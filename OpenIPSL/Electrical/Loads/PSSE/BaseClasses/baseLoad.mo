@@ -10,15 +10,15 @@ partial model baseLoad "Base load for PSSE models"
     final enableQ_0=true,
     final enableP_0=true);
  import Modelica.ComplexMath.j;
-  parameter Types.ComplexPower S_p=P_0 + j*Q_0
+  parameter Types.ComplexPower S_p=Complex(P_0,Q_0)
     "Consumption of original constant power load";
-  parameter Types.ComplexPower S_i=0 + j*0
+  parameter Types.ComplexPower S_i=Complex(0.0,0.0)
     "Consumption of original constant current load";
-  parameter Types.ComplexPower S_y=0 + j*0
+  parameter Types.ComplexPower S_y=Complex(0.0,0.0)
     "Consumption of original constant shunt admittance load";
-  parameter Complex a=1 + j*0
+  parameter Complex a=Complex(1.0,0.0)
     "Load transfer fraction for constant current load";
-  parameter Complex b=0 + j*1
+  parameter Complex b=Complex(0.0,1.0)
     "Load transfer fraction for constant shunt admittance load";
   parameter Types.PerUnit PQBRAK=0.7 "Constant power characteristic threshold";
   parameter Integer characteristic=1 annotation (choices(choice=1, choice=2));
