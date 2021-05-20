@@ -42,7 +42,7 @@ protected
   parameter Complex a=Complex(0.0,(Xq - Xppd));
   parameter Complex Epqp=Complex(real(PSIpp0 + a*It),imag(PSIpp0 + a*It));
   parameter Real delta0=arg(Epqp) "rotor angle in radians";
-  parameter Complex DQ_dq=Complex(cos(delta0),sin(delta0)) "Parks transformation";
+  parameter Complex DQ_dq=Complex(cos(delta0),-sin(delta0)) "Parks transformation";
   parameter Complex I_dq=Complex(real(It*DQ_dq), -imag(It*DQ_dq));
   //Initialization of current and voltage components in synchronous reference frame.
   parameter Types.PerUnit iq0=real(I_dq) "q-axis component of initial current";
