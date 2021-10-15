@@ -15,12 +15,12 @@ model Bus "Bus model (2014/03/10)"
         extent={{-10.0,-10.0},{10.0,10.0}}),
       iconTransformation(
         extent={{-10,-10},{10,10}})));
-  Types.PerUnit v(start=v_0) "Bus voltage magnitude";
+  Types.PerUnit V(start=v_0) "Bus voltage magnitude";
   Types.Angle angle(start=angle_0) "Bus voltage angle";
   SI.Conversions.NonSIunits.Angle_deg angleDisplay = SI.Conversions.to_deg(angle)
     "Angle in degrees for display purposes";
 equation
-  v = sqrt(p.vr^2 + p.vi^2);
+  V = sqrt(p.vr^2 + p.vi^2);
   angle = atan2(p.vi, p.vr);
   p.ir = 0;
   p.ii = 0;
@@ -35,7 +35,7 @@ equation
           origin={0,-120},
           extent={{-60,-20},{60,20}},
           lineColor={170,0,0},
-          textString=DynamicSelect("Vpu", String(v, significantDigits=3))),Text(
+          textString=DynamicSelect("Vpu", String(V, significantDigits=3))),Text(
           visible=displayPF,
           origin={0,-160},
           extent={{-60,-20},{60,20}},
