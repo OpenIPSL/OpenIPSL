@@ -2,7 +2,7 @@ within OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1;
 package DelayModelChoices "Provides choices for delay models to use either in simulation (Fixed Delay or Pade Approximation) or in linearization (Pade Approximation)"
   extends Modelica.Icons.VariantsPackage;
 
-  block FixedDelay "Extended Fixed Delay Model from the MSL"
+  block FixedDelay "Fixed Delay (MSL)"
     extends Modelica.Blocks.Nonlinear.FixedDelay(delayTime = Teng);
     extends DelayModelChoices.Interface;
   annotation (Documentation(revisions="<html>

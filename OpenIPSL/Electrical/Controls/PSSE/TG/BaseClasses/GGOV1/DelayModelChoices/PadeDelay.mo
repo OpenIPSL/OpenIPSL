@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.DelayModelChoices;
-block PadeDelay "Extending the Pade Delay model from the MSL"
+block PadeDelay "Pade Delay (MSL)"
   extends Modelica.Blocks.Nonlinear.PadeDelay(delayTime=Teng,n=2,m=n,balance=true);
   extends DelayModelChoices.Interface;
   annotation (Documentation(revisions="<html>

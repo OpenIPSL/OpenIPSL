@@ -3,6 +3,9 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
   parameter Integer Flag = 1 "Switch for fuel source characteristic"
     annotation(Evaluate = true,
     choices(choice = 0 "Fuel flow independent of speed", choice = 1 "Fuel flow proportional to speed"));
+  replaceable DelayModelChoices.FixedDelay delay(delayTime = Teng)
+    constrainedby DelayModelChoices.Interface "Delay Model"
+    annotation(choicesAllMatching=true,Placement(transformation(origin = {108, -40}, extent = {{-10, -10}, {10, 10}})));
   parameter Types.Time Tact = 0.5 "Actuator time constant";
   parameter Types.PerUnit Kturb = 1.5 "Turbine gain";
   parameter Types.Time Tb = 0.1 "Turbine lag time constant";
@@ -24,9 +27,6 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {138, -40})));
   Modelica.Blocks.Math.Gain gain1(k = Kturb) annotation (
     Placement(transformation(origin = {78, -40}, extent = {{-10, -10}, {10, 10}})));
-  replaceable DelayModelChoices.FixedDelay delay(delayTime = Teng)
-    constrainedby DelayModelChoices.Interface "Delay Model"
-    annotation(Placement(transformation(origin = {108, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add4(k2 = -1) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {48, -40})));
   Modelica.Blocks.Math.Add add5(k1 = -1) annotation (
