@@ -11,6 +11,9 @@ model GGOV1DU "GGOV1DU - Variation of GE General Governor/Turbine Model [IEEE201
     annotation (Evaluate=true, choices(
       choice=0 "Fuel flow independent of speed",
       choice=1 "Fuel flow proportional to speed"));
+  replaceable parameter BaseClasses.GGOV1.DelayModelChoices.FixedDelay delay
+    constrainedby BaseClasses.GGOV1.DelayModelChoices.Interface "Delay Model"
+    annotation(choicesAllMatching=true);
   parameter Types.PerUnit R=0.04 "Permanent droop";
   parameter Types.Time T_pelec=1 "Electrical power transducer time constant";
   parameter Types.PerUnit maxerr=0.05 "Maximum value for speed error signal";
@@ -69,6 +72,7 @@ model GGOV1DU "GGOV1DU - Variation of GE General Governor/Turbine Model [IEEE201
     Wfnl=Wfnl) annotation (Placement(transformation(origin = {-30, 80}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter V(uMax=Vmax, uMin=Vmin) annotation (Placement(transformation(origin = {44, 0}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.Turbine gGOV1_Turb(
+    delay=delay,
     Tact=Tact,
     Kturb=Kturb,
     Tb=Tb,
