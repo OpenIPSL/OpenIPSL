@@ -28,4 +28,9 @@ package Types "Library specific type definitions"
       alpha  "Control using the firing angle alpha",
       xTCSC  "Control using reactance xTCSC")
        "Control type of the PSAT TCSC";
+type DelayType = enumeration(
+      FixedDelay
+               "Fixed Delay",
+      PadeDelay
+              "Pade Delay") "Enumeration defining the delay type";
 end Types;

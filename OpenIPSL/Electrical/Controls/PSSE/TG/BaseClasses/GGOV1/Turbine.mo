@@ -3,9 +3,7 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
   parameter Integer Flag = 1 "Switch for fuel source characteristic"
     annotation(Evaluate = true,
     choices(choice = 0 "Fuel flow independent of speed", choice = 1 "Fuel flow proportional to speed"));
-  replaceable DelayModelChoices.FixedDelay delay(delayTime = Teng)
-    constrainedby DelayModelChoices.Interface "Delay Model"
-    annotation(choicesAllMatching=true,Placement(transformation(origin = {108, -40}, extent = {{-10, -10}, {10, 10}})));
+  parameter Types.DelayType delayType=Types.DelayType.FixedDelay "Delay type (for linearisation)";
   parameter Types.Time Tact = 0.5 "Actuator time constant";
   parameter Types.PerUnit Kturb = 1.5 "Turbine gain";
   parameter Types.Time Tb = 0.1 "Turbine lag time constant";
@@ -24,13 +22,13 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
   Modelica.Blocks.Math.Product product annotation (
     Placement(transformation(extent = {{0, -44}, {20, -24}})));
   OpenIPSL.NonElectrical.Continuous.LeadLag s4(K = 1, T1 = Tc, T2 = Tb, y_start = s40) annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {138, -40})));
+    Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin={150,-40})));
   Modelica.Blocks.Math.Gain gain1(k = Kturb) annotation (
     Placement(transformation(origin = {78, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add4(k2 = -1) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {48, -40})));
   Modelica.Blocks.Math.Add add5(k1 = -1) annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {182, 0})));
+    Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin={184,0})));
   Modelica.Blocks.Math.Gain gain2(k = Dm) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {90, 6})));
   OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.Flag flag10(Flag=Flag)   annotation (
@@ -71,6 +69,14 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
     Placement(transformation(extent = {{-160, 0}, {-140, 20}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Vmax, uMin = Vmin) annotation (
     Placement(transformation(extent = {{-48, -50}, {-28, -30}})));
+  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=Teng) if
+       delayType == Types.DelayType.FixedDelay "Use fixed delay model"
+    annotation(Placement(transformation(extent={{108,-32},{120,-20}})));
+  Modelica.Blocks.Nonlinear.PadeDelay padeDelay(
+    delayTime=C.eps,
+    n=2,
+    balance=true) if delayType == Types.DelayType.PadeDelay "Use pade delay model"
+    annotation (Placement(transformation(extent={{108,-60},{120,-48}})));
 protected
   parameter Types.PerUnit Pmech0(fixed = false);
   parameter Types.PerUnit s30(fixed = false);
@@ -87,11 +93,11 @@ initial equation
   fsr0 = (Pmech0 + Dm) / Kturb + Wfnl;
 equation
   connect(s4.y, add5.u2) annotation (
-    Line(points = {{149, -40}, {160, -40}, {160, -6}, {170, -6}}, color = {0, 0, 127}, smooth = Smooth.None));
+    Line(points={{161,-40},{166,-40},{166,-6},{172,-6}},          color = {0, 0, 127}, smooth = Smooth.None));
   connect(product.y, add4.u1) annotation (
     Line(points = {{21, -34}, {36, -34}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(gain2.y, add5.u1) annotation (
-    Line(points = {{101, 6}, {170, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
+    Line(points={{101,6},{172,6}},      color = {0, 0, 127}, smooth = Smooth.None));
   connect(dm_select.y, gain2.u) annotation (
     Line(points = {{-19, 40}, {20, 40}, {20, 6}, {78, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(V1.y, s3.u) annotation (
@@ -101,7 +107,7 @@ equation
   connect(add8.y, Tactgain.u) annotation (
     Line(points = {{-149, -40}, {-142, -40}}, color = {0, 0, 127}));
   connect(add5.y, PMECH) annotation (
-    Line(points = {{193, 0}, {210, 0}}, color = {0, 0, 127}));
+    Line(points={{195,0},{210,0}},      color = {0, 0, 127}));
   connect(s5.u, s9.y) annotation (
     Line(points = {{108, 60}, {101, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(product1.u2, gain2.u) annotation (
@@ -120,10 +126,6 @@ equation
     Line(points = {{-42, 0}, {-80, 0}, {-80, 40}, {-42, 40}}, color = {0, 0, 127}));
   connect(add4.y, gain1.u) annotation (
     Line(points = {{59, -40}, {66, -40}}, color = {0, 0, 127}));
-  connect(gain1.y, delay.u) annotation (
-    Line(points = {{89, -40}, {96, -40}}, color = {0, 0, 127}));
-  connect(delay.y, s4.u) annotation (
-    Line(points = {{119, -40}, {126, -40}}, color = {0, 0, 127}));
   connect(flag10.y, product.u1) annotation (
     Line(points = {{-19, 0}, {-10, 0}, {-10, -28}, {-2, -28}}, color = {0, 0, 127}));
   connect(limiter.y, product.u2) annotation (
@@ -140,6 +142,12 @@ equation
     Line(points = {{-220, 80}, {-130, 80}, {-130, 26}, {-122, 26}}, color = {0, 0, 127}));
   connect(FSR, add8.u1) annotation (
     Line(points = {{-220, 0}, {-180, 0}, {-180, -34}, {-172, -34}, {-172, -34}}, color = {0, 0, 127}));
+  connect(fixedDelay.y, s4.u) annotation (Line(points={{120.6,-26},{130,-26},{130,-40},{138,-40}}, color={0,0,127}));
+  connect(padeDelay.y, s4.u) annotation (Line(points={{120.6,-54},{130,-54},{130,-40},{138,-40}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(gain1.y, fixedDelay.u) annotation (Line(points={{89,-40},{98,-40},{98,-26},{106.8,-26}}, color={0,0,127}));
+  connect(gain1.y, padeDelay.u) annotation (Line(points={{89,-40},{98,-40},{98,-54},{106.8,-54}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (
     Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {28, 108, 200}, extent = {{-60, 40}, {60, -40}}, textString = "Turbine
 Model"), Text(origin = {-4, 0},lineColor = {28, 108, 200}, extent = {{-90, 90}, {-40, 68}}, textString = "SPEED"), Text(origin = {-6, 82},lineColor = {28, 108, 200}, extent = {{-90, -70}, {-50, -90}}, textString = "FSR"), Text(lineColor = {28, 108, 200}, extent = {{40, 12}, {90, -12}}, textString = "PMECH"), Text(lineColor = {28, 108, 200}, extent = {{-20, 90}, {30, 70}}, textString = "TEXM"), Text(lineColor = {28, 108, 200}, extent = {{30, -70}, {92, -92}}, textString = "VSTROKE"), Text(origin = {-4, -78},lineColor = {28, 108, 200}, extent = {{-90, 10}, {-40, -14}}, textString = "PELEC")}),
@@ -153,13 +161,12 @@ Turbine dynamic system for the general purpose Turbine/Governor models GGOV1 and
 </blockquote>
 <h5>Linearisation</h5>
 <p>
-If one wants to use this model in combination with linear analysis then the replacable <code>delay</code> block
-needs to get changed to <a href=\"modelica://OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.DelayModelChoices.PadeDelay\">OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.DelayModelChoices.PadeDelay</a>
-block instead (only allowed matching replacement).
+If one wants to use this model in combination with linear analysis then the parameter <code>delayType</code> 
+needs to get changed to \"Pade Delay\".
 
 The Pade Delay model herein has as default n=2 and m=n.
 
-Linearisation will fail if <code>Teng = 0</code>. The default time-delay is set to <code>Teng = C.eps</code>. 
+Linearisation will fail if <code>delayTime = 0</code>. The default time-delay is set to <code>delayTime = C.eps</code>. 
 </p>
 </html>", revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
