@@ -3,7 +3,7 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
   parameter Integer Flag = 1 "Switch for fuel source characteristic"
     annotation(Evaluate = true,
     choices(choice = 0 "Fuel flow independent of speed", choice = 1 "Fuel flow proportional to speed"));
-  parameter Types.DelayType delayType=Types.DelayType.FixedDelay "Delay type (for linearisation)";
+  parameter Types.DelayType delay=Types.DelayType.FixedDelay "Delay type (for linearisation)";
   parameter Types.Time Tact = 0.5 "Actuator time constant";
   parameter Types.PerUnit Kturb = 1.5 "Turbine gain";
   parameter Types.Time Tb = 0.1 "Turbine lag time constant";
@@ -70,12 +70,12 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Vmax, uMin = Vmin) annotation (
     Placement(transformation(extent = {{-48, -50}, {-28, -30}})));
   Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=Teng) if
-       delayType == Types.DelayType.FixedDelay "Use fixed delay model"
+       delay == Types.DelayType.FixedDelay "Use fixed delay model"
     annotation(Placement(transformation(extent={{108,-32},{120,-20}})));
   Modelica.Blocks.Nonlinear.PadeDelay padeDelay(
     delayTime=C.eps,
     n=2,
-    balance=true) if delayType == Types.DelayType.PadeDelay "Use pade delay model"
+    balance=true) if delay == Types.DelayType.PadeDelay "Use pade delay model"
     annotation (Placement(transformation(extent={{108,-60},{120,-48}})));
 protected
   parameter Types.PerUnit Pmech0(fixed = false);
@@ -166,7 +166,7 @@ needs to get changed to \"Pade Delay\".
 
 The Pade Delay model herein has as default n=2 and m=n.
 
-Linearisation will fail if <code>delayTime = 0</code>. The default time-delay is set to <code>delayTime = C.eps</code>. 
+Linearisation will fail if <code>padeDelay.delayTime = 0</code>. The default time-delay is set to <code>padeDelay.delayTime = C.eps</code>. 
 </p>
 </html>", revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
