@@ -38,8 +38,9 @@ partial model SMIB "SMIB - Single Machine Infinite Base system with one load."
   OpenIPSL.Electrical.Events.PwFault pwFault(
     t1=2,
     t2=2.15,
-    R=0,
-    X=0) annotation (Placement(transformation(
+    R=C.eps,
+    X=C.eps)
+         annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={40,-60})));

@@ -3,8 +3,8 @@ model Nordic44_Original_Case_Bus_Fault
   "Bus 3100 bus fault test case, several state events triggered"
   extends OpenIPSL.Examples.N44.Original.Nordic44_Original_Case(bus_3100(np=3));
   OpenIPSL.Electrical.Events.PwFault pwFault(
-    R=0,
-    X=0,
+    R=C.eps,
+    X=C.eps,
     t1=2,
     t2=2.2) annotation (Placement(transformation(extent={{-164,66},{-152,78}})));
 equation
