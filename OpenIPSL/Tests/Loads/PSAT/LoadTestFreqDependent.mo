@@ -14,8 +14,7 @@ model LoadTestFreqDependent "Simple system to test functionality of frequency de
     Q_0=600000,
     v_0=0.993325452568749) annotation (Placement(transformation(origin={80,-30}, extent={{-10,-10},{10,10}})));
 equation
-
-  connect(frequencyDependent.p, pwLine3.n) annotation (Line(points={{80,-20},{80,0},{62,0},{62,-10},{59,-10}}, color={0,0,255}));
+  connect(bus3.p, frequencyDependent.p) annotation (Line(points={{70,0},{80,0},{80,-20}}, color={0,0,255}));
   annotation (experiment(
       StopTime=15,
       Interval=0.03,

@@ -5,7 +5,7 @@ partial model TGTestBase "Base class for tests involving turbine governors."
     P_0=80000,
     Q_0=60000,
     v_0=1) annotation (Placement(transformation(
-        origin={90.0709,0},
+        origin={120.071,10},
         extent={{-5.92912,-6.00002},{5.92911,6.00001}})));
   OpenIPSL.Electrical.Branches.PwLine pwLineFault(
     B=0.001/2,
@@ -14,28 +14,28 @@ partial model TGTestBase "Base class for tests involving turbine governors."
     X=0.1,
     t1=8,
     t2=8.1) annotation (Placement(transformation(
-        origin={70,30},
+        origin={86,30},
         extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine3(
     B=0.001/2,
     G=0,
     R=0.01,
     X=0.1) annotation (Placement(transformation(
-        origin={70,10},
+        origin={86,10},
         extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine4(
     B=0.001/2,
     G=0,
     R=0.01,
     X=0.1) annotation (Placement(transformation(
-        origin={70,-10},
+        origin={86,-10},
         extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Loads.PSAT.PQ pwLoadPQ2(
     angle_0=0,
     P_0=80000,
     Q_0=60000,
     v_0=1) annotation (Placement(transformation(
-        origin={90,-26},
+        origin={118,-26},
         extent={{-6,-6},{6,6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine1(
     B=0.001/2,
@@ -43,20 +43,20 @@ partial model TGTestBase "Base class for tests involving turbine governors."
     R=0.01,
     X=0.1,
     displayPF=false) annotation (Placement(transformation(
-        origin={46,10},
+        origin={50,10},
         extent={{-10.0,-10.0},{10.0,10.0}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine2(
     B=0.001/2,
     G=0,
     R=0.01,
     X=0.1) annotation (Placement(transformation(
-        origin={46,-10},
+        origin={50,-10},
         extent={{-10.0,-10.0},{10.0,10.0}})));
   OpenIPSL.Electrical.Events.PwFaultPQ pwFault(
     X=0.001,
     t1=3,
     t2=3.1,
-    R=10) annotation (Placement(transformation(extent={{76,-36},{64,-24}})));
+    R=10) annotation (Placement(transformation(extent={{96,-36},{84,-24}})));
   parameter Real p0=0.160352698692006 "Power flow, node active power";
   inner OpenIPSL.Electrical.SystemBase SysData
     annotation (Placement(transformation(extent={{-100,80},{-60,100}})));
@@ -66,6 +66,7 @@ partial model TGTestBase "Base class for tests involving turbine governors."
     x1d=0.302,
     M=10,
     D=0,
+    w(fixed=true),
     xd=1.9,
     T1d0=8,
     xq=1.7,
@@ -76,23 +77,45 @@ partial model TGTestBase "Base class for tests involving turbine governors."
     V_b=400000,
     Vn=400000) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}})));
+  Electrical.Buses.Bus bus1 annotation (
+    Placement(visible = true, transformation(origin={32,0},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Electrical.Buses.Bus bus2 annotation (
+    Placement(visible = true, transformation(origin={68,0},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Electrical.Buses.Bus bus3 annotation (
+    Placement(visible = true, transformation(origin={106,-10},  extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Electrical.Buses.Bus bus4 annotation (
+    Placement(visible = true, transformation(origin={106,20},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(pwLine1.n, pwLine3.p) annotation (Line(
-      points={{55,10},{61,10}},
-      color={0,0,255},
-      smooth=Smooth.None));
-  connect(pwLine2.n,pwLine4. p) annotation (Line(
-      points={{55,-10},{61,-10}},
-      color={0,0,255},
-      smooth=Smooth.None));
 
-  connect(pwLine3.p, pwLineFault.p) annotation (Line(points={{61,10},{61,30}}, color={0,0,255}));
-  connect(pwLineFault.n, pwLine3.n) annotation (Line(points={{79,30},{79,10}}, color={0,0,255}));
-  connect(pwFault.p, pwLine4.n) annotation (Line(points={{77,-30},{79,-30},{79,-10}}, color={0,0,255}));
-  connect(pwLoadPQ2.p, pwLine4.n) annotation (Line(points={{90,-20},{90,-10},{79,-10}}, color={0,0,255}));
-  connect(pwLoadPQ1.p, pwLine3.n) annotation (Line(points={{90.0709,6},{90,6},{90,10},{79,10}}, color={0,0,255}));
-  connect(pwLine1.n, pwLine2.n) annotation (Line(points={{55,10},{55,10},{55,-10}}, color={0,0,255}));
   connect(gen.vf0, gen.vf) annotation (Line(points={{-16,22},{-16,28},{-32,28},{-32,10},{-24,10}}, color={0,0,127}));
-  connect(gen.p, pwLine1.p) annotation (Line(points={{20,0},{37,0},{37,10}}, color={0,0,255}));
-  connect(gen.p, pwLine2.p) annotation (Line(points={{20,0},{37,0},{37,-10}}, color={0,0,255}));
+  connect(gen.p, bus1.p)
+    annotation (Line(points={{20,0},{32,0}}, color={0,0,255}));
+  connect(bus1.p, pwLine1.p)
+    annotation (Line(points={{32,0},{36,0},{36,10},{41,10}}, color={0,0,255}));
+  connect(bus1.p, pwLine2.p) annotation (Line(points={{32,0},{36,0},{36,-10},{41,
+          -10}}, color={0,0,255}));
+  connect(bus2.p, pwLine1.n)
+    annotation (Line(points={{68,0},{64,0},{64,10},{59,10}}, color={0,0,255}));
+  connect(bus2.p, pwLine2.n) annotation (Line(points={{68,0},{64,0},{64,-10},{59,
+          -10}}, color={0,0,255}));
+  connect(bus2.p, pwLine3.p)
+    annotation (Line(points={{68,0},{72,0},{72,10},{77,10}}, color={0,0,255}));
+  connect(bus2.p, pwLine4.p) annotation (Line(points={{68,0},{72,0},{72,-10},{77,
+          -10}}, color={0,0,255}));
+  connect(pwLine4.n, bus3.p)
+    annotation (Line(points={{95,-10},{106,-10}}, color={0,0,255}));
+  connect(bus3.p, pwLoadPQ2.p)
+    annotation (Line(points={{106,-10},{118,-10},{118,-20}}, color={0,0,255}));
+  connect(bus4.p, pwLine3.n) annotation (Line(points={{106,20},{100,20},{100,10},
+          {95,10}}, color={0,0,255}));
+  connect(bus4.p, pwLoadPQ1.p) annotation (Line(points={{106,20},{120.071,20},{120.071,
+          16}}, color={0,0,255}));
+  connect(bus4.p, pwLineFault.n) annotation (Line(points={{106,20},{100,20},{100,
+          30},{95,30}}, color={0,0,255}));
+  connect(bus3.p, pwFault.p) annotation (Line(points={{106,-10},{102,-10},{102,-30},
+          {97,-30}}, color={0,0,255}));
+  connect(pwLineFault.p, pwLine3.p) annotation (Line(points={{77,30},{72,30},{72,
+          10},{77,10}}, color={0,0,255}));
+  annotation (Diagram(coordinateSystem(extent={{-100,-100},{140,100}})), Icon(
+        coordinateSystem(extent={{-100,-100},{100,100}})));
 end TGTestBase;
