@@ -2,22 +2,22 @@ within OpenIPSL.Tests.Machines.PSAT;
 model Order4test2_AVR "Simple system with line opening to test functionality of order 4 machine connected to an AVR type III from PSAT"
   extends OpenIPSL.Tests.BaseClasses.MachineTestBase;
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.Controls.PSAT.AVR.AVRtypeIII AVRtypeIII1 annotation (
+  OpenIPSL.Electrical.Controls.PSAT.AVR.AVRtypeIII AVRtypeIII1(v(fixed = true))  annotation (
       Placement(transformation(
         origin={-67,5},
         extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Machines.PSAT.Order4 order4_Inputs_Outputs(
-    angle_0=0,
-    ra=0.001,
-    x1d=0.302,
-    M=10,
+    
     D=0,
+    M=10,
     P_0=16035269.8692006,
     Q_0=11859436.505981,
-    Sn=370000000,
-    v_0=1,
+    Sn(displayUnit = "V.A") =370000000,
     V_b=200000,
-    Vn=200000) annotation (Placement(transformation(extent={{-37,-10},{-17,10}})));
+    Vn(displayUnit = "V") =200000,angle_0=0, delta(fixed = true),
+    ra=0.001,
+    v_0=1, vd(fixed = false), w(fixed = true),
+    x1d=0.302) annotation (Placement(transformation(extent={{-37,-10},{-17,10}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-97,-4},{-87,6}})));
 equation

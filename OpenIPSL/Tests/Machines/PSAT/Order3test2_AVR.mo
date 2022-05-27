@@ -3,20 +3,20 @@ model Order3test2_AVR "Simple system with line opening to test functionality of 
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.MachineTestBase;
   OpenIPSL.Electrical.Machines.PSAT.Order3 order3_Inputs_Outputs1(
-    angle_0=0,
-    ra=0.01,
-    x1d=0.302,
-    M=10,
+    
     D=0,
-    xd=1.9,
-    T1d0=8,
-    xq=1.7,
+    M=10,
     P_0=16035269.8692006,
     Q_0=11859436.505981,
-    Sn=20000000,
-    v_0=1,
+    Sn(displayUnit = "V.A") =20000000,
+    T1d0=8,
     V_b=400000,
-    Vn=400000) annotation (Placement(transformation(
+    Vn(displayUnit = "V") =400000,angle_0=0, delta(fixed = true),
+    ra=0.01,
+    v_0=1, w(fixed = true),
+    x1d=0.302,
+    xd=1.9,
+    xq=1.7) annotation (Placement(transformation(
         origin={-30,0},
         extent={{-9.99992,-10},{10,10}})));
   OpenIPSL.Electrical.Controls.PSAT.AVR.AVRtypeIII AVRtypeIII1 annotation (

@@ -61,21 +61,21 @@ partial model TGTestBase "Base class for tests involving turbine governors."
   inner OpenIPSL.Electrical.SystemBase SysData
     annotation (Placement(transformation(extent={{-100,80},{-60,100}})));
   Electrical.Machines.PSAT.Order3 gen(
-    angle_0=0,
-    ra=0.001,
-    x1d=0.302,
-    M=10,
+    
     D=0,
-    w(fixed=true),
-    xd=1.9,
-    T1d0=8,
-    xq=1.7,
+    M=10,
     P_0=160410,
     Q_0=120120,
-    Sn=20000000,
-    v_0=1,
+    Sn(displayUnit = "V.A") =20000000,
+    T1d0=8,
     V_b=400000,
-    Vn=400000) annotation (Placement(transformation(
+    Vn(displayUnit = "V") =400000,angle_0=0, delta(fixed = true),
+    ra=0.001,
+    v_0=1,
+    w(fixed=true),
+    x1d=0.302,
+    xd=1.9,
+    xq=1.7) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}})));
   Electrical.Buses.Bus bus1 annotation (
     Placement(visible = true, transformation(origin={32,0},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));

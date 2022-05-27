@@ -2,12 +2,12 @@ within OpenIPSL.Examples.SevenBus;
 model Network "Seven-bus test system model, ready for simulation"
   extends Modelica.Icons.Example;
   SevenBus.Generators.G1 GEN1(
-    M_b=1078000000,
-    V_b=24000,
-    v_0=PF_results.voltages.V21,
-    angle_0=PF_results.voltages.A21,
+    M_b(displayUnit = "MVA")= 1078000000,
     P_0=PF_results.machines.P21_1,
-    Q_0=PF_results.machines.Q21_1)
+    Q_0=PF_results.machines.Q21_1,
+    V_b=24000,
+    angle_0=PF_results.voltages.A21,
+    v_0=PF_results.voltages.V21)
     annotation (Placement(transformation(extent={{-280,-142},{-260,-122}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine(
     R=6e-006,
@@ -90,10 +90,7 @@ model Network "Seven-bus test system model, ready for simulation"
     V_b=380000,
     nn=1,
     v_0=PF_results.voltages.V7,
-    angle_0=PF_results.voltages.A7) annotation (Placement(transformation(
-        extent={{-1,-39},{1,39}},
-        rotation=-90,
-        origin={1,91})));
+    angle_0=PF_results.voltages.A7) annotation (Placement(visible = true, transformation(origin = {1, 91}, extent = {{-1, -39}, {1, 39}}, rotation = -90)));
   OpenIPSL.Electrical.Buses.BusExt FPAND(
     np=4,
     nn=2,
@@ -131,19 +128,19 @@ model Network "Seven-bus test system model, ready for simulation"
     G=0,
     B=0) annotation (Placement(transformation(extent={{40,28},{60,48}})));
   OpenIPSL.Electrical.Loads.PSSE.Load load2(
-    V_b=380000,
-    v_0=PF_results.voltages.V1,
-    angle_0=PF_results.voltages.A1,
     P_0=PF_results.loads.PL1_1,
-    Q_0=PF_results.loads.QL1_1)
+    Q_0=PF_results.loads.QL1_1,V_b=380000, angle(fixed = false),
+    angle_0=PF_results.voltages.A1, v(fixed = false),
+    v_0=PF_results.voltages.V1)
     annotation (Placement(transformation(extent={{-96,-78},{-86,-68}})));
+
   OpenIPSL.Electrical.Loads.PSSE.Load load3(
-    V_b=380000,
-    v_0=PF_results.voltages.V4,
-    angle_0=PF_results.voltages.A4,
     P_0=PF_results.loads.PL4_1,
-    Q_0=PF_results.loads.QL4_1)
+    Q_0=PF_results.loads.QL4_1,V_b=380000, angle(fixed = false),
+    angle_0=PF_results.voltages.A4,
+    v_0=PF_results.voltages.V4)
     annotation (Placement(transformation(extent={{84,-78},{94,-68}})));
+
   OpenIPSL.Electrical.Buses.BusExt FVALDI(
     nn=4,
     V_b=380000,
@@ -161,38 +158,31 @@ model Network "Seven-bus test system model, ready for simulation"
     X=0.000692,
     G=0,
     B=0) annotation (Placement(transformation(extent={{140,-92},{160,-72}})));
-  inner OpenIPSL.Electrical.SystemBase SysData
-    annotation (Placement(transformation(extent={{-220,120},{-140,160}})));
+  inner OpenIPSL.Electrical.SystemBase SysData annotation (Placement(transformation(extent={{-220,120},{-140,160}})));
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer twoWindingTransformer(
-    G=0,
-    B=0,
-    R=0.00001,
+    ANG1 = 0.00174532925199433,B=0,G=0,
+    R=0.00001, VB1 = 380000, VB2 = 380000, VNOM1 = 380000, VNOM2 = 380000,
     X=0.00069,
-    CZ=1,
-    CW=1,
-    VNOM1=380000,
-    VB1=380000,
-    VNOM2=380000,
-    VB2=380000,
-    ANG1=0,
     t1=PF_results.trafos.t1_1_4,
     t2=PF_results.trafos.t2_1_4)
     annotation (Placement(transformation(extent={{-12,-40},{8,-24}})));
+
   SevenBus.Generators.G2 GEN2(
-    V_b=20000,
-    M_b=1710000000,
-    v_0=PF_results.voltages.V61,
-    angle_0=PF_results.voltages.A61,
+    M_b(displayUnit = "V.A") =1710000000,
     P_0=PF_results.machines.P61_1,
-    Q_0=PF_results.machines.Q61_1)
+    Q_0=PF_results.machines.Q61_1,
+    V_b=20000,
+    angle_0=PF_results.voltages.A61,
+    v_0=PF_results.voltages.V61)
     annotation (Placement(transformation(extent={{280,-142},{260,-122}})));
+
   SevenBus.Generators.G3 GEN3(
-    M_b=1211000000,
-    V_b=24000,
-    v_0=PF_results.voltages.V71,
-    angle_0=PF_results.voltages.A71,
+    M_b(displayUnit = "V.A") =1211000000,
     P_0=PF_results.machines.P71_1,
-    Q_0=PF_results.machines.Q71_1) annotation (Placement(transformation(
+    Q_0=PF_results.machines.Q71_1,
+    V_b=24000,
+    angle_0=PF_results.voltages.A71,
+    v_0=PF_results.voltages.V71) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,158})));
@@ -204,63 +194,59 @@ model Network "Seven-bus test system model, ready for simulation"
     annotation (Placement(transformation(extent={{-76,-180},{-64,-168}})));
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer1(
-    G=0,
-    B=0,
-    CW=1,
-    VB2=380000,
-    VB1=24000,
-    ANG1=0,
-    CZ=2,
+    ANG1 = 0.00174532925199433,B=0,
+    CW= 1, CZ = 2,G=0,
     R=0.0025,
+    S_n(displayUnit = "MVA")= 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
     X=0.137,
-    VNOM1=24000,
-    t2=415/380,
-    S_n=1080000000,
     t1=PF_results.trafos.t1_2_21,
-    VNOM2=PF_results.trafos.t2_2_21) annotation (Placement(transformation(
-        extent={{6,-4},{-6,4}},
-        rotation=180,
-        origin={-230,-132})));
+    t2=PF_results.trafos.t2_2_21) annotation (Placement(visible = true, transformation(origin = {-230, -132}, extent = {{6, -4}, {-6, 4}}, rotation = 180)));
+
+
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer2(
-    G=0,
-    B=0,
-    CW=1,
-    VB2=380000,
-    VB1=20000,
-    VNOM2=405000,
-    CZ=2,
+    ANG1 = 0.00174532925199433,B=0, CZ = 2,G=0,
     R=0.0029,
+    S_n(displayUnit = "MVA")= 1710000000, VB1 = 20000, VB2 = 380000, VNOM1 = 20000, VNOM2 = 405000,
     X=0.1583,
-    VNOM1=20000,
-    S_n=1710000000,
-    ANG1=0,
     t1=PF_results.trafos.t1_6_61,
     t2=PF_results.trafos.t2_6_61) annotation (Placement(transformation(
         extent={{-6,-4},{6,4}},
         rotation=180,
-        origin={230,-132})));
+        origin={222,-132})));
+
+
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer3(
-    G=0,
-    B=0,
-    CW=1,
-    VB2=380000,
-    VB1=24000,
-    VNOM2=415000,
-    CZ=2,
-    R=0.0025,
+    ANG1 = 0.00174532925199433,B=0, CZ = 2,G=0,
+    R=0.0025, S_n(displayUnit = "MVA") = 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
     X=0.1362,
-    VNOM1=24000,
-    S_n=1080000000,
-    ANG1=0,
     t1=PF_results.trafos.t1_7_71,
     t2=PF_results.trafos.t2_7_71) annotation (Placement(transformation(
         extent={{6,-4},{-6,4}},
         rotation=90,
-        origin={0,118})));
+        origin={0,110})));
+
+
   SevenBus.Data.PF_results PF_results
     annotation (Placement(transformation(extent={{-260,140},{-240,160}})));
+  Electrical.Buses.Bus internal_bus_gen1(S_b = 1078000000,V_b = 24000,angle_0=PF_results.voltages.A21, v_0=
+        PF_results.voltages.V21) annotation (Placement(visible=true,
+        transformation(
+        origin={-248,-132},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
+  Electrical.Buses.Bus internal_bus_gen3 annotation (Placement(visible=true,
+        transformation(
+        origin={0,128},
+        extent={{-10,-10},{10,10}},
+        rotation=90)));
+  Electrical.Buses.Bus internal_bus_gen2(S_b(displayUnit = "V.A") = 1710000000,V_b = 20000,angle_0=PF_results.voltages.A61, v_0=
+        PF_results.voltages.V61) annotation (Placement(visible=true,
+        transformation(
+        origin={242,-132},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
 equation
   connect(pwLine.n, FTILL.n[1]) annotation (Line(points={{-145,-132},{-100,-132},
           {-100,-148}}, color={0,0,255}));
@@ -302,19 +288,19 @@ equation
                              color={0,0,255}));
   connect(pwLine8.p, FPAND.p[2]) annotation (Line(points={{-59,58},{-90,58},{-90,
           8},{-98,8},{-98,-18.85}},  color={0,0,255}));
-  connect(pwLine8.n, FVERGE.p[1]) annotation (Line(points={{-41,58},{-20,58},{-20,
-          90},{-16.55,90}},                color={0,0,255}));
-  connect(pwLine9.n, FVERGE.p[2]) annotation (Line(points={{-41,38},{-2,38},{-2,
-          90},{-4.85,90}},               color={0,0,255}));
+  connect(pwLine8.n, FVERGE.p[1]) annotation(
+    Line(points = {{-41, 58}, {-20, 58}, {-20, 90}, {1, 90}}, color = {0, 0, 255}));
+  connect(pwLine9.n, FVERGE.p[2]) annotation(
+    Line(points = {{-41, 38}, {-2, 38}, {-2, 90}, {1, 90}}, color = {0, 0, 255}));
   connect(pwLine11.n, FTDPRA.n[1]) annotation (Line(points={{59,38},{64,38},{64,
           -30.55},{98,-30.55}},
                             color={0,0,255}));
   connect(pwLine10.n, FTDPRA.n[2]) annotation (Line(points={{59,58},{80,58},{80,
           -4},{98,-4},{98,-18.85}},color={0,0,255}));
-  connect(pwLine11.p, FVERGE.p[3]) annotation (Line(points={{41,38},{2,38},{2,90},
-          {6.85,90}},                          color={0,0,255}));
-  connect(pwLine10.p, FVERGE.p[4]) annotation (Line(points={{41,58},{20,58},{20,
-          90},{18.55,90}},               color={0,0,255}));
+  connect(pwLine11.p, FVERGE.p[3]) annotation(
+    Line(points = {{41, 38}, {2, 38}, {2, 90}, {1, 90}}, color = {0, 0, 255}));
+  connect(pwLine10.p, FVERGE.p[4]) annotation(
+    Line(points = {{41, 58}, {20, 58}, {20, 90}, {1, 90}}, color = {0, 0, 255}));
   connect(load2.p, FPAND.p[3]) annotation (Line(points={{-91,-68},{-91,-36},{-98,
           -36},{-98,-7.15}},color={0,0,255}));
   connect(load3.p, FTDPRA.n[3]) annotation (Line(points={{89,-68},{89,-36},{98,-36},
@@ -340,47 +326,28 @@ equation
           {-98,-32},{-98,4.55}},            color={0,0,255}));
   connect(pwFault.p, FTILL.p[4]) annotation (Line(points={{-77,-174},{-82,-174},
           {-82,-133},{-98,-133}}, color={0,0,255}));
-  connect(twoWindingTransformer2.n, FVALDI.p[1]) annotation (Line(points={{223.4,
+  connect(twoWindingTransformer2.n, FVALDI.p[1]) annotation (Line(points={{215.4,
           -132},{200,-132},{200,-131}},color={0,0,255}));
-  connect(twoWindingTransformer2.p, GEN2.pwPin)
-    annotation (Line(points={{236.6,-132},{259,-132}},
-                                                     color={0,0,255}));
-  connect(GEN3.pwPin, twoWindingTransformer3.p)
-    annotation (Line(points={{0,147},{0,124.6}},
-                                               color={0,0,255}));
   connect(twoWindingTransformer3.n, FVERGE.n[1])
-    annotation (Line(points={{0,111.4},{0,92},{1,92}},
+    annotation (Line(points={{0,103.4},{0,92},{1,92}},
                                                color={0,0,255}));
-  connect(twoWindingTransformer1.p, GEN1.pwPin)
-    annotation (Line(points={{-236.6,-132},{-259,-132}},
-                                                       color={0,0,255}));
-  connect(twoWindingTransformer1.n, FSSV.n[1]) annotation (Line(points={{-223.4,
-          -132},{-200,-132},{-200,-131}},
-                                   color={0,0,255}));
+  connect(twoWindingTransformer1.n, FSSV.n[1]) annotation (
+    Line(points={{-223.4,-132},{-200,-132},{-200,-131}},      color = {0, 0, 255}));
+  connect(GEN1.pwPin, internal_bus_gen1.p)
+    annotation (Line(points={{-259,-132},{-248,-132}}, color={0,0,255}));
+  connect(internal_bus_gen1.p, twoWindingTransformer1.p)
+    annotation (Line(points={{-248,-132},{-236.6,-132}}, color={0,0,255}));
+  connect(twoWindingTransformer3.p, internal_bus_gen3.p)
+    annotation (Line(points={{0,116.6},{0,128}}, color={0,0,255}));
+  connect(GEN3.pwPin, internal_bus_gen3.p)
+    annotation (Line(points={{0,147},{0,128}}, color={0,0,255}));
+  connect(GEN2.pwPin, internal_bus_gen2.p)
+    annotation (Line(points={{259,-132},{242,-132}}, color={0,0,255}));
+  connect(internal_bus_gen2.p, twoWindingTransformer2.p)
+    annotation (Line(points={{242,-132},{228.6,-132}}, color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(extent={{-280,-200},{280,180}},
-          preserveAspectRatio=false), graphics={Text(
-          extent={{-222,-82},{-198,-92}},
-          lineColor={28,108,200},
-          textString="FSSV"),Text(
-          extent={{204,-82},{236,-92}},
-          lineColor={28,108,200},
-          textString="FVALDI"),Text(
-          extent={{100,38},{138,28}},
-          lineColor={28,108,200},
-          textString="FTDPRA"),Text(
-          extent={{-132,38},{-102,28}},
-          lineColor={28,108,200},
-          textString="FPAND"),Text(
-          extent={{46,94},{84,84}},
-          lineColor={28,108,200},
-          textString="FVERGE"),Text(
-          extent={{44,-108},{74,-118}},
-          lineColor={28,108,200},
-          textString="FSBIS"),Text(
-          extent={{-114,-110},{-84,-120}},
-          lineColor={28,108,200},
-          textString="FTILL5")}),
+          preserveAspectRatio=false), graphics={Text(lineColor = {28, 108, 200}, extent = {{-222, -82}, {-198, -92}}, textString = "FSSV"),Text(lineColor = {28, 108, 200}, extent = {{204, -82}, {236, -92}}, textString = "FVALDI"),Text(lineColor = {28, 108, 200}, extent = {{100, 38}, {138, 28}}, textString = "FTDPRA"),Text(lineColor = {28, 108, 200}, extent = {{-132, 38}, {-102, 28}}, textString = "FPAND"),Text(lineColor = {28, 108, 200}, extent = {{46, 94}, {84, 84}}, textString = "FVERGE"),Text(lineColor = {28, 108, 200}, extent = {{44, -108}, {74, -118}}, textString = "FSBIS"),Text(lineColor = {28, 108, 200}, extent = {{-114, -110}, {-84, -120}}, textString = "FTILL5")}),
     Documentation(info="<html>
 <p>This example model is a small synthetic power system that can be used for assessing classic transient stability of a power grid, when undergoing a three-phase-to-ground fault. The fault is applied on bus FTILL5, at 1 second and lasts for 200ms.</p>
 <p>The system should be simulated during 10 seconds and the variables of interest are:</p>
