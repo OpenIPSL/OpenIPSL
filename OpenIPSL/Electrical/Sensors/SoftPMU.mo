@@ -25,7 +25,8 @@ public
   NonElectrical.Nonlinear.FrequencyCalc fCalc(
     real_start=vr_0,
     imag_start=vi_0,
-    start_guess=true)
+    start_guess=true,
+    Ts=Ts)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   connect(p, n);
