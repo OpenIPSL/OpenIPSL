@@ -9,11 +9,7 @@ model FrequencyCalc "Frequency deviation calculation from a rotating phasor"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealOutput y "O/P is in rad/sec"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Continuous.Derivative derOfReal(
-    T = Ts,
-    initType=init_type,
-    x_start=real_start,
-    y_start=0)
+  Modelica.Blocks.Continuous.Der        derOfReal
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
   Modelica.Blocks.Math.Product ImagXderReal annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Math.Add diff(k2=-1) annotation (Placement(transformation(extent={{20,40},{40,60}})));
@@ -25,11 +21,7 @@ model FrequencyCalc "Frequency deviation calculation from a rotating phasor"
   Modelica.Blocks.Math.Product imag2 annotation (Placement(transformation(extent={{-20,-76},{0,-56}})));
   Modelica.Blocks.Math.Product real2 annotation (Placement(transformation(extent={{-20,-44},{0,-24}})));
   Modelica.Blocks.Math.Add sum annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
-  Modelica.Blocks.Continuous.Derivative derOfImag(
-    T = Ts,
-    initType=init_type,
-    x_start=imag_start,
-    y_start=0)
+  Modelica.Blocks.Continuous.Der        derOfImag
     annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
 
 protected
@@ -65,6 +57,12 @@ annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, 
     Text(extent={{20,20},{90,-20}}, lineColor={28,108,200}, fillColor={28,108,200}, fillPattern = FillPattern.Solid, textString="freq")}),
   Documentation(info="<html>
 <p>This block uses the real and imaginary components of a Cartesian representation of a voltage phasor to estimate the electrical frequency deviation from nominal value present at the node.</p>
+<pre>
+    Vr*der(Vi) - Vi*der(Vr)
+f = -----------------------
+          Vr^2 + Vi^2
+</pre>
+
 <p>The calculations are done using the filtered derivative of the real and imaginary parts of the phasor representation.
 The user is required to set proper values for initialization of the calculations, together with a smoothing filter time constant, used to filter the derivative components.</p>
 </html>"));
