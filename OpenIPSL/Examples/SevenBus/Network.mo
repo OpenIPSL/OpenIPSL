@@ -2,7 +2,7 @@ within OpenIPSL.Examples.SevenBus;
 model Network "Seven-bus test system model, ready for simulation"
   extends Modelica.Icons.Example;
   SevenBus.Generators.G1 GEN1(
-    M_b(displayUnit = "MVA")= 1078000000,
+    M_b=1078000000,
     P_0=PF_results.machines.P21_1,
     Q_0=PF_results.machines.Q21_1,
     V_b=24000,
@@ -129,14 +129,14 @@ model Network "Seven-bus test system model, ready for simulation"
     B=0) annotation (Placement(transformation(extent={{40,28},{60,48}})));
   OpenIPSL.Electrical.Loads.PSSE.Load load2(
     P_0=PF_results.loads.PL1_1,
-    Q_0=PF_results.loads.QL1_1,V_b=380000, angle(fixed = false),
-    angle_0=PF_results.voltages.A1, v(fixed = false),
+    Q_0=PF_results.loads.QL1_1,V_b=380000,
+    angle_0=PF_results.voltages.A1,
     v_0=PF_results.voltages.V1)
     annotation (Placement(transformation(extent={{-96,-78},{-86,-68}})));
 
   OpenIPSL.Electrical.Loads.PSSE.Load load3(
     P_0=PF_results.loads.PL4_1,
-    Q_0=PF_results.loads.QL4_1,V_b=380000, angle(fixed = false),
+    Q_0=PF_results.loads.QL4_1,V_b=380000,
     angle_0=PF_results.voltages.A4,
     v_0=PF_results.voltages.V4)
     annotation (Placement(transformation(extent={{84,-78},{94,-68}})));
@@ -168,7 +168,7 @@ model Network "Seven-bus test system model, ready for simulation"
     annotation (Placement(transformation(extent={{-12,-40},{8,-24}})));
 
   SevenBus.Generators.G2 GEN2(
-    M_b(displayUnit = "V.A") =1710000000,
+    M_b= 1710000000,
     P_0=PF_results.machines.P61_1,
     Q_0=PF_results.machines.Q61_1,
     V_b=20000,
@@ -177,7 +177,7 @@ model Network "Seven-bus test system model, ready for simulation"
     annotation (Placement(transformation(extent={{280,-142},{260,-122}})));
 
   SevenBus.Generators.G3 GEN3(
-    M_b(displayUnit = "V.A") =1211000000,
+    M_b= 1211000000,
     P_0=PF_results.machines.P71_1,
     Q_0=PF_results.machines.Q71_1,
     V_b=24000,
@@ -197,7 +197,7 @@ model Network "Seven-bus test system model, ready for simulation"
     ANG1 = 0.00174532925199433,B=0,
     CW= 1, CZ = 2,G=0,
     R=0.0025,
-    S_n(displayUnit = "MVA")= 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
+    S_n= 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
     X=0.137,
     t1=PF_results.trafos.t1_2_21,
     t2=PF_results.trafos.t2_2_21) annotation (Placement(visible = true, transformation(origin = {-230, -132}, extent = {{6, -4}, {-6, 4}}, rotation = 180)));
@@ -207,7 +207,7 @@ model Network "Seven-bus test system model, ready for simulation"
     twoWindingTransformer2(
     ANG1 = 0.00174532925199433,B=0, CZ = 2,G=0,
     R=0.0029,
-    S_n(displayUnit = "MVA")= 1710000000, VB1 = 20000, VB2 = 380000, VNOM1 = 20000, VNOM2 = 405000,
+    S_n= 1710000000, VB1 = 20000, VB2 = 380000, VNOM1 = 20000, VNOM2 = 405000,
     X=0.1583,
     t1=PF_results.trafos.t1_6_61,
     t2=PF_results.trafos.t2_6_61) annotation (Placement(transformation(
@@ -219,7 +219,7 @@ model Network "Seven-bus test system model, ready for simulation"
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer3(
     ANG1 = 0.00174532925199433,B=0, CZ = 2,G=0,
-    R=0.0025, S_n(displayUnit = "MVA") = 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
+    R=0.0025, S_n = 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
     X=0.1362,
     t1=PF_results.trafos.t1_7_71,
     t2=PF_results.trafos.t2_7_71) annotation (Placement(transformation(
@@ -241,7 +241,7 @@ model Network "Seven-bus test system model, ready for simulation"
         origin={0,128},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Electrical.Buses.Bus internal_bus_gen2(S_b(displayUnit = "V.A") = 1710000000,V_b = 20000,angle_0=PF_results.voltages.A61, v_0=
+  Electrical.Buses.Bus internal_bus_gen2(S_b = 1710000000,V_b = 20000,angle_0=PF_results.voltages.A61, v_0=
         PF_results.voltages.V61) annotation (Placement(visible=true,
         transformation(
         origin={242,-132},
@@ -288,19 +288,19 @@ equation
                              color={0,0,255}));
   connect(pwLine8.p, FPAND.p[2]) annotation (Line(points={{-59,58},{-90,58},{-90,
           8},{-98,8},{-98,-18.85}},  color={0,0,255}));
-  connect(pwLine8.n, FVERGE.p[1]) annotation(
-    Line(points = {{-41, 58}, {-20, 58}, {-20, 90}, {1, 90}}, color = {0, 0, 255}));
-  connect(pwLine9.n, FVERGE.p[2]) annotation(
-    Line(points = {{-41, 38}, {-2, 38}, {-2, 90}, {1, 90}}, color = {0, 0, 255}));
+  connect(pwLine8.n, FVERGE.p[1]) annotation (
+    Line(points={{-41,58},{-20,58},{-20,90},{-16.55,90}},     color = {0, 0, 255}));
+  connect(pwLine9.n, FVERGE.p[2]) annotation (
+    Line(points={{-41,38},{-2,38},{-2,90},{-4.85,90}},      color = {0, 0, 255}));
   connect(pwLine11.n, FTDPRA.n[1]) annotation (Line(points={{59,38},{64,38},{64,
           -30.55},{98,-30.55}},
                             color={0,0,255}));
   connect(pwLine10.n, FTDPRA.n[2]) annotation (Line(points={{59,58},{80,58},{80,
           -4},{98,-4},{98,-18.85}},color={0,0,255}));
-  connect(pwLine11.p, FVERGE.p[3]) annotation(
-    Line(points = {{41, 38}, {2, 38}, {2, 90}, {1, 90}}, color = {0, 0, 255}));
-  connect(pwLine10.p, FVERGE.p[4]) annotation(
-    Line(points = {{41, 58}, {20, 58}, {20, 90}, {1, 90}}, color = {0, 0, 255}));
+  connect(pwLine11.p, FVERGE.p[3]) annotation (
+    Line(points={{41,38},{2,38},{2,90},{6.85,90}},       color = {0, 0, 255}));
+  connect(pwLine10.p, FVERGE.p[4]) annotation (
+    Line(points={{41,58},{20,58},{20,90},{18.55,90}},      color = {0, 0, 255}));
   connect(load2.p, FPAND.p[3]) annotation (Line(points={{-91,-68},{-91,-36},{-98,
           -36},{-98,-7.15}},color={0,0,255}));
   connect(load3.p, FTDPRA.n[3]) annotation (Line(points={{89,-68},{89,-36},{98,-36},
