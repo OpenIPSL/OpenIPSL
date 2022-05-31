@@ -1,20 +1,14 @@
 within OpenIPSL.NonElectrical.Nonlinear;
 model FrequencyCalc "Frequency deviation calculation from a rotating phasor"
   parameter Boolean start_guess=false;
-protected
-  parameter Modelica.Blocks.Types.Init init_type=if start_guess == true then
-      Modelica.Blocks.Types.Init.InitialState else Modelica.Blocks.Types.Init.NoInit;
-public
   parameter Real real_start=1 "Phasor initial real part";
   parameter Real imag_start=0 "Phasor initial imaginary part";
   parameter Types.Time Ts = 0.01 "Smoothing filter time constant";
-public
+
   Modelica.Blocks.Interfaces.RealInput real_part
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealOutput y "O/P is in rad/sec" annotation (
-      Placement(transformation(extent={{100,-10},{120,10}}),
-                                                           iconTransformation(
-          extent={{100,-10},{120,10}})));
+  Modelica.Blocks.Interfaces.RealOutput y "O/P is in rad/sec"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Continuous.Derivative derOfReal(
     T = Ts,
     initType=init_type,
@@ -37,6 +31,11 @@ public
     x_start=imag_start,
     y_start=0)
     annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
+
+protected
+  parameter Modelica.Blocks.Types.Init init_type=if start_guess == true then
+      Modelica.Blocks.Types.Init.InitialState else Modelica.Blocks.Types.Init.NoInit;
+
 equation
   connect(diff.y, division.u1) annotation (Line(points={{41,50},{52,50},{52,6},{68,6}}, color={0,0,127}));
   connect(sum.y, division.u2) annotation (Line(points={{41,-50},{52,-50},{52,-6},{68,-6}}, color={0,0,127}));
@@ -58,13 +57,13 @@ equation
   connect(derOfReal.y, ImagXderReal.u2) annotation (Line(points={{-39,20},{-30,20},{-30,24},{-22,24}}, color={0,0,127}));
   connect(real2.u2, real_part) annotation (Line(points={{-22,-40},{-80,-40},{-80,60},{-120,60}}, color={0,0,127}));
   connect(real2.u1, real_part) annotation (Line(points={{-22,-28},{-80,-28},{-80,60},{-120,60}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-100,100},{100,-100}},      lineColor = {28, 108, 200}, fillColor = {85, 170, 255},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Text(extent={{-90,80},{40,40}},       lineColor = {28, 108, 200}, fillColor = {28, 108, 200},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "real part"), Text(extent={{-90,-40},{40,-80}},       lineColor = {28, 108, 200}, fillColor = {28, 108, 200},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "imag part"), Text(extent={{20,20},{90,-20}},      lineColor={28,108,200},     fillColor={28,108,200},
-            fillPattern=FillPattern.Solid,
-          textString="freq")}),
-    Documentation(info="<html>
+
+annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}),
+  graphics={ Rectangle(extent={{-100,100},{100,-100}}, lineColor = {28, 108, 200}, fillColor = {85, 170, 255}, fillPattern = FillPattern.Solid),
+    Text(extent={{-90,80},{40,40}}, lineColor = {28, 108, 200}, fillColor = {28, 108, 200}, fillPattern = FillPattern.Solid, textString = "real part"),
+    Text(extent={{-90,-40},{40,-80}}, lineColor = {28, 108, 200}, fillColor = {28, 108, 200}, fillPattern = FillPattern.Solid, textString = "imag part"),
+    Text(extent={{20,20},{90,-20}}, lineColor={28,108,200}, fillColor={28,108,200}, fillPattern = FillPattern.Solid, textString="freq")}),
+  Documentation(info="<html>
 <p>This block uses the real and imaginary components of a Cartesian representation of a voltage phasor to estimate the electrical frequency deviation from nominal value present at the node.</p>
 <p>The calculations are done using the filtered derivative of the real and imaginary parts of the phasor representation.
 The user is required to set proper values for initialization of the calculations, together with a smoothing filter time constant, used to filter the derivative components.</p>
