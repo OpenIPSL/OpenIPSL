@@ -65,5 +65,8 @@ f = -----------------------
 
 <p>The calculations are done using the filtered derivative of the real and imaginary parts of the phasor representation.
 The user is required to set proper values for initialization of the calculations, together with a smoothing filter time constant, used to filter the derivative components.</p>
+<h5>Note</h5>
+<p><em>The calculated frequency is just an estimate and can deviate by a certain margin of error.</em></p>
+
 </html>"));
 end FrequencyCalc;
