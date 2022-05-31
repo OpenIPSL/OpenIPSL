@@ -347,7 +347,28 @@ equation
     annotation (Line(points={{242,-132},{228.6,-132}}, color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(extent={{-280,-200},{280,180}},
-          preserveAspectRatio=false), graphics={Text(lineColor = {28, 108, 200}, extent = {{-222, -82}, {-198, -92}}, textString = "FSSV"),Text(lineColor = {28, 108, 200}, extent = {{204, -82}, {236, -92}}, textString = "FVALDI"),Text(lineColor = {28, 108, 200}, extent = {{100, 38}, {138, 28}}, textString = "FTDPRA"),Text(lineColor = {28, 108, 200}, extent = {{-132, 38}, {-102, 28}}, textString = "FPAND"),Text(lineColor = {28, 108, 200}, extent = {{46, 94}, {84, 84}}, textString = "FVERGE"),Text(lineColor = {28, 108, 200}, extent = {{44, -108}, {74, -118}}, textString = "FSBIS"),Text(lineColor = {28, 108, 200}, extent = {{-114, -110}, {-84, -120}}, textString = "FTILL5")}),
+          preserveAspectRatio=false), graphics={Text(
+          extent={{-222,-82},{-198,-92}},
+          lineColor={28,108,200},
+          textString="FSSV"),Text(
+          extent={{204,-82},{236,-92}},
+          lineColor={28,108,200},
+          textString="FVALDI"),Text(
+          extent={{100,38},{138,28}},
+          lineColor={28,108,200},
+          textString="FTDPRA"),Text(
+          extent={{-132,38},{-102,28}},
+          lineColor={28,108,200},
+          textString="FPAND"),Text(
+          extent={{46,94},{84,84}},
+          lineColor={28,108,200},
+          textString="FVERGE"),Text(
+          extent={{44,-108},{74,-118}},
+          lineColor={28,108,200},
+          textString="FSBIS"),Text(
+          extent={{-114,-110},{-84,-120}},
+          lineColor={28,108,200},
+          textString="FTILL5")}),
     Documentation(info="<html>
 <p>This example model is a small synthetic power system that can be used for assessing classic transient stability of a power grid, when undergoing a three-phase-to-ground fault. The fault is applied on bus FTILL5, at 1 second and lasts for 200ms.</p>
 <p>The system should be simulated during 10 seconds and the variables of interest are:</p>
