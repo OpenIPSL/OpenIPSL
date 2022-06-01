@@ -121,7 +121,7 @@ This record collects all the information that is used to initialized the network
 </html>"));
   end PF_results;
   annotation (Documentation(info="<html>
-<p>This package contains a set of data records that are used to initalize the power network on a determined operating point.</p>
+<p>This package contains a set of data records that are used to initialize the power network on a determined operating point.</p>
 <p>The user is also encouraged to duplicate this system and to add other initial conditions, if stability under other operating conditions need to be assessed or understood.</p>
 </html>"));
 end Data;

@@ -3367,7 +3367,7 @@ equation
         __Dymola_experimentFlags(
         Advanced(Define(DAEsolver=true))),
       Documentation(info="<html>
-<p>Simulation of the Nordic 44 test system, in its base case scenario, with a fault occuring at bus , triggering several events. Try simulating the system in DAE mode when in Dymola.</p>
+<p>Simulation of the Nordic 44 test system, in its base case scenario, with a fault occurring at bus , triggering several events. Try simulating the system in DAE mode when in Dymola.</p>
 <p>Simulate the system for 5 seconds. Variables of interest are:</p>
 <ul>
 <li><code>genEventTest.eXST1_1.EFD</code></li>

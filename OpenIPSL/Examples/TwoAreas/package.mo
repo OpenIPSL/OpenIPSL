@@ -5,7 +5,7 @@ package TwoAreas "2 areas test system from Klein, Rogers, and Kundur"
 annotation (
     Documentation(info="<html>
 <p>This package contains a 11-bus 4-machine 2-area power grid model implemented in three different ways, generation unit models that are used in the network implementation and data packages for assisting initialization. </p>
-<p>As metioned previously, the user will find three test systems: </p>
+<p>As mentioned previously, the user will find three test systems: </p>
 <ul>
 <li><strong>Two_Areas_PSAT</strong>: test system in which generation units are composed of PSAT machine models.</li>
 <li><strong>Two_Areas_PSSE</strong>: test system in which generation units are composed of PSSE machine models.</li>

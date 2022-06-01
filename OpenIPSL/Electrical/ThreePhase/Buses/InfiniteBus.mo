@@ -44,12 +44,12 @@ model InfiniteBus "Three-phase infinite bus"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
   OpenIPSL.Interfaces.PwPin p3
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
-  Types.ActivePower Pa "Active Power suplied by the Infinite bus (phase a)";
-  Types.ReactivePower Qa "Reactive Power suplied by the Infinite bus (phase a)";
-  Types.ActivePower Pb "Active Power suplied by the Infinite bus (phase b)";
-  Types.ReactivePower Qb "Reactive Power suplied by the Infinite bus (phase b)";
-  Types.ActivePower Pc "Active Power suplied by the Infinite bus (phase c)";
-  Types.ReactivePower Qc "Reactive Power suplied by the Infinite bus (phase c)";
+  Types.ActivePower Pa "Active Power supplied by the Infinite bus (phase a)";
+  Types.ReactivePower Qa "Reactive Power supplied by the Infinite bus (phase a)";
+  Types.ActivePower Pb "Active Power supplied by the Infinite bus (phase b)";
+  Types.ReactivePower Qb "Reactive Power supplied by the Infinite bus (phase b)";
+  Types.ActivePower Pc "Active Power supplied by the Infinite bus (phase c)";
+  Types.ReactivePower Qc "Reactive Power supplied by the Infinite bus (phase c)";
 equation
   // Equations for Phase A
   p1.vr = V_A*cos(angle_A);

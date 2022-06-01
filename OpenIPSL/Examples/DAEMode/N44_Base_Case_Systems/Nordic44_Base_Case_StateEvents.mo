@@ -3364,7 +3364,7 @@ equation
             textString="bus
 5402")}),
       Documentation(info="<html>
-<p>Simulation of the Nordic 44 test system, in its base case scenario, with a fault occuring at bus , triggering several events.
+<p>Simulation of the Nordic 44 test system, in its base case scenario, with a fault occurring at bus , triggering several events.
 Try simulating the system with an fixed time-step solver, without a DAE mode, and with a time-step of 10ms.</p>
 <p>Simulate the system for 5 seconds. Variables of interest are:</p>
 <ul>

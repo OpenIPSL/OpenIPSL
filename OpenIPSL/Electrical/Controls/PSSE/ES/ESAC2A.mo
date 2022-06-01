@@ -211,7 +211,7 @@ equation
 </tr>
 <tr>
 <td><p>Author</p></td>
-<td><p>ALSETLab, Rensselaer Polytechnic Insititute</p></td>
+<td><p>ALSETLab, Rensselaer Polytechnic Institute</p></td>
 </tr>
 <tr>
 <td><p>Contact</p></td>

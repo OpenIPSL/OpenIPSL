@@ -120,7 +120,7 @@ A PV Plant implemented according to the DIgSILENT template in PowerFactory.
 </p>
 <p>NOTE 1: The PLL Dynamics are missing along with the active power reduction models for FRT events.
 </p>
-<p>NOTE 2: Keep in mind that if external irradiance is connected it needs to be matched for the inital active power for steady-state initialization.
+<p>NOTE 2: Keep in mind that if external irradiance is connected it needs to be matched for the initial active power for steady-state initialization.
 </p>
 </html>", revisions = "<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

@@ -106,7 +106,7 @@ equation
 <li><code>G1.machine.delta</code></li>
 </ul>
 <p>Note that these curves have oscillations that grow with time, indicating a clear case of instability. This issue is addressed on Example 2.</p>
-<p>Also note that validation agains PSAT can be performed by loading the file <code>Tutorial/Additional_Material/PSAT_dyn.csv</code>. The correspondent curves are:</p>
+<p>Also note that validation against PSAT can be performed by loading the file <code>Tutorial/Additional_Material/PSAT_dyn.csv</code>. The correspondent curves are:</p>
 <ul>
 <li><code>PSAT_dyn.v</code> corresponds to <code>G1.machine.v</code></li>
 <li><code>PSAT_dyn.vf</code> corresponds to <code>G1.avr.vf</code></li>

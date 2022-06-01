@@ -27,7 +27,7 @@ class v100 "Version 1.0.0 (2016-12-16)"
 <li>Deleting current limiter from KTH Solar package by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/42\">#42</a></li>
 <li>Updating exciter Base Classes by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/41\">#41</a></li>
 <li>Implementing invFEX as a function in base classes of exciters by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/44\">#44</a></li>
-<li>Removing unsed parameter Ec0 from SEXS exciter by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/46\">#46</a></li>
+<li>Removing unused parameter Ec0 from SEXS exciter by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/46\">#46</a></li>
 <li>Updating PSAT AVR Type III to remove initialization parameters by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/49\">#49</a></li>
 <li>Release support by <a href=\"https://github.com/MaximeBaudette\">@MaximeBaudette</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/48\">#48</a></li>
 <li>Fixed the parameter name for Xpq. by <a href=\"https://github.com/Krokkodilli\">@Krokkodilli</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/52\">#52</a></li>

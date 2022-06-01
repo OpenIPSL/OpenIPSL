@@ -27,7 +27,7 @@ model Gen_no_contr "Generation unit with only a machine model"
     annotation (Dialog(group="Machine parameters"));
   parameter Types.PerUnit S12 "Saturation factor at 1.2 pu"
     annotation (Dialog(group="Machine parameters"));
-  parameter Types.PerUnit R_a=0 "amature resistance"
+  parameter Types.PerUnit R_a=0 "Armature resistance"
     annotation (Dialog(group="Machine parameters"));
   OpenIPSL.Electrical.Machines.PSSE.GENSAL gENSAL(
     V_b=V_b,

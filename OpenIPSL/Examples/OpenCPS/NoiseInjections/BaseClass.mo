@@ -33,7 +33,7 @@ equation
           points={{-100,0},{-80,0},{-70,40},{-60,-20},{-50,20},{-28,-40},{-10,
             40},{0,-20},{12,20},{20,0},{40,0},{40,0}},
           thickness=2)}), Documentation(info="<html>
-<p>This model is used as base for building the node injections into electrical nodes via consumption of active and reactive powers, i.e. <code>P</code> and <code>Q</code>, respectivly.
+<p>This model is used as base for building the node injections into electrical nodes via consumption of active and reactive powers, i.e. <code>P</code> and <code>Q</code>, respectively.
 These variables are changed differently according to the noise injection procedure in which the extended models are based on. </p>
 </html>"));
 end BaseClass;

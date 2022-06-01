@@ -3,7 +3,7 @@ package AKD "Small subsystem representing the northern part of the Norwegian pow
  extends Modelica.Icons.ExamplesPackage;
 
 annotation (Documentation(info="<html>
-<p>The AKD test system represents a small transmission grid that is provided by Statnett, the Norwegian Transmission System Operator. The grid represents a subsystem of the Norwegian power network, located in the nothern part of the country.</p>
+<p>The AKD test system represents a small transmission grid that is provided by Statnett, the Norwegian Transmission System Operator. The grid represents a subsystem of the Norwegian power network, located in the northern part of the country.</p>
 <p>The system is composed of seven buses, six machines and one load center.</p>
 <p>The model underwent a software-to-software validation procedure against the PSSE model counterpart. The validation procedure assessed the behavior of the system after different disturbances that were applied to the system.</p>
 <p>This package contains three sub-packages:</p>

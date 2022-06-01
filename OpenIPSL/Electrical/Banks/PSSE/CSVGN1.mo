@@ -21,7 +21,7 @@ model CSVGN1 "STATIC SHUNT COMPENSATOR MODEL"
   parameter Types.Time T3=0 annotation (Dialog(group="Device parameters"));
   parameter Types.Time T4=0 annotation (Dialog(group="Device parameters"));
   parameter Types.Time T5=0 annotation (Dialog(group="Device parameters"));
-  parameter Types.ReactivePower RMIN=0 "Reactor minmum var output" annotation (Dialog(group="Device parameters"));
+  parameter Types.ReactivePower RMIN=0 "Reactor minimum var output" annotation (Dialog(group="Device parameters"));
   parameter Types.PerUnit VMAX=0.5 annotation (Dialog(group="Device parameters"));
   parameter Types.PerUnit VMIN=0 annotation (Dialog(group="Device parameters"));
   parameter Types.ReactivePower CBASE=100e6 "Capacitor output" annotation (Dialog(group="Device parameters"));

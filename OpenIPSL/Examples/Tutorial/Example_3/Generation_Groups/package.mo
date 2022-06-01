@@ -3,7 +3,7 @@ package Generation_Groups "Package with a set of generation units that is used i
  extends Modelica.Icons.Package;
 
 annotation (Documentation(info="<html>
-<p>This package contains basically three genration units:</p>
+<p>This package contains basically three generation units:</p>
 <ul>
 <li><strong>Gen1</strong>: generation unit connected to bus 1.</li>
 <li><strong>Gen2</strong>: generation unit connected to bus 2.</li>

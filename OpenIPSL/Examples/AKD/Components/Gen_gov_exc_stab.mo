@@ -27,7 +27,7 @@ model Gen_gov_exc_stab "Generation unit with machine, exciter, turbine-governor,
     annotation (Dialog(group="Machine parameters"));
   parameter Types.PerUnit S12 "Saturation factor at 1.2 pu"
     annotation (Dialog(group="Machine parameters"));
-  parameter Types.PerUnit R_a=0 "amature resistance"
+  parameter Types.PerUnit R_a=0 "Armature resistance"
     annotation (Dialog(group="Machine parameters"));
   parameter Types.PerUnit R=0.05 "Permanent droop";
   parameter Types.PerUnit r=0.3 "Temporary droop";
