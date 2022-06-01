@@ -24,5 +24,11 @@ annotation (
 <p>This tutorial is designed to present the basics of the OpenIPSL for beginners that are starting to use the library.</p>
 <p>It is composed by three simple examples that are meant to cover the principles of power system modeling using
 Modelica and the models available in OpenIPSL, while exploring common power system test cases.</p>
+<h5>Note</h5>
+<p>
+<em>The tutorial depends on the non-standard conformant <a href=\"https://github.com/modelica/Modelica_LinearSystems2\">Modelica_LinearSystems2</a> library
+for some of the analysis parts. Since this is the only place that library is needed, the developers decided to not have <code>OpenIPSL</code> itself
+depend on it and might have to be loaded manually.</em>
+</p>
 </html>"));
 end Tutorial;
