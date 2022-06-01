@@ -108,7 +108,6 @@ bus to a fixed value (i.e., <code>fn</code>). The parameters <code>P_0</code>, <
 <code>v_0</code> and <code>fn</code> have the same function as in case 2.</li>
 </ol>
 
-
 <h5>Applications</h5>
 <ol>
 <li><code>H=0</code>: Infinite bus</li> 

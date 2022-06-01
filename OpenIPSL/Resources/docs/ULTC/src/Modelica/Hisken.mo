@@ -130,10 +130,6 @@ package Hisken
         experiment(StopTime = 300, Interval = 0.001, Tolerance = 0.0001, __Dymola_Algorithm = "Dassl"));
     end Test_System_HiskenLoad;
 
-
-
-
-
     model TransformerDiscrete2 "Tap changer updated"
       parameter Real m0 = 1.0375 "Initial tap ratio, from power flow";
       parameter Real n_step = 0.0125 "Step size";
@@ -200,8 +196,6 @@ package Hisken
       end when;
     end TransformerDiscrete2;
 
-
-
     model Test_System_HiskenLoad_new "OpenIPSL and updated tap changer"
       OpenIPSL.Electrical.Buses.Bus B1 annotation (
         Placement(transformation(extent = {{-131, -10}, {-111, 10}})));
@@ -252,9 +246,6 @@ package Hisken
         experiment(StopTime = 350, Interval = 0.01, Tolerance = 0.0001, __Dymola_Algorithm = "Dassl"));
     end Test_System_HiskenLoad_new;
 
-
-
-
     model Load_Hisken_new
       parameter Real P0 = 0.4 "Active power";
       parameter Real Q0 = 0 "Reactive power";
@@ -280,7 +271,6 @@ package Hisken
       angle = atan2(p.vi, p.vr);
       v = sqrt(p.vr ^ 2 + p.vi ^ 2);
     end Load_Hisken_new;
-
 
   end DAIS;
   annotation (

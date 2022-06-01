@@ -202,7 +202,6 @@ model Network "Seven-bus test system model, ready for simulation"
     t1=PF_results.trafos.t1_2_21,
     t2=PF_results.trafos.t2_2_21) annotation (Placement(visible = true, transformation(origin = {-230, -132}, extent = {{6, -4}, {-6, 4}}, rotation = 180)));
 
-
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer2(
     ANG1 = 0.00174532925199433,B=0, CZ = 2,G=0,
@@ -215,7 +214,6 @@ model Network "Seven-bus test system model, ready for simulation"
         rotation=180,
         origin={222,-132})));
 
-
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer3(
     ANG1 = 0.00174532925199433,B=0, CZ = 2,G=0,
@@ -226,7 +224,6 @@ model Network "Seven-bus test system model, ready for simulation"
         extent={{6,-4},{-6,4}},
         rotation=90,
         origin={0,110})));
-
 
   SevenBus.Data.PF_results PF_results
     annotation (Placement(transformation(extent={{-260,140},{-240,160}})));
