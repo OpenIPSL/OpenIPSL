@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Branches.Simulink.LTC;
-model LTC_lookup
+model LTC_lookup "Lookup block for load tap changing transformer implementation"
   Modelica.Blocks.Interfaces.RealInput u annotation (Placement(transformation(
           extent={{-76,-2},{-56,18}}), iconTransformation(extent={{-92,-20},{-56,
             18}})));

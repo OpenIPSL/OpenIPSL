@@ -1,5 +1,5 @@
 within OpenIPSL.NonElectrical.Logical;
-model NegCurLogic
+model NegCurLogic "Negative current logic block"
   Modelica.Blocks.Interfaces.RealInput Vd(start=nstartvalue) annotation (
       Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealOutput Efd(start=nstartvalue) annotation (

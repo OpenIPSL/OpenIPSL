@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind;
-model WindGenerator
+model WindGenerator "Generic wind power generation model"
   import Modelica.Constants.pi;
   import Modelica.Constants.e;
   Modelica.Blocks.Interfaces.RealOutput Vw "Connector of Real output signal"

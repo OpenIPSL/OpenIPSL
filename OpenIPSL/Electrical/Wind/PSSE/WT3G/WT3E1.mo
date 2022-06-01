@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSSE.WT3G;
-model WT3E1
+model WT3E1 "Electrical Control for Type 3 Wind Generator"
   parameter Integer VARFLG
     "0 constant Q; 1 Reactive control; -1 Constant PF control" annotation (
       choices(

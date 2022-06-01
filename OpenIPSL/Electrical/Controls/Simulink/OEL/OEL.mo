@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.Simulink.OEL;
-model OEL "OverExcitation Limiter"
+model OEL "Over Excitation Limiter"
   parameter Real ifd_lim "OEL parameter";
   parameter Real r "OEL parameter";
   parameter Real f "OEL parameter";

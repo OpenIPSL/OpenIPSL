@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSAT.PSAT_Type_3;
-model ElecDynBlk
+model ElecDynBlk "Dynamical equations for electrical block of a type 3 wind machine"
   Modelica.Blocks.Interfaces.RealInput omega_m "Rotor Speed" annotation (
       Placement(
       transformation(

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
-partial model BaseExciter
+partial model BaseExciter "Base exciter model for PSSE excitation systems"
   Modelica.Blocks.Interfaces.RealInput VUEL annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},

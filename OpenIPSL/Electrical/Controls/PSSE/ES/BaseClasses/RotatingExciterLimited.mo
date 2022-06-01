@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
-model RotatingExciterLimited
+model RotatingExciterLimited "Base model for a rotating exciter system with limited output"
   extends RotatingExciterBase(redeclare replaceable
       Modelica.Blocks.Continuous.LimIntegrator sISO(
       k=1/T_E,

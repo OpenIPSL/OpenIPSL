@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Turbine;
-model Rotor_Model
+model Rotor_Model "Model with wind machine's rotor equations"
   Modelica.Blocks.Interfaces.RealInput Pm "Mechanical Power Input" annotation (
       Placement(
       transformation(

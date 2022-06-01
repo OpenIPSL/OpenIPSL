@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.Loads;
-package PSAT
+package PSAT "Load models from PSAT"
   extends Modelica.Icons.Package;
 end PSAT;

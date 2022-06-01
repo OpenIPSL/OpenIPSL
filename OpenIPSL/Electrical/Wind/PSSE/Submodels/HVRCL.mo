@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSSE.Submodels;
-model HVRCL
+model HVRCL "Model for the High Voltage Ractive Current Limiter"
   //The 'High Voltage Reactive Current Management' block limits the reactive current injected into the network equations such that the terminal voltage of the machine never exceeds Volim of nominal, as long as the converter is within current limits."
   parameter Types.PerUnit VHVRCR "Threshold voltage for HVRCL";
   parameter Types.PerUnit CurHVRCR "Max. reactive current at VHVRCR";

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSAT;
-package PSS
+package PSS "Power System Stabilizer (PSS) models from PSAT"
   extends Modelica.Icons.Package;
 
 annotation (Documentation(info="<html>

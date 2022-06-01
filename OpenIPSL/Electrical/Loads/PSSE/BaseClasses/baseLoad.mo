@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Loads.PSSE.BaseClasses;
-partial model baseLoad
+partial model baseLoad "Base load for PSSE models"
   extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,
     final enablefn=false,

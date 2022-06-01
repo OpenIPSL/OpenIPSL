@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.Machines;
-package PSAT
+package PSAT "Machine models from PSAT"
   extends Modelica.Icons.Package;
 end PSAT;

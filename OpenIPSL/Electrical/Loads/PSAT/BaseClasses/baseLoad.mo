@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Loads.PSAT.BaseClasses;
-partial model baseLoad
+partial model baseLoad "Base load for PSAT models"
   extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,
     final enablefn=false,

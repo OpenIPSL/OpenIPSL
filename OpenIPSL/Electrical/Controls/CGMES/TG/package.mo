@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.Controls.CGMES;
-package TG
+package TG "Turbine-governor models from CGMES"
   extends Modelica.Icons.Package;
 end TG;

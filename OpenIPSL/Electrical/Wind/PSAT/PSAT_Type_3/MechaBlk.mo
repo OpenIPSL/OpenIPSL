@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSAT.PSAT_Type_3;
-model MechaBlk
+model MechaBlk "Mechanical block for Type 3 wind machine model"
   Modelica.Blocks.Interfaces.RealInput Tm "engine shaft torque" annotation (
       Placement(
       transformation(

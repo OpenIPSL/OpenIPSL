@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.Controls;
-package PSAT
+package PSAT "Controller models from PSAT"
   extends Modelica.Icons.Package;
 end PSAT;

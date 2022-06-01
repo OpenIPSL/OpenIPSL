@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Events;
-model PwFaultPQ
+model PwFaultPQ "Transitory short-circuit on a node with active and reactive power information"
   OpenIPSL.Interfaces.PwPin p annotation (Placement(transformation(extent={{-40,
             -10},{-20,10}}), iconTransformation(extent={{-80,-10},{-60,10}})));
   parameter Types.PerUnit R "Resistance";

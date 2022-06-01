@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Machines.PSAT.BaseClasses;
-partial model baseMachine
+partial model baseMachine "Base machine for PSAT models"
   extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,
     final enablefn=false,

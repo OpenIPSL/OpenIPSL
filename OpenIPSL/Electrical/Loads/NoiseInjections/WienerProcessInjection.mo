@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Loads.NoiseInjections;
-model WienerProcessInjection
+model WienerProcessInjection "Load with white gaussian noise injection using Wiener process"
   extends BaseClass;
 
 initial equation

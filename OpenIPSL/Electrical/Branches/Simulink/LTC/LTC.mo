@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Branches.Simulink.LTC;
-model LTC
+model LTC "Load tap changing transformer branch"
   Modelica.Blocks.Continuous.LimIntegrator imLimitedIntegrator(
     outMax=1,
     k=1,

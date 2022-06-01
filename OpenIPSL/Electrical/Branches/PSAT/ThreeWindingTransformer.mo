@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Branches.PSAT;
-model ThreeWindingTransformer
+model ThreeWindingTransformer "Three winding transformer model from PSAT"
   outer OpenIPSL.Electrical.SystemBase SysData;
   OpenIPSL.Interfaces.PwPin b1
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}}), iconTransformation(extent={{-120,-10},{-100,10}})));

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3;
-package Turbine
+package Turbine "Type 3 wind turbine model"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

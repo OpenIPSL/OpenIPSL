@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Turbine;
-model Cp_function
+model Cp_function "Block for power coefficient (Cp) calculation"
   extends Modelica.Blocks.Icons.Block;
   Modelica.Blocks.Interfaces.RealInput Lambda "Lambda" annotation (Placement(
       transformation(

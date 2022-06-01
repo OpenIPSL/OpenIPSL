@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind;
-package PSSE
+package PSSE "Wind machine models from PSSE"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

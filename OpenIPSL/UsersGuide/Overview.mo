@@ -64,7 +64,7 @@ Within each subpackage, the user will find models grouped into software tools fr
    <td valign=\"top\"> Models that can represent three-phase grids. More information can be found in the package's documentation. </td>
 </tr>
 <tr><td valign=\"top\"> Wind </td>
-   <td valign=\"top\"> Models that represent generators and their controls. </td>
+   <td valign=\"top\"> Models that represent wind generators and their controls. </td>
 </tr>
 <tr><td valign=\"top\"> Essentials </td>
    <td valign=\"top\"> Contains the <code>pfComponent</code> model that is extended for purposes of initialization with power flow results. </td>

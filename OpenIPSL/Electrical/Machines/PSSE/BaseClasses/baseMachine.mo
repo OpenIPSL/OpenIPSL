@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Machines.PSSE.BaseClasses;
-partial model baseMachine
+partial model baseMachine "Base machine for PSSE models"
   import Complex;
   import Modelica.ComplexMath.arg;
   import Modelica.ComplexMath.real;

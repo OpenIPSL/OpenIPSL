@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Solar;
-package PowerFactory
+package PowerFactory "Solar PV models from PowerFactory"
   extends Modelica.Icons.Package;
 
   annotation (

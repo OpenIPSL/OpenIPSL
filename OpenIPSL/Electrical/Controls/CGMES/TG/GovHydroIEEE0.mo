@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.CGMES.TG;
-class GovHydroIEEE0
+class GovHydroIEEE0 "CGMES Simplified Hydro Governor"
   parameter Real K=5 "Governor gain";
   parameter Types.Time T1=0.25 "Governor lag time constant";
   parameter Types.Time T2=0 "Governor lead time constant";

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
-model RectifierCommutationVoltageDrop
+model RectifierCommutationVoltageDrop "Base model for excitation system with commutation voltage drop on rectifier"
   parameter Types.PerUnit K_C "Rectifier load factor";
   Modelica.Blocks.Interfaces.RealInput V_EX annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(

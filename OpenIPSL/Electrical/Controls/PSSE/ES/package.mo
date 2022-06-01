@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE;
-package ES
+package ES "Excitation system models from PSSE"
   extends Modelica.Icons.Package;
 
 annotation (Documentation(info="<html>

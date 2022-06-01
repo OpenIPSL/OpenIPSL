@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.FACTS;
-package PSAT
+package PSAT "FACTS models from PSAT"
   extends Modelica.Icons.Package;
 end PSAT;

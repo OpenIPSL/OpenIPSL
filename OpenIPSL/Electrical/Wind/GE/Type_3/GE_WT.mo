@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3;
-model GE_WT
+model GE_WT "Type 3 wind turbine machine from GE"
   import Modelica.Constants.pi;
   import Modelica.Constants.eps;
   parameter Types.PerUnit _V0=1.03 "Terminal Voltage from Power Flow";

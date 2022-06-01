@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Buses;
-model BusExt
+model BusExt "Bus model with array of pins representing the same node"
   outer OpenIPSL.Electrical.SystemBase SysData
     "Must add this line in all models";
   parameter Integer np(min=0) = 0 "Number of left connection"

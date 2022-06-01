@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Generator;
-model Generator
+model Generator "Implementation of type 3 wind generator"
   import Modelica.Constants.pi;
   parameter Types.Frequency freq=50;
   parameter Real omega_0=2*pi*freq;

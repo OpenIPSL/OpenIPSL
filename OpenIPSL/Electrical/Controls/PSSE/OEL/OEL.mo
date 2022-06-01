@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.OEL;
-model OEL
+model OEL "Over excitation limiter system from PSSE"
   Modelica.Blocks.Interfaces.RealInput IFD "Field current" annotation (
       Placement(transformation(extent={{-140,-20},{-100,20}}),
                                                              iconTransformation(

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3;
-package Electrical_Control
+package Electrical_Control "Electrical control models for type 3 wind machine"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

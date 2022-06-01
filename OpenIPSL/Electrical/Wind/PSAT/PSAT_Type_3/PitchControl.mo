@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSAT.PSAT_Type_3;
-model PitchControl
+model PitchControl "Pitch control block for Type 3 wind machine model"
   Modelica.Blocks.Interfaces.RealInput omega_m "Real voltage" annotation (
       Placement(
       transformation(

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
-model RotatingExciter
+model RotatingExciter "Base model for a rotating exciter system"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.RotatingExciterBase(
       redeclare replaceable Modelica.Blocks.Continuous.Integrator sISO(
       k=1/T_E,

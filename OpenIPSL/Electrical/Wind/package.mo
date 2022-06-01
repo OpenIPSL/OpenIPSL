@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical;
-package Wind
+package Wind "Models that represent wind generators and their controls"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

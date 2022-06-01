@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Banks.PSSE;
-model Shunt
+model Shunt "Fixed shunt device model"
   parameter Types.PerUnit G "Conductance (system base)";
   parameter Types.PerUnit B "Susceptance (system base)";
   Complex I;

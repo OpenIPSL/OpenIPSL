@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Turbine;
-model Turbine_Model
+model Turbine_Model "Type 3 wind turbine model"
   parameter Types.ApparentPower GEN_base=1000000;
   parameter Types.ApparentPower WT_base=1000000;
   parameter Real Kpp=1;

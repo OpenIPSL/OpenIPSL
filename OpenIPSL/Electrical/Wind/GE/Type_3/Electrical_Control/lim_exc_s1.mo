@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Electrical_Control;
-model lim_exc_s1
+model lim_exc_s1 "Exciter limiter model for wind machine"
   extends Modelica.Blocks.Icons.Block;
   parameter Types.PerUnit xiqmin=1;
   parameter Types.PerUnit xiqmax=1;

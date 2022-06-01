@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Branches.Simulink.LTC;
-model LTC_switch
+model LTC_switch "Switch block for load tap changing transformer implementation"
   Modelica.Blocks.Interfaces.RealInput Signalin annotation (Placement(
         transformation(extent={{-68,-4},{-48,16}}), iconTransformation(extent={
             {-78,-16},{-48,16}})));

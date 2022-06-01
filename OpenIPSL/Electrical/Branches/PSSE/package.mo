@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.Branches;
-package PSSE
+package PSSE "Branch models from PSSE"
   extends Modelica.Icons.Package;
 end PSSE;

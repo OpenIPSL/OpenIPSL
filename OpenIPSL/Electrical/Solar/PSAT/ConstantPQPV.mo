@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Solar.PSAT;
-model ConstantPQPV
+model ConstantPQPV "Solar PV models that can be either constant PQ or constant PV" 
   model PQ1 "Constant PQ Generator, Solar Photo-Voltaic Generator"
     OpenIPSL.Interfaces.PwPin p annotation (Placement(
         transformation(

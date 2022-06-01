@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
-model RotatingExciterWithDemagnetizationLimited
+model RotatingExciterWithDemagnetizationLimited "Base model for a rotating exciter system with demagnetization effect and limited output"
   extends RotatingExciterWithDemagnetization(redeclare replaceable
       Modelica.Blocks.Continuous.LimIntegrator sISO(
       outMin=0,

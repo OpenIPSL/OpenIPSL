@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Machines.PSSE;
-model GENCLS
+model GENCLS "Classic generator model that can also represent an infinite bus"
   extends Icons.VerifiedModel;
   extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,

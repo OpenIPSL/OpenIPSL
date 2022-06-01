@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.OEL;
-model IF_comparisor
+model IF_comparisor "Discrete over excitation limiter based on comparison and if-statements"
   Modelica.Blocks.Interfaces.RealInput p
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput n1

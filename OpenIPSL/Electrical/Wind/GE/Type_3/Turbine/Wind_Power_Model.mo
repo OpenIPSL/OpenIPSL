@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Turbine;
-model Wind_Power_Model
+model Wind_Power_Model "Model for wind power in a type 3 machine"
   Modelica.Blocks.Interfaces.RealInput Wind_Speed "Wind speed" annotation (
       Placement(
       transformation(

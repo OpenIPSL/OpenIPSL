@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSSE.Submodels;
-model CCL
+model CCL "Model for calculation of converter current limits"
   parameter Types.PerUnit Qmax;
   parameter Boolean pqflag;
   parameter Types.PerUnit ImaxTD "Converter current limit";

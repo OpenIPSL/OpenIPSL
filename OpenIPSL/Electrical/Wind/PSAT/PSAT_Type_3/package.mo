@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSAT;
-package PSAT_Type_3
+package PSAT_Type_3 "Type 3 wind machine model from PSAT"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

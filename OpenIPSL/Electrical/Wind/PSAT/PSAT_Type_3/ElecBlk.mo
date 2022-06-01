@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSAT.PSAT_Type_3;
-model ElecBlk
+model ElecBlk "Electrical block for Type 3 wind machine"
   Modelica.Blocks.Interfaces.RealInput omega_m "Rotor Speed" annotation (
       Placement(
       transformation(

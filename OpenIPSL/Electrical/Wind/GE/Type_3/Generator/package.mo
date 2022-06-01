@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3;
-package Generator
+package Generator "Type 3 wind generator model"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

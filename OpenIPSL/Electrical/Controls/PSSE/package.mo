@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls;
-package PSSE
+package PSSE "Controller models from PSSE"
   extends Modelica.Icons.Package;
 
 annotation (Documentation(info="<html>

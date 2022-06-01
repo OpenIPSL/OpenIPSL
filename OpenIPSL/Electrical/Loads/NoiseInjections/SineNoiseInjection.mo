@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Loads.NoiseInjections;
-model SineNoiseInjection
+model SineNoiseInjection "Load with noise and sine reference injection"
   extends BaseClass;
   parameter Real amplitude=1 "Amplitude of sine wave";
   parameter Types.Frequency freqHz(start=1) "Frequency of sine wave";

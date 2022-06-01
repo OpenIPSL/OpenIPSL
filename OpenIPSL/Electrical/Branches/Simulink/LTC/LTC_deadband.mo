@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Branches.Simulink.LTC;
-model LTC_deadband
+model LTC_deadband "Deadband block for load tap changing transformer implementation"
   Modelica.Blocks.Interfaces.RealOutput signal annotation (Placement(
         transformation(extent={{56,-2},{76,18}}), iconTransformation(extent={{
             56,-2},{76,18}})));

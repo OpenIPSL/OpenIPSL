@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE;
-package Type_3
+package Type_3 "Type 3 wind machine from GE"
   extends Modelica.Icons.Package;
 
 annotation (Diagram(coordinateSystem(

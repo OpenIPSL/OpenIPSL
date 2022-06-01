@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Branches.Simulink.LTC;
-model LTC_quantizer
+model LTC_quantizer "Quantizer block for load tap changing transformer implementation"
   Modelica.Blocks.Interfaces.RealInput p annotation (Placement(transformation(
           extent={{-76,-2},{-56,18}}), iconTransformation(extent={{-90,-18},{-56,
             18}})));

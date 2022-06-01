@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Loads.NoiseInjections;
-partial model BaseClass
+partial model BaseClass "Base class for noise injection loads"
 
   // Parameters to be used by the nois generators
   parameter Real active_mu=0 "Expectation value active power noise";

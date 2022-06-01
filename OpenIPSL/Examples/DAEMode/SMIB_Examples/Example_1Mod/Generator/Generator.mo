@@ -1,5 +1,5 @@
 within OpenIPSL.Examples.DAEMode.SMIB_Examples.Example_1Mod.Generator;
-model Generator
+model Generator "Generator model composed by PSAT components for Machine and AVR"
     extends OpenIPSL.Interfaces.Generator;
     OpenIPSL.Electrical.Machines.PSAT.Order6 order6(D = 0, M = 7, P_0 = P_0, Q_0 = Q_0, Sn = 2220000000, T1q0 = 1, T2d0 = 0.03, T2q0 = 0.07, Taa = 0.002, v_0 = v_0, V_b = V_b, Vn = 400000, angle_0 = angle_0, ra = 0.003, x1d = 0.3, x1q = 0.65, x2d = 0.23, x2q = 0.25, xd = 1.81, xq = 1.76) annotation (
           Placement(transformation(origin = {9, -5}, extent = {{-15, -15}, {15, 15}})));

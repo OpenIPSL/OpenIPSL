@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.PSSE.WT3G;
-model WT3G1
+model WT3G1 "Wind Machine Model with DFIG and Ative Power Control done by a Converter (Type 3)"
   extends OpenIPSL.Electrical.Essentials.pfComponent;
   parameter Types.PerUnit X_eq "Equivalent reactance for current injection";
   parameter Types.PerUnit K_pll "PLL first integrator gain";

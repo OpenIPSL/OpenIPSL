@@ -1,4 +1,4 @@
 within OpenIPSL.Electrical.Controls.Simulink;
-package PSS
+package PSS "Power system stabilizer models based on Simulink implementation"
   extends Modelica.Icons.Package;
 end PSS;

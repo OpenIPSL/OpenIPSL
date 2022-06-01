@@ -1,5 +1,5 @@
 within OpenIPSL.NonElectrical;
-package Continuous
+package Continuous "Blocks that are described with continuous equations"
   extends Modelica.Icons.Package;
 
 annotation (Documentation(info="<html>

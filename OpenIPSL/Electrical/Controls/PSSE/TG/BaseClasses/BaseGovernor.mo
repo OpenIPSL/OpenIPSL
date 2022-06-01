@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses;
-partial model BaseGovernor
+partial model BaseGovernor "Base turbine governor model"
 
   Modelica.Blocks.Interfaces.RealInput SPEED annotation (Placement(
         transformation(extent={{-260,-140},{-220,-100}}), iconTransformation(

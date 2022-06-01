@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSAT.TG;
-model TGTypeI
+model TGTypeI "TG Type I"
   Modelica.Blocks.Interfaces.RealInput w "Rotor speed [pu]" annotation (
       Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput pm "Mechanical power [pu]" annotation (

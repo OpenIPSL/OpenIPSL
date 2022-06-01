@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
-model RotatingExciterBase
+model RotatingExciterBase "Base model for a rotating exciter"
   parameter Types.Time T_E "Exciter time constant";
   parameter Real K_E "Exciter field gain";
   parameter Types.PerUnit E_1 "Exciter saturation point 1";

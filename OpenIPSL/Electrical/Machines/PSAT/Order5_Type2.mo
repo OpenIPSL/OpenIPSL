@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Machines.PSAT;
-model Order5_Type2
+model Order5_Type2 "5th order machine model, type 2"
   extends BaseClasses.baseMachine(vf(start=vf00), xq0=xq);
   parameter Types.PerUnit xd=1.9 "d-axis synchronous reactance"
     annotation (Dialog(group="Machine parameters"));
