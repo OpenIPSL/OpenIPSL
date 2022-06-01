@@ -63,7 +63,7 @@ equation
 </table>
 </html>", info="<html>
 <p>
-For more information see <a href=\"OpenIPSL.UsersGuide.References\">[Milano2013]</a>, section \"18.4.2
+For more information see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013]</a>, section \"18.4.2
 Type II\".
 </p>
 </html>"), Icon(graphics={

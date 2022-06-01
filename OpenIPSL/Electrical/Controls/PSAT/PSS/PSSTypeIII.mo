@@ -44,7 +44,7 @@ equation
           lineColor={0,0,255},
           textString="%name")}),    Documentation(info="<html>
 <p>
-For more information see <a href=\"OpenIPSL.UsersGuide.References\">[Milano2013]</a>, section \"18.4.3
+For more information see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013]</a>, section \"18.4.3
 Type III\".
 </p>
 </html>"));

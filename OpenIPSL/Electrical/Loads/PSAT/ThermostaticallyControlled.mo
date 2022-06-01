@@ -105,7 +105,7 @@ This load defines a dynamic load with temperature control. This
 component is initialized after the power flow solution and needs a PQ load connected
 at the same bus.</p>
 <p>
-For more information see <a href=\"OpenIPSL.UsersGuide.References\">[Milano2013]</a>,
+For more information see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013]</a>,
 section \"16.6 Thermostatically Controlled Load\".
 </p>
 </html>"));
