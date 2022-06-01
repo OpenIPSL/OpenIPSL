@@ -3,23 +3,23 @@ model SLDWindV "Dynamic support during faults"
   parameter Types.PerUnit Deadband "Deadband for dynamic AC voltage support";
   parameter Real K_FRT "Gain for dynamic AC voltage supports";
   Modelica.Blocks.Math.Add add(k1 = -1, k2 = 1) annotation (
-    Placement(visible = true, transformation(origin = {-10, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-10, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain gain(k = K_FRT) annotation (
-    Placement(visible = true, transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product annotation (
-    Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const(k = Deadband) annotation (
-    Placement(visible = true, transformation(origin = {-60, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-60, 50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Abs duac_abs annotation (
-    Placement(visible = true, transformation(origin = {-60, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-60, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput duac annotation (
-    Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealOutput diq annotation (
-    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Division division annotation (
-    Placement(visible = true, transformation(origin = {-2, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-2, -30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Modelica.Constants.inf, uMin = Deadband)  annotation (
-    Placement(visible = true, transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(product.y, gain.u) annotation (
     Line(points = {{51, 0}, {68, 0}}, color = {0, 0, 127}));

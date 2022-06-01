@@ -12,15 +12,15 @@ model PVModule "Model of a single PV module"
   parameter SI.Irradiance E_STC = 1000;
   parameter SI.Temperature theta_STC = 298.15;
   Modelica.Blocks.Interfaces.RealInput U annotation (
-    Placement(visible = true, transformation(origin={-100,80},    extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin={-90,90},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={-100,80},    extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-90,90},    extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput E if use_input_E annotation (
-    Placement(visible = true, transformation(origin={-100,40},    extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin={-90,50},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={-100,40},    extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-90,50},    extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput theta if use_input_theta annotation (
-    Placement(visible = true, transformation(origin={-100,-40},    extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={-100,-40},    extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput I annotation (
-    Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Umpp annotation (
-    Placement(visible = true, transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
   Types.Voltage U0 "Open-circuit voltage";
   Types.Current Isc "Short-circuit current";
   Types.Current Impp "MPP Current";

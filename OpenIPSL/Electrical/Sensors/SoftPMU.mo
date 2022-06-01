@@ -55,7 +55,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="PMU")}), Documentation(info="<html>
 <p>This device can be used to simulate a Phasorial Measurement Unit (PMU) designed for estimating the grid's frequency at a local node.
-Frequency estimates are provided given the following: initial conditions for the node's voltage phasor; nominal frequency value; and time constant associated with the 
+Frequency estimates are provided given the following: initial conditions for the node's voltage phasor; nominal frequency value; and time constant associated with the
 smoothing filter used in derivative calculations.</p>
 <h5>Note</h5>
 <p><em>The calculated frequency is just an estimate and can deviate by a certain margin of error.</em></p>

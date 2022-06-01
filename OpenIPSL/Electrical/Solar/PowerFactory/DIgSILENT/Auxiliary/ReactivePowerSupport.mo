@@ -7,37 +7,37 @@ model ReactivePowerSupport "Reactive power support for FRT"
   parameter Real K_FRT "Gain for dynamic AC voltage supports";
   parameter Types.PerUnit i0 "Initial reactive current";
   Modelica.Blocks.Interfaces.RealInput duac annotation (
-    Placement(visible = true, transformation(origin = {-200, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealOutput iq annotation (
-    Placement(visible = true, transformation(origin = {210, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Switch FRT_characteristic_selection annotation (
-    Placement(visible = true, transformation(origin = {98, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {98, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.BooleanConstant FRTCharac(k=i_EEG) annotation (
-    Placement(visible = true, transformation(origin = {60, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {60, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = iq_max, uMin = iq_min)  annotation (
-    Placement(visible = true, transformation(origin = {182, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {182, 0}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.General.Picdro picdro(Tdrop = if i_EEG then 0 else 0.5, Tpick = 0)  annotation (
-    Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold = 0)  annotation (
-    Placement(visible = true, transformation(origin = {-70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-70, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Abs abs annotation (
-    Placement(visible = true, transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.DeadZone deadZone(deadZoneAtInit = true, uMax = Deadband, uMin = -Deadband)  annotation (
-    Placement(visible = true, transformation(origin = {-158, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-158, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant initial_current(k = i0)  annotation (
-    Placement(visible = true, transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add annotation (
-    Placement(visible = true, transformation(origin = {140, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {140, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain gain(k = K_FRT)  annotation (
-    Placement(visible = true, transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Switch switch annotation (
-    Placement(visible = true, transformation(origin = {60, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {60, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant zero_FRT_support(k = 0)  annotation (
-    Placement(visible = true, transformation(origin = {20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {20, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Switch switch1 annotation (
-    Placement(visible = true, transformation(origin = {60, -50}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
+    Placement(transformation(origin = {60, -50}, extent = {{-10, 10}, {10, -10}})));
   SLDWindV sLDWindV(Deadband = Deadband, K_FRT = K_FRT)  annotation (
-    Placement(visible = true, transformation(origin = {-30, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, -80}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(FRTCharac.y, FRT_characteristic_selection.u2) annotation (
     Line(points = {{71, 0}, {86, 0}}, color = {255, 0, 255}));

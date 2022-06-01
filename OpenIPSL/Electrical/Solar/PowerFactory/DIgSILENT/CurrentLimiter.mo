@@ -5,55 +5,55 @@ model CurrentLimiter "Limiter of d- and q-axis currents"
   parameter Types.PerUnit Deadband;
   parameter Boolean i_EEG;
   Modelica.Blocks.Interfaces.RealInput idin annotation (
-    Placement(visible = true, transformation(origin = {-200, 110}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 110}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-80, 60}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealInput iqin annotation (
-    Placement(visible = true, transformation(origin = {-200, -110}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, -110}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-80, -60}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealInput duac annotation (
-    Placement(visible = true, transformation(origin = {-200, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealOutput idout annotation (
-    Placement(visible = true, transformation(origin = {210, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, 50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput iqout annotation (
-    Placement(visible = true, transformation(origin = {210, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, -50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter dlim_normal_op(limitsAtInit = true, uMax = maxAbsCur, uMin = -maxAbsCur) annotation (
-    Placement(visible = true, transformation(origin = {90, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {90, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter qlim_frt_op(limitsAtInit = true, uMax = maxAbsCur, uMin = -maxAbsCur) annotation (
-    Placement(visible = true, transformation(origin = {90, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {90, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter qlim_normal_op annotation (
-    Placement(visible = true, transformation(origin = {90, -120}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {90, -120}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter dlim_frt_op annotation (
-    Placement(visible = true, transformation(origin = {90, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {90, 150}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant maximum_current(k = maxAbsCur) annotation (
-    Placement(visible = true, transformation(origin = {-30, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 150}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add(k1 = -1, k2 = +1) annotation (
-    Placement(visible = true, transformation(origin = {10, 130}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, 130}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Abs abs1 annotation (
-    Placement(visible = true, transformation(origin = {-30, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain gain(k = -1) annotation (
-    Placement(visible = true, transformation(origin = {40, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+    Placement(transformation(origin = {40, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Math.Min min annotation (
-    Placement(visible = true, transformation(origin = {20, -150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {20, -150}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const(k = maxIq) annotation (
-    Placement(visible = true, transformation(origin = {-20, -130}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-20, -130}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain gain1(k = -1) annotation (
-    Placement(visible = true, transformation(origin = {50, -150}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
+    Placement(transformation(origin = {50, -150}, extent = {{10, 10}, {-10, -10}}, rotation = 180)));
   Modelica.Blocks.Math.Pythagoras pythagoras(u1IsHypotenuse = true) annotation (
-    Placement(visible = true, transformation(origin = {-64, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-64, -170}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const1(k = maxAbsCur) annotation (
-    Placement(visible = true, transformation(origin = {-110, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-110, -170}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = maxAbsCur, uMin = 0) annotation (
-    Placement(visible = true, transformation(origin = {-20, -170}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-20, -170}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.General.Picdro picdro(Tdrop = if i_EEG then 0 else 0.5, Tpick = 0) annotation (
-    Placement(visible = true, transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.DeadZone deadZone(deadZoneAtInit = true, uMax = Deadband, uMin = -Deadband) annotation (
-    Placement(visible = true, transformation(origin = {-130, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-130, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold = Deadband) annotation (
-    Placement(visible = true, transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Abs abs annotation (
-    Placement(visible = true, transformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Switch switch_q_frt_normal annotation (
-    Placement(visible = true, transformation(origin = {150, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {150, -110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Switch switch1 annotation (
-    Placement(visible = true, transformation(origin = {150, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {150, 110}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(abs1.u, duac) annotation (
     Line(points = {{-42, 90}, {-160, 90}, {-160, 0}, {-200, 0}}, color = {0, 0, 127}));

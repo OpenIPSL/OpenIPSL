@@ -18,7 +18,7 @@ partial model LoadTestBase "Base class for the different load cases."
     B=0.001/2,
     G=0,
     R=0.01,
-    X=0.1) annotation (Placement(visible = true, transformation(origin = {50, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    X=0.1) annotation (Placement(transformation(origin = {50, 10}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Step Vstep1(height=0.0005, startTime=2) annotation (Placement(transformation(
         origin={-84,64},
         extent={{-4,-4},{4,4}})));
@@ -74,13 +74,13 @@ partial model LoadTestBase "Base class for the different load cases."
   Modelica.Blocks.Math.MultiSum sumV(nu=5) annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
   Modelica.Blocks.Math.MultiSum sumP(nu=5) annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
   Electrical.Branches.PwLine pwLine1(B = 0.001 / 2, G = 0, R = 0.01, X = 0.1) annotation (
-    Placement(visible = true, transformation(origin = {10, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, -10}, extent = {{-10, -10}, {10, 10}})));
   Electrical.Buses.Bus bus1 annotation (
-    Placement(visible = true, transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Buses.Bus bus3 annotation (
-    Placement(visible = true, transformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Buses.Bus bus2 annotation (
-    Placement(visible = true, transformation(origin = {30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {30, 0}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(Vstep1.y, sumV.u[1]) annotation (
     Line(points = {{-79.6, 64}, {-68, 64}, {-68, 45.6}, {-60, 45.6}}, color = {0, 0, 127}));

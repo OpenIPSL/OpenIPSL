@@ -161,12 +161,12 @@ Turbine dynamic system for the general purpose Turbine/Governor models GGOV1 and
 </blockquote>
 <h5>Linearisation</h5>
 <p>
-If one wants to use this model in combination with linear analysis then the parameter <code>delayType</code> 
+If one wants to use this model in combination with linear analysis then the parameter <code>delayType</code>
 needs to get changed to \"Pade Delay\".
 
 The Pade Delay model herein has as default n=2 and m=n.
 
-Linearisation will fail if <code>padeDelay.delayTime = 0</code>. The default time-delay is set to <code>padeDelay.delayTime = C.eps</code>. 
+Linearisation will fail if <code>padeDelay.delayTime = 0</code>. The default time-delay is set to <code>padeDelay.delayTime = C.eps</code>.
 </p>
 </html>", revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

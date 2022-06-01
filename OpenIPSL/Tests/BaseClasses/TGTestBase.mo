@@ -78,13 +78,13 @@ partial model TGTestBase "Base class for tests involving turbine governors."
         extent={{-20,-20},{20,20}})));
 
   Electrical.Buses.Bus bus1 annotation (
-    Placement(visible = true, transformation(origin={32,0},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={32,0},     extent = {{-10, -10}, {10, 10}})));
   Electrical.Buses.Bus bus2 annotation (
-    Placement(visible = true, transformation(origin={68,0},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={68,0},     extent = {{-10, -10}, {10, 10}})));
   Electrical.Buses.Bus bus3 annotation (
-    Placement(visible = true, transformation(origin={106,-10},  extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={106,-10},  extent = {{-10, -10}, {10, 10}})));
   Electrical.Buses.Bus bus4 annotation (
-    Placement(visible = true, transformation(origin={106,20},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={106,20},   extent = {{-10, -10}, {10, 10}})));
 equation
 
   connect(gen.vf0, gen.vf) annotation (Line(points={{-16,22},{-16,28},{-32,28},{-32,10},{-24,10}}, color={0,0,127}));
@@ -116,6 +116,5 @@ equation
           {97,-30}}, color={0,0,255}));
   connect(pwLineFault.p, pwLine3.p) annotation (Line(points={{77,30},{72,30},{72,
           10},{77,10}}, color={0,0,255}));
-  annotation (Diagram(coordinateSystem(extent={{-100,-100},{140,100}})), Icon(
-        coordinateSystem(extent={{-100,-100},{100,100}})));
+  annotation (Diagram(coordinateSystem(extent={{-100,-100},{140,100}})));
 end TGTestBase;

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Electrical_Control;
-model Electrical_Control "Type 3 wind machine electrical control" 
+model Electrical_Control "Type 3 wind machine electrical control"
   import Modelica.Constants.inf;
   parameter Types.PerUnit qmax=1;
   parameter Types.PerUnit qmin=0;

@@ -15,26 +15,26 @@ model ElmGenstat "Static generator"
   Types.Angle angle_i;
   Types.Angle angle_v;
   Modelica.Blocks.Interfaces.RealInput id_ref annotation (
-    Placement(visible = true, transformation(origin = {-108, 70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-108, 70}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, 80}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput iq_ref annotation (
-    Placement(visible = true, transformation(origin = {-108, 30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-108, 30}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, 40}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Interfaces.PwPin p(vr(start=v_0*cos(angle_0)), vi(start=v_0*sin(angle_0))) annotation (
-    Placement(visible = true, transformation(extent = {{90, -10}, {110, 10}}, rotation = 0), iconTransformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
+    Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
   Modelica.Blocks.Interfaces.RealOutput i annotation (
-    Placement(visible = true, transformation(origin = {110, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput v annotation (
-    Placement(visible = true, transformation(origin = {110, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 30}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 80}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput sinref if pll_connected "Optional PLL input for sine" annotation (
-    Placement(visible = true, transformation(origin = {-108, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-108, -30}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput cosref if pll_connected "Optional PLL input for cosine"
                                                                                               annotation (
-    Placement(visible = true, transformation(origin = {-108, -70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-108, -70}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -80}, extent = {{-10, -10}, {10, 10}})));
   Real sinu "Internal sine of the voltage angle";
   Real cosu "Internal cosine of the voltage angle";
   Modelica.Blocks.Interfaces.RealOutput P annotation (
-    Placement(visible = true, transformation(origin = {110, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, -30}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Q annotation (
-    Placement(visible = true, transformation(origin = {110, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, -70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}})));
 equation
   if pll_connected then
     connect(sinref, sinu);
@@ -71,7 +71,7 @@ equation
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "P", fontName = "Arial",
             horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Text(origin = {72.3, -81.99},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "Q", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Text(origin = {0, -8}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}, coordinateSystem(initialScale = 0.1, extent = {{-100, -100}, {100, 100}})),
+            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Text(origin = {0, -8}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
     Diagram,
     Documentation(info="<html>
 <p>

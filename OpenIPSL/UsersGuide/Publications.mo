@@ -16,7 +16,7 @@ model Publications "Publications"
 
 <ul>
 
-<li>S. Boersma, X. Bombois, L. Vanfretti, J.C. Gonzalez-Torres, and A. Benchaib, 
+<li>S. Boersma, X. Bombois, L. Vanfretti, J.C. Gonzalez-Torres, and A. Benchaib,
     &quot;Probing Signal Design for Enhanced Damping Estimation in Power Networks&quot;,
     International Journal of Electrical Power & Energy Systems, vol. 129, July 2021, 106640, ISSN 0142-0615.
     <a href=\"https://doi.org/10.1016/j.ijepes.2020.106640\">DOI:10.1016/j.ijepes.2020.106640</a>.</li>
@@ -31,7 +31,7 @@ model Publications "Publications"
 <li>L. Vanfretti, G. Laera, M. de Castro Fernandes, C. Wang, C. Mishra and K. D. Jones,
     &quot;Initial steps in deploying and calibrating power system models on a sychrophasor data cloud platform using FMI &quot;,
     User Presentation at the FMI User Meeting at the Modelica Conference 2021, 14th International Modelica Conference, Linköping, September 20-24, 2021.
-    <a href=\"https://raw.githubusercontent.com/modelica/ModelicaConference2021/master/presentations/FMI-User-Meeting/01_FMI_Dominion_Model_Calibration_Slides.pdf\">Presentation</a>, and 
+    <a href=\"https://raw.githubusercontent.com/modelica/ModelicaConference2021/master/presentations/FMI-User-Meeting/01_FMI_Dominion_Model_Calibration_Slides.pdf\">Presentation</a>, and
     <a href=\"https://ecse.rpi.edu/~vanfrl/documents/publications/conference/2021/CNPR_2021_05_LV_Dominion_Cloud_MODELICA_2021_paper_45.pdf\">authors' copy of abstract</a>.</li>
 
 <li>B. Mukherjee, M. de Castro Fernandes, and L. Vanfretti,
@@ -47,8 +47,8 @@ model Publications "Publications"
 <li>M. de Castro Fernandes, M. Navarro Catalan, M. Baudette, and L. Vanfretti,
     &quot;The Open Instance Power System Library (OpenIPSL): A Modelica Library for Phasor Time-Domain Simulations &quot;,
     User Presentation at the American Modelica Conference 2020, Boulder, Colorado, USA, March 23-25, 2020.
-    Presentation <a href=\"https://2020.american.conference.modelica.org/proceedings/userpresentations/MarcelodeCastroOpenIPSL.pdf\">Presentation PDF</a>, 
-    <a href=\"https://www.youtube.com/watch?v=2i3fvgFtcYA\">video</a>, and 
+    Presentation <a href=\"https://2020.american.conference.modelica.org/proceedings/userpresentations/MarcelodeCastroOpenIPSL.pdf\">Presentation PDF</a>,
+    <a href=\"https://www.youtube.com/watch?v=2i3fvgFtcYA\">video</a>, and
     <a href=\"https://sites.ecse.rpi.edu/~vanfrl/documents/publications/conference/2020/CNPR202002_openipsl_abstract.pdf\">authors' copy of abstract</a>.</li>
 
 <li>S.A. Dorado-Rojas, M. Navarro Catalan, M. de Castro Fernandes, and L. Vanfretti,
@@ -86,7 +86,7 @@ model Publications "Publications"
     Proceedings of the 13th International Modelica Conference, Regensburg, Germany, March 4–6, 2019,
     <a href=\"http://dx.doi.org/10.3384/ecp19157607\">DOI: 10.3384/ecp19157607</a></li>
 
-<li> M. de Castro Fernandes, J. G. de Oliveira, L. Vanfretti, M. Baudette, and M.A. Tomim, 
+<li> M. de Castro Fernandes, J. G. de Oliveira, L. Vanfretti, M. Baudette, and M.A. Tomim,
     &quot;Modeling and simulation of a hybrid single-phase/three-phase system in Modelica &quot;,
     2018 Simposio Brasileiro de Sistemas Eletricos (SBSE), 2018, pp. 1-7,
     <a href=\"http://dx.doi.org/10.1109/SBSE.2018.8395775\">DOI: 10.1109/SBSE.2018.8395775 </a></li>
@@ -98,28 +98,28 @@ model Publications "Publications"
 
 <li> M. Aguilera, L. Vanfretti, T. Bogodorova, and F. Gomez,
     &quot;Coalesced Gas Turbine and Power System Modeling and Simulation using Modelica &quot;,
-    Proceedings of The American Modelica Conference 2018, October 9-10, Samberg Conference Center, Cambridge MA, USA, Issue 154, 2019-02-26, Pages 112-120, ISSN 1650-3740. 
+    Proceedings of The American Modelica Conference 2018, October 9-10, Samberg Conference Center, Cambridge MA, USA, Issue 154, 2019-02-26, Pages 112-120, ISSN 1650-3740.
     <a href=\"http://dx.doi.org/10.3384/ecp1815493\">DOI: 10.3384/ecp1815493</a></li>
 
-<li> B. Mukherjee, and L. Vanfretti, 
+<li> B. Mukherjee, and L. Vanfretti,
     &quot;Modeling of PMU-Based Islanded Operation Controls for Power Distribution Networks using Modelica and OpenIPSL &quot;,
-    Proceedings of The American Modelica Conference 2018, October 9-10, Samberg Conference Center, Cambridge MA, USA, Issue 154, 2019-02-26, Pages 112-120, ISSN 1650-3740. 
+    Proceedings of The American Modelica Conference 2018, October 9-10, Samberg Conference Center, Cambridge MA, USA, Issue 154, 2019-02-26, Pages 112-120, ISSN 1650-3740.
     <a href=\" http://doi.org/10.3384/ecp18154112\">DOI: 10.3384/ecp18154112</a></li>
 
-<li>D. Winkler, 
+<li>D. Winkler,
     &quot;Analysing the stability of an Islanded hydro-electric power system&quot;,
-    Proceedings of The American Modelica Conference 2018, October 9-10, Samberg Conference Center, Cambridge MA, USA, Issue 154, 2019-02-26, Pages 112-120, ISSN 1650-3740. 
+    Proceedings of The American Modelica Conference 2018, October 9-10, Samberg Conference Center, Cambridge MA, USA, Issue 154, 2019-02-26, Pages 112-120, ISSN 1650-3740.
     <a href=\" http://doi.org/10.3384/ecp18154103\">DOI: 10.3384/ecp18154103</a></li>
 
-<li>D. Winkler, 
+<li>D. Winkler,
     &quot;Electrical Power System Modelling in Modelica - Comparing Open-source Library Options&quot;,
-    Proceedings of the 58th Conference on Simulation and Modelling (SIMS 58), September 25-27, Reykjavik, Iceland, 
-    Issue 188, 2017-09-27, Pages 263-270, ISSN 1650-3740. 
+    Proceedings of the 58th Conference on Simulation and Modelling (SIMS 58), September 25-27, Reykjavik, Iceland,
+    Issue 188, 2017-09-27, Pages 263-270, ISSN 1650-3740.
     <a href=\" http://doi.org/10.3384/ecp17138263\">DOI: 10.3384/ecp17138263</a></li>
 
-<li> T. Rabuzin, M. Baudette and L. Vanfretti, 
-     &quot;Implementation of a continuous integration workflow for a power system Modelica library,&quot; 
-     2017 IEEE Power  &amp; Energy Society General Meeting, 2017, pp. 1-5, 
+<li> T. Rabuzin, M. Baudette and L. Vanfretti,
+     &quot;Implementation of a continuous integration workflow for a power system Modelica library,&quot;
+     2017 IEEE Power  &amp; Energy Society General Meeting, 2017, pp. 1-5,
      <a href=\"https://doi.org/10.1109/PESGM.2017.8274618\">DOI: 10.1109/PESGM.2017.8274618.</a></li>
 
 <li> L. Vanfretti, T. Rabuzin, M. Baudette, and M. Murad,

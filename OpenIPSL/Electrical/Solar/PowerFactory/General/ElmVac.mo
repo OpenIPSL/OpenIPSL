@@ -13,11 +13,11 @@ model ElmVac "Controllable voltage source"
   Types.PerUnit Q;
   Types.Angle phiu;
   Modelica.Blocks.Interfaces.RealInput f0 annotation (
-    Placement(visible = true, transformation(origin = {-100, 50}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-104, 40}, extent = {{-12, -12}, {12, 12}}, rotation = 0)));
+    Placement(transformation(origin = {-100, 50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-104, 40}, extent = {{-12, -12}, {12, 12}})));
   Modelica.Blocks.Interfaces.RealInput v(start=v_0, fixed=true) annotation (
-    Placement(visible = true, transformation(origin = {-100, -50}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-104, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 0)));
+    Placement(transformation(origin = {-100, -50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-104, -40}, extent = {{-12, -12}, {12, 12}})));
   OpenIPSL.Interfaces.PwPin p annotation (
-    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
 initial equation
   phiu = angle_0;
 equation

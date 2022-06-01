@@ -3,21 +3,21 @@ model Picdro "Pick-up drop-off implementation for protection functions"
   parameter Types.Time Tpick "Pick-up time delay";
   parameter Types.Time Tdrop "Drop-off time delay";
   Modelica.Blocks.Interfaces.BooleanInput condition annotation (
-    Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-100, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-80, 0}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.BooleanOutput trip annotation (
-    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Timer timer annotation (
-    Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold = Tpick + 1e-8)  annotation (
-    Placement(visible = true, transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.RSFlipFlop rSFlipFlop annotation (
-    Placement(visible = true, transformation(origin = {70, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {70, -6}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Timer timer1 annotation (
-    Placement(visible = true, transformation(origin = {-10, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-10, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold1(threshold = Tdrop + 1e-8) annotation (
-    Placement(visible = true, transformation(origin = {30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {30, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.Not not1 annotation (
-    Placement(visible = true, transformation(origin = {-50, -50}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    Placement(transformation(origin = {-50, -50}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
 equation
   connect(condition, timer.u) annotation (
     Line(points = {{-100, 0}, {-44, 0}, {-44, 0}, {-42, 0}}, color = {255, 0, 255}));

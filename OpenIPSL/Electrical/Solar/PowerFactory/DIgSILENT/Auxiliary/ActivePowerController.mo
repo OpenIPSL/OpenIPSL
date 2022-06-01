@@ -6,35 +6,35 @@ model ActivePowerController "Controller for the active power of a PV plant"
   parameter Real yo_max "Maximum d-axis current";
   parameter Types.PerUnit id0 "Initial d-axis current";
   Modelica.Blocks.Interfaces.RealInput yi annotation (
-    Placement(visible = true, transformation(origin = {-160, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin={-80,0},     extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-160, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-80,0},     extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealOutput yo annotation (
-    Placement(visible = true, transformation(origin = {170, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {170, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput pred annotation (
-    Placement(visible = true, transformation(origin = {-160, 70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin={-80,60},     extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-160, 70}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-80,60},     extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Continuous.LimIntegrator I(initType = Modelica.Blocks.Types.Init.InitialOutput,k = K / T, limitsAtInit = false,outMax = yo_max, outMin = yo_min, y_start = id0) if with_I  annotation (
-    Placement(visible = true, transformation(origin = {-88, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-88, -20}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant disable(k = 0) if not with_I annotation (
-    Placement(visible = true, transformation(origin = {-90, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-90, -60}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add annotation (
-    Placement(visible = true, transformation(origin = {10, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, -6}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain P(k = K)  annotation (
-    Placement(visible = true, transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.Integrator tracker(initType = Modelica.Blocks.Types.Init.InitialOutput, k = 1 / 0.1, y_start = id0)  annotation (
-    Placement(visible = true, transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Feedback feedback annotation (
-    Placement(visible = true, transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = yo_max, uMin = yo_min)  annotation (
-    Placement(visible = true, transformation(origin = {100, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {100, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product annotation (
-    Placement(visible = true, transformation(origin = {60, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {60, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter1(limitsAtInit = true, uMax = yo_max, uMin = yo_min) annotation (
-    Placement(visible = true, transformation(origin = {44, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {44, -6}, extent = {{-10, -10}, {10, 10}})));
   //protected
   Modelica.Blocks.Interfaces.RealOutput yo1 annotation (
-    Placement(visible = true, transformation(origin={170,-20},  extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin={110,-40},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin={170,-20},  extent = {{-10, -10}, {10, 10}}), iconTransformation(origin={110,-40},   extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput yo2 annotation (
-    Placement(visible = true, transformation(origin={170,20},    extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin={110,40},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput x annotation (Placement(visible = true, transformation(origin={170,-60}, extent={{-10,-10},{10,10}},      rotation = 0), iconTransformation(origin={110,-80}, extent={{-10,-10},{10,10}}, rotation = 0)));
+    Placement(transformation(origin={170,20},    extent = {{-10, -10}, {10, 10}}), iconTransformation(origin={110,40},    extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interfaces.RealOutput x annotation (Placement(transformation(origin={170,-60}, extent={{-10,-10},{10,10}}), iconTransformation(origin={110,-80}, extent={{-10,-10},{10,10}})));
   parameter Boolean with_I = if T > 0 then true else false;
 equation
   yo = if pred < 1 then min(yo1,yo2) else yo1;

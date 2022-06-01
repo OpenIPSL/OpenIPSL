@@ -85,7 +85,7 @@ equation
           textString="GENCLS")}),
     Documentation(info="<html>
 <p>
-Synchronous machine represented by 'classical' modeling 
+Synchronous machine represented by 'classical' modeling
 (see also <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-AGV2], chapter 15</a>).
 </p>
 <h5>Parametrization</h5>
@@ -93,24 +93,24 @@ Synchronous machine represented by 'classical' modeling
 This model changes its behavior depending on the value of the parameter <code>H</code>:
 </p>
 <ol>
-<li><code>H=0</code>: The model behaves like an infinite bus where the voltage and frequency, 
-specified by <code>v_0</code> and <code>fn</code>, are kept constant. 
-<code>P</code> and <code>Q</code> are then calculated accordingly (i.e., the initial values 
+<li><code>H=0</code>: The model behaves like an infinite bus where the voltage and frequency,
+specified by <code>v_0</code> and <code>fn</code>, are kept constant.
+<code>P</code> and <code>Q</code> are then calculated accordingly (i.e., the initial values
 <code>P_0</code> and <code>Q_0</code> have <strong>no</strong> influence on the behavior of the model).</li>
 <li><code>H>0</code>: \"Classical Generator\" model with physically-meaningful parameters, e.g.,
  <code>H=5</code> in a 100 MVA base. The parameters <code>P_0</code> and <code>Q_0</code> are used
-to specify the fixed active and reactive power injected or absorbed by the model. 
+to specify the fixed active and reactive power injected or absorbed by the model.
 The parameters <code>v_0</code> and <code>fn</code> can be used to specify the <strong>initial</strong>
 voltage and frequency.</li>
 <li><code>H>>0</code>: By making <code>H</code> very large, e.g., <code>H=1e6</code> in a 100 MVA base,
-the speed of the machine will not undergo any changes, and consequently will set the frequency <code>f</code> at the 
+the speed of the machine will not undergo any changes, and consequently will set the frequency <code>f</code> at the
 bus to a fixed value (i.e., <code>fn</code>). The parameters <code>P_0</code>, <code>Q_0</code>,
 <code>v_0</code> and <code>fn</code> have the same function as in case 2.</li>
 </ol>
 
 <h5>Applications</h5>
 <ol>
-<li><code>H=0</code>: Infinite bus</li> 
+<li><code>H=0</code>: Infinite bus</li>
 <li><code>H>0</code>: Can be used to model a generation facility when only limited information
  is available, this is the simplest model possible to represent a synchronous machine's electro-mechanical dynamics.</li>
 <li><code>H>>0</code>: Can be used to model the connection to a \"stiff grid\".</li>

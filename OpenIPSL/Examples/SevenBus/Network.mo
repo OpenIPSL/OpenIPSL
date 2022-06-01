@@ -90,7 +90,7 @@ model Network "Seven-bus test system model, ready for simulation"
     V_b=380000,
     nn=1,
     v_0=PF_results.voltages.V7,
-    angle_0=PF_results.voltages.A7) annotation (Placement(visible = true, transformation(origin = {1, 91}, extent = {{-1, -39}, {1, 39}}, rotation = -90)));
+    angle_0=PF_results.voltages.A7) annotation (Placement(transformation(origin = {1, 91}, extent = {{-1, -39}, {1, 39}}, rotation = -90)));
   OpenIPSL.Electrical.Buses.BusExt FPAND(
     np=4,
     nn=2,
@@ -200,7 +200,7 @@ model Network "Seven-bus test system model, ready for simulation"
     S_n= 1080000000, VB1 = 24000, VB2 = 380000, VNOM1 = 24000, VNOM2 = 415000,
     X=0.137,
     t1=PF_results.trafos.t1_2_21,
-    t2=PF_results.trafos.t2_2_21) annotation (Placement(visible = true, transformation(origin = {-230, -132}, extent = {{6, -4}, {-6, 4}}, rotation = 180)));
+    t2=PF_results.trafos.t2_2_21) annotation (Placement(transformation(origin = {-230, -132}, extent = {{6, -4}, {-6, 4}}, rotation = 180)));
 
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer
     twoWindingTransformer2(
@@ -228,22 +228,17 @@ model Network "Seven-bus test system model, ready for simulation"
   SevenBus.Data.PF_results PF_results
     annotation (Placement(transformation(extent={{-260,140},{-240,160}})));
   Electrical.Buses.Bus internal_bus_gen1(S_b = 1078000000,V_b = 24000,angle_0=PF_results.voltages.A21, v_0=
-        PF_results.voltages.V21) annotation (Placement(visible=true,
-        transformation(
+        PF_results.voltages.V21) annotation (Placement(transformation(
         origin={-248,-132},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
-  Electrical.Buses.Bus internal_bus_gen3 annotation (Placement(visible=true,
-        transformation(
+        extent={{-10,-10},{10,10}})));
+  Electrical.Buses.Bus internal_bus_gen3 annotation (Placement(transformation(
         origin={0,128},
         extent={{-10,-10},{10,10}},
         rotation=90)));
   Electrical.Buses.Bus internal_bus_gen2(S_b = 1710000000,V_b = 20000,angle_0=PF_results.voltages.A61, v_0=
-        PF_results.voltages.V61) annotation (Placement(visible=true,
-        transformation(
+        PF_results.voltages.V61) annotation (Placement(transformation(
         origin={242,-132},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
 equation
   connect(pwLine.n, FTILL.n[1]) annotation (Line(points={{-145,-132},{-100,-132},
           {-100,-148}}, color={0,0,255}));

@@ -20,37 +20,37 @@ model Controller "Controller for the solar plant"
   parameter Types.PerUnit iq0 = -0.2 "Initial q-axis current";
   parameter Types.PerUnit id0 = 0.6 "Initial d-axis current";
   Modelica.Blocks.Interfaces.RealInput vdcref annotation (
-    Placement(visible = true, transformation(origin = {-200, 90}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 90}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput uac annotation (
-    Placement(visible = true, transformation(origin = {-200, -70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-200, -70}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput pred annotation (
-    Placement(visible = true, transformation(origin = {-200, 130}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 130}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -80}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Feedback feedback annotation (
-    Placement(visible = true, transformation(origin = {-90, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-90, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.FirstOrder MPP_delay(T = Tmpp, initType = Modelica.Blocks.Types.Init.SteadyState) annotation (
-    Placement(visible = true, transformation(origin = {-150, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-150, 90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput vdcin annotation (
-    Placement(visible = true, transformation(origin = {-200, 30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 30}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, 80}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.FirstOrder voltage_measurement_delay(T = Tr, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = uac0) annotation (
-    Placement(visible = true, transformation(origin = {-150, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-150, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant reference_voltage(k = uac0) annotation (
-    Placement(visible = true, transformation(origin = {-150, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-150, -110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Modelica.Constants.inf, uMin = U_min) annotation (
-    Placement(visible = true, transformation(origin = {-110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-110, 90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Feedback feedback1 annotation (
-    Placement(visible = true, transformation(origin = {-70, 30}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
+    Placement(transformation(origin = {-70, 30}, extent = {{-10, 10}, {10, -10}})));
   Modelica.Blocks.Continuous.FirstOrder filter(T = Tr, initType = Modelica.Blocks.Types.Init.SteadyState, y_start = 0) annotation (
-    Placement(visible = true, transformation(origin = {-20, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-20, 30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput id_ref annotation (
-    Placement(visible = true, transformation(origin = {210, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, 80}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput iq_ref annotation (
-    Placement(visible = true, transformation(origin = {210, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, -80}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.DIgSILENT.Auxiliary.ReactivePowerSupport reactivePowerSupport(Deadband = Deadband, K_FRT = K_FRT, i0 = iq0, i_EEG = i_EEG, iq_max = iq_max, iq_min = iq_min)  annotation (
-    Placement(visible = true, transformation(origin = {-20, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-20, -70}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.DIgSILENT.CurrentLimiter current_limiter(Deadband = Deadband, maxAbsCur = maxAbsCur, maxIq = maxIq, i_EEG = i_EEG)  annotation (
-    Placement(visible = true, transformation(origin = {140, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {140, 0}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.DIgSILENT.Auxiliary.ActivePowerController activePowerController(K = Kp, T = Tip, id0 = id0,yo_max = id_max, yo_min = id_min)  annotation (
-    Placement(visible = true, transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(vdcref, MPP_delay.u) annotation (
     Line(points = {{-200, 90}, {-162, 90}}, color = {0, 0, 127}));
