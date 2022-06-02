@@ -63,7 +63,7 @@ equation
   connect(eXAC2.EFD, gENROE.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
                                                  color={0,0,127}));
   connect(gENROE.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(eXAC2.VUEL, zero.y) annotation (Line(points={{-66,-61},{-66,-80},{-40.6,-80}}, color={0,0,127}));
   connect(eXAC2.VOEL, zero.y) annotation (Line(points={{-70,-61},{-70,-80},{-40.6,-80}}, color={0,0,127}));
   connect(zero.y, eXAC2.VOTHSG) annotation (Line(points={{-40.6,-80},{-54,-80},{-54,-46},{-59,-46}}, color={0,0,127}));

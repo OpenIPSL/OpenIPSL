@@ -64,15 +64,15 @@ equation
           0,255},
           startAngle=0,
           endAngle=360),
-                  Ellipse(extent={{-4,62},{0,58}},    lineColor={0,0,255}),
-          Ellipse(extent={{-4,-18},{0,-22}},    lineColor={0,0,255}),Line(
+                  Ellipse(extent={{-4,62},{0,58}}, lineColor={0,0,255}),
+          Ellipse(extent={{-4,-18},{0,-22}}, lineColor={0,0,255}),Line(
           points={{0,20},{50,20}},
           color={0,0,255},
-          smooth=Smooth.None),Ellipse(extent={{-4,22},{0,18}},    lineColor={0,
+          smooth=Smooth.None),Ellipse(extent={{-4,22},{0,18}}, lineColor={0,
           0,255}),Line(
           points={{0,-60},{48,-60}},
           color={0,0,255},
-          smooth=Smooth.None),Ellipse(extent={{-4,-58},{0,-62}},    lineColor={
+          smooth=Smooth.None),Ellipse(extent={{-4,-58},{0,-62}}, lineColor={
           0,0,255}),
         Text(
           extent={{-120,140},{120,100}},

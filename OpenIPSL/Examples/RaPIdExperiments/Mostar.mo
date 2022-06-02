@@ -76,7 +76,7 @@ equation
   connect(gENSAL.p, bus1.p)
     annotation (Line(points={{-48,0},{-48,0},{-8,0}}, color={0,0,255}));
   connect(const.y, sT5B.VUEL) annotation (Line(points={{-69.5,-71},{-60,-71},{
-          -60,-38.9}},  color={0,0,127}));
+          -60,-38.9}}, color={0,0,127}));
   connect(const1.y, sT5B.VOEL) annotation (Line(points={{-69.5,-51},{-64,-51},
           {-64,-38.9}}, color={0,0,127}));
   connect(sT5B.EFD, gENSAL.EFD) annotation (Line(points={{-75,-29},{-86,-29},{
@@ -99,7 +99,7 @@ equation
   connect(add3_1.y, sT5B.ECOMP) annotation (Line(points={{-38.4,-28},{-38.4,-29},
           {-53,-29}}, color={0,0,127}));
   connect(sT5B.VOTHSG, const2.y) annotation (Line(points={{-53,-25.4},{-46,
-          -25.4},{-46,-52},{-40.6,-52}},    color={0,0,127}));
+          -25.4},{-46,-52},{-40.6,-52}}, color={0,0,127}));
   connect(add3_1.u3, step1.y) annotation (Line(points={{-29.2,-31.2},{-26,-31.2},
           {-26,-34},{-24.4,-34}}, color={0,0,127}));
   annotation (

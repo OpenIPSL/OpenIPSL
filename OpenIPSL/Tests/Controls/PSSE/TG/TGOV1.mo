@@ -41,7 +41,7 @@ equation
   connect(tGOV1.PMECH, gENROE.PMECH) annotation (Line(points={{-81,50.2},{-100,50.2},{-100,10},{-92,10}},
                                     color={0,0,127}));
   connect(gENROE.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   annotation (
 experiment(StopTime=10));
 end TGOV1;

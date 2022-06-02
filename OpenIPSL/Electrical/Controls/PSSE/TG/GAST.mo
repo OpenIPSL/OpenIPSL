@@ -86,7 +86,7 @@ equation
       points={{61,0},{100,0},{100,-30},{92,-30}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(add.y,lV_Gate.u1)  annotation (Line(
+  connect(add.y,lV_Gate.u1) annotation (Line(
       points={{-59,6},{-42,6}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -96,12 +96,12 @@ equation
       smooth=Smooth.None));
   connect(const.y, add2.u1) annotation (Line(points={{69,-70},{0,-70},{0,-62},{-8,-62}},
                       color={0,0,127}));
-  connect(simpleLagLim.u,lV_Gate.y)  annotation (Line(points={{-2,0},{-19,0}},
+  connect(simpleLagLim.u,lV_Gate.y) annotation (Line(points={{-2,0},{-19,0}},
                                  color={0,0,127}));
   connect(simpleLagLim.y, transferFunction1.u) annotation (Line(points={{21,0},{38,0}},
                                          color={0,0,127}));
   connect(add3.y, PMECH)
-    annotation (Line(points={{141,0},{250,0}},  color={0,0,127}));
+    annotation (Line(points={{141,0},{250,0}}, color={0,0,127}));
   connect(SPEED, g1_R.u) annotation (Line(points={{-240,-120},{-152,-120},{-152,0},{-122,0}},
                             color={0,0,127}));
   connect(gDturb.u, g1_R.u) annotation (Line(points={{-42,39.5},{-152,39.5},{-152,0},{-122,0}},

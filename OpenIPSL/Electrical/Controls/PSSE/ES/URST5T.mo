@@ -80,9 +80,9 @@ equation
     annotation (Line(points={{-200,0},{-186,0},{-172,0}}, color={0,0,127}));
   connect(TransducerDelay.y, DiffV.u2) annotation (Line(points={{-149,0},{-132,
           0},{-132,-6},{-122,-6}}, color={0,0,127}));
-  connect(VOEL,lV_Gate.u2)  annotation (Line(points={{-70,-200},{-70,-100},{-60,-100},{-60,-6},{-54,-6}},
+  connect(VOEL,lV_Gate.u2) annotation (Line(points={{-70,-200},{-70,-100},{-60,-100},{-60,-6},{-54,-6}},
                                                          color={0,0,127}));
-  connect(hV_Gate.y,lV_Gate.u1)  annotation (Line(points={{-65,0},{-60,0},{-60,6},{-54,6}},
+  connect(hV_Gate.y,lV_Gate.u1) annotation (Line(points={{-65,0},{-60,0},{-60,6},{-54,6}},
                              color={0,0,127}));
   connect(LL2.y, K_R.u)
     annotation (Line(points={{61,0},{61,0},{68,0}}, color={0,0,127}));
@@ -116,7 +116,7 @@ equation
         preserveAspectRatio=true), graphics={Text(
           extent={{-90,90},{-60,70}},
           lineColor={28,108,200},
-          textString="VT"),    Text(
+          textString="VT"), Text(
           extent={{-100,160},{100,100}},
           lineColor={28,108,200},
           textString="URST5T")}),

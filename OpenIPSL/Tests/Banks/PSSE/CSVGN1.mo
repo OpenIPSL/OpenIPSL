@@ -46,7 +46,7 @@ equation
                                                      color={0,0,127}));
     connect(gENSAL.EFD, gENSAL.EFD0) annotation (Line(points={{-92,-10},{-100,-10},{-100,-30},{-42,-30},{-42,-10},{-46,-10}},
                                                      color={0,0,127}));
-    connect(gENSAL.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    connect(gENSAL.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
  connect(cSVGN1.p, SHUNT.p) annotation (Line(points={{40,60},{40,30}}, color={0,0,255}));
   connect(cSVGN1.V, realExpression.y)
     annotation (Line(points={{28,65},{20,65},{20,48},{15,48}},

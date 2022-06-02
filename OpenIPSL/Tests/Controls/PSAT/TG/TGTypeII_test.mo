@@ -2,7 +2,7 @@ within OpenIPSL.Tests.Controls.PSAT.TG;
 model TGTypeII_test "Simple system to test functionality of TG type II model"
   extends BaseClasses.TGTestBase;
   extends Modelica.Icons.Example;
-  Electrical.Controls.PSAT.TG.TGTypeII           tGtypeII(S_b=SysData.S_b)
+  Electrical.Controls.PSAT.TG.TGTypeII tGtypeII(S_b=SysData.S_b)
              annotation (Placement(transformation(extent={{-68,-24},{-40,4}})));
 equation
   connect(tGtypeII.pm, gen.pm) annotation (Line(points={{-38.6,-10},{-24,-10}}, color={0,0,127}));

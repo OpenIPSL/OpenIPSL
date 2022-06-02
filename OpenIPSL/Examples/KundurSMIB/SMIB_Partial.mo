@@ -43,21 +43,21 @@ protected
   parameter Real S_b=SysData.S_b;
 equation
   connect(B1.p, transformer.p)
-    annotation (Line(points={{-52,0},{-43,0}},         color={0,0,255}));
+    annotation (Line(points={{-52,0},{-43,0}}, color={0,0,255}));
   connect(transformer.n, B2.p)
     annotation (Line(points={{-21,0},{-12,0}}, color={0,0,255}));
   connect(B2.p, line_1.p) annotation (Line(points={{-12,0},{-2,0},{-2,20},{18.9,
-          20}},          color={0,0,255}));
+          20}}, color={0,0,255}));
   connect(line_1.n, B3.p) annotation (Line(points={{35.1,20},{58,20},{58,0},{68,
           0}}, color={0,0,255}));
   connect(B3.p, infinite_bus.p)
     annotation (Line(points={{68,0},{80,0}}, color={0,0,255}));
   connect(fault.p, line_1.p) annotation (Line(points={{6.33333,-50},{-6,-50},{-6,
-          0},{-2,0},{-2,20},{18.9,20}},       color={0,0,255}));
+          0},{-2,0},{-2,20},{18.9,20}}, color={0,0,255}));
   connect(line_2.n, B3.p) annotation (Line(points={{35.1,-20},{58,-20},{58,0},{68,
-          0}},    color={0,0,255}));
+          0}}, color={0,0,255}));
   connect(line_2.p, line_1.p) annotation (Line(points={{18.9,-20},{-2,-20},{-2,20},
-          {18.9,20}},    color={0,0,255}));
+          {18.9,20}}, color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={Text(

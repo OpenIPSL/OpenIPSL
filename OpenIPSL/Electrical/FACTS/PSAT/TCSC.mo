@@ -30,7 +30,7 @@ model TCSC "Thyristor Controlled Series Compensator"
   parameter Types.PerUnit xTCSC_max=0.05 "Maximum reactance"
    annotation (Dialog(enable=ctrl <> Ctrl.alpha, group="Device parameters"));
 
-  //  parameter Real Cp=0.10 "Percentage of series compensation [%] (only for power flow calculation)";
+  // parameter Real Cp=0.10 "Percentage of series compensation [%] (only for power flow calculation)";
   parameter Types.Time Tr=0.5 "Regulator time constant"
    annotation (Dialog(group="Device parameters"));
   parameter Real Kp=5 "Proportional gain of PI controller [pu/pu]"
@@ -64,7 +64,7 @@ model TCSC "Thyristor Controlled Series Compensator"
   Modelica.Blocks.Math.Feedback powerDiff annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
   Modelica.Blocks.Continuous.TransferFunction PIcontroller(b={Kp,Ki}, a={1,0},
     initType=Modelica.Blocks.Types.Init.InitialOutput,
-    y_start=-x10)                                                              annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+    y_start=-x10) annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Blocks.Math.Feedback feedback annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Math.Gain stabilizer(k=Kr) annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   NonElectrical.Continuous.SimpleLagLim X1(
@@ -88,7 +88,7 @@ protected
   parameter Types.PerUnit X=XL*(Vn^2/Sn)*(S_b/V_b^2) "Line Reactance";
   parameter Types.PerUnit y=1/X "Line admittance";
   parameter Real kx=sqrt(xC/xL);
-  //  parameter Types.PerUnit XL2=(1 - Cp)*XL "Simplified line reactance for power flow calculation";
+  // parameter Types.PerUnit XL2=(1 - Cp)*XL "Simplified line reactance for power flow calculation";
   parameter Real x1_min=if alphaCtrl then alpha_min else xTCSC_min annotation (Evaluate=true);
   parameter Real x1_max=if alphaCtrl then alpha_max else xTCSC_max annotation (Evaluate=true);
   parameter Real x10=if alphaCtrl then alpha0 else xTCSC0 annotation (Evaluate=true);

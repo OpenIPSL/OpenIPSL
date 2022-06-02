@@ -197,7 +197,7 @@ protected
       annotation (Placement(transformation(extent={{130,0},{150,20}})));
     Modelica.Blocks.Math.Division division
       annotation (Placement(transformation(extent={{96,0},{116,20}})));
-    Modelica.Blocks.Nonlinear.Limiter imLimited_min(uMin=0.01,      uMax=
+    Modelica.Blocks.Nonlinear.Limiter imLimited_min(uMin=0.01, uMax=
           Modelica.Constants.inf)
       annotation (Placement(transformation(extent={{36,-70},{56,-50}})));
     Modelica.Blocks.Math.Add3 add3_1(k1=-1, k3=-1)
@@ -335,7 +335,7 @@ protected
               extent={{-100,160},{100,0}},
               lineColor={0,140,72},
               textString="Active Power
-PI"),Text(    extent={{-40,180},{40,140}},
+PI"),Text( extent={{-40,180},{40,140}},
               lineColor={28,108,200},
               textString="I_PMAX"),Text(
               extent={{112,20},{192,-20}},
@@ -437,7 +437,7 @@ protected
     OpenIPSL.NonElectrical.Continuous.SimpleLag K8_extra(
       y_start=k40,
       K=1,
-      T=TRV)  annotation (Placement(transformation(extent={{-96,-16},{-76,4}})));
+      T=TRV) annotation (Placement(transformation(extent={{-96,-16},{-76,4}})));
     parameter Types.Time Tfv "Filter time constant in voltage regulator";
     parameter Types.PerUnit Kpv "Proportional gain in voltage regulator";
     parameter Types.TimeAging KIV "Integrator gain in voltage regulator";
@@ -476,7 +476,7 @@ protected
         color={0,0,127},
         smooth=Smooth.None));
     connect(VARL.y, add3.u1) annotation (Line(points={{-75,30},{-70,30},{-70,6},{-66,
-            6}},      color={0,0,127}));
+            6}}, color={0,0,127}));
     connect(K.y, Q_ord)
       annotation (Line(points={{119,0},{210,0}}, color={0,0,127}));
     connect(add3.u2, K8_extra.y)

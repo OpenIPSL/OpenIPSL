@@ -33,7 +33,7 @@ equation
   connect(Exc1.v, order4_1.v) annotation (Line(points={{-159.5,89},{-164,89},{-164,
           98},{-110,98},{-110,83.6},{-114.8,83.6}}, color={0,0,127}));
   connect(vs_1.y, Exc1.vs) annotation (Line(points={{-167.6,84},{-159.5,84},{-159.5,
-          83}},   color={0,0,127}));
+          83}}, color={0,0,127}));
   connect(Exc2.v, order3_2.v) annotation (Line(points={{165.583,7.5},{170,7.5},
           {170,16},{128,16},{128,3},{131,3}},
                                          color={0,0,127}));

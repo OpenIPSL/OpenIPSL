@@ -48,7 +48,7 @@ equation
   connect(gainVoltage.y, add3.u3) annotation (Line(points={{-59,-80},{-52,-80},{-52,-4.8},{-45.2,-4.8}}, color={0,0,127}));
   connect(add3.y, derivativeLag.u) annotation (Line(points={{-31.4,0},{-22,0}}, color={0,0,127}));
   connect(derivativeLag.y, simpleLagLim.u)
-    annotation (Line(points={{1,0},{10,0}},               color={0,0,127}));
+    annotation (Line(points={{1,0},{10,0}}, color={0,0,127}));
   connect(simpleLagLim.y, add.u2) annotation (Line(points={{33,0},{42,0},{42,-6},{68,-6}}, color={0,0,127}));
   connect(add.y, Vref) annotation (Line(points={{91,0},{110,0}}, color={0,0,127}));
   connect(vref0, add.u1) annotation (Line(points={{0,120},{0,66},{40,66},{40,6},{68,6}}, color={0,0,127}));
@@ -61,7 +61,7 @@ equation
           fillPattern=FillPattern.Solid), Text(
           extent={{-140,-100},{140,-160}},
           lineColor={0,0,255},
-          textString="%name")}),    Documentation(info="<html>
+          textString="%name")}), Documentation(info="<html>
 <p>
 For more information see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013]</a>, section \"18.4.1
 Type I\".

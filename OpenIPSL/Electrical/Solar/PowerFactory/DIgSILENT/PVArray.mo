@@ -43,29 +43,29 @@ model PVArray "Array of PV modules"
     Placement(transformation(origin = {-30, 50}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
 equation
   connect(gain.y, Iarray) annotation (
-    Line(points={{81,50},{104,50},{104,50},{110,50}},          color = {0, 0, 127}));
+    Line(points={{81,50},{104,50},{104,50},{110,50}}, color = {0, 0, 127}));
   connect(gain1.y, Vmpp_array) annotation (
-    Line(points={{81,-50},{104,-50},{104,-50},{110,-50}},          color = {0, 0, 127}));
+    Line(points={{81,-50},{104,-50},{104,-50},{110,-50}}, color = {0, 0, 127}));
   if use_input_E then
     connect(module.E, E) annotation (
-      Line(points={{-9,5},{-68,5},{-68,30},{-100,30},{-100,30}},             color = {0, 0, 127}));
+      Line(points={{-9,5},{-68,5},{-68,30},{-100,30},{-100,30}}, color = {0, 0, 127}));
   end if;
   if use_input_theta then
     connect(module.theta, theta) annotation (
-      Line(points={{-9,-4},{-60,-4},{-60,-30},{-100,-30},{-100,-30}},             color = {0, 0, 127}));
+      Line(points={{-9,-4},{-60,-4},{-60,-30},{-100,-30},{-100,-30}}, color = {0, 0, 127}));
   end if;
   connect(module_time.u, Uarray) annotation (
     Line(points = {{-72, 70}, {-82, 70}, {-82, 70}, {-100, 70}}, color = {0, 0, 127}));
   connect(module_time.y, gain2.u) annotation (
-    Line(points={{-49,70},{-30,70},{-30,62},{-30,62}},          color = {0, 0, 127}));
+    Line(points={{-49,70},{-30,70},{-30,62},{-30,62}}, color = {0, 0, 127}));
   connect(gain2.y, module.U) annotation (
-    Line(points={{-30,39},{-30,9},{-9,9}},        color = {0, 0, 127}));
+    Line(points={{-30,39},{-30,9},{-9,9}}, color = {0, 0, 127}));
   connect(module.I, gain.u) annotation (
     Line(points = {{11, 4}, {40, 4}, {40, 50}, {58, 50}}, color = {0, 0, 127}));
   connect(module.Umpp, gain1.u) annotation (
     Line(points = {{11, -4}, {40, -4}, {40, -50}, {58, -50}}, color = {0, 0, 127}));
   annotation (
-    Icon(graphics={  Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-50, 80}, extent = {{-20, 8}, {20, -8}}, textString = "Uarray"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {72, 62}, extent = {{-20, 8}, {20, -8}}, textString = "Iarray"), Text(origin = {59, -58}, extent = {{-37, 8}, {37, -8}}, textString = "Vmpp_array"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-50, 80}, extent = {{-20, 8}, {20, -8}}, textString = "Uarray"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {72, 62}, extent = {{-20, 8}, {20, -8}}, textString = "Iarray"), Text(origin = {59, -58}, extent = {{-37, 8}, {37, -8}}, textString = "Vmpp_array"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
         Documentation(info = "<html>
 <p>
 Model of a PV Array used in DIgSILENT's implementation of the PV plant. Provides optional inputs of irradiance (E) and temperature (theta). If those inputs are not connected, the model set temperature to 25&nbsp;&deg;C and irradiance so that it matches the specified initial power production.

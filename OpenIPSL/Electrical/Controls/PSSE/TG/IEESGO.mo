@@ -52,17 +52,17 @@ initial algorithm
 
 equation
   connect(imSimpleLag.y, imLeadLag.u) annotation (Line(points={{-159,-120},{-142,
-          -120}},                                                                color={0,0,127}));
+          -120}}, color={0,0,127}));
   connect(imLeadLag.y, add.u2) annotation (Line(points={{-119,-120},{-80,-120},{
-          -80,-6},{-62,-6}},                                                                color={0,0,127}));
-  connect(add.y, limiter.u) annotation (Line(points={{-39,0},{-22,0}},              color={0,0,127}));
-  connect(limiter.y, imSimpleLag1.u) annotation (Line(points={{1,0},{1,0},{18,0}},       color={0,0,127}));
+          -80,-6},{-62,-6}}, color={0,0,127}));
+  connect(add.y, limiter.u) annotation (Line(points={{-39,0},{-22,0}}, color={0,0,127}));
+  connect(limiter.y, imSimpleLag1.u) annotation (Line(points={{1,0},{1,0},{18,0}}, color={0,0,127}));
   connect(imSimpleLag2.y, imSimpleLag3.u) annotation (Line(points={{101,-70},{118,
-          -70}},                                                                                  color={0,0,127}));
+          -70}}, color={0,0,127}));
   connect(gain1.u, imSimpleLag3.u) annotation (Line(points={{118,-30},{110,-30},
-          {110,-70},{118,-70}},                                                                   color={0,0,127}));
+          {110,-70},{118,-70}}, color={0,0,127}));
   connect(PMECH0, add.u1) annotation (Line(points={{-240,80},{-80,80},{-80,6},{-62,
-          6}},       color={0,0,127}));
+          6}}, color={0,0,127}));
   connect(SPEED, imSimpleLag.u) annotation (Line(points={{-240,-120},{-212,-120},
           {-182,-120}}, color={0,0,127}));
   connect(imSimpleLag1.y, gain.u)

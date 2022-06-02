@@ -94,21 +94,21 @@ This data record has the tap position for the different transformers in the syst
   record PF_results "Collection of records that characterize the equilibrium point"
     extends Modelica.Icons.Record;
     replaceable record Voltages = SevenBus.Data.SevenBus_voltages
-      constrainedby SevenBus.Data.SevenBus_voltages               "Voltage data record template"
+      constrainedby SevenBus.Data.SevenBus_voltages "Voltage data record template"
                                                     annotation (
         choicesAllMatching);
     Voltages voltages;
     replaceable record Machines = SevenBus.Data.SevenBus_machines
-      constrainedby SevenBus.Data.SevenBus_machines               "Power data record template for machines"
+      constrainedby SevenBus.Data.SevenBus_machines "Power data record template for machines"
                                                     annotation (
         choicesAllMatching);
     Machines machines;
-    replaceable record Trafos = SevenBus.Data.SevenBus_trafos                                        constrainedby
-      SevenBus.Data.SevenBus_trafos                           "Transformer tap data record template"
+    replaceable record Trafos = SevenBus.Data.SevenBus_trafos constrainedby
+      SevenBus.Data.SevenBus_trafos "Transformer tap data record template"
                                     annotation (choicesAllMatching);
     Trafos trafos;
-    replaceable record Loads = SevenBus.Data.SevenBus_loads                                        constrainedby
-      SevenBus.Data.SevenBus_loads                          "Power data record template for loads"
+    replaceable record Loads = SevenBus.Data.SevenBus_loads constrainedby
+      SevenBus.Data.SevenBus_loads "Power data record template for loads"
                                    annotation (choicesAllMatching);
     Loads loads;
     annotation (

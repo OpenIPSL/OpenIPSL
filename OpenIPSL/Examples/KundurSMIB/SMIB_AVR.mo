@@ -13,7 +13,7 @@ protected
   parameter Real S_b=SysData.S_b;
 equation
   connect(G1.pwPin, B1.p)
-    annotation (Line(points={{-61,0},{-52,0}},         color={0,0,255}));
+    annotation (Line(points={{-61,0},{-52,0}}, color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={Text(

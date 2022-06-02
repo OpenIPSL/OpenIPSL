@@ -135,7 +135,7 @@ equation
   connect(TransducerDelay.y, DiffV.u2) annotation (Line(points={{-149,0},{-132,
           0},{-132,-6},{-122,-6}}, color={0,0,127}));
   connect(DiffV.y, add3_1.u2)
-    annotation (Line(points={{-99,0},{-88,0}},         color={0,0,127}));
+    annotation (Line(points={{-99,0},{-88,0}}, color={0,0,127}));
   connect(VOTHSG, add3_1.u1) annotation (Line(points={{-200,90},{-94,90},{-94,8},{-88,8}},
                     color={0,0,127}));
   connect(VUEL, add3_1.u3) annotation (Line(points={{-130,-200},{-130,-20},{-94,-20},{-94,-8},{-88,-8}},
@@ -145,7 +145,7 @@ equation
   connect(Gain1.y, add.u1) annotation (Line(points={{-27,20},{-24,20},{-24,6},{-20,6}},
                    color={0,0,127}));
   connect(limiter.y, VA.u)
-    annotation (Line(points={{33,0},{40,0}},          color={0,0,127}));
+    annotation (Line(points={{33,0},{40,0}}, color={0,0,127}));
   connect(VA.y, add1.u2)
     annotation (Line(points={{63,0},{66,0},{66,-6},{70,-6}}, color={0,0,127}));
   connect(add1.y, Gain2.u) annotation (Line(points={{93,0},{96,0},{96,20},{100,20}},
@@ -157,12 +157,12 @@ equation
   connect(VM1.y, add2.u2) annotation (Line(points={{123,-20},{126,-20},{126,-6},{130,-6}},
                      color={0,0,127}));
   connect(add2.y, limiter1.u)
-    annotation (Line(points={{153,0},{160,0}},           color={0,0,127}));
+    annotation (Line(points={{153,0},{160,0}}, color={0,0,127}));
   connect(product.y, EFD) annotation (Line(points={{181,-70},{196,-70},{196,0},{210,0}},
                     color={0,0,127}));
   connect(lV_Gate.u2, VOEL) annotation (Line(points={{118,-70},{0,-70},{0,-160},{-70,-160},{-70,-200}},
                                   color={0,0,127}));
-  connect(limiter1.y,lV_Gate.u1)  annotation (Line(points={{183,0},{188,0},{188,-40},{112,-40},{112,-58},{118,-58}},
+  connect(limiter1.y,lV_Gate.u1) annotation (Line(points={{183,0},{188,0},{188,-40},{112,-40},{112,-58},{118,-58}},
                                                  color={0,0,127}));
   connect(gain.u, EFD) annotation (Line(points={{124,60},{196,60},{196,0},{210,0}},
                color={0,0,127}));
@@ -185,7 +185,7 @@ equation
         graphics={Text(
           extent={{-80,90},{-20,70}},
           lineColor={0,0,255},
-          textString="GenT"),  Text(
+          textString="GenT"), Text(
           extent={{-100,160},{100,100}},
           lineColor={28,108,200},
           textString="ESST4B"),

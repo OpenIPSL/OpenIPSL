@@ -74,37 +74,37 @@ equation
   connect(deadZone.u, duac) annotation (
     Line(points = {{-142, 0}, {-188, 0}, {-188, 0}, {-200, 0}}, color = {0, 0, 127}));
   connect(deadZone.y, abs.u) annotation (
-    Line(points={{-119,0},{-102,0}},      color = {0, 0, 127}));
+    Line(points={{-119,0},{-102,0}}, color = {0, 0, 127}));
   connect(abs.y, greaterEqualThreshold.u) annotation (
     Line(points = {{-79, 0}, {-62, 0}}, color = {0, 0, 127}));
   connect(greaterEqualThreshold.y, picdro.condition) annotation (
     Line(points = {{-39, 0}, {-18, 0}}, color = {255, 0, 255}));
   connect(switch_q_frt_normal.y, iqout) annotation (
-    Line(points={{161,-110},{180,-110},{180,-50},{210,-50},{210,-50}},            color = {0, 0, 127}));
+    Line(points={{161,-110},{180,-110},{180,-50},{210,-50},{210,-50}}, color = {0, 0, 127}));
   connect(switch_q_frt_normal.u2, picdro.trip) annotation (
-    Line(points={{138,-110},{120,-110},{120,0},{1,0},{1,0}},            color = {255, 0, 255}));
+    Line(points={{138,-110},{120,-110},{120,0},{1,0},{1,0}}, color = {255, 0, 255}));
   connect(pythagoras.u2, iqin) annotation (
     Line(points = {{-76, -176}, {-88, -176}, {-88, -110}, {-200, -110}}, color = {0, 0, 127}));
   connect(const1.y, pythagoras.u1) annotation (
-    Line(points={{-99,-170},{-94,-170},{-94,-164},{-76,-164},{-76,-164}},            color = {0, 0, 127}));
+    Line(points={{-99,-170},{-94,-170},{-94,-164},{-76,-164},{-76,-164}}, color = {0, 0, 127}));
   connect(gain1.y, qlim_normal_op.limit2) annotation (
-    Line(points={{61,-150},{68,-150},{68,-128},{78,-128}},          color = {0, 0, 127}));
+    Line(points={{61,-150},{68,-150},{68,-128},{78,-128}}, color = {0, 0, 127}));
   connect(qlim_normal_op.limit1, min.y) annotation (
-    Line(points={{78,-112},{34,-112},{34,-150},{31,-150}},          color = {0, 0, 127}));
+    Line(points={{78,-112},{34,-112},{34,-150},{31,-150}}, color = {0, 0, 127}));
   connect(qlim_normal_op.y, switch_q_frt_normal.u3) annotation (
-    Line(points={{101,-120},{120,-120},{120,-118},{138,-118},{138,-118}},            color = {0, 0, 127}));
+    Line(points={{101,-120},{120,-120},{120,-118},{138,-118},{138,-118}}, color = {0, 0, 127}));
   connect(qlim_frt_op.u, iqin) annotation (
     Line(points = {{78, -70}, {68, -70}, {68, -110}, {-200, -110}, {-200, -110}}, color = {0, 0, 127}));
   connect(qlim_frt_op.y, switch_q_frt_normal.u1) annotation (
-    Line(points={{101,-70},{114,-70},{114,-102},{138,-102},{138,-102}},            color = {0, 0, 127}));
+    Line(points={{101,-70},{114,-70},{114,-102},{138,-102},{138,-102}}, color = {0, 0, 127}));
   connect(switch1.u2, picdro.trip) annotation (
-    Line(points={{138,110},{120,110},{120,0},{1,0}},          color = {255, 0, 255}));
+    Line(points={{138,110},{120,110},{120,0},{1,0}}, color = {255, 0, 255}));
   connect(dlim_normal_op.y, switch1.u3) annotation (
-    Line(points={{101,70},{128,70},{128,102},{138,102},{138,102}},            color = {0, 0, 127}));
+    Line(points={{101,70},{128,70},{128,102},{138,102},{138,102}}, color = {0, 0, 127}));
   connect(dlim_frt_op.y, switch1.u1) annotation (
-    Line(points={{101,150},{120,150},{120,118},{138,118},{138,118}},            color = {0, 0, 127}));
+    Line(points={{101,150},{120,150},{120,118},{138,118},{138,118}}, color = {0, 0, 127}));
   connect(switch1.y, idout) annotation (
-    Line(points={{161,110},{180,110},{180,50},{210,50},{210,50}},            color = {0, 0, 127}));
+    Line(points={{161,110},{180,110},{180,50},{210,50},{210,50}}, color = {0, 0, 127}));
   connect(maximum_current.y, add.u1) annotation (
     Line(points = {{-19, 150}, {-10.5, 150}, {-10.5, 136}, {-2, 136}}, color = {0, 0, 127}));
   connect(dlim_normal_op.u, idin) annotation (
@@ -112,16 +112,16 @@ equation
   connect(dlim_frt_op.u, idin) annotation (
     Line(points = {{78, 150}, {66, 150}, {66, 108}, {-200, 108}, {-200, 110}}, color = {0, 0, 127}));
   connect(abs1.y, add.u2) annotation (
-    Line(points={{-19,90},{-10,90},{-10,124},{-2,124},{-2,124}},            color = {0, 0, 127}));
+    Line(points={{-19,90},{-10,90},{-10,124},{-2,124},{-2,124}}, color = {0, 0, 127}));
   connect(gain.y, dlim_frt_op.limit1) annotation (
-    Line(points={{40,161},{40,161},{40,168},{66,168},{66,158},{78,158},{78,158}},                color = {0, 0, 127}));
+    Line(points={{40,161},{40,161},{40,168},{66,168},{66,158},{78,158},{78,158}}, color = {0, 0, 127}));
   annotation (
-    Icon(graphics={  Rectangle(
+    Icon(graphics={ Rectangle(
           lineColor={118,18,62},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          extent={{-100,100},{100,-100}}),                                                                                                                                             Text(origin = {-35, 62}, extent = {{-21, 10}, {21, -10}}, textString = "idin"), Text(origin = {-33, -60}, extent = {{-21, 10}, {21, -10}}, textString = "iqin"), Text(origin = {-33, 0}, extent = {{-21, 10}, {21, -10}}, textString = "duac"), Text(origin = {71, 52}, extent = {{-21, 10}, {21, -10}}, textString = "idout"), Text(origin = {71, -48}, extent = {{-21, 10}, {21, -10}}, textString = "iqout"), Text(origin={0,
-              -10},                                                                                                                                                                                                        lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+          extent={{-100,100},{100,-100}}), Text(origin = {-35, 62}, extent = {{-21, 10}, {21, -10}}, textString = "idin"), Text(origin = {-33, -60}, extent = {{-21, 10}, {21, -10}}, textString = "iqin"), Text(origin = {-33, 0}, extent = {{-21, 10}, {21, -10}}, textString = "duac"), Text(origin = {71, 52}, extent = {{-21, 10}, {21, -10}}, textString = "idout"), Text(origin = {71, -48}, extent = {{-21, 10}, {21, -10}}, textString = "iqout"), Text(origin={0,
+              -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
     Diagram(coordinateSystem(extent = {{-200, -200}, {200, 200}})),
      Documentation(revisions = "<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

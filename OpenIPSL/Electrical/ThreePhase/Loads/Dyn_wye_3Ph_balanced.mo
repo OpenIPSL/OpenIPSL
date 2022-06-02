@@ -47,7 +47,7 @@ model Dyn_wye_3Ph_balanced "Variable balanced three-phase wye load"
 protected
   Types.ActivePower P_a(start = P0 / 3)
     "Initial active power";
-  Types.ReactivePower Q_a(start = Q0  / 3)
+  Types.ReactivePower Q_a(start = Q0 / 3)
     "Initial reactive power";
   Types.ActivePower P_b(start = P0 / 3)
     "Initial active power";

@@ -54,29 +54,29 @@ partial model SMIB "SMIB - Single Machine Infinite Base system with one load."
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   OpenIPSL.Electrical.Buses.Bus FAULT
     annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
-  Electrical.Branches.PwLine          pwLine1(
+  Electrical.Branches.PwLine pwLine1(
     R=0.0005,
     G=0,
     B=0,
     X=0.1) annotation (Placement(transformation(extent={{14,26},{26,34}})));
-  Electrical.Branches.PwLine          pwLine2(
+  Electrical.Branches.PwLine pwLine2(
     R=0.0005,
     G=0,
     B=0,
     X=0.1) annotation (Placement(transformation(extent={{54,26},{66,34}})));
-  Electrical.Buses.Bus          SHUNT
+  Electrical.Buses.Bus SHUNT
     annotation (Placement(transformation(extent={{30,20},{50,40}})));
 equation
   connect(GEN1.p, pwLine.p)
-    annotation (Line(points={{-30,0},{-19.4,0}},         color={0,0,255}));
+    annotation (Line(points={{-30,0},{-19.4,0}}, color={0,0,255}));
   connect(pwLine.n, LOAD.p)
-    annotation (Line(points={{-8.6,0},{0,0}},            color={0,0,255}));
+    annotation (Line(points={{-8.6,0},{0,0}}, color={0,0,255}));
   connect(pwLine3.p, LOAD.p) annotation (Line(points={{14.6,-30},{10,-30},{10,0},{0,0}},
                  color={0,0,255}));
   connect(constantLoad.p, LOAD.p)
-    annotation (Line(points={{0,-52},{0,0}},       color={0,0,255}));
+    annotation (Line(points={{0,-52},{0,0}}, color={0,0,255}));
   connect(GEN2.p, gENCLS.p)
-    annotation (Line(points={{80,0},{90,0}},        color={0,0,255}));
+    annotation (Line(points={{80,0},{90,0}}, color={0,0,255}));
   connect(pwLine4.n, GEN2.p) annotation (Line(points={{65.4,-30},{70,-30},{70,0},{80,0}},
                    color={0,0,255}));
   connect(FAULT.p, pwLine4.p)

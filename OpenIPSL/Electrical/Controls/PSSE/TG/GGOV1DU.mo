@@ -52,11 +52,11 @@ model GGOV1DU "GGOV1DU - Variation of GE General Governor/Turbine Model [IEEE201
     annotation (Placement(transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}), iconTransformation(extent = {{-100, 40}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput PELEC
     "Machine electrical power (pu)"
-    annotation (Placement(transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}),  iconTransformation(extent = {{-100, -80}, {-60, -40}})));
+    annotation (Placement(transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}), iconTransformation(extent = {{-100, -80}, {-60, -40}})));
   Modelica.Blocks.Sources.Constant AccelerationSet(k=Aset) annotation (Placement(transformation(origin = {-64, 14}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant P_ref(k=Pref) annotation (Placement(transformation(origin = {-82, -26}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant Pmw_set(k=Pmwset)
-    "Supervisory Load Controller Setpoint,"                                                  annotation (Placement(transformation(origin = {-60, -46}, extent = {{-10, -10}, {10, 10}})));
+    "Supervisory Load Controller Setpoint," annotation (Placement(transformation(origin = {-60, -46}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant set(k=Ldref) "load reference" annotation (Placement(transformation(origin = {-62, 80}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.Min_select min_select(frs0=fsr0, nu= 3) annotation (Placement(transformation(extent = {{4, -10}, {24, 10}})));
   Modelica.Blocks.Interfaces.RealOutput PMECH "Turbine mechanical power (pu)" annotation (
@@ -149,7 +149,7 @@ equation
   connect(PELEC, gGOV1_Turb.PELEC) annotation (
     Line(points = {{-120, -60}, {-80, -60}, {-80, -90}, {64, -90}, {64, -8}, {70, -8}, {70, -8}}, color = {0, 0, 127}));
   connect(gGOV1_Turb.VSTROKE, gGOV1_Power.VSTROKE) annotation (
-    Line(points={{93.2,-8},{96,-8},{96,-78},{-34,-78},{-34,-64},{-34,-64}},            color = {0, 0, 127}));
+    Line(points={{93.2,-8},{96,-8},{96,-78},{-34,-78},{-34,-64},{-34,-64}}, color = {0, 0, 127}));
   connect(PELEC, gGOV1_Temp.PELEC) annotation (
     Line(points = {{-120, -60}, {-94, -60}, {-94, 48}, {-30, 48}, {-30, 68}}, color = {0, 0, 127}));
   connect(V.y, gGOV1_Power.GOVOUT1) annotation (
@@ -157,14 +157,14 @@ equation
   connect(V.y, gGOV1_Accel.FSR) annotation (
     Line(points = {{55, 0}, {58, 0}, {58, -32}, {-12, -32}, {-12, -4}, {-18, -4}}, color = {0, 0, 127}));
   connect(gGOV1_Power.FSRN, min_select.u[1]) annotation (
-    Line(points={{-19,-52},{-6,-52},{-6,-4},{4,-4},{4,4.66667}},      color = {0, 0, 127}));
+    Line(points={{-19,-52},{-6,-52},{-6,-4},{4,-4},{4,4.66667}}, color = {0, 0, 127}));
   connect(gGOV1_Temp.FSRT, min_select.u[2]) annotation (
     Line(points = {{-19, 74}, {-6, 74}, {-6, 4}, {4, 4}, {4, 0}}, color = {0, 0, 127}));
   connect(gGOV1_Accel.FSRA, min_select.u[3]) annotation (
-    Line(points={{-19,4},{-10,4},{-10,0},{4,0},{4,-4.66667}},     color = {0, 0, 127}));
+    Line(points={{-19,4},{-10,4},{-10,0},{4,0},{4,-4.66667}}, color = {0, 0, 127}));
   annotation (
     Diagram,
-    Icon(            graphics={
+    Icon( graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200}),

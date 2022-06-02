@@ -53,7 +53,7 @@ protected
 
 equation
   connect(field_current.ifield, add.u1)
-    annotation (Line(points={{-19,-20},{-8,-20}},           color={0,0,127}));
+    annotation (Line(points={{-19,-20},{-8,-20}}, color={0,0,127}));
   connect(currentLimit.y, add.u2) annotation (Line(points={{8.88178e-016,-49},{
           8.88178e-016,-38},{8.88178e-016,-28},{0,-28}}, color={0,0,127}));
   connect(v_ref, difference.y)

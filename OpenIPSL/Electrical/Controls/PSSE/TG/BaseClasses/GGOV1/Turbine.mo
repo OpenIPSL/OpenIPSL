@@ -31,7 +31,7 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin={184,0})));
   Modelica.Blocks.Math.Gain gain2(k = Dm) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {90, 6})));
-  OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.Flag flag10(Flag=Flag)   annotation (
+  OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.Flag flag10(Flag=Flag) annotation (
     Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-30, 0})));
   OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.GGOV1.Dm_select dm_select(Dm = Dm) annotation (
     Placement(transformation(extent = {{-40, 30}, {-20, 50}})));
@@ -93,11 +93,11 @@ initial equation
   fsr0 = (Pmech0 + Dm) / Kturb + Wfnl;
 equation
   connect(s4.y, add5.u2) annotation (
-    Line(points={{161,-40},{166,-40},{166,-6},{172,-6}},          color = {0, 0, 127}, smooth = Smooth.None));
+    Line(points={{161,-40},{166,-40},{166,-6},{172,-6}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(product.y, add4.u1) annotation (
     Line(points = {{21, -34}, {36, -34}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(gain2.y, add5.u1) annotation (
-    Line(points={{101,6},{172,6}},      color = {0, 0, 127}, smooth = Smooth.None));
+    Line(points={{101,6},{172,6}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(dm_select.y, gain2.u) annotation (
     Line(points = {{-19, 40}, {20, 40}, {20, 6}, {78, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(V1.y, s3.u) annotation (
@@ -107,7 +107,7 @@ equation
   connect(add8.y, Tactgain.u) annotation (
     Line(points = {{-149, -40}, {-142, -40}}, color = {0, 0, 127}));
   connect(add5.y, PMECH) annotation (
-    Line(points={{195,0},{210,0}},      color = {0, 0, 127}));
+    Line(points={{195,0},{210,0}}, color = {0, 0, 127}));
   connect(s5.u, s9.y) annotation (
     Line(points = {{108, 60}, {101, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(product1.u2, gain2.u) annotation (
@@ -149,7 +149,7 @@ equation
   connect(gain1.y, padeDelay.u) annotation (Line(points={{89,-40},{98,-40},{98,-54},{106.8,-54}}, color={0,0,127},
       pattern=LinePattern.Dash));
   annotation (
-    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {28, 108, 200}, extent = {{-60, 40}, {60, -40}}, textString = "Turbine
+    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics={ Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {28, 108, 200}, extent = {{-60, 40}, {60, -40}}, textString = "Turbine
 Model"), Text(origin = {-4, 0},lineColor = {28, 108, 200}, extent = {{-90, 90}, {-40, 68}}, textString = "SPEED"), Text(origin = {-6, 82},lineColor = {28, 108, 200}, extent = {{-90, -70}, {-50, -90}}, textString = "FSR"), Text(lineColor = {28, 108, 200}, extent = {{40, 12}, {90, -12}}, textString = "PMECH"), Text(lineColor = {28, 108, 200}, extent = {{-20, 90}, {30, 70}}, textString = "TEXM"), Text(lineColor = {28, 108, 200}, extent = {{30, -70}, {92, -92}}, textString = "VSTROKE"), Text(origin = {-4, -78},lineColor = {28, 108, 200}, extent = {{-90, 10}, {-40, -14}}, textString = "PELEC")}),
     Documentation(info="<html>
 <p>The following documentation is adapted from

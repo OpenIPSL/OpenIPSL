@@ -38,7 +38,7 @@ model TGTypeVI
           extent={{100,-10},{120,10}})));
   Modelica.Blocks.Math.Gain gain9(k=Kp)
     annotation (Placement(transformation(extent={{-116,34},{-104,46}})));
-  Modelica.Blocks.Math.MultiSum multiSum5(      k={1,1,1}, nu=3)
+  Modelica.Blocks.Math.MultiSum multiSum5( k={1,1,1}, nu=3)
     annotation (Placement(transformation(extent={{-76,14},{-64,26}})));
   Modelica.Blocks.Math.Feedback feedback1
     annotation (Placement(transformation(extent={{-146,14},{-134,26}})));
@@ -222,7 +222,7 @@ equation
           textString="we"),Text(
           extent={{-100,-20},{-60,-40}},
           lineColor={0,0,0},
-          textString="pe"),  Text(
+          textString="pe"), Text(
           extent={{-100,-70},{-60,-90}},
           lineColor={0,0,0},
           textString="pref"),Text(

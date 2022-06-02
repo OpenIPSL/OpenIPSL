@@ -33,7 +33,7 @@ model ULTC "Example model to demonstrate the working of the generic ULTC"
     t1=20,
     t2=200) annotation (Placement(transformation(extent={{-50,-30},{-30,-10}})));
   inner OpenIPSL.Electrical.SystemBase SysData annotation (
-    Placement(transformation(origin={-70,90},     extent={{-30,-10},{30,10}})));
+    Placement(transformation(origin={-70,90}, extent={{-30,-10},{30,10}})));
   Electrical.Loads.PSAT.ExponentialRecovery load(
     P_0=40000000,
     Tp=5,

@@ -76,7 +76,7 @@ equation
   connect(non_active_limits.y, sEXS.VOEL)
     annotation (Line(points={{59,-50},{-6,-50},{-6,-23}}, color={0,0,127}));
   connect(sEXS.VUEL, sEXS.VOEL) annotation (Line(points={{-10,-23},{-10,-32},{
-          -6,-32},{-6,-23}},                  color={0,0,127}));
+          -6,-32},{-6,-23}}, color={0,0,127}));
   connect(V_IB, central_Unit.V_IB) annotation (Line(points={{-100,60},{-80,60},
           {-80,47},{-59,47}}, color={0,0,127}));
   connect(iEESGO.PMECH, gen.PMECH)
@@ -96,9 +96,9 @@ equation
   connect(TRIGGER, central_Unit.TRIGGER) annotation (Line(points={{90,60},{-30,
           60},{-30,40},{-39,40}}, color={255,0,255}));
   connect(central_Unit.P_CTRL, iEESGO.PMECH0) annotation (Line(points={{-39,43},
-          {-32,43},{-32,6},{6,6}},     color={0,0,127}));
+          {-32,43},{-32,6},{6,6}}, color={0,0,127}));
   connect(central_Unit.V_CTRL, sEXS.VOTHSG) annotation (Line(points={{-39,47},{
-          -36,47},{-36,-8},{-17,-8}},             color={0,0,127}));
+          -36,47},{-36,-8},{-17,-8}}, color={0,0,127}));
   connect(gen.XADIFD, sEXS.XADIFD) annotation (Line(points={{80,-18},{84,-18},{
           84,-34},{2,-34},{2,-23}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

@@ -11,7 +11,7 @@ partial model BasePSS "Base model for PSSs from PSSE"
                               Text(
           extent={{-90,60},{-60,20}},
           lineColor={28,108,200},
-          textString="V_S1"),  Text(
+          textString="V_S1"), Text(
           extent={{-90,-20},{-60,-60}},
           lineColor={28,108,200},
           textString="V_S2"),Text(

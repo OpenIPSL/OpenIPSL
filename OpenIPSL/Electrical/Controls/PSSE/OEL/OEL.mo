@@ -75,7 +75,7 @@ equation
   connect(IFDSetpoint.y, add.u1) annotation (Line(points={{-69,40},{-65.6,40},{-65.6,6},{-62,6}},
                                    color={0,0,127}));
   connect(multiSum.y, VOEL)
-    annotation (Line(points={{81.7,0},{110,0}},           color={0,0,127}));
+    annotation (Line(points={{81.7,0},{110,0}}, color={0,0,127}));
   connect(imLimitedIntegrator.y, multiSum.u[1]) annotation (Line(points={{31,60},{48.6,60},{48.6,5.25},{60,5.25}},
                                               color={0,0,127}));
   connect(imLimitedIntegrator1.y, multiSum.u[2]) annotation (Line(points={{31,20},{40.6,20},{40.6,1.75},{60,1.75}},

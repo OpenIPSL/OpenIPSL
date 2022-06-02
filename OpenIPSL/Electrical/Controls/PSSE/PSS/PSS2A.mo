@@ -67,7 +67,7 @@ model PSS2A "PSS2A - Dual-Input Stabilizer Model [IEEE1992]"
     K=T_w4,
     T=T_w4) annotation (Placement(transformation(extent={{-140,-50},{-120,-30}})));
 equation
-  connect(SimpleLag1.y, add.u1) annotation (Line(points={{-79,40},{-62,40}},          color={0,0,127}));
+  connect(SimpleLag1.y, add.u1) annotation (Line(points={{-79,40},{-62,40}}, color={0,0,127}));
   connect(SimpleLag2.y, add.u2) annotation (Line(points={{-79,-40},{-68,-40},{-68,28},{-62,28}},
                                                                                                color={0,0,127}));
   connect(add1.u2, add.u2) annotation (Line(points={{28,-6},{12,-6},{12,-40},{-68,-40},{-68,28},{-62,28}},
@@ -76,25 +76,25 @@ equation
   connect(gain.y, Leadlag1.u) annotation (Line(points={{81,0},{88,0}}, color={0,0,127}));
   connect(Leadlag1.y, Leadlag2.u) annotation (Line(points={{111,0},{118,0}}, color={0,0,127}));
   connect(Leadlag2.y, limiter.u) annotation (Line(points={{141,0},{158,0}}, color={0,0,127}));
-  connect(rampTrackingFilter.y, add1.u1) annotation (Line(points={{1,30},{12,30},{12,6},{28,6}},  color={0,0,127}));
-  connect(derivativeLag.y, derivativeLag1.u) annotation (Line(points={{-159,40},{-142,40}},             color={0,0,127}));
-  connect(derivativeLag1.y, SimpleLag1.u) annotation (Line(points={{-119,40},{-102,40}},        color={0,0,127}));
+  connect(rampTrackingFilter.y, add1.u1) annotation (Line(points={{1,30},{12,30},{12,6},{28,6}}, color={0,0,127}));
+  connect(derivativeLag.y, derivativeLag1.u) annotation (Line(points={{-159,40},{-142,40}}, color={0,0,127}));
+  connect(derivativeLag1.y, SimpleLag1.u) annotation (Line(points={{-119,40},{-102,40}}, color={0,0,127}));
   connect(derivativeLag3.u, derivativeLag2.y) annotation (Line(points={{-142,-40},{-159,-40}}, color={0,0,127}));
   connect(derivativeLag3.y, SimpleLag2.u) annotation (Line(points={{-119,-40},{-102,-40}},
                                                                                          color={0,0,127}));
   connect(V_S1, derivativeLag.u)
-    annotation (Line(points={{-220,40},{-182,40}},           color={0,0,127}));
+    annotation (Line(points={{-220,40},{-182,40}}, color={0,0,127}));
   connect(V_S2, derivativeLag2.u) annotation (Line(points={{-220,-40},{-182,-40}},
                                   color={0,0,127}));
   connect(limiter.y, VOTHSG)
-    annotation (Line(points={{181,0},{210,0}},         color={0,0,127}));
+    annotation (Line(points={{181,0},{210,0}}, color={0,0,127}));
   connect(add.y, rampTrackingFilter.u)
     annotation (Line(points={{-39,34},{-30,34},{-30,30},{-22,30}},
                                                             color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-80},{200,80}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-                                                                                    graphics={                                                             Text(
+                                                                                    graphics={ Text(
           extent={{-40,80},{40,40}},
           lineColor={28,108,200},
           textString="PSS2A")}),

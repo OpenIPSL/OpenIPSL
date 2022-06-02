@@ -1,5 +1,5 @@
 within OpenIPSL.NonElectrical.Logical;
-model Relay "Relay,  y = if u1 > 0 then u2 else u3"
+model Relay "Relay, y = if u1 > 0 then u2 else u3"
   Modelica.Blocks.Interfaces.RealInput u1 annotation (Placement(transformation(
           extent={{-140,60},{-100,100}})));
   Modelica.Blocks.Interfaces.RealInput u2 annotation (Placement(transformation(

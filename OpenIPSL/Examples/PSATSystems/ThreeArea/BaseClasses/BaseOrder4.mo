@@ -20,7 +20,7 @@ partial model BaseOrder4 "Template for base network and a 4th order generator"
     T1d0=8) annotation (Placement(transformation(extent={{-140,68},{-116,92}})));
 equation
   connect(order4_1.p, B800.p) annotation (Line(points={{-116,80},{-107.4,80},{-107.4,
-          80},{-100,80}},                  color={0,0,255}));
+          80},{-100,80}}, color={0,0,255}));
   connect(order4_1.pm, order4_1.pm0) annotation (Line(points={{-142.4,74},{-144,
           74},{-144,66.8},{-137.6,66.8}}, color={0,0,127}));
   annotation (Documentation(info="<html>

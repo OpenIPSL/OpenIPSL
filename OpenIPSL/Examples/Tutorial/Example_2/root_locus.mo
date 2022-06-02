@@ -8,7 +8,7 @@ function root_locus "Function for executing the root locus analysis for tuning t
 algorithm
   // LINEARIZE the model
   ss := Modelica_LinearSystems2.ModelAnalysis.Linearize(pathToPlantModel);
-  //  Modelica.Utilities.Streams.print(String(ss));
+  // Modelica.Utilities.Streams.print(String(ss));
   // Check eigenvalues of the open-loop
   Modelica.Math.Matrices.eigenValues(ss.A);
   // Carry out root locus

@@ -33,7 +33,7 @@ partial model Step_1 "Creating system model, adding buses, generator and system 
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=12,
-          textString="Electrical.Buses.Bus"),                   Rectangle(
+          textString="Electrical.Buses.Bus"), Rectangle(
           extent={{58,-58},{122,-102}},
           lineColor={255,0,0},
           lineThickness=1),Text(

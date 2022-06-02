@@ -348,11 +348,11 @@ equation
   connect(B13.p, L1314.p)
     annotation (Line(points={{0,0},{6.3,0}}, color={0,0,255}));
   connect(L1314.n, B14.p)
-    annotation (Line(points={{11.7,0},{11.7,0},{20,0}},  color={0,0,255}));
+    annotation (Line(points={{11.7,0},{11.7,0},{20,0}}, color={0,0,255}));
   connect(L1415.n, B15.p)
-    annotation (Line(points={{31.7,0},{31.7,0},{40,0}},  color={0,0,255}));
+    annotation (Line(points={{31.7,0},{31.7,0},{40,0}}, color={0,0,255}));
   connect(L1516.n, B16.p)
-    annotation (Line(points={{51.7,0},{51.7,0},{60,0}},  color={0,0,255}));
+    annotation (Line(points={{51.7,0},{51.7,0},{60,0}}, color={0,0,255}));
   connect(B9.p, Tr49.p)
     annotation (Line(points={{80,30},{93.4,30}}, color={0,0,255}));
   connect(B4.p, L410.p)
@@ -360,7 +360,7 @@ equation
   connect(Tr49.n, B4.p) annotation (Line(points={{106.6,30},{110,30},{110,14},{
           -84,14},{-84,0},{-80,0}}, color={0,0,255}));
   connect(L1718.n, B18.p)
-    annotation (Line(points={{93.7,0},{93.7,0},{100,0}},  color={0,0,255}));
+    annotation (Line(points={{93.7,0},{93.7,0},{100,0}}, color={0,0,255}));
   connect(B17.p, L1718.p)
     annotation (Line(points={{80,0},{88.3,0}}, color={0,0,255}));
   connect(B25.p, L2425.p)

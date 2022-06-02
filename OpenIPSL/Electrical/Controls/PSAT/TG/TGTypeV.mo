@@ -40,7 +40,7 @@ model TGTypeV
     annotation (Placement(transformation(extent={{-56,-6},{-44,6}})));
   Modelica.Blocks.Math.Gain gain9(k=1/Tp)
     annotation (Placement(transformation(extent={{-116,-6},{-104,6}})));
-  Modelica.Blocks.Math.MultiSum multiSum6(      k={-1,1}, nu=2)
+  Modelica.Blocks.Math.MultiSum multiSum6( k={-1,1}, nu=2)
     annotation (Placement(transformation(extent={{-136,-6},{-124,6}})));
   Modelica.Blocks.Math.Gain gain6(k=sigma) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -169,7 +169,7 @@ equation
           origin={80,0},
           extent={{-20,-10},{20,10}},
           lineColor={0,0,0},
-          textString="pm"),  Text(
+          textString="pm"), Text(
           origin={-80,62},
           extent={{-20,-10},{20,10}},
           lineColor={0,0,0},

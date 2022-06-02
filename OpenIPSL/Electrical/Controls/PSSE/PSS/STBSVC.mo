@@ -54,13 +54,13 @@ initial equation
   V_S20 = V_S2;
 equation
   connect(gain.y, limiter.u)
-    annotation (Line(points={{101,0},{118,0}},      color={0,0,127}));
+    annotation (Line(points={{101,0},{118,0}}, color={0,0,127}));
   connect(limiter.y, VOTHSG)
     annotation (Line(points={{141,0},{210,0}},color={0,0,127}));
   connect(V_S1, imSimpleLag.u)
-    annotation (Line(points={{-220,40},{-122,40}},           color={0,0,127}));
+    annotation (Line(points={{-220,40},{-122,40}}, color={0,0,127}));
   connect(imSimpleLag.y, imLeadLag.u)
-    annotation (Line(points={{-99,40},{-82,40}},            color={0,0,127}));
+    annotation (Line(points={{-99,40},{-82,40}}, color={0,0,127}));
   connect(imLeadLag.y, add.u1) annotation (Line(points={{-59,40},{-30,40},{-30,6},{-14,6}},
                        color={0,0,127}));
   connect(V_S2, imSimpleLag1.u) annotation (Line(points={{-220,-40},{-120,-40}},
@@ -70,11 +70,11 @@ equation
   connect(imLeadLag1.y, add.u2) annotation (Line(points={{-59,-40},{-30,-40},{-30,-6},{-14,-6}},
                          color={0,0,127}));
   connect(imDerivativeLag.y, gain.u)
-    annotation (Line(points={{61,0},{78,0}},          color={0,0,127}));
+    annotation (Line(points={{61,0},{78,0}}, color={0,0,127}));
   connect(add.y, imDerivativeLag.u)
-    annotation (Line(points={{9,0},{38,0}},          color={0,0,127}));
+    annotation (Line(points={{9,0},{38,0}}, color={0,0,127}));
   annotation (
-   Icon(graphics={             Text(
+   Icon(graphics={ Text(
           extent={{-60,80},{60,40}},
           lineColor={28,108,200},
           textString="STBSVC")}));

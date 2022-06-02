@@ -35,17 +35,17 @@ model G3 "900MVA generation unit, composed of machine and exciter, connected to 
     annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
 equation
   connect(g3.PMECH, g3.PMECH0) annotation (Line(points={{28,12},{20,12},{20,30},
-          {80,30},{80,10},{74,10}},        color={0,0,127}));
+          {80,30},{80,10},{74,10}}, color={0,0,127}));
   connect(g3.p, pwPin) annotation (Line(points={{72,0},{100,0}},
                color={0,0,255}));
   connect(sEXS.EFD, g3.EFD) annotation (Line(points={{17,-12},{28,-12}},
                               color={0,0,127}));
   connect(sEXS.EFD0, g3.EFD0) annotation (Line(points={{-5,-16},{-18,-16},{-18,
-          -68},{80,-68},{80,-10},{74,-10}},         color={0,0,127}));
+          -68},{80,-68},{80,-10},{74,-10}}, color={0,0,127}));
   connect(sEXS.VUEL, non_active_inputs.y)
     annotation (Line(points={{2,-23},{2,-50},{19,-50}}, color={0,0,127}));
   connect(g3.ETERM, sEXS.ECOMP) annotation (Line(points={{74,-6},{82,-6},{82,
-          -70},{-20,-70},{-20,-12},{-5,-12}},            color={0,0,127}));
+          -70},{-20,-70},{-20,-12},{-5,-12}}, color={0,0,127}));
   connect(non_active_inputs.y, sEXS.VOEL)
     annotation (Line(points={{19,-50},{6,-50},{6,-23}}, color={0,0,127}));
   connect(non_active_inputs.y, sEXS.VOTHSG) annotation (Line(points={{19,-50},{

@@ -40,15 +40,15 @@ initial equation
   P_REF = PELEC0;
 equation
   connect(imSimpleLag1.y, imDerivativeLag.u)
-    annotation (Line(points={{1,0},{18,0}},  color={0,0,127}));
+    annotation (Line(points={{1,0},{18,0}}, color={0,0,127}));
   connect(imSimpleLag.y, feedback.u1)
-    annotation (Line(points={{-59,0},{-48,0}},           color={0,0,127}));
+    annotation (Line(points={{-59,0},{-48,0}}, color={0,0,127}));
   connect(imSimpleLag.u, PELEC)
-    annotation (Line(points={{-82,0},{-120,0}},          color={0,0,127}));
+    annotation (Line(points={{-82,0},{-120,0}}, color={0,0,127}));
   connect(feedback.y, imSimpleLag1.u)
-    annotation (Line(points={{-31,0},{-22,0}},          color={0,0,127}));
+    annotation (Line(points={{-31,0},{-22,0}}, color={0,0,127}));
   connect(imSimpleLag1.y, imDerivativeLag.u)
-    annotation (Line(points={{1,0},{18,0}},           color={0,0,127}));
+    annotation (Line(points={{1,0},{18,0}}, color={0,0,127}));
   connect(imDerivativeLag.y, limiter.u)
     annotation (Line(points={{41,0},{58,0}}, color={0,0,127}));
   connect(limiter.y, VOTHSG)

@@ -102,7 +102,7 @@ equation
   connect(imSimpleLag1.y, add.u2) annotation (Line(points={{-129,-40},{-120,-40},
           {-120,-6},{-102,-6}}, color={0,0,127}));
   connect(V_S1, imSimpleLag.u)
-    annotation (Line(points={{-200,40},{-152,40}},           color={0,0,127}));
+    annotation (Line(points={{-200,40},{-152,40}}, color={0,0,127}));
   connect(imSimpleLag.y, add.u1) annotation (Line(points={{-129,40},{-120,40},{
           -120,6},{-102,6}}, color={0,0,127}));
   connect(imLeadLag2.y, limiter.u)

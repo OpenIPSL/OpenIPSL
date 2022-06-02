@@ -3094,7 +3094,7 @@ equation
     annotation (Line(points={{143.4,-34},{124,-34},{124,-30}},
                                                              color={0,0,255}));
   connect(twoWindingTransformer6.p, bus_5400.n[4]) annotation (Line(points={{156.6,
-          -34},{172,-34},{172,-41.5},{180,-41.5}},     color={0,0,255}));
+          -34},{172,-34},{172,-41.5},{180,-41.5}}, color={0,0,255}));
   connect(twoWindingTransformer7.n, bus_5402.p[1])
     annotation (Line(points={{200,-23.4},{200,-8},{196,-8}},
                                                            color={0,0,255}));
@@ -3114,13 +3114,13 @@ equation
     annotation (Line(points={{215.4,84},{202,84},{202,80}},
                                                           color={0,0,255}));
   connect(twoWindingTransformer10.p, bus_5601.n[1]) annotation (Line(points={{236.6,
-          32},{236.6,32},{270,32},{270,8},{280,8}},   color={0,0,255}));
+          32},{236.6,32},{270,32},{270,8},{280,8}}, color={0,0,255}));
   connect(twoWindingTransformer10.n, bus_6001.p[2]) annotation (Line(points={{223.4,
-          32},{190,32},{190,22},{184,22}},     color={0,0,255}));
+          32},{190,32},{190,22},{184,22}}, color={0,0,255}));
   connect(twoWindingTransformer11.n, bus_6001.p[3]) annotation (Line(points={{205.4,
-          14},{198,14},{198,26},{184,26}},     color={0,0,255}));
+          14},{198,14},{198,26},{184,26}}, color={0,0,255}));
   connect(twoWindingTransformer11.p, bus_6000.n[3]) annotation (Line(points={{218.6,
-          14},{234,14},{234,6},{240,6}},     color={0,0,255}));
+          14},{234,14},{234,6},{240,6}}, color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-300,-220},{
             300,220}}), graphics={Text(
@@ -3356,7 +3356,7 @@ equation
 <ul>
 <li>Bus names assignation</li>
 <li>New bus grouping according to the real bidding zones </li>
-<li>Introduction of 5 no scalable loads at buses: 8500, 7000, 7100 and two at 6701 (to represent missing exchanges)  </li>
+<li>Introduction of 5 no scalable loads at buses: 8500, 7000, 7100 and two at 6701 (to represent missing exchanges) </li>
 <li>All no scalable loads have Q=P*tan(acos(0.95)) except for that one at bus 5610 with PF=0.99 (to not have frequent problems of low voltage in southern Norway) </li>
 <li>Trafo 5602-5603: winding 1 ratio set from 0.9683 to 1 (to not have permanent problems of low voltage in southern Norway) and no Auto Adjust </li>
 <li>Change of X about line 5400-5500 from 0.94 pu to 0.094 pu (to fix ODMS warning)</li>

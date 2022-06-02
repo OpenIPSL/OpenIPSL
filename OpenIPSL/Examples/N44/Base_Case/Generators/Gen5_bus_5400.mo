@@ -49,7 +49,7 @@ model Gen5_bus_5400 "Configuration of synchronous generator with regulators: GEN
             120,10}})));
 equation
   connect(gENSAL.p, p)
-    annotation (Line(points={{0,9},{54,9},{54,0},{110,0}},   color={0,0,255}));
+    annotation (Line(points={{0,9},{54,9},{54,0},{110,0}}, color={0,0,255}));
   connect(hYGOV.PMECH, gENSAL.PMECH) annotation (Line(points={{1.25,64.4444},{10,64.4444},{10,50},{10,40},{-74,40},{-74,22.5},{-70.4,22.5}},
                                                               color={0,0,127}));
   connect(sEXS.EFD, gENSAL.EFD) annotation (Line(points={{87.8,-49.8889},{94,-49.8889},{94,-86},{-74,-86},{-74,-4.5},{-70.4,-4.5}},

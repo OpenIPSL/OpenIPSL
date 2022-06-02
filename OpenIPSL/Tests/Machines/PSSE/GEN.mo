@@ -29,6 +29,6 @@ model GEN "SMIB system to test functionality of flexible GEN model (needs replac
     redeclare OpenIPSL.Electrical.Controls.PSSE.PSS.DisabledPSS pss) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 equation
   connect(G1.pwPin, GEN1.p)
-    annotation (Line(points={{-59,0},{-30,0},{-30,0}},   color={0,0,255}));
+    annotation (Line(points={{-59,0},{-30,0},{-30,0}}, color={0,0,255}));
 
 end GEN;

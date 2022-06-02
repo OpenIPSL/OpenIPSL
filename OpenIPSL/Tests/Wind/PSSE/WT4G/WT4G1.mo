@@ -68,7 +68,7 @@ equation
   connect(FAULT.p, pwLine.p)
     annotation (Line(points={{10,0},{20,0},{20,20},{31,20}}, color={0,0,255}));
   connect(pwLine1.p, pwLine.p) annotation (Line(points={{31,-20},{20,-20},{20,20},
-          {31,20}},              color={0,0,255}));
+          {31,20}}, color={0,0,255}));
   connect(pwFault.p, FAULT.p) annotation (Line(points={{18.3333,-50},{14,-50},{
           14,0},{10,0}}, color={0,0,255}));
   connect(pwLine.n, GEN2.p)

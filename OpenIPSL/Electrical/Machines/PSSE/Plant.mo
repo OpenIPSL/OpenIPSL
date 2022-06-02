@@ -31,11 +31,11 @@ model Plant "Framework for an electrical plant including controllers"
     Placement(transformation(extent={{-80,-20},{-40,20}})));
 equation
   connect(pss.V_S2, governor.PMECH0) annotation (
-    Line(points={{-82,-8},{-94,-8},{-94,92},{92,92},{92,49.2},{74.4,49.2}},               color = {0, 0, 127}));
+    Line(points={{-82,-8},{-94,-8},{-94,92},{92,92},{92,49.2},{74.4,49.2}}, color = {0, 0, 127}));
   connect(pss.V_S1, machine.SPEED) annotation (
-    Line(points={{-82,8},{-90,8},{-90,86},{88,86},{88,14},{82,14}},                  color = {0, 0, 127}));
+    Line(points={{-82,8},{-90,8},{-90,86},{88,86},{88,14},{82,14}}, color = {0, 0, 127}));
   connect(machine.p, pwPin)
-    annotation (Line(points={{80,0},{110,0}},         color={0,0,255}));
+    annotation (Line(points={{80,0},{110,0}}, color={0,0,255}));
   connect(exciter.XADIFD, machine.XADIFD) annotation (Line(points={{16,-22},{16,-30},{86,-30},{86,-18},{82,-18}},
                                                    color={0,0,127}));
   connect(machine.EFD0, exciter.EFD0) annotation (Line(points={{82,-10},{88,-10},{88,-46},{-26,-46},{-26,-8},{-22,-8}},

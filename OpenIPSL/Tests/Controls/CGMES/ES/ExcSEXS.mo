@@ -51,7 +51,7 @@ equation
   connect(sEXS.EFD, gENROE.EFD) annotation (Line(points={{-85.4,-50},{-100,-50},{-100,-10},{-92,-10}},
                                             color={0,0,127}));
   connect(gENROE.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
-  connect(gENROE.XADIFD, sEXS.XADIFD) annotation (Line(points={{-46,-18},{-40,-18},{-40,-78},{-81.2,-78},{-81.2,-65.4}},        color={0,0,127}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
+  connect(gENROE.XADIFD, sEXS.XADIFD) annotation (Line(points={{-46,-18},{-40,-18},{-40,-78},{-81.2,-78},{-81.2,-65.4}}, color={0,0,127}));
   annotation (experiment(StopTime=10));
 end ExcSEXS;

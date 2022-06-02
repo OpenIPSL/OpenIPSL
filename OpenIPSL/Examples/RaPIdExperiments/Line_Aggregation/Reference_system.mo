@@ -100,11 +100,11 @@ model Reference_system "Reference power system model for line aggregation using 
     duration=5,
     startTime=10)
     annotation (Placement(transformation(extent={{-192,-16},{-172,4}})));
-  inner Electrical.SystemBase          SysData(S_b=100000000, fn=50)
+  inner Electrical.SystemBase SysData(S_b=100000000, fn=50)
     annotation (Placement(transformation(extent={{-200,-60},{-160,-40}})));
 equation
   connect(gENROE1.EFD0, gENROE1.EFD) annotation (Line(points={{128,0},{124,0},{124,
-          -16},{176,-16},{176,-2},{174,-2}},   color={0,0,127}));
+          -16},{176,-16},{176,-2},{174,-2}}, color={0,0,127}));
   connect(gENROE1.PMECH, gENROE1.PMECH0) annotation (Line(points={{174,22},{180,
           22},{180,-20},{120,-20},{120,20},{128,20}}, color={0,0,127}));
   connect(pwLine.n, LOAD.p)
@@ -120,7 +120,7 @@ equation
   connect(gENROE1.p, GEN2.p)
     annotation (Line(points={{130,10},{130,10},{102,10}}, color={0,0,255}));
   connect(constantLoad.p, pwLine1.p) annotation (Line(points={{46,-20},{46,10},{
-          50,10},{50,30},{63,30}},          color={0,0,255}));
+          50,10},{50,30},{63,30}}, color={0,0,255}));
   connect(pwLine.p, GEN1.p)
     annotation (Line(points={{7,10},{7,10},{-14,10}}, color={0,0,255}));
   connect(gENROE.p, GEN1.p)

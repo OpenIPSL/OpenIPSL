@@ -40,11 +40,11 @@ model DeltaDynLoad_3Ph "Variable three-phase delta load"
     annotation (Dialog(group="Power flow"));
   parameter Types.ActivePower P_bc=1e6 "Active power for line BC"
     annotation (Dialog(group="Power flow"));
-  parameter Types.ReactivePower Q_bc=0  "Reactive power for line BC"
+  parameter Types.ReactivePower Q_bc=0 "Reactive power for line BC"
     annotation (Dialog(group="Power flow"));
   parameter Types.ActivePower P_ca=1e6 "Active power for line CA"
     annotation (Dialog(group="Power flow"));
-  parameter Types.ReactivePower Q_ca=0  "Reactive power for line CA"
+  parameter Types.ReactivePower Q_ca=0 "Reactive power for line CA"
     annotation (Dialog(group="Power flow"));
   parameter Real A_ab=0 "Percentage of Constant Power Load for Line AB (%)"
     annotation (Dialog(group="Load Parameters for ZIP Model"));

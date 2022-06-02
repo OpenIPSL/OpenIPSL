@@ -29,11 +29,11 @@ equation
           extent={{-80,80},{80,-80}},
           horizontalAlignment=TextAlignment.Left,
           textString="Rselect
- 1 -  electrical power
+ 1 - electrical power
  0 - isochronous
 -1 - valve stroke
 -2 - governor output
-"),                                                          Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}})}),
+"), Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}})}),
     Documentation(info="<html>
 <p>The following documentation is adapted from
 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-Models], chapter 7.12</a>:</p>

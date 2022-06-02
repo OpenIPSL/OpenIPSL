@@ -89,26 +89,26 @@ initial equation
 equation
   connect(Leadlag3.y, limiter.u) annotation (Line(points={{151,0},{158,0}}, color={0,0,127}));
   connect(Leadlag2.y, Leadlag3.u) annotation (Line(points={{121,0},{128,0}}, color={0,0,127}));
-  connect(Leadlag2.u, Leadlag1.y) annotation (Line(points={{98,0},{93,0}},   color={0,0,127}));
+  connect(Leadlag2.u, Leadlag1.y) annotation (Line(points={{98,0},{93,0}}, color={0,0,127}));
   connect(SimpleLag1.y, add.u1) annotation (Line(points={{-63,20},{-54,20}}, color={0,0,127}));
   connect(SimpleLag2.y, add.u2) annotation (Line(points={{-63,-20},{-60,-20},{-60,8},{-54,8}}, color={0,0,127}));
-  connect(add1.y, gain.u) annotation (Line(points={{35,0},{40,0}},        color={0,0,127}));
-  connect(gain.y, Leadlag1.u) annotation (Line(points={{63,0},{70,0}},          color={0,0,127}));
+  connect(add1.y, gain.u) annotation (Line(points={{35,0},{40,0}}, color={0,0,127}));
+  connect(gain.y, Leadlag1.u) annotation (Line(points={{63,0},{70,0}}, color={0,0,127}));
   connect(derivativeLag.y, derivativeLag1.u) annotation (Line(points={{-127,20},{-118,20}}, color={0,0,127}));
   connect(derivativeLag3.u, derivativeLag2.y) annotation (Line(points={{-118,-20},{-127,-20}}, color={0,0,127}));
-  connect(derivativeLag1.y, SimpleLag1.u) annotation (Line(points={{-95,20},{-86,20}},          color={0,0,127}));
+  connect(derivativeLag1.y, SimpleLag1.u) annotation (Line(points={{-95,20},{-86,20}}, color={0,0,127}));
   connect(derivativeLag3.y, SimpleLag2.u) annotation (Line(points={{-95,-20},{-86,-20}}, color={0,0,127}));
   connect(derivativeLag2.u, limiter2.y) annotation (Line(points={{-150,-20},{-159,-20}}, color={0,0,127}));
   connect(derivativeLag.u, limiter1.y) annotation (Line(points={{-150,20},{-159,20}}, color={0,0,127}));
   connect(add.y, rampTrackingFilter.u) annotation (Line(points={{-31,14},{-24,14}},color={0,0,127}));
-  connect(rampTrackingFilter.y, add1.u1) annotation (Line(points={{-1,14},{4,14},{4,6},{12,6}},   color={0,0,127}));
-  connect(add1.u2, add.u2) annotation (Line(points={{12,-6},{4,-6},{4,-20},{-60,-20},{-60,8},{-54,8}},   color={0,0,127}));
+  connect(rampTrackingFilter.y, add1.u1) annotation (Line(points={{-1,14},{4,14},{4,6},{12,6}}, color={0,0,127}));
+  connect(add1.u2, add.u2) annotation (Line(points={{12,-6},{4,-6},{4,-20},{-60,-20},{-60,8},{-54,8}}, color={0,0,127}));
   connect(V_S1, limiter1.u)
     annotation (Line(points={{-220,40},{-190,40},{-190,20},{-182,20}},
                                                              color={0,0,127}));
   connect(V_S2, limiter2.u) annotation (Line(points={{-220,-40},{-190,-40},{-190,-20},{-182,-20}},
                       color={0,0,127}));
-  connect(limiter.y, VOTHSG) annotation (Line(points={{181,0},{210,0}},         color={0,0,127}));
+  connect(limiter.y, VOTHSG) annotation (Line(points={{181,0},{210,0}}, color={0,0,127}));
   annotation (Icon(graphics={Text(
           extent={{-40,80},{40,40}},
           lineColor={28,108,200},

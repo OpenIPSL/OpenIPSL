@@ -78,7 +78,7 @@ equation
   connect(gENSAL.XADIFD, sCRX.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-68},{-78,-68},{-78,-61}},
                                               color={0,0,127}));
   connect(gENSAL.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(sCRX.VUEL, zero.y) annotation (Line(points={{-66,-61},{-66,-80},{-40.6,-80}}, color={0,0,127}));
   annotation (
 experiment(StopTime=10));

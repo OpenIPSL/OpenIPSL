@@ -12,11 +12,11 @@ model PVModule "Model of a single PV module"
   parameter SI.Irradiance E_STC = 1000;
   parameter SI.Temperature theta_STC = 298.15;
   Modelica.Blocks.Interfaces.RealInput U annotation (
-    Placement(transformation(origin={-100,80},    extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-90,90},    extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin={-100,80}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-90,90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput E if use_input_E annotation (
-    Placement(transformation(origin={-100,40},    extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-90,50},    extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin={-100,40}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin={-90,50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput theta if use_input_theta annotation (
-    Placement(transformation(origin={-100,-40},    extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin={-100,-40}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput I annotation (
     Placement(transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Umpp annotation (
@@ -88,7 +88,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   annotation (
-    Icon(graphics={  Rectangle(lineColor = {118, 18, 62}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-58, 80}, extent = {{-20, 8}, {20, -8}}, textString = "U"), Text(origin = {76, 42}, extent = {{-20, 8}, {20, -8}}, textString = "I"), Text(origin = {76, -40}, extent = {{-20, 8}, {20, -8}}, textString = "Ummp"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Rectangle(lineColor = {118, 18, 62}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-58, 80}, extent = {{-20, 8}, {20, -8}}, textString = "U"), Text(origin = {76, 42}, extent = {{-20, 8}, {20, -8}}, textString = "I"), Text(origin = {76, -40}, extent = {{-20, 8}, {20, -8}}, textString = "Ummp"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
  Documentation(info = "<html>
 <p>
 Model of a PV Module within a PV array.

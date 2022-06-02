@@ -60,7 +60,7 @@ equation
         graphics={Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
-          fillColor={255,255,255}),      Text(
+          fillColor={255,255,255}), Text(
           extent={{-56,-80},{-24,-100}},
           lineColor={28,108,200},
           textString="VUEL"),Text(

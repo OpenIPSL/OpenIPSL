@@ -31,7 +31,7 @@ protected
           Line(points={{55,-75},{65,-75}}, color={0,0,255}),Text(
           lineColor={28,108,200},
           extent={{-29,-18},{20,18}},
-          textString="G +jB  "),Text(
+          textString="G +jB "),Text(
           lineColor={28,108,200},
           extent={{-15,5},{-5,13}},
           textString="ser"),Text(

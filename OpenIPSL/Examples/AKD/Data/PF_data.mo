@@ -7,7 +7,7 @@ record PF_data "PSSE complete data record"
   Voltages voltages;
   /* PSSE powers from power flow solution */
   replaceable record Powers = Data.AKD_PF_powers constrainedby
-    Data.AKD_PF_powers                                                            "PSSE powers from power flow solution"
+    Data.AKD_PF_powers "PSSE powers from power flow solution"
                        annotation (choicesAllMatching);
   Powers powers;
   annotation (Documentation(info="<html>

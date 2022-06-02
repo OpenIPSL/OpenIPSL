@@ -24,9 +24,9 @@ partial model BaseOrder5 "Template for base network and a 5th order generator"
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
 equation
   connect(order5.p, bus1.p) annotation (Line(points={{-92,0},{-84.35,0},{-84.35,
-          0},{-80,0}},                  color={0,0,255}));
+          0},{-80,0}}, color={0,0,255}));
   connect(order5.pm, order5.pm0) annotation (Line(points={{-114,-5},{-114,-5},{-114,
-          -11},{-110,-11}},      color={0,0,127}));
+          -11},{-110,-11}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
 <p>Extension of <strong>BaseNetwork</strong> but with a fifth order machine connected to bus 1.</p>

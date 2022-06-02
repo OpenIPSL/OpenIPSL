@@ -94,7 +94,7 @@ model Gen_gov_exc_stab "Generation unit with machine, exciter, turbine-governor,
     S12=S12,
     R_a=R_a) annotation (Placement(transformation(extent={{20,-20},{59,20}})));
   OpenIPSL.Interfaces.PwPin pwPin annotation (Placement(transformation(extent={{90,-10},
-            {110,10}}),         iconTransformation(extent={{60,-10},{80,10}})));
+            {110,10}}), iconTransformation(extent={{60,-10},{80,10}})));
   OpenIPSL.Electrical.Controls.PSSE.TG.HYGOV hYGOV(
     R=R,
     r=r,
@@ -149,25 +149,25 @@ model Gen_gov_exc_stab "Generation unit with machine, exciter, turbine-governor,
     annotation (Placement(transformation(extent={{20,-72},{40,-52}})));
 equation
   connect(gENSAL.p, pwPin)
-    annotation (Line(points={{59,0},{100,0}},            color={0,0,255}));
+    annotation (Line(points={{59,0},{100,0}}, color={0,0,255}));
   connect(gENSAL.PMECH0, hYGOV.PMECH0) annotation (Line(points={{60.95,10},{80,10},
-          {80,36},{-2,36}},                color={0,0,127}));
+          {80,36},{-2,36}}, color={0,0,127}));
   connect(gENSAL.SPEED, hYGOV.SPEED) annotation (Line(points={{60.95,14},{70,14},
-          {70,24},{-2,24}},             color={0,0,127}));
+          {70,24},{-2,24}}, color={0,0,127}));
   connect(hYGOV.PMECH, gENSAL.PMECH) annotation (Line(points={{-21,30},{-30,30},
-          {-30,12},{16.1,12}},       color={0,0,127}));
+          {-30,12},{16.1,12}}, color={0,0,127}));
   connect(iEEET2_1.EFD, gENSAL.EFD) annotation (Line(points={{-21,-30},{-30,-30},
-          {-30,-12},{16.1,-12}},      color={0,0,127}));
+          {-30,-12},{16.1,-12}}, color={0,0,127}));
   connect(iEEEST.VOTHSG, iEEET2_1.VOTHSG) annotation (Line(points={{19,-88},{10,
-          -88},{10,-26},{1,-26}},                color={0,0,127}));
+          -88},{10,-26},{1,-26}}, color={0,0,127}));
   connect(gENSAL.ETERM, iEEET2_1.ECOMP) annotation (Line(points={{60.95,-6},{80,
-          -6},{80,-30},{1,-30}},                                color={0,0,127}));
+          -6},{80,-30},{1,-30}}, color={0,0,127}));
   connect(gENSAL.PELEC, iEEEST.V_S) annotation (Line(points={{60.95,6},{74,6},{74,
-          -92},{42,-92}},               color={0,0,127}));
+          -92},{42,-92}}, color={0,0,127}));
   connect(disabled_comp_vt.y, iEEEST.V_CT) annotation (Line(points={{41,-62},{58,
           -62},{58,-84},{42,-84}}, color={0,0,127}));
   connect(gENSAL.EFD0, iEEET2_1.EFD0) annotation (Line(points={{60.95,-10},{70,-10},
-          {70,-34},{1,-34}},                                 color={0,0,127}));
+          {70,-34},{1,-34}}, color={0,0,127}));
   connect(gENSAL.XADIFD, iEEET2_1.XADIFD) annotation (Line(points={{60.95,-18},{
           66,-18},{66,-46},{-18,-46},{-18,-41}}, color={0,0,127}));
   connect(disabled_exc_lims.y, iEEET2_1.VOEL)

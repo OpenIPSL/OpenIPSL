@@ -66,6 +66,6 @@ equation
           textString="%name",
           lineColor={0,0,255})}),
     Documentation(info="<html>
-<p>This is an <strong>opening</strong> circuit breaker which can either be parametrised with an opening and closing time or controlled via an external trigger. If the external trigger is active (i.e.,  <code>Trigger=true</code>)> then the circuit breaker is open.</p>
+<p>This is an <strong>opening</strong> circuit breaker which can either be parametrised with an opening and closing time or controlled via an external trigger. If the external trigger is active (i.e., <code>Trigger=true</code>)> then the circuit breaker is open.</p>
 </html>"));
 end Breaker;

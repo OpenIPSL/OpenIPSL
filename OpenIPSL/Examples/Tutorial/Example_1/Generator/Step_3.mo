@@ -46,7 +46,7 @@ equation
   connect(avr.vf0, machine.vf0) annotation (Line(points={{-34,-7.66667},{-34,4},
           {22,4},{22,-7}}, color={0,0,127}));
   connect(machine.p, pwPin) annotation (Line(points={{76,-40},{76,-40.9256},{110,
-          -40.9256},{110,0}},     color={0,0,255}));
+          -40.9256},{110,0}}, color={0,0,255}));
   annotation (Diagram(coordinateSystem(
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=false,

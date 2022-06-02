@@ -93,30 +93,30 @@ model G3 "Generation unit connected to bus FVERGE"
     P_MIN=0) annotation (Placement(transformation(extent={{60,50},{40,30}})));
 equation
   connect(gENROU.p, pwPin)
-    annotation (Line(points={{40,0},{110,0}},        color={0,0,255}));
+    annotation (Line(points={{40,0},{110,0}}, color={0,0,255}));
   connect(gENROU.ETERM, sT5B.ECOMP) annotation (Line(points={{42,-6},{76,-6},{76,
-          -50},{21,-50}},     color={0,0,127}));
+          -50},{21,-50}}, color={0,0,127}));
   connect(sT5B.XADIFD, gENROU.XADIFD) annotation (Line(points={{2,-61},{2,-72},{
           70,-72},{70,-18},{42,-18}},
                                 color={0,0,127}));
   connect(sT5B.EFD0, gENROU.EFD0) annotation (Line(points={{21,-54},{82,-54},{82,
-          -10},{42,-10}},      color={0,0,127}));
+          -10},{42,-10}}, color={0,0,127}));
   connect(gENROU.SPEED, pSS2B.V_S1) annotation (Line(points={{42,14},{88,14},{88,
-          -32},{61,-32}},     color={0,0,127}));
+          -32},{61,-32}}, color={0,0,127}));
   connect(gENROU.PELEC, pSS2B.V_S2) annotation (Line(points={{42,6},{92,6},{92,-40},
-          {61,-40}},          color={0,0,127}));
+          {61,-40}}, color={0,0,127}));
   connect(VUEL.y, sT5B.VUEL) annotation (Line(points={{-39,-82},{14,-82},{14,-61}},
                       color={0,0,127}));
   connect(VOEL.y, sT5B.VOEL) annotation (Line(points={{-39,-50},{-30,-50},{-30,-78},
-          {10,-78},{10,-61}},         color={0,0,127}));
+          {10,-78},{10,-61}}, color={0,0,127}));
   connect(pSS2B.VOTHSG, sT5B.VOTHSG) annotation (Line(points={{39,-36},{28,-36},
-          {28,-46},{21,-46}},              color={0,0,127}));
+          {28,-46},{21,-46}}, color={0,0,127}));
   connect(gENROU.EFD, sT5B.EFD) annotation (Line(points={{-4,-12},{-20,-12},{-20,
-          -50},{-1,-50}},       color={0,0,127}));
+          -50},{-1,-50}}, color={0,0,127}));
   connect(iEESGO.PMECH, gENROU.PMECH) annotation (Line(points={{39,40},{-20,40},
-          {-20,12},{-4,12}},                  color={0,0,127}));
+          {-20,12},{-4,12}}, color={0,0,127}));
   connect(iEESGO.PMECH0, gENROU.PMECH0) annotation (Line(points={{58,46},{92,46},
-          {92,10},{42,10}},                color={0,0,127}));
+          {92,10},{42,10}}, color={0,0,127}));
   connect(gENROU.SPEED, iEESGO.SPEED) annotation (Line(points={{42,14},{88,14},{
           88,34},{58,34}}, color={0,0,127}));
   annotation (

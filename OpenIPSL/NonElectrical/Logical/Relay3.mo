@@ -1,5 +1,5 @@
 within OpenIPSL.NonElectrical.Logical;
-model Relay3 "Relay,  y = if u1 > Vov then u3 elseif u1 < -Vov then u4 else u2"
+model Relay3 "Relay, y = if u1 > Vov then u3 elseif u1 < -Vov then u4 else u2"
   parameter Real Vov=0.5 "Threshold for relay";
   Modelica.Blocks.Interfaces.RealInput u1 annotation (Placement(transformation(
           extent={{-140,60},{-100,100}})));
@@ -15,11 +15,11 @@ model Relay3 "Relay,  y = if u1 > Vov then u3 elseif u1 < -Vov then u4 else u2"
   Modelica.Blocks.Interfaces.RealInput u4 annotation (Placement(transformation(
           extent={{-140,-80},{-100,-40}}), iconTransformation(extent={{-140,-100},{-100,-60}})));
   Modelica.Blocks.Logical.Switch switch_u4 annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
-  Modelica.Blocks.Logical.LessThreshold    lessThreshold(threshold=-Vov)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=-Vov)
                                                             annotation (Placement(transformation(extent={{-68,40},{-48,60}})));
 equation
 
-  connect(greaterThreshold.u, u1) annotation (Line(points={{-70,80},{-120,80}},                   color={0,0,127}));
+  connect(greaterThreshold.u, u1) annotation (Line(points={{-70,80},{-120,80}}, color={0,0,127}));
   connect(greaterThreshold.y, switch_u3.u2) annotation (Line(points={{-47,80},{-10,80},{-10,0},{48,0}}, color={255,0,255}));
   connect(switch_u3.y, y) annotation (Line(points={{71,0},{110,0}}, color={0,0,127}));
   connect(u3, switch_u3.u1) annotation (Line(points={{-120,-20},{-60,-20},{-60,8},{48,8}}, color={0,0,127}));

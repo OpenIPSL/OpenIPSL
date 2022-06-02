@@ -53,8 +53,8 @@ equation
                                           color={0,0,127}));
   connect(minusInf.y, eSDC2A.VUEL) annotation (Line(points={{-40.4,-80},{-66,-80},{-66,-61}}, color={0,0,127}));
   connect(gENROE.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
-  connect(gENROE.XADIFD, eSDC2A.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-70},{-78,-70},{-78,-61}},           color={0,0,127}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
+  connect(gENROE.XADIFD, eSDC2A.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-70},{-78,-70},{-78,-61}}, color={0,0,127}));
   connect(zero.y, eSDC2A.VOTHSG) annotation (Line(points={{-24.4,-46},{-59,-46}}, color={0,0,127}));
   connect(zero.y, eSDC2A.VOEL) annotation (Line(points={{-24.4,-46},{-30,-46},{-30,-66},{-70,-66},{-70,-61}}, color={0,0,127}));
   annotation (

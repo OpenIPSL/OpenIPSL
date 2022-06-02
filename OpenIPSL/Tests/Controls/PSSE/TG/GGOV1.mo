@@ -63,7 +63,7 @@ model GGOV1 "SMIB system to test functionality of GGOV1 model"
 equation
   connect(gGOV1.PELEC, gENROU.PELEC) annotation (Line(points={{-62,56},{-36,56},{-36,6},{-46,6}},color={0,0,127},smooth=Smooth.None));
   connect(gENROU.EFD0, gENROU.EFD) annotation (Line(points={{-46,-10},{-40,-10},{-40,-26},{-98,-26},{-98,-12},{-92,-12}},color={0,0,127},smooth=Smooth.None));
-  connect(gGOV1.PMECH, gENROU.PMECH) annotation (Line(points={{-81,50},{-98,50},{-98,12},{-92,12}},    color={0,0,127}));
+  connect(gGOV1.PMECH, gENROU.PMECH) annotation (Line(points={{-81,50},{-98,50},{-98,12},{-92,12}}, color={0,0,127}));
   connect(gENROU.SPEED, gGOV1.SPEED) annotation (Line(points={{-46,14},{-40,14},{-40,44},{-62,44}},color={0,0,127}));
   connect(gENROU.p, GEN1.p) annotation (Line(points={{-48,0},{-50,0},{-50,0},{-30,0}},color={0,0,255}));
   annotation (

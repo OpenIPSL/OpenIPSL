@@ -8,7 +8,7 @@ model STATCOM_Test "Simple model to test the functionality of STATCOM"
     Kr=25,
     Tr=0.2,
     i_Max=0.7,
-    i_Min=-0.7)                                  annotation (Placement(transformation(extent={{90,30},{70,50}})));
+    i_Min=-0.7) annotation (Placement(transformation(extent={{90,30},{70,50}})));
   Electrical.Machines.PSSE.GENCLS Syn1 annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Electrical.Branches.PwLine pwLineSC(
     displayPF=true,
@@ -26,7 +26,7 @@ model STATCOM_Test "Simple model to test the functionality of STATCOM"
     t_start_2=6,
     t_end_2=8,
     dP2=0,
-    dQ2=-10000000)                                           annotation (Placement(transformation(extent={{70,-40},{90,-20}})));
+    dQ2=-10000000) annotation (Placement(transformation(extent={{70,-40},{90,-20}})));
   Electrical.Branches.PwLine pwLineLoad(
     displayPF=true,
     R=0.001,

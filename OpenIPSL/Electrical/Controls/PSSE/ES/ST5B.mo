@@ -128,7 +128,7 @@ equation
   connect(TransducerDelay.y, DiffV.u2) annotation (Line(points={{-149,0},{-132,0},{-132,-6},{-122,-6}}, color={0,0,127}));
   connect(high.u, TransducerDelay.u) annotation (Line(points={{94,-30},{-178,-30},{-178,0},{-172,0}}, color={0,0,127}));
   connect(low.u, TransducerDelay.u) annotation (Line(points={{92,-70},{80,-70},{80,-30},{-178,-30},{-178,0},{-172,0}}, color={0,0,127}));
-  connect(VOTHSG, VERR1.u1) annotation (Line(points={{-200,90},{-28,90},{-28,6},{-22,6}},   color={0,0,127}));
+  connect(VOTHSG, VERR1.u1) annotation (Line(points={{-200,90},{-28,90},{-28,6},{-22,6}}, color={0,0,127}));
   connect(XADIFD, K_c.u) annotation (Line(points={{80,-200},{80,-200},{80,-124},
           {80,-120},{130,-120},{130,-104}}, color={0,0,127}));
   connect(hV_Gate.y, lV_Gate.u1) annotation (Line(points={{-65,0},{-60,0},{-60,6},{-54,6}}, color={0,0,127}));

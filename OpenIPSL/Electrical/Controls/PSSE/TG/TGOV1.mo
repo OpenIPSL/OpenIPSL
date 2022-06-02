@@ -39,9 +39,9 @@ initial equation
 
 equation
   connect(REF.y, add.u1) annotation (Line(points={{-119,50},{-60,50},{-60,5.8},{
-          -42,5.8}},                                                    color={0,0,127}));
+          -42,5.8}}, color={0,0,127}));
   connect(simpleLagLim.u, imGain9.y) annotation (Line(points={{38,0.5},{21,0.5},
-          {21,0}},                                                                          color={0,0,127}));
+          {21,0}}, color={0,0,127}));
   connect(add1.y, PMECH)
     annotation (Line(points={{201,0},{250,0},{250,0}}, color={0,0,127}));
   connect(simpleLagLim.y, imLeadLag.u) annotation (Line(points={{61,0.5},{69.5,0.5},

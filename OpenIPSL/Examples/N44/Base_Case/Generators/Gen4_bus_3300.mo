@@ -88,7 +88,7 @@ equation
   connect(gENROU.XADIFD, sCRX.XADIFD) annotation (Line(points={{8.56,-22.5},{12,-22.5},{12,-83.4889},{74.6,-83.4889}},
                                                color={0,0,127}));
   connect(gENROU.p, pwPin)
-    annotation (Line(points={{6,9},{76,9},{76,0},{110,0}},   color={0,0,255}));
+    annotation (Line(points={{6,9},{76,9},{76,0},{110,0}}, color={0,0,255}));
   connect(gENROU.PELEC, sTAB2A.PELEC) annotation (Line(points={{9.2,19.5},{34,19.5},{34,-32},{-82,-32},{-82,-47.5},{-74.4136,-47.5}},
                                                                   color={0,0,
           127}));

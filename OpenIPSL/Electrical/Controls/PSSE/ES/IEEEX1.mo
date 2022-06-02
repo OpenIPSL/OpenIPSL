@@ -10,11 +10,11 @@ model IEEEX1 "1979 IEEE Type 1 Excitation System Model and 1981 IEEE Type DC1 Mo
   parameter Types.Time T_C=0 "Regulator numerator (lead) time constant";
   parameter Types.PerUnit V_RMAX=7.3 "Maximum regulator output";
   parameter Types.PerUnit V_RMIN=-7.3 "Minimum regulator output";
-  parameter Types.PerUnit K_E=1  "Exciter field proportional constant";
+  parameter Types.PerUnit K_E=1 "Exciter field proportional constant";
   parameter Types.Time T_E=0.8 "Exciter field time constant";
   parameter Types.PerUnit K_F=0.03 "Rate feedback excitation system stabilizer gain";
   parameter Types.Time T_F=1 "Rate feedback time constant";
-  parameter Types.PerUnit E_1=2.4  "Exciter output voltage for saturation factor S_E(E_1)";
+  parameter Types.PerUnit E_1=2.4 "Exciter output voltage for saturation factor S_E(E_1)";
   parameter Types.PerUnit S_EE_1=0.03 "Exciter saturation factor at exciter output voltage E1";
   parameter Types.PerUnit E_2=5.0000 "Exciter output voltage for saturation factor S_E(E_2)";
   parameter Types.PerUnit S_EE_2=0.50000 "Exciter saturation factor at exciter output voltage E2";

@@ -25,8 +25,8 @@ package Types "Library specific type definitions"
   operator record ComplexPower = SI.ComplexPower(re(nominal = 1e8, displayUnit="MW"), im(nominal = 1e8, displayUnit="MVA")) "Active and Reactive powers in cartesian representation";
   operator record ComplexPerUnit = Complex(re(unit = "1"), im(unit = "1")) "Per unit record for phasor in cartesian representation";
   type Ctrl = enumeration(
-      alpha  "Control using the firing angle alpha",
-      xTCSC  "Control using reactance xTCSC")
+      alpha "Control using the firing angle alpha",
+      xTCSC "Control using reactance xTCSC")
        "Control type of the PSAT TCSC";
 type DelayType = enumeration(
       FixedDelay

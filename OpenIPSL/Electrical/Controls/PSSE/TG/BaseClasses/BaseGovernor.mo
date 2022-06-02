@@ -9,7 +9,7 @@ partial model BaseGovernor "Base turbine governor model"
           extent={{-100,-80},{-60,-40}})));
   Modelica.Blocks.Interfaces.RealOutput PMECH annotation (Placement(
         transformation(extent = {{240, -10}, {260, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
-  annotation (Icon(            graphics={
+  annotation (Icon( graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200}),
@@ -30,7 +30,7 @@ partial model BaseGovernor "Base turbine governor model"
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="PMECH")}),                                 Diagram(
+          textString="PMECH")}), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-240},{240,
             200}})));
 end BaseGovernor;

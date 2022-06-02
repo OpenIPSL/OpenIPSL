@@ -179,7 +179,7 @@ model AKD "Part of the Norwegian transmission system, ready for simulation"
     B=0.00404*0.5,
     t1=1,
     t2=1.05,
-    opening=1)     annotation (Placement(transformation(
+    opening=1) annotation (Placement(transformation(
         extent={{-7,-4.5},{7,4.5}},
         origin={69,-0.5})));
   OpenIPSL.Electrical.Buses.BusExt bus_58583(

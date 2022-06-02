@@ -38,7 +38,7 @@ equation
   connect(machine.pm0, machine.pm) annotation (Line(points={{26,-33},{26,-40},{0,-40},{0,-15},{14,-15}},
                                             color={0,0,127}));
   connect(machine.p, pwPin)
-    annotation (Line(points={{80,0},{110,0}},          color={0,0,255}));
+    annotation (Line(points={{80,0},{110,0}}, color={0,0,255}));
   connect(pss_off.y, avr.vs) annotation (Line(points={{-59,0},{-54,0},{-54,4},{
           -48.3333,4}},
                color={0,0,127}));
@@ -48,7 +48,7 @@ equation
           50},{-60,24},{-48.3333,24}},
                               color={0,0,127}));
   connect(machine.vf0, avr.vf0) annotation (Line(points={{26,33},{26,40},{-30,
-          40},{-30,32.3333}},                   color={0,0,127}));
+          40},{-30,32.3333}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
 <p> Generation unit composed of order 6 machine and an AVR type III.</p>

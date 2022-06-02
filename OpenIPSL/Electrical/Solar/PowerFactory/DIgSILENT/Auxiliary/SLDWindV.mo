@@ -18,7 +18,7 @@ model SLDWindV "Dynamic support during faults"
     Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Division division annotation (
     Placement(transformation(origin = {-2, -30}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Modelica.Constants.inf, uMin = Deadband)  annotation (
+  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Modelica.Constants.inf, uMin = Deadband) annotation (
     Placement(transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(product.y, gain.u) annotation (
@@ -28,23 +28,23 @@ equation
   connect(gain.y, diq) annotation (
     Line(points = {{91, 0}, {110, 0}}, color = {0, 0, 127}));
   connect(add.u1, const.y) annotation (
-    Line(points={{-22,46},{-35,46},{-35,50},{-49,50}},          color = {0, 0, 127}));
+    Line(points={{-22,46},{-35,46},{-35,50},{-49,50}}, color = {0, 0, 127}));
   connect(add.u2, duac_abs.y) annotation (
-    Line(points={{-22,34},{-40,34},{-40,0},{-49,0},{-49,0}},            color = {0, 0, 127}));
+    Line(points={{-22,34},{-40,34},{-40,0},{-49,0},{-49,0}}, color = {0, 0, 127}));
   connect(division.u2, limiter.y) annotation (
-    Line(points={{-14,-36},{-19,-36},{-19,-30}},        color = {0, 0, 127}));
+    Line(points={{-14,-36},{-19,-36},{-19,-30}}, color = {0, 0, 127}));
   connect(division.u1, duac) annotation (
     Line(points = {{-14, -24}, {-18, -24}, {-18, -14}, {-78, -14}, {-78, 0}, {-100, 0}}, color = {0, 0, 127}));
   connect(division.y, product.u2) annotation (
     Line(points = {{9, -30}, {20, -30}, {20, -6}, {28, -6}}, color = {0, 0, 127}));
   connect(product.u1, add.y) annotation (
-    Line(points={{28,6},{20,6},{20,40},{1,40},{1,40}},            color = {0, 0, 127}));
+    Line(points={{28,6},{20,6},{20,40},{1,40},{1,40}}, color = {0, 0, 127}));
   connect(limiter.u, duac_abs.y) annotation (
-    Line(points={{-42,-30},{-46,-30},{-46,0},{-49,0},{-49,0}},            color = {0, 0, 127}));
+    Line(points={{-42,-30},{-46,-30},{-46,0},{-49,0},{-49,0}}, color = {0, 0, 127}));
 
 annotation (
     Diagram,
-    Icon(graphics={  Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {73, 2}, extent = {{-83, 12}, {83, -12}}, textString = "diq"), Text(origin = {-33, 2}, extent = {{-83, 12}, {83, -12}}, textString = "duac"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {73, 2}, extent = {{-83, 12}, {83, -12}}, textString = "diq"), Text(origin = {-33, 2}, extent = {{-83, 12}, {83, -12}}, textString = "duac"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
          Documentation(info = "<html>
 <p>
 A fault ride through implementation for reactive power support.

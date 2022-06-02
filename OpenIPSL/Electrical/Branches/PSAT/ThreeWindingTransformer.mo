@@ -45,15 +45,15 @@ model ThreeWindingTransformer "Three winding transformer model from PSAT"
     xT=0.5*(x12 + x13 - x23),
     m=m) annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
   TwoWindingTransformer branch2(
-    V_b=V_b,                    Sn=Sn,
+    V_b=V_b, Sn=Sn,
     Vn=Vn,
     rT=0.5*(r12 + r23 - r13),
-    xT=0.5*(x12 + x23 - x13))                annotation (Placement(transformation(extent={{40,20},{60,40}})));
+    xT=0.5*(x12 + x23 - x13)) annotation (Placement(transformation(extent={{40,20},{60,40}})));
   TwoWindingTransformer branch3(
-    V_b=V_b,                    Sn=Sn,
+    V_b=V_b, Sn=Sn,
     Vn=Vn,
     rT=0.5*(r23 + r13 - r12),
-    xT=0.5*(x23 + x13 - x12))                annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
+    xT=0.5*(x23 + x13 - x12)) annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
 equation
   v0 = sqrt(branch1.n.vr^2 + branch1.n.vi^2);
   v1 = sqrt(b1.vr^2 + b1.vi^2);

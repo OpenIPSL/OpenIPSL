@@ -26,9 +26,9 @@ equation
   connect(order6_1.p, pwPin) annotation (Line(points={{80,0},{100,0}},
                                      color={0,0,255}));
   connect(order6_1.vf0, order6_1.vf) annotation (Line(points={{44,22},{44,28},{
-          28,28},{28,10},{36,10}},             color={0,0,127}));
+          28,28},{28,10},{36,10}}, color={0,0,127}));
   connect(order6_1.pm0, order6_1.pm) annotation (Line(points={{44,-22},{44,-28},
-          {28,-28},{28,-10},{36,-10}},                         color={0,0,127}));
+          {28,-28},{28,-10},{36,-10}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
 <p>20kV/900MVA generation unit connected to bus 4, and composed of the following component models:</p>

@@ -38,21 +38,21 @@ model MeasurementBus "Three-phase active and reactive power measurement bus"
   Modelica.Blocks.Interfaces.RealOutput qa(unit="1") = Qa/S_b "[pu, system base]" annotation (Placement(transformation(
         extent={{24,-24},{-24,24}},
         rotation=-90,
-        origin={50,124}),  iconTransformation(
+        origin={50,124}), iconTransformation(
         extent={{24,-24},{-24,24}},
         rotation=-90,
         origin={50,124})));
   Modelica.Blocks.Interfaces.RealOutput qb(unit="1") = Qb/S_b "[pu, system base]" annotation (Placement(transformation(
         extent={{24,-24},{-24,24}},
         rotation=-90,
-        origin={0,124}),  iconTransformation(
+        origin={0,124}), iconTransformation(
         extent={{24,-24},{-24,24}},
         rotation=-90,
         origin={0,124})));
   Modelica.Blocks.Interfaces.RealOutput qc(unit="1") = Qc/S_b "[pu, system base]" annotation (Placement(transformation(
         extent={{24,-24},{-24,24}},
         rotation=-90,
-        origin={-50,124}),  iconTransformation(
+        origin={-50,124}), iconTransformation(
         extent={{24,-24},{-24,24}},
         rotation=-90,
         origin={-50,124})));

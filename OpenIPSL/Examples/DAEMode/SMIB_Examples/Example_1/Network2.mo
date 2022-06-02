@@ -27,23 +27,23 @@ equation
       connect(B3.p, infiniteBus.p) annotation (
         Line(points = {{58, 0}, {92, 0}, {92, 0}, {92, 0}}, color = {0, 0, 255}));
       connect(pwLine2.n, B3.p) annotation (
-        Line(points={{39,-20},{44,-20},{44,0},{58,0}},          color = {0, 0, 255}));
+        Line(points={{39,-20},{44,-20},{44,0},{58,0}}, color = {0, 0, 255}));
       connect(pwLine1.n, B3.p) annotation (
-        Line(points={{39,20},{44,20},{44,0},{58,0}},          color = {0, 0, 255}));
+        Line(points={{39,20},{44,20},{44,0},{58,0}}, color = {0, 0, 255}));
       connect(breaker1.r, pwLine1.p) annotation (
-        Line(points={{6,20},{22,20},{22,20},{21,20}},          color = {0, 0, 255}));
+        Line(points={{6,20},{22,20},{22,20},{21,20}}, color = {0, 0, 255}));
       connect(breaker2.r, pwLine2.p) annotation (
-        Line(points={{6,-20},{21,-20}},      color = {0, 0, 255}));
+        Line(points={{6,-20},{21,-20}}, color = {0, 0, 255}));
       connect(breaker1.s, B2.p) annotation (
-        Line(points={{-14,20},{-26,20},{-26,0},{-40,0},{-40,0}},            color = {0, 0, 255}));
+        Line(points={{-14,20},{-26,20},{-26,0},{-40,0},{-40,0}}, color = {0, 0, 255}));
       connect(breaker2.s, B2.p) annotation (
-        Line(points={{-14,-20},{-26,-20},{-26,0},{-40,0},{-40,0}},            color = {0, 0, 255}));
+        Line(points={{-14,-20},{-26,-20},{-26,0},{-40,0},{-40,0}}, color = {0, 0, 255}));
       connect(twoWindingTransformer.n, B2.p) annotation (
-        Line(points={{-49,0},{-41,0},{-41,0},{-40,0}},          color = {0, 0, 255}));
+        Line(points={{-49,0},{-41,0},{-41,0},{-40,0}}, color = {0, 0, 255}));
       connect(G1.pwPin, B1.p) annotation (
-        Line(points={{-87,0},{-80,0}},      color = {0, 0, 255}));
+        Line(points={{-87,0},{-80,0}}, color = {0, 0, 255}));
       connect(twoWindingTransformer.p, B1.p) annotation (
-        Line(points={{-71,0},{-80,0}},      color = {0, 0, 255}));
+        Line(points={{-71,0},{-80,0}}, color = {0, 0, 255}));
       annotation (
         experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-6, Interval = 1e-4),
         Diagram(coordinateSystem(extent={{-120,-100},{120,100}})),

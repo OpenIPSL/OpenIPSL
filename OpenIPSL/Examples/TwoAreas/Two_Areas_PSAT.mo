@@ -186,11 +186,11 @@ equation
   connect(Line7_8_2.p, bus7.p) annotation (Line(points={{-39,20},{-54,20},{-54,30},{-60,30}},
                               color={0,0,255}));
   connect(bus9.p, Line9_10.p)
-    annotation (Line(points={{60,30},{71,30}},      color={0,0,255}));
+    annotation (Line(points={{60,30},{71,30}}, color={0,0,255}));
   connect(Line9_10.n, bus10.p) annotation (Line(points={{89,30},{89,30},{100,30}},
                          color={0,0,255}));
   connect(bus10.p, Line10_11.p)
-    annotation (Line(points={{100,30},{111,30}},     color={0,0,255}));
+    annotation (Line(points={{100,30},{111,30}}, color={0,0,255}));
   connect(Line10_11.n, bus11.p) annotation (Line(points={{129,30},{129,30},{140,30}},
                          color={0,0,255}));
   connect(g4.pwPin, bus4.p) annotation (Line(points={{201.4,-10},{201.4,-10},{

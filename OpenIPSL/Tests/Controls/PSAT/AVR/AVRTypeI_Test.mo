@@ -53,7 +53,7 @@ model AVRTypeI_Test "Simple system to test functionality of exciter (automatic v
     B=0.0005) annotation (Placement(transformation(
         origin={40,40},
         extent={{-5.99999,-5.99998},{5.99999,6}})));
-  Electrical.Loads.PSAT.PQ     pwLoadPQ1(
+  Electrical.Loads.PSAT.PQ pwLoadPQ1(
     angle_0=0,
     P_0=8000000,
     Q_0=6000000,

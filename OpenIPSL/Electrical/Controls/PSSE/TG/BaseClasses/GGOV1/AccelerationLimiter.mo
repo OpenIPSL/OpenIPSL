@@ -45,18 +45,18 @@ equation
       smooth=Smooth.None));
   connect(add1.u1, ASET) annotation (Line(points={{-32,12},{-44,12},{-44,80},{-120,80}},
                                                                                        color={0,0,127}));
-  connect(s8.u, SPEED) annotation (Line(points={{-82,0},{-120,0}},                               color={0,0,127}));
-  connect(add.u2, FSR) annotation (Line(points={{68,-6},{52,-6},{52,-80},{-120,-80}},        color={0,0,127}));
-  connect(add.y, FSRA) annotation (Line(points={{91,0},{110,0}},                           color={0,0,127}));
+  connect(s8.u, SPEED) annotation (Line(points={{-82,0},{-120,0}}, color={0,0,127}));
+  connect(add.u2, FSR) annotation (Line(points={{68,-6},{52,-6},{52,-80},{-120,-80}}, color={0,0,127}));
+  connect(add.y, FSRA) annotation (Line(points={{91,0},{110,0}}, color={0,0,127}));
   annotation (
     Icon(graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,255}),Text(
           extent={{-90,50},{-60,30}},
           lineColor={28,108,200},
-          textString="ASET"),          Text(
+          textString="ASET"), Text(
                     extent={{-70,52},{70,-50}},
                     lineColor={28,108,200},
                     textString="Acceleration
-Limiter"),Text(               extent={{-90,-30},{-50,-50}},
+Limiter"),Text( extent={{-90,-30},{-50,-50}},
                     lineColor={28,108,200},
                     textString="SPEED"),Text(
                     extent={{60,52},{90,30}},

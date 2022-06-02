@@ -65,16 +65,16 @@ equation
   connect(diff.u2, TEXM) annotation (
     Line(points = {{12, -6}, {80, -6}, {80, 40}, {120, 40}}, color = {0, 0, 127}));
   annotation (
-    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = false), graphics={  Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(
+    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = false), graphics={ Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(
           lineColor={28,108,200},
           extent={{-90,10},{-60,-10}},
-          textString="LDREF"),                                                                                                                                                                                                        Text(
+          textString="LDREF"), Text(
           lineColor={28,108,200},
           extent={{60,50},{90,30}},
-          textString="TEXM"),                                                                                                                                                                                                        Text(
+          textString="TEXM"), Text(
           lineColor={28,108,200},
           extent={{60,-50},{90,-70}},
-          textString="FSRT"),                                                                                                                                                                                                        Text(lineColor = {28, 108, 200}, extent={{-60,40},{60,-20}},      textString = "Load
+          textString="FSRT"), Text(lineColor = {28, 108, 200}, extent={{-60,40},{60,-20}}, textString = "Load
 Limiter"), Text(
           lineColor={28,108,200},
           extent={{-20,-80},{20,-100}},

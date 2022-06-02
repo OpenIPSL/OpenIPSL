@@ -162,7 +162,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     nn=3,
     v_0=V2,
     angle_0=A2,
-    np=1)  annotation (Placement(
+    np=1) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=90,
@@ -211,7 +211,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     np=2,
     v_0=V7,
     angle_0=A7,
-    nn=1)   annotation (Placement(
+    nn=1) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=90,
@@ -251,7 +251,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     nn=3,
     v_0=V11,
     angle_0=A11,
-    np=2)  annotation (Placement(
+    np=2) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=180,
@@ -368,7 +368,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     nn=3,
     v_0=V23,
     angle_0=A23,
-    np=1)                                             annotation (Placement(
+    np=1) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=90,
@@ -397,7 +397,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     np=4,
     v_0=V26,
     angle_0=A26,
-    nn=2)                                             annotation (Placement(
+    nn=2) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=90,
@@ -407,7 +407,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     nn=2,
     v_0=V27,
     angle_0=A27,
-    np=1)                                             annotation (Placement(
+    np=1) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=90,
@@ -455,7 +455,7 @@ model Grid_Model "Namsskogan distribution network modeled in positive sequence e
     nn=2,
     v_0=V32,
     angle_0=A32,
-    np=1)                                             annotation (Placement(
+    np=1) annotation (Placement(
         transformation(
         extent={{2,-22},{-2,22}},
         rotation=180,

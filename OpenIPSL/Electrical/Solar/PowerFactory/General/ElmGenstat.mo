@@ -52,26 +52,26 @@ equation
   i = sqrt(p.ii ^ 2 + p.ir ^ 2)*S_b/M_b;
   angle_i = atan2(p.ii, p.ir);
   annotation (
-    Icon(graphics={  Rectangle(
+    Icon(graphics={ Rectangle(
           lineColor={118,18,62},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          extent={{-100,-100},{100,100}}),                                                                                                                    Text(origin = {-51.7, 80.01}, fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "id_ref", fontName = "Arial", horizontalAlignment = TextAlignment.Left), Text(origin = {-48.7, 39.82}, fillPattern = FillPattern.Solid, extent = {{-23.3, -10.18}, {23.3, 10.18}}, textString = "iq_ref", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Left), Ellipse(origin = {71.43, -32.67}, lineColor = {118, 18, 62}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid,
-            lineThickness =                                                                                                                                                                                                        0.5, extent = {{-71.43, 66.67}, {-1.43, -1.33}}, endAngle = 360), Line(origin = {49.9468, -19.7732}, points = {{-38, 19}, {8, 19}}, color = {118, 18, 62}, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 10), Text(origin = {-50.7, -38.18},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-21.3, -10.18}, {21.3, 10.18}}, textString = "sinref", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Left), Text(origin = {-49.7, -80.18},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-24.3, -10.18}, {24.3, 10.18}}, textString = "cosref", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Left), Text(origin = {68.3, 40.01},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "i", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Text(origin = {70.3, 78.01},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "v", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Line(origin = {80, 0}, points = {{-10, 0}, {10, 0}, {20, 0}}, color = {118, 18, 62}, thickness = 0.5), Text(origin = {70.3, -39.99},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "P", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Text(origin = {72.3, -81.99},
-            fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "Q", fontName = "Arial",
-            horizontalAlignment =                                                                                                                                                                                                        TextAlignment.Right), Text(origin = {0, -8}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
+          extent={{-100,-100},{100,100}}), Text(origin = {-51.7, 80.01}, fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "id_ref", fontName = "Arial", horizontalAlignment = TextAlignment.Left), Text(origin = {-48.7, 39.82}, fillPattern = FillPattern.Solid, extent = {{-23.3, -10.18}, {23.3, 10.18}}, textString = "iq_ref", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Left), Ellipse(origin = {71.43, -32.67}, lineColor = {118, 18, 62}, fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            lineThickness = 0.5, extent = {{-71.43, 66.67}, {-1.43, -1.33}}, endAngle = 360), Line(origin = {49.9468, -19.7732}, points = {{-38, 19}, {8, 19}}, color = {118, 18, 62}, arrow = {Arrow.None, Arrow.Filled}, arrowSize = 10), Text(origin = {-50.7, -38.18},
+            fillPattern = FillPattern.Solid, extent = {{-21.3, -10.18}, {21.3, 10.18}}, textString = "sinref", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Left), Text(origin = {-49.7, -80.18},
+            fillPattern = FillPattern.Solid, extent = {{-24.3, -10.18}, {24.3, 10.18}}, textString = "cosref", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Left), Text(origin = {68.3, 40.01},
+            fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "i", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Right), Text(origin = {70.3, 78.01},
+            fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "v", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Right), Line(origin = {80, 0}, points = {{-10, 0}, {10, 0}, {20, 0}}, color = {118, 18, 62}, thickness = 0.5), Text(origin = {70.3, -39.99},
+            fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "P", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Right), Text(origin = {72.3, -81.99},
+            fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "Q", fontName = "Arial",
+            horizontalAlignment = TextAlignment.Right), Text(origin = {0, -8}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
     Diagram,
     Documentation(info="<html>
 <p>

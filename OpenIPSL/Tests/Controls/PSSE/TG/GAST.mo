@@ -58,7 +58,7 @@ equation
   connect(iEEET1.VOTHSG, zero.y) annotation (Line(points={{-59,-46},{-53.3333,-46},{-53.3333,-80},{-40.6,-80}}, color={0,0,127}));
   connect(iEEET1.VOEL, zero.y) annotation (Line(points={{-70,-61},{-70,-80},{-40.6,-80}}, color={0,0,127}));
   connect(iEEET1.VUEL, zero.y) annotation (Line(points={{-66,-61},{-66,-80},{-40.6,-80}}, color={0,0,127}));
-  connect(gENROU.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+  connect(gENROU.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(gENROU.XADIFD, iEEET1.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-68},{-78,-68},{-78,-61}},
                                               color={0,0,127}));
   connect(gENROU.SPEED, gAST.SPEED) annotation (Line(points={{-46,14},{-42,14},{-42,44},{-62,44}},

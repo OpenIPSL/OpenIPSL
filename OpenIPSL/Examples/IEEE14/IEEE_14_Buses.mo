@@ -509,7 +509,7 @@ equation
   connect(B5.p, L8.p) annotation (Line(points={{-24,-40},{-24,-40},{-14,-40},{-14,
           -53},{-7,-53}}, color={0,0,255}));
   connect(B8.p, groupBus8_1.pwPin) annotation (Line(points={{149,-37},{159.5,-37},
-          {159.5,-36},{161,-36}},       color={0,0,255}));
+          {159.5,-36},{161,-36}}, color={0,0,255}));
   connect(L15.p, B9.p)
     annotation (Line(points={{52,60.9},{86,60.9},{86,44}}, color={0,0,255}));
   connect(B9.p, L16.p) annotation (Line(points={{86,44},{86,44},{86,56},{96,56},

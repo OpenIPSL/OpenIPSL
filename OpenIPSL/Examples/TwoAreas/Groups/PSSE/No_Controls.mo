@@ -26,11 +26,11 @@ package No_Controls "Set of generation units modeled with PSSE composed only of 
       annotation (Placement(transformation(extent={{32,-20},{72,20}})));
   equation
     connect(gENSAL.EFD0, gENSAL.EFD) annotation (Line(points={{74,-10},{80,-10},
-            {80,-30},{20,-30},{20,-12},{28,-12}},    color={0,0,127}));
+            {80,-30},{20,-30},{20,-12},{28,-12}}, color={0,0,127}));
     connect(gENSAL.PMECH, gENSAL.PMECH0) annotation (Line(points={{28,12},{20,
-            12},{20,30},{80,30},{80,10},{74,10}},        color={0,0,127}));
+            12},{20,30},{80,30},{80,10},{74,10}}, color={0,0,127}));
     connect(gENSAL.p, pwPin)
-      annotation (Line(points={{72,0},{100,0}},              color={0,0,255}));
+      annotation (Line(points={{72,0},{100,0}}, color={0,0,255}));
     annotation (
       Documentation(info="<html>
 <p>900MVA generation unit connected to bus 1, and composed of the following component models:</p>
@@ -66,11 +66,11 @@ package No_Controls "Set of generation units modeled with PSSE composed only of 
       annotation (Placement(transformation(extent={{32,-20},{72,20}})));
   equation
     connect(gENSAL.EFD, gENSAL.EFD0) annotation (Line(points={{28,-12},{20,-12},
-            {20,-30},{80,-30},{80,-10},{74,-10}},      color={0,0,127}));
+            {20,-30},{80,-30},{80,-10},{74,-10}}, color={0,0,127}));
     connect(gENSAL.PMECH, gENSAL.PMECH0) annotation (Line(points={{28,12},{20,
-            12},{20,30},{80,30},{80,10},{74,10}},        color={0,0,127}));
+            12},{20,30},{80,30},{80,10},{74,10}}, color={0,0,127}));
     connect(gENSAL.p, pwPin)
-      annotation (Line(points={{72,0},{100,0}},              color={0,0,255}));
+      annotation (Line(points={{72,0},{100,0}}, color={0,0,255}));
     annotation (
       Documentation(info="<html>
 <p>900MVA generation unit connected to bus 2, and composed of the following component models:</p>
@@ -106,9 +106,9 @@ package No_Controls "Set of generation units modeled with PSSE composed only of 
       annotation (Placement(transformation(extent={{32,-20},{72,20}})));
   equation
     connect(gENSAL.PMECH, gENSAL.PMECH0) annotation (Line(points={{28,12},{20,
-            12},{20,30},{80,30},{80,10},{74,10}},               color={0,0,127}));
+            12},{20,30},{80,30},{80,10},{74,10}}, color={0,0,127}));
     connect(gENSAL.EFD0, gENSAL.EFD) annotation (Line(points={{74,-10},{80,-10},
-            {80,-30},{20,-30},{20,-12},{28,-12}},                         color=
+            {80,-30},{20,-30},{20,-12},{28,-12}}, color=
            {0,0,127}));
     connect(gENSAL.p, pwPin) annotation (Line(points={{72,0},{100,0}},
                      color={0,0,255}));
@@ -147,9 +147,9 @@ package No_Controls "Set of generation units modeled with PSSE composed only of 
       annotation (Placement(transformation(extent={{32,-20},{72,20}})));
   equation
     connect(gENSAL.p, pwPin)
-      annotation (Line(points={{72,0},{100,0}},              color={0,0,255}));
+      annotation (Line(points={{72,0},{100,0}}, color={0,0,255}));
     connect(gENSAL.EFD0, gENSAL.EFD) annotation (Line(points={{74,-10},{80,-10},
-            {80,-30},{20,-30},{20,-12},{28,-12}},    color={0,0,127}));
+            {80,-30},{20,-30},{20,-12},{28,-12}}, color={0,0,127}));
     connect(gENSAL.PMECH, gENSAL.PMECH0) annotation (Line(points={{28,12},{20,
             12},{20,30},{80,30},{80,10},{74,10}},
           color={0,0,127}));

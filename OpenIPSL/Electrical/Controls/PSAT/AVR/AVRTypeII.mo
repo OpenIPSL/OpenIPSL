@@ -153,7 +153,7 @@ equation
           extent={{16,-60},{56,-100}},
           lineColor={0,0,255},
           textString="vf0
-"),Text(  extent={{2,102},{42,62}},
+"),Text( extent={{2,102},{42,62}},
           lineColor={0,0,255},
           textString="vref0")}),
     Documentation(revisions="<html>
@@ -177,7 +177,7 @@ equation
 </table>
 </html>", info="<html>
 <h5 style=\"color: #ff0000\">WARNING</h5>
-<p style=\"color: #ff0000\">The PSAT Toolbox  called this model &quot;AVR Type II&quot;
+<p style=\"color: #ff0000\">The PSAT Toolbox called this model &quot;AVR Type II&quot;
  (see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013], section 18.3.2</a>)
  when it actually is the &quot;IEEE <strong>Type I</strong>&quot;
  (see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2010], chapter 16.2.1</a>).</p>

@@ -120,9 +120,9 @@ initial equation
   V_REF = VA0/K_A + ECOMP0;
 equation
   connect(rectifierCommutationVoltageDrop.XADIFD, XADIFD) annotation (Line(
-        points={{180,-11},{180,-30.5},{80,-30.5},{80,-200}},  color={0,0,127}));
+        points={{180,-11},{180,-30.5},{80,-30.5},{80,-200}}, color={0,0,127}));
   connect(rotatingExciterWithDemagnetizationLimited.XADIFD, XADIFD) annotation (
-     Line(points={{140,-11.25},{140,-30},{80,-30},{80,-200}},  color={0,0,127}));
+     Line(points={{140,-11.25},{140,-30},{80,-30},{80,-200}}, color={0,0,127}));
   connect(leadLag.y, imLimitedSimpleLag.u)
     annotation (Line(points={{-29,0},{-29,0},{-22,0}}, color={0,0,127}));
   connect(add3_1.y, leadLag.u)
@@ -171,15 +171,15 @@ equation
   connect(gain1.y, limiter.u)
     annotation (Line(points={{92.8,0},{94,0},{98,0}}, color={0,0,127}));
   connect(lV_GATE.y, gain1.u)
-    annotation (Line(points={{71,0},{74.4,0}},     color={0,0,127}));
-  connect(gain3.y,lV_GATE.u2)  annotation (Line(points={{51,-30},{44,-30},{44,-6},{48,-6}},
+    annotation (Line(points={{71,0},{74.4,0}}, color={0,0,127}));
+  connect(gain3.y,lV_GATE.u2) annotation (Line(points={{51,-30},{44,-30},{44,-6},{48,-6}},
                        color={0,0,127}));
   connect(DiffV1.y,lV_GATE.u1)
-    annotation (Line(points={{41,0},{44,0},{44,6},{48,6}},  color={0,0,127}));
+    annotation (Line(points={{41,0},{44,0},{44,6},{48,6}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
-        graphics={             Text(
+        graphics={ Text(
           extent={{-100,160},{100,100}},
           lineColor={28,108,200},
           textString="EXAC2")}),

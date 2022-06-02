@@ -2,7 +2,7 @@ within OpenIPSL.Electrical.Wind.PSSE.Submodels;
 model LVACL "Model for the Low Voltage Active Current Limiter"
   //The Low Voltage Active Current Management block is designed to capture the characteristic
   //of active power under very low voltage scenarios. This low voltage limit is designed to reduce active current in a linear fashion.
-  //  The protection function is activated when
+  // The protection function is activated when
   //the terminal voltage drops below 0.8 pu and strangling power completely if the terminal voltage is lower than
   //0.4 pu. For voltages between 0.8 pu and 0.4 pu to reduce the active power is linear according to equation
   Modelica.Blocks.Interfaces.RealOutput Ip_LVACL annotation (Placement(

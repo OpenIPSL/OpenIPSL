@@ -39,7 +39,7 @@ equation
   connect(imLeadLag.y, imLeadLag1.u)
     annotation (Line(points={{11,0},{26,0}}, color={0,0,127}));
   connect(vSI, derivativeLag.u)
-    annotation (Line(points={{-120,0},{-62,0}},         color={0,0,127}));
+    annotation (Line(points={{-120,0},{-62,0}}, color={0,0,127}));
   connect(derivativeLag.y, imLeadLag.u)
     annotation (Line(points={{-39,0},{-12,0},{-12,0}}, color={0,0,127}));
   annotation ( Documentation(revisions="<html>

@@ -30,6 +30,6 @@ equation
   connect(gENROU.EFD, gENROU.EFD0) annotation (Line(points={{-92,-10},{-100,-10},{-100,-30},{-42,-30},{-42,-10},{-46,-10}},
                                                      color={0,0,127}));
   connect(gENROU.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   annotation (experiment(StopTime=10));
 end GENROU;

@@ -8,7 +8,7 @@ model TCSC_Test "Simple model to test the functionality of TCSC"
     angle_0 = -0.010060269794713,
     t_start_1=2,
     t_end_1=10,
-    dP1=2000000)                                             annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+    dP1=2000000) annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
   Electrical.FACTS.PSAT.TCSC tCSC(
     displayPF=true,
     ctrl=OpenIPSL.Types.Ctrl.xTCSC,
@@ -40,7 +40,7 @@ model TCSC_Test "Simple model to test the functionality of TCSC"
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Electrical.Buses.Bus Inf(displayPF=true)
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-  Electrical.Machines.PSAT.Order2          Gen1(
+  Electrical.Machines.PSAT.Order2 Gen1(
     D=0,
     angle_0 = 0.070618464996643,
     ra=0.01,

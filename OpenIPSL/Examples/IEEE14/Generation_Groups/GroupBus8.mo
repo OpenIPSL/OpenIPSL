@@ -41,20 +41,20 @@ model GroupBus8 "18kV/25MVA reactive power generation unit (synchronous condense
         extent={{-20,-20},{20,20}},
         origin={60,0})));
   OpenIPSL.Interfaces.PwPin pwPin annotation (Placement(transformation(extent={{100,-10},
-            {120,10}}),         iconTransformation(extent={{100,-10},{120,10}})));
+            {120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
 equation
   connect(aVR3TypeII2.vf, Syn4.vf) annotation (Line(points={{8,10},{36,10}},
                                  color={0,0,127}));
   connect(Syn4.v, aVR3TypeII2.v) annotation (Line(points={{82,6},{88,6},{88,-30},
-          {-22,-30},{-22,4},{-16,4}},   color={0,0,127}));
+          {-22,-30},{-22,4},{-16,4}}, color={0,0,127}));
   connect(Syn4.p, pwPin) annotation (Line(points={{80,0},{110,0}},
                    color={0,0,255}));
   connect(Syn4.pm0, Syn4.pm) annotation (Line(points={{44,-22},{44,-26},{18,-26},
-          {18,-10},{36,-10}},             color={0,0,127}));
+          {18,-10},{36,-10}}, color={0,0,127}));
   connect(Syn4.vf0, aVR3TypeII2.vf0) annotation (Line(points={{44,22},{44,28},{
-          14,28},{14,-26},{-4,-26},{-4,-2}},           color={0,0,127}));
+          14,28},{14,-26},{-4,-26},{-4,-2}}, color={0,0,127}));
   connect(aVR3TypeII2.vref0, aVR3TypeII2.vref) annotation (Line(points={{-4,22},
-          {-4,28},{-22,28},{-22,16},{-16,16}},                     color={0,0,
+          {-4,28},{-22,28},{-22,16},{-16,16}}, color={0,0,
           127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

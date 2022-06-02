@@ -54,31 +54,31 @@ model GenEventTest "Configuration of synchronous generator with regulators: GENS
                   120,10}})));
 equation
     connect(gENSAL.p, p)
-          annotation (Line(points={{-2,8},{82,8},{82,0},{110,0}},  color={0,0,255}));
+          annotation (Line(points={{-2,8},{82,8},{82,0},{110,0}}, color={0,0,255}));
     connect(sTAB2A.VOTHSG, eXST1_1.VOTHSG) annotation (Line(points={{-17.7,-44},
-          {-17.7,-48.4},{21.1,-48.4}},                            color={0,0,
+          {-17.7,-48.4},{21.1,-48.4}}, color={0,0,
                 127}));
     connect(cte.y, eXST1_1.VOEL) annotation (Line(points={{-9.4,-64},{-2,-64},{-2,
-          -84.4},{53,-84.4}},                   color={0,0,127}));
+          -84.4},{53,-84.4}}, color={0,0,127}));
     connect(eXST1_1.EFD, gENSAL.EFD) annotation (Line(points={{84.9,-58},{84,-58},
           {84,-86},{-78,-86},{-78,-11.2},{-70.2,-11.2}},
               color={0,0,127}));
     connect(gENSAL.PELEC, sTAB2A.PELEC) annotation (Line(points={{1.1,17.6},{10,
-          17.6},{10,-30},{-72,-30},{-72,-44},{-70.6,-44}},    color={0,0,127}));
+          17.6},{10,-30},{-72,-30},{-72,-44},{-70.6,-44}}, color={0,0,127}));
     connect(gENSAL.XADIFD, eXST1_1.XADIFD) annotation (Line(points={{1.1,-20.8},
-          {8,-20.8},{8,-84.4},{76.2,-84.4}},                  color={0,0,127}));
+          {8,-20.8},{8,-84.4},{76.2,-84.4}}, color={0,0,127}));
     connect(gENSAL.EFD0, eXST1_1.EFD0) annotation (Line(points={{1.1,-8},{12,-8},
-          {12,-67.6},{21.1,-67.6}},                  color={0,0,127}));
+          {12,-67.6},{21.1,-67.6}}, color={0,0,127}));
     connect(hYGOV.PMECH, gENSAL.PMECH) annotation (Line(points={{13.6,76},{18,76},
-          {18,46},{-76,46},{-76,27.2},{-70.2,27.2}},    color={0,0,127}));
+          {18,46},{-76,46},{-76,27.2},{-70.2,27.2}}, color={0,0,127}));
     connect(gENSAL.SPEED, hYGOV.SPEED) annotation (Line(points={{1.1,30.4},{24,30.4},
-          {24,92},{-66,92},{-66,84.4},{-54.8,84.4}},         color={0,0,127}));
+          {24,92},{-66,92},{-66,84.4},{-54.8,84.4}}, color={0,0,127}));
     connect(gENSAL.PMECH0, hYGOV.PMECH0) annotation (Line(points={{1.1,24},{32,24},
-          {32,96},{-78,96},{-78,67.6},{-54.8,67.6}},         color={0,0,127}));
+          {32,96},{-78,96},{-78,67.6},{-54.8,67.6}}, color={0,0,127}));
     connect(gENSAL.ETERM, eXST1_1.ECOMP) annotation (Line(points={{1.1,-1.6},{16,
-          -1.6},{16,-58},{21.1,-58}},                   color={0,0,127}));
+          -1.6},{16,-58},{21.1,-58}}, color={0,0,127}));
     connect(eXST1_1.VUEL, cte.y) annotation (Line(points={{41.4,-84.4},{-2,-84.4},
-          {-2,-64},{-9.4,-64}},       color={0,0,127}));
+          {-2,-64},{-9.4,-64}}, color={0,0,127}));
     annotation (
           Icon(graphics={Ellipse(extent={{-100,-100},{101,100}}, lineColor={0,0,255}),
                 Line(

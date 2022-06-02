@@ -63,7 +63,7 @@ model PIDGovernorDU "GE GGOV1DU General Governor Frequency Controller"
         rotation=90)));
 
   Modelica.Blocks.Interfaces.RealInput GOVOUT1
-    "Governor Output before Limiter"                                            annotation (Placement(transformation(
+    "Governor Output before Limiter" annotation (Placement(transformation(
         origin={40,-120},extent={{-20, -20},{20, 20}},
         rotation=90),iconTransformation(
         origin={40,-120},extent={{-20, -20},{20, 20}},
@@ -106,63 +106,63 @@ equation
   connect(FSRN, GovernorPID.y) annotation (
     Line(points = {{110, 0}, {95, 0}}, color = {0, 0, 127}));
   connect(add3_2.u3, r.y) annotation (
-    Line(points={{-22,62},{-30,62},{-30,21},{-30,21}},          color = {0, 0, 127}));
+    Line(points={{-22,62},{-30,62},{-30,21},{-30,21}}, color = {0, 0, 127}));
   connect(add2.u2, s7.y) annotation (
-    Line(points={{-56,64},{-70,64},{-70,57},{-70,57}},          color = {0, 0, 127}));
+    Line(points={{-56,64},{-70,64},{-70,57},{-70,57}}, color = {0, 0, 127}));
   connect(P_REF, add2.u1) annotation (
     Line(points = {{-120, 80}, {-70, 80}, {-70, 76}, {-56, 76}, {-56, 76}}, color = {0, 0, 127}));
   connect(SPEED, add3_2.u1) annotation (
     Line(points = {{0, 120}, {0, 88}, {-30, 88}, {-30, 78}, {-22, 78}}, color = {0, 0, 127}));
   connect(rSELECT.y, r.u) annotation (
-    Line(points={{-30,-13},{-30,-13},{-30,-2},{-30,-2}},          color = {0, 0, 127}));
+    Line(points={{-30,-13},{-30,-13},{-30,-2},{-30,-2}}, color = {0, 0, 127}));
   connect(PMW_SET, add3.u1) annotation (
     Line(points = {{-120, 0}, {-76, 0}, {-76, 6}, {-76, 6}}, color = {0, 0, 127}));
   connect(s0.y, add3.u2) annotation (
     Line(points = {{-71, -80}, {-64, -80}, {-64, 6}}, color = {0, 0, 127}));
   connect(s0.y, rSELECT.Pelect) annotation (
-    Line(points={{-71,-80},{-38,-80},{-38,-36},{-38,-36}},          color = {0, 0, 127}));
+    Line(points={{-71,-80},{-38,-80},{-38,-36},{-38,-36}}, color = {0, 0, 127}));
   connect(VSTROKE, rSELECT.ValveStroke) annotation (
     Line(points = {{-40, -120}, {-40, -120}, {-40, -90}, {-30, -90}, {-30, -36}, {-30, -36}}, color = {0, 0, 127}));
   connect(GOVOUT1, rSELECT.GovernorOutput) annotation (
     Line(points = {{40, -120}, {40, -120}, {40, -90}, {-22, -90}, {-22, -36}, {-22, -36}}, color = {0, 0, 127}));
   connect(KPGOV.y, GovernorPID.u2) annotation (
-    Line(points={{41,0},{72,0},{72,0},{72,0}},          color = {0, 0, 127}));
+    Line(points={{41,0},{72,0},{72,0},{72,0}}, color = {0, 0, 127}));
   connect(s1.y, GovernorPID.u1) annotation (
-    Line(points={{41,30},{60,30},{60,8},{72,8},{72,8}},            color = {0, 0, 127}));
+    Line(points={{41,30},{60,30},{60,8},{72,8},{72,8}}, color = {0, 0, 127}));
   connect(s2.y, GovernorPID.u3) annotation (
-    Line(points={{-1,-50},{-8,-50},{-8,-30},{60,-30},{60,-8},{72,-8},{72,-8}},               color = {0, 0, 127}));
+    Line(points={{-1,-50},{-8,-50},{-8,-30},{60,-30},{60,-8},{72,-8},{72,-8}}, color = {0, 0, 127}));
   connect(LoadlimiterPI2.u1, s2.y) annotation (
-    Line(points={{78,-44},{90,-44},{90,-30},{-8,-30},{-8,-50},{-1,-50},{-1,-50}},              color = {0, 0, 127}));
+    Line(points={{78,-44},{90,-44},{90,-30},{-8,-30},{-8,-50},{-1,-50},{-1,-50}}, color = {0, 0, 127}));
   connect(GOVOUT1, LoadlimiterPI2.u2) annotation (
     Line(points = {{40, -120}, {40, -120}, {40, -90}, {90, -90}, {90, -56}, {78, -56}, {78, -56}}, color = {0, 0, 127}));
   connect(limiterSerror.y, KPGOV.u) annotation (
-    Line(points={{61,70},{80,70},{80,50},{0,50},{0,0},{18,0}},              color = {0, 0, 127}));
+    Line(points={{61,70},{80,70},{80,50},{0,50},{0,0},{18,0}}, color = {0, 0, 127}));
   connect(s1.u, limiterSerror.y) annotation (
-    Line(points={{18,30},{0,30},{0,50},{80,50},{80,70},{62,70},{62,70},{61,70}},                  color = {0, 0, 127}));
+    Line(points={{18,30},{0,30},{0,50},{80,50},{80,70},{62,70},{62,70},{61,70}}, color = {0, 0, 127}));
   annotation (
     Diagram,
     Icon(graphics={Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}),Text(
           lineColor={28,108,200},
           extent={{-20,100},{20,80}},
-          textString="SPEED"),                                                                                                                                                                                                      Text(
+          textString="SPEED"), Text(
           lineColor={28,108,200},
           extent={{-90,90},{-50,68}},
-          textString="P_REF"),                                                                                                                                                                                                        Text(
+          textString="P_REF"), Text(
           lineColor={28,108,200},
           extent={{-90,10},{-48,-12}},
-          textString="PMW_SET"),                                                                                                                                                                                                        Text(
+          textString="PMW_SET"), Text(
           lineColor={28,108,200},
           extent={{-90,-70},{-50,-90}},
-          textString="PELEC"),                                                                                                                                                                                                        Text(
+          textString="PELEC"), Text(
           lineColor={28,108,200},
           extent={{60,10},{90,-10}},
-          textString="FSRN"),                                                                                                                                                                                                        Text(
+          textString="FSRN"), Text(
           lineColor={28,108,200},
           extent={{-40,20},{40,-20}},
-          textString="Governor"),                                                                                                                                                                                                        Text(
+          textString="Governor"), Text(
           lineColor={28,108,200},
           extent={{-60,-80},{-20,-100}},
-          textString="VSTROKE"),                                                                                                                                                                                                        Text(
+          textString="VSTROKE"), Text(
           lineColor={28,108,200},
           extent={{20,-80},{60,-100}},
           textString="GOVOUT1")}),

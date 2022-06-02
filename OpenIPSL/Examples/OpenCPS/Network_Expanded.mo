@@ -174,11 +174,11 @@ equation
     annotation (Line(points={{60,-46.6},{60,-46.6},{60,-60}},
                                                             color={0,0,255}));
   connect(LD2.p, B4.p) annotation (Line(points={{100,-60},{100,-24},{80,-24},{80,
-          -20}},     color={0,0,255}));
+          -20}}, color={0,0,255}));
   connect(G2.conn, B5.p)
     annotation (Line(points={{60,-69},{60,-60}}, color={0,0,255}));
   connect(LD1.p, B2.p)
-    annotation (Line(points={{-6,0},{-6,40},{0,40}},   color={0,0,255}));
+    annotation (Line(points={{-6,0},{-6,40},{0,40}}, color={0,0,255}));
   connect(B4.p, breaker1.p)
     annotation (Line(points={{80,-20},{80,-14.5}}, color={0,0,255}));
   connect(V_IB, G2.V_IB)

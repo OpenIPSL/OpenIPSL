@@ -120,7 +120,7 @@ model Reference_system "Original test system for machine aggregation using RaPId
     annotation (Placement(transformation(extent={{-190,-34},{-170,-14}})));
   Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{-110,-20},{-90,0}})));
-  inner Electrical.SystemBase          SysData(S_b=100000000, fn=50)
+  inner Electrical.SystemBase SysData(S_b=100000000, fn=50)
     annotation (Placement(transformation(extent={{-200,80},{-160,100}})));
 equation
   connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-62,12},{-68,
@@ -144,13 +144,13 @@ equation
   connect(gENROE2.p, GEN2.p) annotation (Line(points={{144,-40},{130,-40},{130,
           0},{122,0}}, color={0,0,255}));
   connect(constantLoad.p, pwLine1.p) annotation (Line(points={{66,-40},{66,0},{70,
-          0},{70,20},{83,20}},            color={0,0,255}));
+          0},{70,20},{83,20}}, color={0,0,255}));
   connect(gENROE1.EFD0, gENROE1.EFD) annotation (Line(points={{142,30},{138,30},
           {138,14},{190,14},{190,28},{188,28}},color={0,0,127}));
   connect(gENROE2.EFD0, gENROE2.EFD) annotation (Line(points={{142,-50},{136,-50},
           {136,-66},{190,-66},{190,-52},{188,-52}}, color={0,0,127}));
   connect(gENROE2.PMECH, gENROE2.PMECH0) annotation (Line(points={{188,-28},{194,
-          -28},{194,-70},{132,-70},{132,-30},{142,-30}},     color={0,0,127}));
+          -28},{194,-70},{132,-70},{132,-30},{142,-30}}, color={0,0,127}));
   connect(gENROE1.PMECH, gENROE1.PMECH0) annotation (Line(points={{188,52},{194,
           52},{194,10},{134,10},{134,50},{142,50}}, color={0,0,127}));
   connect(add.y, add1.u1)

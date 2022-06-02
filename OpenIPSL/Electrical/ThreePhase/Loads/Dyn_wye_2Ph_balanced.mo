@@ -41,7 +41,7 @@ model Dyn_wye_2Ph_balanced "Variable balanced two-phase wye load"
 protected
   Types.ActivePower P_a(start = P0 / 2)
     "Initial active power";
-  Types.ReactivePower Q_a(start = Q0  / 2)
+  Types.ReactivePower Q_a(start = Q0 / 2)
     "Initial reactive power";
   Types.ActivePower P_b(start = P0 / 2)
     "Initial active power";

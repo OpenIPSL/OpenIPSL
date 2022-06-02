@@ -119,7 +119,7 @@ model Publications "Publications"
 
 <li> T. Rabuzin, M. Baudette and L. Vanfretti,
      &quot;Implementation of a continuous integration workflow for a power system Modelica library,&quot;
-     2017 IEEE Power  &amp; Energy Society General Meeting, 2017, pp. 1-5,
+     2017 IEEE Power &amp; Energy Society General Meeting, 2017, pp. 1-5,
      <a href=\"https://doi.org/10.1109/PESGM.2017.8274618\">DOI: 10.1109/PESGM.2017.8274618.</a></li>
 
 <li> L. Vanfretti, T. Rabuzin, M. Baudette, and M. Murad,

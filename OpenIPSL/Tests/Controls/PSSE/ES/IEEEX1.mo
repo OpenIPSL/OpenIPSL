@@ -53,8 +53,8 @@ equation
   connect(iEEEX1.VOEL, zero.y) annotation (Line(points={{-70,-61},{-70,-80},{-40.6,-80}}, color={0,0,127}));
   connect(iEEEX1.VUEL, zero.y) annotation (Line(points={{-66,-61},{-66,-80},{-40.6,-80}}, color={0,0,127}));
   connect(gENROE.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
-  connect(gENROE.XADIFD, iEEEX1.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-66},{-78,-66},{-78,-61}},            color={0,0,127}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
+  connect(gENROE.XADIFD, iEEEX1.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-66},{-78,-66},{-78,-61}}, color={0,0,127}));
   annotation (
 experiment(StopTime=10));
 end IEEEX1;

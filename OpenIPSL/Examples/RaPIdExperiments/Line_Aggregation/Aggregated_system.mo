@@ -81,7 +81,7 @@ model Aggregated_system "Simple test system with aggregated lines for export and
     annotation (Placement(transformation(extent={{180,-12},{140,28}})));
   Modelica.Blocks.Interfaces.RealInput pref_disturb
     annotation (Placement(transformation(extent={{-182,-6},{-142,34}})));
-  inner Electrical.SystemBase          SysData(S_b=100000000, fn=50)
+  inner Electrical.SystemBase SysData(S_b=100000000, fn=50)
     annotation (Placement(transformation(extent={{-200,-60},{-160,-40}})));
 equation
   connect(pwLine.n, LOAD.p)

@@ -90,11 +90,11 @@ equation
     annotation (Line(points={{5,-19.1667},{5,0},{14.6,0}},
                                                          color={0,0,255}));
   connect(order2.p, bus2.p) annotation (Line(points={{100,0},{89.5,0},{89.5,0},{
-          80,0}},           color={0,0,255}));
+          80,0}}, color={0,0,255}));
   connect(order2.vf, order2.vf0) annotation (Line(points={{122,5},{122,5},{122,14},
-          {118,14},{118,11}},     color={0,0,127}));
+          {118,14},{118,11}}, color={0,0,127}));
   connect(order2.pm, order2.pm0) annotation (Line(points={{122,-5},{122,-5},{122,
-          -6},{122,-14},{118,-14},{118,-11}},     color={0,0,127}));
+          -6},{122,-14},{118,-14},{118,-11}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-80},{160,80}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,-80},{160,

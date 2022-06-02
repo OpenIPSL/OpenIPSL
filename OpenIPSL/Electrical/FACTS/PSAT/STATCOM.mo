@@ -91,9 +91,9 @@ equation
           color={0,0,255}),
                          Line(
           points={{-90,-4},{-70,-4}},
-          color={0,0,255}),   Line(
+          color={0,0,255}), Line(
           points={{-52,20},{-80,20},{-80,4}},
-          color={0,0,255}),   Text(
+          color={0,0,255}), Text(
           extent={{-78,-46},{82,-86}},
           lineColor={28,108,200},
           lineThickness=0.5,

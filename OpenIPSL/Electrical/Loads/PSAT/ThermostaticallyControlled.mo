@@ -72,7 +72,7 @@ equation
    Q = Q_0/S_b;
 
   connect(t_ref, add.u1) annotation (Line(points={{-120,60},{-94,60},{-94,46},{-82,
-          46}},         color={0,0,127}));
+          46}}, color={0,0,127}));
   connect(product.y, gain.u) annotation (Line(points={{49,-24},{32,-24}},
                                 color={0,0,127}));
   connect(gain1.y, add1.u1) annotation (Line(points={{-8.95,60},{11.375,60},{11.375,46},{18,46}},
@@ -80,7 +80,7 @@ equation
   connect(Limiter.y, add1.u2) annotation (Line(points={{0.6,20},{12,20},{12,34},{18,34}},
                         color={0,0,127}));
   connect(add1.y, Limiter1.u)
-    annotation (Line(points={{41,40},{58,40}},     color={0,0,127}));
+    annotation (Line(points={{41,40},{58,40}}, color={0,0,127}));
   connect(Limiter1.y, product.u2) annotation (Line(points={{81,40},{90,40},{90,-18},{72,-18}},
                                 color={0,0,127}));
   connect(gain.y, add4.u2) annotation (Line(points={{9,-24},{-6,-24}},
@@ -99,7 +99,7 @@ equation
           {90,-60},{90,-30},{72,-30}}, color={0,0,127}));
   connect(firstOrder.y, add.u2) annotation (Line(points={{-59,-30},{-72,-30},{-94,
           -30},{-94,34},{-82,34}}, color={0,0,127}));
-  annotation (    Documentation(info="<html>
+  annotation ( Documentation(info="<html>
 <p>
 This load defines a dynamic load with temperature control. This
 component is initialized after the power flow solution and needs a PQ load connected

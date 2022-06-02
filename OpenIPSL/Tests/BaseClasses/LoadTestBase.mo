@@ -89,7 +89,7 @@ equation
   connect(Vsine1.y, sumV.u[3]) annotation (
     Line(points = {{-79.6, 32}, {-70, 32}, {-70, 40}, {-60, 40}}, color = {0, 0, 127}));
   connect(Vsine2.y, sumV.u[4]) annotation (
-    Line(points={{-79.6069,16},{-68,16},{-68,37.2},{-60,37.2}},          color = {0, 0, 127}));
+    Line(points={{-79.6069,16},{-68,16},{-68,37.2},{-60,37.2}}, color = {0, 0, 127}));
   connect(sumV.y, order3_Inputs_Outputs1.vf) annotation (
     Line(points = {{-38.3, 40}, {-30, 40}, {-30, 20}, {-50, 20}, {-50, 5}, {-42, 5}}, color = {0, 0, 127}));
   connect(order3_Inputs_Outputs1.vf0, sumV.u[5]) annotation (
@@ -112,18 +112,18 @@ equation
     Line(points={{-10,0},{-6,0},{-6,10.1643},{0.87023,10.1643}},
                                                           color = {0, 0, 255}));
   connect(bus1.p, pwLine1.p) annotation (
-    Line(points={{-10,0},{-6,0},{-6,-10},{1,-10}},          color = {0, 0, 255}));
+    Line(points={{-10,0},{-6,0},{-6,-10},{1,-10}}, color = {0, 0, 255}));
   connect(pwLine2.n, bus2.p) annotation (
     Line(points={{18.9932,10.1643},{24,10.1643},{24,0},{30,0}},
                                                           color = {0, 0, 255}));
   connect(pwLine1.n, bus2.p) annotation (
-    Line(points={{19,-10},{24,-10},{24,0},{30,0}},          color = {0, 0, 255}));
+    Line(points={{19,-10},{24,-10},{24,0},{30,0}}, color = {0, 0, 255}));
   connect(bus2.p, pwLine4.p) annotation (
-    Line(points={{30,0},{36,0},{36,10},{41,10}},          color = {0, 0, 255}));
+    Line(points={{30,0},{36,0},{36,10},{41,10}}, color = {0, 0, 255}));
   connect(bus2.p, pwLine3.p) annotation (
-    Line(points={{30,0},{36,0},{36,-10},{41,-10}},          color = {0, 0, 255}));
+    Line(points={{30,0},{36,0},{36,-10},{41,-10}}, color = {0, 0, 255}));
   connect(pwLine4.n, bus3.p) annotation (
-    Line(points={{59,10},{64,10},{64,0},{70,0}},          color = {0, 0, 255}));
+    Line(points={{59,10},{64,10},{64,0},{70,0}}, color = {0, 0, 255}));
   connect(pwLine3.n, bus3.p) annotation (
-    Line(points={{59,-10},{64,-10},{64,0},{70,0}},          color = {0, 0, 255}));
+    Line(points={{59,-10},{64,-10},{64,0},{70,0}}, color = {0, 0, 255}));
 end LoadTestBase;

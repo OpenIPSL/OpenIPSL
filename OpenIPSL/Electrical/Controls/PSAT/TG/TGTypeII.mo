@@ -85,7 +85,7 @@ equation
           origin={-80,0},
           extent={{-20,10},{20,-10}},
           lineColor={0,0,0},
-          textString="w"),  Text(
+          textString="w"), Text(
           origin={80,0},
           extent={{-20,10},{20,-10}},
           lineColor={0,0,0},

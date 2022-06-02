@@ -10,16 +10,16 @@ model Generator "Generator model composed by PSAT components for Machine and AVR
 equation
     connect(order6.pm0, order6.pm) annotation (
           Line(points={{-3,-21.5},{-3,-21.5},{-3,-30},{-18,-30},{-18,-12},{-9,-12},
-          {-9,-12.5}},                                                                                     color = {0, 0, 127}));
+          {-9,-12.5}}, color = {0, 0, 127}));
     connect(order6.v, aVRtypeIII.v) annotation (
           Line(points={{25.5,-0.5},{38,-0.5},{38,26},{-70,26},{-70,12},{-63,12},
-          {-63,12}},                                                                              color = {0, 0, 127}));
+          {-63,12}}, color = {0, 0, 127}));
     connect(order6.vf0, aVRtypeIII.vf0) annotation (
-          Line(points={{-3,11.5},{-3,24},{-52,24},{-52,17}},        color = {0, 0, 127}));
+          Line(points={{-3,11.5},{-3,24},{-52,24},{-52,17}}, color = {0, 0, 127}));
     connect(aVRtypeIII.vf, order6.vf) annotation (
-          Line(points={{-39,6},{-23,6},{-23,2.5},{-9,2.5}},      color = {0, 0, 127}));
+          Line(points={{-39,6},{-23,6},{-23,2.5},{-9,2.5}}, color = {0, 0, 127}));
     connect(order6.p, pwPin) annotation (
           Line(points = {{24, -5}, {62, -5}, {62, 0}, {110, 0}}, color = {0, 0, 255}));
     connect(pss_off.y, aVRtypeIII.vs) annotation (
-          Line(points={{-77,0},{-64,0},{-64,0},{-63,0}},          color = {0, 0, 127}));
+          Line(points={{-77,0},{-64,0},{-64,0},{-63,0}}, color = {0, 0, 127}));
 end Generator;

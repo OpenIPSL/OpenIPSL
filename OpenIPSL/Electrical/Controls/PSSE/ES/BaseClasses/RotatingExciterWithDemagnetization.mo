@@ -11,7 +11,7 @@ model RotatingExciterWithDemagnetization "Base model for a rotating exciter syst
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={0,-100}),  iconTransformation(
+        origin={0,-100}), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-90})));

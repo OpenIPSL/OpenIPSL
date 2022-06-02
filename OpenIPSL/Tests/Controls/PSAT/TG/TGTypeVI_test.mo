@@ -50,7 +50,7 @@ equation
   connect(gen.w, tGTypeVI.we) annotation (Line(points={{22,18},{30,18},{30,40},{-80,40},{-80,-5.8},{-70.8,-5.8}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics={       Text(
+            100,100}}), graphics={ Text(
           extent={{-14,-46},{60,-58}},
           lineColor={0,0,255},
           textString="Wref perturbation with sine signal 5-10s")}),

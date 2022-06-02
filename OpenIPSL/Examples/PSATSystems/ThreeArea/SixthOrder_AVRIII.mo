@@ -26,9 +26,9 @@ equation
   connect(Exc1.vf0, Syn2.vf0) annotation (Line(points={{-148,91.5},{-148,96},{-133.6,
           96},{-133.6,93.2}}, color={0,0,127}));
   connect(Exc1.v, Syn2.v) annotation (Line(points={{-153.5,89},{-160,89},{-160,98},
-          {-108,98},{-108,83.6},{-110.8,83.6}},     color={0,0,127}));
+          {-108,98},{-108,83.6},{-110.8,83.6}}, color={0,0,127}));
   connect(vs_1.y, Exc1.vs) annotation (Line(points={{-161.6,84},{-153.5,84},{-153.5,
-          83}},   color={0,0,127}));
+          83}}, color={0,0,127}));
   connect(Exc2.vf, order3_2.vf)
     annotation (Line(points={{155.583,5},{155.583,5},{154,5}},
                                                            color={0,0,127}));

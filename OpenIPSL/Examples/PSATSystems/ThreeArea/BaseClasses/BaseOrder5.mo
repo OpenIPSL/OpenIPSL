@@ -26,7 +26,7 @@ equation
   connect(Syn2.pm, Syn2.pm0) annotation (Line(points={{-142.4,74},{-144,74},{-144,
           66.8},{-137.6,66.8}}, color={0,0,127}));
   connect(Syn2.p, B800.p) annotation (Line(points={{-116,80},{-107.4,80},{-107.4,
-          80},{-100,80}},                  color={0,0,255}));
+          80},{-100,80}}, color={0,0,255}));
   annotation (Documentation(info="<html>
 <p>Extension of <strong>BaseNetwork</strong> but with a fifth order machine connected to bus 800.</p>
 </html>"));

@@ -156,9 +156,9 @@ equation
   connect(add3_1.y, imLimited.u)
     annotation (Line(points={{-71,0},{-66,0}}, color={0,0,127}));
   connect(imLeadLag.y, imLeadLag1.u)
-    annotation (Line(points={{13,0},{18,0}},            color={0,0,127}));
+    annotation (Line(points={{13,0},{18,0}}, color={0,0,127}));
   connect(simpleLagLim.u, imLeadLag1.y)
-    annotation (Line(points={{46,0},{41,0}},          color={0,0,127}));
+    annotation (Line(points={{46,0},{41,0}}, color={0,0,127}));
   connect(Vref1.y, add2.u1)
     annotation (Line(points={{21,-140},{34,-140},{34,-132}}, color={0,0,127}));
   connect(imGain1.y, variableLimiter.limit2)
@@ -166,7 +166,7 @@ equation
                                                            color={0,0,127}));
   connect(add3_1.u1, imDerivativeLag.y) annotation (Line(points={{-94,8},{-98,8},
           {-98,70},{-1,70}}, color={0,0,127}));
-  connect(VUEL2,hV_GATE.u2)  annotation (Line(points={{-10,-200},{-10,-174},{-42,-174},{-42,-6},{-38,-6}},
+  connect(VUEL2,hV_GATE.u2) annotation (Line(points={{-10,-200},{-10,-174},{-42,-174},{-42,-6},{-38,-6}},
                                                  color={0,0,127}));
   connect(variableLimiter.y, EFD)
     annotation (Line(points={{197,0},{210,0}}, color={0,0,127}));
@@ -176,7 +176,7 @@ equation
                            color={0,0,127}));
   connect(VT, imGain2.u) annotation (Line(points={{130,-200},{130,-120},{156,-120},{156,-82}},
         color={0,0,127}));
-  connect(VOEL,lV_GATE.u2)  annotation (Line(points={{-70,-200},{-70,-100},{110,-100},{110,-16},{132,-16},{132,-6},{138,-6}},
+  connect(VOEL,lV_GATE.u2) annotation (Line(points={{-70,-200},{-70,-100},{110,-100},{110,-16},{132,-16},{132,-6},{138,-6}},
                                                            color={0,0,127}));
   connect(imGain1.u, imGain2.u) annotation (Line(points={{130,-62},{130,-120},{156,-120},{156,-82}},
                                 color={0,0,127}));
@@ -192,13 +192,13 @@ equation
           90},{-140,-44},{-122,-44}}, color={0,0,127}));
   connect(Limiters.y, add3_1.u3) annotation (Line(points={{-99,-50},{-98,-50},{
           -98,-8},{-94,-8}}, color={0,0,127}));
-  connect(imLimited.y,hV_GATE.u1)  annotation (Line(points={{-43,0},{-42,0},{-42,6},{-38,6}},
+  connect(imLimited.y,hV_GATE.u1) annotation (Line(points={{-43,0},{-42,0},{-42,6},{-38,6}},
                                     color={0,0,127}));
   connect(VOTHSG2, add3_2.u1) annotation (Line(points={{-200,132},{70,132},{70,8},{76,8}},
                       color={0,0,127}));
   connect(lV_GATE.y, variableLimiter.u) annotation (Line(points={{161,0},{174,0}},
                                                 color={0,0,127}));
-  connect(hV_GATE1.y,lV_GATE.u1)  annotation (Line(points={{131,0},{134,0},{134,6},{138,6}},
+  connect(hV_GATE1.y,lV_GATE.u1) annotation (Line(points={{131,0},{134,0},{134,6},{138,6}},
                                                           color={0,0,127}));
   connect(imGain.u, add2.y)
     annotation (Line(points={{40,-82},{40,-109},{40,-109}}, color={0,0,127}));
@@ -212,7 +212,7 @@ equation
     annotation (Line(points={{69,0},{76,0}}, color={0,0,127}));
   connect(hV_GATE.y, imLeadLag.u) annotation (Line(points={{-15,0},{-10,0}},
                                        color={0,0,127}));
-  connect(VUEL3,hV_GATE1.u2)  annotation (Line(points={{50,-200},{50,-170},{100,-170},{100,-6},{108,-6}},
+  connect(VUEL3,hV_GATE1.u2) annotation (Line(points={{50,-200},{50,-170},{100,-170},{100,-6},{108,-6}},
                                                                       color={0,
           0,127}));
   connect(XADIFD, add2.u2) annotation (Line(points={{80,-200},{80,-160},{46,-160},{46,-132}}, color={0,0,127}));
@@ -231,7 +231,7 @@ equation
           textString="VOTHSG2"),Text(
           extent={{-92,-68},{-64,-88}},
           lineColor={28,108,200},
-          textString="VT"),    Text(
+          textString="VT"), Text(
           extent={{20,-80},{36,-100}},
           lineColor={28,108,200},
           textString="VUEL2"),

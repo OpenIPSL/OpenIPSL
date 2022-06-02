@@ -23,7 +23,7 @@ model PhaseShiftingTransformer "Phase Shifting Transformer (PST)"
     Types.PerUnit pmes(start=pmes0) "Measured power flow";
     Types.Angle alpha(start=alpha0) "Shifting angle";
 
-  Interfaces.PwPin          p
+  Interfaces.PwPin p
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
   Interfaces.PwPin n annotation (Placement(transformation(extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
   equation
@@ -94,7 +94,7 @@ model PhaseShiftingTransformer "Phase Shifting Transformer (PST)"
     Vn=Vn,
     rT=rT,
     xT=xT,
-    m=m)                                      annotation (Placement(transformation(extent={{-60,-20},{-20,20}})));
+    m=m) annotation (Placement(transformation(extent={{-60,-20},{-20,20}})));
   PhaseShifter phaseShifter(
     pref=pref,
     Kp=Kp,
@@ -103,7 +103,7 @@ model PhaseShiftingTransformer "Phase Shifting Transformer (PST)"
     alpha_max=alpha_max,
     alpha_min=alpha_min,
     pmes0=pmes0,
-    alpha0=alpha0)          annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    alpha0=alpha0) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Interfaces.PwPin n annotation (Placement(transformation(extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
   Interfaces.PwPin p annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
 equation
@@ -132,7 +132,7 @@ equation
           extent={{70,8},{90,-12}},
           lineColor={0,0,255},
           textStyle={TextStyle.Bold},
-          textString="deg"),    Text(
+          textString="deg"), Text(
           extent={{-40,-60},{40,-100}},
           lineColor={0,128,0},
           textString="PST"),
@@ -143,7 +143,7 @@ equation
                   Line(
           points={{94,0},{100,0},{100,0}},
           color={0,0,255},
-          smooth=Smooth.None)}),    Documentation(info="<html>
+          smooth=Smooth.None)}), Documentation(info="<html>
 <p>The following documentation is adapted from
 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2010], chapter 11.2.3</a>:</p>
 <blockquote>

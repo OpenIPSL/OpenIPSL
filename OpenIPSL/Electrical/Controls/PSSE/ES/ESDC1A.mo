@@ -87,7 +87,7 @@ equation
   connect(add3_1.y, imLeadLag.u)
     annotation (Line(points={{-39,0},{-36,0},{-22,0}}, color={0,0,127}));
   connect(hV_GATE.y, simpleLagLim.u)
-    annotation (Line(points={{61,0},{78,0}},                color={0,0,127}));
+    annotation (Line(points={{61,0},{78,0}}, color={0,0,127}));
   connect(simpleLagLim.y, rotatingExciterLimited.I_C)
     annotation (Line(points={{101,0},{101,0},{118.75,0}}, color={0,0,127}));
   connect(ECOMP, TransducerDelay.u)
@@ -96,9 +96,9 @@ equation
           0},{-132,-6},{-122,-6}}, color={0,0,127}));
   connect(rotatingExciterLimited.EFD, EFD)
     annotation (Line(points={{141.25,0},{210,0},{210,0}}, color={0,0,127}));
-  connect(imLeadLag.y,hV_GATE.u1)  annotation (Line(points={{1,0},{32,0},{32,6},{38,6}},
+  connect(imLeadLag.y,hV_GATE.u1) annotation (Line(points={{1,0},{32,0},{32,6},{38,6}},
                        color={0,0,127}));
-  connect(VUEL,hV_GATE.u2)  annotation (Line(points={{-130,-200},{-128,-200},{-128,-80},{32,-80},{32,-6},{38,-6}},
+  connect(VUEL,hV_GATE.u2) annotation (Line(points={{-130,-200},{-128,-200},{-128,-80},{32,-80},{32,-6},{38,-6}},
                                               color={0,0,127}));
   connect(imDerivativeLag.u, EFD) annotation (Line(points={{2,-50},{160,-50},{
           160,0},{210,0}}, color={0,0,127}));

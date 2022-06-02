@@ -45,19 +45,19 @@ model G4 "900MVA generation unit, composed of machine and exciter, connected to 
     annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
 equation
   connect(gENSAL.p, pwPin)
-    annotation (Line(points={{72,0},{100,0}},       color={0,0,255}));
+    annotation (Line(points={{72,0},{100,0}}, color={0,0,255}));
   connect(gENSAL.PMECH, gENSAL.PMECH0) annotation (Line(points={{28,12},{20,12},
-          {20,30},{80,30},{80,10},{74,10}},                     color={0,0,127}));
+          {20,30},{80,30},{80,10},{74,10}}, color={0,0,127}));
   connect(eSDC1A.EFD, gENSAL.EFD) annotation (Line(points={{17,-12},{28,-12}},
                                          color={0,0,127}));
   connect(eSDC1A.EFD0, gENSAL.EFD0) annotation (Line(points={{-5,-16},{-18,-16},
-          {-18,-68},{80,-68},{80,-10},{74,-10}},            color={0,0,127}));
+          {-18,-68},{80,-68},{80,-10},{74,-10}}, color={0,0,127}));
   connect(non_active_inputs.y, eSDC1A.VUEL)
     annotation (Line(points={{19,-50},{2,-50},{2,-23}}, color={0,0,127}));
   connect(eSDC1A.VOEL, eSDC1A.VUEL) annotation (Line(points={{6,-23},{6,-50},{2,
-          -50},{2,-23}},                                color={0,0,127}));
+          -50},{2,-23}}, color={0,0,127}));
   connect(gENSAL.ETERM, eSDC1A.ECOMP) annotation (Line(points={{74,-6},{82,-6},
-          {82,-70},{-20,-70},{-20,-12},{-5,-12}},             color={0,0,127}));
+          {82,-70},{-20,-70},{-20,-12},{-5,-12}}, color={0,0,127}));
   connect(non_active_inputs.y, eSDC1A.VOTHSG) annotation (Line(points={{19,-50},
           {-12,-50},{-12,-8},{-5,-8}}, color={0,0,127}));
   connect(gENSAL.XADIFD, eSDC1A.XADIFD) annotation (Line(points={{74,-18},{78,

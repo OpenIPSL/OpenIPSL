@@ -52,7 +52,7 @@ equation
           fillPattern=FillPattern.Solid),Line(
           points={{-20,20},{-44,42},{-66,32},{-80,0}},
           color={0,0,0},
-          smooth=Smooth.Bezier),         Line(
+          smooth=Smooth.Bezier), Line(
           points={{20,-20},{44,-42},{66,-32},{80,0}},
           color={0,0,0},
           smooth=Smooth.Bezier)}));

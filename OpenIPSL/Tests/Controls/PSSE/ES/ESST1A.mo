@@ -61,7 +61,7 @@ equation
   connect(eSST1A.XADIFD, gENROE.XADIFD) annotation (Line(points={{-86,-74},{-86,-80},{-42,-80},{-42,-18},{-46,-18}},
                                                  color={0,0,127}));
   connect(gENROE.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(eSST1A.VOTHSG2, zero.y) annotation (Line(points={{-48,-36},{-30,-36},{-30,-44},{-24.4,-44}}, color={0,0,127}));
   connect(eSST1A.VOTHSG, zero.y) annotation (Line(points={{-48,-44},{-24.4,-44}}, color={0,0,127}));
   connect(eSST1A.VUEL, zero.y) annotation (Line(points={{-62,-74},{-62,-84},{-30,-84},{-30,-44},{-24.4,-44}}, color={0,0,127}));

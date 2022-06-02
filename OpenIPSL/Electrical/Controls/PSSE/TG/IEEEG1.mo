@@ -115,26 +115,26 @@ model IEEEG1 "IEEEG1 - 1981 IEEE Type 1 Turbine-Governor Model"
     annotation (Placement(transformation(extent={{136,44},{148,56}})));
 equation
   connect(SPEED_HP, imLeadLag.u) annotation (Line(points={{-170,0},{-147.6,0}}, color={0,0,127}));
-  connect(Pref.y, add3_1.u1) annotation (Line(points={{-129.2,34},{-124,34},{-124,6.4},{-115.6,6.4}},   color={0,0,127}));
-  connect(add3_1.u2, imLeadLag.y) annotation (Line(points={{-115.6,0},{-129.2,0}},            color={0,0,127}));
+  connect(Pref.y, add3_1.u1) annotation (Line(points={{-129.2,34},{-124,34},{-124,6.4},{-115.6,6.4}}, color={0,0,127}));
+  connect(add3_1.u2, imLeadLag.y) annotation (Line(points={{-115.6,0},{-129.2,0}}, color={0,0,127}));
   connect(add3_1.y, gain.u) annotation (Line(points={{-97.2,0},{-93.6,0}}, color={0,0,127}));
   connect(gain.y, limiter.u) annotation (Line(points={{-75.2,0},{-71.6,0}}, color={0,0,127}));
   connect(limiter.y, limIntegrator.u) annotation (Line(points={{-53.2,0},{-49.6,0}}, color={0,0,127}));
-  connect(imSimpleLag1.u, imSimpleLag.y) annotation (Line(points={{18.4,0},{-5.2,0}},          color={0,0,127}));
+  connect(imSimpleLag1.u, imSimpleLag.y) annotation (Line(points={{18.4,0},{-5.2,0}}, color={0,0,127}));
   connect(limIntegrator.y, imSimpleLag.u) annotation (Line(points={{-31.2,0},{-23.6,0}}, color={0,0,127}));
   connect(add3_1.u3, imSimpleLag.u) annotation (Line(points={{-115.6,-6.4},{-124,-6.4},{-124,-30},{-28,-30},{-28,0},{-23.6,0}},
                                                                                                                               color={0,0,127}));
-  connect(imGain1.u, imSimpleLag.y) annotation (Line(points={{8,16.8},{8,0},{-5.2,0}},   color={0,0,127}));
-  connect(imGain2.u, imSimpleLag.y) annotation (Line(points={{8,-16.8},{8,0},{-5.2,0}},  color={0,0,127}));
+  connect(imGain1.u, imSimpleLag.y) annotation (Line(points={{8,16.8},{8,0},{-5.2,0}}, color={0,0,127}));
+  connect(imGain2.u, imSimpleLag.y) annotation (Line(points={{8,-16.8},{8,0},{-5.2,0}}, color={0,0,127}));
   connect(imSimpleLag1.y, imSimpleLag2.u) annotation (Line(points={{36.8,0},{58.4,0}}, color={0,0,127}));
   connect(imGain3.u, imSimpleLag2.u) annotation (Line(points={{48,16.8},{48,0},{58.4,0}}, color={0,0,127}));
   connect(imGain4.u, imSimpleLag2.u) annotation (Line(points={{48,-16.8},{48,0},{58.4,0}},color={0,0,127}));
   connect(add.u2, imGain3.y) annotation (Line(points={{54.8,46.4},{48,46.4},{48,30.6}}, color={0,0,127}));
-  connect(imGain1.y, add.u1) annotation (Line(points={{8,30.6},{8,53.6},{54.8,53.6}},   color={0,0,127}));
+  connect(imGain1.y, add.u1) annotation (Line(points={{8,30.6},{8,53.6},{54.8,53.6}}, color={0,0,127}));
   connect(add1.u1, imGain4.y) annotation (Line(points={{54.8,-46.4},{48,-46.4},{48,-30.6}}, color={0,0,127}));
-  connect(imGain2.y, add1.u2) annotation (Line(points={{8,-30.6},{8,-53.6},{54.8,-53.6}},   color={0,0,127}));
-  connect(imSimpleLag2.y, imSimpleLag3.u) annotation (Line(points={{76.8,0},{98.4,0}},  color={0,0,127}));
-  connect(imGain5.u, imSimpleLag3.u) annotation (Line(points={{88,16.8},{88,0},{98.4,0}},  color={0,0,127}));
+  connect(imGain2.y, add1.u2) annotation (Line(points={{8,-30.6},{8,-53.6},{54.8,-53.6}}, color={0,0,127}));
+  connect(imSimpleLag2.y, imSimpleLag3.u) annotation (Line(points={{76.8,0},{98.4,0}}, color={0,0,127}));
+  connect(imGain5.u, imSimpleLag3.u) annotation (Line(points={{88,16.8},{88,0},{98.4,0}}, color={0,0,127}));
   connect(imGain6.u, imSimpleLag3.u) annotation (Line(points={{88,-16.8},{88,0},{98.4,0}}, color={0,0,127}));
   connect(imGain6.y, add2.u1) annotation (Line(points={{88,-30.6},{88,-46.4},{94.8,-46.4}}, color={0,0,127}));
   connect(add1.y, add2.u2) annotation (Line(points={{68.6,-50},{88,-50},{88,-53.6},{94.8,-53.6}}, color={0,0,127}));
@@ -142,12 +142,12 @@ equation
   connect(imGain5.y, add3.u2) annotation (Line(points={{88,30.6},{88,46.4},{94.8,46.4}}, color={0,0,127}));
   connect(imSimpleLag3.y, imGain7.u) annotation (Line(points={{116.8,0},{128,0},{128,16.8}}, color={0,0,127}));
   connect(imGain8.u, imGain7.u) annotation (Line(points={{128,-16.8},{128,16.8}},color={0,0,127}));
-  connect(add4.y, PMECH_LP) annotation (Line(points={{148.6,-50},{170,-50}},           color={0,0,127}));
+  connect(add4.y, PMECH_LP) annotation (Line(points={{148.6,-50},{170,-50}}, color={0,0,127}));
   connect(imGain8.y, add4.u1) annotation (Line(points={{128,-30.6},{128,-46.4},{134.8,-46.4}}, color={0,0,127}));
   connect(add2.y, add4.u2) annotation (Line(points={{108.6,-50},{128,-50},{128,-53.6},{134.8,-53.6}}, color={0,0,127}));
   connect(add3.y, add5.u1) annotation (Line(points={{108.6,50},{128,50},{128,53.6},{134.8,53.6}}, color={0,0,127}));
   connect(imGain7.y, add5.u2) annotation (Line(points={{128,30.6},{128,46.4},{134.8,46.4}}, color={0,0,127}));
-  connect(add5.y, PMECH_HP) annotation (Line(points={{148.6,50},{170,50}},          color={0,0,127}));
+  connect(add5.y, PMECH_HP) annotation (Line(points={{148.6,50},{170,50}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-80},{160,80}}, preserveAspectRatio=
             false)),

@@ -37,7 +37,7 @@ equation
           -5}},
         color={0,0,127}));
   connect(AVRtypeIII1.vf0, order3_Inputs_Outputs1.vf0) annotation (Line(points={{-68,
-          9.16667},{-68,16},{-37.9999,16},{-37.9999,11}},      color={0,0,127}));
+          9.16667},{-68,16},{-37.9999,16},{-37.9999,11}}, color={0,0,127}));
   connect(AVRtypeIII1.vs, const.y) annotation (Line(points={{-77.1667,-5},{-86,
           -5},{-86,0},{-89.6,0}}, color={0,0,127}));
   annotation (experiment(StopTime=20));

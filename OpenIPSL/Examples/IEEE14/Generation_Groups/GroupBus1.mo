@@ -35,20 +35,20 @@ model GroupBus1 "69kV/615MVA generation unit connected to bus 1"
     P_0=P_0,
     Q_0=Q_0) annotation (Placement(transformation(extent={{40,-20},{80,20}})));
   OpenIPSL.Interfaces.PwPin pwPin annotation (Placement(transformation(extent={{100,-10},
-            {120,10}}),          iconTransformation(extent={{100,-10},{120,10}})));
+            {120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
 equation
   connect(AVR1.vf, Syn1.vf) annotation (Line(points={{14,10},{36,10}},
                         color={0,0,127}));
   connect(Syn1.v, AVR1.v) annotation (Line(points={{82,6},{88,6},{88,-30},{-16,-30},
-          {-16,4},{-10,4}},                         color={0,0,127}));
+          {-16,4},{-10,4}}, color={0,0,127}));
   connect(Syn1.p, pwPin) annotation (Line(points={{80,0},{110,0}},
                      color={0,0,255}));
   connect(Syn1.pm0, Syn1.pm) annotation (Line(points={{44,-22},{44,-26},{28,-26},
-          {28,-10},{36,-10}},               color={0,0,127}));
+          {28,-10},{36,-10}}, color={0,0,127}));
   connect(AVR1.vref0, AVR1.vref) annotation (Line(points={{2,22},{2,26},{-16,26},
-          {-16,16},{-10,16}},                                  color={0,0,127}));
+          {-16,16},{-10,16}}, color={0,0,127}));
   connect(AVR1.vf0, Syn1.vf0) annotation (Line(points={{2,-2},{2,-12},{20,-12},{
-          20,26},{44,26},{44,22}},            color={0,0,127}));
+          20,26},{44,26},{44,22}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}, preserveAspectRatio=
             false),graphics={Text(

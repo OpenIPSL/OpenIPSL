@@ -150,59 +150,59 @@ equation
   connect(Line6_7.p, bus6.p) annotation (Line(points={{-89,30},{-89,30},{-100,30}},
                           color={0,0,255}));
   connect(Line5_6.n, bus6.p) annotation (Line(points={{-111,30},{-111,30},{-100,
-          30}},           color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(Line5_6.p, bus5.p) annotation (Line(points={{-129,30},{-129,30},{-140,
-          30}},           color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(Line8_9_2.n, bus9.p) annotation (Line(points={{39,20},{54,20},{54,30},
-          {60,30}},        color={0,0,255}));
+          {60,30}}, color={0,0,255}));
   connect(Line8_9_1.n, bus9.p) annotation (Line(points={{39,40},{54,40},{54,30},
-          {60,30}},        color={0,0,255}));
+          {60,30}}, color={0,0,255}));
   connect(Line8_9_2.p, bus8.p) annotation (Line(points={{21,20},{6,20},{6,30},{0,
-          30}},        color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(Line8_9_1.p, bus8.p) annotation (Line(points={{21,40},{6,40},{6,30},{0,
-          30}},        color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(Line7_8_2.n, bus8.p) annotation (Line(points={{-21,20},{-6,20},{-6,22},
-          {-6,30},{0,30}},        color={0,0,255}));
+          {-6,30},{0,30}}, color={0,0,255}));
   connect(Line7_8_1.n, bus8.p) annotation (Line(points={{-21,40},{-6,40},{-6,30},
-          {0,30}},        color={0,0,255}));
+          {0,30}}, color={0,0,255}));
   connect(Line7_8_1.p, bus7.p) annotation (Line(points={{-39,40},{-54,40},{-54,30},
-          {-60,30}},          color={0,0,255}));
+          {-60,30}}, color={0,0,255}));
   connect(Line7_8_2.p, bus7.p) annotation (Line(points={{-39,20},{-54,20},{-54,30},
-          {-60,30}},          color={0,0,255}));
+          {-60,30}}, color={0,0,255}));
   connect(bus9.p, Line9_10.p)
-    annotation (Line(points={{60,30},{71,30}},      color={0,0,255}));
+    annotation (Line(points={{60,30},{71,30}}, color={0,0,255}));
   connect(Line9_10.n, bus10.p) annotation (Line(points={{89,30},{89,30},{100,30}},
                          color={0,0,255}));
   connect(bus10.p, Line10_11.p)
-    annotation (Line(points={{100,30},{111,30}},     color={0,0,255}));
+    annotation (Line(points={{100,30},{111,30}}, color={0,0,255}));
   connect(Line10_11.n, bus11.p) annotation (Line(points={{129,30},{129,30},{140,
-          30}},          color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(g4.pwPin, bus4.p) annotation (Line(points={{201.4,-10},{201.4,-10},{
           180,-10}}, color={0,0,255}));
   connect(g3.pwPin, bus3.p)
     annotation (Line(points={{201.4,30},{180,30}}, color={0,0,255}));
   connect(Load7.p, bus7.p) annotation (Line(points={{-64,0},{-64,0},{-64,30},{-60,
-          30}},      color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(Load9.p, Line9_10.p) annotation (Line(points={{65,0},{66,0},{66,30},{71,
-          30}},              color={0,0,255}));
+          30}}, color={0,0,255}));
   connect(pwFault.p, bus8.p)
     annotation (Line(points={{2,-4.33333},{2,30},{0,30}}, color={0,0,255}));
   connect(bus1.p, Line5_1.p)
-    annotation (Line(points={{-180,30},{-169,30}},     color={0,0,255}));
+    annotation (Line(points={{-180,30},{-169,30}}, color={0,0,255}));
   connect(bus5.p, Line5_1.n)
-    annotation (Line(points={{-140,30},{-151,30}},     color={0,0,255}));
+    annotation (Line(points={{-140,30},{-151,30}}, color={0,0,255}));
   connect(bus2.p, Line5_2.p)
-    annotation (Line(points={{-180,0},{-169,0}},     color={0,0,255}));
+    annotation (Line(points={{-180,0},{-169,0}}, color={0,0,255}));
   connect(Line5_2.n, bus6.p) annotation (Line(points={{-151,0},{-104,0},{-104,30},
-          {-100,30}},     color={0,0,255}));
+          {-100,30}}, color={0,0,255}));
   connect(bus11.p, Line5_3.p)
-    annotation (Line(points={{140,30},{151,30}},     color={0,0,255}));
+    annotation (Line(points={{140,30},{151,30}}, color={0,0,255}));
   connect(Line5_3.n, bus3.p) annotation (Line(points={{169,30},{169,30},{180,30}},
                      color={0,0,255}));
   connect(bus4.p, Line5_4.n)
-    annotation (Line(points={{180,-10},{169,-10}},     color={0,0,255}));
+    annotation (Line(points={{180,-10},{169,-10}}, color={0,0,255}));
   connect(Line5_4.p, Line10_11.p) annotation (Line(points={{151,-10},{104,-10},{
-          104,30},{111,30}},      color={0,0,255}));
+          104,30},{111,30}}, color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-220,-40},{220,
             60}}), graphics={Text(

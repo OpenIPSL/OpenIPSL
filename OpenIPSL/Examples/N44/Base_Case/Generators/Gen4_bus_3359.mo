@@ -66,7 +66,7 @@ model Gen4_bus_3359 "Configuration of synchronous generator with regulators: GEN
             {100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
 equation
   connect(gENROU.p, pwPin)
-    annotation (Line(points={{6,9},{66,9},{66,0},{110,0}},   color={0,0,255}));
+    annotation (Line(points={{6,9},{66,9},{66,0},{110,0}}, color={0,0,255}));
   connect(iEESGO.PMECH, gENROU.PMECH) annotation (Line(points={{9.25,72.4444},{20,72.4444},{20,46},{-66,46},{-66,25.5},{-62.2,25.5}},
                                                                    color={0,0,
           127}));

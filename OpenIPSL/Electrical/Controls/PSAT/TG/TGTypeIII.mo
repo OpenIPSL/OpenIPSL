@@ -218,7 +218,7 @@ equation
           textString="TGTypeIII"),Text(
           extent={{-100,10},{-60,-10}},
           lineColor={0,0,0},
-          textString="w"),  Text(
+          textString="w"), Text(
           extent={{60,10},{100,-10}},
           lineColor={0,0,0},
           textString="pm"),

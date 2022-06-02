@@ -54,11 +54,11 @@ model Gen_no_contr "Generation unit with only a machine model"
             {80,-10},{100,10}}), iconTransformation(extent={{60,-10},{80,10}})));
 equation
   connect(gENSAL.PMECH0, gENSAL.PMECH) annotation (Line(points={{54.95,10},{60,10},
-          {60,30},{0,30},{0,12},{10.1,12}},                color={0,0,127}));
+          {60,30},{0,30},{0,12},{10.1,12}}, color={0,0,127}));
   connect(gENSAL.EFD0, gENSAL.EFD) annotation (Line(points={{54.95,-10},{60,-10},
-          {60,-30},{0,-30},{0,-12},{10.1,-12}},       color={0,0,127}));
+          {60,-30},{0,-30},{0,-12},{10.1,-12}}, color={0,0,127}));
   connect(gENSAL.p, pwPin)
-    annotation (Line(points={{53,0},{90,0}},   color={0,0,255}));
+    annotation (Line(points={{53,0},{90,0}}, color={0,0,255}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={Ellipse(extent={{-60,60},{60,-60}}, lineColor={0,

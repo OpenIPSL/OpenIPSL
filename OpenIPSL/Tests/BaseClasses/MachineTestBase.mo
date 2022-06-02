@@ -72,7 +72,7 @@ equation
   connect(pwLine3.p, pwLinewithOpening1.p) annotation (Line(points={{56.6,-14},
           {44,-14},{44,20},{48,20},{48,12},{54.6,12}}, color={0,0,255}));
   connect(bus3.p, pwLoadPQ1.p)
-    annotation (Line(points={{80,24},{88,24},{88,24}},   color={0,0,255}));
+    annotation (Line(points={{80,24},{88,24},{88,24}}, color={0,0,255}));
   connect(bus3.p, pwLinewithOpening1.n) annotation (Line(points={{80,24},{72,24},
           {72,12},{65.4,12}}, color={0,0,255}));
   connect(bus4.p, pwLoadPQ2.p) annotation (Line(points={{80,-14},{88,-14},{88,-14.2889}},

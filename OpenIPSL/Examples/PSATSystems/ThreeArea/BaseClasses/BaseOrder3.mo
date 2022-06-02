@@ -19,9 +19,9 @@ partial model BaseOrder3 "Template for base network and a 3rd order generator"
     annotation (Placement(transformation(extent={{-130,70},{-110,90}})));
 equation
   connect(order3_1.p, B800.p) annotation (Line(points={{-110,80},{-104.5,80},{-104.5,
-          80},{-100,80}},                  color={0,0,255}));
+          80},{-100,80}}, color={0,0,255}));
   connect(order3_1.pm, order3_1.pm0) annotation (Line(points={{-132,75},{-132,75},
-          {-132,74},{-132,70},{-132,69},{-128,69}},     color={0,0,127}));
+          {-132,74},{-132,70},{-132,69},{-128,69}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Extension of <strong>BaseNetwork</strong> but with a third order machine connected to bus 800.</p>
 </html>"));

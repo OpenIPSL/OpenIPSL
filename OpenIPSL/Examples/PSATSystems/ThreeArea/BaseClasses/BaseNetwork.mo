@@ -264,7 +264,7 @@ equation
   connect(pwLine1to5.n, B1000.p) annotation (Line(points={{51.7,20},{76,20},{76,
           0},{80,0}}, color={0,0,255}));
   connect(pwLine1to6.p, B900.p)
-    annotation (Line(points={{28.3,0},{28.3,0},{20,0}},  color={0,0,255}));
+    annotation (Line(points={{28.3,0},{28.3,0},{20,0}}, color={0,0,255}));
   connect(pwLine1to5.p, B900.p) annotation (Line(points={{46.3,20},{24,20},{24,
           0},{20,0}}, color={0,0,255}));
   connect(pwLine1to12.n, B700.p) annotation (Line(points={{-83.5,59.65},{-83.5,
@@ -274,7 +274,7 @@ equation
   connect(pwLine1to1.n, B200.p) annotation (Line(points={{-84,-33.7},{-84,-33.7},
           {-84,-40}}, color={0,0,255}));
   connect(order2.p, B100.p) annotation (Line(points={{-84,-70},{-84,-64.5},{-84,
-          -64.5},{-84,-60}},      color={0,0,255}));
+          -64.5},{-84,-60}}, color={0,0,255}));
   connect(order2.pm0, order2.pm) annotation (Line(points={{-73,-88},{-70,-88},
           {-70,-92},{-78,-92},{-78,-92},{-79,-92}},color={0,0,127}));
   connect(order2.vf0, order2.vf) annotation (Line(points={{-95,-88},{-96,-88},
@@ -286,7 +286,7 @@ equation
   connect(pwLine1to2.p, B300.p)
     annotation (Line(points={{-53.7,0},{-84,0},{-84,-20}}, color={0,0,255}));
   connect(B1200.p, order3_2.p)
-    annotation (Line(points={{120,0},{132,0},{132,0}},       color={0,0,255}));
+    annotation (Line(points={{120,0},{132,0},{132,0}}, color={0,0,255}));
   connect(order3_2.pm0, order3_2.pm) annotation (Line(points={{150,-11},{150,-14},
           {156,-14},{156,-5},{154,-5}}, color={0,0,127}));
   annotation (
