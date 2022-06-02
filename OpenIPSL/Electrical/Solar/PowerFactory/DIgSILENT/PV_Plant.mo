@@ -42,21 +42,17 @@ model PV_Plant "DIgSILENT model of a solar plant"
   parameter Types.Time Tmpp = 5 "Time Delay MPP-Tracking"
                                                          annotation (
     Dialog(group = "Current Controller Parameters"));
-  parameter Types.PerUnit id_min = 0 "Min. Active Current Limit"
-                                                                 annotation (
+  parameter Types.PerUnit id_min = 0 "Min. Active Current Limit" annotation (
     Dialog(group = "Current Controller Parameters"));
-  parameter Types.PerUnit id_max = 1
-                                     "Max. Active Current Limit"
+  parameter Types.PerUnit id_max = 1 "Max. Active Current Limit"
                                                                 annotation (
     Dialog(group = "Current Controller Parameters"));
   parameter Types.Voltage U_min = 200 "Minimal allowed DC-voltage"
                                                                   annotation (
     Dialog(group = "Current Controller Parameters"));
-  parameter Types.PerUnit iq_min = -1 "Min. Reactive Current Limit"
-                                                                    annotation (
+  parameter Types.PerUnit iq_min = -1 "Min. Reactive Current Limit" annotation (
     Dialog(group = "Current Controller Parameters"));
-  parameter Types.PerUnit iq_max = 1
-                                     "Max. Reactive Current Limit"
+  parameter Types.PerUnit iq_max = 1 "Max. Reactive Current Limit"
                                                                   annotation (
     Dialog(group = "Current Controller Parameters"));
   parameter Real Deadband = 0.1 "Deadband for Dynamic AC Voltage Support"
@@ -65,8 +61,7 @@ model PV_Plant "DIgSILENT model of a solar plant"
   parameter Real K_FRT = 2 "Gain for Dynamic AC Voltage Support"
                                                                 annotation (
     Dialog(group = "Current Controller Parameters"));
-  parameter Boolean i_EEG = false "false = acc. TC2007; true = acc. SDLWindV"
-                                                                              annotation (
+  parameter Boolean i_EEG = false "false = acc. TC2007; true = acc. SDLWindV" annotation (
     Dialog(group = "Current Controller Parameters"));
   parameter Types.PerUnit maxAbsCur = 1 "Max. allowed absolute current"
                                                                        annotation (
@@ -112,7 +107,6 @@ equation
   connect(pv_array.Vmpp_array, controller.vdcref) annotation (
     Line(points={{-39,4},{-30,4},{-30,0},{6,0},{6,8},{21,8}}, color = {0, 0, 127}));
   annotation (
-
     Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 60.31}, points = {{-100, 39.6877}, {0, -40.3123}, {100, 39.6877}, {100, 39.6877}}, color = {118, 18, 62}), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
         Documentation(info = "<html>
 <p>

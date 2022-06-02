@@ -5,12 +5,10 @@ model Controller "Controller for the solar plant"
   parameter Types.Time Tr = 0.001 "Measurement Delay";
   parameter Types.Time Tmpp = 5 "Time Delay MPP-Tracking";
   parameter Types.PerUnit id_min = 0 "Min. Active Current Limit";
-  parameter Types.PerUnit id_max = 1
-                                     "Max. Active Current Limit";
+  parameter Types.PerUnit id_max = 1 "Max. Active Current Limit";
   parameter Types.Voltage U_min = 200 "Minimal allowed DC-voltage";
   parameter Real iq_min = -1 "Min. Reactive Current Limit";
-  parameter Real iq_max = 1
-                            "Max. Reactive Current Limit";
+  parameter Real iq_max = 1 "Max. Reactive Current Limit";
   parameter Real Deadband = 0.1 "Deadband for Dynamic AC Voltage Support";
   parameter Real K_FRT = 2 "Gain for Dynamic AC Voltage Support";
   parameter Boolean i_EEG = false "false = acc. TC2007; true = acc. SDLWindV";

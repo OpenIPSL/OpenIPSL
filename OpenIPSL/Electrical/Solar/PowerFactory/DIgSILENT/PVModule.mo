@@ -26,8 +26,8 @@ model PVModule "Model of a single PV module"
   Types.Current Impp "MPP Current";
   Real tempCorrU "Voltage Correction Factor";
   Real tempCorrI "Current Correction Factor";
-  Modelica.Blocks.Sources.RealExpression not_use_input_theta(y=theta_STC) if
-                                                                         not use_input_theta annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
+  Modelica.Blocks.Sources.RealExpression not_use_input_theta(y=theta_STC)
+                                                                      if not use_input_theta annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
   Modelica.Blocks.Sources.RealExpression not_use_input_E(y=P_init) if not use_input_E annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 protected
   Real lnEquot "Logarithm of the irradiance ratio";
