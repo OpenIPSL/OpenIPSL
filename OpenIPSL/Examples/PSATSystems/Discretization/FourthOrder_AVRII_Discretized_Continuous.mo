@@ -16,17 +16,13 @@ model FourthOrder_AVRII_Discretized_Continuous "5-bus system with 4th-order mach
     Tr=0.05,
     Ae=0,
     Be=0) annotation (Placement(transformation(extent={{-166,-6},{-146,14}})));
-  Modelica_Synchronous.RealSignals.Sampler.Sample sample1
-    annotation (Placement(transformation(extent={{-186,4},{-174,16}})));
-  Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample2
-    annotation (Placement(transformation(extent={{-186,-6},{-174,6}})));
-  Modelica_Synchronous.RealSignals.Sampler.Hold hold1(y_start=1.046883400898693)
-    annotation (Placement(transformation(extent={{-132,0},{-120,12}})));
-  Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock1(
+  Modelica.Clocked.RealSignals.Sampler.Sample sample1 annotation (Placement(transformation(extent={{-186,4},{-174,16}})));
+  Modelica.Clocked.RealSignals.Sampler.SampleClocked sample2 annotation (Placement(transformation(extent={{-186,-6},{-174,6}})));
+  Modelica.Clocked.RealSignals.Sampler.Hold hold1(y_start=1.046883400898693) annotation (Placement(transformation(extent={{-132,0},{-120,12}})));
+  Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock periodicClock1(
     period=0.01,
     useSolver=true,
-    solverMethod="ImplicitEuler")
-    annotation (Placement(transformation(extent={{-194,-52},{-182,-40}})));
+    solverMethod="ImplicitEuler") annotation (Placement(transformation(extent={{-194,-52},{-182,-40}})));
 equation
   connect(sample1.y, aVRTypeII.vref) annotation (Line(
       points={{-173.4,10},{-168,10}},

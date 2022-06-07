@@ -14,16 +14,14 @@ model ReactivePowerSupport "Reactive power support for FRT"
     Placement(transformation(origin = {98, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.BooleanConstant FRTCharac(k=i_EEG) annotation (
     Placement(transformation(origin = {60, 0}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = iq_max, uMin = iq_min) annotation (
-    Placement(transformation(origin = {182, 0}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=iq_max, uMin=iq_min) annotation (Placement(transformation(origin={182,0}, extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.General.Picdro picdro(Tdrop = if i_EEG then 0 else 0.5, Tpick = 0) annotation (
     Placement(transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold = 0) annotation (
     Placement(transformation(origin = {-70, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Abs abs annotation (
     Placement(transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.DeadZone deadZone(deadZoneAtInit = true, uMax = Deadband, uMin = -Deadband) annotation (
-    Placement(transformation(origin = {-158, 0}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=Deadband, uMin=-Deadband) annotation (Placement(transformation(origin={-158,0}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant initial_current(k = i0) annotation (
     Placement(transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add annotation (

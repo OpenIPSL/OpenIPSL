@@ -18,8 +18,7 @@ model SLDWindV "Dynamic support during faults"
     Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Division division annotation (
     Placement(transformation(origin = {-2, -30}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Modelica.Constants.inf, uMin = Deadband) annotation (
-    Placement(transformation(origin = {-30, -30}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Modelica.Constants.inf, uMin=Deadband) annotation (Placement(transformation(origin={-30,-30}, extent={{-10,-10},{10,10}})));
 equation
   connect(product.y, gain.u) annotation (
     Line(points = {{51, 0}, {68, 0}}, color = {0, 0, 127}));

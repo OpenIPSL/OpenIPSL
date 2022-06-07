@@ -4,7 +4,6 @@ partial model baseMachine "Base machine for PSSE models"
   import Modelica.ComplexMath.arg;
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
-  import Modelica.ComplexMath.'abs';
   import Modelica.ComplexMath.conj;
   import Modelica.Blocks.Interfaces.*;
   extends OpenIPSL.Electrical.Essentials.pfComponent(

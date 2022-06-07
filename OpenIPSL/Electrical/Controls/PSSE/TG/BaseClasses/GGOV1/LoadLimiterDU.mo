@@ -33,8 +33,7 @@ model LoadLimiterDU "GE General GGOV1DU Governor/Turbine Temperature Control"
     Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {0, -120}), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {0, -120})));
   Modelica.Blocks.Sources.Constant const(k = Wfnl) annotation (
     Placement(transformation(extent = {{-60, 60}, {-40, 80}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Vmax, uMin = Vmin) annotation (
-    Placement(transformation(origin = {-10, -34}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Vmax, uMin=Vmin) annotation (Placement(transformation(origin={-10,-34}, extent={{-10,-10},{10,10}})));
 protected
   parameter Types.PerUnit Pmech0(fixed = false);
   parameter Types.PerUnit s60(fixed = false);

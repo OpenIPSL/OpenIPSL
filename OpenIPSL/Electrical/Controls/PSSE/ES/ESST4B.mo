@@ -3,7 +3,6 @@ model ESST4B "ST4B Excitation System [IEEE2005]"
   extends Icons.VerifiedModel;
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import Modelica.ComplexMath.j;
-  import Modelica.ComplexMath.'abs';
   parameter Types.Time T_R=0.3 "Regulator input filter time constant";
   parameter Types.PerUnit K_PR=2.97 "Voltage regulator proportional gain";
   parameter Types.TimeAging K_IR=2.97 "Voltage regulator integral gain";

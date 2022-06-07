@@ -6,7 +6,6 @@ model GENROE "ROUND ROTOR GENERATOR MODEL (EXPONENTIAL SATURATION)"
   import Modelica.ComplexMath.arg;
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
-  import Modelica.ComplexMath.'abs';
   import Modelica.ComplexMath.conj;
   import Modelica.ComplexMath.fromPolar;
   import OpenIPSL.NonElectrical.Functions.SE_exp;

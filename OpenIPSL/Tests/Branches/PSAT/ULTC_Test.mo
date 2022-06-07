@@ -15,19 +15,14 @@ model ULTC_Test "Simple model for testing a ULTC (under-load tap changing) trans
     X=0.1) annotation (Placement(transformation(
         origin={20,10},
         extent={{-10.0,-10.0},{10.0,10.0}})));
-  Modelica.Blocks.Sources.Sine sine1(amplitude=0.001, freqHz=0.2) annotation (
-      Placement(transformation(
-        origin={-92,10},
-        extent={{-4.4802,-4.4802},{4.4802,4.4802}})));
+  Modelica.Blocks.Sources.Sine sine1(amplitude=0.001, f=0.2) annotation (Placement(transformation(origin={-92,10}, extent={{-4.4802,-4.4802},{4.4802,4.4802}})));
   Modelica.Blocks.Math.Add diff(k2=-1) annotation (Placement(transformation(
         origin={-72,0},
         extent={{-6.3229,-6.3229},{6.3229,6.3229}})));
   Modelica.Blocks.Sources.Sine sine2(
     amplitude=0.001,
-    freqHz=0.2,
-    startTime=5) annotation (Placement(transformation(
-        origin={-92,-10},
-        extent={{-4.4802,-4.4802},{4.4802,4.4802}})));
+    f=0.2,
+    startTime=5) annotation (Placement(transformation(origin={-92,-10}, extent={{-4.4802,-4.4802},{4.4802,4.4802}})));
   OpenIPSL.Electrical.Machines.PSAT.Order2 order2_Inputs_Outputs(
     D=5,
     angle_0=0,

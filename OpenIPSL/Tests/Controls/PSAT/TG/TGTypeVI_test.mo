@@ -19,22 +19,18 @@ model TGTypeVI_test "Simple system to test functionality of TG type VI model"
     dref=0,
     po=0.16074) annotation (Placement(transformation(extent={{-68,-24},{-40,4}})));
   Modelica.Blocks.Sources.Sine sine2(
-    freqHz=0.2,
+    f=0.2,
     startTime=10,
     amplitude=-0.001,
-    offset=0) annotation (Placement(transformation(
-        origin={-26,-60},
-        extent={{6,-6},{-6,6}})));
+    offset=0) annotation (Placement(transformation(origin={-26,-60}, extent={{6,-6},{-6,6}})));
   Modelica.Blocks.Math.Add Perturbation(k2=+1) annotation (Placement(transformation(
         origin={-60,-50},
         extent={{9.99996,-9.99996},{-10,10}})));
   Modelica.Blocks.Sources.Sine sine1(
-    freqHz=0.2,
+    f=0.2,
     startTime=5,
     amplitude=0.001,
-    offset=1) annotation (Placement(transformation(
-        origin={-26,-40},
-        extent={{6.00002,-6.00001},{-6,6.00001}})));
+    offset=1) annotation (Placement(transformation(origin={-26,-40}, extent={{6.00002,-6.00001},{-6,6.00001}})));
 equation
 
   connect(sine1.y, Perturbation.u1) annotation (Line(

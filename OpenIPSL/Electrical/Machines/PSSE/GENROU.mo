@@ -6,7 +6,6 @@ model GENROU "ROUND ROTOR GENERATOR MODEL (QUADRATIC SATURATION)"
   import Modelica.ComplexMath.arg;
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
-  import Modelica.ComplexMath.'abs';
   import Modelica.ComplexMath.conj;
   import Modelica.ComplexMath.fromPolar;
   import Modelica.ComplexMath.j;

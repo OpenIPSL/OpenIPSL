@@ -14,10 +14,8 @@ model CurrentLimiter "Limiter of d- and q-axis currents"
     Placement(transformation(origin = {210, 50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput iqout annotation (
     Placement(transformation(origin = {210, -50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter dlim_normal_op(limitsAtInit = true, uMax = maxAbsCur, uMin = -maxAbsCur) annotation (
-    Placement(transformation(origin = {90, 70}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter qlim_frt_op(limitsAtInit = true, uMax = maxAbsCur, uMin = -maxAbsCur) annotation (
-    Placement(transformation(origin = {90, -70}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter dlim_normal_op(uMax=maxAbsCur, uMin=-maxAbsCur) annotation (Placement(transformation(origin={90,70}, extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Nonlinear.Limiter qlim_frt_op(uMax=maxAbsCur, uMin=-maxAbsCur) annotation (Placement(transformation(origin={90,-70}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter qlim_normal_op annotation (
     Placement(transformation(origin = {90, -120}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter dlim_frt_op annotation (
@@ -40,12 +38,10 @@ model CurrentLimiter "Limiter of d- and q-axis currents"
     Placement(transformation(origin = {-64, -170}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const1(k = maxAbsCur) annotation (
     Placement(transformation(origin = {-110, -170}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = maxAbsCur, uMin = 0) annotation (
-    Placement(transformation(origin = {-20, -170}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=maxAbsCur, uMin=0) annotation (Placement(transformation(origin={-20,-170}, extent={{-10,-10},{10,10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.General.Picdro picdro(Tdrop = if i_EEG then 0 else 0.5, Tpick = 0) annotation (
     Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.DeadZone deadZone(deadZoneAtInit = true, uMax = Deadband, uMin = -Deadband) annotation (
-    Placement(transformation(origin = {-130, 0}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=Deadband, uMin=-Deadband) annotation (Placement(transformation(origin={-130,0}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold = Deadband) annotation (
     Placement(transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Abs abs annotation (

@@ -6,8 +6,8 @@ model ThermostaticallyControlled "Thload - Thermostatically Controlled Load"
   parameter Real Ki=25 "Gain of the integral controller [pu/pu]";
   parameter Types.Time Ti=10 "Time constant of integral controller";
   parameter Types.Time T1=1200 "Time constant of the thermal load";
-  parameter SI.Temp_C T_ref=70 "Reference temperature";
-  parameter SI.Temp_C T0=10 "Initial temperature";
+  parameter Modelica.Units.NonSI.Temperature_degC T_ref=70 "Reference temperature";
+  parameter Modelica.Units.NonSI.Temperature_degC T0=10 "Initial temperature";
   parameter Types.PerUnit G0 = P_0/100*v_0^2 "Initial conductance";
   parameter Types.PerUnit Gmax = Kl*G0 "Maximum conductance";
   parameter Types.PerUnit Gmin = 0 "Minimum conductance";

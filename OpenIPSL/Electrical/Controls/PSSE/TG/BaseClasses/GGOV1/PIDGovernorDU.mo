@@ -29,7 +29,7 @@ model PIDGovernorDU "GE GGOV1DU General Governor Frequency Controller"
     y_start=0,
     initType=Modelica.Blocks.Types.Init.InitialOutput) annotation (Placement(transformation(extent = {{20, 20}, {40, 40}})));
   Modelica.Blocks.Math.Add3 GovernorPID annotation (Placement(transformation(origin = {84, 1.77636e-15}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=db, deadZoneAtInit=false) annotation (Placement(transformation(extent = {{10, 60}, {30, 80}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=db) annotation (Placement(transformation(extent={{10,60},{30,80}})));
   Modelica.Blocks.Nonlinear.Limiter limiterSerror(uMax=maxerr, uMin=minerr) annotation (Placement(transformation(extent = {{40, 60}, {60, 80}})));
   Modelica.Blocks.Math.Add3 add3_2(k1=-1, k3=-1) annotation (Placement(transformation(origin = {-10, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Gain r(k=R) "Permanent droop" annotation (Placement(transformation(origin = {-30, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));

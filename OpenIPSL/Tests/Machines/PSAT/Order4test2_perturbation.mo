@@ -28,34 +28,25 @@ model Order4test2_perturbation "Simple system with perturbation to test function
      Placement(transformation(
         origin={-95,35},
         extent={{-5,-5},{5,5}})));
-  Modelica.Blocks.Sources.Sine sine1(amplitude=0.001, freqHz=0.2) annotation (
-      Placement(transformation(
-        origin={-95,20},
-        extent={{-5,-5},{5,5}})));
+  Modelica.Blocks.Sources.Sine sine1(amplitude=0.001, f=0.2) annotation (Placement(transformation(origin={-95,20}, extent={{-5,-5},{5,5}})));
   Modelica.Blocks.Math.Add add2(k2=-1) annotation (Placement(transformation(
         origin={-75,15},
         extent={{-5,-5},{5,5}})));
   Modelica.Blocks.Sources.Sine sine2(
     amplitude=0.001,
-    freqHz=0.2,
-    startTime=5) annotation (Placement(transformation(
-        origin={-95,5},
-        extent={{-5,-5},{5,5}})));
+    f=0.2,
+    startTime=5) annotation (Placement(transformation(origin={-95,5}, extent={{-5,-5},{5,5}})));
   Modelica.Blocks.Sources.Sine sine3(
     amplitude=0.001,
-    freqHz=0.2,
-    startTime=10) annotation (Placement(transformation(
-        origin={-95,-75},
-        extent={{-5,-5},{5,5}})));
+    f=0.2,
+    startTime=10) annotation (Placement(transformation(origin={-95,-75}, extent={{-5,-5},{5,5}})));
   Modelica.Blocks.Math.Add add3(k2=-1) annotation (Placement(transformation(
         origin={-75,-65},
         extent={{-4.99999,-4.99999},{4.99999,4.99999}})));
   Modelica.Blocks.Sources.Sine sine4(
     amplitude=0.001,
-    freqHz=0.2,
-    startTime=5) annotation (Placement(transformation(
-        origin={-95,-55},
-        extent={{-5,-5},{5,5}})));
+    f=0.2,
+    startTime=5) annotation (Placement(transformation(origin={-95,-55}, extent={{-5,-5},{5,5}})));
   Modelica.Blocks.Sources.Step step3(height=-0.0005, startTime=7.1) annotation (
      Placement(transformation(
         origin={-95,-35},

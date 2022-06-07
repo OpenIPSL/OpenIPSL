@@ -67,8 +67,7 @@ model Turbine "GE General GGOV1 and GGOV1DU Turbine Model"
     Placement(transformation(extent = {{-120, 10}, {-100, 30}})));
   Modelica.Blocks.Sources.Constant const1(k = 1) annotation (
     Placement(transformation(extent = {{-160, 0}, {-140, 20}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(limitsAtInit = true, uMax = Vmax, uMin = Vmin) annotation (
-    Placement(transformation(extent = {{-48, -50}, {-28, -30}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Vmax, uMin=Vmin) annotation (Placement(transformation(extent={{-48,-50},{-28,-30}})));
   Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=Teng)
     if delay == Types.DelayType.FixedDelay "Use fixed delay model"
     annotation(Placement(transformation(extent={{108,-32},{120,-20}})));

@@ -41,8 +41,8 @@ if not use_input_E then
   der(local_E) = 0;
 end if;
 equation
-  tempCorrU = 1 + au * (SI.Conversions.to_degC(local_theta) - 25);
-  tempCorrI = 1 + ai * (SI.Conversions.to_degC(local_theta) - 25);
+  tempCorrU =1 + au*(Modelica.Units.Conversions.to_degC(local_theta) - 25);
+  tempCorrI =1 + ai*(Modelica.Units.Conversions.to_degC(local_theta) - 25);
 // Open-circuit voltage
   lnEquot = if local_E > 1.0 then log(max(local_E, 1.0)) / log(E_STC) else 0;
 // ln(E)/ln(1000W/m2), if E > 1W/m2

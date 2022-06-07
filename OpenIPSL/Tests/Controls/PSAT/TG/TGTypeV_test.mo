@@ -16,7 +16,7 @@ model TGTypeV_test "Simple system to test functionality of TG type V model"
     Pref=0.160552) annotation (Placement(transformation(extent={{-68,-24},{-40,4}})));
   Modelica.Blocks.Sources.Sine sine2(
     amplitude=0.001,
-    freqHz=0.2,
+    f=0.2,
     offset=1,
     startTime=5) annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
@@ -24,11 +24,9 @@ model TGTypeV_test "Simple system to test functionality of TG type V model"
         origin={-26,-60})));
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=-0.001,
-    freqHz=0.2,
+    f=0.2,
     startTime=10,
-    offset=0) annotation (Placement(transformation(
-        extent={{6,-6},{-6,6}},
-        origin={-26,-40})));
+    offset=0) annotation (Placement(transformation(extent={{6,-6},{-6,6}}, origin={-26,-40})));
   Modelica.Blocks.Math.Add perturbation annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,

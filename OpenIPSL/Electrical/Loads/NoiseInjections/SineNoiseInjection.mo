@@ -10,11 +10,10 @@ model SineNoiseInjection "Load with noise and sine reference injection"
 
   Modelica.Blocks.Sources.Sine sine(
     amplitude=amplitude,
-    freqHz=freqHz,
+    f=freqHz,
     phase=phase,
     offset=offset,
-    startTime=startTime)
-    annotation (Placement(transformation(extent={{10,12},{30,32}})));
+    startTime=startTime) annotation (Placement(transformation(extent={{10,12},{30,32}})));
 equation
   y = noise_gen.y + sine.y;
 end SineNoiseInjection;

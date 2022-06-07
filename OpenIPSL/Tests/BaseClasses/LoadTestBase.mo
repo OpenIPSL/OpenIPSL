@@ -25,29 +25,21 @@ partial model LoadTestBase "Base class for the different load cases."
   Modelica.Blocks.Sources.Step Vstep2(height=-0.0005, startTime=2.1) annotation (Placement(transformation(
         origin={-84,50},
         extent={{-4,-4},{4,4}})));
-  Modelica.Blocks.Sources.Sine Vsine1(amplitude=0.001, freqHz=0.2) annotation (Placement(transformation(
-        origin={-84,32},
-        extent={{-4,-4},{4,4}})));
+  Modelica.Blocks.Sources.Sine Vsine1(amplitude=0.001, f=0.2) annotation (Placement(transformation(origin={-84,32}, extent={{-4,-4},{4,4}})));
   Modelica.Blocks.Sources.Sine Vsine2(
     amplitude=0.001,
-    freqHz=0.2,
+    f=0.2,
     startTime=5,
-    phase=3.1415926535898) annotation (Placement(transformation(
-        origin={-83.9311,16},
-        extent={{-3.9311,-4},{3.9311,4}})));
+    phase=3.1415926535898) annotation (Placement(transformation(origin={-83.9311,16}, extent={{-3.9311,-4},{3.9311,4}})));
   Modelica.Blocks.Sources.Sine Psine2(
     amplitude=0.001,
-    freqHz=0.2,
+    f=0.2,
     startTime=10,
-    phase=3.1415926535898) annotation (Placement(transformation(
-        origin={-84,-64},
-        extent={{-4,-4},{4,4}})));
+    phase=3.1415926535898) annotation (Placement(transformation(origin={-84,-64}, extent={{-4,-4},{4,4}})));
   Modelica.Blocks.Sources.Sine Psine1(
     amplitude=0.001,
-    freqHz=0.2,
-    startTime=5) annotation (Placement(transformation(
-        origin={-84,-50},
-        extent={{-4,-4},{4,4}})));
+    f=0.2,
+    startTime=5) annotation (Placement(transformation(origin={-84,-50}, extent={{-4,-4},{4,4}})));
   Modelica.Blocks.Sources.Step Pstep2(height=-0.0005, startTime=7.1) annotation (Placement(transformation(
         origin={-84,-30},
         extent={{-4,-4},{4,4}})));
