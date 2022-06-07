@@ -5,7 +5,11 @@ class v200 "Version 2.0.0 (2022-06-07)"
 <h4>What&apos;s Changed</h4>
 <p>
 This new release version 2.0.0 of <code><strong>OpenIPSL</strong></code> is a 
-<strong>non-backward compatible</strong> version.
+<strong>non-backward compatible</strong> release based on the 
+<a href=\"https://github.com/modelica/ModelicaStandardLibrary/releases/tag/v3.2.3%2Bbuild.4\">
+Modelica Standard Library version 3.2.3</a>.
+</p>
+<p>
 A conversion script is provided for user libraries using <code><strong>OpenIPSL</strong></code> version 
 1.5.0 and older.</p>
 <h5>Highlights</h5>
