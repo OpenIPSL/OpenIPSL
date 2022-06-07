@@ -5,7 +5,7 @@
 // Make an exception for example base class
 // (examples should normally not be extended from and hence no conversion is normally given)
 convertClass("OpenIPSL.Examples.SMIBpartial",
-             "OpenIPSL.Examples.BaseClasses.SMIB");
+             "OpenIPSL.Tests.BaseClasses.SMIB");
 
 /* Electrical */
 
