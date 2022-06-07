@@ -8,9 +8,7 @@ This new release version 2.0.0 of <code><strong>OpenIPSL</strong></code> is a
 <strong>non-backward compatible</strong> version.
 A conversion script is provided for user libraries using <code><strong>OpenIPSL</strong></code> version 
 1.5.0 and older.</p>
-<p>
-The main changes in this release are:
-</p>
+<h5>Highlights</h5>
 <ul>
 <li>Changed the license to the <a href=\"https://opensource.org/licenses/BSD-3-Clause\">
 3-Clause BSD License</a>.</li>
@@ -113,7 +111,7 @@ This release consists of
 <li><a href=\"https://github.com/ManuelNvro\">@ManuelNvro</a> made their first contribution in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/196\">#196</a></li>
 <li><a href=\"https://github.com/sergio-dorado\">@sergio-dorado</a> made their first contribution in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/268\">#268</a></li>
 </ul>
-<h5>Full Changelog:</h5>
+<h5>Full Changelog</h5>
 <p><code><a href=\"https://github.com/OpenIPSL/OpenIPSL/compare/v1.5.0...v2.0.0\">v1.5.0...v2.0.0</a></code></p>
 </html>"));
 end v200;
