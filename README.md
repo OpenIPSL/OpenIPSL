@@ -44,11 +44,11 @@ If you want to submit your contributions to the OpenIPSL, note that we make use 
 
 The authors can be contacted by email: <a href="mailto:luigi.vanfretti@gmail.com?subject=OpenIPSL_License">luigi.vanfretti@gmail.com</a>.
 
-This Source Code Form is subject to the terms of the 3-Clause BSD license.
+This Source Code Form is subject to the terms of the [3-Clause BSD license](https://opensource.org/licenses/BSD-3-Clause).
 
 ## Acknowledgements
 
 This work was supported primarily by the following grants and institutions, in reverse chronological order:
 - 2018-2023: Dominion Energy Virginia through sponsored research projects: (2018-2019) Flexible Alternating Current Transmission System Modeling and Performance Analysis using Measurement Data, (2020-2021) Model Validation of Generator Power Plants, and (2021-2022) Cloud-Based Integrated Model-and-Measurement Analytics for Power System Applications, at Rensselaer Polytechnic Institute.
-- 2019-2021: New York State Energy Research and Development Authority (NYSERDA) through the Electric Power Transmission and Distribution (EPTD) PON 3770 High Performing Grid Program together with the New York Power Authority (NYPA). 
-- 2018-2020: This work was also supported in part by the ERC Program of the National Science Foundation and DOE under NSF Award Number EEC-1041877 and in part by the CURENT Industry Partnership Program. 
+- 2019-2021: New York State Energy Research and Development Authority (NYSERDA) through the Electric Power Transmission and Distribution (EPTD) PON 3770 High Performing Grid Program together with the New York Power Authority (NYPA).
+- 2018-2020: This work was also supported in part by the ERC Program of the National Science Foundation and DOE under NSF Award Number EEC-1041877 and in part by the CURENT Industry Partnership Program.
