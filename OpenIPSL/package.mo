@@ -6,13 +6,13 @@ annotation (preferredView="info",
   Protection(access = Access.packageDuplicate),
   uses(Complex(version="4.0.0"), Modelica(version="4.0.0")),
   version="3.0.0",
-  versionDate="2022-06-08",
+  versionDate="2022-06-09",
   conversion(
     from(version={"0.8","0.8.1","1.0.0","1.5.0"}, to="2.0.0",
-      script="modelica://OpenIPSL/Resources/scripts/ConvertOpenIPSL_from_1.5.0_to_2.0.0.mos"), 
+      script="modelica://OpenIPSL/Resources/scripts/ConvertOpenIPSL_from_1.5.0_to_2.0.0.mos"),
     from(version="2.0.0", to="3.0.0",
       script="modelica://OpenIPSL/Resources/scripts/ConvertOpenIPSL_from_2.0.0_to_3.0.0.mos")),
-  Icon(graphics={Bitmap(extent={{-100,-100},{100,100}}, 
+  Icon(graphics={Bitmap(extent={{-100,-100},{100,100}},
     fileName="modelica://OpenIPSL/Resources/images/OpenIPSL_Logo.png")}),
   Documentation(info="<html>
 <p>
