@@ -11,7 +11,7 @@ Modelica Standard Library version 3.2.3</a>.
 </p>
 <p>
 A conversion script is provided for user libraries using <code><strong>OpenIPSL</strong></code> version 
-1.5.0 and older. <em>(Note: Models that extended from any of the old  <code>Examples</code> models 
+1.5.0 and older. <em>(Note: Models that extended from any of the old <code>Examples</code> models 
 will have to be converted manually by the user.)</em>
 </p>
 <h5>Highlights</h5>
