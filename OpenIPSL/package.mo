@@ -6,7 +6,7 @@ annotation (preferredView="info",
   Protection(access = Access.packageDuplicate),
   uses(Complex(version="3.2.3"), Modelica(version="3.2.3"), Modelica_Synchronous(version="0.93.0")),
   version="2.0.0",
-  versionDate="2022-06-07",
+  versionDate="2022-06-08",
   conversion(
      from(version={"0.8","0.8.1","1.0.0","1.5.0"}, script="modelica://OpenIPSL/Resources/scripts/ConvertOpenIPSL_from_1.5.0_to_2.0.0.mos")),
   Icon(graphics={Bitmap(extent={{-100,-100},{100,100}}, fileName=

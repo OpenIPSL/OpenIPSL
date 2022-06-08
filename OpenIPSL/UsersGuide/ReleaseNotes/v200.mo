@@ -1,5 +1,5 @@
 within OpenIPSL.UsersGuide.ReleaseNotes;
-class v200 "Version 2.0.0 (2022-06-07)"
+class v200 "Version 2.0.0 (2022-06-08)"
   extends Modelica.Icons.ReleaseNotes;
   annotation (Documentation(info="<html>
 <h4>What&apos;s Changed</h4>
