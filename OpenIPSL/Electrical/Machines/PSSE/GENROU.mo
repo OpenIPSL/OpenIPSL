@@ -6,6 +6,7 @@ model GENROU "ROUND ROTOR GENERATOR MODEL (QUADRATIC SATURATION)"
   import Modelica.ComplexMath.arg;
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
+  import Modelica.ComplexMath.abs;
   import Modelica.ComplexMath.conj;
   import Modelica.ComplexMath.fromPolar;
   import Modelica.ComplexMath.j;
@@ -51,7 +52,7 @@ protected
   parameter Types.Angle ang_PSIpp0=arg(PSIpp0) "flux angle";
   parameter Types.Angle ang_It=arg(It) "current angle";
   parameter Types.Angle ang_PSIpp0andIt=ang_PSIpp0 - ang_It "angle difference";
-  parameter Types.PerUnit abs_PSIpp0='abs'(PSIpp0)
+  parameter Types.PerUnit abs_PSIpp0=abs(PSIpp0)
     "magnitude of sub-transient flux linkage";
   parameter Real dsat=SE(
       abs_PSIpp0,
