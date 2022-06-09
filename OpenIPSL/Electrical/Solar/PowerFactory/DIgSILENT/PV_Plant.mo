@@ -26,9 +26,9 @@ model PV_Plant "DIgSILENT model of a solar plant"
     Dialog(group = "Parameters of PV Modules"));
   parameter Types.Current Isc_stc = 5 "Short-circuit current at Standard Test Conditions" annotation (
     Dialog(group = "Parameters of PV Modules"));
-  parameter Modelica.Units.SI.LinearTemperatureCoefficient au=-0.0039 "Temperature correction factor (voltage)" annotation (Dialog(group="Parameters of PV Modules"));
-  parameter Modelica.Units.SI.LinearTemperatureCoefficient ai=0.0004 "Temperature correction factor (current)" annotation (Dialog(group="Parameters of PV Modules"));
-  parameter Modelica.Units.SI.Capacitance C=1.5e-3 "Capacity of capacitor on DC busbar" annotation (Dialog(group="DC busbar parameters"));
+  parameter SI.LinearTemperatureCoefficient au=-0.0039 "Temperature correction factor (voltage)" annotation (Dialog(group="Parameters of PV Modules"));
+  parameter SI.LinearTemperatureCoefficient ai=0.0004 "Temperature correction factor (current)" annotation (Dialog(group="Parameters of PV Modules"));
+  parameter SI.Capacitance C=1.5e-3 "Capacity of capacitor on DC busbar" annotation (Dialog(group="DC busbar parameters"));
   parameter Real Kp = 0.005 "Gain, Active Power PI-Controller" annotation (
     Dialog(group = "Current Controller Parameters"));
   parameter Types.Time Tip = 0.03 "Integration Time Constant, Active Power PI-Ctrl." annotation (
