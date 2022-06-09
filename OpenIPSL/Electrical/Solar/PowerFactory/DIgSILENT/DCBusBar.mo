@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical.Solar.PowerFactory.DIgSILENT;
 model DCBusBar "Model of a DC busbar between the module and inverter"
-  parameter SI.Capacitance C=1.5e-3 "Capacity of capacitor on DC busbar";
+  parameter Modelica.Units.SI.Capacitance C=1.5e-3 "Capacity of capacitor on DC busbar";
   Modelica.Blocks.Interfaces.RealInput P_conv annotation (
       Placement(
       transformation(

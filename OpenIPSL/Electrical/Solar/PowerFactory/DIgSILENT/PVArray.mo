@@ -15,10 +15,8 @@ model PVArray "Array of PV modules"
     Dialog(group = "Parameters of PV Modules"));
   parameter Types.Current Isc_stc = 5 "Short-circuit current at Standard Test Conditions" annotation (
     Dialog(group = "Parameters of PV Modules"));
-  parameter SI.LinearTemperatureCoefficient au = -0.0039 "Temperature correction factor (voltage)" annotation (
-    Dialog(group = "Parameters of PV Modules"));
-  parameter SI.LinearTemperatureCoefficient ai = 0.0004 "Temperature correction factor (current)" annotation (
-    Dialog(group = "Parameters of PV Modules"));
+  parameter Modelica.Units.SI.LinearTemperatureCoefficient au=-0.0039 "Temperature correction factor (voltage)" annotation (Dialog(group="Parameters of PV Modules"));
+  parameter Modelica.Units.SI.LinearTemperatureCoefficient ai=0.0004 "Temperature correction factor (current)" annotation (Dialog(group="Parameters of PV Modules"));
   parameter Boolean use_input_E = false;
   parameter Boolean use_input_theta = false;
   Modelica.Blocks.Interfaces.RealOutput Iarray annotation (

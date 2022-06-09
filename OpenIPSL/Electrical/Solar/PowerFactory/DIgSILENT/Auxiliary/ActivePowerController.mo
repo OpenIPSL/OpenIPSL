@@ -22,11 +22,17 @@ model ActivePowerController "Controller for the active power of a PV plant"
   Modelica.Blocks.Continuous.Integrator tracker(initType = Modelica.Blocks.Types.Init.InitialOutput, k = 1 / 0.1, y_start = id0) annotation (
     Placement(transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Feedback feedback annotation (
-    Placement(transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=yo_max, uMin=yo_min) annotation (Placement(transformation(origin={100,70}, extent={{-10,-10},{10,10}})));
+    Placement(visible = true, transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=yo_max, uMin=yo_min) annotation (Placement(visible=true, transformation(
+        origin={100,70},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   Modelica.Blocks.Math.Product product annotation (
-    Placement(transformation(origin = {60, 70}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=yo_max, uMin=yo_min) annotation (Placement(transformation(origin={44,-6}, extent={{-10,-10},{10,10}})));
+    Placement(visible = true, transformation(origin = {60, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=yo_max, uMin=yo_min) annotation (Placement(visible=true, transformation(
+        origin={44,-6},
+        extent={{-10,-10},{10,10}},
+        rotation=0)));
   //protected
   Modelica.Blocks.Interfaces.RealOutput yo1 annotation (
     Placement(transformation(origin={170,-20}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin={110,-40}, extent = {{-10, -10}, {10, 10}})));
