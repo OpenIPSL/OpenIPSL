@@ -41,5 +41,5 @@ equation
   connect(Iqmin, IqLimiter.limit2);
   connect(Iqmax, IqLimiter.limit1);
   annotation (
-    Icon(graphics={  Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {20, 100}, extent = {{-120, 0}, {80, -20}}, textString = "PQ Priority"), Text(origin = {44, 60}, extent = {{-120, 0}, {-78, -20}}, textString = "Ipref"), Text(origin = {44, -40}, extent = {{-120, 0}, {-78, -20}}, textString = "Iqref"), Text(origin = {172, 62}, extent = {{-120, 0}, {-78, -20}}, textString = "Ipcmd"), Text(origin = {172, -38}, extent = {{-120, 0}, {-78, -20}}, textString = "Iqcmd")}));
+    Icon(graphics={ Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {20, 100}, extent = {{-120, 0}, {80, -20}}, textString = "PQ Priority"), Text(origin = {44, 60}, extent = {{-120, 0}, {-78, -20}}, textString = "Ipref"), Text(origin = {44, -40}, extent = {{-120, 0}, {-78, -20}}, textString = "Iqref"), Text(origin = {172, 62}, extent = {{-120, 0}, {-78, -20}}, textString = "Ipcmd"), Text(origin = {172, -38}, extent = {{-120, 0}, {-78, -20}}, textString = "Iqcmd")}));
 end QPPriority;

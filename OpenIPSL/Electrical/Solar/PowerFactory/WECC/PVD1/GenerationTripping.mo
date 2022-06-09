@@ -46,5 +46,5 @@ equation
     reinit(umax, Lv2);
   end when;
   annotation (
-    Icon(graphics={  Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {32, 93}, extent = {{-132, 7}, {68, -13}}, textString = "Generation Tripping"), Text(origin = {144, 53}, extent = {{-132, 7}, {-44, -13}}, textString = "TripLow"), Text(origin = {144, -47}, extent = {{-132, 7}, {-44, -13}}, textString = "TripHigh"), Text(origin = {36, 3}, extent = {{-132, 7}, {-44, -13}}, textString = "Input")}));
+    Icon(graphics={ Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {32, 93}, extent = {{-132, 7}, {68, -13}}, textString = "Generation Tripping"), Text(origin = {144, 53}, extent = {{-132, 7}, {-44, -13}}, textString = "TripLow"), Text(origin = {144, -47}, extent = {{-132, 7}, {-44, -13}}, textString = "TripHigh"), Text(origin = {36, 3}, extent = {{-132, 7}, {-44, -13}}, textString = "Input")}));
 end GenerationTripping;
