@@ -3,17 +3,17 @@ model QPPriority
   parameter Boolean PqFlag;
   parameter Types.PerUnit Imax;
   Modelica.Blocks.Interfaces.RealInput Ip annotation (
-    Placement(visible = true, transformation(origin = {-100, 50}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-100, 50}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-100, 50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-100, 50}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealInput Iq annotation (
-    Placement(visible = true, transformation(origin = {-100, -50}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-100, -50}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-100, -50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-100, -50}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealOutput Iqcmd annotation (
-    Placement(visible = true, transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Ipcmd annotation (
-    Placement(visible = true, transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter IpLimiter annotation (
-    Placement(visible = true, transformation(origin = {0, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {0, 50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter IqLimiter annotation (
-    Placement(visible = true, transformation(origin = {0, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {0, -50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Iqmin;
   Modelica.Blocks.Interfaces.RealOutput Iqmax;
   Modelica.Blocks.Interfaces.RealOutput Ipmin;

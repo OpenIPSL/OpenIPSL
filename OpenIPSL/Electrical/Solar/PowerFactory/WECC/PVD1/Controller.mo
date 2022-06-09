@@ -22,78 +22,74 @@ model Controller
   parameter Types.PerUnit Vt2 = 1.1 "Voltage tripping repose curve point 2";
   parameter Types.PerUnit Vt3 = 1.2 "Voltage tripping repose curve point 3";
   Modelica.Blocks.Interfaces.RealInput Vt annotation (
-    Placement(visible = true, transformation(origin = {-200, -10}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-200, 140}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, -10}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-200, 140}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interfaces.RealInput It annotation (
-    Placement(visible = true, transformation(origin = {-200, -70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-200, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, -70}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-200, 60}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Math.Gain compensation(k = Xc) annotation (
-    Placement(visible = true, transformation(origin = {-150, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-150, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add annotation (
-    Placement(visible = true, transformation(origin = {-110, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.Limiter numerical_limit(uMax=Modelica.Constants.inf, uMin=0.01) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {-110, -70}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter numerical_limit(uMax=Modelica.Constants.inf, uMin=0.01) annotation (Placement(transformation(
         origin={-70,-10},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Division division annotation (
-    Placement(visible = true, transformation(origin = {90, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {90, -30}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.WECC.PVD1.QPPriority qppriority(Imax = Imax, PqFlag = PqFlag) annotation (
-    Placement(visible = true, transformation(origin = {130, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {130, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Division division1 annotation (
-    Placement(visible = true, transformation(origin = {90, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {90, 30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.FirstOrder PCurrentController(T = Tg, initType = Modelica.Blocks.Types.Init.InitialOutput, k = 1, y_start = Pref / u_0) annotation (
-    Placement(visible = true, transformation(origin = {182, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {182, 90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Continuous.FirstOrder QCurrentController(T = Tg, initType = Modelica.Blocks.Types.Init.InitialOutput, k = -1, y_start = -Qref / u_0) annotation (
-    Placement(visible = true, transformation(origin = {182, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {182, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput freq annotation (
-    Placement(visible = true, transformation(origin = {-200, 150}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-200, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {-200, 150}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-200, -60}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Sources.Constant freq_ref(k = 1) annotation (
-    Placement(visible = true, transformation(origin = {-182, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-182, 110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add2(k1 = -1) annotation (
-    Placement(visible = true, transformation(origin = {-130, 144}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=Modelica.Constants.inf, uMin=fdbd) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {-130, 144}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=Modelica.Constants.inf, uMin=fdbd) annotation (Placement(transformation(
         origin={-90,144},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Gain frequency_droop(k = Ddn) annotation (
-    Placement(visible = true, transformation(origin = {-50, 144}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-50, 144}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant active_power_reference(k = Pref) annotation (
-    Placement(visible = true, transformation(origin = {-150, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.DeadZone deadband_voltage(uMax=v1, uMin=v0) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {-150, 30}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadband_voltage(uMax=v1, uMin=v0) annotation (Placement(transformation(
         origin={-70,-70},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Gain voltage_droop(k = dqdv) annotation (
-    Placement(visible = true, transformation(origin = {-30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Qmx, uMin=Qmn) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {-30, -70}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Qmx, uMin=Qmn) annotation (Placement(transformation(
         origin={50,-70},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Add add1 annotation (
-    Placement(visible = true, transformation(origin = {14, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {14, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant reactive_power_reference(k = Qref) annotation (
-    Placement(visible = true, transformation(origin = {-70, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-70, -110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Ip annotation (
-    Placement(visible = true, transformation(origin = {210, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {210, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, 90}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {210, 110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Iq annotation (
-    Placement(visible = true, transformation(origin = {210, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {210, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {210, -70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {210, -90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Add add4 annotation (
-    Placement(visible = true, transformation(origin = {-50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-50, 50}, extent = {{-10, -10}, {10, 10}})));
   parameter Types.PerUnit Qref;
   parameter Types.PerUnit Pref;
   parameter Types.PerUnit u_0;
   Modelica.Blocks.Math.Product product1 annotation (
-    Placement(visible = true, transformation(origin = {150, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {150, 90}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product annotation (
-    Placement(visible = true, transformation(origin = {70, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {70, 150}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.WECC.PVD1.GenerationTripping frequency_tripping(Lv0 = Ft0, Lv1 = Ft1, Lv2 = Ft2, Lv3 = Ft3, recov = fr_recov) annotation (
-    Placement(visible = true, transformation(origin = {30, 150}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {30, 150}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.WECC.PVD1.GenerationTripping voltage_tripping(Lv0 = Vt0, Lv1 = Vt1, Lv2 = Vt2, Lv3 = Vt3, recov = vr_recov) annotation (
-    Placement(visible = true, transformation(origin = {30, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {30, 110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product2 annotation (
-    Placement(visible = true, transformation(origin = {70, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {70, 110}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product3 annotation (
-    Placement(visible = true, transformation(origin = {110, 130}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 130}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product4 annotation (
-    Placement(visible = true, transformation(origin = {150, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {150, -70}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(It, compensation.u) annotation (
     Line(points = {{-200, -70}, {-162, -70}}, color = {0, 0, 127}));

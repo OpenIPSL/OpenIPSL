@@ -61,13 +61,13 @@ model Plant_PVD1
   parameter Types.PerUnit Vt3 = 1.2 "Voltage tripping repose curve point 3" annotation (
     Dialog(group = "PVD1 Model Parameters"));
   OpenIPSL.Interfaces.PwPin p annotation (
-    Placement(visible = true, transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   OpenIPSL.Electrical.Solar.PowerFactory.WECC.PVD1.Controller pvd1(Ddn = Ddn, Ft0 = Ft0, Ft1 = Ft1, Ft2 = Ft2, Ft3 = Ft3, Imax = Imax, PqFlag = PqFlag, Pref = P_0 / M_b, Qmn = Qmn, Qmx = Qmx, Qref = Q_0 / M_b, Tg = Tg, Vt0 = Vt0, Vt1 = Vt1, Vt2 = Vt2, Vt3 = Vt3, Xc = Xc, dqdv = dqdv, fdbd = fdbd, fr_recov = fr_recov, u_0 = v_0, v0 = v0, v1 = v1, vr_recov = vr_recov) annotation (
-    Placement(visible = true, transformation(origin = {2.66454e-15, -2.66454e-15}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Placement(transformation(origin = {2.66454e-15, -2.66454e-15}, extent = {{-20, -20}, {20, 20}})));
   OpenIPSL.Electrical.Solar.PowerFactory.General.ElmGenstat static_generator(M_b = M_b, angle_0 = angle_0, pll_connected = false, v_0 = v_0)  annotation (
-    Placement(visible = true, transformation(origin = {61.625, -0.2}, extent = {{-17.625, -28.2}, {17.625, 28.2}}, rotation = 0)));
+    Placement(transformation(origin = {61.625, -0.2}, extent = {{-17.625, -28.2}, {17.625, 28.2}})));
   OpenIPSL.Electrical.Solar.PowerFactory.General.StaVmea measurement(angle_0 = angle_0, fn = fn)  annotation (
-    Placement(visible = true, transformation(origin = {50, -50}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {50, -50}, extent = {{10, -10}, {-10, 10}})));
 equation
   connect(static_generator.p, p) annotation (
     Line(points = {{80, 0}, {104, 0}, {104, 0}, {110, 0}}, color = {0, 0, 255}));
@@ -84,6 +84,6 @@ equation
   connect(measurement.fe, pvd1.freq) annotation (
     Line(points = {{40, -54}, {-28, -54}, {-28, -6}, {-20, -6}, {-20, -6}}, color = {0, 0, 127}));
   annotation (
-    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 60.3123}, points = {{-100, 39.6877}, {0, -40.3123}, {100, 39.6877}, {100, 39.6877}})}, coordinateSystem(initialScale = 0.1)),
+    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 60.3123}, points = {{-100, 39.6877}, {0, -40.3123}, {100, 39.6877}, {100, 39.6877}})}, coordinateSystem()),
     __OpenModelica_simulationFlags(lv = "LOG_STATS", outputFormat = "mat", s = "dassl"));
 end Plant_PVD1;

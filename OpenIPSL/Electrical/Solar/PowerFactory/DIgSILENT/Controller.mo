@@ -32,11 +32,10 @@ model Controller "Controller for the solar plant"
   Modelica.Blocks.Continuous.FirstOrder voltage_measurement_delay(T = Tr, initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = uac0) annotation (
     Placement(transformation(origin = {-150, -70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant reference_voltage(k = uac0) annotation (
-    Placement(visible = true, transformation(origin = {-150, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Modelica.Constants.inf, uMin=U_min) annotation (Placement(visible=true, transformation(
+    Placement(transformation(origin = {-150, -110}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Modelica.Constants.inf, uMin=U_min) annotation (Placement(transformation(
         origin={-110,90},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Feedback feedback1 annotation (
     Placement(transformation(origin = {-70, 30}, extent = {{-10, 10}, {10, -10}})));
   Modelica.Blocks.Continuous.FirstOrder filter(T = Tr, initType = Modelica.Blocks.Types.Init.SteadyState, y_start = 0) annotation (
