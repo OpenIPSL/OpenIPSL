@@ -3,6 +3,7 @@ model ESST4B "ST4B Excitation System [IEEE2005]"
   extends Icons.VerifiedModel;
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import Modelica.ComplexMath.j;
+  import Modelica.ComplexMath.abs;
   parameter Types.Time T_R=0.3 "Regulator input filter time constant";
   parameter Types.PerUnit K_PR=2.97 "Voltage regulator proportional gain";
   parameter Types.TimeAging K_IR=2.97 "Voltage regulator integral gain";
@@ -110,7 +111,7 @@ initial equation
   VR0 = Efd0*K_G;
   V_REF = ECOMP;
 equation
-  VE = 'abs'(K_P_comp*V_T + j*(K_I + K_P_comp*X_L)*I_T);
+  VE = abs(K_P_comp*V_T + j*(K_I + K_P_comp*X_L)*I_T);
   V_T = Gen_terminal.vr + j*Gen_terminal.vi;
   I_T = Gen_terminal.ir + j*Gen_terminal.ii;
   connect(add.y, limiter.u) annotation (Line(

@@ -6,6 +6,7 @@ model GENROE "ROUND ROTOR GENERATOR MODEL (EXPONENTIAL SATURATION)"
   import Modelica.ComplexMath.arg;
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
+  import Modelica.ComplexMath.abs;
   import Modelica.ComplexMath.conj;
   import Modelica.ComplexMath.fromPolar;
   import OpenIPSL.NonElectrical.Functions.SE_exp;
@@ -53,7 +54,7 @@ protected
   parameter Real ang_PSIpp0=arg(PSIpp0) "flux angle";
   parameter Real ang_It=arg(It) "current angle";
   parameter Real ang_PSIpp0andIt=ang_PSIpp0 - ang_It "angle difference";
-  parameter Types.PerUnit abs_PSIpp0='abs'(PSIpp0)
+  parameter Types.PerUnit abs_PSIpp0=abs(PSIpp0)
     "magnitude of sub-transient flux linkage";
   parameter Real dsat=SE_exp(
       abs_PSIpp0,
