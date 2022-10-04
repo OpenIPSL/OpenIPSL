@@ -14,6 +14,7 @@ model HYGOV "HYGOV - Hydro Turbine-Governor model"
   parameter Types.PerUnit A_t=1.2 "Turbine gain";
   parameter Types.PerUnit D_turb=0.2 "Turbine damping";
   parameter Types.PerUnit q_NL=0.08 "Water flow at no load";
+  parameter Types.PerUnit h0=1.0 "water head initial value";
   Modelica.Blocks.Sources.Constant n_ref(k=nref) annotation (Placement(transformation(extent={{-178,14},{-166,26}})));
   OpenIPSL.NonElectrical.Continuous.SimpleLag SimpleLag1(
     K=1,
@@ -71,9 +72,9 @@ model HYGOV "HYGOV - Hydro Turbine-Governor model"
     T=T_r,
     y_start=0)
     annotation (Placement(transformation(extent={{-106,0},{-94,12}})));
-protected
-  parameter Real h0=1 "water head initial value";
+  // parameter Real h0=1 "water head initial value";
   // Real T_w(start=T_w);//=1.25 "Water time constant, s";
+protected
   parameter Real q0(fixed=false);
   //=Pm0/(A_t*h0)+q_NL "water flow initial value";
   parameter Real g0(fixed=false);
