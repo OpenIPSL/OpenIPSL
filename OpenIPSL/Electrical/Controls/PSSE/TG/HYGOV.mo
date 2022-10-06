@@ -72,7 +72,6 @@ model HYGOV "HYGOV - Hydro Turbine-Governor model"
     T=T_r,
     y_start=0)
     annotation (Placement(transformation(extent={{-106,0},{-94,12}})));
-  // Real T_w(start=T_w);//=1.25 "Water time constant, s";
 protected
   parameter Real q0(fixed=false);
   //=Pm0/(A_t*h0)+q_NL "water flow initial value";
