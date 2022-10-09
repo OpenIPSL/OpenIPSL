@@ -41,7 +41,7 @@ protected
   parameter Types.Impedance Zb = V_b^2/S_b "System base impedance";
   parameter Types.PerUnit r = rT * Zn/Zb "Resistance (system base)";
   parameter Types.PerUnit x = xT * Zn/Zb "Reactance (system base)";
-  parameter Boolean tc = m <> 1.0 "Internal parameter to switch on the icon arrow";
+  parameter Boolean tc = m > 1.0 or m < 1.0 "Internal parameter to switch on the icon arrow";
 equation
   r*p.ir - x*p.ii = 1/m^2*p.vr - 1/m*n.vr;
   r*p.ii + x*p.ir = 1/m^2*p.vi - 1/m*n.vi;

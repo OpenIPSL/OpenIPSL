@@ -61,11 +61,11 @@ protected
   parameter Types.PerUnit V_S0(fixed=false);
   parameter Boolean bypass_filter2(fixed=false);
   parameter Boolean bypass_filter1(fixed=false);
-  parameter Integer n1=if A_1 == 0 and A_2 == 0 then 4 elseif A_2 == 0 then 2
+  parameter Integer n1=if not (A_1 > 0.0 or A_1 < 0.0) and not (A_2 > 0.0 or A_2 < 0.0) then 4 elseif not (A_2 > 0.0 or A_2 < 0.0) then 2
        else 3;
-  parameter Integer n2=if A_3 == 0 and A_4 == 0 then 4 elseif A_4 == 0 then 2
+  parameter Integer n2=if not (A_3 > 0.0 or A_3 < 0.0) and not (A_4 > 0.0 or A_4 < 0.0) then 4 elseif not (A_4 > 0.0 or A_4 < 0.0) then 2
        else 3;
-  parameter Integer n3=if A_6 == 0 and A_5 == 0 then 1 elseif A_6 == 0 then 2
+  parameter Integer n3=if not (A_6 > 0.0 or A_6 < 0.0) and not (A_5 > 0.0 or A_5 < 0.0) then 1 elseif not (A_6 > 0.0 or A_6 < 0.0) then 2
        else 3;
   parameter Real a1[n1](each fixed=false);
   parameter Real a2[n2](each fixed=false);
