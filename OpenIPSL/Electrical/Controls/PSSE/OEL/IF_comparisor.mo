@@ -44,10 +44,10 @@ equation
           lineColor={
           0,0,255}),Text(
           extent={{40,-14},{80,-54}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString=">"),Text(
           extent={{40,66},{80,26}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="<"),Line(
           points={{-100,0},{-40,0}},
           color={0,0,255},
@@ -76,6 +76,6 @@ equation
           0,0,255}),
         Text(
           extent={{-120,140},{120,100}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}));
 end IF_comparisor;

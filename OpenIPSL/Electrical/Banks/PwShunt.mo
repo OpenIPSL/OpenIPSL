@@ -32,7 +32,7 @@ equation
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={Rectangle(extent={{-100,100},{100,-100}},
           lineColor={0,0,255}),Text(
           extent={{-94,8},{-84,-6}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="Q"),Line(
@@ -73,6 +73,6 @@ equation
           {0,100}}, color={0,0,255}),Line(points={{60,62},{60,80},{0,80}},
           color={0,0,255}),Text(
           extent={{-100,-100},{100,-140}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}));
 end PwShunt;

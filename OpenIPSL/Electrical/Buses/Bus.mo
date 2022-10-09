@@ -33,12 +33,12 @@ equation
           visible=displayPF,
           origin={0,-120},
           extent={{-60,-20},{60,20}},
-          lineColor={170,0,0},
+          textColor={170,0,0},
           textString=DynamicSelect("Vpu", String(v, significantDigits=3))),Text(
           visible=displayPF,
           origin={0,-160},
           extent={{-60,-20},{60,20}},
-          lineColor={170,0,0},
+          textColor={170,0,0},
           textString=DynamicSelect("Angle", String(angleDisplay, significantDigits=3)
              + "°"))}));
 end Bus;

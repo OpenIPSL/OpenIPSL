@@ -64,19 +64,19 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-104,72},{-72,50}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="v"),Text(
           extent={{-100,-48},{-68,-70}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vs"),Text(
           extent={{88,10},{120,-12}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vf"),Text(
           extent={{-34,36},{42,-24}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="AVRTypeIII"),Text(
           extent={{-16,100},{16,78}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vf0")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

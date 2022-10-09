@@ -53,14 +53,14 @@ equation
           lineColor={255,0,0},
           lineThickness=1),Text(
           extent={{-92,102},{98,84}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=15,
           textStyle={TextStyle.Bold},
           textString="Step 1: Adding PSS to the generator model"),Text(
           extent={{-84,28},{20,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=12,

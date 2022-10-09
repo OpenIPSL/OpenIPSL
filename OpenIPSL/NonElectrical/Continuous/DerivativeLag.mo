@@ -32,13 +32,13 @@ equation
   annotation (
 Icon(graphics={Text(
           extent={{-60,82},{60,22}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Ks"),Line(
           points={{-62,0},{66,0}},
           color={0,0,255},
           smooth=Smooth.Bezier,
           thickness=0.5),Text(
           extent={{-60,-20},{60,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1+sT")}));
 end DerivativeLag;

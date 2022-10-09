@@ -27,6 +27,6 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-88,40},{82,-40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="SE(Efd)")}));
 end ImSE;

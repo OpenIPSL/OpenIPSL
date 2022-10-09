@@ -51,19 +51,19 @@ equation
   annotation (
     Icon(graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,255}),Text(
           extent={{-90,50},{-60,30}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ASET"), Text(
                     extent={{-70,52},{70,-50}},
-                    lineColor={28,108,200},
+                    textColor={28,108,200},
                     textString="Acceleration
 Limiter"),Text( extent={{-90,-30},{-50,-50}},
-                    lineColor={28,108,200},
+                    textColor={28,108,200},
                     textString="SPEED"),Text(
                     extent={{60,52},{90,30}},
-                    lineColor={28,108,200},
+                    textColor={28,108,200},
                     textString="FSRA"),Text(
                     extent={{60,-30},{90,-50}},
-                    lineColor={28,108,200},
+                    textColor={28,108,200},
                     textString="FSR")}),
     Documentation(info="<html>
 <p>The following documentation is adapted from

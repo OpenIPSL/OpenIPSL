@@ -50,19 +50,19 @@ equation
         initialScale=0.05), graphics={Rectangle(extent={{-100,100},{100,-100}},
           lineColor={0,0,0}),Text(
           extent={{-58,40},{40,-4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1+sT"),Text(
           extent={{-64,20},{56,-58}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="(1+sT )"),Text(
           extent={{22,28},{44,-4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1"),Text(
           extent={{24,-10},{46,-42}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="2"),Text(
           extent={{54,2},{66,-16}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="M"),Line(
           points={{-60,40},{-74,40},{-74,-40},{-60,-40}},
           color={0,0,255},
@@ -71,7 +71,7 @@ equation
           color={0,0,255},
           thickness=1),Text(
           extent={{76,48},{94,28}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="N"),Line(
           points={{-68,0},{70,0}},
           color={0,0,255},

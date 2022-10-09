@@ -81,7 +81,7 @@ equation
           lineColor={0,0,255}),
                               Text(
           extent={{-60,30},{60,-32}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="GENCLS")}),
     Documentation(info="<html>
 <p>

@@ -73,15 +73,15 @@ equation
             false), graphics={Rectangle(extent={{-84,78},{128,-20}}, lineColor=
           {0,0,255}),Text(
           extent={{-80,72},{-62,60}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="ifd"),Text(
           extent={{-80,34},{-62,22}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="V "),Text(
           extent={{106,36},{130,22}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vfd"),Text(
           extent={{-34,58},{88,0}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Exciter AVR OEL PSS")}));
 end ExcitationSystemKp0;

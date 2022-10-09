@@ -54,16 +54,16 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-96,72},{-64,50}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vref"),Text(
           extent={{-104,-48},{-72,-70}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="v"),Text(
           extent={{70,10},{102,-12}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vf"),Text(
           extent={{-38,46},{38,-14}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Discrete
 AVR2")}),
     Documentation(info="<html>

@@ -60,20 +60,20 @@ equation
   annotation (Icon(graphics={
         Text(
           extent={{80,-80},{-80,-40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="GovHydroIEEE0"),
         Text(
           extent={{-52,70},{-92,90}},
           textString="Pref",
-          lineColor={28,108,200}),
+          textColor={28,108,200}),
         Text(
           extent={{-32,-10},{-92,10}},
           textString="SPEED",
-          lineColor={28,108,200}),
+          textColor={28,108,200}),
         Text(
           extent={{90,-10},{30,10}},
           textString="PMECH",
-          lineColor={28,108,200}),
+          textColor={28,108,200}),
         Rectangle(
           lineThickness=2,
           borderPattern=BorderPattern.Raised,

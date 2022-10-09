@@ -24,11 +24,11 @@ equation
           fillPattern=FillPattern.Solid),
                          Text(
           extent={{-40,20},{40,-20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name"),Text(
           visible=displayPF,
           extent={{-80,160},{80,80}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString=DynamicSelect("0.0 MW",
             OpenIPSL.NonElectrical.Functions.displayPower(P, " MW"))),Polygon(
           visible=displayPF,
@@ -40,7 +40,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           visible=displayPF,
           extent={{-80,-80},{80,-160}},
-          lineColor={0,255,0},
+          textColor={0,255,0},
           textString=DynamicSelect("0.0 Mvar",
             OpenIPSL.NonElectrical.Functions.displayPower(Q, " Mvar"))),Polygon(
           visible=displayPF,

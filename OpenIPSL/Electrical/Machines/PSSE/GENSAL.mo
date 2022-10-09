@@ -104,7 +104,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-58,62},{52,-64}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="GENSAL")}),
     Documentation(info="<html>Salient Pole Generator represented by equal mutual inductance rotor modeling.</html>",
     revisions="<html>

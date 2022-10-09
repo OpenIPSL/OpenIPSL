@@ -76,11 +76,11 @@ equation
           fillPattern=FillPattern.Solid),Line(points={{34,86},{82,86},{74,92}},
           color={0,0,0}),Text(
           extent={{14,84},{102,38}},
-          lineColor={238,46,47},
+          textColor={238,46,47},
           textString=DynamicSelect("0.0", String(P, significantDigits=2))),Line(
           points={{32,-54},{80,-54},{72,-48}}, color={0,0,0}),Text(
           extent={{12,-54},{100,-100}},
-          lineColor={0,255,0},
+          textColor={0,255,0},
           textString=DynamicSelect("0.0", String(Q, significantDigits=2))),Line(
           points={{40,-48},{40,-60}}, color={0,0,0}),Line(points={{80,-54},{72,
           -60}}, color={0,0,0}),Line(points={{82,86},{74,80}}, color={0,0,0})}),

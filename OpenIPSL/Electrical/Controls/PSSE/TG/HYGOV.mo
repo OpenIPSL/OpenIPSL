@@ -138,7 +138,7 @@ equation
           pattern=LinePattern.Dash,
           lineThickness=1),Text(
           extent={{-126,40},{-82,34}},
-          lineColor={255,128,0},
+          textColor={255,128,0},
           textStyle={TextStyle.Bold},
           textString="Governor System"),Rectangle(
           extent={{-8,32},{166,-38}},
@@ -146,12 +146,12 @@ equation
           pattern=LinePattern.Dash,
           lineThickness=1),Text(
           extent={{38,42},{98,32}},
-          lineColor={85,170,255},
+          textColor={85,170,255},
           textStyle={TextStyle.Bold},
           textString="Hydraulic Turbine System")}),
     Icon(graphics={Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="HYGOV")}),
     Documentation(info="<html> This is a hydro turbine-governor model.
 </html>",revisions="<html>

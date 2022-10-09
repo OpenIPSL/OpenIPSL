@@ -162,7 +162,7 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{-80,100},{80,60}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid,
           textString="%name"),

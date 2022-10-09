@@ -314,13 +314,13 @@ protected
     annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,200}},
             preserveAspectRatio=false), graphics={Text(
               extent={{-88,16},{-84,14}},
-              lineColor={0,0,255},
+              textColor={0,0,255},
               lineThickness=0.5,
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
               textString="Speed"),Text(
               extent={{-80,200},{80,180}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               pattern=LinePattern.Dash,
               lineThickness=0.5,
               fillColor={0,0,255},
@@ -333,19 +333,19 @@ protected
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
               extent={{-100,160},{100,0}},
-              lineColor={0,140,72},
+              textColor={0,140,72},
               textString="Active Power
 PI"),Text( extent={{-40,180},{40,140}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="I_PMAX"),Text(
               extent={{112,20},{192,-20}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="I_PCMD"),Text(
               extent={{-40,-140},{40,-180}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="VTERM"),Text(
               extent={{-174,20},{-94,-20}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="PELEC")}));
   end ActivePowerController;
 equation
@@ -388,7 +388,7 @@ protected
     annotation (Diagram(coordinateSystem(extent={{-200,-100},{0,100}},
             preserveAspectRatio=true), graphics={Text(
               extent={{-160,100},{-40,80}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               pattern=LinePattern.Dash,
               lineThickness=0.5,
               fillColor={0,0,255},
@@ -401,13 +401,13 @@ protected
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
               extent={{-188,6},{-148,-6}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="P_FAREF"),Text(
               extent={{-60,6},{-2,-6}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="Q_REF_PF"),Text(
               extent={{-160,80},{-40,40}},
-              lineColor={238,46,47},
+              textColor={238,46,47},
               textString="PF Controller")}));
   end pf_Controller;
 equation
@@ -504,7 +504,7 @@ protected
               lineThickness=0.5,
               pattern=LinePattern.Dash),Text(
               extent={{-16,46},{46,40}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               pattern=LinePattern.Dash,
               lineThickness=0.5,
               fillColor={0,0,255},
@@ -517,13 +517,13 @@ protected
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
               extent={{-196,14},{-76,-16}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="V_REG"),Text(
               extent={{80,14},{200,-16}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="Q_ORD"),Text(
               extent={{-172,162},{180,72}},
-              lineColor={180,56,148},
+              textColor={180,56,148},
               textString="WindCONTROL Emulator")}));
   end windControlEmulator;
 equation
@@ -567,7 +567,7 @@ equation
           lineThickness=0.5,
           pattern=LinePattern.Dash),Text(
           extent={{64,116},{170,108}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           pattern=LinePattern.Dash,
           lineThickness=0.5,
           fillColor={0,0,255},
@@ -578,7 +578,7 @@ equation
           lineThickness=0.5,
           pattern=LinePattern.Dash),Text(
           extent={{-130,128},{-24,120}},
-          lineColor={0,140,72},
+          textColor={0,140,72},
           pattern=LinePattern.Dash,
           lineThickness=0.5,
           fillColor={0,0,255},
@@ -589,7 +589,7 @@ equation
           lineThickness=0.5,
           pattern=LinePattern.Dash),Text(
           extent={{94,104},{200,96}},
-          lineColor={180,56,148},
+          textColor={180,56,148},
           pattern=LinePattern.Dash,
           lineThickness=0.5,
           fillColor={0,0,255},
@@ -604,34 +604,34 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-70,42},{82,-36}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="WT4E1"),Text(
           extent={{110,172},{170,142}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="V"),Text(
           extent={{110,114},{170,84}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="Q"),Text(
           extent={{110,56},{170,26}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="P"),Text(
           extent={{82,-42},{194,-74}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="WIPCMD"),Text(
           extent={{82,-124},{194,-156}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,

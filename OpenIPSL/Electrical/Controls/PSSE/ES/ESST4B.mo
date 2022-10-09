@@ -179,19 +179,19 @@ equation
     Diagram(coordinateSystem(extent={{-180,-180},{200,140}}),
         graphics={Text(
           extent={{210,-4},{234,-18}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="VB")}),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
         graphics={Text(
           extent={{-80,90},{-20,70}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="GenT"), Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ESST4B"),
                   Text(
           extent={{40,90},{80,70}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Bus")}),
     Documentation(info="<html>IEEE Type ST4B Potential or Compound-Source Controlled-Rectifier Exciter Model.</html>",
   revisions="<html><table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

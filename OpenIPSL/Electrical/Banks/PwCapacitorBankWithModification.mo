@@ -66,6 +66,6 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{-100,-100},{100,-140}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}));
 end PwCapacitorBankWithModification;

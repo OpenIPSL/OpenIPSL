@@ -62,14 +62,14 @@ equation
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={Text(
           extent={{-110,80},{110,60}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=15,
           textStyle={TextStyle.Bold},
           textString="Example 1: Single-machine infinite bus model*"),Text(
           extent={{-138,-88},{80,-106}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=12,

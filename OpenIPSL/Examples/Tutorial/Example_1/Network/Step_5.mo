@@ -73,7 +73,7 @@ equation
     Diagram(coordinateSystem(extent={{-120,-100},{120,100}},
           preserveAspectRatio=false), graphics={Text(
           extent={{-100,100},{100,80}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=15,

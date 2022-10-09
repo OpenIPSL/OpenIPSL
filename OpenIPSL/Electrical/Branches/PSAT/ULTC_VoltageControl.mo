@@ -98,11 +98,11 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{-100,-40},{100,-100}},
-          lineColor={0,128,0},
+          textColor={0,128,0},
           textString="ULTC"),
         Text(
           extent={{-100,100},{100,40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

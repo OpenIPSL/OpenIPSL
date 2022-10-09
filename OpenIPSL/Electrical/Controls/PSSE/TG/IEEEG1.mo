@@ -157,16 +157,16 @@ equation
                                                                      lineColor={28,108,200}),
                      Text(
           extent={{-50,20},{10,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="SPEED_HP"),Text(
           extent={{30,60},{90,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="PMECH_HP"),Text(
           extent={{30,-20},{88,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="PMECH_LP"),Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="IEEEG1")}),
     Documentation(info="<html>Governor IEEEG1, IEEG1_GE and
     IEEEG1D IEEE Type 1 Speed-Governor Model.</html>",

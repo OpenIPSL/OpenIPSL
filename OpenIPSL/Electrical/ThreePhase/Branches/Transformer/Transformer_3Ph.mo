@@ -134,15 +134,15 @@ equation
           color={0,0,255}),Line(points={{-60,-90},{-90,-90}}, color={0,0,255}),
           Line(points={{60,-90},{39,-20}}, color={0,0,255}),Line(points={{60,-90},
           {90,-90}}, color={0,0,255}),Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-38,20},{-4,-20}},
           textString="K"),Text(
           origin={6,0},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{1,20},{35,-20}},
           textString="M"),Text(
           origin={-54,84},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{4,18},{104,-34}},
           textString="Three Phase Transformer")}, coordinateSystem),
     Documentation(info="<html>

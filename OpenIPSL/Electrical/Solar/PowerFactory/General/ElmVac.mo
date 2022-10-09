@@ -27,7 +27,7 @@ equation
   -P = p.vr * p.ir + p.vi * p.ii;
   -Q = p.vi * p.ir - p.vr * p.ii;
 annotation (
-    Icon(graphics={ Ellipse(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}, endAngle = 360), Line(origin = {-5.53254, -0.428994}, points = {{-40, 0}, {-20, 20}, {20, -20}, {40, 0}, {40, 0}}), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Ellipse(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}, endAngle = 360), Line(origin = {-5.53254, -0.428994}, points = {{-40, 0}, {-20, 20}, {20, -20}, {40, 0}, {40, 0}}), Text(origin = {0, -10}, textColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
 Documentation(info="<html>
 <p>
 Controllable voltage source with frequency and volage as inputs.

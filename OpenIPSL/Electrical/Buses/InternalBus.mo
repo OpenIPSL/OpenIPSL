@@ -26,6 +26,6 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),Text(
           extent={{-46,34},{-22,2}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="*")}));
 end InternalBus;

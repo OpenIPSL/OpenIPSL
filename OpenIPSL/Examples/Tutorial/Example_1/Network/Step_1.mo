@@ -16,7 +16,7 @@ partial model Step_1 "Creating system model, adding buses, generator and system 
     Diagram(coordinateSystem(extent={{-120,-100},{120,100}},
           preserveAspectRatio=false), graphics={Text(
           extent={{-100,100},{100,80}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=15,
@@ -29,7 +29,7 @@ partial model Step_1 "Creating system model, adding buses, generator and system 
           lineColor={255,0,0},
           lineThickness=1),Text(
           extent={{-94,36},{96,18}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fontSize=12,
@@ -38,7 +38,7 @@ partial model Step_1 "Creating system model, adding buses, generator and system 
           lineColor={255,0,0},
           lineThickness=1),Text(
           extent={{-6,-42},{184,-60}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           lineThickness=1,
           fontSize=12,
           textString="Electrical.SystemBase")}),

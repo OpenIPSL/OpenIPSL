@@ -58,12 +58,12 @@ equation
             100}}), graphics={Rectangle(extent={{-88,44},{56,-18}}, lineColor={
           0,0,255}),Text(
           extent={{-44,28},{22,-2}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="PSS"),Text(
           extent={{-86,24},{-62,4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="omega"),Text(
           extent={{34,20},{54,0}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Upss")}));
 end PSS;

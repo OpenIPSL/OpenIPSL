@@ -207,7 +207,7 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-220,-40},{220,
             60}}), graphics={Text(
           extent={{-70,-30},{52,-38}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="Two-Area System
 Prabha Kundur, \"Power System Stability and Control\", Example 12.6, page 813")}),
     Documentation(info="<html>

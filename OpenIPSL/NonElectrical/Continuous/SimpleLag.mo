@@ -22,10 +22,10 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-18,68},{22,8}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="K"),Text(
           extent={{-68,-20},{72,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1 + Ts"),Line(
           points={{-78,0},{80,0}},
           color={0,0,255},

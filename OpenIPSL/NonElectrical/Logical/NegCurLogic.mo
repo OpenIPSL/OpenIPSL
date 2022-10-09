@@ -19,10 +19,10 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-80,80},{80,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Negative Current Logic"),
                                     Text(
           extent={{-150,150},{150,110}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}));
 end NegCurLogic;

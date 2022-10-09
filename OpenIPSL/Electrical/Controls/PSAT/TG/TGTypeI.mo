@@ -40,19 +40,19 @@ equation
   annotation (
     Icon(graphics={ Text(
           extent={{-100,10},{-60,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="w"),Text(
           extent={{60,10},{100,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pm"),
        Text(
           extent={{-60,0},{60,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TGTypeI"),
         Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
         Text(
           extent={{-80,80},{80,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

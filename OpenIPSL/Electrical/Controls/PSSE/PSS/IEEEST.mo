@@ -205,16 +205,16 @@ equation
     Icon(graphics={Rectangle(extent={{-100,100},{100,-100}},
           lineColor={0,0,255}),Text(
           extent={{-40,80},{40,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="IEEEST"),Text(
           extent={{-90,-20},{-50,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="V_S"),Text(
           extent={{50,20},{90,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VOTHSG"),Text(
           extent={{-90,60},{-50,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="V_CT")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

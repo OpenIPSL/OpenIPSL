@@ -25,7 +25,7 @@ equation
     Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={Text(
-          lineColor={0,0,255},
+          textColor={0,0,255},
           extent={{-80,80},{80,-80}},
           horizontalAlignment=TextAlignment.Left,
           textString="Rselect

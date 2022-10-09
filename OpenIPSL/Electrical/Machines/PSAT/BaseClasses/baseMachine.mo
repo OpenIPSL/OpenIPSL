@@ -144,31 +144,31 @@ equation
           fillPattern=FillPattern.Solid),Text(
           origin={-80,50},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="vf"),Text(
           origin={-80,-50},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="pm"),Text(
           origin={-80,90},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="vf0"),Text(
           origin={-80,-90},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="pm0"),Text(
           origin={85,60},
           extent={{-15,-10},{15,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="delta"),Text(
           origin={90,90},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="w"),Text(
           origin={90,30},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="v"),Ellipse(extent={{-40,40},{40,-40}}, lineColor={28,108,
           200}),Line(
           points={{-20,0},{-9,15},{9,-15},{20,0}},
@@ -176,14 +176,14 @@ equation
           smooth=Smooth.Bezier),Text(
           origin={0,-60},
           extent={{-60,-20},{60,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="%name"),Text(
           origin={90,-31},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="P"),Text(
           origin={90,-70},
           extent={{-10,-10},{10,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="Q")}));
 end baseMachine;

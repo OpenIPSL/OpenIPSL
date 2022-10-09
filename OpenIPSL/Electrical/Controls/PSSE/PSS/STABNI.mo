@@ -70,13 +70,13 @@ equation
                                                            lineColor=
            {28,108,200}),Text(
           extent={{-40,80},{40,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="STABNI"),Text(
           extent={{-92,20},{-50,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="PELEC"),Text(
           extent={{48,20},{90,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VOTHSG")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

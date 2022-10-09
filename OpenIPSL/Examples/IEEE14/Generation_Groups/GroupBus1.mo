@@ -53,11 +53,11 @@ equation
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}, preserveAspectRatio=
             false),graphics={Text(
           extent={{-93,6},{-24,-12}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textStyle={TextStyle.Italic},
           textString=""),
           Text(extent={{-34,-32},{38,-52}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="%name"),

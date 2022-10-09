@@ -68,7 +68,7 @@ equation
     Icon(
         graphics={Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ExcSEXS")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

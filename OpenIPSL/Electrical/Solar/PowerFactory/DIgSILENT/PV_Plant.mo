@@ -107,7 +107,7 @@ equation
   connect(pv_array.Vmpp_array, controller.vdcref) annotation (
     Line(points={{-39,4},{-30,4},{-30,0},{6,0},{6,8},{21,8}}, color = {0, 0, 127}));
   annotation (
-    Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 60.31}, points = {{-100, 39.6877}, {0, -40.3123}, {100, 39.6877}, {100, 39.6877}}, color = {118, 18, 62}), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 60.31}, points = {{-100, 39.6877}, {0, -40.3123}, {100, 39.6877}, {100, 39.6877}}, color = {118, 18, 62}), Text(origin = {0, -10}, textColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
         Documentation(info = "<html>
 <p>
 A PV Plant implemented according to the DIgSILENT template in PowerFactory.

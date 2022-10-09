@@ -305,7 +305,7 @@ protected
     annotation (Diagram(coordinateSystem(extent={{-200,-100},{0,100}},
             preserveAspectRatio=true), graphics={Text(
               extent={{-160,100},{-40,80}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               pattern=LinePattern.Dash,
               lineThickness=0.5,
               fillColor={0,0,255},
@@ -318,13 +318,13 @@ protected
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
               extent={{-188,6},{-148,-6}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="P_FAREF"),Text(
               extent={{-60,6},{-2,-6}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="Q_REF_PF"),Text(
               extent={{-160,80},{-40,40}},
-              lineColor={238,46,47},
+              textColor={238,46,47},
               textString="PF Controller")}));
   end pf_Controller;
 equation
@@ -468,7 +468,7 @@ protected
     annotation (Diagram(coordinateSystem(extent={{-200,-100},{200,100}},
             preserveAspectRatio=true), graphics={Text(
               extent={{-60,100},{60,80}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               pattern=LinePattern.Dash,
               lineThickness=0.5,
               fillColor={0,0,255},
@@ -481,7 +481,7 @@ protected
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
               extent={{-64,72},{76,32}},
-              lineColor={0,140,72},
+              textColor={0,140,72},
               textString="Active Power
 PI")}));
   end ActivePowerControl;
@@ -596,17 +596,17 @@ protected
     annotation (Diagram(coordinateSystem(extent={{-200,-80},{200,80}},
             preserveAspectRatio=true), graphics={Text(
               extent={{136,8},{156,4}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               textString="K
       "),Text(extent={{-60,80},{60,60}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               pattern=LinePattern.Dash,
               lineThickness=0.5,
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
               textString="Reactive Power Control"),Text(
               extent={{18,26},{38,22}},
-              lineColor={255,0,0},
+              textColor={255,0,0},
               textString="K+1
       ")}), Icon(coordinateSystem(extent={{-200,-80},{200,80}},
             preserveAspectRatio=true), graphics={Rectangle(
@@ -615,16 +615,16 @@ protected
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
               extent={{-120,80},{122,50}},
-              lineColor={180,56,148},
+              textColor={180,56,148},
               textString="Reactive Power Control"),Text(
               extent={{-176,50},{-116,30}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="ITERM"),Text(
               extent={{130,10},{194,-10}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="Q_ORD"),Text(
               extent={{-176,-32},{-116,-52}},
-              lineColor={28,108,200},
+              textColor={28,108,200},
               textString="VTERM")}));
   end ReactivePowerControl;
 equation
@@ -658,16 +658,16 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{160,66},{184,56}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="VLTFLG"),Line(
           points={{172,40},{186,40}},
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{160,32},{170,28}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="0"),Text(
           extent={{70,32},{80,26}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Vterm"),Line(
           points={{-20,92},{-20,52}},
           color={0,0,255},
@@ -679,13 +679,13 @@ equation
           pattern=LinePattern.Dot,
           thickness=0.5),Text(
           extent={{-30,36},{-20,32}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="-1"),Text(
           extent={{-20,62},{-10,58}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="1"),Text(
           extent={{2,34},{12,30}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="0"),Line(
           points={{-10,36},{-10,12}},
           color={0,0,255},
@@ -700,7 +700,7 @@ equation
           smooth=Smooth.None,
           thickness=0.5),Text(
           extent={{-54,64},{-32,56}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="VARFLG"),Line(
           points={{-44,92},{-20,92}},
           color={0,0,255},
@@ -724,6 +724,6 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-80,60},{80,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="WT3E1")}));
 end WT3E1;

@@ -33,6 +33,6 @@ equation
 </html>"), Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={Text(
           origin={0,60},
           extent={{-60,-20},{60,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="Order II")}));
 end Order2;

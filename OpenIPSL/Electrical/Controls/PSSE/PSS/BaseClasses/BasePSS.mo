@@ -10,13 +10,13 @@ partial model BasePSS "Base model for PSSs from PSSE"
           fillColor={255,255,255}),
                               Text(
           extent={{-90,60},{-60,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="V_S1"), Text(
           extent={{-90,-20},{-60,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="V_S2"),Text(
           extent={{40,20},{90,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VOTHSG")}),
                               Diagram(coordinateSystem(preserveAspectRatio=false,
                    extent={{-200,-80},{200,80}})));

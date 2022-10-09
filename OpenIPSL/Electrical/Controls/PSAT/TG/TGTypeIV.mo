@@ -245,22 +245,22 @@ equation
             100}}), graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
                                Text(
           extent={{-60,0},{60,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TGTypeIV"),Text(
           origin={-80,0},
           extent={{-20,10},{20,-10}},
           fontName="Arial",
           textString="w",
-          lineColor={0,0,0}),
+          textColor={0,0,0}),
                             Text(
           origin={80,0},
           extent={{-20,10},{20,-10}},
           fontName="Arial",
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pm"),
         Text(
           extent={{-80,80},{80,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-80},{160,40}})),
     Documentation(revisions="<html>

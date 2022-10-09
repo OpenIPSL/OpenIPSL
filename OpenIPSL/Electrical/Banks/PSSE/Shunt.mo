@@ -20,7 +20,7 @@ Shunt model from Nordic44 system developed by Giuseppe.
 Icon(graphics={Rectangle(extent={{-100,
           100},{100,-100}}, lineColor={0,0,255}),Text(
           extent={{-60,60},{60,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textStyle={TextStyle.Bold},
           textString="Y")}));
 end Shunt;

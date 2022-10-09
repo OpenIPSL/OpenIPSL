@@ -27,15 +27,15 @@ equation
           lineColor={28,108,200}),
                                Text(
           extent={{-90,80},{-58,60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="v"),Text(
           extent={{-90,-44},{-62,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="p"),Text(
           extent={{-88,16},{-60,0}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="q"),Text(
           extent={{64,16},{92,0}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="if")}));
 end FieldCurrent;

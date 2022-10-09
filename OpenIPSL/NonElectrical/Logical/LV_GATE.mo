@@ -7,7 +7,7 @@ block LV_GATE "Passes through the lower value of the two inputs"
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid), Text(
           extent={{-100,40},{60,-40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="LV

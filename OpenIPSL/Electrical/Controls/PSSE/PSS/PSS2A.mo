@@ -96,7 +96,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                                                                     graphics={ Text(
           extent={{-40,80},{40,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="PSS2A")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

@@ -46,7 +46,7 @@ equation
           extent={{-100.0,-100.0},{100.0,100.0}}),Text(
           origin={0,60},
           extent={{-60,-20},{60,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="Order V - Type 2")}), Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>

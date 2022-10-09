@@ -170,25 +170,25 @@ equation
           lineColor={28,108,200}),
         Text(
           extent={{-50,80},{10,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="SPEED"),
         Text(
           extent={{-50,-40},{10,-80}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="PELEC"),
         Text(
           extent={{30,20},{90,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="PMECH"),
         Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="GGOV1DU")}),
     Documentation(info="<html>
 <p>The following documentation is adapted from

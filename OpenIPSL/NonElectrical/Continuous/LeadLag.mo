@@ -33,22 +33,22 @@ equation
   annotation (
 Icon(graphics={Text(
           extent={{-44,82},{76,22}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1+sT"),Line(
           points={{-46,0},{82,0}},
           color={0,0,255},
           smooth=Smooth.Bezier,
           thickness=0.5),Text(
           extent={{-44,-20},{76,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1+sT"),Text(
           extent={{-100,28},{-40,-32}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="K"),Text(
           extent={{62,44},{82,24}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1"),Text(
           extent={{64,-58},{84,-78}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="2")}));
 end LeadLag;

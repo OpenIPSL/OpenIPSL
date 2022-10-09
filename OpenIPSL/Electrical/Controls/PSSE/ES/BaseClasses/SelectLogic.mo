@@ -39,7 +39,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-42,54},{38,-48}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Select
 Logic"),Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,255})}));
 end SelectLogic;

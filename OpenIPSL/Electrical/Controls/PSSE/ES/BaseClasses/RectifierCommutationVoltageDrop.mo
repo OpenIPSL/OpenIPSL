@@ -47,18 +47,18 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-68,96},{70,60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="Rectifier Commutation
 Voltage Drop"),Text(
           extent={{-99,4},{-70,-6}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="V_EX"),Text(
           extent={{-19,-86},{18,-96}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="XADIFD"),Text(
           extent={{76,6},{98,-4}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="EFD")}));
 end RectifierCommutationVoltageDrop;

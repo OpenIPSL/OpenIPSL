@@ -56,7 +56,7 @@ equation
           color={0,0,255},
           pattern=LinePattern.Dash),Text(
           extent={{-150,150},{150,110}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name"),Line(
           points={{-100,-30},{-42,-30}},
           color={0,0,255},

@@ -64,7 +64,7 @@ equation
             100}}), graphics={Ellipse(extent={{-60,60},{60,-60}}, lineColor={0,
           0,255}),Text(
           extent={{-34,24},{32,-28}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="GEN")}),
     Documentation(info="<html>

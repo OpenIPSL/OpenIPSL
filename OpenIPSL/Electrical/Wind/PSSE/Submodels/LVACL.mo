@@ -38,7 +38,7 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-44,114},{44,54}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="LVACL"),Line(
           points={{-60,-60},{-42,-60},{0,20},{20,20}},
           color={0,128,255},
@@ -54,12 +54,12 @@ equation
           thickness=0.5,
           arrow={Arrow.Filled,Arrow.Filled}),Text(
           extent={{-98,-8},{-68,-22}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="IP_LVLP"),Text(
           extent={{64,6},{98,-8}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="IP_LVACL"),Text(
           extent={{4,-78},{22,-92}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="V")}));
 end LVACL;

@@ -76,6 +76,6 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-80,100},{80,40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}));
 end TwoWindingTransformer;

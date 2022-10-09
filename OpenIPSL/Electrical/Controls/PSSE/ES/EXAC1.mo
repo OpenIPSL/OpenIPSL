@@ -130,7 +130,7 @@ equation
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
         graphics={ Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="EXAC1")}),
     Documentation(info="<html>IEEE Type AC1 Excitation System Model.</html>",
     revisions="<html><table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

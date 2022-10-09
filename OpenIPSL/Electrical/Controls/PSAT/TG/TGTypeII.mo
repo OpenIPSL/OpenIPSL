@@ -75,7 +75,7 @@ equation
           origin={0,-40},
           extent={{-60,40},{60,-40}},
           fontName="Arial",
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TGTypeII"),
                             Text(
           origin={0,80},
@@ -84,15 +84,15 @@ equation
           textString="pm0"),Text(
           origin={-80,0},
           extent={{-20,10},{20,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="w"), Text(
           origin={80,0},
           extent={{-20,10},{20,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pm"),
         Text(
           extent={{-80,80},{80,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

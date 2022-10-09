@@ -67,7 +67,7 @@ equation
         grid={2,2}),
         graphics={Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="TGOV1")}),
     Documentation(info="<html>Steam Turbine-Governor Model TGOV1.</html>",
     revisions="<html>

@@ -341,25 +341,25 @@ equation
     Diagram(coordinateSystem(extent={{-280,-200},{280,180}},
           preserveAspectRatio=false), graphics={Text(
           extent={{-222,-82},{-198,-92}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FSSV"),Text(
           extent={{204,-82},{236,-92}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FVALDI"),Text(
           extent={{100,38},{138,28}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FTDPRA"),Text(
           extent={{-132,38},{-102,28}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FPAND"),Text(
           extent={{46,94},{84,84}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FVERGE"),Text(
           extent={{44,-108},{74,-118}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FSBIS"),Text(
           extent={{-114,-110},{-84,-120}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="FTILL5")}),
     Documentation(info="<html>
 <p>This example model is a small synthetic power system that can be used for assessing classic transient stability of a power grid, when undergoing a three-phase-to-ground fault. The fault is applied on bus FTILL5, at 1 second and lasts for 200ms.</p>

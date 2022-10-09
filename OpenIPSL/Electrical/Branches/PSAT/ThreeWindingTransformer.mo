@@ -95,11 +95,11 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{-60,-50},{60,-92}},
-          lineColor={0,128,0},
+          textColor={0,128,0},
           textString="TWT"),
         Text(
           extent={{-100,140},{100,80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

@@ -117,7 +117,7 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           extent={{-100,100},{100,-100}}), Text(origin = {-35, 62}, extent = {{-21, 10}, {21, -10}}, textString = "idin"), Text(origin = {-33, -60}, extent = {{-21, 10}, {21, -10}}, textString = "iqin"), Text(origin = {-33, 0}, extent = {{-21, 10}, {21, -10}}, textString = "duac"), Text(origin = {71, 52}, extent = {{-21, 10}, {21, -10}}, textString = "idout"), Text(origin = {71, -48}, extent = {{-21, 10}, {21, -10}}, textString = "iqout"), Text(origin={0,
-              -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+              -10}, textColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
     Diagram(coordinateSystem(extent = {{-200, -200}, {200, 200}})),
      Documentation(revisions = "<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>

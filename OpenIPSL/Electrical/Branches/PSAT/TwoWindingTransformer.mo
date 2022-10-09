@@ -63,14 +63,14 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{-38,20},{-4,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="1"),Text(
           extent={{4,18},{32,-16}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="2"),
         Text(
           extent={{-80,90},{80,30}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name"),
         Line(
           visible= tc,
@@ -87,11 +87,11 @@ equation
         Text(
           visible=tc,
           extent={{-80,-40},{-40,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="TC"),Text(
           visible=displayPF,
           extent={{-200,160},{-20,40}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString=DynamicSelect("0.0 MW",
             OpenIPSL.NonElectrical.Functions.displayPower(P12, " MW"))),Polygon(
           visible=displayPF,
@@ -103,7 +103,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           visible=displayPF,
           extent={{20,160},{200,40}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString=DynamicSelect("0.0 MW",
             OpenIPSL.NonElectrical.Functions.displayPower(P21, " MW"))),Polygon(
           visible=displayPF,
@@ -115,7 +115,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           visible=displayPF,
           extent={{-200,-40},{-20,-160}},
-          lineColor={0,255,0},
+          textColor={0,255,0},
           textString=DynamicSelect("0.0 Mvar",
             OpenIPSL.NonElectrical.Functions.displayPower(Q12, " Mvar"))),
           Polygon(
@@ -128,7 +128,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           visible=displayPF,
           extent={{20,-40},{200,-160}},
-          lineColor={0,255,0},
+          textColor={0,255,0},
           textString=DynamicSelect("0.0 Mvar",
             OpenIPSL.NonElectrical.Functions.displayPower(Q21, " Mvar"))),
           Polygon(

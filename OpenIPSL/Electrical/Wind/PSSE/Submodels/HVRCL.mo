@@ -36,19 +36,19 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-20,40},{20,30}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="HVRCL "),Line(
           points={{14,30},{-6,30},{-16,10},{-16,10}},
           color={0,0,255},
           thickness=0.5,
           smooth=Smooth.None),Text(
           extent={{-28,3},{-20,-3}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="I_q"),Text(
           extent={{-5,-21},{5,-29}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="V"),Text(
           extent={{19,4},{38,-4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="I_sorc")}));
 end HVRCL;

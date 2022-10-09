@@ -113,39 +113,39 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             160,100}}), graphics={Text(
           extent={{90,-6},{128,-10}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Servomotor"),Text(
           extent={{14,34},{52,30}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="PI Control"),Text(
           extent={{-102,36},{-78,34}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="w (rotor speed)"),Text(
           extent={{-100,-40},{-76,-42}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="P (active power)"),Text(
           extent={{-98,-8},{-74,-10}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="P0 (power set point)"),Text(
           extent={{-50,6},{-32,8}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Speed drop")}),
     Icon(coordinateSystem(extent={{-100,-100},{160,100}}, preserveAspectRatio=
             false), graphics={Rectangle(extent={{-4,46},{150,-20}}, lineColor={
           0,0,255}),Text(
           extent={{24,30},{126,6}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Speed Governor"),Text(
           extent={{0,42},{20,26}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Omega"),Text(
           extent={{136,24},{152,12}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="z"),Text(
           extent={{0,20},{20,4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Pmset"),Text(
           extent={{0,-2},{20,-18}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Pe")}));
 end Governor;

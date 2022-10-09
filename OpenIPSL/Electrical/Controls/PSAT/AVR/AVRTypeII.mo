@@ -120,16 +120,16 @@ equation
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=false), graphics={Text(
           extent={{32,-28},{46,-36}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="vr2"),Text(
           extent={{-2,0},{-8,12}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="vr1"),Text(
           extent={{-72,-14},{-64,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="Vm"),Text(
           extent={{24,12},{30,2}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="vr")}),
     Icon(coordinateSystem(
         extent={{-100,-100},{100,100}},
@@ -139,22 +139,22 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-90,80},{-50,40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vref"),Text(
           extent={{-100,-40},{-60,-70}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="v"),Text(
           extent={{60,20},{100,-20}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vf"),Text(
           extent={{-40,40},{40,-40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="AVR2"),Text(
           extent={{16,-60},{56,-100}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vf0
 "),Text( extent={{2,102},{42,62}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="vref0")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

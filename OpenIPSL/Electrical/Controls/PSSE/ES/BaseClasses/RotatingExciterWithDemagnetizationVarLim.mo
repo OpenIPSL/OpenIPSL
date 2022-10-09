@@ -17,14 +17,14 @@ equation
           70},{-20,0},{-8,0},{-8,6}}, color={0,0,127}));
   annotation (Icon(graphics={Text(
           extent={{-54,48},{52,36}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="Limited"),Text(
           extent={{-79,66},{-48,56}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="outMax"),Text(
           extent={{47,66},{78,56}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="outMin")}));
 end RotatingExciterWithDemagnetizationVarLim;

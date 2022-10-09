@@ -111,7 +111,7 @@ equation
   connect(limiter.y, VOTHSG) annotation (Line(points={{181,0},{210,0}}, color={0,0,127}));
   annotation (Icon(graphics={Text(
           extent={{-40,80},{40,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="PSS2B")}),
           Documentation(info="<html>IEEE Dual-Input Stabilizer Model.</html>",
   revisions="<html><table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

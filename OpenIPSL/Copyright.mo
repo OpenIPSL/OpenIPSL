@@ -14,7 +14,7 @@ class Copyright "DISCLAIMER<html>
     Icon(graphics={
         Text(
           extent={{-100,140},{100,100}},
-          lineColor={0,127,0},
+          textColor={0,127,0},
           textString="%name%"),
         Ellipse(
           extent={{-100,100},{100,-100}},

@@ -90,17 +90,17 @@ equation
                                                           lineColor={0,0,255}),
           Text(
           extent={{-40,-40},{40,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="OEL"),Text(
           extent={{-96,4},{-72,-6}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="IFD/EFD"),Text(
           extent={{82,4},{100,-4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="VOEL"),
         Text(
           extent={{-100,100},{100,40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

@@ -71,20 +71,20 @@ equation
     Line(points = {{-11, 8.88178e-16}, {-88, 8.88178e-16}, {-88, -70}, {-50, -70}}, color = {0, 0, 127}));
   annotation (
     Icon(graphics={ Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-90,10},{-58,-10}},
           textString="LDREF"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{60,50},{90,28}},
           textString="TEXM"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{60,-50},{90,-70}},
           textString="FSRT"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-60,40},{60,-40}},
           textString="Load
 Limiter"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-20,-80},{20,-100}},
           textString="PELEC")}),
     Documentation(info = "<html>

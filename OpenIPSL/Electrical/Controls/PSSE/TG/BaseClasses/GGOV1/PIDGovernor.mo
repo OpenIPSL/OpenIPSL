@@ -138,29 +138,29 @@ equation
   annotation (
     Diagram,
     Icon(graphics={Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}),Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-20,100},{20,80}},
           textString="SPEED"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-90,90},{-50,70}},
           textString="P_REF",
           rotation=360), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-90,10},{-50,-10}},
           textString="PMW_SET"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-90,-70},{-50,-90}},
           textString="PELEC"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{60,10},{90,-10}},
           textString="FSRN"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-40,20},{40,-20}},
           textString="Governor"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{-60,-80},{-20,-100}},
           textString="VSTROKE"), Text(
-          lineColor={28,108,200},
+          textColor={28,108,200},
           extent={{20,-80},{60,-100}},
           textString="GOVOUT1")}),
     Documentation(info="<html>

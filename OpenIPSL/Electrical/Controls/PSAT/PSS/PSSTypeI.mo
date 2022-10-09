@@ -60,7 +60,7 @@ equation
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid), Text(
           extent={{-140,-100},{140,-160}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}), Documentation(info="<html>
 <p>
 For more information see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013]</a>, section \"18.4.1

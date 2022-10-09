@@ -148,8 +148,8 @@ equation
   connect(gain1.y, padeDelay.u) annotation (Line(points={{89,-40},{98,-40},{98,-54},{106.8,-54}}, color={0,0,127},
       pattern=LinePattern.Dash));
   annotation (
-    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics={ Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {28, 108, 200}, extent = {{-60, 40}, {60, -40}}, textString = "Turbine
-Model"), Text(origin = {-4, 0},lineColor = {28, 108, 200}, extent = {{-90, 90}, {-40, 68}}, textString = "SPEED"), Text(origin = {-6, 82},lineColor = {28, 108, 200}, extent = {{-90, -70}, {-50, -90}}, textString = "FSR"), Text(lineColor = {28, 108, 200}, extent = {{40, 12}, {90, -12}}, textString = "PMECH"), Text(lineColor = {28, 108, 200}, extent = {{-20, 90}, {30, 70}}, textString = "TEXM"), Text(lineColor = {28, 108, 200}, extent = {{30, -70}, {92, -92}}, textString = "VSTROKE"), Text(origin = {-4, -78},lineColor = {28, 108, 200}, extent = {{-90, 10}, {-40, -14}}, textString = "PELEC")}),
+    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics={ Rectangle(lineColor = {0, 0, 255}, extent = {{-100, 100}, {100, -100}}), Text(textColor = {28, 108, 200}, extent = {{-60, 40}, {60, -40}}, textString = "Turbine
+Model"), Text(origin = {-4, 0},textColor = {28, 108, 200}, extent = {{-90, 90}, {-40, 68}}, textString = "SPEED"), Text(origin = {-6, 82},textColor = {28, 108, 200}, extent = {{-90, -70}, {-50, -90}}, textString = "FSR"), Text(textColor = {28, 108, 200}, extent = {{40, 12}, {90, -12}}, textString = "PMECH"), Text(textColor = {28, 108, 200}, extent = {{-20, 90}, {30, 70}}, textString = "TEXM"), Text(textColor = {28, 108, 200}, extent = {{30, -70}, {92, -92}}, textString = "VSTROKE"), Text(origin = {-4, -78},textColor = {28, 108, 200}, extent = {{-90, 10}, {-40, -14}}, textString = "PELEC")}),
     Documentation(info="<html>
 <p>The following documentation is adapted from
 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-Models], chapter 7.12</a>:</p>

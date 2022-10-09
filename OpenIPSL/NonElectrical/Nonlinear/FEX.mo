@@ -26,6 +26,6 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-62,28},{64,-30}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="FEX=f(IN)")}));
 end FEX;

@@ -74,16 +74,16 @@ equation
     Icon(graphics={ Rectangle(lineColor = {118, 18, 62}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, -100}, {100, 100}}), Line(origin = {50.106, -52.0451}, points = {{-80, -40}, {-80, -20}, {-6, 30}}, color = {0, 0, 127}), Polygon(origin = {50, -84}, lineColor = {192, 192, 192}, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid, points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}}), Line(origin = {50.175, -93.8248}, points = {{-80, 78}, {-80, 0}}, color = {192, 192, 192}), Line(origin = {40.2612, -7.74434}, points = {{-80, -80}, {30, -80}}, color = {192, 192, 192}), Polygon(origin = {2, -8}, lineColor = {192, 192, 192}, fillColor = {192, 192, 192},
             fillPattern = FillPattern.Solid, points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}}), Text(origin = {18, -50.9032}, lineColor = {192, 192, 192}, extent = {{0, 2.90323}, {34, -27.0968}}, textString = "PI"), Text(origin={
               -34,60}, extent = {{-30, 10}, {30, -10}}, textString = "pred"), Text(origin={
-              -44,2}, extent = {{-30, 10}, {30, -10}}, textString = "yi"), Text(origin = {82, 2}, extent = {{-30, 10}, {30, -10}}, textString = "yo"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name"),
+              -44,2}, extent = {{-30, 10}, {30, -10}}, textString = "yi"), Text(origin = {82, 2}, extent = {{-30, 10}, {30, -10}}, textString = "yo"), Text(origin = {0, -10}, textColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name"),
                                                                                                                                                                                                       Text(origin={92,-78}, extent = {{-30, 10}, {30, -10}},
           textString="x",
-          lineColor={0,0,0}), Text(origin={84,
+          textColor={0,0,0}), Text(origin={84,
               -40}, extent = {{-30, 10}, {30, -10}},
           textString="yo1",
-          lineColor={0,0,0}), Text(origin={80,
+          textColor={0,0,0}), Text(origin={80,
               40}, extent = {{-30, 10}, {30, -10}},
           textString="yo2",
-          lineColor={0,0,0})}),
+          textColor={0,0,0})}),
      Documentation(info = "<html>
 <p>
 This is essentially a PI controller whose output is reduced during the activation of FRT. PI from Modelica Standard Library was not used due to the specific implementation in PowerFactory which this model follows.

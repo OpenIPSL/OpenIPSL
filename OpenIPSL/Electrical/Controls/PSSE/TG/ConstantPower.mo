@@ -7,6 +7,6 @@ equation
   annotation (Icon(graphics={
                   Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ConstantPower")}));
 end ConstantPower;

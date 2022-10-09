@@ -76,6 +76,6 @@ equation
   annotation (
    Icon(graphics={ Text(
           extent={{-60,80},{60,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="STBSVC")}));
 end STBSVC;

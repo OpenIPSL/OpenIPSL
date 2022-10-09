@@ -119,7 +119,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-58,62},{52,-64}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="GENSAE")}),
     Documentation(info="<html>Salient Pole Generator represented by equal mutual inductance rotor modeling.
     The model is the same as GENSAL model with the exception that an exponential function is used for saturation.</html>",

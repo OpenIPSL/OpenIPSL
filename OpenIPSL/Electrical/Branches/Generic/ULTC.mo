@@ -77,11 +77,11 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{-100,-40},{100,-100}},
-          lineColor={0,128,0},
+          textColor={0,128,0},
           textString="ULTC"),
         Text(
           extent={{-100,100},{100,40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}), Documentation(info="<html>
 <p>See <a href=\"modelica:OpenIPSL/Resources/docs/ULTC/ultc.pdf\">PDF documentation</a> by Mohammed Ahsan Adib Murad. </p>
 </html>"));

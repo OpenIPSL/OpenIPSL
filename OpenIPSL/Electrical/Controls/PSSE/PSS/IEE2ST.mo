@@ -120,19 +120,19 @@ equation
             60}})),
     Icon( graphics={Text(
           extent={{-88,60},{-50,20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ICS1"),Text(
           extent={{-90,-20},{-50,-60}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ICS2"),Text(
           extent={{-20,-70},{20,-92}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VCT"),Text(
           extent={{50,20},{90,-20}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VOTHSG"),Text(
           extent={{-40,80},{40,40}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="IEE2ST"),Rectangle(extent={{-100,100},{100,-100}},
           lineColor={28,108,200})}),
     Documentation(revisions="<html>

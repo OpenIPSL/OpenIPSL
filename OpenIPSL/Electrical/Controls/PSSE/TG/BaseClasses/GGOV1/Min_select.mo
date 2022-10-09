@@ -12,7 +12,7 @@ equation
   annotation (
     Icon(graphics={Text(
           extent={{-60,60},{80,-40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Low value
 select"),Rectangle(extent={{-100,100},{100,-100}},
                                                  lineColor={0,0,255})}),

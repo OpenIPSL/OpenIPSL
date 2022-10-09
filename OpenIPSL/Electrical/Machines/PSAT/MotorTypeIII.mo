@@ -107,7 +107,7 @@ equation
           fillColor={255,255,255},
           extent={{-56,-58},{55.9318,54}}),Text(
           extent={{-50,48},{50,-52}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="M"),Text(
           origin={0,-76.0978},
           fillPattern=FillPattern.Solid,

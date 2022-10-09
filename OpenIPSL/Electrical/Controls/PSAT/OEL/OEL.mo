@@ -75,26 +75,26 @@ equation
           lineColor={28,108,200}),
                                Text(
           extent={{-100,80},{-70,50}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="v"),Text(
           extent={{-100,20},{-70,-10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="p"),Text(
           extent={{-100,-40},{-70,-70}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="q"),Text(
           extent={{-20,100},{20,80}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="vref0"),Text(
           extent={{60,-4},{94,-38}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="v_ref"),Text(
           extent={{-36,70},{26,-8}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="OXL"),
         Text(
           extent={{-72,-40},{70,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

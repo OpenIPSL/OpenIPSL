@@ -11,6 +11,6 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={Text(
           extent={{-78,42},{72,-30}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="y=Ae*u*exp(Be|u|)")}));
 end CeilingBlock;

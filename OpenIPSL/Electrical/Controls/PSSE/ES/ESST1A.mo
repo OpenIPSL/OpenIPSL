@@ -227,20 +227,20 @@ equation
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={ Text(
           extent={{-90,90},{-20,68}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VOTHSG2"),Text(
           extent={{-92,-68},{-64,-88}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VT"), Text(
           extent={{20,-80},{36,-100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VUEL2"),
                              Text(
           extent={{42,-80},{58,-100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VUEL3"), Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="ESST1A")}),
     Documentation(info="<html>IEEE Type ST1A Excitation System Model.</html>",
   revisions="<html><table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

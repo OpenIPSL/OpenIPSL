@@ -52,9 +52,9 @@ equation
 
 annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}),
   graphics={ Rectangle(extent={{-100,100},{100,-100}}, lineColor = {28, 108, 200}, fillColor = {85, 170, 255}, fillPattern = FillPattern.Solid),
-    Text(extent={{-90,80},{40,40}}, lineColor = {28, 108, 200}, fillColor = {28, 108, 200}, fillPattern = FillPattern.Solid, textString = "real part"),
-    Text(extent={{-90,-40},{40,-80}}, lineColor = {28, 108, 200}, fillColor = {28, 108, 200}, fillPattern = FillPattern.Solid, textString = "imag part"),
-    Text(extent={{20,20},{90,-20}}, lineColor={28,108,200}, fillColor={28,108,200}, fillPattern = FillPattern.Solid, textString="freq")}),
+    Text(extent={{-90,80},{40,40}}, textColor = {28, 108, 200}, fillColor = {28, 108, 200}, fillPattern = FillPattern.Solid, textString = "real part"),
+    Text(extent={{-90,-40},{40,-80}}, textColor = {28, 108, 200}, fillColor = {28, 108, 200}, fillPattern = FillPattern.Solid, textString = "imag part"),
+    Text(extent={{20,20},{90,-20}}, textColor={28,108,200}, fillColor={28,108,200}, fillPattern = FillPattern.Solid, textString="freq")}),
   Documentation(info="<html>
 <p>This block uses the real and imaginary components of a Cartesian representation of a voltage phasor to estimate the electrical frequency deviation from nominal value present at the node.</p>
 <pre>

@@ -53,26 +53,26 @@ equation
             100}}), graphics={Rectangle(extent={{-78,46},{32,-44}}, lineColor={
           0,0,255}),Text(
           extent={{-78,10},{-64,-2}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="z"),Text(
           extent={{20,10},{30,-4}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Pm"),Text(
           extent={{-52,18},{8,-20}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Hy turbine")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={Text(
           extent={{-28,40},{-12,38}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="q (water flow)"),Text(
           extent={{-28,28},{-14,26}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="H (head)"),Text(
           extent={{60,12},{78,12}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Pm (mech. power)"),Text(
           extent={{-98,-4},{-82,4}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="z (gate opening)")}));
 end TurbinePm;

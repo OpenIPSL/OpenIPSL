@@ -41,7 +41,7 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),Text(
           extent={{-60,20},{60,-20}},
-          lineColor={255,255,0},
+          textColor={255,255,0},
           textString="%name"),Polygon(
           points={{-42,34},{28,34},{28,24},{48,36},{28,48},{28,38},{-42,38},{-42,
             34}},
@@ -50,7 +50,7 @@ equation
           fillColor={28,108,200}),Ellipse(extent={{-60,62},{62,-60}}, lineColor=
            {28,108,200}),Text(
           extent={{-36,-26},{44,-48}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid,
           textString="PMU")}), Documentation(info="<html>

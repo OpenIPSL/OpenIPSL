@@ -250,26 +250,26 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),Text(
           extent={{-76,58},{82,18}},
-          lineColor={244,125,35},
+          textColor={244,125,35},
           textString="Converter Current Limit
     "),Text(
           extent={{-86,6},{-46,-6}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VTERM"),Text(
           extent={{-70,96},{-30,84}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="I_Qmin"),Text(
           extent={{-18,96},{22,84}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="I_Qmax"),Text(
           extent={{32,88},{72,76}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="I_Qcmd"),Text(
           extent={{26,-76},{66,-88}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="I_Pcmd"),Text(
           extent={{-72,-76},{-32,-88}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="I_Pmax")}),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Rectangle(
@@ -278,16 +278,16 @@ equation
           pattern=LinePattern.Dot,
           lineThickness=0.5),Text(
           extent={{-52,90},{-40,80}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           pattern=LinePattern.Dot,
           lineThickness=0.5,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="Q"),Text(
           extent={{64,-38},{120,-62}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="sqrt(ImaxTD^2 - IpCMD^2)"),Text(
           extent={{-112,-42},{-58,-58}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="sqrt(ImaxTD^2 - IqCMD^2)")}));
 end CCL;

@@ -45,7 +45,7 @@ equation
           color={0,0,255},
           pattern=LinePattern.Dash),Text(
           extent={{-150,150},{150,110}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name"),Ellipse(extent={{18,-36},{26,-44}},
                                                                lineColor={0,0,255},
           fillColor={0,0,255},

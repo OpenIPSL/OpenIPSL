@@ -212,26 +212,26 @@ equation
             false), graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
                                Text(
           extent={{-60,-20},{60,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TGTypeVI"),Text(
           extent={{-100,90},{-60,70}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="wref"),Text(
           extent={{-100,40},{-60,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="we"),Text(
           extent={{-100,-20},{-60,-40}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pe"), Text(
           extent={{-100,-70},{-60,-90}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pref"),Text(
           extent={{60,10},{100,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pm"),
         Text(
           extent={{-60,80},{60,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-180,-60},{200,60}})),
     Documentation(revisions="<html>

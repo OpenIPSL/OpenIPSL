@@ -159,28 +159,28 @@ equation
             false), graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
                                Text(
           extent={{-60,0},{62,-82}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="TGTypeV"),Text(
           origin={-80,0},
           extent={{-20,-10},{20,10}},
           textString="w",
-          lineColor={0,0,0}),
+          textColor={0,0,0}),
                             Text(
           origin={80,0},
           extent={{-20,-10},{20,10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pm"), Text(
           origin={-80,62},
           extent={{-20,-10},{20,10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="pref"),Text(
           origin={-80,-60},
           extent={{-20,10},{20,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="wref"),
         Text(
           extent={{-60,80},{60,20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,-40},{220,40}})),
     Documentation(revisions="<html>

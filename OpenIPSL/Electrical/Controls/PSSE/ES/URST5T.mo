@@ -115,10 +115,10 @@ equation
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=true), graphics={Text(
           extent={{-90,90},{-60,70}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="VT"), Text(
           extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="URST5T")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

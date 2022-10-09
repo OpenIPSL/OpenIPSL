@@ -13,7 +13,7 @@ partial model Generator "Template icon for generation units used in this example
           color={0,0,0},
           thickness=0.5),Text(
           extent={{-40,20},{40,-20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%name"),Line(
           points={{-20,20},{-50,40},{-80,0}},
           color={0,0,0},

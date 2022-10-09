@@ -61,32 +61,32 @@ equation
             100}}), graphics={Rectangle(extent={{-78,46},{32,-44}}, lineColor={
           0,0,255}),Text(
           extent={{-78,32},{-64,20}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="z"),Text(
           extent={{-76,-8},{-56,-28}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="omega"),Text(
           extent={{18,14},{28,0}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Tm"),Text(
           extent={{-52,18},{8,-20}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Hy turbine")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={Text(
           extent={{-96,0},{-80,-2}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="z (gate opening)"),Text(
           extent={{-96,-28},{-80,-30}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="w (rotor speed)"),Text(
           extent={{102,10},{128,8}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Tm (mech. torque)"),Text(
           extent={{52,14},{70,14}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="Pm (mech. power)"),Text(
           extent={{-8,-6},{22,-8}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="1/Tw (water time constant)")}));
 end TurbineTm;

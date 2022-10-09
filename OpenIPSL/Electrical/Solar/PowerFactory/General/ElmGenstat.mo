@@ -71,7 +71,7 @@ equation
             fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "P", fontName = "Arial",
             horizontalAlignment = TextAlignment.Right), Text(origin = {72.3, -81.99},
             fillPattern = FillPattern.Solid, extent = {{-20.3, -10.18}, {20.3, 10.18}}, textString = "Q", fontName = "Arial",
-            horizontalAlignment = TextAlignment.Right), Text(origin = {0, -8}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
+            horizontalAlignment = TextAlignment.Right), Text(origin = {0, -8}, textColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
     Diagram,
     Documentation(info="<html>
 <p>

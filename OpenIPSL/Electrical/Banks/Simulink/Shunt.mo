@@ -17,7 +17,7 @@ equation
             {100,100}}), graphics={Rectangle(extent={{-100,100},{100,-100}},
           lineColor={0,0,255}),Text(
           extent={{-40,40},{40,-40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Y"),Line(
           points={{-1,14},{-1,-6}},
           color={0,0,255},

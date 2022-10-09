@@ -60,14 +60,14 @@ equation
             100}}), graphics={Line(points={{40,100},{60,140},{100,140}}, color=
           {0,0,0}),Text(
           extent={{-20,68},{20,8}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="K"),Line(
           points={{-80,0},{78,0}},
           color={0,0,255},
           smooth=Smooth.Bezier,
           thickness=0.5),Text(
           extent={{-70,-20},{70,-80}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="1 + Ts"),Line(points={{-100,-140},{-60,-140},{-40,-100}},
           color={0,0,0}),Ellipse(
           extent={{-82,86},{-96,72}},

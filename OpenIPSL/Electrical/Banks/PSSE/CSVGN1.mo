@@ -153,10 +153,10 @@ equation
             100}}), graphics={Rectangle(extent={{-100,100},{100,-100}},
           lineColor={0,0,255}),Text(
           extent={{-46,20},{40,-26}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="CSVGN1"),Text(
           extent={{-100,-100},{100,-140}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}), Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>

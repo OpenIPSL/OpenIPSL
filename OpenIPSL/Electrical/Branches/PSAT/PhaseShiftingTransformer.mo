@@ -130,15 +130,15 @@ equation
           color={0,0,255},
           smooth=Smooth.None),Text(
           extent={{70,8},{90,-12}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textStyle={TextStyle.Bold},
           textString="deg"), Text(
           extent={{-40,-60},{40,-100}},
-          lineColor={0,128,0},
+          textColor={0,128,0},
           textString="PST"),
         Text(
           extent={{-100,100},{100,40}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name"),
                   Line(
           points={{94,0},{100,0},{100,0}},

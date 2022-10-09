@@ -162,10 +162,10 @@ equation
     Line(points={{-19,4},{-10,4},{-10,0},{4,0},{4,-4.66667}}, color = {0, 0, 127}));
   annotation (
         Icon(graphics={Rectangle(lineColor = {28, 108, 200}, extent = {{-100, 100}, {100, -100}}),
-        Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-50, 80}, {10, 40}}, textString = "SPEED"),
-        Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-50, -40}, {10, -80}}, textString = "PELEC"),
-        Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{30, 20}, {90, -20}}, textString = "PMECH"),
-        Text(lineColor = {28, 108, 200}, extent = {{-100, 160}, {100, 100}}, textString = "GGOV1")}),
+        Text(textColor = {28, 108, 200}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-50, 80}, {10, 40}}, textString = "SPEED"),
+        Text(textColor = {28, 108, 200}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-50, -40}, {10, -80}}, textString = "PELEC"),
+        Text(textColor = {28, 108, 200}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{30, 20}, {90, -20}}, textString = "PMECH"),
+        Text(textColor = {28, 108, 200}, extent = {{-100, 160}, {100, 100}}, textString = "GGOV1")}),
     Documentation(info="<html>
 <p>The following documentation is adapted from
 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-Models], chapter 7.12</a>:</p>
