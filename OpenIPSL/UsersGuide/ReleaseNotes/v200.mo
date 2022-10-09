@@ -86,7 +86,7 @@ This release consists of
 <li>Updated and fix the conversion script. by <a href=\"https://github.com/dietmarw\">@dietmarw</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/251\">#251</a></li>
 <li>Introduce nominal values to help numerical solvers by <a href=\"https://github.com/dietmarw\">@dietmarw</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/252\">#252</a></li>
 <li>Fix GGOV1 by <a href=\"https://github.com/marcelofcastro\">@marcelofcastro</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/254\">#254</a></li>
-<li>Fixing the initialisation issues with GENCLS and other PSS gen models by <a href=\"https://github.com/dietmarw\">@dietmarw</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/258\">#258</a></li>
+<li>Fixing the initialization issues with GENCLS and other PSS gen models by <a href=\"https://github.com/dietmarw\">@dietmarw</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/258\">#258</a></li>
 <li>Fix units by <a href=\"https://github.com/marcelofcastro\">@marcelofcastro</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/257\">#257</a></li>
 <li>Update Documentation in User&apos;s Guide by <a href=\"https://github.com/marcelofcastro\">@marcelofcastro</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/259\">#259</a></li>
 <li>Moving the CI files where they belong. by <a href=\"https://github.com/dietmarw\">@dietmarw</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/261\">#261</a></li>

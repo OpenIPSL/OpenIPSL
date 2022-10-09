@@ -5,7 +5,7 @@ class v100 "Version 1.0.0 (2016-12-16)"
 <p>First Release of OpenIPSL</p>
 <h4>What&apos;s Changed</h4>
 <ul>
-<li>Fixing the initialisation issue in OpenModelica for all of the generators by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/3\">#3</a></li>
+<li>Fixing the initialization issue in OpenModelica for all of the generators by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/3\">#3</a></li>
 <li>Updating package and example icons. by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/4\">#4</a></li>
 <li>Changing the package structure. close <a href=\"https://github.com/OpenIPSL/OpenIPSL/issues/5\">#5</a> by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/6\">#6</a></li>
 <li>Removing import statements by <a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a> in <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/9\">#9</a></li>

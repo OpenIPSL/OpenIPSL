@@ -27,8 +27,8 @@ model Order6 "6th order machine model"
   Types.PerUnit e2q(start=e2q0, fixed=true) "q-axis sub-transient voltage";
   Types.PerUnit e2d(start=e2d0) "d-axis sub-transient voltage";
 protected
-  parameter Types.PerUnit e2q0=vq0 + ra*iq0 + x2d*id0 "Initialitation";
-  parameter Types.PerUnit e2d0=vd0 + ra*id0 - x2q*iq0 "Initialitation";
+  parameter Types.PerUnit e2q0=vq0 + ra*iq0 + x2d*id0 "Initialization";
+  parameter Types.PerUnit e2d0=vd0 + ra*id0 - x2q*iq0 "Initialization";
   parameter Types.PerUnit e1d0=(xq - x1q - T2q0*x2q*(xq - x1q)/(T1q0*x1q))*iq0;
   parameter Types.PerUnit K1=xd - x1d - T2d0*x2d*(xd - x1d)/(T1d0*x1d);
   parameter Types.PerUnit K2=x1d - x2d + T2d0*x2d*(xd - x1d)/(T1d0*x1d);

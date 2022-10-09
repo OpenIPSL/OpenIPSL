@@ -15,7 +15,7 @@ protected
   parameter Real c2=x1d*K "scaled x'd";
   parameter Real c3=xq*K " scaled xq";
   parameter Types.PerUnit vf00=V_MBtoSB*(e1q0 + (xd - x1d)*id0) "Inititial value (system base)";
-  parameter Real e1q0=vq0 + ra*iq0 + x1d*id0 "Initialitation";
+  parameter Real e1q0=vq0 + ra*iq0 + x1d*id0 "Initialization";
 initial equation
   der(e1q) = 0;
 equation

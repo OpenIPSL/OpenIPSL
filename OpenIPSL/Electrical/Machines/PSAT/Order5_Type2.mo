@@ -21,8 +21,8 @@ model Order5_Type2 "5th order machine model, type 2"
   Types.PerUnit e2q(start=e2q0) "q-axis sub-transient voltage";
   Types.PerUnit e2d(start=e2d0) "d-axis sub-transient voltage";
 protected
-  parameter Types.PerUnit e2q0=vq0 + ra*iq0 + x2d*id0 "Initialitation";
-  parameter Types.PerUnit e2d0=vd0 + ra*id0 - x2q*iq0 "Initialitation";
+  parameter Types.PerUnit e2q0=vq0 + ra*iq0 + x2d*id0 "Initialization";
+  parameter Types.PerUnit e2d0=vd0 + ra*id0 - x2q*iq0 "Initialization";
   parameter Types.PerUnit K1=xd - x1d - (T2d0*x2d*(xd - x1d))/(T1d0*x1d);
   parameter Types.PerUnit K2=x1d - x2d + (T2d0*x2d*(xd - x1d))/(T1d0*x1d);
   parameter Types.PerUnit e1q0=(-K1*Taa/T1d0*id0) + (1 - Taa/T1d0)*(e2q0 + K2*id0);

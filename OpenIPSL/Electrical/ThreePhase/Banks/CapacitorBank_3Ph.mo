@@ -62,12 +62,12 @@ protected
   Real Qc=Q_c/S_p;
 
   // Initializing voltages for each pin
-  parameter Real var0=VA*cos(AngA) "Initialitation";
-  parameter Real vai0=VA*sin(AngA) "Initialitation";
-  parameter Real vbr0=VB*cos(AngB) "Initialitation";
-  parameter Real vbi0=VB*sin(AngB) "Initialitation";
-  parameter Real vcr0=VC*cos(AngC) "Initialitation";
-  parameter Real vci0=VC*sin(AngC) "Initialitation";
+  parameter Real var0=VA*cos(AngA) "Initialization";
+  parameter Real vai0=VA*sin(AngA) "Initialization";
+  parameter Real vbr0=VB*cos(AngB) "Initialization";
+  parameter Real vbi0=VB*sin(AngB) "Initialization";
+  parameter Real vcr0=VC*cos(AngC) "Initialization";
+  parameter Real vci0=VC*sin(AngC) "Initialization";
 equation
   Pa = (A.vr*A.ir + A.vi*A.ii);
   Pb = (B.vr*B.ir + B.vi*B.ii);

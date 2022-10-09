@@ -24,8 +24,8 @@ protected
   Real Qa=Q_a/S_p;
 
   // Initializing voltages for each pin
-  parameter Real var0=VA*cos(AngA) "Initialitation";
-  parameter Real vai0=VA*sin(AngA) "Initialitation";
+  parameter Real var0=VA*cos(AngA) "Initialization";
+  parameter Real vai0=VA*sin(AngA) "Initialization";
 equation
   Pa = (A.vr*A.ir + A.vi*A.ii);
   Qa = (-A.vi*A.ir + A.vr*A.ii)/((A.vr)^2 + (A.vi)^2);
