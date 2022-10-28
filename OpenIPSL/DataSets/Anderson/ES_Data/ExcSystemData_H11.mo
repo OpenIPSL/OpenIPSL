@@ -1,0 +1,25 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_H11
+  extends ExcSystemData_Template(VR_type = "A",
+    Name = "WMA",
+    RR = 1.5,
+    T_R = 0.000,
+    K_A = 276.000,
+    T_A1 = 0.060,
+    T_A2 = 0.000,
+    V_RMAX = 1.960,
+    V_RMIN = -1.960,
+    K_E = -0.184,
+    T_E = 1.290,
+    E_1 = 3.900,
+    E_2 = 5.200,
+    S_EE_1 = 0.270,
+    S_EE_2 = 0.560,
+    A_ex = 0.0303,
+    B_ex = 0.5612,
+    Efd_max = 5.200,
+    Efd_min = -5.200,
+    K_F = 0.0317,
+    T_F1 = 0.480,
+    T_F2 = 0.000);
+end ExcSystemData_H11;

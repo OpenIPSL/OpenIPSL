@@ -1,0 +1,25 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_F5
+  extends ExcSystemData_Template(VR_type = "A",
+    Name = "NA101",
+    RR = 0.50,
+    T_R = 0.060,
+    K_A = 25.000,
+    T_A1 = 0.200,
+    T_A2 = 0.000,
+    V_RMAX = 1.000,
+    V_RMIN = -1.000,
+    K_E = -0.0582,
+    T_E = 0.6544,
+    E_1 = 2.5785,
+    E_2 = 3.438,
+    S_EE_1 = 0.0895,
+    S_EE_2 = 0.349,
+    A_ex = 0.0015,
+    B_ex = 1.5833,
+    Efd_max = 3.438,
+    Efd_min = -3.438,
+    K_F = 0.105,
+    T_F1 = 0.350,
+    T_F2 = 0.000);
+end ExcSystemData_F5;

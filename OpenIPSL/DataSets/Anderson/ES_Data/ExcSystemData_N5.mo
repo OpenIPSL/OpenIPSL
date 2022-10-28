@@ -1,0 +1,25 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_N5
+  extends ExcSystemData_Template(VR_type = "C",
+    Name = "BRLS",
+    RR = 2.00,
+    T_R = 0.000,
+    K_A = 400.000,
+    T_A1 = 0.020,
+    T_A2 = 0.000,
+    V_RMAX = 10.650,
+    V_RMIN = -10.650,
+    K_E = 1.000,
+    T_E = 1.000,
+    E_1 = 3.600,
+    E_2 = 4.800,
+    S_EE_1 = 0.375,
+    S_EE_2 = 1.220,
+    A_ex = Modelica.Constants.small,
+    B_ex = Modelica.Constants.small,
+    Efd_max = 4.800,
+    Efd_min = 0.000,
+    K_F = 0.060,
+    T_F1 = 1.000,
+    T_F2 = 0.000);
+end ExcSystemData_N5;
