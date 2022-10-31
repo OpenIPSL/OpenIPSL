@@ -65,8 +65,8 @@ model IEEEST "SMIB system to test functionality of IEEEST model"
     V_CL=0.0)
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
 equation
-  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,50},{-98,50},{-98,68},{-40,68},{-40,50},{-46,50}},
-                                                     color={0,0,127}));
+  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,52},{-98,
+          52},{-98,68},{-40,68},{-40,50},{-46,50}},  color={0,0,127}));
   connect(eSST1A.ECOMP, gENROE.ETERM) annotation (Line(points={{-54.5,-53},{-38,-53},{-38,34},{-46,34}},
                                             color={0,0,127}));
   connect(minusInf.y, eSST1A.VUEL2) annotation (Line(points={{-83.4,-90},{-75.515,-90},{-75.515,-69.485}}, color={0,0,127}));
@@ -74,8 +74,8 @@ equation
   connect(eSST1A.VUEL3, eSST1A.VUEL2) annotation (Line(points={{-78.7775,-69.4925},{-78.7775,-90},{-75.515,-90},{-75.515,-69.485}},
                                                               color={0,0,127}));
   connect(plusInf.y, eSST1A.VOEL) annotation (Line(points={{-58.6,-90},{-71,-90},{-71,-69.5}}, color={0,0,127}));
-  connect(eSST1A.EFD, gENROE.EFD) annotation (Line(points={{-87.5,-53},{-98,-53},{-98,30},{-92,30}},
-                                            color={0,0,127}));
+  connect(eSST1A.EFD, gENROE.EFD) annotation (Line(points={{-87.5,-53},{-98,-53},
+          {-98,28},{-92,28}},               color={0,0,127}));
   connect(eSST1A.VT, gENROE.ETERM) annotation (Line(points={{-54.5375,-64.7375},{-38,-64.7375},{-38,34},{-46,34}},
                                              color={0,0,127}));
   connect(eSST1A.EFD0, gENROE.EFD0) annotation (Line(points={{-54.5,-59},{-40,-59},{-40,30},{-46,30}},

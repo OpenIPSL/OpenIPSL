@@ -17,7 +17,7 @@ partial model SMIB "SMIB - Single Machine Infinite Base system with one load."
     G=0,
     B=0) annotation (Placement(transformation(extent={{54,-34},{66,-26}})));
   OpenIPSL.Electrical.Machines.PSSE.GENCLS gENCLS(
-    M_b=100e6,
+    M_b=100000000,
     D=0,
     angle_0=0,
     X_d=0.2,

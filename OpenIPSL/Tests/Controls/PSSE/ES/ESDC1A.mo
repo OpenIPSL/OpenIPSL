@@ -42,10 +42,10 @@ model ESDC1A "SMIB system to test functionality of ESDC1A model"
     V_RMAX=0)
     annotation (Placement(transformation(extent={{-60,-60},{-80,-40}})));
 equation
-  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,10},{-100,10},{-100,30},{-40,30},{-40,10},{-46,10}},
-                                                     color={0,0,127}));
-  connect(eSDC1A.EFD, gENROE.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
-                                            color={0,0,127}));
+  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,12},{-100,
+          12},{-100,30},{-40,30},{-40,10},{-46,10}}, color={0,0,127}));
+  connect(eSDC1A.EFD, gENROE.EFD) annotation (Line(points={{-81,-50},{-100,-50},
+          {-100,-12},{-92,-12}},            color={0,0,127}));
   connect(eSDC1A.EFD0, gENROE.EFD0) annotation (Line(points={{-59,-54},{-38,-54},{-38,-10},{-46,-10}},
                                                color={0,0,127}));
   connect(gENROE.ETERM, eSDC1A.ECOMP) annotation (Line(points={{-46,-6},{-34,-6},{-34,-50},{-59,-50}},

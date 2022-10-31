@@ -32,14 +32,14 @@ model TGOV1 "SMIB system to test functionality of TGOV1 model"
     V_MIN=0.3)
     annotation (Placement(transformation(extent={{-60,60},{-80,40}})));
 equation
-  connect(gENROE.EFD, gENROE.EFD0) annotation (Line(points={{-92,-10},{-100,-10},{-100,-32},{-40,-32},{-40,-10},{-46,-10}},
-                                                     color={0,0,127}));
+  connect(gENROE.EFD, gENROE.EFD0) annotation (Line(points={{-92,-12},{-100,-12},
+          {-100,-32},{-40,-32},{-40,-10},{-46,-10}}, color={0,0,127}));
   connect(tGOV1.SPEED, gENROE.SPEED) annotation (Line(points={{-62,44},{-42,44},{-42,14},{-46,14}},
                                   color={0,0,127}));
   connect(tGOV1.PMECH0, gENROE.PMECH0) annotation (Line(points={{-62,56},{-38,56},{-38,10},{-46,10}},
                                   color={0,0,127}));
-  connect(tGOV1.PMECH, gENROE.PMECH) annotation (Line(points={{-81,50.2},{-100,50.2},{-100,10},{-92,10}},
-                                    color={0,0,127}));
+  connect(tGOV1.PMECH, gENROE.PMECH) annotation (Line(points={{-81,50},{-100,50},
+          {-100,12},{-92,12}},      color={0,0,127}));
   connect(gENROE.p, GEN1.p)
     annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   annotation (
