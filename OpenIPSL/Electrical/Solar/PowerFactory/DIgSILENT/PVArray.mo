@@ -65,7 +65,8 @@ equation
   connect(module.Umpp, gain1.u) annotation (
     Line(points = {{11, -4}, {40, -4}, {40, -50}, {58, -50}}, color = {0, 0, 127}));
   annotation (
-    Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-50, 80}, extent = {{-20, 8}, {20, -8}}, textString = "Uarray"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {72, 62}, extent = {{-20, 8}, {20, -8}}, textString = "Iarray"), Text(origin = {59, -58}, extent = {{-37, 8}, {37, -8}}, textString = "Vmpp_array"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Rectangle(lineColor = {118, 18, 62},fillColor = {255, 255, 255},
+            fillPattern =                                                                          FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-50, 80}, extent = {{-20, 8}, {20, -8}}, textString = "Uarray"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {72, 62}, extent = {{-20, 8}, {20, -8}}, textString = "Iarray"), Text(origin = {59, -58}, extent = {{-37, 8}, {37, -8}}, textString = "Vmpp_array"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
         Documentation(info = "<html>
 <p>
 Model of a PV Array used in DIgSILENT's implementation of the PV plant. Provides optional inputs of irradiance (E) and temperature (theta). If those inputs are not connected, the model set temperature to 25&nbsp;&deg;C and irradiance so that it matches the specified initial power production.

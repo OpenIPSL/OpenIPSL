@@ -25,10 +25,10 @@ model GENROE "SMIB system to test functionality of generator model with round ro
     Q_0=5416582,
     v_0=1) annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
 equation
-  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,10},{-100,10},{-100,26},{-42,26},{-42,10},{-46,10}},
-                                                     color={0,0,127}));
-  connect(gENROE.EFD, gENROE.EFD0) annotation (Line(points={{-92,-10},{-100,-10},{-100,-30},{-42,-30},{-42,-10},{-46,-10}},
-                                                     color={0,0,127}));
+  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,12},{-100,
+          12},{-100,26},{-42,26},{-42,10},{-46,10}}, color={0,0,127}));
+  connect(gENROE.EFD, gENROE.EFD0) annotation (Line(points={{-92,-12},{-100,-12},
+          {-100,-30},{-42,-30},{-42,-10},{-46,-10}}, color={0,0,127}));
   connect(gENROE.p, GEN1.p)
     annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   annotation (experiment(StopTime=10));

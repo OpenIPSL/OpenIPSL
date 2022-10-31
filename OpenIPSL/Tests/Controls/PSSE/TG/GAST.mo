@@ -49,8 +49,8 @@ model GAST "SMIB system to test functionality of GAST model"
     V_MIN=-0.05,
     D_turb=0) annotation (Placement(transformation(extent={{-60,60},{-80,40}})));
 equation
-  connect(iEEET1.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
-                                                 color={0,0,127}));
+  connect(iEEET1.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},
+          {-100,-12},{-92,-12}},                 color={0,0,127}));
   connect(iEEET1.ECOMP, gENROU.ETERM) annotation (Line(points={{-59,-50},{-34,-50},{-34,-6},{-46,-6}},
                                              color={0,0,127}));
   connect(iEEET1.EFD0, gENROU.EFD0) annotation (Line(points={{-59,-54},{-38,-54},{-38,-10},{-46,-10}},
@@ -63,8 +63,8 @@ equation
                                               color={0,0,127}));
   connect(gENROU.SPEED, gAST.SPEED) annotation (Line(points={{-46,14},{-42,14},{-42,44},{-62,44}},
                                                 color={0,0,127}));
-  connect(gAST.PMECH, gENROU.PMECH) annotation (Line(points={{-81,50.2},{-100,50.2},{-100,10},{-92,10}},
-                                  color={0,0,127}));
+  connect(gAST.PMECH, gENROU.PMECH) annotation (Line(points={{-81,50},{-100,50},
+          {-100,12},{-92,12}},    color={0,0,127}));
   connect(gENROU.PMECH0, gAST.PMECH0) annotation (Line(points={{-46,10},{-38,10},{-38,56},{-62,56}},
                                                    color={0,0,127}));
 annotation (experiment(StopTime=10));
