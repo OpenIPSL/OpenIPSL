@@ -1,4 +1,4 @@
-﻿within OpenIPSL.UsersGuide;
+within OpenIPSL.UsersGuide;
 model Publications "Publications"
   extends Modelica.Icons.References;
   annotation (Documentation(info="<html>
@@ -17,10 +17,10 @@ model Publications "Publications"
 <ul>
 
 <li>M. de Castro, G. Laera, F. Fachini, S.A. Dorado-Rojas, L. Vanfretti, S. Ahmed, C. Mishra, K.D. Jones and R. M. Gardner,
-    &quot;Power System Real-Time Simulation using Modelica and the FMI&quot;, 
+    &quot;Power System Real-Time Simulation using Modelica and the FMI&quot;,
     American Modelica Conference 2022, October 26-28, 2022, Dallas, Texas, US.</li>
 
-<li>G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C. Mishra, K.D. Jones and R.M. Gardner, 
+<li>G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C. Mishra, K.D. Jones and R.M. Gardner,
     &quot;Guidelines and Use Cases for Power System Dynamics Modeling and Model Verification using Modelica&quot;,
     American Modelica Conference 2022, October 26-28, 2022, Dallas, Texas, US.
 </li>
