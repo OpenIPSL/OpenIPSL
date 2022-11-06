@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 record ExcSystemData_H18
   extends ExcSystemData_Template(VR_type = "J",
+    IEEE_type = "NA",
     Name = "",
     RR = Modelica.Constants.small,
     T_R = 0.000,

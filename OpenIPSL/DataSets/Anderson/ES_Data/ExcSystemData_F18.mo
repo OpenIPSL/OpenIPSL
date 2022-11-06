@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 record ExcSystemData_F18
   extends ExcSystemData_Template(VR_type = "G",
+    IEEE_type = "ST1x",
     Name = "ALTHYREX",
     RR = 3.50,
     T_R = 0.000,

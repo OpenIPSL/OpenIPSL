@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 record ExcSystemData_CT1
   extends ExcSystemData_Template(VR_type = "D",
+    IEEE_type = "ST2x",
     Name = "SCPT",
     RR = Modelica.Constants.small,
     T_R = 0.000,

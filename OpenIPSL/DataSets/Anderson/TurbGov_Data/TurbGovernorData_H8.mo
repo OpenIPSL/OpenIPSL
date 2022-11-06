@@ -2,7 +2,7 @@ within OpenIPSL.DataSets.Anderson.TurbGov_Data;
 record TurbGovernorData_H8
   extends TurbGovernorData_Template(GOV = "G",
     R = 0.050,
-    P_MAX = 90.00,
+    P_MAX = 90.00/75,
     T_1 = 20.000,
     T_2 = 4.000,
     T_3 = 0.500,

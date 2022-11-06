@@ -2,7 +2,7 @@ within OpenIPSL.DataSets.Anderson.TurbGov_Data;
 partial record TurbGovernorData_Template "Turbine-Governor Data"
   parameter String GOV "Governor type (G = general, H = hydraulic, C = cross-compound)";
   parameter OpenIPSL.Types.PerUnit R "Turbine steady-state regulation setting or droop";
-  parameter OpenIPSL.Types.ActivePower P_MAX "Maximum Turbine Output";
+  parameter OpenIPSL.Types.PerUnit P_MAX "Maximum Turbine Output";
   parameter OpenIPSL.Types.Time T_1 "Control time constant (governor delay) or governor response time (type H)";
   parameter OpenIPSL.Types.Time T_2 "Hydro reset time constant (type G) or pilot valve time (type H)";
   parameter OpenIPSL.Types.Time T_3 "Servo time constant (type G or C), or hydro gate time constant (type G) or dashput time constant (type H)";

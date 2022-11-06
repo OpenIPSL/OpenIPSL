@@ -2,7 +2,7 @@ within OpenIPSL.DataSets.Anderson.TurbGov_Data;
 record TurbGovernorData_H15
   extends TurbGovernorData_Template(GOV = "G",
     R = 0.050,
-    P_MAX = 155.00,
+    P_MAX = 155.00/158,
     T_1 = Modelica.Constants.small,
     T_2 = Modelica.Constants.small,
     T_3 = Modelica.Constants.small,

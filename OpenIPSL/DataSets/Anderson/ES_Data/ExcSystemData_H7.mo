@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 record ExcSystemData_H7
   extends ExcSystemData_Template(VR_type = "A",
+    IEEE_type = "DC1x",
     Name = "WMA",
     RR = 1.85,
     T_R = 0.000,

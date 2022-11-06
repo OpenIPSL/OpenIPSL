@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 record ExcSystemData_F1
   extends ExcSystemData_Template(VR_type = "E",
+    IEEE_type = "DC3x",
     Name = "BJ30",
     RR = 0.50,
     T_R = 0.000,

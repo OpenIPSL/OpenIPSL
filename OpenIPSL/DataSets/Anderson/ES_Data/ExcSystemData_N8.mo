@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 record ExcSystemData_N8
   extends ExcSystemData_Template(VR_type = "C",
+    IEEE_type = "AC2x",
     Name = "BRLS",
     RR = 2.00,
     T_R = 0.000,

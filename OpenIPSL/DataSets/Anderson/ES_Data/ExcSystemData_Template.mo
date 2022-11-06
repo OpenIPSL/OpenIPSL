@@ -1,6 +1,7 @@
 within OpenIPSL.DataSets.Anderson.ES_Data;
 partial record ExcSystemData_Template "Excitation System Data"
   parameter String VR_type "Excitation system type";
+  parameter String IEEE_type "Similar to this IEEE type";
   parameter String Name "Excitation system name";
   parameter Real RR "Exciter response ratio";
   parameter OpenIPSL.Types.Time T_R "Regulator input filter time constant";

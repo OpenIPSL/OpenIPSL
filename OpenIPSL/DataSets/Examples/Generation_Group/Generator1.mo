@@ -2,6 +2,10 @@ within OpenIPSL.DataSets.Examples.Generation_Group;
 model Generator1
   extends OpenIPSL.Electrical.Essentials.pfComponent;
   OpenIPSL.Electrical.Machines.PSSE.GENSAE gENSAE(
+    P_0=P_0,
+    Q_0=Q_0,
+    v_0=v_0,
+    angle_0=angle_0,
     Tpd0=gU_Dynamics.guDynamics.machine.Tpd0,
     Tppd0=gU_Dynamics.guDynamics.machine.Tppd0,
     R_a=gU_Dynamics.guDynamics.machine.R_a,
@@ -15,12 +19,9 @@ model Generator1
     Xl=gU_Dynamics.guDynamics.machine.Xl,
     S10=gU_Dynamics.guDynamics.machine.S10,
     S12=gU_Dynamics.guDynamics.machine.S12,
-    angle_0=0.070492225331847,
     Xppq=gU_Dynamics.guDynamics.machine.Xppq,
-    M_b=gU_Dynamics.guDynamics.machine.M_b,
-    P_0=40000000,
-    Q_0=5416582,
-    v_0=1) annotation (Placement(transformation(extent={{26,-20},{66,20}})));
+    M_b=gU_Dynamics.guDynamics.machine.M_b)
+           annotation (Placement(transformation(extent={{26,-20},{66,20}})));
   Modelica.Blocks.Sources.Constant zero(k=0)
     annotation (Placement(transformation(extent={{0,-78},{-12,-66}})));
   OpenIPSL.Electrical.Controls.PSSE.ES.ESST1A eSST1A(
@@ -78,10 +79,10 @@ model Generator1
         origin={-27,15})));
   OpenIPSL.Interfaces.PwPin pwPin annotation (Placement(transformation(extent={{100,-10},
             {120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
-  GU_Dynamics gU_Dynamics(redeclare record GUnitDynamics = IEEE421.ST.ESST1A_1
-        (redeclare record PSS = .OpenIPSL.DataSets.IEEE421.PSS_Data.PSS2B_2 (
-              K_S2=gU_Dynamics.guDynamics.pss.T_7/(2*gU_Dynamics.guDynamics.machine.H))))
+  GU_Dynamics gU_Dynamics(redeclare record GUnitDynamics = GUnitDynamics)
     annotation (Placement(transformation(extent={{-90,32},{-70,52}})));
+  replaceable record GUnitDynamics = GU_Dynamics_Template annotation (
+      choicesAllMatching=true);
 equation
   connect(gENSAE.PMECH,gENSAE. PMECH0) annotation (Line(points={{22,12},{10,12},
           {10,30},{76,30},{76,10},{68,10}},          color={0,0,127}));
@@ -129,26 +130,28 @@ equation
           color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor=
            {28,108,200})}), Diagram(graphics={
         Rectangle(
-          extent={{-56,94},{98,66}},
+          extent={{-80,98},{72,66}},
           lineColor={28,108,200},
           radius=5,
           lineThickness=0.5,
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-48,94},{94,68}},
+          extent={{-76,94},{84,70}},
           textColor={0,0,0},
           textString="1. Drag and Drop from the DataSets package.
-2. Choose the appropriate parameter data set from the dropdown list.
-3. Insert component references."),
+2. Propagate to the upper-level.
+3. Go to the generator component in the upper-level model.
+ Choose the appropriate parameter data set from the dropdown list.
+4. Insert component references."),
         Line(
-          points={{-56,84},{-72,56}},
+          points={{-40,90},{-56,90},{-72,56}},
           color={28,108,200},
           thickness=0.5,
           arrow={Arrow.None,Arrow.Filled},
           pattern=LinePattern.Dash),
         Line(
-          points={{-38,64},{-68,36},{-70,-14}},
+          points={{-36,66},{-68,36},{-70,-14}},
           color={28,108,200},
           pattern=LinePattern.Dash,
           thickness=0.5,
@@ -177,15 +180,15 @@ equation
           extent={{-66,42},{-48,32}},
           textColor={28,108,200},
           textStyle={TextStyle.Bold},
-          textString="3"),
+          textString="4"),
         Text(
           extent={{-4,44},{14,34}},
           textColor={28,108,200},
           textStyle={TextStyle.Bold},
-          textString="3"),
+          textString="4"),
         Text(
           extent={{46,42},{64,32}},
           textColor={28,108,200},
           textStyle={TextStyle.Bold},
-          textString="3")}));
+          textString="4")}));
 end Generator1;
