@@ -129,19 +129,19 @@ initial equation
   end if;
   V_S0 = V_S;
 equation
-  if V_CU == 0 and not V_CL == 0 then
+  if not (V_CU > 0.0 or V_CU < 0.0) and (V_CL > 0.0 or V_CL < 0.0) then
     if V_CT > V_CL then
       VOTHSG = Vs;
     else
       VOTHSG = 0;
     end if;
-  elseif V_CL == 0 and not V_CU == 0 then
+  elseif not (V_CL > 0.0 or V_CL < 0.0) and (V_CU > 0.0 or V_CU < 0.0) then
     if V_CT < V_CU then
       VOTHSG = Vs;
     else
       VOTHSG = 0;
     end if;
-  elseif V_CU == 0 and V_CL == 0 then
+  elseif not (V_CU > 0.0 or V_CU < 0.0) and not (V_CL > 0.0 or V_CL < 0.0) then
     VOTHSG = Vs;
   elseif V_CT > V_CL and V_CT < V_CU then
     VOTHSG = Vs;
