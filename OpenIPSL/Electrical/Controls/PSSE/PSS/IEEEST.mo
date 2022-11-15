@@ -129,7 +129,7 @@ initial equation
   end if;
   V_S0 = V_S;
 equation
-  if not (V_CU > 0.0 or V_CU < 0.0) and (V_CL > 0.0 or V_CL < 0.0) then
+  if not (V_CU > 0 or V_CU < 0) and (V_CL > 0 or V_CL < 0) then
     if V_CT > V_CL then
       VOTHSG = Vs;
     else
