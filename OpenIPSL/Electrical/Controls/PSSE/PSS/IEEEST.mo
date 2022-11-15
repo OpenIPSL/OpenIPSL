@@ -141,7 +141,7 @@ equation
     else
       VOTHSG = 0;
     end if;
-  elseif not (V_CU > 0.0 or V_CU < 0.0) and not (V_CL > 0.0 or V_CL < 0.0) then
+  elseif not (V_CU > 0 or V_CU < 0) and not (V_CL > 0 or V_CL < 0) then
     VOTHSG = Vs;
   elseif V_CT > V_CL and V_CT < V_CU then
     VOTHSG = Vs;
