@@ -3,29 +3,33 @@ message: "If you use this software, please cite it as below."
 authors:
 - name: "OpenIPSL"
 title: "OpenIPSL: an Open-Instance Power System Library"
-version: 3.0.0
+version: 2.0.0
 url: "https://github.com/OpenIPSL/OpenIPSL"
 preferred-citation:
   type: article
   authors:
-  - family-names: "Baudette"
-    given-names: "Maxime"
-  - family-names: "Castro"
+  - family-names: "de Castro"
     given-names: "Marcelo"
-  - family-names: "Rabuzin"
-    given-names: "Tin"
-  - family-names: "Lavenius"
-    given-names: "Jan"
-  - family-names: "Bogodorova"
-    given-names: "Tetiana"
+  - family-names: "Winkler"
+    given-names: "Dietmar"
+  - family-names: "Laera"
+    given-names: "Giuseppe"
   - family-names: "Vanfretti"
     given-names: "Luigi"
-  doi: "https://doi.org/10.1016/j.softx.2018.01.002"
+  - family-names: "Dorado-Rojas"
+    given-names: "Sergio A."
+  - family-names: "Rabuzin"
+    given-names: "Tin"
+  - family-names: "Mukherjee"
+    given-names: "Biswarup"
+  - family-names: "Navarro"
+    given-names: "Manuel"
+  doi: "https://doi.org/10.1016/j.softx.2022.101277"
   journal: "SoftwareX"
-  start: 34 # First page number
-  end: 36 # Last page number
-  title: "OpenIPSL: Open-Instance Power System Library — Update 1.5 to “iTesla Power Systems Library (iPSL): A Modelica library for phasor time-domain simulations"
+  start:  # First page number
+  end:  # Last page number
+  title: "Version [OpenIPSL 2.0.0] - [iTesla Power Systems Library (iPSL): A Modelica library for phasor time-domain simulations],"
   issn: "2352-7110" 
-  volume: 7
-  year: 2018
-  url: "https://www.sciencedirect.com/science/article/pii/S2352711018300050"
+  volume: 21
+  year: 2023
+  url: "https://www.sciencedirect.com/science/article/pii/S2352711022001959"
