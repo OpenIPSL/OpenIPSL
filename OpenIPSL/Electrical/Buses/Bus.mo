@@ -1,4 +1,4 @@
-within OpenIPSL.Electrical.Buses;
+﻿within OpenIPSL.Electrical.Buses;
 model Bus "Bus model (2014/03/10)"
   extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enableQ_0=false,

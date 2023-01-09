@@ -51,8 +51,8 @@ model IEEEG1 "SMIB system to test functionality of IEEEG1 model"
     K_5=0.5,
     T_7=9999) annotation (Placement(transformation(extent={{-60,30},{-80,50}})));
 equation
-  connect(iEEET1.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
-                                                 color={0,0,127}));
+  connect(iEEET1.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},
+          {-100,-12},{-92,-12}},                 color={0,0,127}));
   connect(iEEET1.ECOMP, gENROU.ETERM) annotation (Line(points={{-59,-50},{-34,-50},{-34,-6},{-46,-6}},
                                              color={0,0,127}));
   connect(iEEET1.EFD0, gENROU.EFD0) annotation (Line(points={{-59,-54},{-38,-54},{-38,-10},{-46,-10}},
@@ -63,8 +63,8 @@ equation
   connect(gENROU.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(gENROU.XADIFD, iEEET1.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-68},{-78,-68},{-78,-61}},
                                               color={0,0,127}));
-  connect(iEEEG1.PMECH_HP, gENROU.PMECH) annotation (Line(points={{-81,44},{-100,44},{-100,10},{-92,10}},
-                                              color={0,0,127}));
+  connect(iEEEG1.PMECH_HP, gENROU.PMECH) annotation (Line(points={{-81,44},{
+          -100,44},{-100,12},{-92,12}},       color={0,0,127}));
   connect(gENROU.SPEED, iEEEG1.SPEED_HP) annotation (Line(points={{-46,14},{-36,14},{-36,40},{-62,40}},
                                                                color={0,0,127}));
 annotation (experiment(StopTime=10));
