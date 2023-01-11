@@ -1,5 +1,4 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampuses;
-package GeneratorGroups
+package CampusA
   extends Modelica.Icons.ExamplesPackage;
-
-end GeneratorGroups;
+end CampusA;

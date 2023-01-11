@@ -1,4 +1,4 @@
-within OpenIPSL.Examples.Microgrids.UniversityCampuses.GeneratorGroups;
+within OpenIPSL.Examples.Microgrids.UniversityCampuses.CampusA.GeneratorGroups;
 model GasTurbineUnit
   extends OpenIPSL.Interfaces.Generator(V_b = 13800);
   Electrical.Machines.PSSE.GENROE gENROE(
