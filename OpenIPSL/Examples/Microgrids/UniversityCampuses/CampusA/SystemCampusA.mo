@@ -50,7 +50,7 @@ model SystemCampusA "Campus Model 1"
            annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={2,172})));
+        origin={2,190})));
   inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
     annotation (Placement(transformation(extent={{80,-260},{140,-220}})));
   OpenIPSL.Electrical.Buses.Bus B1L2(
@@ -410,7 +410,7 @@ model SystemCampusA "Campus Model 1"
     B=0) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-88,120})));
+        origin={-90,106})));
   OpenIPSL.Electrical.Buses.Bus B1L3(
     V_b=13800,
     v_0=PF_results.voltages.VB1L3,
@@ -426,7 +426,7 @@ model SystemCampusA "Campus Model 1"
     B=0) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={2,98})));
+        origin={2,88})));
   OpenIPSL.Electrical.Branches.PwLine Line8(
     R=0.2,
     X=0.001,
@@ -434,7 +434,7 @@ model SystemCampusA "Campus Model 1"
     B=0) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={92,120})));
+        origin={92,106})));
   OpenIPSL.Electrical.Branches.PwLine Line1(
     R=0.3,
     X=0.01,
@@ -481,7 +481,7 @@ model SystemCampusA "Campus Model 1"
     angle_0=PF_results.voltages.AB1L2)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-88,150})));
+        origin={-88,138})));
   GeneratorGroups.GasTurbineUnit GT2(
     P_0=PF_results.machines.PGT2,
     Q_0=PF_results.machines.QGT2,
@@ -489,7 +489,7 @@ model SystemCampusA "Campus Model 1"
     angle_0=PF_results.voltages.AB2L2)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={82,150})));
+        origin={82,136})));
   GeneratorGroups.SteamTurbineUnit steamTurbineUnit(
     P_0=PF_results.machines.PST,
     Q_0=PF_results.machines.QST,
@@ -513,6 +513,21 @@ model SystemCampusA "Campus Model 1"
         OpenIPSL.Examples.Microgrids.UniversityCampuses.CampusA.Data.LoadsCampus1)
     annotation (Placement(transformation(extent={{160,-256},{200,-216}})));
 
+  Electrical.Events.Breaker BrGT1(enableTrigger=false)       annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={-88,166})));
+  Electrical.Events.Breaker BrGT2(enableTrigger=false)       annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={82,166})));
+  Electrical.Events.Breaker BrUTILITY(enableTrigger=false, t_o=5) annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={2,164})));
 equation
   connect(LOAD1.p, B1L5.p) annotation (Line(points={{-178,-10},{-178,-6},{-148,
           -6},{-148,0}},      color={0,0,255}));
@@ -568,7 +583,7 @@ equation
     annotation (Line(points={{22,-160},{22,-180}}, color={0,0,255}));
   connect(Line3.p, B3L4.p) annotation (Line(points={{162,201},{162,76},{122,76},
           {122,60}},       color={0,0,255}));
-  connect(Line2.p, B2L4.p) annotation (Line(points={{-38,201},{-38,70},{2,70},{
+  connect(Line2.p, B2L4.p) annotation (Line(points={{-38,201},{-38,62},{2,62},{
           2,60}},        color={0,0,255}));
   connect(B2L2.p, Line4.p)
     annotation (Line(points={{82,180},{82,201}}, color={0,0,255}));
@@ -590,9 +605,9 @@ equation
           232},{102,240}}, color={0,0,255}));
   connect(Line2.n, B1L1.p) annotation (Line(points={{-38,219},{-38,232},{-88,
           232},{-88,240}},     color={0,0,255}));
-  connect(Line7.n, B2L4.p) annotation (Line(points={{2,89},{2,60}},
+  connect(Line7.n, B2L4.p) annotation (Line(points={{2,79},{2,60}},
                          color={0,0,255}));
-  connect(Line7.p, B1L3.p) annotation (Line(points={{2,107},{2,140}},
+  connect(Line7.p, B1L3.p) annotation (Line(points={{2,97},{2,140}},
                                             color={0,0,255}));
   connect(Br2.r, B2L4.p) annotation (Line(points={{-52,60},{-52,58},{2,58},{2,
           60}},           color={0,0,255}));
@@ -603,14 +618,14 @@ equation
   connect(Br3.r, B3L4.p) annotation (Line(points={{68,60},{68,58},{122,58},{122,
           60}},            color={0,0,255}));
   connect(Line8.p, B1L3.p)
-    annotation (Line(points={{83,120},{2,120},{2,140}},
+    annotation (Line(points={{83,106},{2,106},{2,140}},
                                                    color={0,0,255}));
-  connect(Line6.p, B1L3.p) annotation (Line(points={{-79,120},{2,120},{2,140}},
+  connect(Line6.p, B1L3.p) annotation (Line(points={{-81,106},{2,106},{2,140}},
                                  color={0,0,255}));
-  connect(Line6.n, B1L4.p) annotation (Line(points={{-97,120},{-120,120},{-120,
+  connect(Line6.n, B1L4.p) annotation (Line(points={{-99,106},{-120,106},{-120,
           60}},                     color={0,0,255}));
   connect(Line8.n, B3L4.p)
-    annotation (Line(points={{101,120},{122,120},{122,60}},
+    annotation (Line(points={{101,106},{122,106},{122,60}},
                                                         color={0,0,255}));
   connect(Line9.n, B1L4.p) annotation (Line(points={{-148,39},{-148,50},{-120,
           50},{-120,60}},         color={0,0,255}));
@@ -649,18 +664,24 @@ equation
           -94},{-48,-100}},       color={0,0,255}));
   connect(Line12.p, B2L7.p) annotation (Line(points={{-58,21},{-58,-94},{-48,
           -94},{-48,-100}},       color={0,0,255}));
-  connect(UTILITY.p, B1L3.p)
-    annotation (Line(points={{2,162},{2,140}},   color={0,0,255}));
-  connect(GT1.pwPin, B1L2.p)
-    annotation (Line(points={{-88,161},{-88,180}}, color={0,0,255}));
-  connect(GT2.pwPin, B2L2.p)
-    annotation (Line(points={{82,161},{82,180}}, color={0,0,255}));
   connect(pwFault.p, B2L8.p) annotation (Line(points={{62.3333,-138},{28,-138},
           {28,-160},{22,-160}}, color={0,0,255}));
   connect(steamTurbineUnit.pwPin, BrST.s)
     annotation (Line(points={{122,151},{122,160}}, color={0,0,255}));
   connect(BrST.r, B3L2.p)
     annotation (Line(points={{122,172},{122,180}}, color={0,0,255}));
+  connect(BrGT1.r, B1L2.p)
+    annotation (Line(points={{-88,172},{-88,180}}, color={0,0,255}));
+  connect(GT1.pwPin, BrGT1.s)
+    annotation (Line(points={{-88,149},{-88,160}}, color={0,0,255}));
+  connect(GT2.pwPin, BrGT2.s)
+    annotation (Line(points={{82,147},{82,160}}, color={0,0,255}));
+  connect(BrGT2.r, B2L2.p)
+    annotation (Line(points={{82,172},{82,180}}, color={0,0,255}));
+  connect(BrUTILITY.s, B1L3.p) annotation (Line(points={{2,158},{2,149},{2,149},
+          {2,140}}, color={0,0,255}));
+  connect(BrUTILITY.r, UTILITY.p) annotation (Line(points={{2,170},{2,175},{2,
+          175},{2,180}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -300},{220,300}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-220,-300},{220,
