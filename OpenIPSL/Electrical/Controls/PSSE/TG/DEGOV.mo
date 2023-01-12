@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
-model DEGOV
+model DEGOV "DEGOV - Woodward Diesel Governor"
   extends BaseClasses.BaseGovernor;
 
   parameter Modelica.Units.SI.Time T1 "Governor Mechanism Time Constant";
@@ -14,20 +14,23 @@ model DEGOV
   parameter OpenIPSL.Types.PerUnit TMIN "Lower Limit";
 
 
-
-
   Modelica.Blocks.Continuous.TransferFunction transferFunction(b={-T3,-1}, a={
-        T2*T1,T1,1})
+        T2*T1,T1,1},
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    y_start=0)
     annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
-  Modelica.Blocks.Continuous.Integrator integrator(k=K)
+  Modelica.Blocks.Continuous.Integrator integrator(k=K, y_start=P0)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   NonElectrical.Continuous.LeadLag leadLag(
     K=1,
     T1=T4,
-    T2=T5) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    T2=T5,
+    y_start=P0)
+           annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   NonElectrical.Continuous.SimpleLagLim simpleLagLim(
     K=1,
     T=T6,
+    y_start=P0,
     outMax=TMAX,
     outMin=TMIN)
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
@@ -39,6 +42,12 @@ model DEGOV
     annotation (Placement(transformation(extent={{-80,-124},{-60,-104}})));
   Modelica.Blocks.Sources.Constant Constant(k=1)
     annotation (Placement(transformation(extent={{-140,-80},{-120,-60}})));
+
+protected
+  parameter Types.PerUnit P0(fixed=false) "Power reference of the governor";
+initial equation
+  P0 = PMECH0;
+
 equation
   connect(SPEED, transferFunction.u) annotation (Line(points={{-240,-120},{-180,
           -120},{-180,0},{-142,0}}, color={0,0,127}));
