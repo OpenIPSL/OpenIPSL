@@ -16,9 +16,18 @@ model Publications "Publications"
 
 <ul>
 
+<li>M. de Castro, G. Laera, F. Fachini, S.A. Dorado-Rojas, L. Vanfretti, S. Ahmed, C. Mishra, K.D. Jones and R. M. Gardner,
+    &quot;Power System Real-Time Simulation using Modelica and the FMI&quot;,
+    American Modelica Conference 2022, October 26-28, 2022, Dallas, Texas, US.</li>
+
+<li>G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C. Mishra, K.D. Jones and R.M. Gardner,
+    &quot;Guidelines and Use Cases for Power System Dynamics Modeling and Model Verification using Modelica&quot;,
+    American Modelica Conference 2022, October 26-28, 2022, Dallas, Texas, US.
+</li>
+
 <li>S. Boersma, X. Bombois, L. Vanfretti, J.C. Gonzalez-Torres, and A. Benchaib,
     &quot;Probing Signal Design for Enhanced Damping Estimation in Power Networks&quot;,
-    International Journal of Electrical Power & Energy Systems, vol. 129, July 2021, 106640, ISSN 0142-0615.
+    International Journal of Electrical Power &amp; Energy Systems, vol. 129, July 2021, 106640, ISSN 0142-0615.
     <a href=\"https://doi.org/10.1016/j.ijepes.2020.106640\">DOI:10.1016/j.ijepes.2020.106640</a>.</li>
 
 <li>M. Podlaski, L. Vanfretti, T. Bogodorova, T. Rabuzin, and M. Baudette,

@@ -14,6 +14,7 @@ model HYGOV "HYGOV - Hydro Turbine-Governor model"
   parameter Types.PerUnit A_t=1.2 "Turbine gain";
   parameter Types.PerUnit D_turb=0.2 "Turbine damping";
   parameter Types.PerUnit q_NL=0.08 "Water flow at no load";
+  parameter Types.PerUnit h0(min=0)=1 "Water head initial value > 0";
   Modelica.Blocks.Sources.Constant n_ref(k=nref) annotation (Placement(transformation(extent={{-178,14},{-166,26}})));
   OpenIPSL.NonElectrical.Continuous.SimpleLag SimpleLag1(
     K=1,
@@ -24,7 +25,7 @@ model HYGOV "HYGOV - Hydro Turbine-Governor model"
     annotation (Placement(transformation(extent={{-130,-22},{-142,-10}})));
   Modelica.Blocks.Math.Gain Gain4(k=D_turb)
     annotation (Placement(transformation(extent={{-62,-34},{-50,-22}})));
-  Modelica.Blocks.Sources.Constant hs(k=1)
+  Modelica.Blocks.Sources.Constant hs(k=h0)
     annotation (Placement(transformation(extent={{20,-20},{32,-8}})));
   Modelica.Blocks.Continuous.Integrator q(
     y_start=q0,
@@ -72,8 +73,6 @@ model HYGOV "HYGOV - Hydro Turbine-Governor model"
     y_start=0)
     annotation (Placement(transformation(extent={{-106,0},{-94,12}})));
 protected
-  parameter Real h0=1 "water head initial value";
-  // Real T_w(start=T_w);//=1.25 "Water time constant, s";
   parameter Real q0(fixed=false);
   //=Pm0/(A_t*h0)+q_NL "water flow initial value";
   parameter Real g0(fixed=false);
@@ -153,7 +152,11 @@ equation
           extent={{-100,160},{100,100}},
           lineColor={28,108,200},
           textString="HYGOV")}),
-    Documentation(info="<html> This is a hydro turbine-governor model.
+    Documentation(info="<html> 
+<p> This is a hydro turbine-governor model. </p>
+<p> If compared to the original PSSE implementation one will notice that the initial water head value, <code>h0</code>, is declared as a parameter.
+This allows the user to modify it, if required, in order to perform adequate studies. 
+The user should leave it in its default value (<code>1</code>) if they do not have any information on water head value, or if they do not wish to modify the parameter.</p>
 </html>",revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>
@@ -162,7 +165,7 @@ equation
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td><p>2020-09</p></td>
+<td><p>2022-11</p></td>
 </tr>
 <tr>
 <td><p>Author</p></td>

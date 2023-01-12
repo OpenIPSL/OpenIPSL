@@ -90,10 +90,10 @@ protected
   Real Qb=TPhasePower[1, 4]*Coef[1, 2];
 
   // Initializing voltages for each pin
-  parameter Real var0=VA*cos(AngA) "Initialitation";
-  parameter Real vai0=VA*sin(AngA) "Initialitation";
-  parameter Real vbr0=VB*cos(AngB) "Initialitation";
-  parameter Real vbi0=VB*sin(AngB) "Initialitation";
+  parameter Real var0=VA*cos(AngA) "Initialization";
+  parameter Real vai0=VA*sin(AngA) "Initialization";
+  parameter Real vbr0=VB*cos(AngB) "Initialization";
+  parameter Real vbi0=VB*sin(AngB) "Initialization";
   parameter Real iar0=(TPhasePower[1, 1]*var0 + TPhasePower[1, 3]*vai0)/(var0^2
        + vai0^2) "Initialization";
   parameter Real iai0=(TPhasePower[1, 1]*vai0 - TPhasePower[1, 3]*var0)/(var0^2

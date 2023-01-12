@@ -11,7 +11,7 @@ model NegCurLogic "Negative current logic block"
   Real Crowbar_V;
 equation
   Efd = if XadIfd < 0 then Crowbar_V else Vd;
-  Crowbar_V = if RC_rfd == 0 then 0 else (-1)*RC_rfd*XadIfd;
+  Crowbar_V = if not (RC_rfd > 0 or RC_rfd < 0) then 0 else (-1)*RC_rfd*XadIfd;
   annotation (
     Icon(graphics={Rectangle(
           extent={{-100,100},{100,-100}},

@@ -17,7 +17,7 @@ model Contact "Contact"
 <dd>email: <a href=\"mailto:luigi.vanfretti@gmail.com\">luigi.vanfretti@gmail.com</a></dd>
 </dl>
 
-<h5>Version 2.0.0 is organized by:</h5>
+<h5>Version 3.1.0 is organized by:</h5>
 <dl>
 <dt><a href=\"https://github.com/dietmarw\">Dietmar Winkler</a></dt>
 <dd>Assistant Professor</dd>
