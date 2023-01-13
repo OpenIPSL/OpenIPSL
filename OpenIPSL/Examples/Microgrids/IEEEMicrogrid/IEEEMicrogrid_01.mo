@@ -228,16 +228,16 @@ equation
     annotation (Line(points={{-110,-140},{-110,-130}}, color={0,0,255}));
   connect(capacitor_bank3.p, breaker3.s)
     annotation (Line(points={{-70,-140},{-70,-130}}, color={0,0,255}));
-  connect(breaker.r, CapBus.p) annotation (Line(points={{-190,-110},{-190,-70},
-          {-130,-70}}, color={0,0,255}));
+  connect(breaker.r, CapBus.p) annotation (Line(points={{-190,-110},{-190,-92},
+          {-130,-92},{-130,-70}}, color={0,0,255}));
   connect(breaker1.r, CapBus.p) annotation (Line(points={{-150,-110},{-150,-92},
           {-130,-92},{-130,-70}}, color={0,0,255}));
   connect(breaker2.r, CapBus.p) annotation (Line(points={{-110,-110},{-110,-92},
           {-130,-92},{-130,-70}}, color={0,0,255}));
-  connect(breaker3.r, CapBus.p) annotation (Line(points={{-70,-110},{-70,-70},{
-          -130,-70}}, color={0,0,255}));
-  connect(CapBus.p, CentralBus.p) annotation (Line(points={{-130,-70},{-130,62},
-          {140,62},{140,100}}, color={0,0,255}));
+  connect(breaker3.r, CapBus.p) annotation (Line(points={{-70,-110},{-70,-92},{
+          -130,-92},{-130,-70}}, color={0,0,255}));
+  connect(CapBus.p, CentralBus.p) annotation (Line(points={{-130,-70},{-130,60},
+          {140,60},{140,100}}, color={0,0,255}));
   connect(load.p, LoadBus.p)
     annotation (Line(points={{-10,-140},{-10,-110}}, color={0,0,255}));
   connect(LoadBus.p, LoadLine.n)
@@ -247,13 +247,37 @@ equation
   connect(BreakerGrid.s, GRID.p)
     annotation (Line(points={{-180,100},{-200,100}}, color={0,0,255}));
   connect(LoadLine.p, CentralBus.p) annotation (Line(points={{-10,-61.2},{-10,
-          -20},{-130,-20},{-130,62},{140,62},{140,100}}, color={0,0,255}));
+          -20},{-130,-20},{-130,60},{140,60},{140,100}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -200},{260,200}})),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-260,-200},{260,200}})),
+          extent={{-260,-200},{260,200}}), graphics={
+        Text(
+          extent={{-152,142},{-130,130}},
+          textColor={28,108,200},
+          textString="(1)"),
+        Text(
+          extent={{-72,142},{-50,130}},
+          textColor={28,108,200},
+          textString="(2)"),
+        Text(
+          extent={{28,142},{50,130}},
+          textColor={28,108,200},
+          textString="(3)"),
+        Text(
+          extent={{128,142},{150,130}},
+          textColor={28,108,200},
+          textString="(4)"),
+        Text(
+          extent={{6,-104},{28,-116}},
+          textColor={28,108,200},
+          textString="(5)"),
+        Text(
+          extent={{-116,-64},{-94,-76}},
+          textColor={28,108,200},
+          textString="(6)")}),
     experiment(
-      StopTime=1000,
+      StopTime=20,
       __Dymola_NumberOfIntervals=5000,
       __Dymola_Algorithm="Dassl"));
 end IEEEMicrogrid_01;

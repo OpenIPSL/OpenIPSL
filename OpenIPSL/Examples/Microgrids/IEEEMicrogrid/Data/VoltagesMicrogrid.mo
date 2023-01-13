@@ -13,7 +13,7 @@ record VoltagesMicrogrid
   parameter Real A2=0*pi/180;
 
   // Bus SubBus
-  parameter Real V3=1.000898;
+  parameter Real V3=1.000034;
   parameter Real A3=-0.0006039513*pi/180;
 
   // Bus CentralBus

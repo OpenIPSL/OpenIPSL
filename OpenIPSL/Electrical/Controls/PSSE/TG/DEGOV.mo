@@ -69,4 +69,9 @@ equation
           -6},{78,-6}}, color={0,0,127}));
   connect(product1.y, PMECH)
     annotation (Line(points={{101,0},{250,0}}, color={0,0,127}));
+  annotation (Icon(graphics={
+                  Text(
+          extent={{-100,160},{100,100}},
+          lineColor={28,108,200},
+          textString="DEGOV")}));
 end DEGOV;
