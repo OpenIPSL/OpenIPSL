@@ -5,9 +5,9 @@ model TwoWindingTransformer "Modeled as series reactances without iron losses"
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
   import Modelica.ComplexMath.j;
-  OpenIPSL.Interfaces.PwPin p
+  OpenIPSL.Interfaces.PwPin_p p
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
-  OpenIPSL.Interfaces.PwPin n
+  OpenIPSL.Interfaces.PwPin_n n
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   parameter Types.ApparentPower S_b=SysData.S_b "System base power"
     annotation (Dialog(group="Power flow"));
