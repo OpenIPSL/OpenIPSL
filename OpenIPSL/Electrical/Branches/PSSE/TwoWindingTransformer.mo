@@ -66,7 +66,8 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={ Ellipse(extent={{-70,40},{10,-40}},
-          lineColor={28,108,200}),Ellipse(extent={{-10,40},{70,-40}}, lineColor=
+          lineColor={28,108,200}),Ellipse(extent={{-10,40},{70,-40}}, lineColor
+            =
            {28,108,200}),Line(points={{-100,0},{-70,0}}, color={28,108,200}),
                                            Line(points={{70,0},{100,0}},color={
           28,108,200}),Polygon(

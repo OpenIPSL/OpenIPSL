@@ -1,4 +1,4 @@
-within OpenIPSL.UsersGuide;
+﻿within OpenIPSL.UsersGuide;
 model Publications "Publications"
   extends Modelica.Icons.References;
   annotation (Documentation(info="<html>
