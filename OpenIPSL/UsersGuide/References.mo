@@ -80,6 +80,15 @@ model References "References"
 </td>
 </tr>
 <tr>
+<td>[Mohammed2019]</td>
+<td>Mohammed, M., Federico, M.:
+        &quot;Modeling and Simulation of PI-Controllers Limiters for the Dynamic Analysis of VSC-Based Devices&quot;.
+        In: IEEE Transactions in Power Systems, Vol: 34, Issue: 5,
+        September 2019,
+        <a href=\"https://ieeexplore.ieee.org/document/8691611\">DOI: 10.1109/TPWRS.2019.2911034</a>
+</td>
+</tr>
+<tr>
 <td>[PSSE-AGV1]</td>
 <td>Siemens:
         &quot;PSS&reg;E Program Application Guide Volume 1&quot;,
@@ -110,6 +119,30 @@ model References "References"
         In: International Conference on Future Power Systems,
         Amsterdam, Netherlands, November 2005,
         <a href=\"https://doi.org/10.1109/FPS.2005.204302\">DOI: 10.1109/FPS.2005.204302</a>
+</td>
+</tr>
+<tr>
+<td>[WECCBattery]</td>
+<td>WECC:
+        &quot;Battery Storage Dynamic Modeling Guideline&quot;,
+	November 2016,
+        (<a href=\"https://www.wecc.org/Reliability/WECC%20Battery%20Storage%20Guideline%20updates_%20Bo%204-5-17%20SLT%204-7-17%20XX%20SC.docx\">document</a>)
+</td>
+</tr>
+<tr>
+<td>[WECCPhotovoltaic]</td>
+<td>WECC:
+        &quot;Solar Photovoltaic Power Plant Modeling and Validation Guideline&quot;,
+	December 2019,
+        (<a href=\"https://www.wecc.org/Reliability/Solar%20PV%20Plant%20Modeling%20and%20Validation%20Guidline.pdf\">document</a>)
+</td>
+</tr>
+<tr>
+<td>[WECCWind]</td>
+<td>WECC:
+        &quot;Wind Power Plant Dynamic Modeling Guideline&quot;,
+	April 2014,
+        (<a href=\"https://www.wecc.org/Reliability/WECC%20Wind%20Plant%20Dynamic%20Modeling%20Guidelines.pdf\">document</a>)
 </td>
 </tr>
 </table>

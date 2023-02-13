@@ -157,11 +157,11 @@ equation
   connect(V.y, gGOV1_Accel.FSR) annotation (
     Line(points = {{55, 0}, {58, 0}, {58, -32}, {-12, -32}, {-12, -4}, {-18, -4}}, color = {0, 0, 127}));
   connect(gGOV1_Power.FSRN, min_select.u[1]) annotation (
-    Line(points={{-19,-52},{-6,-52},{-6,-4},{4,-4},{4,4.66667}}, color = {0, 0, 127}));
+    Line(points={{-19,-52},{-6,-52},{-6,-4},{4,-4},{4,-2.33333}},color = {0, 0, 127}));
   connect(gGOV1_Temp.FSRT, min_select.u[2]) annotation (
     Line(points = {{-19, 74}, {-6, 74}, {-6, 4}, {4, 4}, {4, 0}}, color = {0, 0, 127}));
   connect(gGOV1_Accel.FSRA, min_select.u[3]) annotation (
-    Line(points={{-19,4},{-10,4},{-10,0},{4,0},{4,-4.66667}}, color = {0, 0, 127}));
+    Line(points={{-19,4},{-10,4},{-10,0},{4,0},{4,2.33333}},  color = {0, 0, 127}));
   annotation (
     Diagram,
     Icon( graphics={

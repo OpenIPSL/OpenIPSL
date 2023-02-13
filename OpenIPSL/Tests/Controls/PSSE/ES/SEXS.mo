@@ -36,8 +36,8 @@ model SEXS "SMIB system to test functionality of SEXS model"
     annotation (Placement(transformation(extent={{-60,-60},{-80,-40}})));
   Modelica.Blocks.Sources.Constant zero(k=0) annotation (Placement(transformation(extent={{6,-6},{-6,6}}, origin={-34,-80})));
 equation
-  connect(gENROU.PMECH, gENROU.PMECH0) annotation (Line(points={{-92,12},{-100,
-          12},{-100,30},{-40,30},{-40,10},{-46,10}}, color={0,0,127}));
+  connect(gENROU.PMECH, gENROU.PMECH0) annotation (Line(points={{-92,10},{-100,10},{-100,30},{-40,30},{-40,10},{-46,10}},
+                                                     color={0,0,127}));
   connect(gENROU.EFD0, sEXS.EFD0) annotation (Line(points={{-46,-10},{-38,-10},{-38,-54},{-59,-54}},
                                          color={0,0,127}));
   connect(gENROU.ETERM, sEXS.ECOMP) annotation (Line(points={{-46,-6},{-34,-6},{-34,-50},{-59,-50}},
@@ -45,8 +45,8 @@ equation
   connect(sEXS.VOEL, zero.y) annotation (Line(points={{-70,-61},{-70,-80},{-40.6,-80}}, color={0,0,127}));
   connect(sEXS.VOTHSG, zero.y) annotation (Line(points={{-59,-46},{-54,-46},{-54,-80},{-40.6,-80}}, color={0,0,127}));
   connect(sEXS.VUEL, zero.y) annotation (Line(points={{-66,-61},{-66,-80},{-40.6,-80}}, color={0,0,127}));
-  connect(sEXS.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},{
-          -100,-12},{-92,-12}},             color={0,0,127}));
+  connect(sEXS.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
+                                            color={0,0,127}));
   connect(gENROU.p, GEN1.p)
     annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(gENROU.XADIFD, sEXS.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-68},{-78,-68},{-78,-61}}, color={0,0,127}));
