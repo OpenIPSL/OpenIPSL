@@ -6,7 +6,7 @@ package Types "Library specific type definitions"
   type ActivePower = SI.ActivePower(nominal = 1e8, displayUnit = "MW");
   type ReactivePower = SI.ReactivePower(nominal = 1e8, displayUnit = "Mvar");
   type Power = SI.Power(nominal = 1e8, displayUnit = "MW");
-  type ApparentPower = SI.ApparentPower(nominal = 1e8, displayUnit = "MVA");
+  type ApparentPower = SI.ApparentPower(nominal = 1e8, displayUnit = "MV.A");
   type Angle = SI.Angle(displayUnit="deg");
   type AngularVelocity = SI.AngularVelocity;
   type Frequency = SI.Frequency;

@@ -41,15 +41,15 @@ model GENROE "ROUND ROTOR GENERATOR MODEL (EXPONENTIAL SATURATION)"
   Types.PerUnit XadIfd(start=efd0) "d-axis machine field current";
   Types.PerUnit XaqIlq(start=0) "q-axis Machine field current";
 protected
-  parameter Complex Zs=R_a + j*Xpp "Equivalent impedance";
-  parameter Complex VT=v_0*cos(angle_0) + j*v_0*sin(angle_0)
+  parameter Complex Zs=Complex(R_a,Xpp) "Equivalent impedance";
+  parameter Complex VT=Complex(v_0*cos(angle_0),v_0*sin(angle_0))
     "Complex terminal voltage";
-  parameter Complex S=p0 + j*q0 "Complex power on machine base";
-  parameter Complex It=real(S/VT) - j*imag(S/VT)
+  parameter Complex S=Complex(p0,q0) "Complex power on machine base";
+  parameter Complex It=Complex(real(S/VT),-imag(S/VT))
     "Complex current, machine base";
-  parameter Complex Is=real(It + VT/Zs) + j*imag(It + VT/Zs)
+  parameter Complex Is=Complex(real(It + VT/Zs),imag(It + VT/Zs))
     "Equivalent internal current source";
-  parameter Complex PSIpp0=real(Zs*Is) + j*imag(Zs*Is)
+  parameter Complex PSIpp0=Complex(real(Zs*Is),imag(Zs*Is))
     "Sub-transient flux linkage in stator reference frame";
   parameter Real ang_PSIpp0=arg(PSIpp0) "flux angle";
   parameter Real ang_It=arg(It) "current angle";
@@ -67,11 +67,11 @@ protected
   //Initializion rotor angle position
   parameter Real delta0=atan(b*cos(ang_PSIpp0andIt)/(b*sin(ang_PSIpp0andIt) - a))
        + ang_PSIpp0 "initial rotor angle in radians";
-  parameter Complex DQ_dq=cos(delta0) - j*sin(delta0)
+  parameter Complex DQ_dq=Complex(cos(delta0),-sin(delta0))
     "Parks transformation, from stator to rotor reference frame";
-  parameter Complex PSIpp0_dq=real(PSIpp0*DQ_dq) + j*imag(PSIpp0*DQ_dq)
+  parameter Complex PSIpp0_dq=Complex(real(PSIpp0*DQ_dq),imag(PSIpp0*DQ_dq))
     "Flux linkage in rotor reference frame";
-  parameter Complex I_dq=real(It*DQ_dq) - j*imag(It*DQ_dq);
+  parameter Complex I_dq=Complex(real(It*DQ_dq),-imag(It*DQ_dq));
   //"The terminal current in rotor reference frame"
   parameter Types.PerUnit PSIppq0=imag(PSIpp0_dq)
     "q-axis component of the sub-transient flux linkage";

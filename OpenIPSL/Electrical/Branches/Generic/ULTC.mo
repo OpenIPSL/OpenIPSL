@@ -20,6 +20,8 @@ model ULTC "Discrete tap changer based on Hisken"
   Real y5;
   Real y7;
   Real y6;
+  Boolean y2l0 "Loop breaker for when-clauses";
+  Boolean y3l0 "Loop breaker for when-clauses";
   Modelica.Blocks.Logical.ZeroCrossing zeroCrossing(enable = true) annotation (
     Placement(transformation(extent = {{-8, -12}, {12, 8}})));
   Interfaces.PwPin p annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
@@ -51,11 +53,13 @@ equation
   else
     y7 = 0;
   end if;
+  y2l0 = y2 < 0;
+  y3l0 = y3 < 0;
   zeroCrossing.u = y5;
-  when zeroCrossing.y and y2 < 0 then
+  when zeroCrossing.y and pre(y2l0) then
     reinit(x1, 0);
     m = pre(m) + m_step;
-  elsewhen zeroCrossing.y and y3 < 0 then
+  elsewhen zeroCrossing.y and pre(y3l0) then
     reinit(x1, 0);
     m = pre(m) - m_step;
   end when;

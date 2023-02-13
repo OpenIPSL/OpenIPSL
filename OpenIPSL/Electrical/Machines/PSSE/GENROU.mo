@@ -39,15 +39,15 @@ model GENROU "ROUND ROTOR GENERATOR MODEL (QUADRATIC SATURATION)"
   Types.PerUnit XadIfd(start=efd0) "d-axis machine field current ";
   Types.PerUnit XaqIlq(start=0) "q-axis Machine field current ";
 protected
-  parameter Complex Zs=R_a + j*Xpp "Equivalent impedance";
-  parameter Complex VT=v_0*cos(angle_0) + j*v_0*sin(angle_0)
+  parameter Complex Zs=Complex(R_a,Xpp) "Equivalent impedance";
+  parameter Complex VT=Complex(v_0*cos(angle_0),v_0*sin(angle_0))
     "Complex terminal voltage";
-  parameter Complex S=p0 + j*q0 "Complex power on machine base";
-  parameter Complex It=real(S/VT) - j*imag(S/VT)
+  parameter Complex S=Complex(p0,q0) "Complex power on machine base";
+  parameter Complex It=Complex(real(S/VT),-imag(S/VT))
     "Complex current, machine base";
-  parameter Complex Is=real(It + VT/Zs) + j*imag(It + VT/Zs)
+  parameter Complex Is=Complex(real(It + VT/Zs),imag(It + VT/Zs))
     "Equivalent internal current source";
-  parameter Complex PSIpp0=real(Zs*Is) + j*imag(Zs*Is)
+  parameter Complex PSIpp0=Complex(real(Zs*Is),imag(Zs*Is))
     "Sub-transient flux linkage in stator reference frame";
   parameter Types.Angle ang_PSIpp0=arg(PSIpp0) "flux angle";
   parameter Types.Angle ang_It=arg(It) "current angle";

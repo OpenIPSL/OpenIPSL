@@ -29,12 +29,15 @@ model ElmGenstat "Static generator"
   Modelica.Blocks.Interfaces.RealInput cosref if pll_connected "Optional PLL input for cosine"
                                                                                               annotation (
     Placement(transformation(origin = {-108, -70}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-90, -80}, extent = {{-10, -10}, {10, 10}})));
-  Real sinu "Internal sine of the voltage angle";
-  Real cosu "Internal cosine of the voltage angle";
   Modelica.Blocks.Interfaces.RealOutput P annotation (
     Placement(transformation(origin = {110, -30}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Q annotation (
     Placement(transformation(origin = {110, -70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}})));
+
+protected
+  Modelica.Blocks.Interfaces.RealOutput sinu "Internal sine of the voltage angle";
+  Modelica.Blocks.Interfaces.RealOutput cosu "Internal cosine of the voltage angle";
+
 equation
   if pll_connected then
     connect(sinref, sinu);

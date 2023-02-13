@@ -27,8 +27,9 @@ model DCBusBar "Model of a DC busbar between the module and inverter"
   Modelica.Blocks.Math.Add add(k2=-1) annotation (Placement(transformation(origin = {6, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Division P_to_I annotation (
     Placement(transformation(origin = {-24, -50}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Continuous.Integrator integrator(initType = Modelica.Blocks.Types.Init.SteadyState, k = 1 / C) annotation (
-    Placement(transformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Continuous.Integrator integrator(initType = Modelica.Blocks.Types.Init.SteadyState,
+    k = 1 / C, y_start=Modelica.Constants.eps)
+    annotation (Placement(transformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(I_pv, add.u1) annotation (
     Line(points={{-120.096,51.0723},{-10,51.0723},{-10,6},{-6,6}},

@@ -31,18 +31,21 @@ model GENSAE "SALIENT POLE GENERATOR MODEL (EXPONENTIAL SATURATION)"
   Types.PerUnit XadIfd(start=efd0) "Machine field current";
   Types.PerUnit PSIpp "Air-gap flux";
 protected
-  parameter Complex Zs=R_a + j*Xppd "Equivalent impedance";
-  parameter Complex Is=real(It + VT/Zs) + j*imag(It + VT/Zs);
-  parameter Complex PSIpp0=real(Zs*Is) + j*imag(Zs*Is);
+  parameter Complex Zs=Complex(R_a,Xppd) "Equivalent impedance";
+  parameter Complex VT=Complex(v_0*cos(angle_0),v_0*sin(angle_0))
+    "Complex terminal voltage";
+  parameter Complex S=Complex(p0,q0) "Complex power on machine base";
+  parameter Complex It=Complex(real(S/VT),-imag(S/VT))
+    "Complex current, machine base";
+  parameter Complex Is=Complex(real(It + VT/Zs),imag(It + VT/Zs))
+    "Equivalent internal current source";
+  parameter Complex PSIpp0=Complex(real(Zs*Is),imag(Zs*Is))
+    "Sub-transient flux linkage in stator reference frame";
   parameter Real ang_PSIpp0=arg(PSIpp0) "flux angle";
   parameter Real ang_It=arg(It) "current angle";
   parameter Real ang_PSIpp0andIt=ang_PSIpp0 - ang_It "angle difference";
   parameter Types.PerUnit abs_PSIpp0=abs(PSIpp0)
     "magnitude of sub-transient flux linkage";
-  parameter Complex VT=v_0*cos(angle_0) + j*v_0*sin(angle_0)
-    "Complex terminal voltage";
-  parameter Complex S=p0 + j*q0 "Complex power on machine base";
-  parameter Complex It=real(S/VT) - j*imag(S/VT) "Terminal current";
   parameter Real a=abs_PSIpp0 + abs_PSIpp0*dsat*(Xq - Xl)/(Xd - Xl);
   parameter Real b=(It.re^2 + It.im^2)^0.5*(Xppd - Xq);
   //Initializion rotor angle position

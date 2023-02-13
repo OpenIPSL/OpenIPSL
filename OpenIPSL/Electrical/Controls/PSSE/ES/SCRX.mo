@@ -73,13 +73,12 @@ equation
   connect(DiffV1.y, V_erro.u3) annotation (Line(points={{-100,-139},{-100,-139},
           {-100,-20},{-80,-20},{-80,-8},{-62,-8}}, color={0,0,127}));
   connect(negCurLogic.Efd, EFD)
-    annotation (Line(points={{181.5,0},{210,0},{210,0}}, color={0,0,127}));
+    annotation (Line(points={{182.5,0},{210,0},{210,0}}, color={0,0,127}));
   connect(product.u1, DiffV.u2) annotation (Line(points={{40.8,23.6},{-160,23.6},
           {-160,0},{-132,0},{-132,-6},{-122,-6}}, color={0,0,127}));
   connect(switch1.y, negCurLogic.Vd) annotation (Line(points={{84.6,24},{120,24},
-          {120,6},{147,6}},   color={0,0,127}));
-  connect(XADIFD, negCurLogic.XadIfd) annotation (Line(points={{80,-200},{80,-6},
-          {147,-6}},                                                                          color={0,0,127}));
+          {120,5},{147.5,5}}, color={0,0,127}));
+  connect(XADIFD, negCurLogic.XadIfd) annotation (Line(points={{80,-200},{80,-5},{147.5,-5}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
     Icon(coordinateSystem(

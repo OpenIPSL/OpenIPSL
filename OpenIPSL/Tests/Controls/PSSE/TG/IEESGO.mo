@@ -61,16 +61,15 @@ equation
       points={{-46,-10},{-38,-10},{-38,-54},{-59,-54}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sCRX.EFD, gENSAL.EFD) annotation (Line(points={{-81,-50},{-100,-50},{
-          -100,-12},{-92,-12}},          color={0,0,127}));
+  connect(sCRX.EFD, gENSAL.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
+                                         color={0,0,127}));
   connect(gENSAL.ETERM, sCRX.ECOMP) annotation (Line(points={{-46,-6},{-34,-6},{-34,-50},{-59,-50}},
                                           color={0,0,127}));
   connect(gENSAL.XADIFD, sCRX.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-68},{-78,-68},{-78,-61}},
                                               color={0,0,127}));
   connect(iEESGO.SPEED, gENSAL.SPEED) annotation (Line(points={{-62,44},{-42,44},{-42,14},{-46,14}},
                                 color={0,0,127}));
-  connect(iEESGO.PMECH, gENSAL.PMECH) annotation (Line(points={{-81,50},{-100,
-          50},{-100,12},{-92,12}},
+  connect(iEESGO.PMECH, gENSAL.PMECH) annotation (Line(points={{-81,50.2},{-100,50.2},{-100,10},{-92,10}},
                                  color={0,0,127}));
   connect(iEESGO.PMECH0, gENSAL.PMECH0) annotation (Line(points={{-62,56},{-38,56},{-38,10},{-46,10}},
                                     color={0,0,127}));

@@ -29,18 +29,21 @@ model GENSAL "SALIENT POLE GENERATOR MODEL (QUADRATIC SATURATION ON D-AXIS)"
   Types.PerUnit PSIq(start=PSIq0) "q-axis flux linkage";
   Types.PerUnit XadIfd(start=efd0) "Machine field current";
 protected
-  parameter Complex Zs=R_a + j*Xppd "Equivalent impedance";
-  parameter Complex Is=real(It + VT/Zs) + j*imag(It + VT/Zs);
-  parameter Complex PSIpp0=real(Zs*Is) + j*imag(Zs*Is);
-  parameter Complex a=0 + j*(Xq - Xppd);
-  parameter Complex Epqp=real(PSIpp0 + a*It) + j*imag(PSIpp0 + a*It);
-  parameter Real delta0=arg(Epqp) "rotor angle in radians";
-  parameter Complex VT=v_0*cos(angle_0) + j*v_0*sin(angle_0)
+  parameter Complex Zs=Complex(R_a,Xppd) "Equivalent impedance";
+  parameter Complex VT=Complex(v_0*cos(angle_0),v_0*sin(angle_0))
     "Complex terminal voltage";
-  parameter Complex S=p0 + j*q0 "Complex power on machine base";
-  parameter Complex It=real(S/VT) - j*imag(S/VT) "Terminal current";
-  parameter Complex DQ_dq=cos(delta0) - j*sin(delta0) "Parks transformation";
-  parameter Complex I_dq=real(It*DQ_dq) - j*imag(It*DQ_dq);
+  parameter Complex S=Complex(p0,q0) "Complex power on machine base";
+  parameter Complex It=Complex(real(S/VT),-imag(S/VT))
+    "Complex current, machine base";
+  parameter Complex Is=Complex(real(It + VT/Zs),imag(It + VT/Zs))
+    "Equivalent internal current source";
+  parameter Complex PSIpp0=Complex(real(Zs*Is),imag(Zs*Is))
+    "Sub-transient flux linkage in stator reference frame";
+  parameter Complex a=Complex(0.0,(Xq - Xppd));
+  parameter Complex Epqp=Complex(real(PSIpp0 + a*It),imag(PSIpp0 + a*It));
+  parameter Real delta0=arg(Epqp) "rotor angle in radians";
+  parameter Complex DQ_dq=Complex(cos(delta0),-sin(delta0)) "Parks transformation";
+  parameter Complex I_dq=Complex(real(It*DQ_dq), -imag(It*DQ_dq));
   //Initialization of current and voltage components in synchronous reference frame.
   parameter Types.PerUnit iq0=real(I_dq) "q-axis component of initial current";
   parameter Types.PerUnit id0=imag(I_dq) "d-axis component of initial current";
@@ -48,7 +51,7 @@ protected
     "d-axis component of initial voltage";
   parameter Types.PerUnit uq0=v_0*sin(angle_0 - delta0 + C.pi/2)
     "q-axis component of initial voltage";
-  parameter Complex PSIpp0_dq=real(PSIpp0*DQ_dq) + j*imag(PSIpp0*DQ_dq)
+  parameter Complex PSIpp0_dq=Complex(real(PSIpp0*DQ_dq),imag(PSIpp0*DQ_dq))
     "Flux linkage in rotor reference frame";
   parameter Types.PerUnit PSIppq0=-imag(PSIpp0_dq)
     "q-axis component of the sub-transient flux linkage";

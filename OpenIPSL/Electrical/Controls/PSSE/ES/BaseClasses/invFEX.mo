@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses;
 function invFEX "Inverse F_EX function for initialization"
-  input Real K_C=K_C;
+  input Real K_C;
   input Real Efd0;
   input Real Ifd0;
   output Real VE0;
