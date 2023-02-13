@@ -1,9 +1,9 @@
 within OpenIPSL.Examples.OpenCPS;
 model Network "Base network for testing resynchronization of a generation unit"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.Buses.Bus BG1
+  OpenIPSL.Electrical.Buses.Bus BG1(v_0=0.998855)
     annotation (Placement(transformation(extent={{-90,30},{-70,50}})));
-  OpenIPSL.Electrical.Buses.Bus B1
+  OpenIPSL.Electrical.Buses.Bus B1(v_0=0.992504)
     annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
     R=0.001,
@@ -28,9 +28,9 @@ model Network "Base network for testing resynchronization of a generation unit"
     X=0.2,
     G=0,
     B=0) annotation (Placement(transformation(extent={{-26,36},{-14,44}})));
-  OpenIPSL.Electrical.Buses.Bus B2
+  OpenIPSL.Electrical.Buses.Bus B2(v_0=0.992681)
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  OpenIPSL.Electrical.Buses.Bus B3
+  OpenIPSL.Electrical.Buses.Bus B3(v_0=0.998705)
     annotation (Placement(transformation(extent={{50,30},{70,50}})));
   OpenIPSL.Electrical.Branches.PwLine L2_1(
     R=0.0005,
@@ -44,10 +44,10 @@ model Network "Base network for testing resynchronization of a generation unit"
     B=0) annotation (Placement(transformation(extent={{24,16},{36,24}})));
   OpenIPSL.Electrical.Machines.PSSE.GENCLS IB(
     V_b=220000,
-    v_0=1,
+    v_0=0.998705,
     angle_0=0,
-    P_0=10067010.00,
-    Q_0=12058260.00,
+    P_0=10067010,
+    Q_0=12058260,
     M_b=100000000,
     X_d=0.2) annotation (Placement(transformation(extent={{110,30},{100,50}})));
   OpenIPSL.Electrical.Buses.Bus B4(angle_0=-0.1075140447, v_0=0.9291416)

@@ -49,12 +49,13 @@ equation
     annotation (Line(points={{-100,-40},{-20,-40}}, color={0,0,127}));
   connect(FI_DIFF, fi_limit_check.u) annotation (Line(points={{-100,-70},{-30,-70},
           {-20,-70}}, color={0,0,127}));
-  connect(and1.u[1], v_limit_check.START) annotation (Line(points={{54,2.8},{40,
-          2.8},{40,50},{1,50}}, color={255,0,255}));
+  connect(and1.u[1], v_limit_check.START) annotation (Line(points={{54,-1.4},{
+          40,-1.4},{40,50},{1,50}},
+                                color={255,0,255}));
   connect(and1.u[2], f_limit_check.START) annotation (Line(points={{54,
           4.44089e-016},{40,4.44089e-016},{40,-40},{1,-40}}, color={255,0,255}));
   connect(fi_limit_check.START, and1.u[3]) annotation (Line(points={{1,-70},{22,
-          -70},{48,-70},{48,-2.8},{54,-2.8}}, color={255,0,255}));
+          -70},{48,-70},{48,1.4},{54,1.4}},   color={255,0,255}));
   connect(TRIGGER, rSFlipFlop.Q)
     annotation (Line(points={{110,0},{97,0}}, color={255,0,255}));
   connect(and1.y, rSFlipFlop.S)

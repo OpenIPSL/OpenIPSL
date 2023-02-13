@@ -18,7 +18,10 @@ model FREQ_CALC "Frequency calculator"
   Modelica.Blocks.Continuous.FirstOrder firstOrder(k=1, T=T_w)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Interfaces.RealOutput d_FREQ
-    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation (Placement(transformation(extent={{100,30},{120,50}})));
+  Modelica.Blocks.Interfaces.RealOutput x_DERIVATIVE
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
 equation
   connect(const1.y, add.u2) annotation (Line(points={{-69,-40},{-66,-40},{-66,-6},
           {-62,-6}}, color={0,0,127}));
@@ -31,7 +34,10 @@ equation
   connect(derivative.y, firstOrder.u)
     annotation (Line(points={{41,0},{49.5,0},{58,0}}, color={0,0,127}));
   connect(firstOrder.y, d_FREQ)
-    annotation (Line(points={{81,0},{110,0}}, color={0,0,127}));
+    annotation (Line(points={{81,0},{98,0},{98,40},{110,40}},
+                                              color={0,0,127}));
+  connect(derivative.u, x_DERIVATIVE)
+    annotation (Line(points={{18,0},{18,-40},{110,-40}}, color={0,0,127}));
   annotation ( Documentation(info="<html>
 <p>This model of frequency calculator is based on a washout filter followed by a first order filter that is meant to smooth the washout output. The model can have as input the angle value of the phasor, the output will be an estimate of the frequency based on the angle variation.</p>
 </html>"));

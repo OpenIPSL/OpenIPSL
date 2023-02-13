@@ -104,7 +104,7 @@ model Network_Expanded "Extended network for testing resynchronization of a gene
     P_0=50000000,
     Q_0=10000000,
     v_0=0.9647,
-    angle_0=-0.05462688572)
+    angle_0=-0.054626885720001)
     annotation (Placement(transformation(extent={{-12,-12},{0,0}})));
   Breakers.Breaker breaker1 annotation (Placement(transformation(
         extent={{-4,4},{4,-4}},
@@ -216,5 +216,8 @@ equation
 </ul>
 <p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
 </html>"),
-    experiment(StopTime=50));
+    experiment(
+      StopTime=50,
+      __Dymola_NumberOfIntervals=5000,
+      __Dymola_Algorithm="Dassl"));
 end Network_Expanded;

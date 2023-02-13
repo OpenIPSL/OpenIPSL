@@ -5,7 +5,7 @@ model G1 "Generation unit connected to bus BG1"
 
   OpenIPSL.Interfaces.PwPin conn annotation (Placement(transformation(extent={{
             100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
-  OpenIPSL.Electrical.Machines.PSSE.GENSAL gen(
+  OpenIPSL.Electrical.Machines.PSSE.GENROE gen(
     M_b=100000000,
     Tpd0=5,
     Tppd0=0.07,
@@ -25,41 +25,37 @@ model G1 "Generation unit connected to bus BG1"
     v_0=v_0,
     angle_0=angle_0,
     P_0=P_0,
-    Q_0=Q_0) annotation (Placement(transformation(extent={{32,-20},{72,20}})));
-  OpenIPSL.Electrical.Controls.PSSE.ES.SEXS sEXS(
-    T_AT_B=0.1,
-    T_B=1,
-    K=100,
-    T_E=0.1,
-    E_MIN=-10,
-    E_MAX=10)
+    Q_0=Q_0,
+    Xpq=0.1,
+    Tpq0=2)  annotation (Placement(transformation(extent={{32,-20},{72,20}})));
+  SEXS4MPC SEXS(T_E=0.1)
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
-  OpenIPSL.Electrical.Controls.PSSE.TG.HYGOV hYGOV
+  IEESGO4MPC IEESGO
     annotation (Placement(transformation(extent={{-6,-52},{14,-32}})));
   Modelica.Blocks.Sources.Constant non_active_inputs(k=0)
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
 equation
   connect(gen.p, conn)
     annotation (Line(points={{72,0},{110,0}}, color={0,0,255}));
-  connect(sEXS.EFD0, gen.EFD0) annotation (Line(points={{-11,6},{-20,6},{-20,
-          -24},{80,-24},{80,-10},{74,-10}}, color={0,0,127}));
-  connect(sEXS.ECOMP, gen.ETERM) annotation (Line(points={{-11,10},{-20,10},{
-          -20,28},{80,28},{80,-6},{74,-6}}, color={0,0,127}));
-  connect(hYGOV.SPEED, gen.SPEED) annotation (Line(points={{-4,-36},{-24,-36},{
-          -24,32},{84,32},{84,14},{74,14}}, color={0,0,127}));
-  connect(hYGOV.PMECH0, gen.PMECH0) annotation (Line(points={{-4,-48},{-10,-48},
+  connect(SEXS.EFD0, gen.EFD0) annotation (Line(points={{-11,6},{-20,6},{-20,-24},
+          {80,-24},{80,-10},{74,-10}}, color={0,0,127}));
+  connect(SEXS.ECOMP, gen.ETERM) annotation (Line(points={{-11,10},{-20,10},{-20,
+          28},{80,28},{80,-6},{74,-6}}, color={0,0,127}));
+  connect(IEESGO.SPEED, gen.SPEED) annotation (Line(points={{-4,-36},{-24,-36},
+          {-24,32},{84,32},{84,14},{74,14}}, color={0,0,127}));
+  connect(IEESGO.PMECH0, gen.PMECH0) annotation (Line(points={{-4,-48},{-10,-48},
           {-10,-56},{84,-56},{84,10},{74,10}}, color={0,0,127}));
-  connect(non_active_inputs.y, sEXS.VOTHSG) annotation (Line(points={{-39,-10},
+  connect(non_active_inputs.y, SEXS.VOTHSG) annotation (Line(points={{-39,-10},
           {-16,-10},{-16,14},{-11,14}}, color={0,0,127}));
-  connect(hYGOV.PMECH, gen.PMECH) annotation (Line(points={{15,-42},{20,-42},{
+  connect(IEESGO.PMECH, gen.PMECH) annotation (Line(points={{15,-42},{20,-42},{
           20,12},{28,12}}, color={0,0,127}));
-  connect(sEXS.EFD, gen.EFD) annotation (Line(points={{11,10},{16,10},{16,-12},
+  connect(SEXS.EFD, gen.EFD) annotation (Line(points={{11,10},{16,10},{16,-12},
           {28,-12}}, color={0,0,127}));
-  connect(gen.XADIFD, sEXS.XADIFD) annotation (Line(points={{74,-18},{78,-18},{
+  connect(gen.XADIFD, SEXS.XADIFD) annotation (Line(points={{74,-18},{78,-18},{
           78,-22},{8,-22},{8,-1}}, color={0,0,127}));
-  connect(non_active_inputs.y, sEXS.VUEL)
+  connect(non_active_inputs.y, SEXS.VUEL)
     annotation (Line(points={{-39,-10},{-4,-10},{-4,-1}}, color={0,0,127}));
-  connect(non_active_inputs.y, sEXS.VOEL)
+  connect(non_active_inputs.y, SEXS.VOEL)
     annotation (Line(points={{-39,-10},{0,-10},{0,-1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Ellipse(
