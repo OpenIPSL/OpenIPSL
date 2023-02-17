@@ -1,0 +1,26 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_F1
+  extends ExcSystemData_Template(VR_type = "E",
+    IEEE_type = "DC3x",
+    Name = "BJ30",
+    RR = 0.50,
+    T_R = 0.000,
+    K_A = 0.050,
+    T_A1 = 20.000,
+    T_A2 = 0.000,
+    V_RMAX = 6.812,
+    V_RMIN = 1.395,
+    K_E = 1.000,
+    T_E = 0.000,
+    E_1 = 2.675,
+    E_2 = 3.567,
+    S_EE_1 = 0.414,
+    S_EE_2 = 0.908,
+    A_ex = 0.0392,
+    B_ex = 0.8807,
+    Efd_max = 3.567,
+    Efd_min = 1.417,
+    K_F = 0.010,
+    T_F1 = 1.000,
+    T_F2 = 0.000);
+end ExcSystemData_F1;

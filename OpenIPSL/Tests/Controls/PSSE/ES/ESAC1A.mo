@@ -47,8 +47,8 @@ model ESAC1A "SMIB system to test functionality of ESAC1A model"
     V_RMIN=-3)
     annotation (Placement(transformation(extent={{-60,-60},{-80,-40}})));
 equation
-  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,10},{-100,10},{-100,30},{-40,30},{-40,10},{-46,10}},
-                                                     color={0,0,127}));
+  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-92,12},{-100,
+          12},{-100,30},{-40,30},{-40,10},{-46,10}}, color={0,0,127}));
   connect(eSAC1A.VOTHSG, zero.y) annotation (Line(points={{-59,-46},{-26.6,-46}}, color={0,0,127}));
   connect(gENROE.ETERM, eSAC1A.ECOMP) annotation (Line(points={{-46,-6},{-34,-6},{-34,-50},{-59,-50}},
                                           color={0,0,127}));
@@ -56,8 +56,8 @@ equation
                                                color={0,0,127}));
   connect(gENROE.XADIFD, eSAC1A.XADIFD) annotation (Line(points={{-46,-18},{-42,-18},{-42,-66},{-78,-66},{-78,-61}},
                                                     color={0,0,127}));
-  connect(eSAC1A.EFD, gENROE.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
-                                                 color={0,0,127}));
+  connect(eSAC1A.EFD, gENROE.EFD) annotation (Line(points={{-81,-50},{-100,-50},
+          {-100,-12},{-92,-12}},                 color={0,0,127}));
   connect(plusInf.y, eSAC1A.VOEL) annotation (Line(points={{-40.4,-88},{-70,-88},{-70,-61}}, color={0,0,127}));
   connect(gENROE.p, GEN1.p)
     annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));

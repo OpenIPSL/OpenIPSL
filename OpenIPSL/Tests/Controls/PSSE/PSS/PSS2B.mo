@@ -72,7 +72,8 @@ model PSS2B "SMIB system to test functionality of PSS2B model"
     M=0,
     N=0) annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
 equation
-  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-87.6,48.5},{-94,48.5},{-94,64},{-36,64},{-36,48.5},{-46.2,48.5}},
+  connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-87.6,50.4},{
+          -94,50.4},{-94,64},{-36,64},{-36,48.5},{-46.2,48.5}},
                                                      color={0,0,127}));
   connect(eSST1A.ECOMP, gENROE.ETERM) annotation (Line(points={{-52.5,-51},{-38,-51},{-38,33.3},{-46.2,33.3}},
                                             color={0,0,127}));
@@ -81,8 +82,8 @@ equation
   connect(eSST1A.VUEL3, eSST1A.VUEL2) annotation (Line(points={{-76.7775,-67.4925},{-76.7775,-90},{-73.515,-90},{-73.515,-67.485}},
                                                               color={0,0,127}));
   connect(plusInf.y, eSST1A.VOEL) annotation (Line(points={{-56.6,-90},{-69,-90},{-69,-67.5}}, color={0,0,127}));
-  connect(eSST1A.EFD, gENROE.EFD) annotation (Line(points={{-85.5,-51},{-94,-51},{-94,29.5},{-87.6,29.5}},
-                                            color={0,0,127}));
+  connect(eSST1A.EFD, gENROE.EFD) annotation (Line(points={{-85.5,-51},{-94,-51},
+          {-94,27.6},{-87.6,27.6}},         color={0,0,127}));
   connect(eSST1A.EFD0, gENROE.EFD0) annotation (Line(points={{-52.5,-57},{-40,-57},{-40,29.5},{-46.2,29.5}},
                                           color={0,0,127}));
   connect(eSST1A.VOTHSG, zero.y) annotation (Line(points={{-52.5,-45},{-48,-45},{-48,-78},{-36.6,-78}}, color={0,0,127}));

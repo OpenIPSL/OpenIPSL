@@ -1,0 +1,26 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_F7
+  extends ExcSystemData_Template(VR_type = "A",
+    IEEE_type = "DC1x",
+    Name = "WMA",
+    RR = 0.50,
+    T_R = 0.000,
+    K_A = 175.000,
+    T_A1 = 0.050,
+    T_A2 = 0.000,
+    V_RMAX = 3.120,
+    V_RMIN = -3.120,
+    K_E = -0.170,
+    T_E = 0.952,
+    E_1 = 3.000,
+    E_2 = 4.000,
+    S_EE_1 = 0.220,
+    S_EE_2 = 0.950,
+    A_ex = 0.0027,
+    B_ex = 1.4628,
+    Efd_max = 4.000,
+    Efd_min = -4.000,
+    K_F = 0.030,
+    T_F1 = 1.000,
+    T_F2 = 0.000);
+end ExcSystemData_F7;

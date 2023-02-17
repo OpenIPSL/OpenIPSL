@@ -1,0 +1,26 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_F19
+  extends ExcSystemData_Template(VR_type = "C",
+    IEEE_type = "AC2x",
+    Name = "WTA",
+    RR = 2.00,
+    T_R = 0.000,
+    K_A = 400.000,
+    T_A1 = 0.020,
+    T_A2 = 0.000,
+    V_RMAX = 18.300,
+    V_RMIN = -18.300,
+    K_E = 1.000,
+    T_E = 0.942,
+    E_1 = 3.765,
+    E_2 = 5.020,
+    S_EE_1 = 0.813,
+    S_EE_2 = 2.670,
+    A_ex = 0.023,
+    B_ex = 0.9475,
+    Efd_max = 5.020,
+    Efd_min = 0.000,
+    K_F = 0.030,
+    T_F1 = 1.000,
+    T_F2 = 0.000);
+end ExcSystemData_F19;

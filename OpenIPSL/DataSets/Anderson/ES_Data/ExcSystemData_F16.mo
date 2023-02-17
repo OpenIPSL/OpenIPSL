@@ -1,0 +1,26 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_F16
+  extends ExcSystemData_Template(VR_type = "G",
+    IEEE_type = "ST1x",
+    Name = "ALTHYREX",
+    RR = 1.50,
+    T_R = 0.000,
+    K_A = 200.000,
+    T_A1 = 0.3950,
+    T_A2 = 0.000,
+    V_RMAX = 3.840,
+    V_RMIN = -3.840,
+    K_E = 1.000,
+    T_E = 0.000,
+    E_1 = 2.880,
+    E_2 = 3.840,
+    S_EE_1 = 0.000,
+    S_EE_2 = 0.000,
+    A_ex = 0.000,
+    B_ex = 0.000,
+    Efd_max = 3.840,
+    Efd_min = -3.840,
+    K_F = 0.0635,
+    T_F1 = 1.000,
+    T_F2 = 0.000);
+end ExcSystemData_F16;

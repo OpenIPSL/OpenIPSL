@@ -1,0 +1,26 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_H18
+  extends ExcSystemData_Template(VR_type = "J",
+    IEEE_type = "NA",
+    Name = "",
+    RR = Modelica.Constants.small,
+    T_R = 0.000,
+    K_A = 200.000,
+    T_A1 = 0.020,
+    T_A2 = 0.000,
+    V_RMAX = 7.320,
+    V_RMIN = 0.000,
+    K_E = 1.000,
+    T_E = 0.000,
+    E_1 = 5.490,
+    E_2 = 7.320,
+    S_EE_1 = 0.000,
+    S_EE_2 = 0.000,
+    A_ex = 0.000,
+    B_ex = 0.000,
+    Efd_max = 7.320,
+    Efd_min = 0.000,
+    K_F = 0.010,
+    T_F1 = 1.000,
+    T_F2 = 0.000);
+end ExcSystemData_H18;

@@ -1,0 +1,26 @@
+within OpenIPSL.DataSets.Anderson.ES_Data;
+record ExcSystemData_H3
+  extends ExcSystemData_Template(VR_type = "E",
+    IEEE_type = "DC3x",
+    Name = "GFA4",
+    RR = 0.5,
+    T_R = 0.000,
+    K_A = 0.050,
+    T_A1 = 20.000,
+    T_A2 = 0.000,
+    V_RMAX = 4.390,
+    V_RMIN = 0.000,
+    K_E = 1.000,
+    T_E = 1.970,
+    E_1 = 2.3962,
+    E_2 = 3.195,
+    S_EE_1 = 0.096,
+    S_EE_2 = 0.375,
+    A_ex = 0.0016,
+    B_ex = 1.7059,
+    Efd_max = 3.195,
+    Efd_min = 0.000,
+    K_F = 0.000,
+    T_F1 = 0.000,
+    T_F2 = 0.000);
+end ExcSystemData_H3;

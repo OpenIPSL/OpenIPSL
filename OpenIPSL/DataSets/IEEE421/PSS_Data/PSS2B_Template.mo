@@ -1,0 +1,28 @@
+within OpenIPSL.DataSets.IEEE421.PSS_Data;
+partial record PSS2B_Template "Type PSS-B Power System Stabilizer"
+  parameter Real T_w1 "Washout time constant 1";
+  parameter Real T_w2 "Washout time constant 2";
+  parameter Real T_6 "Lag time constant 6";
+  parameter Real T_w3 "Washout time constant 3";
+  parameter Real T_w4 "Washout time constant 4";
+  parameter Real T_7 "Lag time constant 7";
+  parameter Real K_S2 "Lag gain 2, T_7/H";
+  parameter Real K_S3 "Lag gain 3";
+  parameter Real T_8 "Ramp-tracking filter time constant";
+  parameter Real T_9 "Ramp-tracking filter time constant";
+  parameter Real K_S1 "PSS gain";
+  parameter Real T_1 "Lead-lag time constant 1";
+  parameter Real T_2 "Lead-lag time constant 2";
+  parameter Real T_3 "Lead-lag time constant 3";
+  parameter Real T_4 "Lead-lag time constant 4";
+  parameter Real T_10 "Lead-lag time constant 10";
+  parameter Real T_11 "Lead-lag time constant 11";
+  parameter Real V_S1MAX "PSS input 1 max. limit";
+  parameter Real V_S1MIN "PSS input 1 min. limit";
+  parameter Real V_S2MAX "PSS input 2 max. limit";
+  parameter Real V_S2MIN "PSS input 2 min. limit";
+  parameter Real V_STMAX "PSS output max. limit, 0.1 ~ 0.2";
+  parameter Real V_STMIN "PSS output min. limit, -0.05 ~ -0.1";
+  parameter Integer M "Ramp tracking filter coefficient";
+  parameter Integer N "Ramp tracking filter coefficient";
+end PSS2B_Template;

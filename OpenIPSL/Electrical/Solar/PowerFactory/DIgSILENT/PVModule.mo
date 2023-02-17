@@ -88,7 +88,8 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   annotation (
-    Icon(graphics={ Rectangle(lineColor = {118, 18, 62}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-58, 80}, extent = {{-20, 8}, {20, -8}}, textString = "U"), Text(origin = {76, 42}, extent = {{-20, 8}, {20, -8}}, textString = "I"), Text(origin = {76, -40}, extent = {{-20, 8}, {20, -8}}, textString = "Ummp"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
+    Icon(graphics={ Rectangle(lineColor = {118, 18, 62}, fillColor = {255, 255, 255},
+            fillPattern =                                                                           FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-54, -40}, extent = {{-20, 8}, {20, -8}}, textString = "theta"), Text(origin = {-58, 38}, extent = {{-20, 8}, {20, -8}}, textString = "E"), Text(origin = {-58, 80}, extent = {{-20, 8}, {20, -8}}, textString = "U"), Text(origin = {76, 42}, extent = {{-20, 8}, {20, -8}}, textString = "I"), Text(origin = {76, -40}, extent = {{-20, 8}, {20, -8}}, textString = "Ummp"), Text(origin = {0, -10}, lineColor = {0, 0, 255}, extent = {{-100, 150}, {100, 110}}, textString = "%name")}),
  Documentation(info = "<html>
 <p>
 Model of a PV Module within a PV array.
