@@ -133,8 +133,8 @@ model NetworkHard
     V_b=220000,
     v_0=1,
     angle_0=0,
-    P_0=10067010.00,
-    Q_0=12058260.00,
+    P_0=10067010,
+    Q_0=12058260,
     M_b=100000000,
     X_d=0.2) annotation (Placement(transformation(extent={{112,60},{102,80}})));
   Modelica.Blocks.Continuous.Integrator integrator(k=1)
