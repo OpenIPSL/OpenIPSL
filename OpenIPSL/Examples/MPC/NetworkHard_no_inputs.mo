@@ -18,7 +18,7 @@ model NetworkHard_no_inputs
         extent={{-6,-4},{6,4}},
         rotation=180,
         origin={-60,70})));
-  OpenIPSL.Examples.MPC.GenerationUnits.G1 G1(
+  OpenIPSL.Examples.MPC.GenerationUnits.PSSE.G1 G1(
     v_0=1,
     angle_0=0.15656662805,
     P_0=40000000,

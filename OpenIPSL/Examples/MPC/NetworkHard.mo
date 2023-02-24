@@ -18,7 +18,7 @@ model NetworkHard
         extent={{-6,-4},{6,4}},
         rotation=180,
         origin={-60,70})));
-  OpenIPSL.Examples.MPC.GenerationUnits.G1 G1(
+  OpenIPSL.Examples.MPC.GenerationUnits.PSSE.G1 G1(
     v_0=0.998855,
     angle_0=0.15699114448641,
     P_0=40000000,
@@ -75,12 +75,12 @@ model NetworkHard
         extent={{-6,-4},{6,4}},
         rotation=270,
         origin={60,-6})));
-  OpenIPSL.Examples.MPC.GenerationUnits.G2_no_controls2 G2(
+  OpenIPSL.Examples.MPC.GenerationUnits.PSSE.G2_for_PID G2(
     v_0=1.0074,
     angle_0=0.0093371449790267,
     V_b=24000,
     P_0=10010220,
-    Q_0=10204330)    annotation (Placement(transformation(
+    Q_0=10204330) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={60,-40})));

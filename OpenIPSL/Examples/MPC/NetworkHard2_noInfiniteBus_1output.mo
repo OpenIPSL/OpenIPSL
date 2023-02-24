@@ -18,7 +18,7 @@ model NetworkHard2_noInfiniteBus_1output
         extent={{-6,-4},{6,4}},
         rotation=180,
         origin={-60,70})));
-  OpenIPSL.Examples.MPC.GenerationUnits.G1 G1(
+  OpenIPSL.Examples.MPC.GenerationUnits.PSSE.G1 G1(
     v_0=0.998855,
     angle_0=0.15699114448641,
     P_0=40000000,

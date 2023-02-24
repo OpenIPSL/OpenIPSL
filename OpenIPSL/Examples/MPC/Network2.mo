@@ -18,7 +18,7 @@ model Network2
         extent={{-6,-4},{6,4}},
         rotation=180,
         origin={-60,70})));
-  OpenIPSL.Examples.MPC.GenerationUnits.G1 G1(
+  OpenIPSL.Examples.MPC.GenerationUnits.PSSE.G1 G1(
     v_0=1,
     angle_0=0.15656662805,
     P_0=40000000,
@@ -88,12 +88,12 @@ model Network2
     angle_0=-0.00960250483,
     Q_0=10000000) annotation (Placement(transformation(extent={{94,-32},{106,
             -20}})));
-  OpenIPSL.Examples.MPC.GenerationUnits.G2 G2(
+  OpenIPSL.Examples.MPC.GenerationUnits.PSSE.G2_1INPUT_Pref G2(
     v_0=1,
     angle_0=0,
     V_b=24000,
     P_0=10010220,
-    Q_0=10204330)    annotation (Placement(transformation(
+    Q_0=10204330) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={60,-40})));
@@ -158,7 +158,7 @@ equation
     annotation (Line(points={{80,26},{80,34.6}},color={0,0,255}));
   connect(T2.n, B5.p)
     annotation (Line(points={{60,-12.6},{60,-20}}, color={0,0,255}));
-  connect(INPUT1, G2.Padd) annotation (Line(points={{-160,-40},{40,-40},{40,-60},
+  connect(INPUT1, G2.P_ref) annotation (Line(points={{-160,-40},{40,-40},{40,-60},
           {57.6,-60},{57.6,-52}}, color={0,0,127}));
   connect(softPMU.n, B4.p)
     annotation (Line(points={{39,8},{80,8},{80,10}}, color={0,0,255}));
