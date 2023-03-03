@@ -1,8 +1,8 @@
 within OpenIPSL.Examples.MPC.GenerationUnits;
-model SEXS4MPC
+model SEXSMPC
   "SEXS - Simplified excitation system model (AC4 from [IEEE1981])"
   extends Icons.VerifiedModel;
-  extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
+  extends OpenIPSL.Examples.MPC.GenerationUnits.BaseExciterMPC(gain(k=1/K));
   parameter Real T_AT_B=0.1 "Ratio between regulator numerator (lead) and denominator (lag) time constants";
   parameter Real T_B=1 "Regulator denominator (lag) time constant";
   parameter Real K=100 "Excitation power source output gain";
@@ -13,38 +13,47 @@ model SEXS4MPC
     k3=1,
     k1=1,
     k2=1) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+  NonElectrical.Continuous.SimpleLagLim simpleLagLim(
+    K=K,
+    T=T_E,
+    y_start=Efd0,
+    outMax=E_MAX,
+    outMin=E_MIN)
+    annotation (Placement(transformation(extent={{120,-10},{140,10}})));
   Modelica.Blocks.Math.Add DiffV1 annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-100,-50})));
-  NonElectrical.Continuous.SimpleLag
-                                   simpleLag(
-    K=K,
-    T=T_B,
-    y_start=Efd0)
-    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  NonElectrical.Continuous.LeadLag leadLag(
+    K=1,
+    T1=T_AT_B*T_B,
+    T2=T_B,
+    y_start=Efd0/K,
+    x_start=Efd0/K)
+    annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 initial equation
   V_REF = Efd0/K + ECOMP0;
 equation
-  connect(DiffV1.u1, VUEL) annotation (Line(points={{-106,-62},{-106,-80},{-130,
-          -80},{-130,-200}}, color={0,0,127}));
-  connect(DiffV1.u2, VOEL) annotation (Line(points={{-94,-62},{-94,-80},{-70,-80},
-          {-70,-200}}, color={0,0,127}));
-  connect(DiffV1.y, V_erro.u3) annotation (Line(points={{-100,-39},{-100,-20},{
-          -52,-20},{-52,-8},{-42,-8}}, color={0,0,127}));
+  connect(simpleLagLim.y, EFD)
+    annotation (Line(points={{141,0},{210,0}}, color={0,0,127}));
   connect(DiffV.y, V_erro.u2)
     annotation (Line(points={{-99,0},{-42,0}}, color={0,0,127}));
   connect(V_erro.u1, VOTHSG) annotation (Line(points={{-42,8},{-52,8},{-52,90},
           {-200,90}}, color={0,0,127}));
   connect(ECOMP, DiffV.u2) annotation (Line(points={{-200,0},{-166,0},{-132,0},
           {-132,-6},{-122,-6}}, color={0,0,127}));
-  connect(V_erro.y, simpleLag.u)
-    annotation (Line(points={{-19,0},{58,0}}, color={0,0,127}));
-  connect(simpleLag.y, EFD)
-    annotation (Line(points={{81,0},{210,0}}, color={0,0,127}));
+  connect(leadLag.y, simpleLagLim.u)
+    annotation (Line(points={{61,0},{118,0}}, color={0,0,127}));
+  connect(leadLag.u, V_erro.y)
+    annotation (Line(points={{38,0},{-19,0}}, color={0,0,127}));
+  connect(VUEL, DiffV1.u1) annotation (Line(points={{-130,-200},{-130,-72},{
+          -106,-72},{-106,-62}}, color={0,0,127}));
+  connect(VOEL, DiffV1.u2) annotation (Line(points={{-70,-200},{-70,-72},{-94,
+          -72},{-94,-62}}, color={0,0,127}));
+  connect(DiffV1.y, V_erro.u3) annotation (Line(points={{-100,-39},{-100,-16},{
+          -42,-16},{-42,-8}}, color={0,0,127}));
   annotation (
-    Diagram(coordinateSystem(extent={{-200,-200},{200,160}}), graphics={Line(
-            points={{79,0},{78,2}}, color={0,0,127})}),
+    Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
         graphics={Text(
           extent={{-100,160},{100,100}},
@@ -70,4 +79,4 @@ equation
 </tr>
 </table>
 </html>"));
-end SEXS4MPC;
+end SEXSMPC;
