@@ -2014,8 +2014,7 @@ package PSSE
         Q_0=10000000) annotation (Placement(transformation(extent={{-12,18},{0,30}})));
       Electrical.Events.Breaker breaker(enableTrigger=false,
         t_o=2,
-        rc_enabled=true,
-        t_rc=30)                               annotation (Placement(transformation(
+        rc_enabled=true)                       annotation (Placement(transformation(
             extent={{-4,-4},{4,4}},
             rotation=90,
             origin={80,22})));
