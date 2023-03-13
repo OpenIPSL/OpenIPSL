@@ -1594,7 +1594,7 @@ package PSSE
     equation
       OUT1 = G2.SPEED1;
       OUT2 = G2.PMECH1;
-      OUT3 = B4.v;
+      OUT3 = G2.gen.ANGLE;
       OUT4 = G2.TF2_out1;
       OUT5 = B3.angle;
       OUT6 = B3.v;
@@ -2013,8 +2013,8 @@ package PSSE
         P_0=50000000,
         Q_0=10000000) annotation (Placement(transformation(extent={{-12,18},{0,30}})));
       Electrical.Events.Breaker breaker(enableTrigger=false,
-        t_o=2,
-        rc_enabled=true)                       annotation (Placement(transformation(
+        t_o=101,
+        rc_enabled=false)                      annotation (Placement(transformation(
             extent={{-4,-4},{4,4}},
             rotation=90,
             origin={80,22})));
@@ -2032,7 +2032,7 @@ package PSSE
         angle_0=-0.00014475935348966,
         d_P=0.01,
         t1=2.1,
-        d_t=40)
+        d_t=20)
         annotation (Placement(transformation(extent={{90,-40},{110,-20}})));
       Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput
         annotation (Placement(transformation(
@@ -2047,20 +2047,11 @@ package PSSE
         annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
       Modelica.Blocks.Math.Add AddU1
         annotation (Placement(transformation(extent={{-80,4},{-60,24}})));
-          Modelica.Blocks.Sources.Constant IN22(k=0)
-        annotation (Placement(transformation(extent={{-120,-54},{-100,-34}})));
-      Modelica.Blocks.Math.Add AddU2
-        annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
-      Modelica.Blocks.Interfaces.RealInput IN2(start=0)
-        "Connector of Real input signal 2" annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=0,
-            origin={-160,-24})));
-      Modelica.Blocks.Sources.Constant IN33(k=0)
+      Modelica.Blocks.Sources.Constant IN22(k=0)
         annotation (Placement(transformation(extent={{-120,-110},{-100,-90}})));
-      Modelica.Blocks.Math.Add AddU3
+      Modelica.Blocks.Math.Add AddU2
         annotation (Placement(transformation(extent={{-80,-96},{-60,-76}})));
-      Modelica.Blocks.Interfaces.RealInput IN3(start=0)
+      Modelica.Blocks.Interfaces.RealInput IN2(start=0)
         "Connector of Real input signal 2" annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=0,
@@ -2146,18 +2137,12 @@ package PSSE
       connect(T2.p, B4.p) annotation (Line(points={{60,0.6},{60,2},{80,2},{80,10}},
                             color={0,0,255}));
 
-      connect(IN22.y, AddU2.u2)
-        annotation (Line(points={{-99,-44},{-82,-44},{-82,-36}}, color={0,0,127}));
-      connect(IN2,AddU2. u1) annotation (Line(points={{-160,-24},{-82,-24}},
-                     color={0,0,127}));
-      connect(IN33.y, AddU3.u2) annotation (Line(points={{-99,-100},{-82,-100},{-82,
+      connect(IN22.y,AddU2. u2) annotation (Line(points={{-99,-100},{-82,-100},{-82,
               -92}}, color={0,0,127}));
-      connect(IN3,AddU3. u1) annotation (Line(points={{-160,-80},{-82,-80}},
+      connect(IN2,AddU2. u1) annotation (Line(points={{-160,-80},{-82,-80}},
                      color={0,0,127}));
-      connect(AddU3.y, G2.Efd_ref)
+      connect(AddU2.y, G2.Efd_ref)
         annotation (Line(points={{-59,-86},{66,-86},{66,-52}}, color={0,0,127}));
-      connect(AddU2.y, G2.P_ref2) annotation (Line(points={{-59,-30},{-20,-30},{-20,
-              -80},{60,-80},{60,-52}}, color={0,0,127}));
       connect(AddU1.y, G2.P_ref1) annotation (Line(points={{-59,14},{-28,14},{-28,-20},
               {0,-20},{0,-74},{54,-74},{54,-52}}, color={0,0,127}));
       annotation ( Diagram(coordinateSystem(preserveAspectRatio=false,

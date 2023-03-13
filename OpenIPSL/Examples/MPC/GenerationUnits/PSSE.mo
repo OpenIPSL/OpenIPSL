@@ -787,7 +787,7 @@ package PSSE
     Modelica.Blocks.Interfaces.RealOutput SPEED1
       "Machine speed deviation from nominal [pu]"
       annotation (Placement(transformation(extent={{100,50},{120,70}})));
-    GASTMPCforthreeentradas gASTMPC(T_3=0.01, D_turb=0.1)
+    GASTMPC gASTMPC(T_3=0.01, D_turb=0.1)
       annotation (Placement(transformation(extent={{-18,14},{2,34}})));
     Modelica.Blocks.Interfaces.RealOutput PMECH1
       annotation (Placement(transformation(extent={{100,30},{120,50}})));
@@ -806,9 +806,6 @@ package PSSE
     Modelica.Blocks.Interfaces.RealInput Efd_ref
       "Connector of Real input signal 1"
       annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-    Modelica.Blocks.Interfaces.RealInput P_ref2
-      "Connector of Real input signal 2"
-      annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   equation
     connect(gen.p, conn)
       annotation (Line(points={{78,0},{110,0}}, color={0,0,255}));
@@ -846,10 +843,8 @@ package PSSE
             {16,86},{110,86}}, color={0,0,127}));
     connect(sEXSMPC.EFd_input, Efd_ref) annotation (Line(points={{-17,-4},{-94,
             -4},{-94,-60},{-120,-60}}, color={0,0,127}));
-    connect(P_ref2, gASTMPC.PMECHControllable2) annotation (Line(points={{-120,
-            0},{-64,0},{-64,2},{-2,2},{-2,12}}, color={0,0,127}));
-    connect(P_ref1, gASTMPC.PMECHControllable1) annotation (Line(points={{-120,
-            60},{-58,60},{-58,6},{-14,6},{-14,12}}, color={0,0,127}));
+    connect(P_ref1, gASTMPC.PMECHControllable) annotation (Line(points={{-120,
+            60},{-60,60},{-60,8},{-8,8},{-8,12}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
               {100,100}}), graphics={Ellipse(
             extent={{-100,100},{100,-100}},
