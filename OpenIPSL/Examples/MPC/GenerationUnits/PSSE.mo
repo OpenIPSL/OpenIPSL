@@ -776,7 +776,7 @@ package PSSE
       T_AT_B=0.2,
       K=50,
       E_MIN=0,
-      E_MAX=10,
+      E_MAX=5,
       T_E=0.01,
       T_B=10) annotation (Placement(transformation(extent={{-16,-22},{4,-2}})));
     Modelica.Blocks.Sources.Constant non_active_limits(k=0)

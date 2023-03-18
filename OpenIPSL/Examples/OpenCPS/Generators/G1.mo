@@ -1,7 +1,10 @@
 within OpenIPSL.Examples.OpenCPS.Generators;
 model G1 "Generation unit connected to bus BG1"
   outer OpenIPSL.Electrical.SystemBase SysData;
-  extends OpenIPSL.Electrical.Essentials.pfComponent;
+  extends OpenIPSL.Electrical.Essentials.pfComponent(enableP_0 = true,
+  enableQ_0 = true,
+  enablev_0 = true,
+  enableangle_0 = true);
 
   OpenIPSL.Interfaces.PwPin conn annotation (Placement(transformation(extent={{
             100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
