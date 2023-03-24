@@ -70,7 +70,8 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name"),
                          Line(points={{-60,-20},{-20,20},{20,-20},{60,20}},
-          color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor=
+          color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor
+            =
            {28,108,200})}),
     Documentation(info="<html>
 <p>13.8kV/25MVA Reactive power generation unit (synchronous condenser) connected to bus 6, and composed of the following component models:</p>

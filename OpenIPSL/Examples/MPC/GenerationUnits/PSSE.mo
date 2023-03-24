@@ -784,25 +784,8 @@ package PSSE
     Modelica.Blocks.Interfaces.RealInput P_ref1
       "Connector of Real input signal 2"
       annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-    Modelica.Blocks.Interfaces.RealOutput SPEED1
-      "Machine speed deviation from nominal [pu]"
-      annotation (Placement(transformation(extent={{100,50},{120,70}})));
     GASTMPC gASTMPC(T_3=0.01, D_turb=0.1)
       annotation (Placement(transformation(extent={{-18,14},{2,34}})));
-    Modelica.Blocks.Interfaces.RealOutput PMECH1
-      annotation (Placement(transformation(extent={{100,30},{120,50}})));
-    Modelica.Blocks.Interfaces.RealOutput EFD1
-                                              "Excitation Voltage [pu]"
-      annotation (Placement(transformation(extent={{100,-40},{120,-20}})));
-    Modelica.Blocks.Interfaces.RealOutput ETERM1
-                                "Machine terminal voltage [pu]"
-      annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-    Modelica.Blocks.Interfaces.RealOutput PELEC1
-                               "Machine electrical power (machine base)"
-      annotation (Placement(transformation(extent={{100,12},{120,32}})));
-    Modelica.Blocks.Interfaces.RealOutput TF2_out1
-      "Connector of Real output signal"
-      annotation (Placement(transformation(extent={{100,76},{120,96}})));
     Modelica.Blocks.Interfaces.RealInput Efd_ref
       "Connector of Real input signal 1"
       annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
@@ -823,28 +806,16 @@ package PSSE
             {84,-34},{2,-34},{2,-23}}, color={0,0,127}));
     connect(sEXSMPC.VOTHSG, sEXSMPC.VOEL) annotation (Line(points={{-17,-8},{-22,
             -8},{-22,-32},{-6,-32},{-6,-23}}, color={0,0,127}));
-    connect(gen.SPEED, SPEED1) annotation (Line(points={{80,14},{86,14},{86,66},
-            {96,66},{96,60},{110,60}}, color={0,0,127}));
-    connect(gASTMPC.SPEED, SPEED1) annotation (Line(points={{-16,30},{-32,30},{
-            -32,54},{86,54},{86,66},{96,66},{96,60},{110,60}}, color={0,0,127}));
     connect(gASTMPC.PMECH0, gen.PMECH0) annotation (Line(points={{-16,18},{-28,
             18},{-28,44},{92,44},{92,10},{80,10}}, color={0,0,127}));
     connect(gASTMPC.PMECH, gen.PMECH) annotation (Line(points={{3,24},{22,24},{
             22,12},{34,12}}, color={0,0,127}));
-    connect(gASTMPC.PMECH, PMECH1) annotation (Line(points={{3,24},{52,24},{52,
-            40},{110,40}}, color={0,0,127}));
-    connect(sEXSMPC.EFD, EFD1) annotation (Line(points={{5,-12},{26,-12},{26,-36},
-            {94,-36},{94,-30},{110,-30}}, color={0,0,127}));
-    connect(gen.ETERM, ETERM1) annotation (Line(points={{80,-6},{92,-6},{92,-60},
-            {110,-60}}, color={0,0,127}));
-    connect(gen.PELEC, PELEC1) annotation (Line(points={{80,6},{94,6},{94,22},{
-            110,22}}, color={0,0,127}));
-    connect(gASTMPC.TF2_out, TF2_out1) annotation (Line(points={{1,35},{16,35},
-            {16,86},{110,86}}, color={0,0,127}));
     connect(sEXSMPC.EFd_input, Efd_ref) annotation (Line(points={{-17,-4},{-94,
             -4},{-94,-60},{-120,-60}}, color={0,0,127}));
     connect(P_ref1, gASTMPC.PMECHControllable) annotation (Line(points={{-120,
             60},{-60,60},{-60,8},{-8,8},{-8,12}}, color={0,0,127}));
+    connect(gen.SPEED, gASTMPC.SPEED) annotation (Line(points={{80,14},{84,14},
+            {84,40},{-24,40},{-24,30},{-16,30}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
               {100,100}}), graphics={Ellipse(
             extent={{-100,100},{100,-100}},

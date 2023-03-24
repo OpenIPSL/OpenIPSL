@@ -1,6 +1,5 @@
 within OpenIPSL.Examples.MPC.PSSE.NOTCONTROLLABLE_NOTOBSERVABLE_STABLE;
-model
-  Reconnection_Microgrid_PSSE_1_INPUT_1_OUTPUT_WITH_CONST_V_SOURCE2_NO_TG
+model Reconnection_Microgrid_PSSE_1_INPUT_1_OUTPUT_WITH_CONST_V_SOURCE2_NO_TG
   "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
   extends Modelica.Icons.Example;
   OpenIPSL.Electrical.Buses.Bus BG1(v_0=0.998855, angle_0=0.15699114448641)

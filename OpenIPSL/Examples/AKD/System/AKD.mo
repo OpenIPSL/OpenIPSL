@@ -321,11 +321,11 @@ model AKD "Part of the Norwegian transmission system, ready for simulation"
     annotation (Placement(transformation(extent={{34,-38},{46,-30}})));
 equation
   connect(line_58553_58583.n, bus_58583.n[1]) annotation (Line(
-      points={{-24.6,20},{-6,20},{-6,37},{-2,37}},
+      points={{-24.6,20},{-6,20},{-6,38.5},{-2,38.5}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(gen58583.pwPin, bus_58583.n[2]) annotation (Line(
-      points={{-13.6,44},{-6.84,44},{-6.84,43},{-2,43}},
+      points={{-13.6,44},{-6.84,44},{-6.84,41.5},{-2,41.5}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(bus_58583.p[1], line_58573_58583.p) annotation (Line(
@@ -337,27 +337,27 @@ equation
       color={0,0,255},
       smooth=Smooth.None));
   connect(bus_58553.p[1], line_58553_58563.p) annotation (Line(
-      points={{-60,5},{-56,5},{-56,-6},{-35.4,-6}},
+      points={{-60,6.5},{-56,6.5},{-56,-6},{-35.4,-6}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(line_58553_58583.p, bus_58553.p[2]) annotation (Line(
-      points={{-35.4,20},{-56,20},{-56,11},{-60,11}},
+      points={{-35.4,20},{-56,20},{-56,9.5},{-60,9.5}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(line_58563_58573.n, bus_58573.n[1]) annotation (Line(
-      points={{35.4,-12},{44,-12},{44,0.6},{50,0.6}},
+      points={{35.4,-12},{44,-12},{44,3.3},{50,3.3}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(line_58573_58583.n, bus_58573.n[2]) annotation (Line(
-      points={{33.4,20},{44,20},{44,11.4},{50,11.4}},
+      points={{33.4,20},{44,20},{44,8.7},{50,8.7}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(line_58573_58653.p, bus_58573.p[1]) annotation (Line(
-      points={{62.7,-0.5},{62.7,0.6},{52,0.6}},
+      points={{62.7,-0.5},{62.7,3.3},{52,3.3}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(gen58573.pwPin, bus_58573.p[2]) annotation (Line(
-      points={{63.3,15},{56.77,15},{56.77,11.4},{52,11.4}},
+      points={{63.3,15},{56.77,15},{56.77,8.7},{52,8.7}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(line_58573_58653.n, bus_58653.n[1]) annotation (Line(
@@ -386,25 +386,27 @@ equation
       smooth=Smooth.None));
   connect(gen58567.pwPin, bus_58567.n[1]) annotation (Line(points={{-81.6,-35},
           {-75.8,-35},{-70,-35}},color={0,0,255}));
-  connect(Load_58563.p, bus_58563.p[1]) annotation (Line(points={{20,-52},{20,-38},
-          {6,-38},{6,-38},{0,-38},{0,-36},{0,-34},{0,-33.8}}, color={0,0,255}));
+  connect(Load_58563.p, bus_58563.p[1]) annotation (Line(points={{20,-52},{20,
+          -38},{6,-38},{6,-38},{0,-38},{0,-36},{0,-28.4},{0,-28.4}},
+                                                              color={0,0,255}));
   connect(line_58563_58573.p, bus_58563.p[2]) annotation (Line(points={{24.6,-12},
           {12,-12},{12,-23},{0,-23}}, color={0,0,255}));
-  connect(line_58553_58563.n, bus_58563.n[1]) annotation (Line(points={{-24.6,-6},
-          {-12,-6},{-12,-31.1},{-2,-31.1}}, color={0,0,255}));
+  connect(line_58553_58563.n, bus_58563.n[1]) annotation (Line(points={{-24.6,
+          -6},{-12,-6},{-12,-27.05},{-2,-27.05}},
+                                            color={0,0,255}));
   connect(gen58566.pwPin, bus_58566.p[1]) annotation (Line(points={{93.3,-35},{
           82.65,-35},{71,-35}}, color={0,0,255}));
   connect(twoWindingTransformer.n, bus_58567.p[1])
     annotation (Line(points={{-42.6,-34},{-68,-34},{-68,-35}},
                                                              color={0,0,255}));
   connect(twoWindingTransformer.p, bus_58563.n[2])
-    annotation (Line(points={{-29.4,-34},{-2,-34},{-2,-14.9}},
+    annotation (Line(points={{-29.4,-34},{-2,-34},{-2,-18.95}},
                                                              color={0,0,255}));
   connect(twoWindingTransformer1.n, bus_58566.n[1])
     annotation (Line(points={{46.6,-34},{69,-34},{69,-35}},
                                                           color={0,0,255}));
   connect(twoWindingTransformer1.p, bus_58563.p[3])
-    annotation (Line(points={{33.4,-34},{0,-34},{0,-12.2}},
+    annotation (Line(points={{33.4,-34},{0,-34},{0,-17.6}},
                                                           color={0,0,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

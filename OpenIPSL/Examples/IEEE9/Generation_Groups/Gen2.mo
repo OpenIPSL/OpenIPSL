@@ -80,7 +80,8 @@ equation
           -6},{10,25},{20,25}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics={Ellipse(extent={{-100,-100},{100,100}}, lineColor=
+            100}}), graphics={Ellipse(extent={{-100,-100},{100,100}}, lineColor
+            =
            {28,108,200}),Line(points={{-60,-20},{-20,20},{20,-20},{60,20}},
           color={28,108,200}),Text(
           extent={{-34,-32},{38,-52}},

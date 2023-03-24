@@ -241,83 +241,95 @@ model Network "Seven-bus test system model, ready for simulation"
         extent={{-10,-10},{10,10}})));
 equation
   connect(pwLine.n, FTILL.n[1]) annotation (Line(points={{-145,-132},{-100,-132},
-          {-100,-148}}, color={0,0,255}));
-  connect(pwLine1.n, FTILL.n[2]) annotation (Line(points={{-145,-152},{-100,-152},
-          {-100,-136}}, color={0,0,255}));
+          {-100,-145}}, color={0,0,255}));
+  connect(pwLine1.n, FTILL.n[2]) annotation (Line(points={{-145,-152},{-100,
+          -152},{-100,-139}},
+                        color={0,0,255}));
   connect(pwLine4.p, FTILL.p[1]) annotation (Line(points={{-29,-132},{-98,-132},
-          {-98,-151}}, color={0,0,255}));
+          {-98,-146.5}},
+                       color={0,0,255}));
   connect(pwLine5.p, FTILL.p[2]) annotation (Line(points={{-29,-152},{-98,-152},
-          {-98,-145}}, color={0,0,255}));
-  connect(load.p, FTILL.p[3]) annotation (Line(points={{-93,-168},{-93,-154},{-98,
-          -154},{-98,-139}}, color={0,0,255}));
-  connect(pwLine2.p, FSBIS.p[1]) annotation (Line(points={{111,-132},{60,-132},{
-          60,-150}}, color={0,0,255}));
+          {-98,-143.5}},
+                       color={0,0,255}));
+  connect(load.p, FTILL.p[3]) annotation (Line(points={{-93,-168},{-93,-154},{
+          -98,-154},{-98,-140.5}},
+                             color={0,0,255}));
+  connect(pwLine2.p, FSBIS.p[1]) annotation (Line(points={{111,-132},{60,-132},
+          {60,-146}},color={0,0,255}));
   connect(pwLine3.p, FSBIS.p[2]) annotation (Line(points={{111,-152},{60,-152},{
           60,-142}}, color={0,0,255}));
   connect(load1.p, FSBIS.p[3]) annotation (Line(points={{65,-168},{65,-154},{60,
-          -154},{60,-134}}, color={0,0,255}));
-  connect(pwLine4.n, FSBIS.n[1]) annotation (Line(points={{-11,-132},{58,-132},{
-          58,-148}}, color={0,0,255}));
-  connect(pwLine5.n, FSBIS.n[2]) annotation (Line(points={{-11,-152},{58,-152},{
-          58,-136}}, color={0,0,255}));
+          -154},{60,-138}}, color={0,0,255}));
+  connect(pwLine4.n, FSBIS.n[1]) annotation (Line(points={{-11,-132},{58,-132},
+          {58,-145}},color={0,0,255}));
+  connect(pwLine5.n, FSBIS.n[2]) annotation (Line(points={{-11,-152},{58,-152},
+          {58,-139}},color={0,0,255}));
   connect(pwLine.p, FSSV.p[1]) annotation (Line(points={{-163,-132},{-198,-132},
-          {-198,-147.65}}, color={0,0,255}));
+          {-198,-139.325}},color={0,0,255}));
   connect(pwLine1.p, FSSV.p[2]) annotation (Line(points={{-163,-152},{-198,-152},
-          {-198,-136.55}}, color={0,0,255}));
-  connect(pwLine7.p, FSSV.p[3]) annotation (Line(points={{-161,-80},{-172,-80},{
-          -172,-130},{-198,-130},{-198,-125.45}},
+          {-198,-133.775}},color={0,0,255}));
+  connect(pwLine7.p, FSSV.p[3]) annotation (Line(points={{-161,-80},{-172,-80},
+          {-172,-130},{-198,-130},{-198,-128.225}},
                                                 color={0,0,255}));
-  connect(pwLine6.p, FSSV.p[4]) annotation (Line(points={{-161,-60},{-190,-60},{
-          -190,-114.35},{-198,-114.35}},
+  connect(pwLine6.p, FSSV.p[4]) annotation (Line(points={{-161,-60},{-190,-60},
+          {-190,-122.675},{-198,-122.675}},
                                        color={0,0,255}));
   connect(pwLine6.n, FPAND.n[1]) annotation (Line(points={{-143,-60},{-140,-60},
-          {-140,-2},{-100,-2},{-100,-24.7}},
+          {-140,-2},{-100,-2},{-100,-18.85}},
                                            color={0,0,255}));
   connect(pwLine7.n, FPAND.n[2]) annotation (Line(points={{-143,-80},{-120,-80},
-          {-120,-22},{-100,-22},{-100,-1.3}}, color={0,0,255}));
-  connect(pwLine9.p, FPAND.p[1]) annotation (Line(points={{-59,38},{-70,38},{-70,
-          -30.55},{-98,-30.55}},
+          {-120,-22},{-100,-22},{-100,-7.15}},color={0,0,255}));
+  connect(pwLine9.p, FPAND.p[1]) annotation (Line(points={{-59,38},{-70,38},{
+          -70,-21.775},{-98,-21.775}},
                              color={0,0,255}));
-  connect(pwLine8.p, FPAND.p[2]) annotation (Line(points={{-59,58},{-90,58},{-90,
-          8},{-98,8},{-98,-18.85}}, color={0,0,255}));
+  connect(pwLine8.p, FPAND.p[2]) annotation (Line(points={{-59,58},{-90,58},{
+          -90,8},{-98,8},{-98,-15.925}},
+                                    color={0,0,255}));
   connect(pwLine8.n, FVERGE.p[1]) annotation (
-    Line(points={{-41,58},{-20,58},{-20,90},{-16.55,90}}, color = {0, 0, 255}));
+    Line(points={{-41,58},{-20,58},{-20,90},{-7.775,90}}, color = {0, 0, 255}));
   connect(pwLine9.n, FVERGE.p[2]) annotation (
-    Line(points={{-41,38},{-2,38},{-2,90},{-4.85,90}}, color = {0, 0, 255}));
+    Line(points={{-41,38},{-2,38},{-2,90},{-1.925,90}},color = {0, 0, 255}));
   connect(pwLine11.n, FTDPRA.n[1]) annotation (Line(points={{59,38},{64,38},{64,
-          -30.55},{98,-30.55}},
+          -21.775},{98,-21.775}},
                             color={0,0,255}));
   connect(pwLine10.n, FTDPRA.n[2]) annotation (Line(points={{59,58},{80,58},{80,
-          -4},{98,-4},{98,-18.85}},color={0,0,255}));
+          -4},{98,-4},{98,-15.925}},
+                                   color={0,0,255}));
   connect(pwLine11.p, FVERGE.p[3]) annotation (
-    Line(points={{41,38},{2,38},{2,90},{6.85,90}}, color = {0, 0, 255}));
+    Line(points={{41,38},{2,38},{2,90},{3.925,90}},color = {0, 0, 255}));
   connect(pwLine10.p, FVERGE.p[4]) annotation (
-    Line(points={{41,58},{20,58},{20,90},{18.55,90}}, color = {0, 0, 255}));
-  connect(load2.p, FPAND.p[3]) annotation (Line(points={{-91,-68},{-91,-36},{-98,
-          -36},{-98,-7.15}},color={0,0,255}));
-  connect(load3.p, FTDPRA.n[3]) annotation (Line(points={{89,-68},{89,-36},{98,-36},
-          {98,-7.15}}, color={0,0,255}));
+    Line(points={{41,58},{20,58},{20,90},{9.775,90}}, color = {0, 0, 255}));
+  connect(load2.p, FPAND.p[3]) annotation (Line(points={{-91,-68},{-91,-36},{
+          -98,-36},{-98,-10.075}},
+                            color={0,0,255}));
+  connect(load3.p, FTDPRA.n[3]) annotation (Line(points={{89,-68},{89,-36},{98,
+          -36},{98,-10.075}},
+                       color={0,0,255}));
   connect(pwLine3.n, FVALDI.n[1]) annotation (Line(points={{129,-152},{198,-152},
-          {198,-147.65}}, color={0,0,255}));
+          {198,-139.325}},color={0,0,255}));
   connect(pwLine2.n, FVALDI.n[2]) annotation (Line(points={{129,-132},{198,-132},
-          {198,-136.55}}, color={0,0,255}));
+          {198,-133.775}},color={0,0,255}));
   connect(pwLine13.n, FVALDI.n[3]) annotation (Line(points={{159,-82},{164,-82},
-          {164,-130},{198,-130},{198,-125.45}},
+          {164,-130},{198,-130},{198,-128.225}},
                                              color={0,0,255}));
   connect(pwLine12.n, FVALDI.n[4]) annotation (Line(points={{159,-62},{180,-62},
-          {180,-114.35},{198,-114.35}},
+          {180,-122.675},{198,-122.675}},
                                       color={0,0,255}));
   connect(pwLine13.p, FTDPRA.p[1]) annotation (Line(points={{141,-82},{104,-82},
-          {104,-24.7},{100,-24.7}},
+          {104,-18.85},{100,-18.85}},
                                 color={0,0,255}));
   connect(pwLine12.p, FTDPRA.p[2]) annotation (Line(points={{141,-62},{120,-62},
-          {120,-1.3},{100,-1.3}}, color={0,0,255}));
+          {120,-7.15},{100,-7.15}},
+                                  color={0,0,255}));
   connect(twoWindingTransformer.n, FTDPRA.n[4]) annotation (Line(points={{9,-32},
-          {98,-32},{98,4.55}}, color={0,0,255}));
+          {98,-32},{98,-4.225}},
+                               color={0,0,255}));
   connect(twoWindingTransformer.p, FPAND.p[4]) annotation (Line(points={{-13,-32},
-          {-98,-32},{-98,4.55}}, color={0,0,255}));
+          {-98,-32},{-98,-4.225}},
+                                 color={0,0,255}));
   connect(pwFault.p, FTILL.p[4]) annotation (Line(points={{-77,-174},{-82,-174},
-          {-82,-133},{-98,-133}}, color={0,0,255}));
+          {-82,-137.5},{-98,-137.5}},
+                                  color={0,0,255}));
   connect(twoWindingTransformer2.n, FVALDI.p[1]) annotation (Line(points={{215.4,
           -132},{200,-132},{200,-131}},color={0,0,255}));
   connect(twoWindingTransformer3.n, FVERGE.n[1])
