@@ -8,8 +8,8 @@ model GASTMPC "GAST - Gas Turbine-Governor"
   parameter Types.Time T_3=3.0 "Load limit response time constant";
   parameter Types.PerUnit AT=0.9 "Ambient temperature load limit";
   parameter Types.PerUnit K_T=2.0 "Load-limited feedback path adjustment gain";
-  parameter Types.PerUnit V_MAX=1.0 "Operational control high limit on fuel valve opening";
-  parameter Types.PerUnit V_MIN=-0.05 "Low output control limit on fuel valve opening";
+  parameter Types.PerUnit V_MAX=0.1 "Operational control high limit on fuel valve opening";
+  parameter Types.PerUnit V_MIN=0.025 "Low output control limit on fuel valve opening";
   parameter Types.PerUnit D_turb=0.0 "Turbine damping";
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{-80,16},{-60,-4}})));
@@ -34,17 +34,6 @@ model GASTMPC "GAST - Gas Turbine-Governor"
         origin={-110,0})));
   NonElectrical.Logical.LV_GATE lV_Gate
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Modelica.Blocks.Continuous.TransferFunction transferFunction1(a={T_2,1},
-    initType=Modelica.Blocks.Types.Init.InitialOutput,
-    y_start=pm0)
-    annotation (Placement(transformation(extent={{64,-10},{84,10}})));
-  Modelica.Blocks.Continuous.TransferFunction transferFunction2(a={T_3,1},
-    initType=Modelica.Blocks.Types.Init.InitialOutput,
-    y_start=pm0)
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={80,-30})));
   Modelica.Blocks.Sources.Constant const(k=AT)
     annotation (Placement(transformation(extent={{90,-80},{70,-60}})));
   NonElectrical.Continuous.SimpleLag    simpleLagLim(
@@ -68,6 +57,16 @@ model GASTMPC "GAST - Gas Turbine-Governor"
         origin={90,110})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=V_MAX, uMin=V_MIN)
     annotation (Placement(transformation(extent={{32,-10},{52,10}})));
+  NonElectrical.Continuous.SimpleLag simpleLag(
+    K=1,
+    T=T_2,
+    y_start=pm0)
+    annotation (Placement(transformation(extent={{70,-10},{90,10}})));
+  NonElectrical.Continuous.SimpleLag simpleLag1(
+    K=1,
+    T=T_3,
+    y_start=pm0)
+    annotation (Placement(transformation(extent={{100,-42},{80,-22}})));
 protected
   parameter Types.PerUnit pm0(fixed=false);
 initial algorithm
@@ -87,18 +86,6 @@ equation
       smooth=Smooth.None));
   connect(gKt.y, add2.u2) annotation (Line(
       points={{-1,-50},{-8,-50}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(transferFunction2.y, add1.u2) annotation (Line(
-      points={{69,-30},{60,-30},{60,-44},{52,-44}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(transferFunction1.y, add3.u2) annotation (Line(
-      points={{85,0},{100,0},{100,-6},{118,-6}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(transferFunction1.y, transferFunction2.u) annotation (Line(
-      points={{85,0},{100,0},{100,-30},{92,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.y,lV_Gate.u1) annotation (Line(
@@ -126,12 +113,19 @@ equation
           104},{-182,104}}, color={0,0,127}));
   connect(add4.y, add.u2) annotation (Line(points={{-159,110},{-88,110},{-88,12},
           {-82,12}}, color={0,0,127}));
-  connect(transferFunction2.y, TF2_out) annotation (Line(points={{69,-30},{60,
-          -30},{60,-54},{96,-54},{96,-194},{68,-194},{68,-210}}, color={0,0,127}));
   connect(simpleLagLim.y, limiter.u)
     annotation (Line(points={{21,0},{30,0}}, color={0,0,127}));
-  connect(limiter.y, transferFunction1.u)
-    annotation (Line(points={{53,0},{62,0}}, color={0,0,127}));
+  connect(simpleLag.y, add3.u2) annotation (Line(points={{91,0},{108,0},{108,-6},
+          {118,-6}}, color={0,0,127}));
+  connect(limiter.y, simpleLag.u)
+    annotation (Line(points={{53,0},{68,0}}, color={0,0,127}));
+  connect(simpleLag1.u, add3.u2) annotation (Line(points={{102,-32},{108,-32},{
+          108,-6},{118,-6}}, color={0,0,127}));
+  connect(simpleLag1.y, add1.u2) annotation (Line(points={{79,-32},{60,-32},{60,
+          -44},{52,-44}}, color={0,0,127}));
+  connect(TF2_out, add1.u2) annotation (Line(points={{68,-210},{68,-124},{134,
+          -124},{134,-42},{68,-42},{68,-32},{60,-32},{60,-44},{52,-44}}, color=
+          {0,0,127}));
   annotation (
     Diagram(coordinateSystem(
         extent={{-240,-200},{240,180}},

@@ -64,8 +64,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name"),
            Line(points={{-60,-20},{-20,20},{20,-20},{60,20}},
-          color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor
-            =
+          color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor=
            {28,108,200})}),
     Documentation(info="<html>
 <p>69kV/60MVA Generation unit connected to bus 2, and composed of the following component models:</p>

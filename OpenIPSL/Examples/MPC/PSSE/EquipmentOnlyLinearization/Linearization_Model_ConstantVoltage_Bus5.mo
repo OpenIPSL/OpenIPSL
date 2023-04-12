@@ -1,9 +1,9 @@
 within OpenIPSL.Examples.MPC.PSSE.EquipmentOnlyLinearization;
-model GridEquivalentConstantVoltageSource2_withNOISE
+model Linearization_Model_ConstantVoltage_Bus5
   "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
   extends Modelica.Icons.Example;
 
-  parameter Boolean equivalentGRID = false;
+  parameter Boolean equivalentGRID = true;
   parameter Boolean equivalentInfBUS = false;
 
   OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
@@ -54,7 +54,7 @@ model GridEquivalentConstantVoltageSource2_withNOISE
     G=0,
     B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,56},{36,64}})));
   OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
-        powerFlow.powerflow.bus.V5) if not equivalentGRID annotation (Placement(
+        powerFlow.powerflow.bus.V5)  annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -75,12 +75,12 @@ model GridEquivalentConstantVoltageSource2_withNOISE
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
     G=0,
     B=0,
-    VNOM1=13800,
-    VB1=13800,
-    VNOM2=6000,
-    VB2=6000,
+    VNOM1=220000,
+    VB1=220000,
+    VNOM2=24000,
+    VB2=24000,
     R=0.005,
-    X=0.1) if not equivalentGRID annotation (Placement(transformation(
+    X=0.1)  annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=270,
         origin={50,-16})));
@@ -107,12 +107,11 @@ model GridEquivalentConstantVoltageSource2_withNOISE
     Q_0=powerFlow.powerflow.loads.QL1,
     v_0=powerFlow.powerflow.bus.V3,
     angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
-    annotation (Placement(transformation(extent={{-20,36},{0,56}})));
-  Electrical.Events.Breaker breaker(
-    enableTrigger=false,
-    t_o=1.01,
+    annotation (Placement(transformation(extent={{-20,38},{0,58}})));
+  Electrical.Events.Breaker breaker(enableTrigger=false,
+    t_o=0.01,
     rc_enabled=false,
-    t_rc=42.01)       if not equivalentGRID                     annotation (Placement(transformation(
+    t_rc=30.01)       if not equivalentGRID                     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={80,16})));
@@ -149,26 +148,19 @@ model GridEquivalentConstantVoltageSource2_withNOISE
     annotation (Placement(transformation(extent={{140,-22},{160,-2}})));
   Modelica.Blocks.Interfaces.RealOutput OUT6
     annotation (Placement(transformation(extent={{140,-42},{160,-22}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT7
+    annotation (Placement(transformation(extent={{140,-62},
+            {160,-42}})));
   Modelica.Blocks.Interfaces.RealOutput OUT8
     annotation (Placement(transformation(extent={{140,-82},
             {160,-62}})));
-            Modelica.Blocks.Interfaces.RealOutput OUT7  annotation (Placement(transformation(extent={{140,-82},
-            {160,-62}})));
-
-  Modelica.Blocks.Interfaces.RealOutput OUT9    annotation (Placement(transformation(extent={{140,-60},
-            {160,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput OUT10   annotation (Placement(transformation(extent={{140,
-            -102},{160,-82}})));
-  Modelica.Blocks.Interfaces.RealOutput OUT11   annotation (Placement(transformation(extent={{140,-102},{160,-82}})));
-  Modelica.Blocks.Interfaces.RealOutput OUT12   annotation (Placement(transformation(extent={{140,-102},{160,-82}})));
-  Modelica.Blocks.Interfaces.RealOutput OUT13   annotation (Placement(transformation(extent={{140,-102},{160,-82}})));
-  Modelica.Blocks.Interfaces.RealOutput OUT14   annotation (Placement(transformation(extent={{140,-102},{160,-82}})));
-
-
+  Modelica.Blocks.Interfaces.RealOutput OUT9    annotation (Placement(transformation(extent={{140,-42},{160,-22}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT10   annotation (Placement(transformation(extent={{140,-62},{160,-42}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT11  annotation (Placement(transformation(extent={{140,-82},{160,-62}})));
 
   PFData.PowerFlow powerFlow(redeclare record PowerFlow =
-        OpenIPSL.Examples.MPC.PFData.PF01)
-    annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
+        OpenIPSL.Examples.MPC.PFData.PF04)
+    annotation (Placement(transformation(extent={{-68,94},{-48,114}})));
   Electrical.Machines.PSSE.GENCLS IB(
     V_b=220000,
     v_0=powerFlow.powerflow.bus.V4,
@@ -184,62 +176,45 @@ model GridEquivalentConstantVoltageSource2_withNOISE
     angle_0=powerFlow.powerflow.bus.A5,
     d_P=0,
     t1=100,
-    d_t=1000) if not equivalentGRID
+    d_t=1000)
     annotation (Placement(transformation(extent={{100,-40},{120,-20}})));
   Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
       active_sigma=0.00002, samplePeriod=0.02)
-                           if not equivalentGRID
     annotation (Placement(transformation(extent={{70,-28},{82,-16}})));
+
   inner Modelica.Blocks.Noise.GlobalSeed globalSeed(useAutomaticSeed=false,
       fixedSeed=10000)
     annotation (Placement(transformation(extent={{-42,92},{-22,112}})));
-  Electrical.Loads.PSSE.Load Load_for_Lin(
-    V_b=220000,
-    P_0=powerFlow.powerflow.machines.PG2,
-    Q_0=powerFlow.powerflow.machines.QG2,
-    v_0=powerFlow.powerflow.bus.V6,
-    angle_0=powerFlow.powerflow.bus.A6) if equivalentGRID annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={42,-70})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=0,
     f=1/200,
     phase=3.1415926535898,
-    startTime=3) if not equivalentGRID
+    startTime=3)
     annotation (Placement(transformation(extent={{72,-44},{82,-34}})));
-  Modelica.Blocks.Math.Add add if not equivalentGRID
+  Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{86,-30},{94,-22}})));
+
+  Electrical.Sources.VoltageSourceReImInput EquivalentInfiniteBus
+    annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=180,
+        origin={22,10})));
+  Modelica.Blocks.Sources.Constant VR1(k=1)
+    annotation (Placement(transformation(extent={{50,12},{40,22}})));
+  Modelica.Blocks.Sources.Constant VI1(k=0)
+    annotation (Placement(transformation(extent={{50,-4},{40,6}})));
 equation
-  //OUT1 = G2.gen.SPEED;
-  //OUT2 = G2.gASTMPC.PMECH;
-  //OUT3 = G2.gen.ANGLE;
-  //OUT4 = G2.gASTMPC.TF2_out;
-  //OUT5 =Bus6.angle;
-  //OUT6 =Bus6.v;
-  //OUT7 =Bus6.p.vr;
-  //OUT8 =Bus6.p.vi;
-  //OUT9 = if not equivalentGRID then Bus5.p.vr else 0;
-  //OUT10 = if not equivalentGRID then Bus5.p.vi else 0;
-  //OUT11 = G2.gen.PELEC;
-
-  OUT1 = G2.gen.w;
-  OUT2 = G2.gen.delta;
-  OUT3 = G2.gen.Epq;
-  OUT4 = G2.gen.PSIkd;
-  OUT5 = G2.gen.PSIppq;
-  OUT6 = G2.sEXSMPC.simpleLagLim.state;
-  OUT7 = G2.sEXSMPC.leadLag.TF.x[1];
-  OUT8 = G2.gASTMPC.simpleLagLim.state;
-  OUT9 = G2.gASTMPC.simpleLag.state;
-  OUT10 = G2.gASTMPC.simpleLag1.state;
-  OUT11 = G2.gASTMPC.PMECH;
-  OUT12 = G2.sEXSMPC.EFD;
-  OUT13 = Bus6.v;
-  OUT14 = Bus6.angle;
-
-
+  OUT1 = G2.gen.SPEED;
+  OUT2 = G2.gASTMPC.PMECH;
+  OUT3 = G2.gen.ANGLE;
+  OUT4 = G2.gASTMPC.TF2_out;
+  OUT5 =Bus6.angle;
+  OUT6 =Bus6.v;
+  OUT7 =Bus6.p.vr;
+  OUT8 =Bus6.p.vi;
+  OUT9 = Bus5.v;
+  OUT10 = Bus5.angle;
+  OUT11 = G2.gen.PELEC;
   connect(T1.p, Bus2.p)
     annotation (Line(points={{-51.2,70},{-40,70}}, color={0,0,255}));
   connect(Bus1.p, T1.n)
@@ -250,10 +225,12 @@ equation
     annotation (Line(points={{-14.6,70},{0,70}}, color={0,0,255}));
   connect(L1.p, Bus2.p)
     annotation (Line(points={{-25.4,70},{-40,70}}, color={0,0,255}));
-  connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,60},{44,60},{44,70},{60,
-          70}}, color={0,0,255}));
-  connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,80},{44,80},{44,70},{60,
-          70}}, color={0,0,255}));
+  connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,60},{44,60},{44,70},{
+          60,70}},
+                color={0,0,255}));
+  connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,80},{44,80},{44,70},{
+          60,70}},
+                color={0,0,255}));
   connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,80},{16,80},{16,70},{0,
           70}}, color={0,0,255}));
   connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,60},{16,60},{16,70},{0,
@@ -261,7 +238,7 @@ equation
   connect(G2.conn, Bus6.p)
     annotation (Line(points={{21,-36},{34,-36}}, color={0,0,255}));
   connect(Load1.p, Bus3.p)
-    annotation (Line(points={{-10,56},{-10,70},{0,70}}, color={0,0,255}));
+    annotation (Line(points={{-10,58},{-10,70},{0,70}}, color={0,0,255}));
   connect(L3.p, Bus4.p)
     annotation (Line(points={{80,55.4},{80,70},{60,70}}, color={0,0,255}));
   connect(breaker.s, Bus5.p)
@@ -291,14 +268,18 @@ equation
     annotation (Line(points={{100,70},{60,70}}, color={0,0,255}));
   connect(Load2.p, Bus5.p) annotation (Line(points={{110,-20},{110,0},{80,0},{80,
           6}}, color={0,0,255}));
-  connect(Load_for_Lin.p, Bus6.p)
-    annotation (Line(points={{42,-60},{42,-36},{34,-36}}, color={0,0,255}));
   connect(sine.y, add.u2) annotation (Line(points={{82.5,-39},{82.5,-34},{85.2,-34},
           {85.2,-28.4}}, color={0,0,127}));
   connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{82.54,-22.06},
           {82.54,-23.6},{85.2,-23.6}}, color={0,0,127}));
   connect(add.y, Load2.u) annotation (Line(points={{94.4,-26},{94.4,-24.5},{101.9,
           -24.5}}, color={0,0,127}));
+  connect(VR1.y, EquivalentInfiniteBus.vRe) annotation (Line(points={{39.5,17},{
+          36,17},{36,12.4},{29.2,12.4}}, color={0,0,127}));
+  connect(VI1.y, EquivalentInfiniteBus.vIm)
+    annotation (Line(points={{39.5,1},{29.2,1},{29.2,7.6}}, color={0,0,127}));
+  connect(EquivalentInfiniteBus.p, Bus5.p) annotation (Line(points={{15.4,10},{12,
+          10},{12,36},{60,36},{60,6},{80,6}}, color={0,0,255}));
     annotation (Placement(transformation(extent={{140,-20},{160,0}})),
                 Placement(transformation(extent={{140,-40},{160,-20}})),
                 Placement(transformation(extent={{140,-60},{160,-40}})),
@@ -357,7 +338,7 @@ equation
 <p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
 </html>"),
     experiment(
-      StopTime=10,
-      __Dymola_NumberOfIntervals=5000,
+      StopTime=60,
+      __Dymola_NumberOfIntervals=10000,
       __Dymola_Algorithm="Dassl"));
-end GridEquivalentConstantVoltageSource2_withNOISE;
+end Linearization_Model_ConstantVoltage_Bus5;

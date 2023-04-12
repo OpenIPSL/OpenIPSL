@@ -757,7 +757,7 @@ package PSSE
       Tppd0=0.07,
       Tppq0=0.09,
       H=4.28,
-      D=0,
+      D=0.1,
       Xd=1.84,
       Xq=1.75,
       Xpd=0.41,
@@ -784,7 +784,8 @@ package PSSE
     Modelica.Blocks.Interfaces.RealInput P_ref1
       "Connector of Real input signal 2"
       annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-    GASTMPC gASTMPC(T_3=0.01, D_turb=0.1)
+    GASTMPC gASTMPC(T_3=0.01,
+      V_MAX=1,                D_turb=0.1)
       annotation (Placement(transformation(extent={{-18,14},{2,34}})));
     Modelica.Blocks.Interfaces.RealInput Efd_ref
       "Connector of Real input signal 1"

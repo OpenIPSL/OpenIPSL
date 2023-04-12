@@ -60,17 +60,17 @@ package PFData
       import Modelica.Constants.pi;
       extends BusTemplate(
       V1 = 1.0000,
-      V2 = 0.9901014,
-      V3 = 0.9926419,
+      V2 = 0.9903815,
+      V3 = 0.9927449,
       V4 = 1.0000,
-      V5 = 0.997595,
+      V5 = 0.9978245,
       V6 = 1.0000,
-      A1 = 12.95735*pi/180,
-      A2 = 6.575669*pi/180,
-      A3 = 0.1464802*pi/180,
+      A1 = 12.69018*pi/180,
+      A2 = 6.426857*pi/180,
+      A3 = 0.117574*pi/180,
       A4 = 0*pi/180,
-      A5 = -0.5738592*pi/180,
-      A6 = -0.2929113*pi/180);
+      A5 = -0.4589332*pi/180,
+      A6 = -0.1773913*pi/180);
 
         // Voltage Magnitudes
 
@@ -93,17 +93,17 @@ package PFData
       import Modelica.Constants.pi;
       extends BusTemplate(
       V1 = 1.0000,
-      V2 = 0.9907908,
-      V3 = 0.9928951,
+      V2 = 0.9910569,
+      V3 = 0.9929926,
       V4 = 1.0000,
-      V5 = 0.9975219,
+      V5 = 0.997748,
       V6 = 0.9999999,
-      A1 = 12.29043*pi/180,
-      A2 = 6.20421*pi/180,
-      A3 = 0.074274*pi/180,
+      A1 = 12.02401*pi/180,
+      A2 = 6.055835*pi/180,
+      A3 = 0.04538411*pi/180,
       A4 = 0*pi/180,
-      A5 = -0.2868419*pi/180,
-      A6 = 0.1378296*pi/180);
+      A5 = -0.1719799*pi/180,
+      A6 = 0.2532443*pi/180);
 
         // Voltage Magnitudes
 
@@ -126,17 +126,17 @@ package PFData
       import Modelica.Constants.pi;
       extends BusTemplate(
       V1 = 1.0000,
-      V2 = 0.9914449,
-      V3 = 0.9931344,
+      V2 = 0.9916971,
+      V3 = 0.9932263,
       V4 = 1.0000,
-      V5 = 0.9974363,
+      V5 = 0.9976591,
       V6 = 1.0000,
-      A1 = 11.62559*pi/180,
-      A2 = 5.83395*pi/180,
-      A3 = 0.0021321*pi/180,
+      A1 = 11.35992*pi/180,
+      A2 = 5.686001*pi/180,
+      A3 = -0.02673999*pi/180,
       A4 = 0*pi/180,
-      A5 = 0.0001343573*pi/180,
-      A6 = 0.5685061*pi/180);
+      A5 = 0.1149386*pi/180,
+      A6 = 0.6838229*pi/180);
 
         // Voltage Magnitudes
 
@@ -315,19 +315,38 @@ package PFData
       import Modelica.Constants.pi;
       extends BusTemplate(
       V1 = 1.0000000,
-      V2 = 0.9914449,
-      V3 = 0.9931344,
+      V2 = 0.9914451,
+      V3 = 0.9931345,
       V4 = 1.0000,
-      V5 = 0.9974363,
+      V5 = 0.9976962,
       V6 = 1.0000,
-      A1 = 11.62559*pi/180,
-      A2 = 5.83395*pi/180,
-      A3 = 0.0021321*pi/180,
+      A1 = 11.62533*pi/180,
+      A2 = 5.833803*pi/180,
+      A3 = 0.002103247*pi/180,
       A4 = 0*pi/180,
-      A5 = 0.0001343573*pi/180,
-      A6 = 0.5685061*pi/180);
+      A5 = 0.0001742224*pi/180,
+      A6 = 0.5115968*pi/180);
 
     end PFBus10;
+
+    record PFBus11
+      "Record for power flow solutions in buses - Microgrid Load = 1 MW"
+      import Modelica.Constants.pi;
+      extends BusTemplate(
+      V1 = 1.0000000,
+      V2 = 0.9935163,
+      V3 = 0.9938831,
+      V4 = 1.0000,
+      V5 = 0.99939,
+      V6 = 1.0000,
+      A1 = 9.244226*pi/180,
+      A2 = 4.507975*pi/180,
+      A3 = -0.2574923*pi/180,
+      A4 = 0*pi/180,
+      A5 = 1.03159*pi/180,
+      A6 = 1.604449*pi/180);
+
+    end PFBus11;
     annotation (Documentation(info="<html>
 <p>Records with power flow solutions for buses.</p>
 </html>"));
@@ -357,8 +376,8 @@ package PFData
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
-       PL2=10e6,
-       QL2=3.28684e6);
+       PL2=9e6,
+       QL2=2.9582e6);
       // Load 1
 
       // Load 2
@@ -372,8 +391,8 @@ package PFData
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
-       PL2=10e6,
-       QL2=3.28684e6);
+       PL2=9e6,
+       QL2=2.9582e6);
       // Load 1
 
       // Load 2
@@ -386,8 +405,8 @@ package PFData
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
-       PL2=10e6,
-       QL2=3.28684e6);
+       PL2=9e6,
+       QL2=2.9582e6);
       // Load 1
 
       // Load 2
@@ -489,8 +508,8 @@ package PFData
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
-       PL2=10e6,
-       QL2=3.28684e6);
+       PL2=9e6,
+       QL2=2.9582e6);
       // Load 1
 
       // Load 2
@@ -498,6 +517,21 @@ package PFData
       // Load: '3_1'
 
     end PFLoad10;
+
+    record PFLoad11
+      "Record for power flow solutions in loads - Pload = 1 MW"
+      extends LoadTemplate(
+       PL1=50e6,
+       QL1=10e6,
+       PL2=1e6,
+       QL2=0.328684e6);
+      // Load 1
+
+      // Load 2
+
+      // Load: '3_1'
+
+    end PFLoad11;
     annotation (Documentation(info="<html>
 <p>Records with power flow solutions for loads.</p>
 </html>"));
@@ -528,12 +562,12 @@ package PFData
     record PFMachine01
       "Machine Record - [L2 10MW/3.28684MVar]; [G2 5MW/2.1669MVar]"
       extends MachineTemplate(
-       PG1=55.0642e6,
-       QG1=7.741584e6,
+       PG1=54.0618e6,
+       QG1=7.494723e6,
        PG2=5.00000e6,
-       QG2=2.166966e6,
-       Pinf=-5.610791e-6,
-       Qinf=15.95016e6);
+       QG2=1.93757e6,
+       Pinf=-4.524317e-05,
+       Qinf=15.61806e6);
         // Machine G1
 
       // Machine G2
@@ -545,12 +579,12 @@ package PFData
     record PFMachine02
       "Record for power flow solutions in machines - Pload = 10 MW"
       extends MachineTemplate(
-       PG1=52.5599e6,
-       QG1=7.134126e6,
+       PG1=51.5576e6,
+       QG1=6.899646e6,
        PG2=7.5e6,
-       QG2=2.130443e6,
-       Pinf=7.10242e-06,
-       Qinf=15.45668e6);
+       QG2=1.904409e6,
+       Pinf=4.163468e-05,
+       Qinf=15.14367e6);
         // Machine G1
 
       // Machine G2
@@ -562,12 +596,12 @@ package PFData
     record PFMachine03
       "Record for power flow solutions in machines - Pload = 10 MW"
       extends MachineTemplate(
-       PG1=50.0567e6,
-       QG1=6.557711e6,
+       PG1=49.0546e6,
+       QG1=6.335524e6,
        PG2=10e6,
-       QG2=2.11277e6,
-       Pinf=-1.736733e-05,
-       Qinf=15.01309e6);
+       QG2=1.890087e6,
+       Pinf=-5.40828e-06,
+       Qinf=14.71908e6);
         // Machine G1
 
       // Machine G2
@@ -681,12 +715,12 @@ package PFData
     record PFMachine10
       "Record for power flow solutions in machines - Pload = 10 MW"
       extends MachineTemplate(
-       PG1=50.0567e6,
-       QG1=6.557711e6,
-       PG2=10e6,
-       QG2=2.11277e6,
-       Pinf=-1.736733e-05,
-       Qinf=15.01309e6);
+       PG1=50.0557e6,
+       QG1=6.557487e6,
+       PG2=9e6,
+       QG2=1.893555e6,
+       Pinf=-1.516062e-05,
+       Qinf=14.88296e6);
         // Machine G1
 
       // Machine G2
@@ -694,6 +728,23 @@ package PFData
       // Machine Inf
 
     end PFMachine10;
+
+    record PFMachine11
+      "Record for power flow solutions in machines - Pload = 1 MW"
+      extends MachineTemplate(
+       PG1=41.0405e6,
+       QG1=4.732887e6,
+       PG2=10e6,
+       QG2=0.1599244e6,
+       Pinf=2.026762e-05,
+       Qinf=12.63993e6);
+        // Machine G1
+
+      // Machine G2
+
+      // Machine Inf
+
+    end PFMachine11;
     annotation (Documentation(info="<html>
 <p>Records with power flow solutions for machines.</p>
 </html>"));
@@ -906,4 +957,25 @@ package PFData
     Machines machines;
 
   end PF10;
+
+  record PF11
+    "Microgrid Load Scenario: [L2 1MW/0.328MVar]; [G2 10MW/0.1599MVar]"
+    extends PowerFlowTemplate;
+
+    replaceable record Bus =
+        BusData.PFBus11   constrainedby BusData.BusTemplate
+      "Power flow results for buses";
+    Bus bus;
+
+    replaceable record Loads =
+        LoadData.PFLoad11    constrainedby LoadData.LoadTemplate
+      "Power flow results for loads";
+    Loads loads;
+
+    replaceable record Machines =
+        MachineData.PFMachine11    constrainedby MachineData.MachineTemplate
+      "Power flow results for machines";
+    Machines machines;
+
+  end PF11;
 end PFData;

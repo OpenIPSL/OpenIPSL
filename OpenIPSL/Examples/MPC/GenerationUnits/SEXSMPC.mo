@@ -42,16 +42,16 @@ equation
           {-200,90}}, color={0,0,127}));
   connect(ECOMP, DiffV.u2) annotation (Line(points={{-200,0},{-166,0},{-132,0},
           {-132,-6},{-122,-6}}, color={0,0,127}));
-  connect(leadLag.y, simpleLagLim.u)
-    annotation (Line(points={{61,0},{118,0}}, color={0,0,127}));
-  connect(leadLag.u, V_erro.y)
-    annotation (Line(points={{38,0},{-19,0}}, color={0,0,127}));
   connect(VUEL, DiffV1.u1) annotation (Line(points={{-130,-200},{-130,-72},{
           -106,-72},{-106,-62}}, color={0,0,127}));
   connect(VOEL, DiffV1.u2) annotation (Line(points={{-70,-200},{-70,-72},{-94,
           -72},{-94,-62}}, color={0,0,127}));
   connect(DiffV1.y, V_erro.u3) annotation (Line(points={{-100,-39},{-100,-16},{
           -42,-16},{-42,-8}}, color={0,0,127}));
+  connect(V_erro.y, leadLag.u)
+    annotation (Line(points={{-19,0},{38,0}}, color={0,0,127}));
+  connect(leadLag.y, simpleLagLim.u)
+    annotation (Line(points={{61,0},{118,0}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),

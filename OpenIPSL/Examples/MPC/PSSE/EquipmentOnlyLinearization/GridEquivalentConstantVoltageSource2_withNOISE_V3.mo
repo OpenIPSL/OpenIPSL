@@ -3,7 +3,7 @@ model GridEquivalentConstantVoltageSource2_withNOISE_V3
   "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
   extends Modelica.Icons.Example;
 
-  parameter Boolean equivalentGRID =true;
+  parameter Boolean equivalentGRID= true;
   parameter Boolean equivalentInfBUS = false;
 
   OpenIPSL.Electrical.Buses.Bus B1(v_0=powerFlow.powerflow.bus.V1, angle_0=
