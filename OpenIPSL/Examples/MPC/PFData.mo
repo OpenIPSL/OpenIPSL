@@ -334,19 +334,38 @@ package PFData
       import Modelica.Constants.pi;
       extends BusTemplate(
       V1 = 1.0000000,
-      V2 = 0.9935163,
-      V3 = 0.9938831,
+      V2 = 0.9903815,
+      V3 = 0.9927449,
       V4 = 1.0000,
-      V5 = 0.99939,
+      V5 = 0.9978246,
       V6 = 1.0000,
-      A1 = 9.244226*pi/180,
-      A2 = 4.507975*pi/180,
-      A3 = -0.2574923*pi/180,
+      A1 = 12.69018*pi/180,
+      A2 = 6.426857*pi/180,
+      A3 = 0.117574*pi/180,
       A4 = 0*pi/180,
-      A5 = 1.03159*pi/180,
-      A6 = 1.604449*pi/180);
+      A5 = -0.4589332*pi/180,
+      A6 = -0.177391*pi/180);
 
     end PFBus11;
+
+    record PFBus12
+      "Record for power flow solutions in buses - Microgrid Load = 1 MW"
+      import Modelica.Constants.pi;
+      extends BusTemplate(
+      V1 = 1.0000000,
+      V2 = 0.9903815,
+      V3 = 0.9927449,
+      V4 = 1.0000,
+      V5 = 0.9978246,
+      V6 = 1.0000,
+      A1 = 12.69018*pi/180,
+      A2 = 6.426857*pi/180,
+      A3 = 0.117574*pi/180,
+      A4 = 0*pi/180,
+      A5 = -0.4589332*pi/180,
+      A6 = -0.177391*pi/180);
+
+    end PFBus12;
     annotation (Documentation(info="<html>
 <p>Records with power flow solutions for buses.</p>
 </html>"));
@@ -372,7 +391,7 @@ package PFData
     end LoadTemplate;
 
     record PFLoad01
-      "Record for power flow solutions in loads - Pload = 30 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 9MW, QL2 = 2.9582 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -387,7 +406,7 @@ package PFData
     end PFLoad01;
 
     record PFLoad02
-      "Record for power flow solutions in loads - Pload = 10 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 9MW, QL2 = 2.9582 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -401,7 +420,7 @@ package PFData
 
     end PFLoad02;
 
-    record PFLoad03 "Record for power flow solutions in loads - Pload = 10 MW"
+    record PFLoad03 "{PL1  = 50MW, QL1 = 10MVar, PL2 = 9MW, QL2 = 2.9582 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -416,7 +435,7 @@ package PFData
     end PFLoad03;
 
     record PFLoad04
-      "Record for power flow solutions in loads - Pload = 10 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 5MW, QL2 = 1.6434 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -430,7 +449,7 @@ package PFData
 
     end PFLoad04;
 
-    record PFLoad05 "Record for power flow solutions in loads - Pload = 10 MW"
+    record PFLoad05 "{PL1  = 50MW, QL1 = 10MVar, PL2 = 5MW, QL2 = 1.6434 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -444,7 +463,7 @@ package PFData
 
     end PFLoad05;
 
-    record PFLoad06 "Record for power flow solutions in loads - Pload = 10 MW"
+    record PFLoad06 "{PL1  = 50MW, QL1 = 10MVar, PL2 = 5MW, QL2 = 1.6434 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -459,7 +478,7 @@ package PFData
     end PFLoad06;
 
     record PFLoad07
-      "Record for power flow solutions in loads - Pload = 10 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 2.5MW, QL2 = 0.8217 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -474,7 +493,7 @@ package PFData
     end PFLoad07;
 
     record PFLoad08
-      "Record for power flow solutions in loads - Pload = 10 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 5MW, QL2 = 1.6434 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -489,7 +508,7 @@ package PFData
     end PFLoad08;
 
     record PFLoad09
-      "Record for power flow solutions in loads - Pload = 10 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 7.5MW, QL2 = 2.4651 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
@@ -519,19 +538,23 @@ package PFData
     end PFLoad10;
 
     record PFLoad11
-      "Record for power flow solutions in loads - Pload = 1 MW"
+      "{PL1  = 50MW, QL1 = 10MVar, PL2 = 9MW, QL2 = 2.9582 MVar}"
       extends LoadTemplate(
        PL1=50e6,
        QL1=10e6,
-       PL2=1e6,
-       QL2=0.328684e6);
-      // Load 1
-
-      // Load 2
-
-      // Load: '3_1'
+       PL2=9e6,
+       QL2=2.9582e6);
 
     end PFLoad11;
+
+    record PFLoad12 "{PL1  = 50MW, QL1 = 10MVar, PL2 = 9MW, QL2 = 2.9582 MVar}"
+      extends LoadTemplate(
+       PL1=50e6,
+       QL1=10e6,
+       PL2=9e6,
+       QL2=2.9582e6);
+
+    end PFLoad12;
     annotation (Documentation(info="<html>
 <p>Records with power flow solutions for loads.</p>
 </html>"));
@@ -732,12 +755,12 @@ package PFData
     record PFMachine11
       "Record for power flow solutions in machines - Pload = 1 MW"
       extends MachineTemplate(
-       PG1=41.0405e6,
-       QG1=4.732887e6,
-       PG2=10e6,
-       QG2=0.1599244e6,
-       Pinf=2.026762e-05,
-       Qinf=12.63993e6);
+       PG1=54.0618e6,
+       QG1=7.494723e6,
+       PG2=5e6,
+       QG2=1.937436e6,
+       Pinf=-4.527057e-05,
+       Qinf=15.618e6);
         // Machine G1
 
       // Machine G2
@@ -745,6 +768,23 @@ package PFData
       // Machine Inf
 
     end PFMachine11;
+
+    record PFMachine12
+      "Record for power flow solutions in machines - Pload = 1 MW"
+      extends MachineTemplate(
+       PG1=54.0618e6,
+       QG1=7.494723e6,
+       PG2=5e6,
+       QG2=1.937436e6,
+       Pinf=-4.527057e-05,
+       Qinf=15.618e6);
+        // Machine G1
+
+      // Machine G2
+
+      // Machine Inf
+
+    end PFMachine12;
     annotation (Documentation(info="<html>
 <p>Records with power flow solutions for machines.</p>
 </html>"));

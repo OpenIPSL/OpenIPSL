@@ -1,9 +1,8 @@
 within OpenIPSL.Examples.MPC.PSSE.EquipmentOnlyLinearization;
-model Linearization_Model_ConstantVoltage_Bus5
-  "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+model OptimizationModel02 "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
   extends Modelica.Icons.Example;
 
-  parameter Boolean equivalentGRID = true;
+  parameter Boolean equivalentGRID = false;
   parameter Boolean equivalentInfBUS = false;
 
   OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
@@ -75,10 +74,10 @@ model Linearization_Model_ConstantVoltage_Bus5
   OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
     G=0,
     B=0,
-    VNOM1=220000,
-    VB1=220000,
-    VNOM2=24000,
-    VB2=24000,
+    VNOM1=13800,
+    VB1=13800,
+    VNOM2=6000,
+    VB2=6000,
     R=0.005,
     X=0.1)  annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
@@ -109,9 +108,9 @@ model Linearization_Model_ConstantVoltage_Bus5
     angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
     annotation (Placement(transformation(extent={{-20,38},{0,58}})));
   Electrical.Events.Breaker breaker(enableTrigger=false,
-    t_o=0.01,
-    rc_enabled=false,
-    t_rc=30.01)       if not equivalentGRID                     annotation (Placement(transformation(
+    t_o=5.01,
+    rc_enabled=true,
+    t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={80,16})));
@@ -157,6 +156,10 @@ model Linearization_Model_ConstantVoltage_Bus5
   Modelica.Blocks.Interfaces.RealOutput OUT9    annotation (Placement(transformation(extent={{140,-42},{160,-22}})));
   Modelica.Blocks.Interfaces.RealOutput OUT10   annotation (Placement(transformation(extent={{140,-62},{160,-42}})));
   Modelica.Blocks.Interfaces.RealOutput OUT11  annotation (Placement(transformation(extent={{140,-82},{160,-62}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT12    annotation (Placement(transformation(extent={{140,-42},{160,-22}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT13   annotation (Placement(transformation(extent={{140,-62},{160,-42}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT14  annotation (Placement(transformation(extent={{140,-82},{160,-62}})));
+  Modelica.Blocks.Interfaces.RealOutput OUT15  annotation (Placement(transformation(extent={{140,-82},{160,-62}})));
 
   PFData.PowerFlow powerFlow(redeclare record PowerFlow =
         OpenIPSL.Examples.MPC.PFData.PF04)
@@ -179,42 +182,39 @@ model Linearization_Model_ConstantVoltage_Bus5
     d_t=1000)
     annotation (Placement(transformation(extent={{100,-40},{120,-20}})));
   Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
-      active_sigma=0.00002, samplePeriod=0.02)
+      active_sigma=0.0002,  samplePeriod=0.02)
     annotation (Placement(transformation(extent={{70,-28},{82,-16}})));
 
   inner Modelica.Blocks.Noise.GlobalSeed globalSeed(useAutomaticSeed=false,
       fixedSeed=10000)
     annotation (Placement(transformation(extent={{-42,92},{-22,112}})));
   Modelica.Blocks.Sources.Sine sine(
-    amplitude=0,
-    f=1/200,
+    amplitude=0.01,
+    f=1/260,
     phase=3.1415926535898,
     startTime=3)
     annotation (Placement(transformation(extent={{72,-44},{82,-34}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{86,-30},{94,-22}})));
 
-  Electrical.Sources.VoltageSourceReImInput EquivalentInfiniteBus
-    annotation (Placement(transformation(
-        extent={{-6,6},{6,-6}},
-        rotation=180,
-        origin={22,10})));
-  Modelica.Blocks.Sources.Constant VR1(k=1)
-    annotation (Placement(transformation(extent={{50,12},{40,22}})));
-  Modelica.Blocks.Sources.Constant VI1(k=0)
-    annotation (Placement(transformation(extent={{50,-4},{40,6}})));
 equation
-  OUT1 = G2.gen.SPEED;
-  OUT2 = G2.gASTMPC.PMECH;
-  OUT3 = G2.gen.ANGLE;
-  OUT4 = G2.gASTMPC.TF2_out;
-  OUT5 =Bus6.angle;
-  OUT6 =Bus6.v;
-  OUT7 =Bus6.p.vr;
-  OUT8 =Bus6.p.vi;
-  OUT9 = Bus5.v;
-  OUT10 = Bus5.angle;
-  OUT11 = G2.gen.PELEC;
+
+  OUT1 = G2.gen.w;
+  OUT2 = G2.gen.delta;
+  OUT3 = G2.gen.Epq;
+  OUT4 = G2.gen.PSIkd;
+  OUT5 = G2.gen.PSIppq;
+  OUT6 = G2.sEXSMPC.simpleLagLim.state;
+  OUT7 = G2.sEXSMPC.leadLag.TF.x[1];
+  OUT8 = G2.gASTMPC.simpleLagLim.state;
+  OUT9 = G2.gASTMPC.simpleLag.state;
+  OUT10 = G2.gASTMPC.simpleLag1.state;
+  OUT11 = G2.gASTMPC.PMECH;
+  OUT12 = G2.sEXSMPC.EFD;
+  OUT13 = Bus5.v;
+  OUT14 = Bus5.angle;
+  OUT15 = G2.gen.P;
+
   connect(T1.p, Bus2.p)
     annotation (Line(points={{-51.2,70},{-40,70}}, color={0,0,255}));
   connect(Bus1.p, T1.n)
@@ -274,12 +274,6 @@ equation
           {82.54,-23.6},{85.2,-23.6}}, color={0,0,127}));
   connect(add.y, Load2.u) annotation (Line(points={{94.4,-26},{94.4,-24.5},{101.9,
           -24.5}}, color={0,0,127}));
-  connect(VR1.y, EquivalentInfiniteBus.vRe) annotation (Line(points={{39.5,17},{
-          36,17},{36,12.4},{29.2,12.4}}, color={0,0,127}));
-  connect(VI1.y, EquivalentInfiniteBus.vIm)
-    annotation (Line(points={{39.5,1},{29.2,1},{29.2,7.6}}, color={0,0,127}));
-  connect(EquivalentInfiniteBus.p, Bus5.p) annotation (Line(points={{15.4,10},{12,
-          10},{12,36},{60,36},{60,6},{80,6}}, color={0,0,255}));
     annotation (Placement(transformation(extent={{140,-20},{160,0}})),
                 Placement(transformation(extent={{140,-40},{160,-20}})),
                 Placement(transformation(extent={{140,-60},{160,-40}})),
@@ -338,7 +332,7 @@ equation
 <p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
 </html>"),
     experiment(
-      StopTime=60,
-      __Dymola_NumberOfIntervals=10000,
+      StopTime=100,
+      __Dymola_NumberOfIntervals=5000,
       __Dymola_Algorithm="Dassl"));
-end Linearization_Model_ConstantVoltage_Bus5;
+end OptimizationModel02;
