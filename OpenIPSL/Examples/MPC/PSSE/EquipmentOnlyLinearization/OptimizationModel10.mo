@@ -1,6 +1,5 @@
 within OpenIPSL.Examples.MPC.PSSE.EquipmentOnlyLinearization;
-model OptimizationModel05
-  "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+model OptimizationModel10 "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
   extends Modelica.Icons.Example;
 
   parameter Boolean equivalentGRID = false;
@@ -109,7 +108,7 @@ model OptimizationModel05
     angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
     annotation (Placement(transformation(extent={{-20,38},{0,58}})));
   Electrical.Events.Breaker breaker(enableTrigger=false,
-    t_o=1.01,
+    t_o=5.01,
     rc_enabled=true,
     t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -163,7 +162,7 @@ model OptimizationModel05
   Modelica.Blocks.Interfaces.RealOutput OUT15  annotation (Placement(transformation(extent={{140,-82},{160,-62}})));
 
   PFData.PowerFlow powerFlow(redeclare record PowerFlow =
-        OpenIPSL.Examples.MPC.PFData.PF02)
+        OpenIPSL.Examples.MPC.PFData.PF01)
     annotation (Placement(transformation(extent={{-68,94},{-48,114}})));
   Electrical.Machines.PSSE.GENCLS IB(
     V_b=220000,
@@ -183,15 +182,14 @@ model OptimizationModel05
     d_t=1000)
     annotation (Placement(transformation(extent={{100,-40},{120,-20}})));
   Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
-      active_sigma=0.0000000005,
-                            samplePeriod=0.02)
+      active_sigma=0.0005,  samplePeriod=0.02)
     annotation (Placement(transformation(extent={{70,-30},{82,-18}})));
 
   inner Modelica.Blocks.Noise.GlobalSeed globalSeed(useAutomaticSeed=false,
       fixedSeed=10000)
     annotation (Placement(transformation(extent={{-42,92},{-22,112}})));
   Modelica.Blocks.Sources.Sine sine(
-    amplitude=0,
+    amplitude=0.01,
     f=1/260,
     phase=3.1415926535898,
     startTime=5.5)
@@ -337,4 +335,4 @@ equation
       StopTime=10,
       __Dymola_NumberOfIntervals=100,
       __Dymola_Algorithm="Dassl"));
-end OptimizationModel05;
+end OptimizationModel10;

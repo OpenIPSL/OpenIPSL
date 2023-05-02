@@ -937,4 +937,103 @@ package PSSE
 <p>This generation unit is supposed to be disconnected in all experiments and, then, to be resynchronized to the whole system.</p>
 </html>"));
   end G2_16MVA;
+
+  model G2_GENROE "Generation unit connected to bus B5"
+    outer OpenIPSL.Electrical.SystemBase SysData;
+    extends OpenIPSL.Electrical.Essentials.pfComponent;
+
+    OpenIPSL.Interfaces.PwPin conn annotation (Placement(transformation(extent={{
+              100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
+    Electrical.Machines.PSSE.GENROU          gen(
+      M_b=16667000,
+      Tpd0=4.822,
+      Tppd0=0.023,
+      Tppq0=0.065,
+      H=8.75,
+      D=2,
+      Xd=1.897,
+      Xq=1.78,
+      Xpd=0.23,
+      Xppd=0.156,
+      Xl=0.123,
+      S10=0.12,
+      S12=0.4,
+      Xppq=0.156,
+      R_a=0,
+      V_b=V_b,
+      v_0=v_0,
+      angle_0=angle_0,
+      P_0=P_0,
+      Q_0=Q_0,
+      Xpq=0.23,
+      Tpq0=4.822)
+               annotation (Placement(transformation(extent={{38,-20},{78,20}})));
+    SEXSMPC                                   sEXSMPC(
+      T_AT_B=0.2,
+      K=50,
+      E_MIN=0,
+      E_MAX=5,
+      T_E=0.01,
+      T_B=10) annotation (Placement(transformation(extent={{-16,-22},{4,-2}})));
+    Modelica.Blocks.Sources.Constant non_active_limits(k=0)
+      annotation (Placement(transformation(extent={{80,-60},{60,-40}})));
+    Modelica.Blocks.Interfaces.RealInput P_ref1
+      "Connector of Real input signal 2"
+      annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+    GASTMPC gASTMPC(V_MAX=1,  D_turb=0.1)
+      annotation (Placement(transformation(extent={{-18,14},{2,34}})));
+    Modelica.Blocks.Interfaces.RealInput Efd_ref
+      "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+  equation
+    connect(gen.p, conn)
+      annotation (Line(points={{78,0},{110,0}}, color={0,0,255}));
+    connect(sEXSMPC.EFD, gen.EFD)
+      annotation (Line(points={{5,-12},{34,-12}}, color={0,0,127}));
+    connect(sEXSMPC.ECOMP, gen.ETERM) annotation (Line(points={{-17,-12},{-32,-12},
+            {-32,-72},{92,-72},{92,-6},{80,-6}}, color={0,0,127}));
+    connect(gen.EFD0, sEXSMPC.EFD0) annotation (Line(points={{80,-10},{88,-10},
+            {88,-68},{-28,-68},{-28,-16},{-17,-16}}, color={0,0,127}));
+    connect(non_active_limits.y, sEXSMPC.VOEL)
+      annotation (Line(points={{59,-50},{-6,-50},{-6,-23}}, color={0,0,127}));
+    connect(sEXSMPC.VUEL, sEXSMPC.VOEL) annotation (Line(points={{-10,-23},{-10,
+            -32},{-6,-32},{-6,-23}}, color={0,0,127}));
+    connect(gen.XADIFD, sEXSMPC.XADIFD) annotation (Line(points={{80,-18},{84,-18},
+            {84,-34},{2,-34},{2,-23}}, color={0,0,127}));
+    connect(sEXSMPC.VOTHSG, sEXSMPC.VOEL) annotation (Line(points={{-17,-8},{-22,
+            -8},{-22,-32},{-6,-32},{-6,-23}}, color={0,0,127}));
+    connect(gASTMPC.PMECH0, gen.PMECH0) annotation (Line(points={{-16,18},{-28,
+            18},{-28,44},{92,44},{92,10},{80,10}}, color={0,0,127}));
+    connect(gASTMPC.PMECH, gen.PMECH) annotation (Line(points={{3,24},{22,24},{
+            22,12},{34,12}}, color={0,0,127}));
+    connect(sEXSMPC.EFd_input, Efd_ref) annotation (Line(points={{-17,-4},{-94,
+            -4},{-94,-60},{-120,-60}}, color={0,0,127}));
+    connect(P_ref1, gASTMPC.PMECHControllable) annotation (Line(points={{-120,
+            60},{-60,60},{-60,8},{-8,8},{-8,12}}, color={0,0,127}));
+    connect(gen.SPEED, gASTMPC.SPEED) annotation (Line(points={{80,14},{84,14},
+            {84,40},{-24,40},{-24,30},{-16,30}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+              {100,100}}), graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),Line(
+            points={{-48,2},{-20,56},{2,4},{24,-28},{48,22}},
+            color={0,0,0},
+            smooth=Smooth.Bezier),Text(
+            extent={{-52,-18},{56,-66}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="%name")}),
+      Documentation(info="<html>
+<p>24kV/100MVA generation unit connected to bus BG1, and composed of the following component models:</p>
+<ul>
+<li><strong>Machine</strong>: GENSAL, a salient pole synchronous machine from PSSE.</li>
+<li><strong>Exciter</strong>: SEXS, a simplified excitation system from PSSE.</li>
+<li><strong>Turbine/Governor</strong>: IEESGO, a standard turbine/governor from PSSE.</li>
+</ul>
+<p>This generation unit is supposed to be disconnected in all experiments and, then, to be resynchronized to the whole system.</p>
+</html>"));
+  end G2_GENROE;
 end PSSE;

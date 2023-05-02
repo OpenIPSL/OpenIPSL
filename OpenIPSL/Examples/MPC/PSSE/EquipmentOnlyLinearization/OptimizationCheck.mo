@@ -109,7 +109,7 @@ model OptimizationCheck "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
     angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
     annotation (Placement(transformation(extent={{-20,36},{0,56}})));
   Electrical.Events.Breaker breaker(enableTrigger=false,
-    t_o=5.01,
+    t_o=1.01,
     rc_enabled=true,
     t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -122,7 +122,7 @@ model OptimizationCheck "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
    // annotation (Placement(transformation(extent={{140,-116},{160,-96}})));
 
   PFData.PowerFlow powerFlow(redeclare record PowerFlow =
-        OpenIPSL.Examples.MPC.PFData.PF01)
+        OpenIPSL.Examples.MPC.PFData.PF03)
     annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
   Electrical.Machines.PSSE.GENCLS IB(
     V_b=220000,
@@ -142,7 +142,8 @@ model OptimizationCheck "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
     d_t=1000) if not equivalentGRID
     annotation (Placement(transformation(extent={{100,-40},{120,-20}})));
   Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
-      active_sigma=0.0005,  samplePeriod=0.02)
+      active_sigma=0.0000000005,
+                            samplePeriod=0.02)
                            if not equivalentGRID
     annotation (Placement(transformation(extent={{70,-28},{82,-16}})));
   inner Modelica.Blocks.Noise.GlobalSeed globalSeed(useAutomaticSeed=false,
@@ -159,7 +160,7 @@ model OptimizationCheck "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
         rotation=0,
         origin={42,-70})));
   Modelica.Blocks.Sources.Sine sine(
-    amplitude=0.01,
+    amplitude=0,
     f=1/260,
     phase=3.1415926535898,
     startTime=5.5)
@@ -167,26 +168,34 @@ model OptimizationCheck "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
     annotation (Placement(transformation(extent={{72,-44},{82,-34}})));
   Modelica.Blocks.Math.Add add if not equivalentGRID
     annotation (Placement(transformation(extent={{86,-30},{94,-22}})));
-  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 1,0; 2,0; 3,
-        0; 4,0; 5,0; 6,0; 7,0; 8,0; 9,0; 10,0; 11,0; 12,0; 13,0; 14,0; 15,0; 16,
-        0; 17,0; 18,0; 19,0; 20,0; 21,0; 22,0; 23,0; 24,0; 25,0; 26,0; 27,0; 28,
-        0; 29,0; 30,0; 31,0; 32,0; 33,0; 34,0; 35,0; 36,0; 37,0; 38,0; 39,0; 40,
-        0; 41,0; 42,0; 43,0; 44,0; 45,0; 46,0; 47,0; 48,0; 49,0; 50,0; 51,0; 52,
-        0; 53,0; 54,0; 55,0; 56,0; 57,0; 58,0; 59,0; 60,0; 61,0; 62,0; 63,0; 64,
-        0; 65,0; 66,0; 67,0; 68,0; 69,0; 70,0; 71,0; 72,0; 73,0; 74,0; 75,0; 76,
-        0; 77,0; 78,0; 79,0; 80,0; 81,0; 82,0; 83,0; 84,0; 85,0; 86,0; 87,0; 88,
-        0; 89,0; 90,0; 91,0; 92,0; 93,0; 94,0; 95,0; 96,0; 97,0; 98,0; 99,0],
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 0.5,-2.74e-16;
+        1,1.23e-16; 1.5,-0.023553414; 2,0.00226445; 2.5,-0.000819532; 3,-0.000893047;
+        3.5,-0.000556498; 4,0.000878186; 4.5,0.000122204; 5,0.000654087; 5.5,
+        0.001129671; 6,0.00068535; 6.5,0.001316455; 7,0.00113267; 7.5,
+        0.001340342; 8,0.001660903; 8.5,0.001058399; 9,0.001485748; 9.5,
+        0.001592657; 10,0.001172465; 10.5,0.001786355; 11,0.001258804; 11.5,
+        0.001414307; 12,0.001851642; 12.5,0.001654247; 13,0.001478177; 13.5,
+        0.001573347; 14,0.00144412; 14.5,0.001425876; 15,0.001481962; 15.5,
+        0.001685424; 16,0.001280223; 16.5,0.002188429; 17,0.001212146; 17.5,
+        0.001057434; 18,0.002316195; 18.5,0.000823138; 19,0.001872715; 19.5,
+        0.002281925; 20,0.000212087; 20.5,0.00178869; 21,0.001550175; 21.5,
+        0.001323849; 22,0.001369638; 22.5,0.00158283; 23,0.001811996; 23.5,
+        0.00161486; 24,0.001157025; 24.5,0.001801794],
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-100,-22},{-80,-2}})));
-  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(table=[0,0; 1,0; 2,0;
-        3,0; 4,0; 5,0; 6,0; 7,0; 8,0; 9,0; 10,0; 11,0; 12,0; 13,0; 14,0; 15,0;
-        16,0; 17,0; 18,0; 19,0; 20,0; 21,0; 22,0; 23,0; 24,0; 25,0; 26,0; 27,0;
-        28,0; 29,0; 30,0; 31,0; 32,0; 33,0; 34,0; 35,0; 36,0; 37,0; 38,0; 39,0;
-        40,0; 41,0; 42,0; 43,0; 44,0; 45,0; 46,0; 47,0; 48,0; 49,0; 50,0; 51,0;
-        52,0; 53,0; 54,0; 55,0; 56,0; 57,0; 58,0; 59,0; 60,0; 61,0; 62,0; 63,0;
-        64,0; 65,0; 66,0; 67,0; 68,0; 69,0; 70,0; 71,0; 72,0; 73,0; 74,0; 75,0;
-        76,0; 77,0; 78,0; 79,0; 80,0; 81,0; 82,0; 83,0; 84,0; 85,0; 86,0; 87,0;
-        88,0; 89,0; 90,0; 91,0; 92,0; 93,0; 94,0; 95,0; 96,0; 97,0; 98,0; 99,0],
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(table=[0,0; 0.5,
+        1.8e-12; 1,3.6e-12; 1.5,0.05; 2,0.1; 2.5,0.15; 3,0.2; 3.5,0.25; 4,
+        0.263776487; 4.5,0.248614171; 5,0.25716742; 5.5,0.260606863; 6,
+        0.265122641; 6.5,0.267769058; 7,0.270142912; 7.5,0.272213427; 8,
+        0.273112005; 8.5,0.274493162; 9,0.275297708; 9.5,0.275799832; 10,
+        0.276775287; 10.5,0.27692303; 11,0.277860691; 11.5,0.277428421; 12,
+        0.277819019; 12.5,0.277601462; 13,0.278020966; 13.5,0.277941926; 14,
+        0.277907842; 14.5,0.279245122; 15,0.277951751; 15.5,0.278432571; 16,
+        0.277688224; 16.5,0.2780227; 17,0.278208204; 17.5,0.278856276; 18,
+        0.277871199; 18.5,0.278786755; 19,0.278471166; 19.5,0.277629014; 20,
+        0.278792724; 20.5,0.278436379; 21,0.278419601; 21.5,0.278409225; 22,
+        0.278597382; 22.5,0.278101802; 23,0.278311091; 23.5,0.278380683; 24,
+        0.279124937; 24.5,0.278239024],
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
 equation
@@ -285,7 +294,7 @@ equation
 <p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
 </html>"),
     experiment(
-      StopTime=100,
-      __Dymola_NumberOfIntervals=5000,
+      StopTime=25,
+      __Dymola_NumberOfIntervals=1000,
       __Dymola_Algorithm="Dassl"));
 end OptimizationCheck;

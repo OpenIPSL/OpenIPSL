@@ -50,7 +50,8 @@ equation
           extent={{-30,90},{30,70}},
           lineColor={0,0,255},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),Line(points={{-30,80},{-100,80}},color=
+          fillPattern=FillPattern.Solid),Line(points={{-30,80},{-100,80}},color
+            =
            {0,0,255}),Line(points={{100,80},{30,80}},color={0,0,255}),Line(
           points={{0,70},{0,-4}},
           color={0,0,255},
