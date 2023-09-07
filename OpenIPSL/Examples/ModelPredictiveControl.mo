@@ -8130,7 +8130,7 @@ The user should leave it in its default value (<code>1</code>) if they do not ha
         "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
         extends Modelica.Icons.Example;
 
-        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentGRID = true;
         parameter Boolean equivalentsystem = false;
 
         OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
@@ -8459,10 +8459,7 @@ The user should leave it in its default value (<code>1</code>) if they do not ha
 <li><code>G2.gen.SPEED</code></li>
 </ul>
 <p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
-</html>"),experiment(
-            StopTime=10,
-            __Dymola_NumberOfIntervals=100,
-            __Dymola_Algorithm="Dassl"));
+</html>"),experiment(Interval=0.5, __Dymola_Algorithm="Dassl"));
       end OptimizationModel05;
 
       model OptimizationModel06
@@ -10350,10 +10347,10 @@ The user should leave it in its default value (<code>1</code>) if they do not ha
           T=298.15,
           pressureUnit=Modelon.ThermoFluid.Choices.RealPressureUnit.Pa,
           temperatureUnit=Modelon.ThermoFluid.Choices.RealTemperatureUnit.degC,
-
           use_p_in=false,
           use_Th_in=false,
           N=1) annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
+
         Modelica.Blocks.Sources.Ramp           ThermalLoad(
           height=500,
           duration=100,
