@@ -1,4 +1,5 @@
 LoadTestBase
 MachineTestBase
 SMIB
+SMIBRenewable
 TGTestBase
