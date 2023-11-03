@@ -27,7 +27,7 @@ public
     imag_start=vi_0,
     start_guess=true,
     Ts=Ts)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 equation
   connect(p, n);
   fCalc.real_part = p.vr;
@@ -47,8 +47,7 @@ equation
             34}},
           lineColor={28,108,200},
           fillPattern=FillPattern.Solid,
-          fillColor={28,108,200}),Ellipse(extent={{-60,62},{62,-60}}, lineColor
-            =
+          fillColor={28,108,200}),Ellipse(extent={{-60,62},{62,-60}}, lineColor=
            {28,108,200}),Text(
           extent={{-36,-26},{44,-48}},
           lineColor={28,108,200},

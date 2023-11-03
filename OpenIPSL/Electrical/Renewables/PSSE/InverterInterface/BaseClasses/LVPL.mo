@@ -9,7 +9,8 @@ model LVPL "Low Voltage Power Logic"
         parameter OpenIPSL.Types.PerUnit Zerox "LVPL characteristic voltage 1";
 equation
 
-  y = noEvent(if V < Zerox then 0 else if V > Brkpt then Lvpl1 else (V-Zerox)*(Lvpl1/(Brkpt-Zerox)));
+  //y = noEvent(if V < Zerox then 0 else if V > Brkpt then Lvpl1 else (V-Zerox)*(Lvpl1/(Brkpt-Zerox)));
+  y = noEvent(smooth(2, if V < Zerox then 0 else if V > Brkpt then Lvpl1 else (V-Zerox)*(Lvpl1/(Brkpt-Zerox))));
 
     annotation (Icon(graphics={
         Rectangle(

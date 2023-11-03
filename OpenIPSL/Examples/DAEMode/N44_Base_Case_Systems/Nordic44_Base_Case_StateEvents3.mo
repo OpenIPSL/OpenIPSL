@@ -4,7 +4,8 @@ model Nordic44_Base_Case_StateEvents3
   Nordic44_Base_Case_StateEvents2 from t = 0s to t = 60s. These start values
   have been stored in this model"
 
-    extends OpenIPSL.Examples.DAEMode.N44_Base_Case_Systems.Nordic44_Base_Case_StateEvents(
+    extends
+    OpenIPSL.Examples.DAEMode.N44_Base_Case_Systems.Nordic44_Base_Case_StateEvents(
       G1_bus3115(hYGOV(Velocity_Limiter(u(start=0.0005312208465522299)))),
       G1_bus3245(hYGOV(Velocity_Limiter(u(start=0.00023619631218909983)))),
       G1_bus3249(hYGOV(Velocity_Limiter(u(start=0.0006355900695655389)))),

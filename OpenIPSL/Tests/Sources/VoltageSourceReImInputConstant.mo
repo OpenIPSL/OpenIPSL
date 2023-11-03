@@ -3,10 +3,12 @@ model VoltageSourceReImInputConstant
   "Test model for the VoltageSourceReImInput model with constant input"
   extends BaseClasses.SMIB;
   replaceable
-  Modelica.Blocks.Sources.Constant vRe(k=1) constrainedby Modelica.Blocks.Interfaces.SO
+  Modelica.Blocks.Sources.Constant vRe(k=1) constrainedby
+    Modelica.Blocks.Interfaces.SO
     annotation (Placement(transformation(extent={{-96,14},{-84,26}})));
   replaceable
-  Modelica.Blocks.Sources.Constant vIm(k=0) constrainedby Modelica.Blocks.Interfaces.SO
+  Modelica.Blocks.Sources.Constant vIm(k=0) constrainedby
+    Modelica.Blocks.Interfaces.SO
     annotation (Placement(transformation(extent={{-96,-26},{-84,-14}})));
   Electrical.Sources.VoltageSourceReImInput vSource
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));

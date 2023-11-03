@@ -11,7 +11,7 @@ model FREQ_CALC "Frequency calculator"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Blocks.Sources.Constant const1(k=fi_0)
     annotation (Placement(transformation(extent={{-90,-50},{-70,-30}})));
-  Modelica.Blocks.Math.Gain gain(k=1)
+  Modelica.Blocks.Math.Gain gain(k=1/(2*Modelica.Constants.pi*60))
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Continuous.Derivative derivative(k=1, T=T_f)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));

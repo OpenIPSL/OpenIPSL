@@ -43,6 +43,18 @@ equation
     vs = vr;
     is = -ir;
   end if;
+//
+//   if Open then
+//     is.re = RealPart_S.y;
+//     is.im = ImagPart_S.y;
+//     ir.re = RealPart_R.y;
+//     ir.im = ImagPart_R.y;
+//   else
+//     vs = vr;
+//     is = -ir;
+//   end if;
+
+
 
   connect(Trigger, Open) annotation (Line(points={{0,120},{0,60},{0,0},{6,0}}, color={255,0,255}));
   annotation (

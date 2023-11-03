@@ -8,7 +8,7 @@ model BESSPlant
     Q_0=-5665800,
     v_0=1,
     angle_0=0.02574992,
-    QFunctionality=4,
+    QFunctionality=3,
     PFunctionality=0,
     redeclare OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
       RenewableGenerator(
@@ -50,16 +50,6 @@ model BESSPlant
 equation
   connect(bESS.pwPin, GEN1.p)
     annotation (Line(points={{-40,0},{-30,0}}, color={0,0,255}));
-  connect(freq.y, bESS.FREQ)
-    annotation (Line(points={{-75,0},{-62,0}}, color={0,0,127}));
-  connect(pwVoltage.vi, bESS.regulate_vi)
-    annotation (Line(points={{-36.6,30},{-44,30},{-44,10}}, color={0,0,127}));
-  connect(pwVoltage.vr, bESS.regulate_vr) annotation (Line(points={{-36.6,33.6},
-          {-56,33.6},{-56,10}}, color={0,0,127}));
-  connect(bESS.branch_ir, pwCurrent.ir) annotation (Line(points={{-44,-10},{-44,
-          -16},{-17.6,-16},{-17.6,-6.6}}, color={0,0,127}));
-  connect(pwCurrent.ii, bESS.branch_ii) annotation (Line(points={{-14,-6.6},{
-          -14,-20},{-56,-20},{-56,-10}}, color={0,0,127}));
   annotation (experiment(
       StopTime=5,
       __Dymola_NumberOfIntervals=5000,
