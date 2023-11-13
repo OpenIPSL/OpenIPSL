@@ -167,7 +167,7 @@ model REECB1 "Electrical control model for large scale photovoltaic"
   Modelica.Blocks.Nonlinear.Limiter limiter7(uMax=dPmax, uMin=dPmin)
     annotation (Placement(transformation(extent={{-240,-176},{-220,-156}})));
   Modelica.Blocks.Continuous.Integrator integrator3(k=1/Tpord, y_start=Ip0*V0)
-    annotation (Placement(transformation(extent={{-152,-176},{-132,-156}})));
+    annotation (Placement(transformation(extent={{-152,-174},{-132,-154}})));
   Modelica.Blocks.Nonlinear.Limiter limiter8(uMax=Pmax, uMin=Pmin)
     annotation (Placement(transformation(extent={{-112,-176},{-92,-156}})));
   Modelica.Blocks.Sources.RealExpression Vt_filt3(y=simpleLag.y)
@@ -328,7 +328,7 @@ equation
     annotation (Line(points={{-255,-166},{-242,-166}},
                                                      color={0,0,127}));
   connect(integrator3.y,limiter8. u)
-    annotation (Line(points={{-131,-166},{-114,-166}},
+    annotation (Line(points={{-131,-164},{-122,-164},{-122,-166},{-114,-166}},
                                                      color={0,0,127}));
   connect(add8.u2,limiter8. u) annotation (Line(points={{-278,-172},{-278,-188},
           {-124,-188},{-124,-166},{-114,-166}}, color={0,0,127}));
@@ -363,7 +363,8 @@ equation
   connect(limiter7.y, product6.u2) annotation (Line(points={{-219,-166},{-212,-166},
           {-212,-172},{-192,-172}}, color={0,0,127}));
   connect(product6.y, integrator3.u)
-    annotation (Line(points={{-169,-166},{-154,-166}}, color={0,0,127}));
+    annotation (Line(points={{-169,-166},{-162,-166},{-162,-164},{-154,-164}},
+                                                       color={0,0,127}));
   connect(VReF0.y, VFlag.u3)
     annotation (Line(points={{-33,-32},{-4,-32},{-4,46}}, color={0,0,127}));
   annotation (Documentation(info="<html>
