@@ -1,6 +1,5 @@
 within OpenIPSL.Electrical.Renewables.PSSE;
 model Wind "Framework for a wind plant including controllers"
-parameter Types.ApparentPower M_b=RenewableGenerator.SysData.S_b "Machine base power" annotation(Dialog(group= "Power flow data"));
 extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enablefn=false,
     final enableV_b=false,
