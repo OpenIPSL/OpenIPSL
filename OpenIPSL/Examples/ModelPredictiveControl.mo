@@ -6804,7 +6804,7 @@ package ModelPredictiveControl
           B=0)  annotation (Placement(transformation(extent={{38,-94},
                   {50,-86}})));
         Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
-            active_sigma=0.0005,samplePeriod=0.01)
+            active_sigma=0.001, samplePeriod=0.01)
           annotation (Placement(transformation(extent={{68,-18},{80,-6}})));
         Modelica.Blocks.Math.Add add
           annotation (Placement(transformation(extent={{86,-18},{94,-10}})));
@@ -15690,7 +15690,7 @@ injections (p_0 and q_0). This method reduces repetitiveness of initialization c
 </html>"));
       end G2_16MVA;
 
-      model G2_GENROE "Generation unit connected to bus B5"
+      model G2_GENROU "Generation unit connected to bus B5"
         outer OpenIPSL.Electrical.SystemBase SysData;
         extends OpenIPSL.Electrical.Essentials.pfComponent;
 
@@ -15787,7 +15787,7 @@ injections (p_0 and q_0). This method reduces repetitiveness of initialization c
 </ul>
 <p>This generation unit is supposed to be disconnected in all experiments and, then, to be resynchronized to the whole system.</p>
 </html>"));
-      end G2_GENROE;
+      end G2_GENROU;
 
       model G2_16MVA_THERMAL "Generation unit connected to bus B5"
         outer OpenIPSL.Electrical.SystemBase SysData;
