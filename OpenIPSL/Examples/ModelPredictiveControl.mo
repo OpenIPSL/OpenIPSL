@@ -6811,15 +6811,35 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{22,-160},{42,-140}})));
         NonElectrical.Continuous.SimpleLag simpleLag(
           K=1,
-          T=0.1,
+          T=0.05,
           y_start=powerFlow.powerflow.bus.V5)
           annotation (Placement(transformation(extent={{60,-160},{80,-140}})));
         Modelica.Blocks.Interfaces.RealOutput V5filtered
           "Connector of Real output signal"
           annotation (Placement(transformation(extent={{96,-160},{116,-140}})));
         Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
-            active_sigma=0.0002, samplePeriod=0.5)
+            active_sigma=0.0005, samplePeriod=0.1)
           annotation (Placement(transformation(extent={{64,-18},{76,-6}})));
+        Modelica.Blocks.Sources.RealExpression realExpression1(y=G2.gen.w)
+          annotation (Placement(transformation(extent={{22,-192},{42,-172}})));
+        NonElectrical.Continuous.SimpleLag simpleLag1(
+          K=1,
+          T=0.05,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{60,-192},{80,-172}})));
+        Modelica.Blocks.Interfaces.RealOutput wfiltered
+          "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{96,-192},{116,-172}})));
+        Modelica.Blocks.Sources.RealExpression realExpression2(y=Bus5.angle)
+          annotation (Placement(transformation(extent={{120,-170},{140,-150}})));
+        NonElectrical.Continuous.SimpleLag simpleLag2(
+          K=1,
+          T=0.05,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{158,-170},{178,-150}})));
+        Modelica.Blocks.Interfaces.RealOutput anglefiltered
+          "Connector of Real output signal" annotation (Placement(
+              transformation(extent={{194,-170},{214,-150}})));
       equation
 
       OUT1 = G2.gen.w;
@@ -6959,6 +6979,14 @@ package ModelPredictiveControl
         connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{76.54,
                 -12.06},{79.87,-12.06},{79.87,-11.6},{83.2,-11.6}}, color={0,0,
                 127}));
+        connect(realExpression1.y, simpleLag1.u)
+          annotation (Line(points={{43,-182},{58,-182}}, color={0,0,127}));
+        connect(simpleLag1.y, wfiltered)
+          annotation (Line(points={{81,-182},{106,-182}}, color={0,0,127}));
+        connect(realExpression2.y, simpleLag2.u)
+          annotation (Line(points={{141,-160},{156,-160}}, color={0,0,127}));
+        connect(simpleLag2.y, anglefiltered)
+          annotation (Line(points={{179,-160},{204,-160}}, color={0,0,127}));
           annotation (Placement(transformation(extent={{140,-20},{160,0}})),
                       Placement(transformation(extent={{140,-40},{160,-20}})),
                       Placement(transformation(extent={{140,-60},{160,-40}})),
@@ -13892,7 +13920,7 @@ package ModelPredictiveControl
         Modelica.Blocks.Math.Add add
           annotation (Placement(transformation(extent={{84,-18},{92,-10}})));
         Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
-            active_sigma=0.001, samplePeriod=0.01)
+            active_sigma=0.0005, samplePeriod=0.1)
           annotation (Placement(transformation(extent={{64,-18},{76,-6}})));
         Modelica.Blocks.Sources.RealExpression OUT1_pre(y=G2.gen.w)
           annotation (Placement(transformation(extent={{140,100},{160,120}})));
@@ -13946,14 +13974,14 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{260,-120},{280,-100}})));
         NonElectrical.Continuous.SimpleLag simpleLag(
           K=1,
-          T=0.01,
+          T=0.1,
           y_start=powerFlow.powerflow.bus.V5)
           annotation (Placement(transformation(extent={{300,-100},{320,-80}})));
         Modelica.Blocks.Interfaces.RealOutput OUT24 "Connector of Real output signal"
           annotation (Placement(transformation(extent={{340,-100},{360,-80}})));
         NonElectrical.Continuous.SimpleLag simpleLag1(
           K=1,
-          T=0.01,
+          T=0.1,
           y_start=powerFlow.powerflow.bus.A5)
           annotation (Placement(transformation(extent={{300,-120},{320,-100}})));
         Modelica.Blocks.Interfaces.RealOutput OUT25 "Connector of Real output signal"
@@ -13986,7 +14014,7 @@ package ModelPredictiveControl
           K=1,
           T=0.1,
           y_start=powerFlow.powerflow.machines.QBESS/100000000)
-          annotation (Placement(transformation(extent={{300,20},{320,40}})));
+          annotation (Placement(transformation(extent={{300,22},{320,42}})));
         NonElectrical.Continuous.SimpleLag simpleLag7(
           K=1,
           T=0.1,
@@ -13996,22 +14024,22 @@ package ModelPredictiveControl
           K=1,
           T=0.1,
           y_start=powerFlow.powerflow.machines.PBESS/100000000)
-          annotation (Placement(transformation(extent={{300,40},{320,60}})));
+          annotation (Placement(transformation(extent={{300,42},{320,62}})));
         NonElectrical.Continuous.SimpleLag simpleLag9(
           K=1,
           T=0.1,
           y_start=0.0089)
-          annotation (Placement(transformation(extent={{300,80},{320,100}})));
+          annotation (Placement(transformation(extent={{300,82},{320,102}})));
         NonElectrical.Continuous.SimpleLag simpleLag10(
           K=1,
           T=0.1,
           y_start=powerFlow.powerflow.bus.V8)
-          annotation (Placement(transformation(extent={{300,60},{320,80}})));
+          annotation (Placement(transformation(extent={{300,62},{320,82}})));
         NonElectrical.Continuous.SimpleLag simpleLag11(
           K=1,
           T=0.1,
           y_start=-0.0199)
-          annotation (Placement(transformation(extent={{300,100},{320,120}})));
+          annotation (Placement(transformation(extent={{300,102},{320,122}})));
         NonElectrical.Continuous.SimpleLag simpleLag12(
           K=1,
           T=0.1,
@@ -14069,7 +14097,7 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{180,60},{200,80}})));
         NonElectrical.Continuous.SimpleLag simpleLag23(
           K=1,
-          T=0.01,
+          T=0.1,
           y_start=G2.gen.w0)
           annotation (Placement(transformation(extent={{180,100},{200,120}})));
         NonElectrical.Continuous.SimpleLag simpleLag24(
@@ -14287,15 +14315,20 @@ package ModelPredictiveControl
         connect(simpleLag24.y, OUT13)
           annotation (Line(points={{201,-130},{230,-130}}, color={0,0,127}));
         connect(OUT14_pre.y, simpleLag11.u)
-          annotation (Line(points={{281,110},{298,110}}, color={0,0,127}));
+          annotation (Line(points={{281,110},{290,110},{290,112},{298,112}},
+                                                         color={0,0,127}));
         connect(OUT15_pre.y, simpleLag9.u)
-          annotation (Line(points={{281,90},{298,90}}, color={0,0,127}));
+          annotation (Line(points={{281,90},{290,90},{290,92},{298,92}},
+                                                       color={0,0,127}));
         connect(OUT16_pre.y, simpleLag10.u)
-          annotation (Line(points={{281,70},{298,70}}, color={0,0,127}));
+          annotation (Line(points={{281,70},{290,70},{290,72},{298,72}},
+                                                       color={0,0,127}));
         connect(OUT17_pre.y, simpleLag8.u)
-          annotation (Line(points={{281,50},{298,50}}, color={0,0,127}));
+          annotation (Line(points={{281,50},{290,50},{290,52},{298,52}},
+                                                       color={0,0,127}));
         connect(OUT18_pre.y, simpleLag6.u)
-          annotation (Line(points={{281,30},{298,30}}, color={0,0,127}));
+          annotation (Line(points={{281,30},{290,30},{290,32},{298,32}},
+                                                       color={0,0,127}));
         connect(OUT19_pre.y, simpleLag7.u)
           annotation (Line(points={{281,10},{298,10}}, color={0,0,127}));
         connect(OUT20_pre.y, simpleLag5.u)
@@ -14305,15 +14338,20 @@ package ModelPredictiveControl
         connect(OUT22_pre.y, simpleLag4.u)
           annotation (Line(points={{281,-50},{298,-50}}, color={0,0,127}));
         connect(simpleLag11.y, OUT14)
-          annotation (Line(points={{321,110},{350,110}}, color={0,0,127}));
+          annotation (Line(points={{321,112},{336,112},{336,110},{350,110}},
+                                                         color={0,0,127}));
         connect(simpleLag9.y, OUT15)
-          annotation (Line(points={{321,90},{350,90}}, color={0,0,127}));
+          annotation (Line(points={{321,92},{336,92},{336,90},{350,90}},
+                                                       color={0,0,127}));
         connect(simpleLag10.y, OUT16)
-          annotation (Line(points={{321,70},{350,70}}, color={0,0,127}));
+          annotation (Line(points={{321,72},{336,72},{336,70},{350,70}},
+                                                       color={0,0,127}));
         connect(simpleLag8.y, OUT17)
-          annotation (Line(points={{321,50},{350,50}}, color={0,0,127}));
+          annotation (Line(points={{321,52},{336,52},{336,50},{350,50}},
+                                                       color={0,0,127}));
         connect(simpleLag6.y, OUT18)
-          annotation (Line(points={{321,30},{350,30}}, color={0,0,127}));
+          annotation (Line(points={{321,32},{336,32},{336,30},{350,30}},
+                                                       color={0,0,127}));
         connect(simpleLag7.y, OUT19)
           annotation (Line(points={{321,10},{350,10}}, color={0,0,127}));
         connect(simpleLag5.y, OUT20)
@@ -14374,6 +14412,1346 @@ package ModelPredictiveControl
             __Dymola_Algorithm="Dassl"),
           Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
       end MPCAppliedEnergyOriginal_v3_FILTERED;
+
+      model MPCAppliedEnergyOriginal_v3_table2
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker breaker(enableTrigger=false,
+          t_o=0.25,
+          rc_enabled=false,
+          t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{140,70},{160,90}})));
+       Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{140,50},{160,70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{140,30},{160,50}})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PF16)
+          annotation (Placement(transformation(extent={{-68,104},{-48,124}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=100,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-42,102},{-22,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=10000)
+          annotation (Placement(transformation(extent={{70,-36},{80,-26}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl PV(
+          V_b=480,
+          P_0=powerFlow.powerflow.machines.PPV,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QPV,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V8,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A8,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{140,10},{160,30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{140,-10},{160,10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{140,-30},{160,-10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{140,-50},{160,-30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{140,-70},{160,-50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{140,-90},{160,-70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{140,-110},{160,-90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{164,70},{184,90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{164,50},{184,70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT13
+          annotation (Placement(transformation(extent={{164,30},{184,50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT14
+          annotation (Placement(transformation(extent={{164,10},{184,30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT15
+          annotation (Placement(transformation(extent={{164,-10},{184,10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT16
+          annotation (Placement(transformation(extent={{164,-30},{184,-10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT17
+          annotation (Placement(transformation(extent={{164,-50},{184,-30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT18
+          annotation (Placement(transformation(extent={{164,-70},{184,-50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT19
+          annotation (Placement(transformation(extent={{164,-90},{184,-70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT20
+          annotation (Placement(transformation(extent={{164,-110},{184,-90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT21
+          annotation (Placement(transformation(extent={{184,70},{204,90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT22
+          annotation (Placement(transformation(extent={{184,50},{204,70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT23
+          annotation (Placement(transformation(extent={{184,30},{204,50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT24
+          annotation (Placement(transformation(extent={{184,10},{204,30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT25
+          annotation (Placement(transformation(extent={{184,-10},{204,10}})));
+        GenerationUnits.PSSE.Battery_Units.BESSMPCLocalVQControl BESS(
+          V_base=480,
+          V_b(displayUnit="kV") = 480,
+          enableV_b=true,
+          P_0=powerFlow.powerflow.machines.PBESS,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QBESS,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V10,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A10,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0005, samplePeriod=0.5)
+          annotation (Placement(transformation(extent={{68,-18},{80,-6}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{86,-18},{94,-10}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 0.05,
+              0; 0.1,0; 0.15,0; 0.2,0; 0.25,0; 0.3,0; 0.35,0; 0.4,0; 0.45,0;
+              0.5,0.01; 0.55,0.01; 0.6,0.01; 0.65,0.01; 0.7,0.01; 0.75,0.01;
+              0.8,0.01; 0.85,0.01; 0.9,0.01; 0.95,0.01; 1,-1.04e-17; 1.05,-1.04e-17;
+              1.1,-1.04e-17; 1.15,-1.04e-17; 1.2,-1.04e-17; 1.25,-1.04e-17; 1.3,
+              -1.04e-17; 1.35,-1.04e-17; 1.4,-1.04e-17; 1.45,-1.04e-17; 1.5,
+              0.004488376; 1.55,0.004488376; 1.6,0.004488376; 1.65,0.004488376;
+              1.7,0.004488376; 1.75,0.004488376; 1.8,0.004488376; 1.85,
+              0.004488376; 1.9,0.004488376; 1.95,0.004488376; 2,-0.002329448;
+              2.05,-0.002329448; 2.1,-0.002329448; 2.15,-0.002329448; 2.2,-0.002329448;
+              2.25,-0.002329448; 2.3,-0.002329448; 2.35,-0.002329448; 2.4,-0.002329448;
+              2.45,-0.002329448; 2.5,-0.012329448; 2.55,-0.012329448; 2.6,-0.012329448;
+              2.65,-0.012329448; 2.7,-0.012329448; 2.75,-0.012329448; 2.8,-0.012329448;
+              2.85,-0.012329448; 2.9,-0.012329448; 2.95,-0.012329448; 3,-0.014514317;
+              3.05,-0.014514317; 3.1,-0.014514317; 3.15,-0.014514317; 3.2,-0.014514317;
+              3.25,-0.014514317; 3.3,-0.014514317; 3.35,-0.014514317; 3.4,-0.014514317;
+              3.45,-0.014514317; 3.5,-0.010585831; 3.55,-0.010585831; 3.6,-0.010585831;
+              3.65,-0.010585831; 3.7,-0.010585831; 3.75,-0.010585831; 3.8,-0.010585831;
+              3.85,-0.010585831; 3.9,-0.010585831; 3.95,-0.010585831; 4,-0.006506519;
+              4.05,-0.006506519; 4.1,-0.006506519; 4.15,-0.006506519; 4.2,-0.006506519;
+              4.25,-0.006506519; 4.3,-0.006506519; 4.35,-0.006506519; 4.4,-0.006506519;
+              4.45,-0.006506519; 4.5,-0.006398531; 4.55,-0.006398531; 4.6,-0.006398531;
+              4.65,-0.006398531; 4.7,-0.006398531; 4.75,-0.006398531; 4.8,-0.006398531;
+              4.85,-0.006398531; 4.9,-0.006398531; 4.95,-0.006398531; 5,-0.006293446;
+              5.05,-0.006293446; 5.1,-0.006293446; 5.15,-0.006293446; 5.2,-0.006293446;
+              5.25,-0.006293446; 5.3,-0.006293446; 5.35,-0.006293446; 5.4,-0.006293446;
+              5.45,-0.006293446; 5.5,-0.005793967; 5.55,-0.005793967; 5.6,-0.005793967;
+              5.65,-0.005793967; 5.7,-0.005793967; 5.75,-0.005793967; 5.8,-0.005793967;
+              5.85,-0.005793967; 5.9,-0.005793967; 5.95,-0.005793967; 6,-0.00728154;
+              6.05,-0.00728154; 6.1,-0.00728154; 6.15,-0.00728154; 6.2,-0.00728154;
+              6.25,-0.00728154; 6.3,-0.00728154; 6.35,-0.00728154; 6.4,-0.00728154;
+              6.45,-0.00728154; 6.5,-0.007750384; 6.55,-0.007750384; 6.6,-0.007750384;
+              6.65,-0.007750384; 6.7,-0.007750384; 6.75,-0.007750384; 6.8,-0.007750384;
+              6.85,-0.007750384; 6.9,-0.007750384; 6.95,-0.007750384; 7,-0.00728214;
+              7.05,-0.00728214; 7.1,-0.00728214; 7.15,-0.00728214; 7.2,-0.00728214;
+              7.25,-0.00728214; 7.3,-0.00728214; 7.35,-0.00728214; 7.4,-0.00728214;
+              7.45,-0.00728214; 7.5,-0.006937751; 7.55,-0.006937751; 7.6,-0.006937751;
+              7.65,-0.006937751; 7.7,-0.006937751; 7.75,-0.006937751; 7.8,-0.006937751;
+              7.85,-0.006937751; 7.9,-0.006937751; 7.95,-0.006937751; 8,-0.007068493;
+              8.05,-0.007068493; 8.1,-0.007068493; 8.15,-0.007068493; 8.2,-0.007068493;
+              8.25,-0.007068493; 8.3,-0.007068493; 8.35,-0.007068493; 8.4,-0.007068493;
+              8.45,-0.007068493; 8.5,-0.006849029; 8.55,-0.006849029; 8.6,-0.006849029;
+              8.65,-0.006849029; 8.7,-0.006849029; 8.75,-0.006849029; 8.8,-0.006849029;
+              8.85,-0.006849029; 8.9,-0.006849029; 8.95,-0.006849029; 9,-0.006733866;
+              9.05,-0.006733866; 9.1,-0.006733866; 9.15,-0.006733866; 9.2,-0.006733866;
+              9.25,-0.006733866; 9.3,-0.006733866; 9.35,-0.006733866; 9.4,-0.006733866;
+              9.45,-0.006733866; 9.5,-0.006920145; 9.55,-0.006920145; 9.6,-0.006920145;
+              9.65,-0.006920145; 9.7,-0.006920145; 9.75,-0.006920145; 9.8,-0.006920145;
+              9.85,-0.006920145; 9.9,-0.006920145; 9.95,-0.006920145; 10,-0.006967495;
+              10.05,-0.006967495; 10.1,-0.006967495; 10.15,-0.006967495; 10.2,-0.006967495;
+              10.25,-0.006967495; 10.3,-0.006967495; 10.35,-0.006967495; 10.4,-0.006967495;
+              10.45,-0.006967495; 10.5,-0.007319607; 10.55,-0.007319607; 10.6,-0.007319607;
+              10.65,-0.007319607; 10.7,-0.007319607; 10.75,-0.007319607; 10.8,-0.007319607;
+              10.85,-0.007319607; 10.9,-0.007319607; 10.95,-0.007319607; 11,-0.006241438;
+              11.05,-0.006241438; 11.1,-0.006241438; 11.15,-0.006241438; 11.2,-0.006241438;
+              11.25,-0.006241438; 11.3,-0.006241438; 11.35,-0.006241438; 11.4,-0.006241438;
+              11.45,-0.006241438; 11.5,-0.006733863; 11.55,-0.006733863; 11.6,-0.006733863;
+              11.65,-0.006733863; 11.7,-0.006733863; 11.75,-0.006733863; 11.8,-0.006733863;
+              11.85,-0.006733863; 11.9,-0.006733863; 11.95,-0.006733863; 12,-0.006929221;
+              12.05,-0.006929221; 12.1,-0.006929221; 12.15,-0.006929221; 12.2,-0.006929221;
+              12.25,-0.006929221; 12.3,-0.006929221; 12.35,-0.006929221; 12.4,-0.006929221;
+              12.45,-0.006929221; 12.5,-0.007243467; 12.55,-0.007243467; 12.6,-0.007243467;
+              12.65,-0.007243467; 12.7,-0.007243467; 12.75,-0.007243467; 12.8,-0.007243467;
+              12.85,-0.007243467; 12.9,-0.007243467; 12.95,-0.007243467; 13,-0.006759761;
+              13.05,-0.006759761; 13.1,-0.006759761; 13.15,-0.006759761; 13.2,-0.006759761;
+              13.25,-0.006759761; 13.3,-0.006759761; 13.35,-0.006759761; 13.4,-0.006759761;
+              13.45,-0.006759761; 13.5,-0.006518669; 13.55,-0.006518669; 13.6,-0.006518669;
+              13.65,-0.006518669; 13.7,-0.006518669; 13.75,-0.006518669; 13.8,-0.006518669;
+              13.85,-0.006518669; 13.9,-0.006518669; 13.95,-0.006518669; 14,-0.007114783;
+              14.05,-0.007114783; 14.1,-0.007114783; 14.15,-0.007114783; 14.2,-0.007114783;
+              14.25,-0.007114783; 14.3,-0.007114783; 14.35,-0.007114783; 14.4,-0.007114783;
+              14.45,-0.007114783; 14.5,-0.006357554; 14.55,-0.006357554; 14.6,-0.006357554;
+              14.65,-0.006357554; 14.7,-0.006357554; 14.75,-0.006357554; 14.8,-0.006357554;
+              14.85,-0.006357554; 14.9,-0.006357554; 14.95,-0.006357554; 15,-0.006912727;
+              15.05,-0.006912727; 15.1,-0.006912727; 15.15,-0.006912727; 15.2,-0.006912727;
+              15.25,-0.006912727; 15.3,-0.006912727; 15.35,-0.006912727; 15.4,-0.006912727;
+              15.45,-0.006912727; 15.5,-0.007070268; 15.55,-0.007070268; 15.6,-0.007070268;
+              15.65,-0.007070268; 15.7,-0.007070268; 15.75,-0.007070268; 15.8,-0.007070268;
+              15.85,-0.007070268; 15.9,-0.007070268; 15.95,-0.007070268; 16,-0.006488459;
+              16.05,-0.006488459; 16.1,-0.006488459; 16.15,-0.006488459; 16.2,-0.006488459;
+              16.25,-0.006488459; 16.3,-0.006488459; 16.35,-0.006488459; 16.4,-0.006488459;
+              16.45,-0.006488459; 16.5,-0.007239766; 16.55,-0.007239766; 16.6,-0.007239766;
+              16.65,-0.007239766; 16.7,-0.007239766; 16.75,-0.007239766; 16.8,-0.007239766;
+              16.85,-0.007239766; 16.9,-0.007239766; 16.95,-0.007239766; 17,-0.006438473;
+              17.05,-0.006438473; 17.1,-0.006438473; 17.15,-0.006438473; 17.2,-0.006438473;
+              17.25,-0.006438473; 17.3,-0.006438473; 17.35,-0.006438473; 17.4,-0.006438473;
+              17.45,-0.006438473; 17.5,-0.00545192; 17.55,-0.00545192; 17.6,-0.00545192;
+              17.65,-0.00545192; 17.7,-0.00545192; 17.75,-0.00545192; 17.8,-0.00545192;
+              17.85,-0.00545192; 17.9,-0.00545192; 17.95,-0.00545192; 18,-0.007044034;
+              18.05,-0.007044034; 18.1,-0.007044034; 18.15,-0.007044034; 18.2,-0.007044034;
+              18.25,-0.007044034; 18.3,-0.007044034; 18.35,-0.007044034; 18.4,-0.007044034;
+              18.45,-0.007044034; 18.5,-0.007253637; 18.55,-0.007253637; 18.6,-0.007253637;
+              18.65,-0.007253637; 18.7,-0.007253637; 18.75,-0.007253637; 18.8,-0.007253637;
+              18.85,-0.007253637; 18.9,-0.007253637; 18.95,-0.007253637; 19,-0.006346125;
+              19.05,-0.006346125; 19.1,-0.006346125; 19.15,-0.006346125; 19.2,-0.006346125;
+              19.25,-0.006346125; 19.3,-0.006346125; 19.35,-0.006346125; 19.4,-0.006346125;
+              19.45,-0.006346125; 19.5,-0.006450081; 19.55,-0.006450081; 19.6,-0.006450081;
+              19.65,-0.006450081; 19.7,-0.006450081; 19.75,-0.006450081; 19.8,-0.006450081;
+              19.85,-0.006450081; 19.9,-0.006450081; 19.95,-0.006450081; 20,-0.006823293;
+              20.05,-0.006823293; 20.1,-0.006823293; 20.15,-0.006823293; 20.2,-0.006823293;
+              20.25,-0.006823293; 20.3,-0.006823293; 20.35,-0.006823293; 20.4,-0.006823293;
+              20.45,-0.006823293; 20.5,-0.006536683; 20.55,-0.006536683; 20.6,-0.006536683;
+              20.65,-0.006536683; 20.7,-0.006536683; 20.75,-0.006536683; 20.8,-0.006536683;
+              20.85,-0.006536683; 20.9,-0.006536683; 20.95,-0.006536683; 21,-0.006448028;
+              21.05,-0.006448028; 21.1,-0.006448028; 21.15,-0.006448028; 21.2,-0.006448028;
+              21.25,-0.006448028; 21.3,-0.006448028; 21.35,-0.006448028; 21.4,-0.006448028;
+              21.45,-0.006448028; 21.5,-0.006209843; 21.55,-0.006209843; 21.6,-0.006209843;
+              21.65,-0.006209843; 21.7,-0.006209843; 21.75,-0.006209843; 21.8,-0.006209843;
+              21.85,-0.006209843; 21.9,-0.006209843; 21.95,-0.006209843; 22,-0.00685509;
+              22.05,-0.00685509; 22.1,-0.00685509; 22.15,-0.00685509; 22.2,-0.00685509;
+              22.25,-0.00685509; 22.3,-0.00685509; 22.35,-0.00685509; 22.4,-0.00685509;
+              22.45,-0.00685509; 22.5,-0.006865477; 22.55,-0.006865477; 22.6,-0.006865477;
+              22.65,-0.006865477; 22.7,-0.006865477; 22.75,-0.006865477; 22.8,-0.006865477;
+              22.85,-0.006865477; 22.9,-0.006865477; 22.95,-0.006865477; 23,-0.006472626;
+              23.05,-0.006472626; 23.1,-0.006472626; 23.15,-0.006472626; 23.2,-0.006472626;
+              23.25,-0.006472626; 23.3,-0.006472626; 23.35,-0.006472626; 23.4,-0.006472626;
+              23.45,-0.006472626; 23.5,-0.006391133; 23.55,-0.006391133; 23.6,-0.006391133;
+              23.65,-0.006391133; 23.7,-0.006391133; 23.75,-0.006391133; 23.8,-0.006391133;
+              23.85,-0.006391133; 23.9,-0.006391133; 23.95,-0.006391133; 24,-0.006392239;
+              24.05,-0.006392239; 24.1,-0.006392239; 24.15,-0.006392239; 24.2,-0.006392239;
+              24.25,-0.006392239; 24.3,-0.006392239; 24.35,-0.006392239; 24.4,-0.006392239;
+              24.45,-0.006392239; 24.5,-0.006867714; 24.55,-0.006867714; 24.6,-0.006867714;
+              24.65,-0.006867714; 24.7,-0.006867714; 24.75,-0.006867714; 24.8,-0.006867714;
+              24.85,-0.006867714; 24.9,-0.006867714; 24.95,-0.006867714; 25,-0.006823374;
+              25.05,-0.006823374; 25.1,-0.006823374; 25.15,-0.006823374; 25.2,-0.006823374;
+              25.25,-0.006823374; 25.3,-0.006823374; 25.35,-0.006823374; 25.4,-0.006823374;
+              25.45,-0.006823374; 25.5,-0.006009897; 25.55,-0.006009897; 25.6,-0.006009897;
+              25.65,-0.006009897; 25.7,-0.006009897; 25.75,-0.006009897; 25.8,-0.006009897;
+              25.85,-0.006009897; 25.9,-0.006009897; 25.95,-0.006009897; 26,-0.006333667;
+              26.05,-0.006333667; 26.1,-0.006333667; 26.15,-0.006333667; 26.2,-0.006333667;
+              26.25,-0.006333667; 26.3,-0.006333667; 26.35,-0.006333667; 26.4,-0.006333667;
+              26.45,-0.006333667; 26.5,-0.006696298; 26.55,-0.006696298; 26.6,-0.006696298;
+              26.65,-0.006696298; 26.7,-0.006696298; 26.75,-0.006696298; 26.8,-0.006696298;
+              26.85,-0.006696298; 26.9,-0.006696298; 26.95,-0.006696298; 27,-0.006943603;
+              27.05,-0.006943603; 27.1,-0.006943603; 27.15,-0.006943603; 27.2,-0.006943603;
+              27.25,-0.006943603; 27.3,-0.006943603; 27.35,-0.006943603; 27.4,-0.006943603;
+              27.45,-0.006943603; 27.5,-0.006168182; 27.55,-0.006168182; 27.6,-0.006168182;
+              27.65,-0.006168182; 27.7,-0.006168182; 27.75,-0.006168182; 27.8,-0.006168182;
+              27.85,-0.006168182; 27.9,-0.006168182; 27.95,-0.006168182; 28,-0.0063413;
+              28.05,-0.0063413; 28.1,-0.0063413; 28.15,-0.0063413; 28.2,-0.0063413;
+              28.25,-0.0063413; 28.3,-0.0063413; 28.35,-0.0063413; 28.4,-0.0063413;
+              28.45,-0.0063413; 28.5,-0.006600291; 28.55,-0.006600291; 28.6,-0.006600291;
+              28.65,-0.006600291; 28.7,-0.006600291; 28.75,-0.006600291; 28.8,-0.006600291;
+              28.85,-0.006600291; 28.9,-0.006600291; 28.95,-0.006600291; 29,-0.006216423;
+              29.05,-0.006216423; 29.1,-0.006216423; 29.15,-0.006216423; 29.2,-0.006216423;
+              29.25,-0.006216423; 29.3,-0.006216423; 29.35,-0.006216423; 29.4,-0.006216423;
+              29.45,-0.006216423; 29.5,-0.00666277; 29.55,-0.00666277; 29.6,-0.00666277;
+              29.65,-0.00666277; 29.7,-0.00666277; 29.75,-0.00666277; 29.8,-0.00666277;
+              29.85,-0.00666277; 29.9,-0.00666277; 29.95,-0.00666277],
+                            smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-118,6},{-98,26}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(table=[0,0; 0.05,
+              0; 0.1,0; 0.15,0; 0.2,0; 0.25,0; 0.3,0; 0.35,0; 0.4,0; 0.45,0;
+              0.5,-0.012603557; 0.55,-0.012603557; 0.6,-0.012603557; 0.65,-0.012603557;
+              0.7,-0.012603557; 0.75,-0.012603557; 0.8,-0.012603557; 0.85,-0.012603557;
+              0.9,-0.012603557; 0.95,-0.012603557; 1,0.033965278; 1.05,
+              0.033965278; 1.1,0.033965278; 1.15,0.033965278; 1.2,0.033965278;
+              1.25,0.033965278; 1.3,0.033965278; 1.35,0.033965278; 1.4,
+              0.033965278; 1.45,0.033965278; 1.5,-0.000966554; 1.55,-0.000966554;
+              1.6,-0.000966554; 1.65,-0.000966554; 1.7,-0.000966554; 1.75,-0.000966554;
+              1.8,-0.000966554; 1.85,-0.000966554; 1.9,-0.000966554; 1.95,-0.000966554;
+              2,0.013541623; 2.05,0.013541623; 2.1,0.013541623; 2.15,
+              0.013541623; 2.2,0.013541623; 2.25,0.013541623; 2.3,0.013541623;
+              2.35,0.013541623; 2.4,0.013541623; 2.45,0.013541623; 2.5,
+              0.028782156; 2.55,0.028782156; 2.6,0.028782156; 2.65,0.028782156;
+              2.7,0.028782156; 2.75,0.028782156; 2.8,0.028782156; 2.85,
+              0.028782156; 2.9,0.028782156; 2.95,0.028782156; 3,0.028093969;
+              3.05,0.028093969; 3.1,0.028093969; 3.15,0.028093969; 3.2,
+              0.028093969; 3.25,0.028093969; 3.3,0.028093969; 3.35,0.028093969;
+              3.4,0.028093969; 3.45,0.028093969; 3.5,0.024613429; 3.55,
+              0.024613429; 3.6,0.024613429; 3.65,0.024613429; 3.7,0.024613429;
+              3.75,0.024613429; 3.8,0.024613429; 3.85,0.024613429; 3.9,
+              0.024613429; 3.95,0.024613429; 4,0.019653565; 4.05,0.019653565;
+              4.1,0.019653565; 4.15,0.019653565; 4.2,0.019653565; 4.25,
+              0.019653565; 4.3,0.019653565; 4.35,0.019653565; 4.4,0.019653565;
+              4.45,0.019653565; 4.5,0.021738245; 4.55,0.021738245; 4.6,
+              0.021738245; 4.65,0.021738245; 4.7,0.021738245; 4.75,0.021738245;
+              4.8,0.021738245; 4.85,0.021738245; 4.9,0.021738245; 4.95,
+              0.021738245; 5,0.021408614; 5.05,0.021408614; 5.1,0.021408614;
+              5.15,0.021408614; 5.2,0.021408614; 5.25,0.021408614; 5.3,
+              0.021408614; 5.35,0.021408614; 5.4,0.021408614; 5.45,0.021408614;
+              5.5,0.020227747; 5.55,0.020227747; 5.6,0.020227747; 5.65,
+              0.020227747; 5.7,0.020227747; 5.75,0.020227747; 5.8,0.020227747;
+              5.85,0.020227747; 5.9,0.020227747; 5.95,0.020227747; 6,
+              0.022996948; 6.05,0.022996948; 6.1,0.022996948; 6.15,0.022996948;
+              6.2,0.022996948; 6.25,0.022996948; 6.3,0.022996948; 6.35,
+              0.022996948; 6.4,0.022996948; 6.45,0.022996948; 6.5,0.022693178;
+              6.55,0.022693178; 6.6,0.022693178; 6.65,0.022693178; 6.7,
+              0.022693178; 6.75,0.022693178; 6.8,0.022693178; 6.85,0.022693178;
+              6.9,0.022693178; 6.95,0.022693178; 7,0.021754221; 7.05,
+              0.021754221; 7.1,0.021754221; 7.15,0.021754221; 7.2,0.021754221;
+              7.25,0.021754221; 7.3,0.021754221; 7.35,0.021754221; 7.4,
+              0.021754221; 7.45,0.021754221; 7.5,0.021278889; 7.55,0.021278889;
+              7.6,0.021278889; 7.65,0.021278889; 7.7,0.021278889; 7.75,
+              0.021278889; 7.8,0.021278889; 7.85,0.021278889; 7.9,0.021278889;
+              7.95,0.021278889; 8,0.022011179; 8.05,0.022011179; 8.1,
+              0.022011179; 8.15,0.022011179; 8.2,0.022011179; 8.25,0.022011179;
+              8.3,0.022011179; 8.35,0.022011179; 8.4,0.022011179; 8.45,
+              0.022011179; 8.5,0.021610506; 8.55,0.021610506; 8.6,0.021610506;
+              8.65,0.021610506; 8.7,0.021610506; 8.75,0.021610506; 8.8,
+              0.021610506; 8.85,0.021610506; 8.9,0.021610506; 8.95,0.021610506;
+              9,0.021801169; 9.05,0.021801169; 9.1,0.021801169; 9.15,
+              0.021801169; 9.2,0.021801169; 9.25,0.021801169; 9.3,0.021801169;
+              9.35,0.021801169; 9.4,0.021801169; 9.45,0.021801169; 9.5,
+              0.022253704; 9.55,0.022253704; 9.6,0.022253704; 9.65,0.022253704;
+              9.7,0.022253704; 9.75,0.022253704; 9.8,0.022253704; 9.85,
+              0.022253704; 9.9,0.022253704; 9.95,0.022253704; 10,0.021275863;
+              10.05,0.021275863; 10.1,0.021275863; 10.15,0.021275863; 10.2,
+              0.021275863; 10.25,0.021275863; 10.3,0.021275863; 10.35,
+              0.021275863; 10.4,0.021275863; 10.45,0.021275863; 10.5,
+              0.023070457; 10.55,0.023070457; 10.6,0.023070457; 10.65,
+              0.023070457; 10.7,0.023070457; 10.75,0.023070457; 10.8,
+              0.023070457; 10.85,0.023070457; 10.9,0.023070457; 10.95,
+              0.023070457; 11,0.020162159; 11.05,0.020162159; 11.1,0.020162159;
+              11.15,0.020162159; 11.2,0.020162159; 11.25,0.020162159; 11.3,
+              0.020162159; 11.35,0.020162159; 11.4,0.020162159; 11.45,
+              0.020162159; 11.5,0.022338244; 11.55,0.022338244; 11.6,
+              0.022338244; 11.65,0.022338244; 11.7,0.022338244; 11.75,
+              0.022338244; 11.8,0.022338244; 11.85,0.022338244; 11.9,
+              0.022338244; 11.95,0.022338244; 12,0.021550929; 12.05,0.021550929;
+              12.1,0.021550929; 12.15,0.021550929; 12.2,0.021550929; 12.25,
+              0.021550929; 12.3,0.021550929; 12.35,0.021550929; 12.4,
+              0.021550929; 12.45,0.021550929; 12.5,0.022559802; 12.55,
+              0.022559802; 12.6,0.022559802; 12.65,0.022559802; 12.7,
+              0.022559802; 12.75,0.022559802; 12.8,0.022559802; 12.85,
+              0.022559802; 12.9,0.022559802; 12.95,0.022559802; 13,0.021248046;
+              13.05,0.021248046; 13.1,0.021248046; 13.15,0.021248046; 13.2,
+              0.021248046; 13.25,0.021248046; 13.3,0.021248046; 13.35,
+              0.021248046; 13.4,0.021248046; 13.45,0.021248046; 13.5,
+              0.020770281; 13.55,0.020770281; 13.6,0.020770281; 13.65,
+              0.020770281; 13.7,0.020770281; 13.75,0.020770281; 13.8,
+              0.020770281; 13.85,0.020770281; 13.9,0.020770281; 13.95,
+              0.020770281; 14,0.023049819; 14.05,0.023049819; 14.1,0.023049819;
+              14.15,0.023049819; 14.2,0.023049819; 14.25,0.023049819; 14.3,
+              0.023049819; 14.35,0.023049819; 14.4,0.023049819; 14.45,
+              0.023049819; 14.5,0.020688478; 14.55,0.020688478; 14.6,
+              0.020688478; 14.65,0.020688478; 14.7,0.020688478; 14.75,
+              0.020688478; 14.8,0.020688478; 14.85,0.020688478; 14.9,
+              0.020688478; 14.95,0.020688478; 15,0.022425081; 15.05,0.022425081;
+              15.1,0.022425081; 15.15,0.022425081; 15.2,0.022425081; 15.25,
+              0.022425081; 15.3,0.022425081; 15.35,0.022425081; 15.4,
+              0.022425081; 15.45,0.022425081; 15.5,0.022361785; 15.55,
+              0.022361785; 15.6,0.022361785; 15.65,0.022361785; 15.7,
+              0.022361785; 15.75,0.022361785; 15.8,0.022361785; 15.85,
+              0.022361785; 15.9,0.022361785; 15.95,0.022361785; 16,0.020075307;
+              16.05,0.020075307; 16.1,0.020075307; 16.15,0.020075307; 16.2,
+              0.020075307; 16.25,0.020075307; 16.3,0.020075307; 16.35,
+              0.020075307; 16.4,0.020075307; 16.45,0.020075307; 16.5,
+              0.022957191; 16.55,0.022957191; 16.6,0.022957191; 16.65,
+              0.022957191; 16.7,0.022957191; 16.75,0.022957191; 16.8,
+              0.022957191; 16.85,0.022957191; 16.9,0.022957191; 16.95,
+              0.022957191; 17,0.021627801; 17.05,0.021627801; 17.1,0.021627801;
+              17.15,0.021627801; 17.2,0.021627801; 17.25,0.021627801; 17.3,
+              0.021627801; 17.35,0.021627801; 17.4,0.021627801; 17.45,
+              0.021627801; 17.5,0.021160227; 17.55,0.021160227; 17.6,
+              0.021160227; 17.65,0.021160227; 17.7,0.021160227; 17.75,
+              0.021160227; 17.8,0.021160227; 17.85,0.021160227; 17.9,
+              0.021160227; 17.95,0.021160227; 18,0.024730173; 18.05,0.024730173;
+              18.1,0.024730173; 18.15,0.024730173; 18.2,0.024730173; 18.25,
+              0.024730173; 18.3,0.024730173; 18.35,0.024730173; 18.4,
+              0.024730173; 18.45,0.024730173; 18.5,0.024412563; 18.55,
+              0.024412563; 18.6,0.024412563; 18.65,0.024412563; 18.7,
+              0.024412563; 18.75,0.024412563; 18.8,0.024412563; 18.85,
+              0.024412563; 18.9,0.024412563; 18.95,0.024412563; 19,0.022523746;
+              19.05,0.022523746; 19.1,0.022523746; 19.15,0.022523746; 19.2,
+              0.022523746; 19.25,0.022523746; 19.3,0.022523746; 19.35,
+              0.022523746; 19.4,0.022523746; 19.45,0.022523746; 19.5,
+              0.022721588; 19.55,0.022721588; 19.6,0.022721588; 19.65,
+              0.022721588; 19.7,0.022721588; 19.75,0.022721588; 19.8,
+              0.022721588; 19.85,0.022721588; 19.9,0.022721588; 19.95,
+              0.022721588; 20,0.023108637; 20.05,0.023108637; 20.1,0.023108637;
+              20.15,0.023108637; 20.2,0.023108637; 20.25,0.023108637; 20.3,
+              0.023108637; 20.35,0.023108637; 20.4,0.023108637; 20.45,
+              0.023108637; 20.5,0.022146191; 20.55,0.022146191; 20.6,
+              0.022146191; 20.65,0.022146191; 20.7,0.022146191; 20.75,
+              0.022146191; 20.8,0.022146191; 20.85,0.022146191; 20.9,
+              0.022146191; 20.95,0.022146191; 21,0.022977006; 21.05,0.022977006;
+              21.1,0.022977006; 21.15,0.022977006; 21.2,0.022977006; 21.25,
+              0.022977006; 21.3,0.022977006; 21.35,0.022977006; 21.4,
+              0.022977006; 21.45,0.022977006; 21.5,0.022374987; 21.55,
+              0.022374987; 21.6,0.022374987; 21.65,0.022374987; 21.7,
+              0.022374987; 21.75,0.022374987; 21.8,0.022374987; 21.85,
+              0.022374987; 21.9,0.022374987; 21.95,0.022374987; 22,0.023745572;
+              22.05,0.023745572; 22.1,0.023745572; 22.15,0.023745572; 22.2,
+              0.023745572; 22.25,0.023745572; 22.3,0.023745572; 22.35,
+              0.023745572; 22.4,0.023745572; 22.45,0.023745572; 22.5,
+              0.023186283; 22.55,0.023186283; 22.6,0.023186283; 22.65,
+              0.023186283; 22.7,0.023186283; 22.75,0.023186283; 22.8,
+              0.023186283; 22.85,0.023186283; 22.9,0.023186283; 22.95,
+              0.023186283; 23,0.022480311; 23.05,0.022480311; 23.1,0.022480311;
+              23.15,0.022480311; 23.2,0.022480311; 23.25,0.022480311; 23.3,
+              0.022480311; 23.35,0.022480311; 23.4,0.022480311; 23.45,
+              0.022480311; 23.5,0.022783919; 23.55,0.022783919; 23.6,
+              0.022783919; 23.65,0.022783919; 23.7,0.022783919; 23.75,
+              0.022783919; 23.8,0.022783919; 23.85,0.022783919; 23.9,
+              0.022783919; 23.95,0.022783919; 24,0.022377338; 24.05,0.022377338;
+              24.1,0.022377338; 24.15,0.022377338; 24.2,0.022377338; 24.25,
+              0.022377338; 24.3,0.022377338; 24.35,0.022377338; 24.4,
+              0.022377338; 24.45,0.022377338; 24.5,0.023089534; 24.55,
+              0.023089534; 24.6,0.023089534; 24.65,0.023089534; 24.7,
+              0.023089534; 24.75,0.023089534; 24.8,0.023089534; 24.85,
+              0.023089534; 24.9,0.023089534; 24.95,0.023089534; 25,0.023319041;
+              25.05,0.023319041; 25.1,0.023319041; 25.15,0.023319041; 25.2,
+              0.023319041; 25.25,0.023319041; 25.3,0.023319041; 25.35,
+              0.023319041; 25.4,0.023319041; 25.45,0.023319041; 25.5,
+              0.022040089; 25.55,0.022040089; 25.6,0.022040089; 25.65,
+              0.022040089; 25.7,0.022040089; 25.75,0.022040089; 25.8,
+              0.022040089; 25.85,0.022040089; 25.9,0.022040089; 25.95,
+              0.022040089; 26,0.023547979; 26.05,0.023547979; 26.1,0.023547979;
+              26.15,0.023547979; 26.2,0.023547979; 26.25,0.023547979; 26.3,
+              0.023547979; 26.35,0.023547979; 26.4,0.023547979; 26.45,
+              0.023547979; 26.5,0.02338953; 26.55,0.02338953; 26.6,0.02338953;
+              26.65,0.02338953; 26.7,0.02338953; 26.75,0.02338953; 26.8,
+              0.02338953; 26.85,0.02338953; 26.9,0.02338953; 26.95,0.02338953;
+              27,0.024333157; 27.05,0.024333157; 27.1,0.024333157; 27.15,
+              0.024333157; 27.2,0.024333157; 27.25,0.024333157; 27.3,
+              0.024333157; 27.35,0.024333157; 27.4,0.024333157; 27.45,
+              0.024333157; 27.5,0.022271112; 27.55,0.022271112; 27.6,
+              0.022271112; 27.65,0.022271112; 27.7,0.022271112; 27.75,
+              0.022271112; 27.8,0.022271112; 27.85,0.022271112; 27.9,
+              0.022271112; 27.95,0.022271112; 28,0.023245648; 28.05,0.023245648;
+              28.1,0.023245648; 28.15,0.023245648; 28.2,0.023245648; 28.25,
+              0.023245648; 28.3,0.023245648; 28.35,0.023245648; 28.4,
+              0.023245648; 28.45,0.023245648; 28.5,0.023935995; 28.55,
+              0.023935995; 28.6,0.023935995; 28.65,0.023935995; 28.7,
+              0.023935995; 28.75,0.023935995; 28.8,0.023935995; 28.85,
+              0.023935995; 28.9,0.023935995; 28.95,0.023935995; 29,0.022833077;
+              29.05,0.022833077; 29.1,0.022833077; 29.15,0.022833077; 29.2,
+              0.022833077; 29.25,0.022833077; 29.3,0.022833077; 29.35,
+              0.022833077; 29.4,0.022833077; 29.45,0.022833077; 29.5,
+              0.024282357; 29.55,0.024282357; 29.6,0.024282357; 29.65,
+              0.024282357; 29.7,0.024282357; 29.75,0.024282357; 29.8,
+              0.024282357; 29.85,0.024282357; 29.9,0.024282357; 29.95,
+              0.024282357],    smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-118,-20},{-98,0}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable2(table=[0,0; 0.05,
+              0; 0.1,0; 0.15,0; 0.2,0; 0.25,0; 0.3,0; 0.35,0; 0.4,0; 0.45,0;
+              0.5,0.000428053; 0.55,0.000428053; 0.6,0.000428053; 0.65,
+              0.000428053; 0.7,0.000428053; 0.75,0.000428053; 0.8,0.000428053;
+              0.85,0.000428053; 0.9,0.000428053; 0.95,0.000428053; 1,
+              0.005014011; 1.05,0.005014011; 1.1,0.005014011; 1.15,0.005014011;
+              1.2,0.005014011; 1.25,0.005014011; 1.3,0.005014011; 1.35,
+              0.005014011; 1.4,0.005014011; 1.45,0.005014011; 1.5,0.004269204;
+              1.55,0.004269204; 1.6,0.004269204; 1.65,0.004269204; 1.7,
+              0.004269204; 1.75,0.004269204; 1.8,0.004269204; 1.85,0.004269204;
+              1.9,0.004269204; 1.95,0.004269204; 2,0.004336122; 2.05,
+              0.004336122; 2.1,0.004336122; 2.15,0.004336122; 2.2,0.004336122;
+              2.25,0.004336122; 2.3,0.004336122; 2.35,0.004336122; 2.4,
+              0.004336122; 2.45,0.004336122; 2.5,0.004350494; 2.55,0.004350494;
+              2.6,0.004350494; 2.65,0.004350494; 2.7,0.004350494; 2.75,
+              0.004350494; 2.8,0.004350494; 2.85,0.004350494; 2.9,0.004350494;
+              2.95,0.004350494; 3,0.004263978; 3.05,0.004263978; 3.1,
+              0.004263978; 3.15,0.004263978; 3.2,0.004263978; 3.25,0.004263978;
+              3.3,0.004263978; 3.35,0.004263978; 3.4,0.004263978; 3.45,
+              0.004263978; 3.5,0.004120982; 3.55,0.004120982; 3.6,0.004120982;
+              3.65,0.004120982; 3.7,0.004120982; 3.75,0.004120982; 3.8,
+              0.004120982; 3.85,0.004120982; 3.9,0.004120982; 3.95,0.004120982;
+              4,0.004251013; 4.05,0.004251013; 4.1,0.004251013; 4.15,
+              0.004251013; 4.2,0.004251013; 4.25,0.004251013; 4.3,0.004251013;
+              4.35,0.004251013; 4.4,0.004251013; 4.45,0.004251013; 4.5,
+              0.004324927; 4.55,0.004324927; 4.6,0.004324927; 4.65,0.004324927;
+              4.7,0.004324927; 4.75,0.004324927; 4.8,0.004324927; 4.85,
+              0.004324927; 4.9,0.004324927; 4.95,0.004324927; 5,0.004242477;
+              5.05,0.004242477; 5.1,0.004242477; 5.15,0.004242477; 5.2,
+              0.004242477; 5.25,0.004242477; 5.3,0.004242477; 5.35,0.004242477;
+              5.4,0.004242477; 5.45,0.004242477; 5.5,0.004313862; 5.55,
+              0.004313862; 5.6,0.004313862; 5.65,0.004313862; 5.7,0.004313862;
+              5.75,0.004313862; 5.8,0.004313862; 5.85,0.004313862; 5.9,
+              0.004313862; 5.95,0.004313862; 6,0.004369775; 6.05,0.004369775;
+              6.1,0.004369775; 6.15,0.004369775; 6.2,0.004369775; 6.25,
+              0.004369775; 6.3,0.004369775; 6.35,0.004369775; 6.4,0.004369775;
+              6.45,0.004369775; 6.5,0.00434518; 6.55,0.00434518; 6.6,0.00434518;
+              6.65,0.00434518; 6.7,0.00434518; 6.75,0.00434518; 6.8,0.00434518;
+              6.85,0.00434518; 6.9,0.00434518; 6.95,0.00434518; 7,0.004311876;
+              7.05,0.004311876; 7.1,0.004311876; 7.15,0.004311876; 7.2,
+              0.004311876; 7.25,0.004311876; 7.3,0.004311876; 7.35,0.004311876;
+              7.4,0.004311876; 7.45,0.004311876; 7.5,0.004329771; 7.55,
+              0.004329771; 7.6,0.004329771; 7.65,0.004329771; 7.7,0.004329771;
+              7.75,0.004329771; 7.8,0.004329771; 7.85,0.004329771; 7.9,
+              0.004329771; 7.95,0.004329771; 8,0.004310735; 8.05,0.004310735;
+              8.1,0.004310735; 8.15,0.004310735; 8.2,0.004310735; 8.25,
+              0.004310735; 8.3,0.004310735; 8.35,0.004310735; 8.4,0.004310735;
+              8.45,0.004310735; 8.5,0.004287819; 8.55,0.004287819; 8.6,
+              0.004287819; 8.65,0.004287819; 8.7,0.004287819; 8.75,0.004287819;
+              8.8,0.004287819; 8.85,0.004287819; 8.9,0.004287819; 8.95,
+              0.004287819; 9,0.004300494; 9.05,0.004300494; 9.1,0.004300494;
+              9.15,0.004300494; 9.2,0.004300494; 9.25,0.004300494; 9.3,
+              0.004300494; 9.35,0.004300494; 9.4,0.004300494; 9.45,0.004300494;
+              9.5,0.004320474; 9.55,0.004320474; 9.6,0.004320474; 9.65,
+              0.004320474; 9.7,0.004320474; 9.75,0.004320474; 9.8,0.004320474;
+              9.85,0.004320474; 9.9,0.004320474; 9.95,0.004320474; 10,
+              0.004409649; 10.05,0.004409649; 10.1,0.004409649; 10.15,
+              0.004409649; 10.2,0.004409649; 10.25,0.004409649; 10.3,
+              0.004409649; 10.35,0.004409649; 10.4,0.004409649; 10.45,
+              0.004409649; 10.5,0.004303296; 10.55,0.004303296; 10.6,
+              0.004303296; 10.65,0.004303296; 10.7,0.004303296; 10.75,
+              0.004303296; 10.8,0.004303296; 10.85,0.004303296; 10.9,
+              0.004303296; 10.95,0.004303296; 11,0.004296905; 11.05,0.004296905;
+              11.1,0.004296905; 11.15,0.004296905; 11.2,0.004296905; 11.25,
+              0.004296905; 11.3,0.004296905; 11.35,0.004296905; 11.4,
+              0.004296905; 11.45,0.004296905; 11.5,0.004305678; 11.55,
+              0.004305678; 11.6,0.004305678; 11.65,0.004305678; 11.7,
+              0.004305678; 11.75,0.004305678; 11.8,0.004305678; 11.85,
+              0.004305678; 11.9,0.004305678; 11.95,0.004305678; 12,0.004371727;
+              12.05,0.004371727; 12.1,0.004371727; 12.15,0.004371727; 12.2,
+              0.004371727; 12.25,0.004371727; 12.3,0.004371727; 12.35,
+              0.004371727; 12.4,0.004371727; 12.45,0.004371727; 12.5,
+              0.004345934; 12.55,0.004345934; 12.6,0.004345934; 12.65,
+              0.004345934; 12.7,0.004345934; 12.75,0.004345934; 12.8,
+              0.004345934; 12.85,0.004345934; 12.9,0.004345934; 12.95,
+              0.004345934; 13,0.004303866; 13.05,0.004303866; 13.1,0.004303866;
+              13.15,0.004303866; 13.2,0.004303866; 13.25,0.004303866; 13.3,
+              0.004303866; 13.35,0.004303866; 13.4,0.004303866; 13.45,
+              0.004303866; 13.5,0.004364422; 13.55,0.004364422; 13.6,
+              0.004364422; 13.65,0.004364422; 13.7,0.004364422; 13.75,
+              0.004364422; 13.8,0.004364422; 13.85,0.004364422; 13.9,
+              0.004364422; 13.95,0.004364422; 14,0.004283816; 14.05,0.004283816;
+              14.1,0.004283816; 14.15,0.004283816; 14.2,0.004283816; 14.25,
+              0.004283816; 14.3,0.004283816; 14.35,0.004283816; 14.4,
+              0.004283816; 14.45,0.004283816; 14.5,0.004316218; 14.55,
+              0.004316218; 14.6,0.004316218; 14.65,0.004316218; 14.7,
+              0.004316218; 14.75,0.004316218; 14.8,0.004316218; 14.85,
+              0.004316218; 14.9,0.004316218; 14.95,0.004316218; 15,0.004354097;
+              15.05,0.004354097; 15.1,0.004354097; 15.15,0.004354097; 15.2,
+              0.004354097; 15.25,0.004354097; 15.3,0.004354097; 15.35,
+              0.004354097; 15.4,0.004354097; 15.45,0.004354097; 15.5,
+              0.004314715; 15.55,0.004314715; 15.6,0.004314715; 15.65,
+              0.004314715; 15.7,0.004314715; 15.75,0.004314715; 15.8,
+              0.004314715; 15.85,0.004314715; 15.9,0.004314715; 15.95,
+              0.004314715; 16,0.004430038; 16.05,0.004430038; 16.1,0.004430038;
+              16.15,0.004430038; 16.2,0.004430038; 16.25,0.004430038; 16.3,
+              0.004430038; 16.35,0.004430038; 16.4,0.004430038; 16.45,
+              0.004430038; 16.5,0.004343889; 16.55,0.004343889; 16.6,
+              0.004343889; 16.65,0.004343889; 16.7,0.004343889; 16.75,
+              0.004343889; 16.8,0.004343889; 16.85,0.004343889; 16.9,
+              0.004343889; 16.95,0.004343889; 17,0.004156364; 17.05,0.004156364;
+              17.1,0.004156364; 17.15,0.004156364; 17.2,0.004156364; 17.25,
+              0.004156364; 17.3,0.004156364; 17.35,0.004156364; 17.4,
+              0.004156364; 17.45,0.004156364; 17.5,0.00424241; 17.55,0.00424241;
+              17.6,0.00424241; 17.65,0.00424241; 17.7,0.00424241; 17.75,
+              0.00424241; 17.8,0.00424241; 17.85,0.00424241; 17.9,0.00424241;
+              17.95,0.00424241; 18,0.0043276; 18.05,0.0043276; 18.1,0.0043276;
+              18.15,0.0043276; 18.2,0.0043276; 18.25,0.0043276; 18.3,0.0043276;
+              18.35,0.0043276; 18.4,0.0043276; 18.45,0.0043276; 18.5,
+              0.004287859; 18.55,0.004287859; 18.6,0.004287859; 18.65,
+              0.004287859; 18.7,0.004287859; 18.75,0.004287859; 18.8,
+              0.004287859; 18.85,0.004287859; 18.9,0.004287859; 18.95,
+              0.004287859; 19,0.004300262; 19.05,0.004300262; 19.1,0.004300262;
+              19.15,0.004300262; 19.2,0.004300262; 19.25,0.004300262; 19.3,
+              0.004300262; 19.35,0.004300262; 19.4,0.004300262; 19.45,
+              0.004300262; 19.5,0.004356305; 19.55,0.004356305; 19.6,
+              0.004356305; 19.65,0.004356305; 19.7,0.004356305; 19.75,
+              0.004356305; 19.8,0.004356305; 19.85,0.004356305; 19.9,
+              0.004356305; 19.95,0.004356305; 20,0.004335398; 20.05,0.004335398;
+              20.1,0.004335398; 20.15,0.004335398; 20.2,0.004335398; 20.25,
+              0.004335398; 20.3,0.004335398; 20.35,0.004335398; 20.4,
+              0.004335398; 20.45,0.004335398; 20.5,0.004302061; 20.55,
+              0.004302061; 20.6,0.004302061; 20.65,0.004302061; 20.7,
+              0.004302061; 20.75,0.004302061; 20.8,0.004302061; 20.85,
+              0.004302061; 20.9,0.004302061; 20.95,0.004302061; 21,0.004239784;
+              21.05,0.004239784; 21.1,0.004239784; 21.15,0.004239784; 21.2,
+              0.004239784; 21.25,0.004239784; 21.3,0.004239784; 21.35,
+              0.004239784; 21.4,0.004239784; 21.45,0.004239784; 21.5,
+              0.004294108; 21.55,0.004294108; 21.6,0.004294108; 21.65,
+              0.004294108; 21.7,0.004294108; 21.75,0.004294108; 21.8,
+              0.004294108; 21.85,0.004294108; 21.9,0.004294108; 21.95,
+              0.004294108; 22,0.004338792; 22.05,0.004338792; 22.1,0.004338792;
+              22.15,0.004338792; 22.2,0.004338792; 22.25,0.004338792; 22.3,
+              0.004338792; 22.35,0.004338792; 22.4,0.004338792; 22.45,
+              0.004338792; 22.5,0.004322469; 22.55,0.004322469; 22.6,
+              0.004322469; 22.65,0.004322469; 22.7,0.004322469; 22.75,
+              0.004322469; 22.8,0.004322469; 22.85,0.004322469; 22.9,
+              0.004322469; 22.95,0.004322469; 23,0.004299018; 23.05,0.004299018;
+              23.1,0.004299018; 23.15,0.004299018; 23.2,0.004299018; 23.25,
+              0.004299018; 23.3,0.004299018; 23.35,0.004299018; 23.4,
+              0.004299018; 23.45,0.004299018; 23.5,0.004275143; 23.55,
+              0.004275143; 23.6,0.004275143; 23.65,0.004275143; 23.7,
+              0.004275143; 23.75,0.004275143; 23.8,0.004275143; 23.85,
+              0.004275143; 23.9,0.004275143; 23.95,0.004275143; 24,0.004330886;
+              24.05,0.004330886; 24.1,0.004330886; 24.15,0.004330886; 24.2,
+              0.004330886; 24.25,0.004330886; 24.3,0.004330886; 24.35,
+              0.004330886; 24.4,0.004330886; 24.45,0.004330886; 24.5,
+              0.004362594; 24.55,0.004362594; 24.6,0.004362594; 24.65,
+              0.004362594; 24.7,0.004362594; 24.75,0.004362594; 24.8,
+              0.004362594; 24.85,0.004362594; 24.9,0.004362594; 24.95,
+              0.004362594; 25,0.004263688; 25.05,0.004263688; 25.1,0.004263688;
+              25.15,0.004263688; 25.2,0.004263688; 25.25,0.004263688; 25.3,
+              0.004263688; 25.35,0.004263688; 25.4,0.004263688; 25.45,
+              0.004263688; 25.5,0.004241662; 25.55,0.004241662; 25.6,
+              0.004241662; 25.65,0.004241662; 25.7,0.004241662; 25.75,
+              0.004241662; 25.8,0.004241662; 25.85,0.004241662; 25.9,
+              0.004241662; 25.95,0.004241662; 26,0.004272785; 26.05,0.004272785;
+              26.1,0.004272785; 26.15,0.004272785; 26.2,0.004272785; 26.25,
+              0.004272785; 26.3,0.004272785; 26.35,0.004272785; 26.4,
+              0.004272785; 26.45,0.004272785; 26.5,0.004348279; 26.55,
+              0.004348279; 26.6,0.004348279; 26.65,0.004348279; 26.7,
+              0.004348279; 26.75,0.004348279; 26.8,0.004348279; 26.85,
+              0.004348279; 26.9,0.004348279; 26.95,0.004348279; 27,0.004292812;
+              27.05,0.004292812; 27.1,0.004292812; 27.15,0.004292812; 27.2,
+              0.004292812; 27.25,0.004292812; 27.3,0.004292812; 27.35,
+              0.004292812; 27.4,0.004292812; 27.45,0.004292812; 27.5,
+              0.004285857; 27.55,0.004285857; 27.6,0.004285857; 27.65,
+              0.004285857; 27.7,0.004285857; 27.75,0.004285857; 27.8,
+              0.004285857; 27.85,0.004285857; 27.9,0.004285857; 27.95,
+              0.004285857; 28,0.004302115; 28.05,0.004302115; 28.1,0.004302115;
+              28.15,0.004302115; 28.2,0.004302115; 28.25,0.004302115; 28.3,
+              0.004302115; 28.35,0.004302115; 28.4,0.004302115; 28.45,
+              0.004302115; 28.5,0.004254055; 28.55,0.004254055; 28.6,
+              0.004254055; 28.65,0.004254055; 28.7,0.004254055; 28.75,
+              0.004254055; 28.8,0.004254055; 28.85,0.004254055; 28.9,
+              0.004254055; 28.95,0.004254055; 29,0.004296627; 29.05,0.004296627;
+              29.1,0.004296627; 29.15,0.004296627; 29.2,0.004296627; 29.25,
+              0.004296627; 29.3,0.004296627; 29.35,0.004296627; 29.4,
+              0.004296627; 29.45,0.004296627; 29.5,0.004295999; 29.55,
+              0.004295999; 29.6,0.004295999; 29.65,0.004295999; 29.7,
+              0.004295999; 29.75,0.004295999; 29.8,0.004295999; 29.85,
+              0.004295999; 29.9,0.004295999; 29.95,0.004295999],
+                                   smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-118,-48},{-98,-28}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable3(table=[0,0; 0.05,
+              0; 0.1,0; 0.15,0; 0.2,0; 0.25,0; 0.3,0; 0.35,0; 0.4,0; 0.45,0;
+              0.5,0.05779623; 0.55,0.05779623; 0.6,0.05779623; 0.65,0.05779623;
+              0.7,0.05779623; 0.75,0.05779623; 0.8,0.05779623; 0.85,0.05779623;
+              0.9,0.05779623; 0.95,0.05779623; 1,0.025402062; 1.05,0.025402062;
+              1.1,0.025402062; 1.15,0.025402062; 1.2,0.025402062; 1.25,
+              0.025402062; 1.3,0.025402062; 1.35,0.025402062; 1.4,0.025402062;
+              1.45,0.025402062; 1.5,0.0239384; 1.55,0.0239384; 1.6,0.0239384;
+              1.65,0.0239384; 1.7,0.0239384; 1.75,0.0239384; 1.8,0.0239384;
+              1.85,0.0239384; 1.9,0.0239384; 1.95,0.0239384; 2,0.031033265;
+              2.05,0.031033265; 2.1,0.031033265; 2.15,0.031033265; 2.2,
+              0.031033265; 2.25,0.031033265; 2.3,0.031033265; 2.35,0.031033265;
+              2.4,0.031033265; 2.45,0.031033265; 2.5,0.032111688; 2.55,
+              0.032111688; 2.6,0.032111688; 2.65,0.032111688; 2.7,0.032111688;
+              2.75,0.032111688; 2.8,0.032111688; 2.85,0.032111688; 2.9,
+              0.032111688; 2.95,0.032111688; 3,0.031846812; 3.05,0.031846812;
+              3.1,0.031846812; 3.15,0.031846812; 3.2,0.031846812; 3.25,
+              0.031846812; 3.3,0.031846812; 3.35,0.031846812; 3.4,0.031846812;
+              3.45,0.031846812; 3.5,0.029404518; 3.55,0.029404518; 3.6,
+              0.029404518; 3.65,0.029404518; 3.7,0.029404518; 3.75,0.029404518;
+              3.8,0.029404518; 3.85,0.029404518; 3.9,0.029404518; 3.95,
+              0.029404518; 4,0.032924225; 4.05,0.032924225; 4.1,0.032924225;
+              4.15,0.032924225; 4.2,0.032924225; 4.25,0.032924225; 4.3,
+              0.032924225; 4.35,0.032924225; 4.4,0.032924225; 4.45,0.032924225;
+              4.5,0.031795159; 4.55,0.031795159; 4.6,0.031795159; 4.65,
+              0.031795159; 4.7,0.031795159; 4.75,0.031795159; 4.8,0.031795159;
+              4.85,0.031795159; 4.9,0.031795159; 4.95,0.031795159; 5,
+              0.029489062; 5.05,0.029489062; 5.1,0.029489062; 5.15,0.029489062;
+              5.2,0.029489062; 5.25,0.029489062; 5.3,0.029489062; 5.35,
+              0.029489062; 5.4,0.029489062; 5.45,0.029489062; 5.5,0.03202839;
+              5.55,0.03202839; 5.6,0.03202839; 5.65,0.03202839; 5.7,0.03202839;
+              5.75,0.03202839; 5.8,0.03202839; 5.85,0.03202839; 5.9,0.03202839;
+              5.95,0.03202839; 6,0.03217054; 6.05,0.03217054; 6.1,0.03217054;
+              6.15,0.03217054; 6.2,0.03217054; 6.25,0.03217054; 6.3,0.03217054;
+              6.35,0.03217054; 6.4,0.03217054; 6.45,0.03217054; 6.5,0.03153408;
+              6.55,0.03153408; 6.6,0.03153408; 6.65,0.03153408; 6.7,0.03153408;
+              6.75,0.03153408; 6.8,0.03153408; 6.85,0.03153408; 6.9,0.03153408;
+              6.95,0.03153408; 7,0.031230675; 7.05,0.031230675; 7.1,0.031230675;
+              7.15,0.031230675; 7.2,0.031230675; 7.25,0.031230675; 7.3,
+              0.031230675; 7.35,0.031230675; 7.4,0.031230675; 7.45,0.031230675;
+              7.5,0.031876197; 7.55,0.031876197; 7.6,0.031876197; 7.65,
+              0.031876197; 7.7,0.031876197; 7.75,0.031876197; 7.8,0.031876197;
+              7.85,0.031876197; 7.9,0.031876197; 7.95,0.031876197; 8,
+              0.031099273; 8.05,0.031099273; 8.1,0.031099273; 8.15,0.031099273;
+              8.2,0.031099273; 8.25,0.031099273; 8.3,0.031099273; 8.35,
+              0.031099273; 8.4,0.031099273; 8.45,0.031099273; 8.5,0.030914552;
+              8.55,0.030914552; 8.6,0.030914552; 8.65,0.030914552; 8.7,
+              0.030914552; 8.75,0.030914552; 8.8,0.030914552; 8.85,0.030914552;
+              8.9,0.030914552; 8.95,0.030914552; 9,0.031311402; 9.05,
+              0.031311402; 9.1,0.031311402; 9.15,0.031311402; 9.2,0.031311402;
+              9.25,0.031311402; 9.3,0.031311402; 9.35,0.031311402; 9.4,
+              0.031311402; 9.45,0.031311402; 9.5,0.03153336; 9.55,0.03153336;
+              9.6,0.03153336; 9.65,0.03153336; 9.7,0.03153336; 9.75,0.03153336;
+              9.8,0.03153336; 9.85,0.03153336; 9.9,0.03153336; 9.95,0.03153336;
+              10,0.033336482; 10.05,0.033336482; 10.1,0.033336482; 10.15,
+              0.033336482; 10.2,0.033336482; 10.25,0.033336482; 10.3,
+              0.033336482; 10.35,0.033336482; 10.4,0.033336482; 10.45,
+              0.033336482; 10.5,0.029900293; 10.55,0.029900293; 10.6,
+              0.029900293; 10.65,0.029900293; 10.7,0.029900293; 10.75,
+              0.029900293; 10.8,0.029900293; 10.85,0.029900293; 10.9,
+              0.029900293; 10.95,0.029900293; 11,0.03143806; 11.05,0.03143806;
+              11.1,0.03143806; 11.15,0.03143806; 11.2,0.03143806; 11.25,
+              0.03143806; 11.3,0.03143806; 11.35,0.03143806; 11.4,0.03143806;
+              11.45,0.03143806; 11.5,0.031116016; 11.55,0.031116016; 11.6,
+              0.031116016; 11.65,0.031116016; 11.7,0.031116016; 11.75,
+              0.031116016; 11.8,0.031116016; 11.85,0.031116016; 11.9,
+              0.031116016; 11.95,0.031116016; 12,0.032699593; 12.05,0.032699593;
+              12.1,0.032699593; 12.15,0.032699593; 12.2,0.032699593; 12.25,
+              0.032699593; 12.3,0.032699593; 12.35,0.032699593; 12.4,
+              0.032699593; 12.45,0.032699593; 12.5,0.031265672; 12.55,
+              0.031265672; 12.6,0.031265672; 12.65,0.031265672; 12.7,
+              0.031265672; 12.75,0.031265672; 12.8,0.031265672; 12.85,
+              0.031265672; 12.9,0.031265672; 12.95,0.031265672; 13,0.030961455;
+              13.05,0.030961455; 13.1,0.030961455; 13.15,0.030961455; 13.2,
+              0.030961455; 13.25,0.030961455; 13.3,0.030961455; 13.35,
+              0.030961455; 13.4,0.030961455; 13.45,0.030961455; 13.5,
+              0.032566303; 13.55,0.032566303; 13.6,0.032566303; 13.65,
+              0.032566303; 13.7,0.032566303; 13.75,0.032566303; 13.8,
+              0.032566303; 13.85,0.032566303; 13.9,0.032566303; 13.95,
+              0.032566303; 14,0.029929337; 14.05,0.029929337; 14.1,0.029929337;
+              14.15,0.029929337; 14.2,0.029929337; 14.25,0.029929337; 14.3,
+              0.029929337; 14.35,0.029929337; 14.4,0.029929337; 14.45,
+              0.029929337; 14.5,0.031939957; 14.55,0.031939957; 14.6,
+              0.031939957; 14.65,0.031939957; 14.7,0.031939957; 14.75,
+              0.031939957; 14.8,0.031939957; 14.85,0.031939957; 14.9,
+              0.031939957; 14.95,0.031939957; 15,0.03192042; 15.05,0.03192042;
+              15.1,0.03192042; 15.15,0.03192042; 15.2,0.03192042; 15.25,
+              0.03192042; 15.3,0.03192042; 15.35,0.03192042; 15.4,0.03192042;
+              15.45,0.03192042; 15.5,0.030911269; 15.55,0.030911269; 15.6,
+              0.030911269; 15.65,0.030911269; 15.7,0.030911269; 15.75,
+              0.030911269; 15.8,0.030911269; 15.85,0.030911269; 15.9,
+              0.030911269; 15.95,0.030911269; 16,0.033964928; 16.05,0.033964928;
+              16.1,0.033964928; 16.15,0.033964928; 16.2,0.033964928; 16.25,
+              0.033964928; 16.3,0.033964928; 16.35,0.033964928; 16.4,
+              0.033964928; 16.45,0.033964928; 16.5,0.030407066; 16.55,
+              0.030407066; 16.6,0.030407066; 16.65,0.030407066; 16.7,
+              0.030407066; 16.75,0.030407066; 16.8,0.030407066; 16.85,
+              0.030407066; 16.9,0.030407066; 16.95,0.030407066; 17,0.027939896;
+              17.05,0.027939896; 17.1,0.027939896; 17.15,0.027939896; 17.2,
+              0.027939896; 17.25,0.027939896; 17.3,0.027939896; 17.35,
+              0.027939896; 17.4,0.027939896; 17.45,0.027939896; 17.5,
+              0.031475677; 17.55,0.031475677; 17.6,0.031475677; 17.65,
+              0.031475677; 17.7,0.031475677; 17.75,0.031475677; 17.8,
+              0.031475677; 17.85,0.031475677; 17.9,0.031475677; 17.95,
+              0.031475677; 18,0.031780131; 18.05,0.031780131; 18.1,0.031780131;
+              18.15,0.031780131; 18.2,0.031780131; 18.25,0.031780131; 18.3,
+              0.031780131; 18.35,0.031780131; 18.4,0.031780131; 18.45,
+              0.031780131; 18.5,0.030438885; 18.55,0.030438885; 18.6,
+              0.030438885; 18.65,0.030438885; 18.7,0.030438885; 18.75,
+              0.030438885; 18.8,0.030438885; 18.85,0.030438885; 18.9,
+              0.030438885; 18.95,0.030438885; 19,0.031300357; 19.05,0.031300357;
+              19.1,0.031300357; 19.15,0.031300357; 19.2,0.031300357; 19.25,
+              0.031300357; 19.3,0.031300357; 19.35,0.031300357; 19.4,
+              0.031300357; 19.45,0.031300357; 19.5,0.032127842; 19.55,
+              0.032127842; 19.6,0.032127842; 19.65,0.032127842; 19.7,
+              0.032127842; 19.75,0.032127842; 19.8,0.032127842; 19.85,
+              0.032127842; 19.9,0.032127842; 19.95,0.032127842; 20,0.031121561;
+              20.05,0.031121561; 20.1,0.031121561; 20.15,0.031121561; 20.2,
+              0.031121561; 20.25,0.031121561; 20.3,0.031121561; 20.35,
+              0.031121561; 20.4,0.031121561; 20.45,0.031121561; 20.5,
+              0.030859901; 20.55,0.030859901; 20.6,0.030859901; 20.65,
+              0.030859901; 20.7,0.030859901; 20.75,0.030859901; 20.8,
+              0.030859901; 20.85,0.030859901; 20.9,0.030859901; 20.95,
+              0.030859901; 21,0.029727631; 21.05,0.029727631; 21.1,0.029727631;
+              21.15,0.029727631; 21.2,0.029727631; 21.25,0.029727631; 21.3,
+              0.029727631; 21.35,0.029727631; 21.4,0.029727631; 21.45,
+              0.029727631; 21.5,0.031614634; 21.55,0.031614634; 21.6,
+              0.031614634; 21.65,0.031614634; 21.7,0.031614634; 21.75,
+              0.031614634; 21.8,0.031614634; 21.85,0.031614634; 21.9,
+              0.031614634; 21.95,0.031614634; 22,0.031705376; 22.05,0.031705376;
+              22.1,0.031705376; 22.15,0.031705376; 22.2,0.031705376; 22.25,
+              0.031705376; 22.3,0.031705376; 22.35,0.031705376; 22.4,
+              0.031705376; 22.45,0.031705376; 22.5,0.031116083; 22.55,
+              0.031116083; 22.6,0.031116083; 22.65,0.031116083; 22.7,
+              0.031116083; 22.75,0.031116083; 22.8,0.031116083; 22.85,
+              0.031116083; 22.9,0.031116083; 22.95,0.031116083; 23,0.030852795;
+              23.05,0.030852795; 23.1,0.030852795; 23.15,0.030852795; 23.2,
+              0.030852795; 23.25,0.030852795; 23.3,0.030852795; 23.35,
+              0.030852795; 23.4,0.030852795; 23.45,0.030852795; 23.5,
+              0.030506034; 23.55,0.030506034; 23.6,0.030506034; 23.65,
+              0.030506034; 23.7,0.030506034; 23.75,0.030506034; 23.8,
+              0.030506034; 23.85,0.030506034; 23.9,0.030506034; 23.95,
+              0.030506034; 24,0.031976448; 24.05,0.031976448; 24.1,0.031976448;
+              24.15,0.031976448; 24.2,0.031976448; 24.25,0.031976448; 24.3,
+              0.031976448; 24.35,0.031976448; 24.4,0.031976448; 24.45,
+              0.031976448; 24.5,0.031920149; 24.55,0.031920149; 24.6,
+              0.031920149; 24.65,0.031920149; 24.7,0.031920149; 24.75,
+              0.031920149; 24.8,0.031920149; 24.85,0.031920149; 24.9,
+              0.031920149; 24.95,0.031920149; 25,0.029613529; 25.05,0.029613529;
+              25.1,0.029613529; 25.15,0.029613529; 25.2,0.029613529; 25.25,
+              0.029613529; 25.3,0.029613529; 25.35,0.029613529; 25.4,
+              0.029613529; 25.45,0.029613529; 25.5,0.030363768; 25.55,
+              0.030363768; 25.6,0.030363768; 25.65,0.030363768; 25.7,
+              0.030363768; 25.75,0.030363768; 25.8,0.030363768; 25.85,
+              0.030363768; 25.9,0.030363768; 25.95,0.030363768; 26,0.030875033;
+              26.05,0.030875033; 26.1,0.030875033; 26.15,0.030875033; 26.2,
+              0.030875033; 26.25,0.030875033; 26.3,0.030875033; 26.35,
+              0.030875033; 26.4,0.030875033; 26.45,0.030875033; 26.5,
+              0.032251441; 26.55,0.032251441; 26.6,0.032251441; 26.65,
+              0.032251441; 26.7,0.032251441; 26.75,0.032251441; 26.8,
+              0.032251441; 26.85,0.032251441; 26.9,0.032251441; 26.95,
+              0.032251441; 27,0.030175352; 27.05,0.030175352; 27.1,0.030175352;
+              27.15,0.030175352; 27.2,0.030175352; 27.25,0.030175352; 27.3,
+              0.030175352; 27.35,0.030175352; 27.4,0.030175352; 27.45,
+              0.030175352; 27.5,0.030981009; 27.55,0.030981009; 27.6,
+              0.030981009; 27.65,0.030981009; 27.7,0.030981009; 27.75,
+              0.030981009; 27.8,0.030981009; 27.85,0.030981009; 27.9,
+              0.030981009; 27.95,0.030981009; 28,0.031060598; 28.05,0.031060598;
+              28.1,0.031060598; 28.15,0.031060598; 28.2,0.031060598; 28.25,
+              0.031060598; 28.3,0.031060598; 28.35,0.031060598; 28.4,
+              0.031060598; 28.45,0.031060598; 28.5,0.029918533; 28.55,
+              0.029918533; 28.6,0.029918533; 28.65,0.029918533; 28.7,
+              0.029918533; 28.75,0.029918533; 28.8,0.029918533; 28.85,
+              0.029918533; 28.9,0.029918533; 28.95,0.029918533; 29,0.031481994;
+              29.05,0.031481994; 29.1,0.031481994; 29.15,0.031481994; 29.2,
+              0.031481994; 29.25,0.031481994; 29.3,0.031481994; 29.35,
+              0.031481994; 29.4,0.031481994; 29.45,0.031481994; 29.5,
+              0.030717462; 29.55,0.030717462; 29.6,0.030717462; 29.65,
+              0.030717462; 29.7,0.030717462; 29.75,0.030717462; 29.8,
+              0.030717462; 29.85,0.030717462; 29.9,0.030717462; 29.95,
+              0.030717462],        smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-118,-94},{-98,-74}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable4(table=[0,0; 0.05,
+              0; 0.1,0; 0.15,0; 0.2,0; 0.25,0; 0.3,0; 0.35,0; 0.4,0; 0.45,0;
+              0.5,0.016433602; 0.55,0.016433602; 0.6,0.016433602; 0.65,
+              0.016433602; 0.7,0.016433602; 0.75,0.016433602; 0.8,0.016433602;
+              0.85,0.016433602; 0.9,0.016433602; 0.95,0.016433602; 1,
+              0.001180323; 1.05,0.001180323; 1.1,0.001180323; 1.15,0.001180323;
+              1.2,0.001180323; 1.25,0.001180323; 1.3,0.001180323; 1.35,
+              0.001180323; 1.4,0.001180323; 1.45,0.001180323; 1.5,0.001148433;
+              1.55,0.001148433; 1.6,0.001148433; 1.65,0.001148433; 1.7,
+              0.001148433; 1.75,0.001148433; 1.8,0.001148433; 1.85,0.001148433;
+              1.9,0.001148433; 1.95,0.001148433; 2,0.001749612; 2.05,
+              0.001749612; 2.1,0.001749612; 2.15,0.001749612; 2.2,0.001749612;
+              2.25,0.001749612; 2.3,0.001749612; 2.35,0.001749612; 2.4,
+              0.001749612; 2.45,0.001749612; 2.5,0.001760823; 2.55,0.001760823;
+              2.6,0.001760823; 2.65,0.001760823; 2.7,0.001760823; 2.75,
+              0.001760823; 2.8,0.001760823; 2.85,0.001760823; 2.9,0.001760823;
+              2.95,0.001760823; 3,0.002452975; 3.05,0.002452975; 3.1,
+              0.002452975; 3.15,0.002452975; 3.2,0.002452975; 3.25,0.002452975;
+              3.3,0.002452975; 3.35,0.002452975; 3.4,0.002452975; 3.45,
+              0.002452975; 3.5,0.002726732; 3.55,0.002726732; 3.6,0.002726732;
+              3.65,0.002726732; 3.7,0.002726732; 3.75,0.002726732; 3.8,
+              0.002726732; 3.85,0.002726732; 3.9,0.002726732; 3.95,0.002726732;
+              4,0.003852596; 4.05,0.003852596; 4.1,0.003852596; 4.15,
+              0.003852596; 4.2,0.003852596; 4.25,0.003852596; 4.3,0.003852596;
+              4.35,0.003852596; 4.4,0.003852596; 4.45,0.003852596; 4.5,
+              0.003318655; 4.55,0.003318655; 4.6,0.003318655; 4.65,0.003318655;
+              4.7,0.003318655; 4.75,0.003318655; 4.8,0.003318655; 4.85,
+              0.003318655; 4.9,0.003318655; 4.95,0.003318655; 5,0.002726848;
+              5.05,0.002726848; 5.1,0.002726848; 5.15,0.002726848; 5.2,
+              0.002726848; 5.25,0.002726848; 5.3,0.002726848; 5.35,0.002726848;
+              5.4,0.002726848; 5.45,0.002726848; 5.5,0.003174004; 5.55,
+              0.003174004; 5.6,0.003174004; 5.65,0.003174004; 5.7,0.003174004;
+              5.75,0.003174004; 5.8,0.003174004; 5.85,0.003174004; 5.9,
+              0.003174004; 5.95,0.003174004; 6,0.002927458; 6.05,0.002927458;
+              6.1,0.002927458; 6.15,0.002927458; 6.2,0.002927458; 6.25,
+              0.002927458; 6.3,0.002927458; 6.35,0.002927458; 6.4,0.002927458;
+              6.45,0.002927458; 6.5,0.002778706; 6.55,0.002778706; 6.6,
+              0.002778706; 6.65,0.002778706; 6.7,0.002778706; 6.75,0.002778706;
+              6.8,0.002778706; 6.85,0.002778706; 6.9,0.002778706; 6.95,
+              0.002778706; 7,0.002805746; 7.05,0.002805746; 7.1,0.002805746;
+              7.15,0.002805746; 7.2,0.002805746; 7.25,0.002805746; 7.3,
+              0.002805746; 7.35,0.002805746; 7.4,0.002805746; 7.45,0.002805746;
+              7.5,0.002989569; 7.55,0.002989569; 7.6,0.002989569; 7.65,
+              0.002989569; 7.7,0.002989569; 7.75,0.002989569; 7.8,0.002989569;
+              7.85,0.002989569; 7.9,0.002989569; 7.95,0.002989569; 8,
+              0.002819607; 8.05,0.002819607; 8.1,0.002819607; 8.15,0.002819607;
+              8.2,0.002819607; 8.25,0.002819607; 8.3,0.002819607; 8.35,
+              0.002819607; 8.4,0.002819607; 8.45,0.002819607; 8.5,0.002845652;
+              8.55,0.002845652; 8.6,0.002845652; 8.65,0.002845652; 8.7,
+              0.002845652; 8.75,0.002845652; 8.8,0.002845652; 8.85,0.002845652;
+              8.9,0.002845652; 8.95,0.002845652; 9,0.002932563; 9.05,
+              0.002932563; 9.1,0.002932563; 9.15,0.002932563; 9.2,0.002932563;
+              9.25,0.002932563; 9.3,0.002932563; 9.35,0.002932563; 9.4,
+              0.002932563; 9.45,0.002932563; 9.5,0.002936716; 9.55,0.002936716;
+              9.6,0.002936716; 9.65,0.002936716; 9.7,0.002936716; 9.75,
+              0.002936716; 9.8,0.002936716; 9.85,0.002936716; 9.9,0.002936716;
+              9.95,0.002936716; 10,0.003237101; 10.05,0.003237101; 10.1,
+              0.003237101; 10.15,0.003237101; 10.2,0.003237101; 10.25,
+              0.003237101; 10.3,0.003237101; 10.35,0.003237101; 10.4,
+              0.003237101; 10.45,0.003237101; 10.5,0.002447014; 10.55,
+              0.002447014; 10.6,0.002447014; 10.65,0.002447014; 10.7,
+              0.002447014; 10.75,0.002447014; 10.8,0.002447014; 10.85,
+              0.002447014; 10.9,0.002447014; 10.95,0.002447014; 11,0.002974532;
+              11.05,0.002974532; 11.1,0.002974532; 11.15,0.002974532; 11.2,
+              0.002974532; 11.25,0.002974532; 11.3,0.002974532; 11.35,
+              0.002974532; 11.4,0.002974532; 11.45,0.002974532; 11.5,
+              0.002826518; 11.55,0.002826518; 11.6,0.002826518; 11.65,
+              0.002826518; 11.7,0.002826518; 11.75,0.002826518; 11.8,
+              0.002826518; 11.85,0.002826518; 11.9,0.002826518; 11.95,
+              0.002826518; 12,0.003145805; 12.05,0.003145805; 12.1,0.003145805;
+              12.15,0.003145805; 12.2,0.003145805; 12.25,0.003145805; 12.3,
+              0.003145805; 12.35,0.003145805; 12.4,0.003145805; 12.45,
+              0.003145805; 12.5,0.002762071; 12.55,0.002762071; 12.6,
+              0.002762071; 12.65,0.002762071; 12.7,0.002762071; 12.75,
+              0.002762071; 12.8,0.002762071; 12.85,0.002762071; 12.9,
+              0.002762071; 12.95,0.002762071; 13,0.002800813; 13.05,0.002800813;
+              13.1,0.002800813; 13.15,0.002800813; 13.2,0.002800813; 13.25,
+              0.002800813; 13.3,0.002800813; 13.35,0.002800813; 13.4,
+              0.002800813; 13.45,0.002800813; 13.5,0.003124214; 13.55,
+              0.003124214; 13.6,0.003124214; 13.65,0.003124214; 13.7,
+              0.003124214; 13.75,0.003124214; 13.8,0.003124214; 13.85,
+              0.003124214; 13.9,0.003124214; 13.95,0.003124214; 14,0.002517827;
+              14.05,0.002517827; 14.1,0.002517827; 14.15,0.002517827; 14.2,
+              0.002517827; 14.25,0.002517827; 14.3,0.002517827; 14.35,
+              0.002517827; 14.4,0.002517827; 14.45,0.002517827; 14.5,
+              0.003085943; 14.55,0.003085943; 14.6,0.003085943; 14.65,
+              0.003085943; 14.7,0.003085943; 14.75,0.003085943; 14.8,
+              0.003085943; 14.85,0.003085943; 14.9,0.003085943; 14.95,
+              0.003085943; 15,0.002949414; 15.05,0.002949414; 15.1,0.002949414;
+              15.15,0.002949414; 15.2,0.002949414; 15.25,0.002949414; 15.3,
+              0.002949414; 15.35,0.002949414; 15.4,0.002949414; 15.45,
+              0.002949414; 15.5,0.002752604; 15.55,0.002752604; 15.6,
+              0.002752604; 15.65,0.002752604; 15.7,0.002752604; 15.75,
+              0.002752604; 15.8,0.002752604; 15.85,0.002752604; 15.9,
+              0.002752604; 15.95,0.002752604; 16,0.003383744; 16.05,0.003383744;
+              16.1,0.003383744; 16.15,0.003383744; 16.2,0.003383744; 16.25,
+              0.003383744; 16.3,0.003383744; 16.35,0.003383744; 16.4,
+              0.003383744; 16.45,0.003383744; 16.5,0.002485506; 16.55,
+              0.002485506; 16.6,0.002485506; 16.65,0.002485506; 16.7,
+              0.002485506; 16.75,0.002485506; 16.8,0.002485506; 16.85,
+              0.002485506; 16.9,0.002485506; 16.95,0.002485506; 17,0.002283357;
+              17.05,0.002283357; 17.1,0.002283357; 17.15,0.002283357; 17.2,
+              0.002283357; 17.25,0.002283357; 17.3,0.002283357; 17.35,
+              0.002283357; 17.4,0.002283357; 17.45,0.002283357; 17.5,
+              0.003174278; 17.55,0.003174278; 17.6,0.003174278; 17.65,
+              0.003174278; 17.7,0.003174278; 17.75,0.003174278; 17.8,
+              0.003174278; 17.85,0.003174278; 17.9,0.003174278; 17.95,
+              0.003174278; 18,0.003011166; 18.05,0.003011166; 18.1,0.003011166;
+              18.15,0.003011166; 18.2,0.003011166; 18.25,0.003011166; 18.3,
+              0.003011166; 18.35,0.003011166; 18.4,0.003011166; 18.45,
+              0.003011166; 18.5,0.002726948; 18.55,0.002726948; 18.6,
+              0.002726948; 18.65,0.002726948; 18.7,0.002726948; 18.75,
+              0.002726948; 18.8,0.002726948; 18.85,0.002726948; 18.9,
+              0.002726948; 18.95,0.002726948; 19,0.002969975; 19.05,0.002969975;
+              19.1,0.002969975; 19.15,0.002969975; 19.2,0.002969975; 19.25,
+              0.002969975; 19.3,0.002969975; 19.35,0.002969975; 19.4,
+              0.002969975; 19.45,0.002969975; 19.5,0.003042256; 19.55,
+              0.003042256; 19.6,0.003042256; 19.65,0.003042256; 19.7,
+              0.003042256; 19.75,0.003042256; 19.8,0.003042256; 19.85,
+              0.003042256; 19.9,0.003042256; 19.95,0.003042256; 20,0.002768111;
+              20.05,0.002768111; 20.1,0.002768111; 20.15,0.002768111; 20.2,
+              0.002768111; 20.25,0.002768111; 20.3,0.002768111; 20.35,
+              0.002768111; 20.4,0.002768111; 20.45,0.002768111; 20.5,
+              0.002782242; 20.55,0.002782242; 20.6,0.002782242; 20.65,
+              0.002782242; 20.7,0.002782242; 20.75,0.002782242; 20.8,
+              0.002782242; 20.85,0.002782242; 20.9,0.002782242; 20.95,
+              0.002782242; 21,0.002606085; 21.05,0.002606085; 21.1,0.002606085;
+              21.15,0.002606085; 21.2,0.002606085; 21.25,0.002606085; 21.3,
+              0.002606085; 21.35,0.002606085; 21.4,0.002606085; 21.45,
+              0.002606085; 21.5,0.003062441; 21.55,0.003062441; 21.6,
+              0.003062441; 21.65,0.003062441; 21.7,0.003062441; 21.75,
+              0.003062441; 21.8,0.003062441; 21.85,0.003062441; 21.9,
+              0.003062441; 21.95,0.003062441; 22,0.002955774; 22.05,0.002955774;
+              22.1,0.002955774; 22.15,0.002955774; 22.2,0.002955774; 22.25,
+              0.002955774; 22.3,0.002955774; 22.35,0.002955774; 22.4,
+              0.002955774; 22.45,0.002955774; 22.5,0.002824636; 22.55,
+              0.002824636; 22.6,0.002824636; 22.65,0.002824636; 22.7,
+              0.002824636; 22.75,0.002824636; 22.8,0.002824636; 22.85,
+              0.002824636; 22.9,0.002824636; 22.95,0.002824636; 23,0.002807662;
+              23.05,0.002807662; 23.1,0.002807662; 23.15,0.002807662; 23.2,
+              0.002807662; 23.25,0.002807662; 23.3,0.002807662; 23.35,
+              0.002807662; 23.4,0.002807662; 23.45,0.002807662; 23.5,
+              0.002761244; 23.55,0.002761244; 23.6,0.002761244; 23.65,
+              0.002761244; 23.7,0.002761244; 23.75,0.002761244; 23.8,
+              0.002761244; 23.85,0.002761244; 23.9,0.002761244; 23.95,
+              0.002761244; 24,0.003063291; 24.05,0.003063291; 24.1,0.003063291;
+              24.15,0.003063291; 24.2,0.003063291; 24.25,0.003063291; 24.3,
+              0.003063291; 24.35,0.003063291; 24.4,0.003063291; 24.45,
+              0.003063291; 24.5,0.002941485; 24.55,0.002941485; 24.6,
+              0.002941485; 24.65,0.002941485; 24.7,0.002941485; 24.75,
+              0.002941485; 24.8,0.002941485; 24.85,0.002941485; 24.9,
+              0.002941485; 24.95,0.002941485; 25,0.002507183; 25.05,0.002507183;
+              25.1,0.002507183; 25.15,0.002507183; 25.2,0.002507183; 25.25,
+              0.002507183; 25.3,0.002507183; 25.35,0.002507183; 25.4,
+              0.002507183; 25.45,0.002507183; 25.5,0.002826389; 25.55,
+              0.002826389; 25.6,0.002826389; 25.65,0.002826389; 25.7,
+              0.002826389; 25.75,0.002826389; 25.8,0.002826389; 25.85,
+              0.002826389; 25.9,0.002826389; 25.95,0.002826389; 26,0.002892385;
+              26.05,0.002892385; 26.1,0.002892385; 26.15,0.002892385; 26.2,
+              0.002892385; 26.25,0.002892385; 26.3,0.002892385; 26.35,
+              0.002892385; 26.4,0.002892385; 26.45,0.002892385; 26.5,
+              0.003113336; 26.55,0.003113336; 26.6,0.003113336; 26.65,
+              0.003113336; 26.7,0.003113336; 26.75,0.003113336; 26.8,
+              0.003113336; 26.85,0.003113336; 26.9,0.003113336; 26.95,
+              0.003113336; 27,0.002615768; 27.05,0.002615768; 27.1,0.002615768;
+              27.15,0.002615768; 27.2,0.002615768; 27.25,0.002615768; 27.3,
+              0.002615768; 27.35,0.002615768; 27.4,0.002615768; 27.45,
+              0.002615768; 27.5,0.002902618; 27.55,0.002902618; 27.6,
+              0.002902618; 27.65,0.002902618; 27.7,0.002902618; 27.75,
+              0.002902618; 27.8,0.002902618; 27.85,0.002902618; 27.9,
+              0.002902618; 27.95,0.002902618; 28,0.002861402; 28.05,0.002861402;
+              28.1,0.002861402; 28.15,0.002861402; 28.2,0.002861402; 28.25,
+              0.002861402; 28.3,0.002861402; 28.35,0.002861402; 28.4,
+              0.002861402; 28.45,0.002861402; 28.5,0.002643035; 28.55,
+              0.002643035; 28.6,0.002643035; 28.65,0.002643035; 28.7,
+              0.002643035; 28.75,0.002643035; 28.8,0.002643035; 28.85,
+              0.002643035; 28.9,0.002643035; 28.95,0.002643035; 29,0.003026269;
+              29.05,0.003026269; 29.1,0.003026269; 29.15,0.003026269; 29.2,
+              0.003026269; 29.25,0.003026269; 29.3,0.003026269; 29.35,
+              0.003026269; 29.4,0.003026269; 29.45,0.003026269; 29.5,
+              0.002777441; 29.55,0.002777441; 29.6,0.002777441; 29.65,
+              0.002777441; 29.7,0.002777441; 29.75,0.002777441; 29.8,
+              0.002777441; 29.85,0.002777441; 29.9,0.002777441; 29.95,
+              0.002777441],        smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-118,-120},{-98,-100}})));
+      equation
+
+      OUT1 = G2.gen.w;
+      OUT2 = G2.gen.delta;
+      OUT3 = G2.gen.Epq;
+      OUT4 = G2.gen.PSIkd;
+      OUT5 = G2.gen.PSIppq;
+      OUT6 = G2.sEXSMPC.simpleLagLim.state;
+      OUT7 = G2.sEXSMPC.leadLag.TF.x_scaled[1];
+      OUT8 = G2.gASTMPC.simpleLagLim.state;
+      OUT9 = G2.gASTMPC.simpleLag.state;
+      OUT10 = G2.gASTMPC.simpleLag1.state;
+      OUT11 = Bus6.v;
+
+      OUT12 =PV.rEGCA1_1.Pgen;
+      OUT13 =PV.rEGCA1_1.Qgen;
+      OUT14 =PV.rEGCA1_1.p.ir;
+      OUT15 =PV.rEGCA1_1.p.ii;
+      OUT16 = Bus8.v;
+
+      OUT17 =BESS.rEGCA1_1.Pgen;
+      OUT18 =BESS.rEGCA1_1.Qgen;
+      OUT19 =BESS.rEGCA1_1.p.ir;
+      OUT20 =BESS.rEGCA1_1.p.ii;
+      OUT21 = Bus10.v;
+
+      OUT22 = Load2.P;
+      OUT23 = Load2.Q;
+
+      OUT24 = Bus5.v;
+      OUT25 = Bus5.angle;
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(breaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
+        connect(breaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(BESS.p1, Bus10.p)
+          annotation (Line(points={{-20,-90},{-10,-90}}, color={0,0,255}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(PV.p1, Bus8.p)
+          annotation (Line(points={{-20,-50},{-10,-50}}, color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(sine.y, add.u2) annotation (Line(points={{80.5,-31},{85.2,-31},{85.2,-16.4}},
+              color={0,0,127}));
+        connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{80.54,-12.06},
+                {82.87,-12.06},{82.87,-11.6},{85.2,-11.6}}, color={0,0,127}));
+        connect(add.y, Load2.u) annotation (Line(points={{94.4,-14},{98.15,-14},{98.15,
+                -14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(combiTimeTable.y[1], G2.P_ref1)
+          annotation (Line(points={{-97,16},{-42,16}}, color={0,0,127}));
+        connect(combiTimeTable1.y[1], G2.Efd_ref) annotation (Line(points={{-97,-10},
+                {-50,-10},{-50,4},{-42,4}},color={0,0,127}));
+        connect(combiTimeTable2.y[1], PV.QINPUT) annotation (Line(points={{-97,-38},
+                {-50,-38},{-50,-50},{-42,-50}},
+                                           color={0,0,127}));
+        connect(combiTimeTable3.y[1], BESS.Paux1)
+          annotation (Line(points={{-97,-84},{-42,-84}}, color={0,0,127}));
+        connect(combiTimeTable4.y[1], BESS.Qext1) annotation (Line(points={{-97,
+                -110},{-50,-110},{-50,-96},{-42,-96}},
+                                                 color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=30,
+            __Dymola_NumberOfIntervals=1000,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_table2;
     end Testing_Kalman_Filter_State_Estimation;
   end Luigi_Vanfretti_Special_Package;
   extends Modelica.Icons.ExamplesPackage;
