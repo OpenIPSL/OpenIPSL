@@ -11246,6 +11246,7 @@ package ModelPredictiveControl
 
         parameter Boolean equivalentGRID = true;
         parameter Boolean equivalentsystem = false;
+        parameter Real set = 0;
 
         OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
               powerFlow.powerflow.bus.A1) if not equivalentGRID
@@ -11352,10 +11353,11 @@ package ModelPredictiveControl
           v_0=powerFlow.powerflow.bus.V3,
           angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
           annotation (Placement(transformation(extent={{-20,48},{0,68}})));
-        Electrical.Events.Breaker breaker(enableTrigger=false,
+        Electrical.Events.Breaker circuitbreaker(
+          enableTrigger=false,
           t_o=0.25,
           rc_enabled=true,
-          t_rc=10000)       if not equivalentGRID                     annotation (Placement(transformation(
+          t_rc=1000) if not equivalentGRID annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={80,26})));
@@ -11587,6 +11589,11 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{184,10},{204,30}})));
         Modelica.Blocks.Interfaces.RealOutput OUT25
           annotation (Placement(transformation(extent={{184,-10},{204,10}})));
+
+
+        Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=if set == 0 then false
+               else true)
+          annotation (Placement(transformation(extent={{-210,30},{-190,50}})));
       equation
 
       OUT1 = G2.gen.w;
@@ -11641,10 +11648,10 @@ package ModelPredictiveControl
           annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
         connect(L3.p, Bus4.p)
           annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
-        connect(breaker.s, Bus5.p)
-          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
-        connect(breaker.r, L3.n)
-          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+        connect(circuitbreaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}}, color={0,0,255}));
+        connect(circuitbreaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}}, color={0,0,255}));
         connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
                             color={0,0,127}));
         connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
@@ -11773,8 +11780,10 @@ package ModelPredictiveControl
         "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
         extends Modelica.Icons.Example;
 
-        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentGRID = true;
         parameter Boolean equivalentsystem = false;
+
+        parameter Real cbbb = 0;
 
         OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
               powerFlow.powerflow.bus.A1) if not equivalentGRID
@@ -11881,7 +11890,8 @@ package ModelPredictiveControl
           v_0=powerFlow.powerflow.bus.V3,
           angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
           annotation (Placement(transformation(extent={{-20,48},{0,68}})));
-        Electrical.Events.Breaker breaker(enableTrigger=false,
+        Electrical.Events.Breaker breaker(
+          enableTrigger=true,
           t_o=10,
           rc_enabled=true,
           t_rc=10000)       if not equivalentGRID                     annotation (Placement(transformation(
@@ -12087,6 +12097,11 @@ package ModelPredictiveControl
         Modelica.Blocks.Sources.CombiTimeTable combiTimeTable4(table=[0,0; 0.5,
               0; 0.51,0.1; 5,0.1], smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
           annotation (Placement(transformation(extent={{-122,-120},{-102,-100}})));
+
+        Modelica.Blocks.Interfaces.BooleanInput Trigger1
+          annotation (Placement(transformation(extent={{-126,8},{-86,48}})));
+      initial equation
+        booleanexpression.y = if cbbb == 0 then false else true;
       equation
 
       OUT1 = G2.gen.w;
@@ -12201,6 +12216,8 @@ package ModelPredictiveControl
                                                  color={0,0,127}));
         connect(combiTimeTable2.y[1], PV.Qref) annotation (Line(points={{-101,
                 -38},{-50,-38},{-50,-56},{-42,-56}}, color={0,0,127}));
+        connect(breaker.Trigger, Trigger1) annotation (Line(points={{75.2,28},{
+                75.2,36},{-80,36},{-80,28},{-106,28}}, color={255,0,255}));
           annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
                 extent={{-140,-140},{140,140}}), graphics={
               Rectangle(
@@ -13633,6 +13650,9 @@ package ModelPredictiveControl
 
         parameter Boolean equivalentGRID = false;
         parameter Boolean equivalentsystem = false;
+        parameter Real set = 0;
+
+
 
         OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
               powerFlow.powerflow.bus.A1) if not equivalentGRID
@@ -13739,10 +13759,11 @@ package ModelPredictiveControl
           v_0=powerFlow.powerflow.bus.V3,
           angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
           annotation (Placement(transformation(extent={{-20,48},{0,68}})));
-        Electrical.Events.Breaker breaker(enableTrigger=false,
-          t_o=0.25,
-          rc_enabled=false,
-          t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
+        Electrical.Events.Breaker circuitbreaker(
+          enableTrigger=true,
+          t_o=0.55,
+          rc_enabled=true,
+          t_rc=1000) if not equivalentGRID annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={80,26})));
@@ -13808,7 +13829,7 @@ package ModelPredictiveControl
           amplitude=0.01,
           f=1/260,
           phase=3.1415926535898,
-          startTime=1000)
+          startTime=5)
           annotation (Placement(transformation(extent={{70,-36},{80,-26}})));
 
         Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
@@ -13829,7 +13850,8 @@ package ModelPredictiveControl
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={10,-90})));
-        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl PV(
+        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl_ADD_ON
+                                                                PV(
           V_b=480,
           P_0=powerFlow.powerflow.machines.PPV,
           enableP_0=true,
@@ -13918,7 +13940,7 @@ package ModelPredictiveControl
           B=0)  annotation (Placement(transformation(extent={{38,-94},
                   {50,-86}})));
         Modelica.Blocks.Math.Add add
-          annotation (Placement(transformation(extent={{84,-18},{92,-10}})));
+          annotation (Placement(transformation(extent={{84,-16},{92,-8}})));
         Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
             active_sigma=0.0002, samplePeriod=0.02)
           annotation (Placement(transformation(extent={{64,-18},{76,-6}})));
@@ -13981,7 +14003,7 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{340,-100},{360,-80}})));
         NonElectrical.Continuous.SimpleLag simpleLag1(
           K=1,
-          T=0.1,
+          T=0.001,
           y_start=powerFlow.powerflow.bus.A5)
           annotation (Placement(transformation(extent={{300,-120},{320,-100}})));
         Modelica.Blocks.Interfaces.RealOutput OUT25 "Connector of Real output signal"
@@ -14147,6 +14169,30 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{340,-40},{360,-20}})));
         Modelica.Blocks.Interfaces.RealOutput OUT22
           annotation (Placement(transformation(extent={{340,-60},{360,-40}})));
+        Electrical.Renewables.PSSE.AddOnBlocks.IrradianceToPower
+          irradianceToPower(
+          Ypv(displayUnit="MW") = 3000000,
+          Sb(displayUnit="MV.A") = 100000000,
+          Tcstc(displayUnit="K") = 298.15,
+          fpv=1,
+          ap=-0.48,
+          Gtstc=1000)
+          annotation (Placement(transformation(extent={{44,-20},{34,-10}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection1(
+            active_sigma=0.0001, samplePeriod=1)
+          annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+              rotation=180,
+              origin={36,-30})));
+        Modelica.Blocks.Math.Add add1
+          annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+              rotation=180,
+              origin={18,-28})));
+        Modelica.Blocks.MathBoolean.Or or1(nu=2)
+          annotation (Placement(transformation(extent={{-210,36},{-198,48}})));
+        Modelica.Blocks.Interfaces.BooleanInput u
+          annotation (Placement(transformation(extent={{-272,-24},{-232,16}})));
+        Modelica.Blocks.Sources.BooleanConstant booleanConstant(k= if set == 0 then false else true)
+          annotation (Placement(transformation(extent={{-252,40},{-232,60}})));
       equation
 
         connect(T1.p, Bus2.p)
@@ -14171,10 +14217,10 @@ package ModelPredictiveControl
           annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
         connect(L3.p, Bus4.p)
           annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
-        connect(breaker.s, Bus5.p)
-          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
-        connect(breaker.r, L3.n)
-          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+        connect(circuitbreaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}}, color={0,0,255}));
+        connect(circuitbreaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}}, color={0,0,255}));
         connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
                             color={0,0,127}));
         connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
@@ -14245,12 +14291,12 @@ package ModelPredictiveControl
                 10},{80,16}}, color={0,0,255}));
         connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
                 10}}, color={0,0,255}));
-        connect(add.y, Load2.u) annotation (Line(points={{92.4,-14},{97.15,-14},
+        connect(add.y, Load2.u) annotation (Line(points={{92.4,-12},{97.15,-12},
                 {97.15,-14.5},{101.9,-14.5}}, color={0,0,127}));
-        connect(add.u2, sine.y) annotation (Line(points={{83.2,-16.4},{83.2,-22},
+        connect(add.u2, sine.y) annotation (Line(points={{83.2,-14.4},{83.2,-22},
                 {80.5,-22},{80.5,-31}}, color={0,0,127}));
         connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{76.54,
-                -12.06},{79.87,-12.06},{79.87,-11.6},{83.2,-11.6}}, color={0,0,
+                -12.06},{79.87,-12.06},{79.87,-9.6},{83.2,-9.6}},   color={0,0,
                 127}));
         connect(simpleLag.y, OUT24)
           annotation (Line(points={{321,-90},{350,-90}}, color={0,0,127}));
@@ -14370,6 +14416,18 @@ package ModelPredictiveControl
           annotation (Line(points={{281,-90},{298,-90}}, color={0,0,127}));
         connect(PRE25.y, simpleLag1.u)
           annotation (Line(points={{281,-110},{298,-110}}, color={0,0,127}));
+        connect(whiteNoiseInjection1.y, add1.u1) annotation (Line(points={{
+                29.46,-29.94},{30,-30.4},{22.8,-30.4}}, color={0,0,127}));
+        connect(irradianceToPower.Ppv, add1.u2) annotation (Line(points={{33.5,
+                -15},{22.8,-15},{22.8,-25.6}}, color={0,0,127}));
+        connect(add1.y, PV.IRR2POW) annotation (Line(points={{13.6,-28},{-50,
+                -28},{-50,-43},{-42,-43}}, color={0,0,127}));
+        connect(u, or1.u[1]) annotation (Line(points={{-252,-4},{-216,-4},{-216,40.95},
+                {-210,40.95}}, color={255,0,255}));
+        connect(booleanConstant.y, or1.u[2]) annotation (Line(points={{-231,50},{-216,
+                50},{-216,43.05},{-210,43.05}}, color={255,0,255}));
+        connect(or1.y, circuitbreaker.Trigger) annotation (Line(points={{-197.1,42},{75.2,
+                42},{75.2,26}}, color={255,0,255}));
           annotation (Placement(transformation(extent={{140,-20},{160,0}})),
                       Placement(transformation(extent={{140,-40},{160,-20}})),
                       Placement(transformation(extent={{140,-60},{160,-40}})),
@@ -16180,7 +16238,7 @@ package ModelPredictiveControl
 </ul>
 <p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
 </html>"),experiment(
-            StopTime=5,
+            StopTime=10,
             __Dymola_NumberOfIntervals=1000,
             __Dymola_Algorithm="Dassl"),
           Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
@@ -16457,6 +16515,33 @@ package ModelPredictiveControl
           annotation (Placement(transformation(extent={{88,-20},{98,-10}})));
         Modelica.Blocks.Sources.Constant ToShedOrNotToShed(k=0)
           annotation (Placement(transformation(extent={{68,-54},{80,-42}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0002, samplePeriod=0.02)
+          annotation (Placement(transformation(extent={{66,-16},{78,-4}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE1
+          annotation (Placement(transformation(extent={{222,92},{242,112}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE2
+          annotation (Placement(transformation(extent={{222,72},{242,92}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE3
+          annotation (Placement(transformation(extent={{222,52},{242,72}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE4
+          annotation (Placement(transformation(extent={{222,32},{242,52}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE5
+          annotation (Placement(transformation(extent={{222,12},{242,32}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE6
+          annotation (Placement(transformation(extent={{222,-8},{242,12}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE7
+          annotation (Placement(transformation(extent={{222,-28},{242,-8}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE8
+          annotation (Placement(transformation(extent={{222,-48},{242,-28}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE9
+          annotation (Placement(transformation(extent={{222,-68},{242,-48}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE10
+          annotation (Placement(transformation(extent={{222,-88},{242,-68}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE11
+          annotation (Placement(transformation(extent={{222,-108},{242,-88}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE12
+          annotation (Placement(transformation(extent={{222,-128},{242,-108}})));
       equation
 
       OUT1 = G2.gen.w;
@@ -16471,6 +16556,19 @@ package ModelPredictiveControl
       OUT10 = G2.gASTMPC.simpleLag1.state;
       OUT11 = Bus5.v;
       OUT12 = Bus5.angle;
+
+      PRE1 = G2.gen.w;
+      PRE2 = G2.gen.delta;
+      PRE3 = G2.gen.Epq;
+      PRE4 = G2.gen.PSIkd;
+      PRE5 = G2.gen.PSIppq;
+      PRE6 = G2.sEXSMPC.simpleLagLim.state;
+      PRE7 = G2.sEXSMPC.leadLag.TF.x_scaled[1];
+      PRE8 = G2.gASTMPC.simpleLagLim.state;
+      PRE9 = G2.gASTMPC.simpleLag.state;
+      PRE10 = G2.gASTMPC.simpleLag1.state;
+      PRE11 = Bus5.v;
+      PRE12 = Bus5.angle;
 
         connect(T1.p, Bus2.p)
           annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
@@ -16553,8 +16651,8 @@ package ModelPredictiveControl
                 -48},{87,-48},{87,-19}}, color={0,0,127}));
         connect(add3_1.y, Load2.u) annotation (Line(points={{98.5,-15},{100.2,
                 -15},{100.2,-14.5},{101.9,-14.5}}, color={0,0,127}));
-        connect(add3_1.u1, add3_1.u2) annotation (Line(points={{87,-11},{87,-11},
-                {87,-15}}, color={0,0,127}));
+        connect(whiteNoiseInjection.y, add3_1.u1) annotation (Line(points={{78.54,-10.06},
+                {78,-11},{87,-11}}, color={0,0,127}));
           annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
                 extent={{-140,-140},{140,140}}), graphics={
               Rectangle(
@@ -16597,6 +16695,3878 @@ package ModelPredictiveControl
             __Dymola_Algorithm="Dassl"),
           Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
       end MPCAppliedEnergyLinearized_v3_G2ONLY;
+
+      model MPCAppliedEnergyOriginal_v3_G2ONLY_FILTERED
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker breaker(enableTrigger=false,
+          t_o=0.75,
+          rc_enabled=false,
+          t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealInput IN1(start=0)
+          "Connector of Real input signal 2" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,10}),iconTransformation(extent={{-10,-10},{10,10}}, origin={-150,10})));
+        Modelica.Blocks.Sources.Constant IN11(k=0)
+          annotation (Placement(transformation(extent={{-108,-2},{-96,10}})));
+        Modelica.Blocks.Math.Add AddU1
+          annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+        Modelica.Blocks.Sources.Constant IN22(k=0)
+          annotation (Placement(transformation(extent={{-108,-32},{-96,-20}})));
+        Modelica.Blocks.Math.Add AddU2
+          annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+        Modelica.Blocks.Interfaces.RealInput IN2(start=0)
+          "Connector of Real input signal 2"
+                 annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,-12}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-150,-12})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PFG2ONLY)
+          annotation (Placement(transformation(extent={{-68,106},{-48,126}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=100,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(
+          enableNoise=true,
+          useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-44,102},{-24,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0.01,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=1000)
+          annotation (Placement(transformation(extent={{66,-32},{76,-22}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.001,
+          X=0.1,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0002, samplePeriod=0.02)
+          annotation (Placement(transformation(extent={{64,-16},{76,-4}})));
+        Modelica.Blocks.Math.Add3 add3_1(k3=-1)
+          annotation (Placement(transformation(extent={{86,-20},{96,-10}})));
+        Modelica.Blocks.Sources.Constant ToShedOrNotToShed(k=0)
+          annotation (Placement(transformation(extent={{66,-54},{78,-42}})));
+        Modelica.Blocks.Sources.RealExpression P1(y=G2.gen.w)
+          annotation (Placement(transformation(extent={{146,90},{166,110}})));
+        Modelica.Blocks.Sources.RealExpression P2(y=G2.gen.delta)
+          annotation (Placement(transformation(extent={{146,70},{166,90}})));
+        Modelica.Blocks.Sources.RealExpression P3(y=G2.gen.Epq)
+          annotation (Placement(transformation(extent={{146,50},{166,70}})));
+        Modelica.Blocks.Sources.RealExpression P4(y=G2.gen.PSIkd)
+          annotation (Placement(transformation(extent={{146,30},{166,50}})));
+        Modelica.Blocks.Sources.RealExpression P5(y=G2.gen.PSIppq)
+          annotation (Placement(transformation(extent={{146,10},{166,30}})));
+        Modelica.Blocks.Sources.RealExpression P6(y=G2.sEXSMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{146,-10},{166,10}})));
+        Modelica.Blocks.Sources.RealExpression P7(y=G2.sEXSMPC.leadLag.TF.x_scaled[
+              1])
+          annotation (Placement(transformation(extent={{146,-30},{166,-10}})));
+        Modelica.Blocks.Sources.RealExpression P8(y=G2.gASTMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{146,-50},{166,-30}})));
+        Modelica.Blocks.Sources.RealExpression P9(y=G2.gASTMPC.simpleLag.state)
+          annotation (Placement(transformation(extent={{146,-70},{166,-50}})));
+        Modelica.Blocks.Sources.RealExpression P10(y=G2.gASTMPC.simpleLag1.state)
+          annotation (Placement(transformation(extent={{146,-90},{166,-70}})));
+        Modelica.Blocks.Sources.RealExpression P11(y=Bus5.v)
+          annotation (Placement(transformation(extent={{146,-110},{166,-90}})));
+        Modelica.Blocks.Sources.RealExpression P12(y=Bus5.angle) annotation (
+            Placement(transformation(extent={{146,-130},{166,-110}})));
+        NonElectrical.Continuous.SimpleLag simpleLag12(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{184,-108},{204,-88}})));
+        NonElectrical.Continuous.SimpleLag simpleLag13(
+          K=1,
+          T=0.001,
+          y_start=powerFlow.powerflow.bus.A5)
+          annotation (Placement(transformation(extent={{184,-130},{204,-110}})));
+        NonElectrical.Continuous.SimpleLag simpleLag14(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{184,-88},{204,-68}})));
+        NonElectrical.Continuous.SimpleLag simpleLag15(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{184,-48},{204,-28}})));
+        NonElectrical.Continuous.SimpleLag simpleLag16(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{184,-68},{204,-48}})));
+        NonElectrical.Continuous.SimpleLag simpleLag17(
+          K=1,
+          T=0.1,
+          y_start=0.0265)
+          annotation (Placement(transformation(extent={{184,-28},{204,-8}})));
+        NonElectrical.Continuous.SimpleLag simpleLag18(
+          K=1,
+          T=0.1,
+          y_start=0.3704)
+          annotation (Placement(transformation(extent={{184,12},{204,32}})));
+        NonElectrical.Continuous.SimpleLag simpleLag19(
+          K=1,
+          T=0.1,
+          y_start=1.3286)
+          annotation (Placement(transformation(extent={{184,-8},{204,12}})));
+        NonElectrical.Continuous.SimpleLag simpleLag20(
+          K=1,
+          T=0.1,
+          y_start=0.9418)
+          annotation (Placement(transformation(extent={{184,32},{204,52}})));
+        NonElectrical.Continuous.SimpleLag simpleLag21(
+          K=1,
+          T=0.1,
+          y_start=0.41905)
+          annotation (Placement(transformation(extent={{184,72},{204,92}})));
+        NonElectrical.Continuous.SimpleLag simpleLag22(
+          K=1,
+          T=0.1,
+          y_start=0.965)
+          annotation (Placement(transformation(extent={{184,52},{204,72}})));
+        NonElectrical.Continuous.SimpleLag simpleLag23(
+          K=1,
+          T=0.1,
+          y_start=G2.gen.w0)
+          annotation (Placement(transformation(extent={{184,92},{204,112}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{226,90},{246,110}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{226,70},{246,90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{226,50},{246,70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{226,30},{246,50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{226,10},{246,30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{226,-10},{246,10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{226,-30},{246,-10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{226,-50},{246,-30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{226,-70},{246,-50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{226,-90},{246,-70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{226,-110},{246,-90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{226,-130},{246,-110}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE1
+          annotation (Placement(transformation(extent={{280,90},{300,110}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE2
+          annotation (Placement(transformation(extent={{280,70},{300,90}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE3
+          annotation (Placement(transformation(extent={{280,50},{300,70}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE4
+          annotation (Placement(transformation(extent={{280,30},{300,50}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE5
+          annotation (Placement(transformation(extent={{280,10},{300,30}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE6
+          annotation (Placement(transformation(extent={{280,-10},{300,10}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE7
+          annotation (Placement(transformation(extent={{280,-30},{300,-10}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE8
+          annotation (Placement(transformation(extent={{280,-50},{300,-30}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE9
+          annotation (Placement(transformation(extent={{280,-70},{300,-50}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE10
+          annotation (Placement(transformation(extent={{280,-90},{300,-70}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE11
+          annotation (Placement(transformation(extent={{280,-110},{300,-90}})));
+        Modelica.Blocks.Interfaces.RealOutput PRE12 annotation (Placement(
+              transformation(extent={{280,-130},{300,-110}})));
+      equation
+
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(breaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
+        connect(breaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+        connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
+                            color={0,0,127}));
+        connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
+                {-82,16}},
+                       color={0,0,127}));
+
+        connect(IN22.y,AddU2. u2) annotation (Line(points={{-95.4,-26},{-82,-26}},
+                       color={0,0,127}));
+        connect(IN2,AddU2. u1) annotation (Line(points={{-150,-12},{-118,-12},{-118,-14},
+                {-82,-14}},
+                       color={0,0,127}));
+        connect(AddU2.y, G2.Efd_ref)
+          annotation (Line(points={{-59,-20},{-52,-20},{-52,4},{-42,4}},
+                                                                 color={0,0,127}));
+        connect(AddU1.y, G2.P_ref1) annotation (Line(points={{-59,10},{-52,10},{-52,16},
+                {-42,16}},                          color={0,0,127}));
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(add3_1.y, Load2.u) annotation (Line(points={{96.5,-15},{98.2,-15},{98.2,
+                -14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(whiteNoiseInjection.y, add3_1.u1) annotation (Line(points={{76.54,-10.06},
+                {80.77,-10.06},{80.77,-11},{85,-11}}, color={0,0,127}));
+        connect(sine.y, add3_1.u2) annotation (Line(points={{76.5,-27},{78,-27},{78,-15},
+                {85,-15}}, color={0,0,127}));
+        connect(ToShedOrNotToShed.y, add3_1.u3)
+          annotation (Line(points={{78.6,-48},{85,-48},{85,-19}}, color={0,0,127}));
+        connect(simpleLag23.y,OUT1)
+          annotation (Line(points={{205,102},{222,102},{222,100},{236,100}},
+                                                         color={0,0,127}));
+        connect(simpleLag21.y,OUT2)
+          annotation (Line(points={{205,82},{222,82},{222,80},{236,80}},
+                                                       color={0,0,127}));
+        connect(simpleLag22.y,OUT3)
+          annotation (Line(points={{205,62},{222,62},{222,60},{236,60}},
+                                                       color={0,0,127}));
+        connect(simpleLag20.y,OUT4)
+          annotation (Line(points={{205,42},{222,42},{222,40},{236,40}},
+                                                       color={0,0,127}));
+        connect(simpleLag18.y,OUT5)
+          annotation (Line(points={{205,22},{222,22},{222,20},{236,20}},
+                                                       color={0,0,127}));
+        connect(simpleLag19.y,OUT6)
+          annotation (Line(points={{205,2},{222,2},{222,0},{236,0}},
+                                                       color={0,0,127}));
+        connect(simpleLag17.y,OUT7)
+          annotation (Line(points={{205,-18},{222,-18},{222,-20},{236,-20}},
+                                                         color={0,0,127}));
+        connect(simpleLag15.y,OUT8)
+          annotation (Line(points={{205,-38},{222,-38},{222,-40},{236,-40}},
+                                                         color={0,0,127}));
+        connect(simpleLag16.y,OUT9)
+          annotation (Line(points={{205,-58},{222,-58},{222,-60},{236,-60}},
+                                                         color={0,0,127}));
+        connect(simpleLag14.y,OUT10)
+          annotation (Line(points={{205,-78},{222,-78},{222,-80},{236,-80}},
+                                                         color={0,0,127}));
+        connect(simpleLag12.y,OUT11)
+          annotation (Line(points={{205,-98},{222,-98},{222,-100},{236,-100}},
+                                                         color={0,0,127}));
+        connect(simpleLag13.y,OUT12)
+          annotation (Line(points={{205,-120},{236,-120}}, color={0,0,127}));
+        connect(P1.y, simpleLag23.u) annotation (Line(points={{167,100},{167,
+                102},{182,102}}, color={0,0,127}));
+        connect(P2.y, simpleLag21.u) annotation (Line(points={{167,80},{167,82},
+                {182,82}}, color={0,0,127}));
+        connect(P3.y, simpleLag22.u) annotation (Line(points={{167,60},{167,62},
+                {182,62}}, color={0,0,127}));
+        connect(P4.y, simpleLag20.u) annotation (Line(points={{167,40},{167,42},
+                {182,42}}, color={0,0,127}));
+        connect(P5.y, simpleLag18.u) annotation (Line(points={{167,20},{167,22},
+                {182,22}}, color={0,0,127}));
+        connect(P6.y, simpleLag19.u)
+          annotation (Line(points={{167,0},{167,2},{182,2}}, color={0,0,127}));
+        connect(P7.y, simpleLag17.u) annotation (Line(points={{167,-20},{167,
+                -18},{182,-18}},
+                            color={0,0,127}));
+        connect(P8.y, simpleLag15.u) annotation (Line(points={{167,-40},{167,
+                -38},{182,-38}},
+                            color={0,0,127}));
+        connect(P9.y, simpleLag16.u) annotation (Line(points={{167,-60},{167,
+                -58},{182,-58}},
+                            color={0,0,127}));
+        connect(P10.y, simpleLag14.u) annotation (Line(points={{167,-80},{167,
+                -78},{182,-78}},
+                            color={0,0,127}));
+        connect(P11.y, simpleLag12.u) annotation (Line(points={{167,-100},{167,
+                -98},{182,-98}}, color={0,0,127}));
+        connect(P12.y, simpleLag13.u) annotation (Line(points={{167,-120},{182,
+                -120}},            color={0,0,127}));
+        connect(PRE12, P12.y) annotation (Line(points={{290,-120},{258,-120},{
+                258,-144},{167,-144},{167,-120}}, color={0,0,127}));
+        connect(PRE11, P11.y) annotation (Line(points={{290,-100},{270,-100},{
+                270,-156},{167,-156},{167,-100}}, color={0,0,127}));
+        connect(PRE10, P10.y) annotation (Line(points={{290,-80},{252,-80},{252,
+                -136},{172,-136},{172,-80},{167,-80}}, color={0,0,127}));
+        connect(PRE9, P9.y) annotation (Line(points={{290,-60},{270,-60},{270,
+                -98},{254,-98},{254,-138},{174,-138},{174,-60},{167,-60}},
+              color={0,0,127}));
+        connect(PRE8, P8.y) annotation (Line(points={{290,-40},{252,-40},{252,
+                120},{174,120},{174,-40},{167,-40}}, color={0,0,127}));
+        connect(PRE7, P7.y) annotation (Line(points={{290,-20},{254,-20},{254,
+                122},{170,122},{170,116},{172,116},{172,-20},{167,-20}}, color=
+                {0,0,127}));
+        connect(PRE6, P6.y) annotation (Line(points={{290,0},{230,0},{230,0},{
+                167,0}}, color={0,0,127}));
+        connect(PRE5, P5.y)
+          annotation (Line(points={{290,20},{167,20}}, color={0,0,127}));
+        connect(PRE4, P4.y)
+          annotation (Line(points={{290,40},{167,40}}, color={0,0,127}));
+        connect(PRE3, P3.y)
+          annotation (Line(points={{290,60},{167,60}}, color={0,0,127}));
+        connect(PRE2, P2.y)
+          annotation (Line(points={{290,80},{167,80}}, color={0,0,127}));
+        connect(PRE1, P1.y) annotation (Line(points={{290,100},{256,100},{256,
+                118},{176,118},{176,100},{167,100}}, color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-160,30},{-134,-90}},
+                lineColor={0,140,72},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,36},{124,-124}},
+                lineColor={238,46,47},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit"),
+              Text(
+                extent={{-164,50},{-132,30}},
+                textColor={0,140,72},
+                textString="Inputs")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=5,
+            __Dymola_NumberOfIntervals=1000,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_G2ONLY_FILTERED;
+
+      model MPCAppliedEnergyOriginal_v3_FILTERED_test
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker breaker(enableTrigger=false,
+          t_o=100000,
+          rc_enabled=false,
+          t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealInput IN1(start=0)
+          "Connector of Real input signal 2" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,10}),iconTransformation(extent={{-10,-10},{10,10}}, origin={-150,10})));
+        Modelica.Blocks.Sources.Constant IN11(k=0)
+          annotation (Placement(transformation(extent={{-108,-2},{-96,10}})));
+        Modelica.Blocks.Math.Add AddU1
+          annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+        Modelica.Blocks.Sources.Constant IN22(k=0)
+          annotation (Placement(transformation(extent={{-108,-32},{-96,-20}})));
+        Modelica.Blocks.Math.Add AddU2
+          annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+        Modelica.Blocks.Interfaces.RealInput IN2(start=0)
+          "Connector of Real input signal 2"
+                 annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,-12}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-150,-12})));
+                  Modelica.Blocks.Interfaces.RealInput IN3 "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-44},{-140,-24}}),
+              iconTransformation(extent={{-160,-44},{-140,-24}})));
+        Modelica.Blocks.Interfaces.RealInput IN4(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-66},{-140,-46}}),
+              iconTransformation(extent={{-160,-66},{-140,-46}})));
+        Modelica.Blocks.Interfaces.RealInput IN5(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-88},{-140,-68}}),
+              iconTransformation(extent={{-160,-88},{-140,-68}})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PF16)
+          annotation (Placement(transformation(extent={{-68,104},{-48,124}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=100,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(
+          enableNoise=true,
+          useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-44,102},{-24,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0.01,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=5)
+          annotation (Placement(transformation(extent={{70,-36},{80,-26}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl_ADD_ON
+                                                                PV(
+          V_b=480,
+          P_0=powerFlow.powerflow.machines.PPV,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QPV,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V8,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A8,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+        Modelica.Blocks.Math.Add AddU3
+          annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
+        Modelica.Blocks.Sources.Constant IN33(k=0)
+          annotation (Placement(transformation(extent={{-108,-62},{-96,-50}})));
+
+        Modelica.Blocks.Math.Add AddU4
+          annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
+        Modelica.Blocks.Math.Add AddU5
+          annotation (Placement(transformation(extent={{-80,-116},{-60,-96}})));
+        Modelica.Blocks.Sources.Constant IN44(k=0)
+          annotation (Placement(transformation(extent={{-108,-92},{-96,-80}})));
+        Modelica.Blocks.Sources.Constant IN55(k=0)
+          annotation (Placement(transformation(extent={{-108,-118},{-96,-106}})));
+        GenerationUnits.PSSE.Battery_Units.BESSMPCLocalVQControl BESS(
+          V_base=480,
+          V_b(displayUnit="kV") = 480,
+          enableV_b=true,
+          P_0=powerFlow.powerflow.machines.PBESS,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QBESS,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V10,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A10,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{84,-16},{92,-8}})));
+        Modelica.Blocks.Sources.RealExpression PRE1(y=G2.gen.w)
+          annotation (Placement(transformation(extent={{140,100},{160,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE2(y=G2.gen.delta)
+          annotation (Placement(transformation(extent={{140,80},{160,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE3(y=G2.gen.Epq)
+          annotation (Placement(transformation(extent={{140,60},{160,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE4(y=G2.gen.PSIkd)
+          annotation (Placement(transformation(extent={{140,40},{160,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE5(y=G2.gen.PSIppq)
+          annotation (Placement(transformation(extent={{140,20},{160,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE6(y=G2.sEXSMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,0},{160,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE7(y=G2.sEXSMPC.leadLag.TF.x_scaled[1])
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE8(y=G2.gASTMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE9(y=G2.gASTMPC.simpleLag.state)
+          annotation (Placement(transformation(extent={{140,-60},{160,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE10(y=G2.gASTMPC.simpleLag1.state)
+          annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE11(y=Bus6.v)
+          annotation (Placement(transformation(extent={{140,-100},{160,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE12(y=PV.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{140,-120},{160,-100}})));
+        Modelica.Blocks.Sources.RealExpression PRE13(y=PV.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{140,-140},{160,-120}})));
+        Modelica.Blocks.Sources.RealExpression PRE14(y=PV.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,100},{280,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE15(y=PV.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,80},{280,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE16(y=Bus8.v)
+          annotation (Placement(transformation(extent={{260,60},{280,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE17(y=BESS.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{260,40},{280,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE18(y=BESS.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{260,20},{280,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE19(y=BESS.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,0},{280,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE20(y=BESS.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,-20},{280,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE21(y=Bus10.v)
+          annotation (Placement(transformation(extent={{260,-40},{280,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE22(y=Load2.P)
+          annotation (Placement(transformation(extent={{260,-60},{280,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE23(y=Load2.Q)
+          annotation (Placement(transformation(extent={{260,-80},{280,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE24(y=Bus5.v)
+          annotation (Placement(transformation(extent={{260,-100},{280,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE25(y=Bus5.angle)
+          annotation (Placement(transformation(extent={{260,-120},{280,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{300,-100},{320,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT24 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-100},{360,-80}})));
+        NonElectrical.Continuous.SimpleLag simpleLag1(
+          K=1,
+          T=0.001,
+          y_start=powerFlow.powerflow.bus.A5)
+          annotation (Placement(transformation(extent={{300,-120},{320,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT25 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-120},{360,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag2(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.QL2/100000000)
+          annotation (Placement(transformation(extent={{300,-80},{320,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT23 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-80},{360,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{220,100},{240,120}})));
+        NonElectrical.Continuous.SimpleLag simpleLag3(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V10)
+          annotation (Placement(transformation(extent={{300,-40},{320,-20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag4(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.PL2/100000000)
+          annotation (Placement(transformation(extent={{300,-60},{320,-40}})));
+        NonElectrical.Continuous.SimpleLag simpleLag5(
+          K=1,
+          T=0.1,
+          y_start=0.02)
+          annotation (Placement(transformation(extent={{300,-20},{320,0}})));
+        NonElectrical.Continuous.SimpleLag simpleLag6(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QBESS/100000000)
+          annotation (Placement(transformation(extent={{300,22},{320,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag7(
+          K=1,
+          T=0.1,
+          y_start=0.01)
+          annotation (Placement(transformation(extent={{300,0},{320,20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag8(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PBESS/100000000)
+          annotation (Placement(transformation(extent={{300,42},{320,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag9(
+          K=1,
+          T=0.1,
+          y_start=0.0089)
+          annotation (Placement(transformation(extent={{300,82},{320,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag10(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V8)
+          annotation (Placement(transformation(extent={{300,62},{320,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag11(
+          K=1,
+          T=0.1,
+          y_start=-0.0199)
+          annotation (Placement(transformation(extent={{300,102},{320,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag12(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V6)
+          annotation (Placement(transformation(extent={{180,-98},{200,-78}})));
+        NonElectrical.Continuous.SimpleLag simpleLag13(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PPV/100000000)
+          annotation (Placement(transformation(extent={{180,-118},{200,-98}})));
+        NonElectrical.Continuous.SimpleLag simpleLag14(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-78},{200,-58}})));
+        NonElectrical.Continuous.SimpleLag simpleLag15(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-38},{200,-18}})));
+        NonElectrical.Continuous.SimpleLag simpleLag16(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-58},{200,-38}})));
+        NonElectrical.Continuous.SimpleLag simpleLag17(
+          K=1,
+          T=0.1,
+          y_start=0.024)
+          annotation (Placement(transformation(extent={{180,-18},{200,2}})));
+        NonElectrical.Continuous.SimpleLag simpleLag18(
+          K=1,
+          T=0.1,
+          y_start=0.417)
+          annotation (Placement(transformation(extent={{180,22},{200,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag19(
+          K=1,
+          T=0.1,
+          y_start=1.187)
+          annotation (Placement(transformation(extent={{180,2},{200,22}})));
+        NonElectrical.Continuous.SimpleLag simpleLag20(
+          K=1,
+          T=0.1,
+          y_start=0.908)
+          annotation (Placement(transformation(extent={{180,42},{200,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag21(
+          K=1,
+          T=0.1,
+          y_start=0.4735)
+          annotation (Placement(transformation(extent={{180,82},{200,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag22(
+          K=1,
+          T=0.1,
+          y_start=0.925)
+          annotation (Placement(transformation(extent={{180,62},{200,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag23(
+          K=1,
+          T=0.1,
+          y_start=G2.gen.w0)
+          annotation (Placement(transformation(extent={{180,102},{200,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag24(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QPV/100000000)
+          annotation (Placement(transformation(extent={{180,-138},{200,-118}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{220,80},{240,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{220,60},{240,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{220,40},{240,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{220,20},{240,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{220,0},{240,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{220,-20},{240,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{220,-40},{240,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{220,-60},{240,-40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{220,-80},{240,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{220,-100},{240,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{220,-120},{240,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT13
+          annotation (Placement(transformation(extent={{220,-140},{240,-120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT14
+          annotation (Placement(transformation(extent={{340,100},{360,120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT15
+          annotation (Placement(transformation(extent={{340,80},{360,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT16
+          annotation (Placement(transformation(extent={{340,60},{360,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT17
+          annotation (Placement(transformation(extent={{340,40},{360,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT18
+          annotation (Placement(transformation(extent={{340,20},{360,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT19
+          annotation (Placement(transformation(extent={{340,0},{360,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT20
+          annotation (Placement(transformation(extent={{340,-20},{360,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT21
+          annotation (Placement(transformation(extent={{340,-40},{360,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT22
+          annotation (Placement(transformation(extent={{340,-60},{360,-40}})));
+        Electrical.Renewables.PSSE.AddOnBlocks.IrradianceToPower
+          irradianceToPower(
+          Ypv(displayUnit="MW") = 3000000,
+          Sb(displayUnit="MV.A") = 100000000,
+          Tcstc(displayUnit="K") = 298.15,
+          fpv=1,
+          ap=-0.48,
+          Gtstc=1000)
+          annotation (Placement(transformation(extent={{44,-20},{34,-10}})));
+      equation
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(breaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
+        connect(breaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+        connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
+                            color={0,0,127}));
+        connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
+                {-82,16}},
+                       color={0,0,127}));
+
+        connect(IN22.y,AddU2. u2) annotation (Line(points={{-95.4,-26},{-82,-26}},
+                       color={0,0,127}));
+        connect(IN2,AddU2. u1) annotation (Line(points={{-150,-12},{-118,-12},{-118,-14},
+                {-82,-14}},
+                       color={0,0,127}));
+        connect(AddU2.y, G2.Efd_ref)
+          annotation (Line(points={{-59,-20},{-52,-20},{-52,4},{-42,4}},
+                                                                 color={0,0,127}));
+        connect(AddU1.y, G2.P_ref1) annotation (Line(points={{-59,10},{-52,10},{-52,16},
+                {-42,16}},                          color={0,0,127}));
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(AddU3.y, PV.QINPUT) annotation (Line(points={{-59,-50},{-42,-50}},
+                                 color={0,0,127}));
+        connect(IN33.y,AddU3. u2)
+          annotation (Line(points={{-95.4,-56},{-82,-56}}, color={0,0,127}));
+        connect(BESS.p1, Bus10.p)
+          annotation (Line(points={{-20,-90},{-10,-90}}, color={0,0,255}));
+        connect(BESS.Paux1, AddU4.y) annotation (Line(points={{-42,-84},{-54,-84},{-54,
+                -80},{-59,-80}}, color={0,0,127}));
+        connect(IN55.y, AddU5.u2)
+          annotation (Line(points={{-95.4,-112},{-82,-112}}, color={0,0,127}));
+        connect(AddU5.y, BESS.Qext1) annotation (Line(points={{-59,-106},{-52,-106},{-52,
+                -96},{-42,-96}},   color={0,0,127}));
+        connect(IN44.y, AddU4.u2)
+          annotation (Line(points={{-95.4,-86},{-82,-86}}, color={0,0,127}));
+        connect(AddU4.u1,IN4)  annotation (Line(points={{-82,-74},{-100,-74},{-100,-70},
+                {-116,-70},{-116,-56},{-150,-56}}, color={0,0,127}));
+        connect(AddU5.u1,IN5)  annotation (Line(points={{-82,-100},{-116,-100},{-116,-78},
+                {-150,-78}}, color={0,0,127}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(AddU3.u1, IN3) annotation (Line(points={{-82,-44},{-118,-44},{-118,-34},
+                {-150,-34}}, color={0,0,127}));
+        connect(PV.p1, Bus8.p)
+          annotation (Line(points={{-20,-50},{-10,-50}}, color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(add.y, Load2.u) annotation (Line(points={{92.4,-12},{97.15,-12},
+                {97.15,-14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(add.u2, sine.y) annotation (Line(points={{83.2,-14.4},{83.2,-22},
+                {80.5,-22},{80.5,-31}}, color={0,0,127}));
+        connect(simpleLag.y, OUT24)
+          annotation (Line(points={{321,-90},{350,-90}}, color={0,0,127}));
+        connect(simpleLag1.y, OUT25)
+          annotation (Line(points={{321,-110},{350,-110}}, color={0,0,127}));
+        connect(simpleLag2.y, OUT23)
+          annotation (Line(points={{321,-70},{350,-70}}, color={0,0,127}));
+        connect(simpleLag23.y, OUT1)
+          annotation (Line(points={{201,112},{216,112},{216,110},{230,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag21.y, OUT2)
+          annotation (Line(points={{201,92},{216,92},{216,90},{230,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag22.y, OUT3)
+          annotation (Line(points={{201,72},{216,72},{216,70},{230,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag20.y, OUT4)
+          annotation (Line(points={{201,52},{216,52},{216,50},{230,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag18.y, OUT5)
+          annotation (Line(points={{201,32},{216,32},{216,30},{230,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag19.y, OUT6)
+          annotation (Line(points={{201,12},{216,12},{216,10},{230,10}},
+                                                       color={0,0,127}));
+        connect(simpleLag17.y, OUT7)
+          annotation (Line(points={{201,-8},{216,-8},{216,-10},{230,-10}},
+                                                         color={0,0,127}));
+        connect(simpleLag15.y, OUT8)
+          annotation (Line(points={{201,-28},{216,-28},{216,-30},{230,-30}},
+                                                         color={0,0,127}));
+        connect(simpleLag16.y, OUT9)
+          annotation (Line(points={{201,-48},{216,-48},{216,-50},{230,-50}},
+                                                         color={0,0,127}));
+        connect(simpleLag14.y, OUT10)
+          annotation (Line(points={{201,-68},{216,-68},{216,-70},{230,-70}},
+                                                         color={0,0,127}));
+        connect(simpleLag12.y, OUT11)
+          annotation (Line(points={{201,-88},{216,-88},{216,-90},{230,-90}},
+                                                         color={0,0,127}));
+        connect(simpleLag13.y, OUT12)
+          annotation (Line(points={{201,-108},{216,-108},{216,-110},{230,-110}},
+                                                           color={0,0,127}));
+        connect(simpleLag24.y, OUT13)
+          annotation (Line(points={{201,-128},{216,-128},{216,-130},{230,-130}},
+                                                           color={0,0,127}));
+        connect(simpleLag11.y, OUT14)
+          annotation (Line(points={{321,112},{336,112},{336,110},{350,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag9.y, OUT15)
+          annotation (Line(points={{321,92},{336,92},{336,90},{350,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag10.y, OUT16)
+          annotation (Line(points={{321,72},{336,72},{336,70},{350,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag8.y, OUT17)
+          annotation (Line(points={{321,52},{336,52},{336,50},{350,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag6.y, OUT18)
+          annotation (Line(points={{321,32},{336,32},{336,30},{350,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag7.y, OUT19)
+          annotation (Line(points={{321,10},{350,10}}, color={0,0,127}));
+        connect(simpleLag5.y, OUT20)
+          annotation (Line(points={{321,-10},{350,-10}}, color={0,0,127}));
+        connect(simpleLag3.y, OUT21)
+          annotation (Line(points={{321,-30},{350,-30}}, color={0,0,127}));
+        connect(simpleLag4.y, OUT22)
+          annotation (Line(points={{321,-50},{350,-50}}, color={0,0,127}));
+        connect(PRE1.y, simpleLag23.u) annotation (Line(points={{161,110},{161,
+                112},{178,112}}, color={0,0,127}));
+        connect(PRE2.y, simpleLag21.u) annotation (Line(points={{161,90},{161,
+                92},{178,92}}, color={0,0,127}));
+        connect(PRE3.y, simpleLag22.u) annotation (Line(points={{161,70},{161,
+                72},{178,72}}, color={0,0,127}));
+        connect(PRE4.y, simpleLag20.u) annotation (Line(points={{161,50},{161,
+                52},{178,52}}, color={0,0,127}));
+        connect(PRE5.y, simpleLag18.u) annotation (Line(points={{161,30},{161,
+                32},{178,32}}, color={0,0,127}));
+        connect(PRE6.y, simpleLag19.u) annotation (Line(points={{161,10},{161,
+                12},{178,12}}, color={0,0,127}));
+        connect(PRE7.y, simpleLag17.u) annotation (Line(points={{161,-10},{161,
+                -8},{178,-8}}, color={0,0,127}));
+        connect(PRE8.y, simpleLag15.u) annotation (Line(points={{161,-30},{161,
+                -28},{178,-28}}, color={0,0,127}));
+        connect(PRE9.y, simpleLag16.u) annotation (Line(points={{161,-50},{161,
+                -48},{178,-48}}, color={0,0,127}));
+        connect(PRE10.y, simpleLag14.u) annotation (Line(points={{161,-70},{161,
+                -68},{178,-68}}, color={0,0,127}));
+        connect(PRE11.y, simpleLag12.u) annotation (Line(points={{161,-90},{161,
+                -88},{178,-88}}, color={0,0,127}));
+        connect(PRE12.y, simpleLag13.u) annotation (Line(points={{161,-110},{
+                161,-108},{178,-108}}, color={0,0,127}));
+        connect(PRE13.y, simpleLag24.u) annotation (Line(points={{161,-130},{
+                161,-128},{178,-128}}, color={0,0,127}));
+        connect(PRE14.y, simpleLag11.u) annotation (Line(points={{281,110},{281,
+                112},{298,112}}, color={0,0,127}));
+        connect(PRE15.y, simpleLag9.u) annotation (Line(points={{281,90},{281,
+                92},{298,92}}, color={0,0,127}));
+        connect(PRE16.y, simpleLag10.u) annotation (Line(points={{281,70},{281,
+                72},{298,72}}, color={0,0,127}));
+        connect(PRE17.y, simpleLag8.u) annotation (Line(points={{281,50},{281,
+                52},{298,52}}, color={0,0,127}));
+        connect(PRE18.y, simpleLag6.u) annotation (Line(points={{281,30},{281,
+                32},{298,32}}, color={0,0,127}));
+        connect(PRE19.y, simpleLag7.u)
+          annotation (Line(points={{281,10},{298,10}}, color={0,0,127}));
+        connect(PRE20.y, simpleLag5.u)
+          annotation (Line(points={{281,-10},{298,-10}}, color={0,0,127}));
+        connect(PRE21.y, simpleLag3.u)
+          annotation (Line(points={{281,-30},{298,-30}}, color={0,0,127}));
+        connect(PRE22.y, simpleLag4.u)
+          annotation (Line(points={{281,-50},{298,-50}}, color={0,0,127}));
+        connect(PRE23.y, simpleLag2.u)
+          annotation (Line(points={{281,-70},{298,-70}}, color={0,0,127}));
+        connect(PRE24.y, simpleLag.u)
+          annotation (Line(points={{281,-90},{298,-90}}, color={0,0,127}));
+        connect(PRE25.y, simpleLag1.u)
+          annotation (Line(points={{281,-110},{298,-110}}, color={0,0,127}));
+        connect(irradianceToPower.Ppv, PV.IRR2POW) annotation (Line(points={{
+                33.5,-15},{-48,-15},{-48,-43},{-42,-43}}, color={0,0,127}));
+        connect(add.u1, add.u2) annotation (Line(points={{83.2,-9.6},{83.2,
+                -14.4}}, color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-160,30},{-134,-90}},
+                lineColor={0,140,72},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,36},{124,-124}},
+                lineColor={238,46,47},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit"),
+              Text(
+                extent={{-164,50},{-132,30}},
+                textColor={0,140,72},
+                textString="Inputs")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=3600,
+            __Dymola_NumberOfIntervals=1000,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_FILTERED_test;
+
+      model MPCAppliedEnergyOriginal_v3_FILTERED_PF17
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker breaker(enableTrigger=false,
+          t_o=0.55,
+          rc_enabled=false,
+          t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealInput IN1(start=0)
+          "Connector of Real input signal 2" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,10}),iconTransformation(extent={{-10,-10},{10,10}}, origin={-150,10})));
+        Modelica.Blocks.Sources.Constant IN11(k=0)
+          annotation (Placement(transformation(extent={{-108,-2},{-96,10}})));
+        Modelica.Blocks.Math.Add AddU1
+          annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+        Modelica.Blocks.Sources.Constant IN22(k=0)
+          annotation (Placement(transformation(extent={{-108,-32},{-96,-20}})));
+        Modelica.Blocks.Math.Add AddU2
+          annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+        Modelica.Blocks.Interfaces.RealInput IN2(start=0)
+          "Connector of Real input signal 2"
+                 annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,-12}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-150,-12})));
+                  Modelica.Blocks.Interfaces.RealInput IN3 "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-44},{-140,-24}}),
+              iconTransformation(extent={{-160,-44},{-140,-24}})));
+        Modelica.Blocks.Interfaces.RealInput IN4(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-66},{-140,-46}}),
+              iconTransformation(extent={{-160,-66},{-140,-46}})));
+        Modelica.Blocks.Interfaces.RealInput IN5(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-88},{-140,-68}}),
+              iconTransformation(extent={{-160,-88},{-140,-68}})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PF17)
+          annotation (Placement(transformation(extent={{-68,104},{-48,124}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=100,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(
+          enableNoise=true,
+          useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-44,102},{-24,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0.01,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=5)
+          annotation (Placement(transformation(extent={{70,-36},{80,-26}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl_ADD_ON
+                                                                PV(
+          V_b=480,
+          P_0=powerFlow.powerflow.machines.PPV,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QPV,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V8,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A8,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+        Modelica.Blocks.Math.Add AddU3
+          annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
+        Modelica.Blocks.Sources.Constant IN33(k=0)
+          annotation (Placement(transformation(extent={{-108,-62},{-96,-50}})));
+
+        Modelica.Blocks.Math.Add AddU4
+          annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
+        Modelica.Blocks.Math.Add AddU5
+          annotation (Placement(transformation(extent={{-80,-116},{-60,-96}})));
+        Modelica.Blocks.Sources.Constant IN44(k=0)
+          annotation (Placement(transformation(extent={{-108,-92},{-96,-80}})));
+        Modelica.Blocks.Sources.Constant IN55(k=0)
+          annotation (Placement(transformation(extent={{-108,-118},{-96,-106}})));
+        GenerationUnits.PSSE.Battery_Units.BESSMPCLocalVQControl BESS(
+          V_base=480,
+          V_b(displayUnit="kV") = 480,
+          enableV_b=true,
+          P_0=powerFlow.powerflow.machines.PBESS,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QBESS,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V10,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A10,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{84,-16},{92,-8}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0002, samplePeriod=0.02)
+          annotation (Placement(transformation(extent={{64,-18},{76,-6}})));
+        Modelica.Blocks.Sources.RealExpression PRE1(y=G2.gen.w)
+          annotation (Placement(transformation(extent={{140,100},{160,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE2(y=G2.gen.delta)
+          annotation (Placement(transformation(extent={{140,80},{160,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE3(y=G2.gen.Epq)
+          annotation (Placement(transformation(extent={{140,60},{160,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE4(y=G2.gen.PSIkd)
+          annotation (Placement(transformation(extent={{140,40},{160,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE5(y=G2.gen.PSIppq)
+          annotation (Placement(transformation(extent={{140,20},{160,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE6(y=G2.sEXSMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,0},{160,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE7(y=G2.sEXSMPC.leadLag.TF.x_scaled[1])
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE8(y=G2.gASTMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE9(y=G2.gASTMPC.simpleLag.state)
+          annotation (Placement(transformation(extent={{140,-60},{160,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE10(y=G2.gASTMPC.simpleLag1.state)
+          annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE11(y=Bus6.v)
+          annotation (Placement(transformation(extent={{140,-100},{160,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE12(y=PV.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{140,-120},{160,-100}})));
+        Modelica.Blocks.Sources.RealExpression PRE13(y=PV.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{140,-140},{160,-120}})));
+        Modelica.Blocks.Sources.RealExpression PRE14(y=PV.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,100},{280,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE15(y=PV.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,80},{280,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE16(y=Bus8.v)
+          annotation (Placement(transformation(extent={{260,60},{280,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE17(y=BESS.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{260,40},{280,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE18(y=BESS.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{260,20},{280,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE19(y=BESS.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,0},{280,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE20(y=BESS.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,-20},{280,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE21(y=Bus10.v)
+          annotation (Placement(transformation(extent={{260,-40},{280,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE22(y=Load2.P)
+          annotation (Placement(transformation(extent={{260,-60},{280,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE23(y=Load2.Q)
+          annotation (Placement(transformation(extent={{260,-80},{280,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE24(y=Bus5.v)
+          annotation (Placement(transformation(extent={{260,-100},{280,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE25(y=Bus5.angle)
+          annotation (Placement(transformation(extent={{260,-120},{280,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{300,-100},{320,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT24 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-100},{360,-80}})));
+        NonElectrical.Continuous.SimpleLag simpleLag1(
+          K=1,
+          T=0.001,
+          y_start=powerFlow.powerflow.bus.A5)
+          annotation (Placement(transformation(extent={{300,-120},{320,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT25 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-120},{360,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag2(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.QL2/100000000)
+          annotation (Placement(transformation(extent={{300,-80},{320,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT23 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-80},{360,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{220,100},{240,120}})));
+        NonElectrical.Continuous.SimpleLag simpleLag3(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V10)
+          annotation (Placement(transformation(extent={{300,-40},{320,-20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag4(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.PL2/100000000)
+          annotation (Placement(transformation(extent={{300,-60},{320,-40}})));
+        NonElectrical.Continuous.SimpleLag simpleLag5(
+          K=1,
+          T=0.1,
+          y_start=0.0091)
+          annotation (Placement(transformation(extent={{300,-20},{320,0}})));
+        NonElectrical.Continuous.SimpleLag simpleLag6(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QBESS/100000000)
+          annotation (Placement(transformation(extent={{300,22},{320,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag7(
+          K=1,
+          T=0.1,
+          y_start=0.0099)
+          annotation (Placement(transformation(extent={{300,0},{320,20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag8(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PBESS/100000000)
+          annotation (Placement(transformation(extent={{300,42},{320,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag9(
+          K=1,
+          T=0.1,
+          y_start=0.0057)
+          annotation (Placement(transformation(extent={{300,82},{320,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag10(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V8)
+          annotation (Placement(transformation(extent={{300,62},{320,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag11(
+          K=1,
+          T=0.1,
+          y_start=-0.02)
+          annotation (Placement(transformation(extent={{300,102},{320,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag12(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V6)
+          annotation (Placement(transformation(extent={{180,-98},{200,-78}})));
+        NonElectrical.Continuous.SimpleLag simpleLag13(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PPV/100000000)
+          annotation (Placement(transformation(extent={{180,-118},{200,-98}})));
+        NonElectrical.Continuous.SimpleLag simpleLag14(
+          K=1,
+          T=0.1,
+          y_start=0.42)
+          annotation (Placement(transformation(extent={{180,-78},{200,-58}})));
+        NonElectrical.Continuous.SimpleLag simpleLag15(
+          K=1,
+          T=0.1,
+          y_start=1.25)
+          annotation (Placement(transformation(extent={{180,-38},{200,-18}})));
+        NonElectrical.Continuous.SimpleLag simpleLag16(
+          K=1,
+          T=0.1,
+          y_start=0.42)
+          annotation (Placement(transformation(extent={{180,-58},{200,-38}})));
+        NonElectrical.Continuous.SimpleLag simpleLag17(
+          K=1,
+          T=0.1,
+          y_start=0.025)
+          annotation (Placement(transformation(extent={{180,-18},{200,2}})));
+        NonElectrical.Continuous.SimpleLag simpleLag18(
+          K=1,
+          T=0.1,
+          y_start=0.554)
+          annotation (Placement(transformation(extent={{180,22},{200,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag19(
+          K=1,
+          T=0.1,
+          y_start=1.259)
+          annotation (Placement(transformation(extent={{180,2},{200,22}})));
+        NonElectrical.Continuous.SimpleLag simpleLag20(
+          K=1,
+          T=0.1,
+          y_start=0.824)
+          annotation (Placement(transformation(extent={{180,42},{200,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag21(
+          K=1,
+          T=0.1,
+          y_start=0.666)
+          annotation (Placement(transformation(extent={{180,82},{200,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag22(
+          K=1,
+          T=0.1,
+          y_start=0.85)
+          annotation (Placement(transformation(extent={{180,62},{200,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag23(
+          K=1,
+          T=0.1,
+          y_start=G2.gen.w0)
+          annotation (Placement(transformation(extent={{180,102},{200,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag24(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QPV/100000000)
+          annotation (Placement(transformation(extent={{180,-138},{200,-118}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{220,80},{240,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{220,60},{240,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{220,40},{240,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{220,20},{240,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{220,0},{240,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{220,-20},{240,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{220,-40},{240,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{220,-60},{240,-40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{220,-80},{240,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{220,-100},{240,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{220,-120},{240,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT13
+          annotation (Placement(transformation(extent={{220,-140},{240,-120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT14
+          annotation (Placement(transformation(extent={{340,100},{360,120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT15
+          annotation (Placement(transformation(extent={{340,80},{360,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT16
+          annotation (Placement(transformation(extent={{340,60},{360,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT17
+          annotation (Placement(transformation(extent={{340,40},{360,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT18
+          annotation (Placement(transformation(extent={{340,20},{360,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT19
+          annotation (Placement(transformation(extent={{340,0},{360,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT20
+          annotation (Placement(transformation(extent={{340,-20},{360,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT21
+          annotation (Placement(transformation(extent={{340,-40},{360,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT22
+          annotation (Placement(transformation(extent={{340,-60},{360,-40}})));
+        Electrical.Renewables.PSSE.AddOnBlocks.IrradianceToPower
+          irradianceToPower(
+          Ypv(displayUnit="MW") = 3000000,
+          Sb(displayUnit="MV.A") = 100000000,
+          Tcstc(displayUnit="K") = 298.15,
+          fpv=1,
+          ap=-0.48,
+          Gtstc=1000)
+          annotation (Placement(transformation(extent={{44,-20},{34,-10}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection1(
+            active_sigma=0.0001, samplePeriod=1)
+          annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+              rotation=180,
+              origin={36,-30})));
+        Modelica.Blocks.Math.Add add1
+          annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+              rotation=180,
+              origin={18,-28})));
+      equation
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(breaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
+        connect(breaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+        connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
+                            color={0,0,127}));
+        connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
+                {-82,16}},
+                       color={0,0,127}));
+
+        connect(IN22.y,AddU2. u2) annotation (Line(points={{-95.4,-26},{-82,-26}},
+                       color={0,0,127}));
+        connect(IN2,AddU2. u1) annotation (Line(points={{-150,-12},{-118,-12},{-118,-14},
+                {-82,-14}},
+                       color={0,0,127}));
+        connect(AddU2.y, G2.Efd_ref)
+          annotation (Line(points={{-59,-20},{-52,-20},{-52,4},{-42,4}},
+                                                                 color={0,0,127}));
+        connect(AddU1.y, G2.P_ref1) annotation (Line(points={{-59,10},{-52,10},{-52,16},
+                {-42,16}},                          color={0,0,127}));
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(AddU3.y, PV.QINPUT) annotation (Line(points={{-59,-50},{-42,-50}},
+                                 color={0,0,127}));
+        connect(IN33.y,AddU3. u2)
+          annotation (Line(points={{-95.4,-56},{-82,-56}}, color={0,0,127}));
+        connect(BESS.p1, Bus10.p)
+          annotation (Line(points={{-20,-90},{-10,-90}}, color={0,0,255}));
+        connect(BESS.Paux1, AddU4.y) annotation (Line(points={{-42,-84},{-54,-84},{-54,
+                -80},{-59,-80}}, color={0,0,127}));
+        connect(IN55.y, AddU5.u2)
+          annotation (Line(points={{-95.4,-112},{-82,-112}}, color={0,0,127}));
+        connect(AddU5.y, BESS.Qext1) annotation (Line(points={{-59,-106},{-52,-106},{-52,
+                -96},{-42,-96}},   color={0,0,127}));
+        connect(IN44.y, AddU4.u2)
+          annotation (Line(points={{-95.4,-86},{-82,-86}}, color={0,0,127}));
+        connect(AddU4.u1,IN4)  annotation (Line(points={{-82,-74},{-100,-74},{-100,-70},
+                {-116,-70},{-116,-56},{-150,-56}}, color={0,0,127}));
+        connect(AddU5.u1,IN5)  annotation (Line(points={{-82,-100},{-116,-100},{-116,-78},
+                {-150,-78}}, color={0,0,127}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(AddU3.u1, IN3) annotation (Line(points={{-82,-44},{-118,-44},{-118,-34},
+                {-150,-34}}, color={0,0,127}));
+        connect(PV.p1, Bus8.p)
+          annotation (Line(points={{-20,-50},{-10,-50}}, color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(add.y, Load2.u) annotation (Line(points={{92.4,-12},{97.15,-12},
+                {97.15,-14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(add.u2, sine.y) annotation (Line(points={{83.2,-14.4},{83.2,-22},
+                {80.5,-22},{80.5,-31}}, color={0,0,127}));
+        connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{76.54,
+                -12.06},{79.87,-12.06},{79.87,-9.6},{83.2,-9.6}},   color={0,0,
+                127}));
+        connect(simpleLag.y, OUT24)
+          annotation (Line(points={{321,-90},{350,-90}}, color={0,0,127}));
+        connect(simpleLag1.y, OUT25)
+          annotation (Line(points={{321,-110},{350,-110}}, color={0,0,127}));
+        connect(simpleLag2.y, OUT23)
+          annotation (Line(points={{321,-70},{350,-70}}, color={0,0,127}));
+        connect(simpleLag23.y, OUT1)
+          annotation (Line(points={{201,112},{216,112},{216,110},{230,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag21.y, OUT2)
+          annotation (Line(points={{201,92},{216,92},{216,90},{230,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag22.y, OUT3)
+          annotation (Line(points={{201,72},{216,72},{216,70},{230,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag20.y, OUT4)
+          annotation (Line(points={{201,52},{216,52},{216,50},{230,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag18.y, OUT5)
+          annotation (Line(points={{201,32},{216,32},{216,30},{230,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag19.y, OUT6)
+          annotation (Line(points={{201,12},{216,12},{216,10},{230,10}},
+                                                       color={0,0,127}));
+        connect(simpleLag17.y, OUT7)
+          annotation (Line(points={{201,-8},{216,-8},{216,-10},{230,-10}},
+                                                         color={0,0,127}));
+        connect(simpleLag15.y, OUT8)
+          annotation (Line(points={{201,-28},{216,-28},{216,-30},{230,-30}},
+                                                         color={0,0,127}));
+        connect(simpleLag16.y, OUT9)
+          annotation (Line(points={{201,-48},{216,-48},{216,-50},{230,-50}},
+                                                         color={0,0,127}));
+        connect(simpleLag14.y, OUT10)
+          annotation (Line(points={{201,-68},{216,-68},{216,-70},{230,-70}},
+                                                         color={0,0,127}));
+        connect(simpleLag12.y, OUT11)
+          annotation (Line(points={{201,-88},{216,-88},{216,-90},{230,-90}},
+                                                         color={0,0,127}));
+        connect(simpleLag13.y, OUT12)
+          annotation (Line(points={{201,-108},{216,-108},{216,-110},{230,-110}},
+                                                           color={0,0,127}));
+        connect(simpleLag24.y, OUT13)
+          annotation (Line(points={{201,-128},{216,-128},{216,-130},{230,-130}},
+                                                           color={0,0,127}));
+        connect(simpleLag11.y, OUT14)
+          annotation (Line(points={{321,112},{336,112},{336,110},{350,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag9.y, OUT15)
+          annotation (Line(points={{321,92},{336,92},{336,90},{350,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag10.y, OUT16)
+          annotation (Line(points={{321,72},{336,72},{336,70},{350,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag8.y, OUT17)
+          annotation (Line(points={{321,52},{336,52},{336,50},{350,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag6.y, OUT18)
+          annotation (Line(points={{321,32},{336,32},{336,30},{350,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag7.y, OUT19)
+          annotation (Line(points={{321,10},{350,10}}, color={0,0,127}));
+        connect(simpleLag5.y, OUT20)
+          annotation (Line(points={{321,-10},{350,-10}}, color={0,0,127}));
+        connect(simpleLag3.y, OUT21)
+          annotation (Line(points={{321,-30},{350,-30}}, color={0,0,127}));
+        connect(simpleLag4.y, OUT22)
+          annotation (Line(points={{321,-50},{350,-50}}, color={0,0,127}));
+        connect(PRE1.y, simpleLag23.u) annotation (Line(points={{161,110},{161,
+                112},{178,112}}, color={0,0,127}));
+        connect(PRE2.y, simpleLag21.u) annotation (Line(points={{161,90},{161,
+                92},{178,92}}, color={0,0,127}));
+        connect(PRE3.y, simpleLag22.u) annotation (Line(points={{161,70},{161,
+                72},{178,72}}, color={0,0,127}));
+        connect(PRE4.y, simpleLag20.u) annotation (Line(points={{161,50},{161,
+                52},{178,52}}, color={0,0,127}));
+        connect(PRE5.y, simpleLag18.u) annotation (Line(points={{161,30},{161,
+                32},{178,32}}, color={0,0,127}));
+        connect(PRE6.y, simpleLag19.u) annotation (Line(points={{161,10},{161,
+                12},{178,12}}, color={0,0,127}));
+        connect(PRE7.y, simpleLag17.u) annotation (Line(points={{161,-10},{161,
+                -8},{178,-8}}, color={0,0,127}));
+        connect(PRE8.y, simpleLag15.u) annotation (Line(points={{161,-30},{161,
+                -28},{178,-28}}, color={0,0,127}));
+        connect(PRE9.y, simpleLag16.u) annotation (Line(points={{161,-50},{161,
+                -48},{178,-48}}, color={0,0,127}));
+        connect(PRE10.y, simpleLag14.u) annotation (Line(points={{161,-70},{161,
+                -68},{178,-68}}, color={0,0,127}));
+        connect(PRE11.y, simpleLag12.u) annotation (Line(points={{161,-90},{161,
+                -88},{178,-88}}, color={0,0,127}));
+        connect(PRE12.y, simpleLag13.u) annotation (Line(points={{161,-110},{
+                161,-108},{178,-108}}, color={0,0,127}));
+        connect(PRE13.y, simpleLag24.u) annotation (Line(points={{161,-130},{
+                161,-128},{178,-128}}, color={0,0,127}));
+        connect(PRE14.y, simpleLag11.u) annotation (Line(points={{281,110},{281,
+                112},{298,112}}, color={0,0,127}));
+        connect(PRE15.y, simpleLag9.u) annotation (Line(points={{281,90},{281,
+                92},{298,92}}, color={0,0,127}));
+        connect(PRE16.y, simpleLag10.u) annotation (Line(points={{281,70},{281,
+                72},{298,72}}, color={0,0,127}));
+        connect(PRE17.y, simpleLag8.u) annotation (Line(points={{281,50},{281,
+                52},{298,52}}, color={0,0,127}));
+        connect(PRE18.y, simpleLag6.u) annotation (Line(points={{281,30},{281,
+                32},{298,32}}, color={0,0,127}));
+        connect(PRE19.y, simpleLag7.u)
+          annotation (Line(points={{281,10},{298,10}}, color={0,0,127}));
+        connect(PRE20.y, simpleLag5.u)
+          annotation (Line(points={{281,-10},{298,-10}}, color={0,0,127}));
+        connect(PRE21.y, simpleLag3.u)
+          annotation (Line(points={{281,-30},{298,-30}}, color={0,0,127}));
+        connect(PRE22.y, simpleLag4.u)
+          annotation (Line(points={{281,-50},{298,-50}}, color={0,0,127}));
+        connect(PRE23.y, simpleLag2.u)
+          annotation (Line(points={{281,-70},{298,-70}}, color={0,0,127}));
+        connect(PRE24.y, simpleLag.u)
+          annotation (Line(points={{281,-90},{298,-90}}, color={0,0,127}));
+        connect(PRE25.y, simpleLag1.u)
+          annotation (Line(points={{281,-110},{298,-110}}, color={0,0,127}));
+        connect(whiteNoiseInjection1.y, add1.u1) annotation (Line(points={{
+                29.46,-29.94},{30,-30.4},{22.8,-30.4}}, color={0,0,127}));
+        connect(irradianceToPower.Ppv, add1.u2) annotation (Line(points={{33.5,
+                -15},{22.8,-15},{22.8,-25.6}}, color={0,0,127}));
+        connect(add1.y, PV.IRR2POW) annotation (Line(points={{13.6,-28},{-50,
+                -28},{-50,-43},{-42,-43}}, color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-160,30},{-134,-90}},
+                lineColor={0,140,72},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,36},{124,-124}},
+                lineColor={238,46,47},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit"),
+              Text(
+                extent={{-164,50},{-132,30}},
+                textColor={0,140,72},
+                textString="Inputs")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=10,
+            __Dymola_NumberOfIntervals=1000,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_FILTERED_PF17;
+
+      model MPCAppliedEnergyOriginal_v3_FILTERED_LOGIC
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker circuitbreaker(
+          enableTrigger=false,
+          t_o=0.55,
+          rc_enabled=true,
+          t_rc=1000) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealInput IN1(start=0)
+          "Connector of Real input signal 2" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,10}),iconTransformation(extent={{-10,-10},{10,10}}, origin={-150,10})));
+        Modelica.Blocks.Sources.Constant IN11(k=0)
+          annotation (Placement(transformation(extent={{-108,-2},{-96,10}})));
+        Modelica.Blocks.Math.Add AddU1
+          annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+        Modelica.Blocks.Sources.Constant IN22(k=0)
+          annotation (Placement(transformation(extent={{-108,-32},{-96,-20}})));
+        Modelica.Blocks.Math.Add AddU2
+          annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+        Modelica.Blocks.Interfaces.RealInput IN2(start=0)
+          "Connector of Real input signal 2"
+                 annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,-12}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-150,-12})));
+                  Modelica.Blocks.Interfaces.RealInput IN3 "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-44},{-140,-24}}),
+              iconTransformation(extent={{-160,-44},{-140,-24}})));
+        Modelica.Blocks.Interfaces.RealInput IN4(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-66},{-140,-46}}),
+              iconTransformation(extent={{-160,-66},{-140,-46}})));
+        Modelica.Blocks.Interfaces.RealInput IN5(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-88},{-140,-68}}),
+              iconTransformation(extent={{-160,-88},{-140,-68}})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PF16)
+          annotation (Placement(transformation(extent={{-68,104},{-48,124}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=100,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(
+          enableNoise=true,
+          useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-44,102},{-24,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0.01,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=5)
+          annotation (Placement(transformation(extent={{70,-36},{80,-26}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl_ADD_ON
+                                                                PV(
+          V_b=480,
+          P_0=powerFlow.powerflow.machines.PPV,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QPV,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V8,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A8,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+        Modelica.Blocks.Math.Add AddU3
+          annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
+        Modelica.Blocks.Sources.Constant IN33(k=0)
+          annotation (Placement(transformation(extent={{-108,-62},{-96,-50}})));
+
+        Modelica.Blocks.Math.Add AddU4
+          annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
+        Modelica.Blocks.Math.Add AddU5
+          annotation (Placement(transformation(extent={{-80,-116},{-60,-96}})));
+        Modelica.Blocks.Sources.Constant IN44(k=0)
+          annotation (Placement(transformation(extent={{-108,-92},{-96,-80}})));
+        Modelica.Blocks.Sources.Constant IN55(k=0)
+          annotation (Placement(transformation(extent={{-108,-118},{-96,-106}})));
+        GenerationUnits.PSSE.Battery_Units.BESSMPCLocalVQControl BESS(
+          V_base=480,
+          V_b(displayUnit="kV") = 480,
+          enableV_b=true,
+          P_0=powerFlow.powerflow.machines.PBESS,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QBESS,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V10,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A10,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{84,-16},{92,-8}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0002, samplePeriod=0.02)
+          annotation (Placement(transformation(extent={{64,-18},{76,-6}})));
+        Modelica.Blocks.Sources.RealExpression PRE1(y=G2.gen.w)
+          annotation (Placement(transformation(extent={{140,100},{160,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE2(y=G2.gen.delta)
+          annotation (Placement(transformation(extent={{140,80},{160,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE3(y=G2.gen.Epq)
+          annotation (Placement(transformation(extent={{140,60},{160,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE4(y=G2.gen.PSIkd)
+          annotation (Placement(transformation(extent={{140,40},{160,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE5(y=G2.gen.PSIppq)
+          annotation (Placement(transformation(extent={{140,20},{160,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE6(y=G2.sEXSMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,0},{160,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE7(y=G2.sEXSMPC.leadLag.TF.x_scaled[1])
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE8(y=G2.gASTMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE9(y=G2.gASTMPC.simpleLag.state)
+          annotation (Placement(transformation(extent={{140,-60},{160,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE10(y=G2.gASTMPC.simpleLag1.state)
+          annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE11(y=Bus6.v)
+          annotation (Placement(transformation(extent={{140,-100},{160,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE12(y=PV.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{140,-120},{160,-100}})));
+        Modelica.Blocks.Sources.RealExpression PRE13(y=PV.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{140,-140},{160,-120}})));
+        Modelica.Blocks.Sources.RealExpression PRE14(y=PV.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,100},{280,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE15(y=PV.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,80},{280,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE16(y=Bus8.v)
+          annotation (Placement(transformation(extent={{260,60},{280,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE17(y=BESS.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{260,40},{280,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE18(y=BESS.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{260,20},{280,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE19(y=BESS.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,0},{280,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE20(y=BESS.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,-20},{280,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE21(y=Bus10.v)
+          annotation (Placement(transformation(extent={{260,-40},{280,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE22(y=Load2.P)
+          annotation (Placement(transformation(extent={{260,-60},{280,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE23(y=Load2.Q)
+          annotation (Placement(transformation(extent={{260,-80},{280,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE24(y=Bus5.v)
+          annotation (Placement(transformation(extent={{260,-100},{280,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE25(y=Bus5.angle)
+          annotation (Placement(transformation(extent={{260,-120},{280,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{300,-100},{320,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT24 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-100},{360,-80}})));
+        NonElectrical.Continuous.SimpleLag simpleLag1(
+          K=1,
+          T=0.001,
+          y_start=powerFlow.powerflow.bus.A5)
+          annotation (Placement(transformation(extent={{300,-120},{320,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT25 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-120},{360,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag2(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.QL2/100000000)
+          annotation (Placement(transformation(extent={{300,-80},{320,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT23 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-80},{360,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{220,100},{240,120}})));
+        NonElectrical.Continuous.SimpleLag simpleLag3(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V10)
+          annotation (Placement(transformation(extent={{300,-40},{320,-20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag4(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.PL2/100000000)
+          annotation (Placement(transformation(extent={{300,-60},{320,-40}})));
+        NonElectrical.Continuous.SimpleLag simpleLag5(
+          K=1,
+          T=0.1,
+          y_start=0.02)
+          annotation (Placement(transformation(extent={{300,-20},{320,0}})));
+        NonElectrical.Continuous.SimpleLag simpleLag6(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QBESS/100000000)
+          annotation (Placement(transformation(extent={{300,22},{320,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag7(
+          K=1,
+          T=0.1,
+          y_start=0.01)
+          annotation (Placement(transformation(extent={{300,0},{320,20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag8(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PBESS/100000000)
+          annotation (Placement(transformation(extent={{300,42},{320,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag9(
+          K=1,
+          T=0.1,
+          y_start=0.0089)
+          annotation (Placement(transformation(extent={{300,82},{320,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag10(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V8)
+          annotation (Placement(transformation(extent={{300,62},{320,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag11(
+          K=1,
+          T=0.1,
+          y_start=-0.0199)
+          annotation (Placement(transformation(extent={{300,102},{320,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag12(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V6)
+          annotation (Placement(transformation(extent={{180,-98},{200,-78}})));
+        NonElectrical.Continuous.SimpleLag simpleLag13(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PPV/100000000)
+          annotation (Placement(transformation(extent={{180,-118},{200,-98}})));
+        NonElectrical.Continuous.SimpleLag simpleLag14(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-78},{200,-58}})));
+        NonElectrical.Continuous.SimpleLag simpleLag15(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-38},{200,-18}})));
+        NonElectrical.Continuous.SimpleLag simpleLag16(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-58},{200,-38}})));
+        NonElectrical.Continuous.SimpleLag simpleLag17(
+          K=1,
+          T=0.1,
+          y_start=0.024)
+          annotation (Placement(transformation(extent={{180,-18},{200,2}})));
+        NonElectrical.Continuous.SimpleLag simpleLag18(
+          K=1,
+          T=0.1,
+          y_start=0.417)
+          annotation (Placement(transformation(extent={{180,22},{200,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag19(
+          K=1,
+          T=0.1,
+          y_start=1.187)
+          annotation (Placement(transformation(extent={{180,2},{200,22}})));
+        NonElectrical.Continuous.SimpleLag simpleLag20(
+          K=1,
+          T=0.1,
+          y_start=0.908)
+          annotation (Placement(transformation(extent={{180,42},{200,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag21(
+          K=1,
+          T=0.1,
+          y_start=0.4735)
+          annotation (Placement(transformation(extent={{180,82},{200,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag22(
+          K=1,
+          T=0.1,
+          y_start=0.925)
+          annotation (Placement(transformation(extent={{180,62},{200,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag23(
+          K=1,
+          T=0.1,
+          y_start=G2.gen.w0)
+          annotation (Placement(transformation(extent={{180,102},{200,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag24(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QPV/100000000)
+          annotation (Placement(transformation(extent={{180,-138},{200,-118}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{220,80},{240,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{220,60},{240,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{220,40},{240,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{220,20},{240,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{220,0},{240,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{220,-20},{240,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{220,-40},{240,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{220,-60},{240,-40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{220,-80},{240,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{220,-100},{240,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{220,-120},{240,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT13
+          annotation (Placement(transformation(extent={{220,-140},{240,-120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT14
+          annotation (Placement(transformation(extent={{340,100},{360,120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT15
+          annotation (Placement(transformation(extent={{340,80},{360,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT16
+          annotation (Placement(transformation(extent={{340,60},{360,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT17
+          annotation (Placement(transformation(extent={{340,40},{360,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT18
+          annotation (Placement(transformation(extent={{340,20},{360,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT19
+          annotation (Placement(transformation(extent={{340,0},{360,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT20
+          annotation (Placement(transformation(extent={{340,-20},{360,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT21
+          annotation (Placement(transformation(extent={{340,-40},{360,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT22
+          annotation (Placement(transformation(extent={{340,-60},{360,-40}})));
+        Electrical.Renewables.PSSE.AddOnBlocks.IrradianceToPower
+          irradianceToPower(
+          Ypv(displayUnit="MW") = 3000000,
+          Sb(displayUnit="MV.A") = 100000000,
+          Tcstc(displayUnit="K") = 298.15,
+          fpv=1,
+          ap=-0.48,
+          Gtstc=1000)
+          annotation (Placement(transformation(extent={{44,-20},{34,-10}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection1(
+            active_sigma=0.0001, samplePeriod=1)
+          annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+              rotation=180,
+              origin={36,-30})));
+        Modelica.Blocks.Math.Add add1
+          annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+              rotation=180,
+              origin={18,-28})));
+      equation
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(circuitbreaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}}, color={0,0,255}));
+        connect(circuitbreaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}}, color={0,0,255}));
+        connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
+                            color={0,0,127}));
+        connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
+                {-82,16}},
+                       color={0,0,127}));
+
+        connect(IN22.y,AddU2. u2) annotation (Line(points={{-95.4,-26},{-82,-26}},
+                       color={0,0,127}));
+        connect(IN2,AddU2. u1) annotation (Line(points={{-150,-12},{-118,-12},{-118,-14},
+                {-82,-14}},
+                       color={0,0,127}));
+        connect(AddU2.y, G2.Efd_ref)
+          annotation (Line(points={{-59,-20},{-52,-20},{-52,4},{-42,4}},
+                                                                 color={0,0,127}));
+        connect(AddU1.y, G2.P_ref1) annotation (Line(points={{-59,10},{-52,10},{-52,16},
+                {-42,16}},                          color={0,0,127}));
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(AddU3.y, PV.QINPUT) annotation (Line(points={{-59,-50},{-42,-50}},
+                                 color={0,0,127}));
+        connect(IN33.y,AddU3. u2)
+          annotation (Line(points={{-95.4,-56},{-82,-56}}, color={0,0,127}));
+        connect(BESS.p1, Bus10.p)
+          annotation (Line(points={{-20,-90},{-10,-90}}, color={0,0,255}));
+        connect(BESS.Paux1, AddU4.y) annotation (Line(points={{-42,-84},{-54,-84},{-54,
+                -80},{-59,-80}}, color={0,0,127}));
+        connect(IN55.y, AddU5.u2)
+          annotation (Line(points={{-95.4,-112},{-82,-112}}, color={0,0,127}));
+        connect(AddU5.y, BESS.Qext1) annotation (Line(points={{-59,-106},{-52,-106},{-52,
+                -96},{-42,-96}},   color={0,0,127}));
+        connect(IN44.y, AddU4.u2)
+          annotation (Line(points={{-95.4,-86},{-82,-86}}, color={0,0,127}));
+        connect(AddU4.u1,IN4)  annotation (Line(points={{-82,-74},{-100,-74},{-100,-70},
+                {-116,-70},{-116,-56},{-150,-56}}, color={0,0,127}));
+        connect(AddU5.u1,IN5)  annotation (Line(points={{-82,-100},{-116,-100},{-116,-78},
+                {-150,-78}}, color={0,0,127}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(AddU3.u1, IN3) annotation (Line(points={{-82,-44},{-118,-44},{-118,-34},
+                {-150,-34}}, color={0,0,127}));
+        connect(PV.p1, Bus8.p)
+          annotation (Line(points={{-20,-50},{-10,-50}}, color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(add.y, Load2.u) annotation (Line(points={{92.4,-12},{97.15,-12},
+                {97.15,-14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(add.u2, sine.y) annotation (Line(points={{83.2,-14.4},{83.2,-22},
+                {80.5,-22},{80.5,-31}}, color={0,0,127}));
+        connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{76.54,
+                -12.06},{79.87,-12.06},{79.87,-9.6},{83.2,-9.6}},   color={0,0,
+                127}));
+        connect(simpleLag.y, OUT24)
+          annotation (Line(points={{321,-90},{350,-90}}, color={0,0,127}));
+        connect(simpleLag1.y, OUT25)
+          annotation (Line(points={{321,-110},{350,-110}}, color={0,0,127}));
+        connect(simpleLag2.y, OUT23)
+          annotation (Line(points={{321,-70},{350,-70}}, color={0,0,127}));
+        connect(simpleLag23.y, OUT1)
+          annotation (Line(points={{201,112},{216,112},{216,110},{230,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag21.y, OUT2)
+          annotation (Line(points={{201,92},{216,92},{216,90},{230,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag22.y, OUT3)
+          annotation (Line(points={{201,72},{216,72},{216,70},{230,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag20.y, OUT4)
+          annotation (Line(points={{201,52},{216,52},{216,50},{230,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag18.y, OUT5)
+          annotation (Line(points={{201,32},{216,32},{216,30},{230,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag19.y, OUT6)
+          annotation (Line(points={{201,12},{216,12},{216,10},{230,10}},
+                                                       color={0,0,127}));
+        connect(simpleLag17.y, OUT7)
+          annotation (Line(points={{201,-8},{216,-8},{216,-10},{230,-10}},
+                                                         color={0,0,127}));
+        connect(simpleLag15.y, OUT8)
+          annotation (Line(points={{201,-28},{216,-28},{216,-30},{230,-30}},
+                                                         color={0,0,127}));
+        connect(simpleLag16.y, OUT9)
+          annotation (Line(points={{201,-48},{216,-48},{216,-50},{230,-50}},
+                                                         color={0,0,127}));
+        connect(simpleLag14.y, OUT10)
+          annotation (Line(points={{201,-68},{216,-68},{216,-70},{230,-70}},
+                                                         color={0,0,127}));
+        connect(simpleLag12.y, OUT11)
+          annotation (Line(points={{201,-88},{216,-88},{216,-90},{230,-90}},
+                                                         color={0,0,127}));
+        connect(simpleLag13.y, OUT12)
+          annotation (Line(points={{201,-108},{216,-108},{216,-110},{230,-110}},
+                                                           color={0,0,127}));
+        connect(simpleLag24.y, OUT13)
+          annotation (Line(points={{201,-128},{216,-128},{216,-130},{230,-130}},
+                                                           color={0,0,127}));
+        connect(simpleLag11.y, OUT14)
+          annotation (Line(points={{321,112},{336,112},{336,110},{350,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag9.y, OUT15)
+          annotation (Line(points={{321,92},{336,92},{336,90},{350,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag10.y, OUT16)
+          annotation (Line(points={{321,72},{336,72},{336,70},{350,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag8.y, OUT17)
+          annotation (Line(points={{321,52},{336,52},{336,50},{350,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag6.y, OUT18)
+          annotation (Line(points={{321,32},{336,32},{336,30},{350,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag7.y, OUT19)
+          annotation (Line(points={{321,10},{350,10}}, color={0,0,127}));
+        connect(simpleLag5.y, OUT20)
+          annotation (Line(points={{321,-10},{350,-10}}, color={0,0,127}));
+        connect(simpleLag3.y, OUT21)
+          annotation (Line(points={{321,-30},{350,-30}}, color={0,0,127}));
+        connect(simpleLag4.y, OUT22)
+          annotation (Line(points={{321,-50},{350,-50}}, color={0,0,127}));
+        connect(PRE1.y, simpleLag23.u) annotation (Line(points={{161,110},{161,
+                112},{178,112}}, color={0,0,127}));
+        connect(PRE2.y, simpleLag21.u) annotation (Line(points={{161,90},{161,
+                92},{178,92}}, color={0,0,127}));
+        connect(PRE3.y, simpleLag22.u) annotation (Line(points={{161,70},{161,
+                72},{178,72}}, color={0,0,127}));
+        connect(PRE4.y, simpleLag20.u) annotation (Line(points={{161,50},{161,
+                52},{178,52}}, color={0,0,127}));
+        connect(PRE5.y, simpleLag18.u) annotation (Line(points={{161,30},{161,
+                32},{178,32}}, color={0,0,127}));
+        connect(PRE6.y, simpleLag19.u) annotation (Line(points={{161,10},{161,
+                12},{178,12}}, color={0,0,127}));
+        connect(PRE7.y, simpleLag17.u) annotation (Line(points={{161,-10},{161,
+                -8},{178,-8}}, color={0,0,127}));
+        connect(PRE8.y, simpleLag15.u) annotation (Line(points={{161,-30},{161,
+                -28},{178,-28}}, color={0,0,127}));
+        connect(PRE9.y, simpleLag16.u) annotation (Line(points={{161,-50},{161,
+                -48},{178,-48}}, color={0,0,127}));
+        connect(PRE10.y, simpleLag14.u) annotation (Line(points={{161,-70},{161,
+                -68},{178,-68}}, color={0,0,127}));
+        connect(PRE11.y, simpleLag12.u) annotation (Line(points={{161,-90},{161,
+                -88},{178,-88}}, color={0,0,127}));
+        connect(PRE12.y, simpleLag13.u) annotation (Line(points={{161,-110},{
+                161,-108},{178,-108}}, color={0,0,127}));
+        connect(PRE13.y, simpleLag24.u) annotation (Line(points={{161,-130},{
+                161,-128},{178,-128}}, color={0,0,127}));
+        connect(PRE14.y, simpleLag11.u) annotation (Line(points={{281,110},{281,
+                112},{298,112}}, color={0,0,127}));
+        connect(PRE15.y, simpleLag9.u) annotation (Line(points={{281,90},{281,
+                92},{298,92}}, color={0,0,127}));
+        connect(PRE16.y, simpleLag10.u) annotation (Line(points={{281,70},{281,
+                72},{298,72}}, color={0,0,127}));
+        connect(PRE17.y, simpleLag8.u) annotation (Line(points={{281,50},{281,
+                52},{298,52}}, color={0,0,127}));
+        connect(PRE18.y, simpleLag6.u) annotation (Line(points={{281,30},{281,
+                32},{298,32}}, color={0,0,127}));
+        connect(PRE19.y, simpleLag7.u)
+          annotation (Line(points={{281,10},{298,10}}, color={0,0,127}));
+        connect(PRE20.y, simpleLag5.u)
+          annotation (Line(points={{281,-10},{298,-10}}, color={0,0,127}));
+        connect(PRE21.y, simpleLag3.u)
+          annotation (Line(points={{281,-30},{298,-30}}, color={0,0,127}));
+        connect(PRE22.y, simpleLag4.u)
+          annotation (Line(points={{281,-50},{298,-50}}, color={0,0,127}));
+        connect(PRE23.y, simpleLag2.u)
+          annotation (Line(points={{281,-70},{298,-70}}, color={0,0,127}));
+        connect(PRE24.y, simpleLag.u)
+          annotation (Line(points={{281,-90},{298,-90}}, color={0,0,127}));
+        connect(PRE25.y, simpleLag1.u)
+          annotation (Line(points={{281,-110},{298,-110}}, color={0,0,127}));
+        connect(whiteNoiseInjection1.y, add1.u1) annotation (Line(points={{
+                29.46,-29.94},{30,-30.4},{22.8,-30.4}}, color={0,0,127}));
+        connect(irradianceToPower.Ppv, add1.u2) annotation (Line(points={{33.5,
+                -15},{22.8,-15},{22.8,-25.6}}, color={0,0,127}));
+        connect(add1.y, PV.IRR2POW) annotation (Line(points={{13.6,-28},{-50,
+                -28},{-50,-43},{-42,-43}}, color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-160,30},{-134,-90}},
+                lineColor={0,140,72},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,36},{124,-124}},
+                lineColor={238,46,47},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit"),
+              Text(
+                extent={{-164,50},{-132,30}},
+                textColor={0,140,72},
+                textString="Inputs")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=10,
+            __Dymola_NumberOfIntervals=1000,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_FILTERED_LOGIC;
+
+      model MPCAppliedEnergyOriginal_v3_FILTERED2
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+        parameter Real set = 0;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker circuitbreaker(
+          enableTrigger=false,
+          t_o=0.55,
+          rc_enabled=true,
+          t_rc=1000) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealInput IN1(start=0)
+          "Connector of Real input signal 2" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,10}),iconTransformation(extent={{-10,-10},{10,10}}, origin={-150,10})));
+        Modelica.Blocks.Sources.Constant IN11(k=0)
+          annotation (Placement(transformation(extent={{-108,-2},{-96,10}})));
+        Modelica.Blocks.Math.Add AddU1
+          annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+        Modelica.Blocks.Sources.Constant IN22(k=0)
+          annotation (Placement(transformation(extent={{-108,-32},{-96,-20}})));
+        Modelica.Blocks.Math.Add AddU2
+          annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+        Modelica.Blocks.Interfaces.RealInput IN2(start=0)
+          "Connector of Real input signal 2"
+                 annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-150,-12}), iconTransformation(extent={{-10,-10},{10,10}},
+                origin={-150,-12})));
+                  Modelica.Blocks.Interfaces.RealInput IN3 "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-44},{-140,-24}}),
+              iconTransformation(extent={{-160,-44},{-140,-24}})));
+        Modelica.Blocks.Interfaces.RealInput IN4(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-66},{-140,-46}}),
+              iconTransformation(extent={{-160,-66},{-140,-46}})));
+        Modelica.Blocks.Interfaces.RealInput IN5(start = 0) "Connector of Real input signal 1"
+          annotation (Placement(transformation(extent={{-160,-88},{-140,-68}}),
+              iconTransformation(extent={{-160,-88},{-140,-68}})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PF17)
+          annotation (Placement(transformation(extent={{-68,104},{-48,124}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=100,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(
+          enableNoise=true,
+          useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-44,102},{-24,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0.01,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=5)
+          annotation (Placement(transformation(extent={{70,-36},{80,-26}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+        GenerationUnits.PSSE.Solar_Units.SolarMPCLocalVQControl_ADD_ON
+                                                                PV(
+          V_b=480,
+          P_0=powerFlow.powerflow.machines.PPV,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QPV,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V8,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A8,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+        Modelica.Blocks.Math.Add AddU3
+          annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
+        Modelica.Blocks.Sources.Constant IN33(k=0)
+          annotation (Placement(transformation(extent={{-108,-62},{-96,-50}})));
+
+        Modelica.Blocks.Math.Add AddU4
+          annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
+        Modelica.Blocks.Math.Add AddU5
+          annotation (Placement(transformation(extent={{-80,-116},{-60,-96}})));
+        Modelica.Blocks.Sources.Constant IN44(k=0)
+          annotation (Placement(transformation(extent={{-108,-92},{-96,-80}})));
+        Modelica.Blocks.Sources.Constant IN55(k=0)
+          annotation (Placement(transformation(extent={{-108,-118},{-96,-106}})));
+        GenerationUnits.PSSE.Battery_Units.BESSMPCLocalVQControl BESS(
+          V_base=480,
+          V_b(displayUnit="kV") = 480,
+          enableV_b=true,
+          P_0=powerFlow.powerflow.machines.PBESS,
+          enableP_0=true,
+          Q_0=powerFlow.powerflow.machines.QBESS,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V10,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A10,
+          enableangle_0=true)
+          annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{84,-16},{92,-8}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0002, samplePeriod=0.02)
+          annotation (Placement(transformation(extent={{64,-18},{76,-6}})));
+        Modelica.Blocks.Sources.RealExpression PRE1(y=G2.gen.w)
+          annotation (Placement(transformation(extent={{140,100},{160,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE2(y=G2.gen.delta)
+          annotation (Placement(transformation(extent={{140,80},{160,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE3(y=G2.gen.Epq)
+          annotation (Placement(transformation(extent={{140,60},{160,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE4(y=G2.gen.PSIkd)
+          annotation (Placement(transformation(extent={{140,40},{160,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE5(y=G2.gen.PSIppq)
+          annotation (Placement(transformation(extent={{140,20},{160,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE6(y=G2.sEXSMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,0},{160,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE7(y=G2.sEXSMPC.leadLag.TF.x_scaled[1])
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE8(y=G2.gASTMPC.simpleLagLim.state)
+          annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE9(y=G2.gASTMPC.simpleLag.state)
+          annotation (Placement(transformation(extent={{140,-60},{160,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE10(y=G2.gASTMPC.simpleLag1.state)
+          annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE11(y=Bus6.v)
+          annotation (Placement(transformation(extent={{140,-100},{160,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE12(y=PV.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{140,-120},{160,-100}})));
+        Modelica.Blocks.Sources.RealExpression PRE13(y=PV.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{140,-140},{160,-120}})));
+        Modelica.Blocks.Sources.RealExpression PRE14(y=PV.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,100},{280,120}})));
+        Modelica.Blocks.Sources.RealExpression PRE15(y=PV.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,80},{280,100}})));
+        Modelica.Blocks.Sources.RealExpression PRE16(y=Bus8.v)
+          annotation (Placement(transformation(extent={{260,60},{280,80}})));
+        Modelica.Blocks.Sources.RealExpression PRE17(y=BESS.rEGCA1_1.Pgen)
+          annotation (Placement(transformation(extent={{260,40},{280,60}})));
+        Modelica.Blocks.Sources.RealExpression PRE18(y=BESS.rEGCA1_1.Qgen)
+          annotation (Placement(transformation(extent={{260,20},{280,40}})));
+        Modelica.Blocks.Sources.RealExpression PRE19(y=BESS.rEGCA1_1.p.ir)
+          annotation (Placement(transformation(extent={{260,0},{280,20}})));
+        Modelica.Blocks.Sources.RealExpression PRE20(y=BESS.rEGCA1_1.p.ii)
+          annotation (Placement(transformation(extent={{260,-20},{280,0}})));
+        Modelica.Blocks.Sources.RealExpression PRE21(y=Bus10.v)
+          annotation (Placement(transformation(extent={{260,-40},{280,-20}})));
+        Modelica.Blocks.Sources.RealExpression PRE22(y=Load2.P)
+          annotation (Placement(transformation(extent={{260,-60},{280,-40}})));
+        Modelica.Blocks.Sources.RealExpression PRE23(y=Load2.Q)
+          annotation (Placement(transformation(extent={{260,-80},{280,-60}})));
+        Modelica.Blocks.Sources.RealExpression PRE24(y=Bus5.v)
+          annotation (Placement(transformation(extent={{260,-100},{280,-80}})));
+        Modelica.Blocks.Sources.RealExpression PRE25(y=Bus5.angle)
+          annotation (Placement(transformation(extent={{260,-120},{280,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V5)
+          annotation (Placement(transformation(extent={{300,-100},{320,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT24 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-100},{360,-80}})));
+        NonElectrical.Continuous.SimpleLag simpleLag1(
+          K=1,
+          T=0.001,
+          y_start=powerFlow.powerflow.bus.A5)
+          annotation (Placement(transformation(extent={{300,-120},{320,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT25 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-120},{360,-100}})));
+        NonElectrical.Continuous.SimpleLag simpleLag2(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.QL2/100000000)
+          annotation (Placement(transformation(extent={{300,-80},{320,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT23 "Connector of Real output signal"
+          annotation (Placement(transformation(extent={{340,-80},{360,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{220,100},{240,120}})));
+        NonElectrical.Continuous.SimpleLag simpleLag3(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V10)
+          annotation (Placement(transformation(extent={{300,-40},{320,-20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag4(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.loads.PL2/100000000)
+          annotation (Placement(transformation(extent={{300,-60},{320,-40}})));
+        NonElectrical.Continuous.SimpleLag simpleLag5(
+          K=1,
+          T=0.1,
+          y_start=0.02)
+          annotation (Placement(transformation(extent={{300,-20},{320,0}})));
+        NonElectrical.Continuous.SimpleLag simpleLag6(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QBESS/100000000)
+          annotation (Placement(transformation(extent={{300,22},{320,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag7(
+          K=1,
+          T=0.1,
+          y_start=0.01)
+          annotation (Placement(transformation(extent={{300,0},{320,20}})));
+        NonElectrical.Continuous.SimpleLag simpleLag8(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PBESS/100000000)
+          annotation (Placement(transformation(extent={{300,42},{320,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag9(
+          K=1,
+          T=0.1,
+          y_start=0.0089)
+          annotation (Placement(transformation(extent={{300,82},{320,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag10(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V8)
+          annotation (Placement(transformation(extent={{300,62},{320,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag11(
+          K=1,
+          T=0.1,
+          y_start=-0.0199)
+          annotation (Placement(transformation(extent={{300,102},{320,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag12(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.bus.V6)
+          annotation (Placement(transformation(extent={{180,-98},{200,-78}})));
+        NonElectrical.Continuous.SimpleLag simpleLag13(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.PPV/100000000)
+          annotation (Placement(transformation(extent={{180,-118},{200,-98}})));
+        NonElectrical.Continuous.SimpleLag simpleLag14(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-78},{200,-58}})));
+        NonElectrical.Continuous.SimpleLag simpleLag15(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-38},{200,-18}})));
+        NonElectrical.Continuous.SimpleLag simpleLag16(
+          K=1,
+          T=0.1,
+          y_start=0.3)
+          annotation (Placement(transformation(extent={{180,-58},{200,-38}})));
+        NonElectrical.Continuous.SimpleLag simpleLag17(
+          K=1,
+          T=0.1,
+          y_start=0.024)
+          annotation (Placement(transformation(extent={{180,-18},{200,2}})));
+        NonElectrical.Continuous.SimpleLag simpleLag18(
+          K=1,
+          T=0.1,
+          y_start=0.417)
+          annotation (Placement(transformation(extent={{180,22},{200,42}})));
+        NonElectrical.Continuous.SimpleLag simpleLag19(
+          K=1,
+          T=0.1,
+          y_start=1.187)
+          annotation (Placement(transformation(extent={{180,2},{200,22}})));
+        NonElectrical.Continuous.SimpleLag simpleLag20(
+          K=1,
+          T=0.1,
+          y_start=0.908)
+          annotation (Placement(transformation(extent={{180,42},{200,62}})));
+        NonElectrical.Continuous.SimpleLag simpleLag21(
+          K=1,
+          T=0.1,
+          y_start=0.4735)
+          annotation (Placement(transformation(extent={{180,82},{200,102}})));
+        NonElectrical.Continuous.SimpleLag simpleLag22(
+          K=1,
+          T=0.1,
+          y_start=0.925)
+          annotation (Placement(transformation(extent={{180,62},{200,82}})));
+        NonElectrical.Continuous.SimpleLag simpleLag23(
+          K=1,
+          T=0.1,
+          y_start=G2.gen.w0)
+          annotation (Placement(transformation(extent={{180,102},{200,122}})));
+        NonElectrical.Continuous.SimpleLag simpleLag24(
+          K=1,
+          T=0.1,
+          y_start=powerFlow.powerflow.machines.QPV/100000000)
+          annotation (Placement(transformation(extent={{180,-138},{200,-118}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{220,80},{240,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{220,60},{240,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{220,40},{240,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{220,20},{240,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{220,0},{240,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{220,-20},{240,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{220,-40},{240,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{220,-60},{240,-40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{220,-80},{240,-60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{220,-100},{240,-80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{220,-120},{240,-100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT13
+          annotation (Placement(transformation(extent={{220,-140},{240,-120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT14
+          annotation (Placement(transformation(extent={{340,100},{360,120}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT15
+          annotation (Placement(transformation(extent={{340,80},{360,100}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT16
+          annotation (Placement(transformation(extent={{340,60},{360,80}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT17
+          annotation (Placement(transformation(extent={{340,40},{360,60}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT18
+          annotation (Placement(transformation(extent={{340,20},{360,40}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT19
+          annotation (Placement(transformation(extent={{340,0},{360,20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT20
+          annotation (Placement(transformation(extent={{340,-20},{360,0}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT21
+          annotation (Placement(transformation(extent={{340,-40},{360,-20}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT22
+          annotation (Placement(transformation(extent={{340,-60},{360,-40}})));
+        Electrical.Renewables.PSSE.AddOnBlocks.IrradianceToPower
+          irradianceToPower(
+          Ypv(displayUnit="MW") = 3000000,
+          Sb(displayUnit="MV.A") = 100000000,
+          Tcstc(displayUnit="K") = 298.15,
+          fpv=1,
+          ap=-0.48,
+          Gtstc=1000)
+          annotation (Placement(transformation(extent={{44,-20},{34,-10}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection1(
+            active_sigma=0.0001, samplePeriod=1)
+          annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+              rotation=180,
+              origin={36,-30})));
+        Modelica.Blocks.Math.Add add1
+          annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+              rotation=180,
+              origin={18,-28})));
+      equation
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(circuitbreaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}}, color={0,0,255}));
+        connect(circuitbreaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}}, color={0,0,255}));
+        connect(IN11.y, AddU1.u2) annotation (Line(points={{-95.4,4},{-82,4}},
+                            color={0,0,127}));
+        connect(IN1, AddU1.u1) annotation (Line(points={{-150,10},{-116,10},{-116,16},
+                {-82,16}},
+                       color={0,0,127}));
+
+        connect(IN22.y,AddU2. u2) annotation (Line(points={{-95.4,-26},{-82,-26}},
+                       color={0,0,127}));
+        connect(IN2,AddU2. u1) annotation (Line(points={{-150,-12},{-118,-12},{-118,-14},
+                {-82,-14}},
+                       color={0,0,127}));
+        connect(AddU2.y, G2.Efd_ref)
+          annotation (Line(points={{-59,-20},{-52,-20},{-52,4},{-42,4}},
+                                                                 color={0,0,127}));
+        connect(AddU1.y, G2.P_ref1) annotation (Line(points={{-59,10},{-52,10},{-52,16},
+                {-42,16}},                          color={0,0,127}));
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(AddU3.y, PV.QINPUT) annotation (Line(points={{-59,-50},{-42,-50}},
+                                 color={0,0,127}));
+        connect(IN33.y,AddU3. u2)
+          annotation (Line(points={{-95.4,-56},{-82,-56}}, color={0,0,127}));
+        connect(BESS.p1, Bus10.p)
+          annotation (Line(points={{-20,-90},{-10,-90}}, color={0,0,255}));
+        connect(BESS.Paux1, AddU4.y) annotation (Line(points={{-42,-84},{-54,-84},{-54,
+                -80},{-59,-80}}, color={0,0,127}));
+        connect(IN55.y, AddU5.u2)
+          annotation (Line(points={{-95.4,-112},{-82,-112}}, color={0,0,127}));
+        connect(AddU5.y, BESS.Qext1) annotation (Line(points={{-59,-106},{-52,-106},{-52,
+                -96},{-42,-96}},   color={0,0,127}));
+        connect(IN44.y, AddU4.u2)
+          annotation (Line(points={{-95.4,-86},{-82,-86}}, color={0,0,127}));
+        connect(AddU4.u1,IN4)  annotation (Line(points={{-82,-74},{-100,-74},{-100,-70},
+                {-116,-70},{-116,-56},{-150,-56}}, color={0,0,127}));
+        connect(AddU5.u1,IN5)  annotation (Line(points={{-82,-100},{-116,-100},{-116,-78},
+                {-150,-78}}, color={0,0,127}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(AddU3.u1, IN3) annotation (Line(points={{-82,-44},{-118,-44},{-118,-34},
+                {-150,-34}}, color={0,0,127}));
+        connect(PV.p1, Bus8.p)
+          annotation (Line(points={{-20,-50},{-10,-50}}, color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(add.y, Load2.u) annotation (Line(points={{92.4,-12},{97.15,-12},
+                {97.15,-14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(add.u2, sine.y) annotation (Line(points={{83.2,-14.4},{83.2,-22},
+                {80.5,-22},{80.5,-31}}, color={0,0,127}));
+        connect(whiteNoiseInjection.y, add.u1) annotation (Line(points={{76.54,
+                -12.06},{79.87,-12.06},{79.87,-9.6},{83.2,-9.6}},   color={0,0,
+                127}));
+        connect(simpleLag.y, OUT24)
+          annotation (Line(points={{321,-90},{350,-90}}, color={0,0,127}));
+        connect(simpleLag1.y, OUT25)
+          annotation (Line(points={{321,-110},{350,-110}}, color={0,0,127}));
+        connect(simpleLag2.y, OUT23)
+          annotation (Line(points={{321,-70},{350,-70}}, color={0,0,127}));
+        connect(simpleLag23.y, OUT1)
+          annotation (Line(points={{201,112},{216,112},{216,110},{230,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag21.y, OUT2)
+          annotation (Line(points={{201,92},{216,92},{216,90},{230,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag22.y, OUT3)
+          annotation (Line(points={{201,72},{216,72},{216,70},{230,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag20.y, OUT4)
+          annotation (Line(points={{201,52},{216,52},{216,50},{230,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag18.y, OUT5)
+          annotation (Line(points={{201,32},{216,32},{216,30},{230,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag19.y, OUT6)
+          annotation (Line(points={{201,12},{216,12},{216,10},{230,10}},
+                                                       color={0,0,127}));
+        connect(simpleLag17.y, OUT7)
+          annotation (Line(points={{201,-8},{216,-8},{216,-10},{230,-10}},
+                                                         color={0,0,127}));
+        connect(simpleLag15.y, OUT8)
+          annotation (Line(points={{201,-28},{216,-28},{216,-30},{230,-30}},
+                                                         color={0,0,127}));
+        connect(simpleLag16.y, OUT9)
+          annotation (Line(points={{201,-48},{216,-48},{216,-50},{230,-50}},
+                                                         color={0,0,127}));
+        connect(simpleLag14.y, OUT10)
+          annotation (Line(points={{201,-68},{216,-68},{216,-70},{230,-70}},
+                                                         color={0,0,127}));
+        connect(simpleLag12.y, OUT11)
+          annotation (Line(points={{201,-88},{216,-88},{216,-90},{230,-90}},
+                                                         color={0,0,127}));
+        connect(simpleLag13.y, OUT12)
+          annotation (Line(points={{201,-108},{216,-108},{216,-110},{230,-110}},
+                                                           color={0,0,127}));
+        connect(simpleLag24.y, OUT13)
+          annotation (Line(points={{201,-128},{216,-128},{216,-130},{230,-130}},
+                                                           color={0,0,127}));
+        connect(simpleLag11.y, OUT14)
+          annotation (Line(points={{321,112},{336,112},{336,110},{350,110}},
+                                                         color={0,0,127}));
+        connect(simpleLag9.y, OUT15)
+          annotation (Line(points={{321,92},{336,92},{336,90},{350,90}},
+                                                       color={0,0,127}));
+        connect(simpleLag10.y, OUT16)
+          annotation (Line(points={{321,72},{336,72},{336,70},{350,70}},
+                                                       color={0,0,127}));
+        connect(simpleLag8.y, OUT17)
+          annotation (Line(points={{321,52},{336,52},{336,50},{350,50}},
+                                                       color={0,0,127}));
+        connect(simpleLag6.y, OUT18)
+          annotation (Line(points={{321,32},{336,32},{336,30},{350,30}},
+                                                       color={0,0,127}));
+        connect(simpleLag7.y, OUT19)
+          annotation (Line(points={{321,10},{350,10}}, color={0,0,127}));
+        connect(simpleLag5.y, OUT20)
+          annotation (Line(points={{321,-10},{350,-10}}, color={0,0,127}));
+        connect(simpleLag3.y, OUT21)
+          annotation (Line(points={{321,-30},{350,-30}}, color={0,0,127}));
+        connect(simpleLag4.y, OUT22)
+          annotation (Line(points={{321,-50},{350,-50}}, color={0,0,127}));
+        connect(PRE1.y, simpleLag23.u) annotation (Line(points={{161,110},{161,
+                112},{178,112}}, color={0,0,127}));
+        connect(PRE2.y, simpleLag21.u) annotation (Line(points={{161,90},{161,
+                92},{178,92}}, color={0,0,127}));
+        connect(PRE3.y, simpleLag22.u) annotation (Line(points={{161,70},{161,
+                72},{178,72}}, color={0,0,127}));
+        connect(PRE4.y, simpleLag20.u) annotation (Line(points={{161,50},{161,
+                52},{178,52}}, color={0,0,127}));
+        connect(PRE5.y, simpleLag18.u) annotation (Line(points={{161,30},{161,
+                32},{178,32}}, color={0,0,127}));
+        connect(PRE6.y, simpleLag19.u) annotation (Line(points={{161,10},{161,
+                12},{178,12}}, color={0,0,127}));
+        connect(PRE7.y, simpleLag17.u) annotation (Line(points={{161,-10},{161,
+                -8},{178,-8}}, color={0,0,127}));
+        connect(PRE8.y, simpleLag15.u) annotation (Line(points={{161,-30},{161,
+                -28},{178,-28}}, color={0,0,127}));
+        connect(PRE9.y, simpleLag16.u) annotation (Line(points={{161,-50},{161,
+                -48},{178,-48}}, color={0,0,127}));
+        connect(PRE10.y, simpleLag14.u) annotation (Line(points={{161,-70},{161,
+                -68},{178,-68}}, color={0,0,127}));
+        connect(PRE11.y, simpleLag12.u) annotation (Line(points={{161,-90},{161,
+                -88},{178,-88}}, color={0,0,127}));
+        connect(PRE12.y, simpleLag13.u) annotation (Line(points={{161,-110},{
+                161,-108},{178,-108}}, color={0,0,127}));
+        connect(PRE13.y, simpleLag24.u) annotation (Line(points={{161,-130},{
+                161,-128},{178,-128}}, color={0,0,127}));
+        connect(PRE14.y, simpleLag11.u) annotation (Line(points={{281,110},{281,
+                112},{298,112}}, color={0,0,127}));
+        connect(PRE15.y, simpleLag9.u) annotation (Line(points={{281,90},{281,
+                92},{298,92}}, color={0,0,127}));
+        connect(PRE16.y, simpleLag10.u) annotation (Line(points={{281,70},{281,
+                72},{298,72}}, color={0,0,127}));
+        connect(PRE17.y, simpleLag8.u) annotation (Line(points={{281,50},{281,
+                52},{298,52}}, color={0,0,127}));
+        connect(PRE18.y, simpleLag6.u) annotation (Line(points={{281,30},{281,
+                32},{298,32}}, color={0,0,127}));
+        connect(PRE19.y, simpleLag7.u)
+          annotation (Line(points={{281,10},{298,10}}, color={0,0,127}));
+        connect(PRE20.y, simpleLag5.u)
+          annotation (Line(points={{281,-10},{298,-10}}, color={0,0,127}));
+        connect(PRE21.y, simpleLag3.u)
+          annotation (Line(points={{281,-30},{298,-30}}, color={0,0,127}));
+        connect(PRE22.y, simpleLag4.u)
+          annotation (Line(points={{281,-50},{298,-50}}, color={0,0,127}));
+        connect(PRE23.y, simpleLag2.u)
+          annotation (Line(points={{281,-70},{298,-70}}, color={0,0,127}));
+        connect(PRE24.y, simpleLag.u)
+          annotation (Line(points={{281,-90},{298,-90}}, color={0,0,127}));
+        connect(PRE25.y, simpleLag1.u)
+          annotation (Line(points={{281,-110},{298,-110}}, color={0,0,127}));
+        connect(whiteNoiseInjection1.y, add1.u1) annotation (Line(points={{
+                29.46,-29.94},{30,-30.4},{22.8,-30.4}}, color={0,0,127}));
+        connect(irradianceToPower.Ppv, add1.u2) annotation (Line(points={{33.5,
+                -15},{22.8,-15},{22.8,-25.6}}, color={0,0,127}));
+        connect(add1.y, PV.IRR2POW) annotation (Line(points={{13.6,-28},{-50,
+                -28},{-50,-43},{-42,-43}}, color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-160,30},{-134,-90}},
+                lineColor={0,140,72},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,36},{124,-124}},
+                lineColor={238,46,47},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit"),
+              Text(
+                extent={{-164,50},{-132,30}},
+                textColor={0,140,72},
+                textString="Inputs")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=10,
+            __Dymola_NumberOfIntervals=1000,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_FILTERED2;
     end Testing_Kalman_Filter_State_Estimation;
 
     package TableSimulations
@@ -17488,6 +21458,622 @@ package ModelPredictiveControl
             __Dymola_Algorithm="Dassl"),
           Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
       end MPCAppliedEnergyOriginal_v3_G2ONLY_Table1;
+
+      model MPCAppliedEnergyOriginal_v3_G2ONLY_Table2
+        "THIS ONE IS STABLE, CONTROLLABLE, OBSERVABLE!!!!!!!"
+        extends Modelica.Icons.Example;
+
+        parameter Boolean equivalentGRID = false;
+        parameter Boolean equivalentsystem = false;
+        parameter Real shed = 0;
+
+        OpenIPSL.Electrical.Buses.Bus Bus1(v_0=powerFlow.powerflow.bus.V1, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus2(v_0=powerFlow.powerflow.bus.V2, angle_0=
+              powerFlow.powerflow.bus.A1) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000)  if not equivalentGRID annotation (Placement(transformation(
+              extent={{-8,-8},{8,8}},
+              rotation=180,
+              origin={-60,80})));
+        OpenIPSL.Examples.OpenCPS.Generators.G1 G1(
+          enableV_b=true,
+          v_0=powerFlow.powerflow.bus.V1,
+          angle_0=powerFlow.powerflow.bus.A1,
+          P_0=powerFlow.powerflow.machines.PG1,
+          Q_0=powerFlow.powerflow.machines.QG1,
+          V_b=6000)  if not equivalentGRID
+          annotation (Placement(transformation(extent={{-112,70},{-92,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L1(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{-26,76},
+                  {-14,84}})));
+        OpenIPSL.Electrical.Buses.Bus Bus3(v_0=powerFlow.powerflow.bus.V3, angle_0=
+              powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+        OpenIPSL.Electrical.Buses.Bus Bus4(v_0=powerFlow.powerflow.bus.V4, angle_0=
+              powerFlow.powerflow.bus.V4) if not equivalentGRID
+          annotation (Placement(transformation(extent={{50,70},{70,90}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_1(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,86},
+                  {36,94}})));
+        OpenIPSL.Electrical.Branches.PwLine L2_2(
+          R=0.0005,
+          X=0.1,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(extent={{24,66},
+                  {36,74}})));
+        OpenIPSL.Electrical.Buses.Bus Bus5(angle_0=powerFlow.powerflow.bus.A5, v_0=
+              powerFlow.powerflow.bus.V5)  annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={80,16})));
+        OpenIPSL.Electrical.Branches.PwLine L3(
+          R=0.001,
+          X=0.2,
+          G=0,
+          B=0) if not equivalentGRID annotation (Placement(transformation(
+              extent={{-6,-4},{6,4}},
+              rotation=-90,
+              origin={80,60})));
+        OpenIPSL.Electrical.Buses.Bus Bus6(v_0=powerFlow.powerflow.bus.V6, angle_0=
+              powerFlow.powerflow.bus.A6) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,10})));
+        OpenIPSL.Electrical.Branches.PSSE.TwoWindingTransformer T2(
+          G=0,
+          B=0,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=6000,
+          VB2=6000,
+          R=0.005,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,10})));
+        GenerationUnits.PSSE.G2_16MVA                         G2(
+          enableV_b=true,
+          enableP_0=true,
+          enableQ_0=true,
+          v_0=powerFlow.powerflow.bus.V6,
+          enablev_0=true,
+          angle_0=powerFlow.powerflow.bus.A6,
+          V_b=6000,
+          P_0=powerFlow.powerflow.machines.PG2,
+          Q_0=powerFlow.powerflow.machines.QG2,
+          enableangle_0=true)
+                        annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-30,10})));
+        inner OpenIPSL.Electrical.SystemBase SysData(S_b=100000000, fn=60)
+          annotation (Placement(transformation(extent={{-128,104},{-74,124}})));
+        OpenIPSL.Electrical.Loads.PSSE.Load Load1(
+          V_b=220000,
+          P_0=powerFlow.powerflow.loads.PL1,
+          Q_0=powerFlow.powerflow.loads.QL1,
+          v_0=powerFlow.powerflow.bus.V3,
+          angle_0=powerFlow.powerflow.bus.A3) if not equivalentGRID
+          annotation (Placement(transformation(extent={{-20,48},{0,68}})));
+        Electrical.Events.Breaker breaker(enableTrigger=false,
+          t_o=0.55,
+          rc_enabled=false,
+          t_rc=80.01)       if not equivalentGRID                     annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
+              rotation=90,
+              origin={80,26})));
+
+        Modelica.Blocks.Interfaces.RealOutput OUT1
+          annotation (Placement(transformation(extent={{140,70},{160,90}})));
+       Modelica.Blocks.Interfaces.RealOutput OUT2
+          annotation (Placement(transformation(extent={{140,50},{160,70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT3
+          annotation (Placement(transformation(extent={{140,30},{160,50}})));
+
+        PFData.PowerFlow powerFlow(redeclare record PowerFlow =
+              OpenIPSL.Examples.ModelPredictiveControl.PFData.PFG2ONLY)
+          annotation (Placement(transformation(extent={{-68,104},{-48,124}})));
+        Electrical.Machines.PSSE.GENCLS IB(
+          V_b=220000,
+          v_0=powerFlow.powerflow.bus.V4,
+          angle_0=powerFlow.powerflow.bus.A4,
+          P_0=powerFlow.powerflow.machines.Pinf,
+          Q_0=powerFlow.powerflow.machines.Qinf,
+          M_b=100000000,
+          X_d=1) if not equivalentGRID annotation (Placement(transformation(extent={{110,70},
+                  {100,90}})));
+        Electrical.Loads.PSSE.Load_ExtInput Load2(
+          P_0=powerFlow.powerflow.loads.PL2,
+          Q_0=powerFlow.powerflow.loads.QL2,
+          v_0=powerFlow.powerflow.bus.V5,
+          angle_0=powerFlow.powerflow.bus.A5,
+          d_P=0,
+          t1=1000,
+          d_t=1000)
+          annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+
+        inner Modelica.Blocks.Noise.GlobalSeed globalSeed(
+          enableNoise=true,
+          useAutomaticSeed=false,
+            fixedSeed=10000)
+          annotation (Placement(transformation(extent={{-44,102},{-24,122}})));
+        Modelica.Blocks.Sources.Sine sine(
+          amplitude=0.01,
+          f=1/260,
+          phase=3.1415926535898,
+          startTime=1000)
+          annotation (Placement(transformation(extent={{66,-32},{76,-22}})));
+
+        Electrical.Buses.Bus Bus10(v_0=powerFlow.powerflow.bus.V10, angle_0=powerFlow.powerflow.bus.A10)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-90})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T4(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={10,-90})));
+
+        Modelica.Blocks.Interfaces.RealOutput OUT4
+          annotation (Placement(transformation(extent={{140,10},{160,30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT5
+          annotation (Placement(transformation(extent={{140,-10},{160,10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT6
+          annotation (Placement(transformation(extent={{140,-30},{160,-10}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT7
+          annotation (Placement(transformation(extent={{140,-50},{160,-30}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT8
+          annotation (Placement(transformation(extent={{140,-70},{160,-50}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT9
+          annotation (Placement(transformation(extent={{140,-90},{160,-70}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT10
+          annotation (Placement(transformation(extent={{140,-110},{160,-90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT11
+          annotation (Placement(transformation(extent={{164,70},{184,90}})));
+        Modelica.Blocks.Interfaces.RealOutput OUT12
+          annotation (Placement(transformation(extent={{164,50},{184,70}})));
+        Electrical.Buses.Bus Bus8(v_0=powerFlow.powerflow.bus.V8, angle_0=powerFlow.powerflow.bus.A8)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-10,-50})));
+        Electrical.Branches.PSSE.TwoWindingTransformer          T3(
+          G=0,
+          B=0,
+          CW=1,
+          VNOM1=13800,
+          VB1=13800,
+          VNOM2=480,
+          VB2=480,
+          R=0.001,
+          X=0.1)  annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={12,-50})));
+        Electrical.Buses.Bus Bus11(v_0=powerFlow.powerflow.bus.V11, angle_0=powerFlow.powerflow.bus.A11)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-90})));
+        Electrical.Buses.Bus Bus9(v_0=powerFlow.powerflow.bus.V9, angle_0=powerFlow.powerflow.bus.A9)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,-50})));
+        Electrical.Buses.Bus Bus7(v_0=powerFlow.powerflow.bus.V7, angle_0=powerFlow.powerflow.bus.A7)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={30,10})));
+        Electrical.Branches.PwLine          L4(
+          R=0.001,
+          X=0.1,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,6},{
+                  50,14}})));
+        Electrical.Branches.PwLine          L5(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-54},
+                  {50,-46}})));
+        Electrical.Branches.PwLine          L6(
+          R=0.01,
+          X=0.001,
+          G=0,
+          B=0)  annotation (Placement(transformation(extent={{38,-94},
+                  {50,-86}})));
+        Electrical.Loads.NoiseInjections.WhiteNoiseInjection whiteNoiseInjection(
+            active_sigma=0.0002, samplePeriod=0.02)
+          annotation (Placement(transformation(extent={{64,-16},{76,-4}})));
+        Modelica.Blocks.Math.Add3 add3_1(k3=-1)
+          annotation (Placement(transformation(extent={{86,-20},{96,-10}})));
+        Modelica.Blocks.Sources.Constant ToShedOrNotToShed(k=0)
+          annotation (Placement(transformation(extent={{66,-54},{78,-42}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0;
+              0.05000000075,0; 0.1000000015,0; 0.150000006,0; 0.200000003,0;
+              0.25,0; 0.3000000119,0; 0.349999994,0; 0.400000006,0;
+              0.4499999881,0; 0.5,0; 0.5500000119,0; 0.6000000238,0;
+              0.6499999762,0; 0.6999999881,0; 0.75,0; 0.8000000119,0;
+              0.8500000238,0; 0.8999999762,0; 0.9499999881,0; 1,0.01;
+              1.049999952,0.01; 1.100000024,0.01; 1.149999976,0.01; 1.200000048,
+              0.01; 1.25,0.01; 1.299999952,0.01; 1.350000024,0.01; 1.399999976,
+              0.01; 1.450000048,0.01; 1.5,0.02; 1.549999952,0.02; 1.600000024,
+              0.02; 1.649999976,0.02; 1.700000048,0.02; 1.75,0.02; 1.799999952,
+              0.02; 1.850000024,0.02; 1.899999976,0.02; 1.950000048,0.02; 2,
+              0.01; 2.049999952,0.01; 2.099999905,0.01; 2.150000095,0.01;
+              2.200000048,0.01; 2.25,0.01; 2.299999952,0.01; 2.349999905,0.01;
+              2.400000095,0.01; 2.450000048,0.01; 2.5,8.01e-16; 2.549999952,
+              8.01e-16; 2.599999905,8.01e-16; 2.650000095,8.01e-16; 2.700000048,
+              8.01e-16; 2.75,8.01e-16; 2.799999952,8.01e-16; 2.849999905,
+              8.01e-16; 2.900000095,8.01e-16; 2.950000048,8.01e-16; 3,-0.01;
+              3.049999952,-0.01; 3.099999905,-0.01; 3.150000095,-0.01;
+              3.200000048,-0.01; 3.25,-0.01; 3.299999952,-0.01; 3.349999905,-0.01;
+              3.400000095,-0.01; 3.450000048,-0.01; 3.5,-0.01383787715;
+              3.549999952,-0.01383787715; 3.599999905,-0.01383787715;
+              3.650000095,-0.01383787715; 3.700000048,-0.01383787715; 3.75,-0.01383787715;
+              3.799999952,-0.01383787715; 3.849999905,-0.01383787715;
+              3.900000095,-0.01383787715; 3.950000048,-0.01383787715; 4,-0.009837606957;
+              4.050000191,-0.009837606957; 4.099999905,-0.009837606957;
+              4.150000095,-0.009837606957; 4.199999809,-0.009837606957; 4.25,-0.009837606957;
+              4.300000191,-0.009837606957; 4.349999905,-0.009837606957;
+              4.400000095,-0.009837606957; 4.449999809,-0.009837606957; 4.5,-0.0102623088;
+              4.550000191,-0.0102623088; 4.599999905,-0.0102623088; 4.650000095,
+              -0.0102623088; 4.699999809,-0.0102623088; 4.75,-0.0102623088;
+              4.800000191,-0.0102623088; 4.849999905,-0.0102623088; 4.900000095,
+              -0.0102623088; 4.949999809,-0.0102623088; 5,-0.01160763021;
+              5.050000191,-0.01160763021; 5.099999905,-0.01160763021;
+              5.150000095,-0.01160763021; 5.199999809,-0.01160763021; 5.25,-0.01160763021;
+              5.300000191,-0.01160763021; 5.349999905,-0.01160763021;
+              5.400000095,-0.01160763021; 5.449999809,-0.01160763021; 5.5,-0.01251675201;
+              5.550000191,-0.01251675201; 5.599999905,-0.01251675201;
+              5.650000095,-0.01251675201; 5.699999809,-0.01251675201; 5.75,-0.01251675201;
+              5.800000191,-0.01251675201; 5.849999905,-0.01251675201;
+              5.900000095,-0.01251675201; 5.949999809,-0.01251675201; 6,-0.01371517937;
+              6.050000191,-0.01371517937; 6.099999905,-0.01371517937;
+              6.150000095,-0.01371517937; 6.199999809,-0.01371517937; 6.25,-0.01371517937;
+              6.300000191,-0.01371517937; 6.349999905,-0.01371517937;
+              6.400000095,-0.01371517937; 6.449999809,-0.01371517937; 6.5,-0.01397805176;
+              6.550000191,-0.01397805176; 6.599999905,-0.01397805176;
+              6.650000095,-0.01397805176; 6.699999809,-0.01397805176; 6.75,-0.01397805176;
+              6.800000191,-0.01397805176; 6.849999905,-0.01397805176;
+              6.900000095,-0.01397805176; 6.949999809,-0.01397805176; 7,-0.01534059791;
+              7.050000191,-0.01534059791; 7.099999905,-0.01534059791;
+              7.150000095,-0.01534059791; 7.199999809,-0.01534059791; 7.25,-0.01534059791;
+              7.300000191,-0.01534059791; 7.349999905,-0.01534059791;
+              7.400000095,-0.01534059791; 7.449999809,-0.01534059791; 7.5,-0.01912965265;
+              7.550000191,-0.01912965265; 7.599999905,-0.01912965265;
+              7.650000095,-0.01912965265; 7.699999809,-0.01912965265; 7.75,-0.01912965265;
+              7.800000191,-0.01912965265; 7.849999905,-0.01912965265;
+              7.900000095,-0.01912965265; 7.949999809,-0.01912965265; 8,-0.018557288;
+              8.050000191,-0.018557288; 8.100000381,-0.018557288; 8.149999619,-0.018557288;
+              8.199999809,-0.018557288; 8.25,-0.018557288; 8.300000191,-0.018557288;
+              8.350000381,-0.018557288; 8.399999619,-0.018557288; 8.449999809,-0.018557288;
+              8.5,-0.01961235268; 8.550000191,-0.01961235268; 8.600000381,-0.01961235268;
+              8.649999619,-0.01961235268; 8.699999809,-0.01961235268; 8.75,-0.01961235268;
+              8.800000191,-0.01961235268; 8.850000381,-0.01961235268;
+              8.899999619,-0.01961235268; 8.949999809,-0.01961235268; 9,-0.02106756486;
+              9.050000191,-0.02106756486; 9.100000381,-0.02106756486;
+              9.149999619,-0.02106756486; 9.199999809,-0.02106756486; 9.25,-0.02106756486;
+              9.300000191,-0.02106756486; 9.350000381,-0.02106756486;
+              9.399999619,-0.02106756486; 9.449999809,-0.02106756486; 9.5,-0.02245707237;
+              9.550000191,-0.02245707237; 9.600000381,-0.02245707237;
+              9.649999619,-0.02245707237; 9.699999809,-0.02245707237; 9.75,-0.02245707237;
+              9.800000191,-0.02245707237; 9.850000381,-0.02245707237;
+              9.899999619,-0.02245707237; 9.949999809,-0.02245707237; 10,-0.0221875374;
+              10.05000019,-0.0221875374; 10.10000038,-0.0221875374; 10.14999962,
+              -0.0221875374; 10.19999981,-0.0221875374; 10.25,-0.0221875374;
+              10.30000019,-0.0221875374; 10.35000038,-0.0221875374; 10.39999962,
+              -0.0221875374; 10.44999981,-0.0221875374; 10.5,-0.02385340635;
+              10.55000019,-0.02385340635; 10.60000038,-0.02385340635;
+              10.64999962,-0.02385340635; 10.69999981,-0.02385340635; 10.75,-0.02385340635;
+              10.80000019,-0.02385340635; 10.85000038,-0.02385340635;
+              10.89999962,-0.02385340635; 10.94999981,-0.02385340635; 11,-0.02414142767;
+              11.05000019,-0.02414142767; 11.10000038,-0.02414142767;
+              11.14999962,-0.02414142767; 11.19999981,-0.02414142767; 11.25,-0.02414142767;
+              11.30000019,-0.02414142767; 11.35000038,-0.02414142767;
+              11.39999962,-0.02414142767; 11.44999981,-0.02414142767; 11.5,-0.02444715624;
+              11.55000019,-0.02444715624; 11.60000038,-0.02444715624;
+              11.64999962,-0.02444715624; 11.69999981,-0.02444715624; 11.75,-0.02444715624;
+              11.80000019,-0.02444715624; 11.85000038,-0.02444715624;
+              11.89999962,-0.02444715624; 11.94999981,-0.02444715624; 12,-0.02569808322;
+              12.05000019,-0.02569808322; 12.10000038,-0.02569808322;
+              12.14999962,-0.02569808322; 12.19999981,-0.02569808322; 12.25,-0.02569808322;
+              12.30000019,-0.02569808322; 12.35000038,-0.02569808322;
+              12.39999962,-0.02569808322; 12.44999981,-0.02569808322; 12.5,-0.02573998054;
+              12.55000019,-0.02573998054; 12.60000038,-0.02573998054;
+              12.64999962,-0.02573998054; 12.69999981,-0.02573998054; 12.75,-0.02573998054;
+              12.80000019,-0.02573998054; 12.85000038,-0.02573998054;
+              12.89999962,-0.02573998054; 12.94999981,-0.02573998054; 13,-0.02540375283;
+              13.05000019,-0.02540375283; 13.10000038,-0.02540375283;
+              13.14999962,-0.02540375283; 13.19999981,-0.02540375283; 13.25,-0.02540375283;
+              13.30000019,-0.02540375283; 13.35000038,-0.02540375283;
+              13.39999962,-0.02540375283; 13.44999981,-0.02540375283; 13.5,-0.02647806954;
+              13.55000019,-0.02647806954; 13.60000038,-0.02647806954;
+              13.64999962,-0.02647806954; 13.69999981,-0.02647806954; 13.75,-0.02647806954;
+              13.80000019,-0.02647806954; 13.85000038,-0.02647806954;
+              13.89999962,-0.02647806954; 13.94999981,-0.02647806954; 14,-0.02684909569;
+              14.05000019,-0.02684909569; 14.10000038,-0.02684909569;
+              14.14999962,-0.02684909569; 14.19999981,-0.02684909569; 14.25,-0.02684909569;
+              14.30000019,-0.02684909569; 14.35000038,-0.02684909569;
+              14.39999962,-0.02684909569; 14.44999981,-0.02684909569; 14.5,-0.02660655577;
+              14.55000019,-0.02660655577; 14.60000038,-0.02660655577;
+              14.64999962,-0.02660655577; 14.69999981,-0.02660655577; 14.75,-0.02660655577;
+              14.80000019,-0.02660655577; 14.85000038,-0.02660655577;
+              14.89999962,-0.02660655577; 14.94999981,-0.02660655577],
+                                       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-110,6},{-90,26}})));
+        Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(table=[0,0;
+              0.05000000075,0; 0.1000000015,0; 0.150000006,0; 0.200000003,0;
+              0.25,0; 0.3000000119,0; 0.349999994,0; 0.400000006,0;
+              0.4499999881,0; 0.5,0; 0.5500000119,0; 0.6000000238,0;
+              0.6499999762,0; 0.6999999881,0; 0.75,0; 0.8000000119,0;
+              0.8500000238,0; 0.8999999762,0; 0.9499999881,0; 1,0.25;
+              1.049999952,0.25; 1.100000024,0.25; 1.149999976,0.25; 1.200000048,
+              0.25; 1.25,0.25; 1.299999952,0.25; 1.350000024,0.25; 1.399999976,
+              0.25; 1.450000048,0.25; 1.5,0.5; 1.549999952,0.5; 1.600000024,0.5;
+              1.649999976,0.5; 1.700000048,0.5; 1.75,0.5; 1.799999952,0.5;
+              1.850000024,0.5; 1.899999976,0.5; 1.950000048,0.5; 2,0.3210287783;
+              2.049999952,0.3210287783; 2.099999905,0.3210287783; 2.150000095,
+              0.3210287783; 2.200000048,0.3210287783; 2.25,0.3210287783;
+              2.299999952,0.3210287783; 2.349999905,0.3210287783; 2.400000095,
+              0.3210287783; 2.450000048,0.3210287783; 2.5,0.07102877828;
+              2.549999952,0.07102877828; 2.599999905,0.07102877828; 2.650000095,
+              0.07102877828; 2.700000048,0.07102877828; 2.75,0.07102877828;
+              2.799999952,0.07102877828; 2.849999905,0.07102877828; 2.900000095,
+              0.07102877828; 2.950000048,0.07102877828; 3,0.3210287783;
+              3.049999952,0.3210287783; 3.099999905,0.3210287783; 3.150000095,
+              0.3210287783; 3.200000048,0.3210287783; 3.25,0.3210287783;
+              3.299999952,0.3210287783; 3.349999905,0.3210287783; 3.400000095,
+              0.3210287783; 3.450000048,0.3210287783; 3.5,0.3328020469;
+              3.549999952,0.3328020469; 3.599999905,0.3328020469; 3.650000095,
+              0.3328020469; 3.700000048,0.3328020469; 3.75,0.3328020469;
+              3.799999952,0.3328020469; 3.849999905,0.3328020469; 3.900000095,
+              0.3328020469; 3.950000048,0.3328020469; 4,0.3333290712;
+              4.050000191,0.3333290712; 4.099999905,0.3333290712; 4.150000095,
+              0.3333290712; 4.199999809,0.3333290712; 4.25,0.3333290712;
+              4.300000191,0.3333290712; 4.349999905,0.3333290712; 4.400000095,
+              0.3333290712; 4.449999809,0.3333290712; 4.5,0.3361648985;
+              4.550000191,0.3361648985; 4.599999905,0.3361648985; 4.650000095,
+              0.3361648985; 4.699999809,0.3361648985; 4.75,0.3361648985;
+              4.800000191,0.3361648985; 4.849999905,0.3361648985; 4.900000095,
+              0.3361648985; 4.949999809,0.3361648985; 5,0.3367526363;
+              5.050000191,0.3367526363; 5.099999905,0.3367526363; 5.150000095,
+              0.3367526363; 5.199999809,0.3367526363; 5.25,0.3367526363;
+              5.300000191,0.3367526363; 5.349999905,0.3367526363; 5.400000095,
+              0.3367526363; 5.449999809,0.3367526363; 5.5,0.3384333121;
+              5.550000191,0.3384333121; 5.599999905,0.3384333121; 5.650000095,
+              0.3384333121; 5.699999809,0.3384333121; 5.75,0.3384333121;
+              5.800000191,0.3384333121; 5.849999905,0.3384333121; 5.900000095,
+              0.3384333121; 5.949999809,0.3384333121; 6,0.3375316963;
+              6.050000191,0.3375316963; 6.099999905,0.3375316963; 6.150000095,
+              0.3375316963; 6.199999809,0.3375316963; 6.25,0.3375316963;
+              6.300000191,0.3375316963; 6.349999905,0.3375316963; 6.400000095,
+              0.3375316963; 6.449999809,0.3375316963; 6.5,0.3385005071;
+              6.550000191,0.3385005071; 6.599999905,0.3385005071; 6.650000095,
+              0.3385005071; 6.699999809,0.3385005071; 6.75,0.3385005071;
+              6.800000191,0.3385005071; 6.849999905,0.3385005071; 6.900000095,
+              0.3385005071; 6.949999809,0.3385005071; 7,0.3395959897;
+              7.050000191,0.3395959897; 7.099999905,0.3395959897; 7.150000095,
+              0.3395959897; 7.199999809,0.3395959897; 7.25,0.3395959897;
+              7.300000191,0.3395959897; 7.349999905,0.3395959897; 7.400000095,
+              0.3395959897; 7.449999809,0.3395959897; 7.5,0.3388048864;
+              7.550000191,0.3388048864; 7.599999905,0.3388048864; 7.650000095,
+              0.3388048864; 7.699999809,0.3388048864; 7.75,0.3388048864;
+              7.800000191,0.3388048864; 7.849999905,0.3388048864; 7.900000095,
+              0.3388048864; 7.949999809,0.3388048864; 8,0.3432656463;
+              8.050000191,0.3432656463; 8.100000381,0.3432656463; 8.149999619,
+              0.3432656463; 8.199999809,0.3432656463; 8.25,0.3432656463;
+              8.300000191,0.3432656463; 8.350000381,0.3432656463; 8.399999619,
+              0.3432656463; 8.449999809,0.3432656463; 8.5,0.3408397522;
+              8.550000191,0.3408397522; 8.600000381,0.3408397522; 8.649999619,
+              0.3408397522; 8.699999809,0.3408397522; 8.75,0.3408397522;
+              8.800000191,0.3408397522; 8.850000381,0.3408397522; 8.899999619,
+              0.3408397522; 8.949999809,0.3408397522; 9,0.3417942205;
+              9.050000191,0.3417942205; 9.100000381,0.3417942205; 9.149999619,
+              0.3417942205; 9.199999809,0.3417942205; 9.25,0.3417942205;
+              9.300000191,0.3417942205; 9.350000381,0.3417942205; 9.399999619,
+              0.3417942205; 9.449999809,0.3417942205; 9.5,0.3408276337;
+              9.550000191,0.3408276337; 9.600000381,0.3408276337; 9.649999619,
+              0.3408276337; 9.699999809,0.3408276337; 9.75,0.3408276337;
+              9.800000191,0.3408276337; 9.850000381,0.3408276337; 9.899999619,
+              0.3408276337; 9.949999809,0.3408276337; 10,0.3457528396;
+              10.05000019,0.3457528396; 10.10000038,0.3457528396; 10.14999962,
+              0.3457528396; 10.19999981,0.3457528396; 10.25,0.3457528396;
+              10.30000019,0.3457528396; 10.35000038,0.3457528396; 10.39999962,
+              0.3457528396; 10.44999981,0.3457528396; 10.5,0.3442620061;
+              10.55000019,0.3442620061; 10.60000038,0.3442620061; 10.64999962,
+              0.3442620061; 10.69999981,0.3442620061; 10.75,0.3442620061;
+              10.80000019,0.3442620061; 10.85000038,0.3442620061; 10.89999962,
+              0.3442620061; 10.94999981,0.3442620061; 11,0.3452125867;
+              11.05000019,0.3452125867; 11.10000038,0.3452125867; 11.14999962,
+              0.3452125867; 11.19999981,0.3452125867; 11.25,0.3452125867;
+              11.30000019,0.3452125867; 11.35000038,0.3452125867; 11.39999962,
+              0.3452125867; 11.44999981,0.3452125867; 11.5,0.3446979296;
+              11.55000019,0.3446979296; 11.60000038,0.3446979296; 11.64999962,
+              0.3446979296; 11.69999981,0.3446979296; 11.75,0.3446979296;
+              11.80000019,0.3446979296; 11.85000038,0.3446979296; 11.89999962,
+              0.3446979296; 11.94999981,0.3446979296; 12,0.3448678318;
+              12.05000019,0.3448678318; 12.10000038,0.3448678318; 12.14999962,
+              0.3448678318; 12.19999981,0.3448678318; 12.25,0.3448678318;
+              12.30000019,0.3448678318; 12.35000038,0.3448678318; 12.39999962,
+              0.3448678318; 12.44999981,0.3448678318; 12.5,0.3466509121;
+              12.55000019,0.3466509121; 12.60000038,0.3466509121; 12.64999962,
+              0.3466509121; 12.69999981,0.3466509121; 12.75,0.3466509121;
+              12.80000019,0.3466509121; 12.85000038,0.3466509121; 12.89999962,
+              0.3466509121; 12.94999981,0.3466509121; 13,0.3495053894;
+              13.05000019,0.3495053894; 13.10000038,0.3495053894; 13.14999962,
+              0.3495053894; 13.19999981,0.3495053894; 13.25,0.3495053894;
+              13.30000019,0.3495053894; 13.35000038,0.3495053894; 13.39999962,
+              0.3495053894; 13.44999981,0.3495053894; 13.5,0.3472329239;
+              13.55000019,0.3472329239; 13.60000038,0.3472329239; 13.64999962,
+              0.3472329239; 13.69999981,0.3472329239; 13.75,0.3472329239;
+              13.80000019,0.3472329239; 13.85000038,0.3472329239; 13.89999962,
+              0.3472329239; 13.94999981,0.3472329239; 14,0.3474813893;
+              14.05000019,0.3474813893; 14.10000038,0.3474813893; 14.14999962,
+              0.3474813893; 14.19999981,0.3474813893; 14.25,0.3474813893;
+              14.30000019,0.3474813893; 14.35000038,0.3474813893; 14.39999962,
+              0.3474813893; 14.44999981,0.3474813893; 14.5,0.3495417367;
+              14.55000019,0.3495417367; 14.60000038,0.3495417367; 14.64999962,
+              0.3495417367; 14.69999981,0.3495417367; 14.75,0.3495417367;
+              14.80000019,0.3495417367; 14.85000038,0.3495417367; 14.89999962,
+              0.3495417367; 14.94999981,0.3495417367],
+                                                 smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+          annotation (Placement(transformation(extent={{-110,-20},{-90,0}})));
+      equation
+
+      OUT1 = G2.gen.w;
+      OUT2 = G2.gen.delta;
+      OUT3 = G2.gen.Epq;
+      OUT4 = G2.gen.PSIkd;
+      OUT5 = G2.gen.PSIppq;
+      OUT6 = G2.sEXSMPC.simpleLagLim.state;
+      OUT7 = G2.sEXSMPC.leadLag.TF.x_scaled[1];
+      OUT8 = G2.gASTMPC.simpleLagLim.state;
+      OUT9 = G2.gASTMPC.simpleLag.state;
+      OUT10 = G2.gASTMPC.simpleLag1.state;
+      OUT11 = Bus5.v;
+      OUT12 = Bus5.angle;
+
+        connect(T1.p, Bus2.p)
+          annotation (Line(points={{-51.2,80},{-40,80}}, color={0,0,255}));
+        connect(Bus1.p, T1.n)
+          annotation (Line(points={{-80,80},{-68.8,80}}, color={0,0,255}));
+        connect(G1.conn, Bus1.p)
+          annotation (Line(points={{-91,80},{-80,80}}, color={0,0,255}));
+        connect(L1.n, Bus3.p)
+          annotation (Line(points={{-14.6,80},{0,80}}, color={0,0,255}));
+        connect(L1.p, Bus2.p)
+          annotation (Line(points={{-25.4,80},{-40,80}}, color={0,0,255}));
+        connect(L2_2.n, Bus4.p) annotation (Line(points={{35.4,70},{44,70},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.n, Bus4.p) annotation (Line(points={{35.4,90},{44,90},{44,80},{60,
+                80}}, color={0,0,255}));
+        connect(L2_1.p, Bus3.p) annotation (Line(points={{24.6,90},{16,90},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(L2_2.p, Bus3.p) annotation (Line(points={{24.6,70},{16,70},{16,80},{0,
+                80}}, color={0,0,255}));
+        connect(Load1.p, Bus3.p)
+          annotation (Line(points={{-10,68},{-10,80},{0,80}}, color={0,0,255}));
+        connect(L3.p, Bus4.p)
+          annotation (Line(points={{80,65.4},{80,80},{60,80}}, color={0,0,255}));
+        connect(breaker.s, Bus5.p)
+          annotation (Line(points={{80,22},{80,16}},color={0,0,255}));
+        connect(breaker.r, L3.n)
+          annotation (Line(points={{80,30},{80,54.6}},color={0,0,255}));
+
+        connect(IB.p, Bus4.p)
+          annotation (Line(points={{100,80},{60,80}}, color={0,0,255}));
+        connect(Load2.p, Bus5.p) annotation (Line(points={{110,-10},{110,10},{80,10},{
+                80,16}},
+                     color={0,0,255}));
+        connect(T4.n, Bus10.p)
+          annotation (Line(points={{-1,-90},{-10,-90}}, color={0,0,255}));
+        connect(Bus6.p, T2.n)
+          annotation (Line(points={{-10,10},{-1,10}},
+                                                  color={0,0,255}));
+        connect(G2.conn, Bus6.p) annotation (Line(points={{-19,10},{-10,10}},
+                                           color={0,0,255}));
+        connect(Bus8.p, T3.n)
+          annotation (Line(points={{-10,-50},{1,-50}},  color={0,0,255}));
+        connect(T2.p, Bus7.p) annotation (Line(points={{21,10},{25.5,10},{25.5,10},{30,
+                10}}, color={0,0,255}));
+        connect(T3.p, Bus9.p)
+          annotation (Line(points={{23,-50},{30,-50}}, color={0,0,255}));
+        connect(T4.p, Bus11.p)
+          annotation (Line(points={{21,-90},{30,-90}}, color={0,0,255}));
+        connect(L4.n, Bus5.p) annotation (Line(points={{49.4,10},{60,10},{60,10},{80,10},
+                {80,16}},     color={0,0,255}));
+        connect(L5.n, Bus5.p) annotation (Line(points={{49.4,-50},{60,-50},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus11.p, L6.p)
+          annotation (Line(points={{30,-90},{38.6,-90}}, color={0,0,255}));
+        connect(Bus9.p, L5.p)
+          annotation (Line(points={{30,-50},{38.6,-50}}, color={0,0,255}));
+        connect(L6.n, Bus5.p) annotation (Line(points={{49.4,-90},{60,-90},{60,10},{80,
+                10},{80,16}}, color={0,0,255}));
+        connect(Bus7.p, L4.p) annotation (Line(points={{30,10},{34.3,10},{34.3,10},{38.6,
+                10}}, color={0,0,255}));
+        connect(add3_1.y, Load2.u) annotation (Line(points={{96.5,-15},{98.2,-15},{98.2,
+                -14.5},{101.9,-14.5}}, color={0,0,127}));
+        connect(whiteNoiseInjection.y, add3_1.u1) annotation (Line(points={{76.54,-10.06},
+                {80.77,-10.06},{80.77,-11},{85,-11}}, color={0,0,127}));
+        connect(sine.y, add3_1.u2) annotation (Line(points={{76.5,-27},{78,-27},{78,-15},
+                {85,-15}}, color={0,0,127}));
+        connect(ToShedOrNotToShed.y, add3_1.u3) annotation (Line(points={{78.6,
+                -48},{85,-48},{85,-19}}, color={0,0,127}));
+        connect(combiTimeTable.y[1], G2.P_ref1)
+          annotation (Line(points={{-89,16},{-42,16}}, color={0,0,127}));
+        connect(combiTimeTable1.y[1], G2.Efd_ref) annotation (Line(points={{-89,
+                -10},{-50,-10},{-50,4},{-42,4}}, color={0,0,127}));
+          annotation (Placement(transformation(extent={{140,-20},{160,0}})),
+                      Placement(transformation(extent={{140,-40},{160,-20}})),
+                      Placement(transformation(extent={{140,-60},{160,-40}})),
+                      Placement(transformation(extent={{140,-80},{160,-60}})),
+                     Diagram(coordinateSystem(preserveAspectRatio=false,
+                extent={{-140,-140},{140,140}}), graphics={
+              Rectangle(
+                extent={{-128,36},{124,-124}},
+                lineColor={238,46,47},
+                lineThickness=0.5),
+              Rectangle(
+                extent={{-128,98},{124,38}},
+                lineColor={0,128,255},
+                lineThickness=0.5),
+              Text(
+                extent={{78,-106},{114,-120}},
+                textColor={238,46,47},
+                textString="Microgrid"),
+              Text(
+                extent={{76,58},{128,34}},
+                textColor={28,108,200},
+                textString="Utility Grid"),
+              Text(
+                extent={{-30,-102},{34,-124}},
+                textColor={0,140,72},
+                textString="Linearization Unit")}),
+          Documentation(info="<html>
+<p>This example system shows how the preparation for resynchronization of Generator 2 to the grid. Note that at 2 seconds, a signal is triggered so voltages between buses 3 and 4 should be equal.</p>
+<p>Simulate the system for 10 seconds. Variables of interest are:</p>
+<ul>
+<li><code>B3.v</code></li>
+<li><code>B4.v</code></li>
+<li><code>G1.gen.SPEED</code></li>
+<li><code>G2.gen.SPEED</code></li>
+</ul>
+<p>Note the behavior of those variables before and after the connection of generator G2 to the main grid.</p>
+</html>"),experiment(
+            StopTime=15,
+            Interval=0.02,
+            __Dymola_Algorithm="Dassl"),
+          Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
+      end MPCAppliedEnergyOriginal_v3_G2ONLY_Table2;
     end TableSimulations;
   end Luigi_Vanfretti_Special_Package;
   extends Modelica.Icons.ExamplesPackage;
@@ -25522,6 +30108,100 @@ injections (p_0 and q_0). This method reduces repetitiveness of initialization c
                   fillPattern=FillPattern.Solid,
                   textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
         end SolarMPCSysIdentification;
+
+        model SolarMPCLocalVQControl_ADD_ON
+          Interfaces.PwPin p1
+            annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+          Electrical.Renewables.PSSE.InverterInterface.REGCA1 rEGCA1_1(V_b=V_base,
+            P_0=P_0,
+            Q_0=Q_0,
+            v_0=v_0,
+            angle_0=angle_0)
+            annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+          REECB1_Local_V_Q_Control_PI EC(
+            pfflag=false,
+            vflag=false,
+            qflag=false,
+            pqflag=true,
+            Trv=0.02,
+            Kqv=0.01,
+            Tp=0.05,
+            Kqp=1,
+            Kqi=0.1,
+            Kvp=1,
+            Kvi=1,
+            Kpp=1,
+            Kpi=1,
+            Pmin=0.001,
+            Imax=1.3)
+            annotation (Placement(transformation(extent={{-16,-10},{4,10}})));
+          Modelica.Blocks.Interfaces.RealInput QINPUT
+            "Reactive Power Reference"
+            annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+          parameter Modelica.Units.SI.Voltage V_base = 480;
+          extends OpenIPSL.Electrical.Essentials.pfComponent;
+          Modelica.Blocks.Math.Add add1
+            annotation (Placement(transformation(extent={{-54,-12},{-34,8}})));
+          Modelica.Blocks.Interfaces.RealInput IRR2POW "Active Power Reference"
+            annotation (Placement(transformation(extent={{-140,50},{-100,90}})));
+        equation
+          connect(EC.Iqcmd, rEGCA1_1.Iqcmd) annotation (Line(points={{4.33333,
+                  5.66667},{11.4524,5.66667},{11.4524,5.71429},{18.5714,5.71429}},
+                color={0,0,127}));
+          connect(EC.Ipcmd, rEGCA1_1.Ipcmd) annotation (Line(points={{4.33333,
+                  -5.66667},{11.4524,-5.66667},{11.4524,-5.71429},{18.5714,
+                  -5.71429}}, color={0,0,127}));
+          connect(EC.iq0, rEGCA1_1.IQ0) annotation (Line(points={{2,-10.6667},{
+                  2,-18},{22,-18},{22,-10},{21.4286,-10},{21.4286,-10.7143}},
+                color={0,0,127}));
+          connect(EC.ip0, rEGCA1_1.IP0) annotation (Line(points={{-2,-10.6667},
+                  {-2,-20},{26,-20},{26,-10.7143},{25.7143,-10.7143}}, color={0,
+                  0,127}));
+          connect(EC.v0, rEGCA1_1.V_0) annotation (Line(points={{-6,-10.6667},{
+                  -6,-22},{30,-22},{30,-10.7143}}, color={0,0,127}));
+          connect(EC.q0, rEGCA1_1.q_0) annotation (Line(points={{-10,-10.6667},
+                  {-10,-26},{34,-26},{34,-10.7143},{34.2857,-10.7143}}, color={
+                  0,0,127}));
+          connect(EC.p0, rEGCA1_1.p_0) annotation (Line(points={{-14,-10.6667},
+                  {-14,-24},{38,-24},{38,-10.7143},{38.5714,-10.7143}}, color={
+                  0,0,127}));
+          connect(rEGCA1_1.V_t, EC.Vt) annotation (Line(points={{24.2857,
+                  10.7143},{24.2857,16},{-28,16},{-28,5.33333},{-16.6667,
+                  5.33333}}, color={0,0,127}));
+          connect(rEGCA1_1.Pgen, EC.Pe) annotation (Line(points={{30,10.7143},{
+                  30,20},{-22,20},{-22,2.66667},{-16.6667,2.66667}}, color={0,0,
+                  127}));
+          connect(rEGCA1_1.Qgen, EC.Qgen) annotation (Line(points={{35.7143,
+                  10.7143},{35.7143,24},{-20,24},{-20,0},{-16.6667,0}}, color={
+                  0,0,127}));
+          connect(rEGCA1_1.p, p1)
+            annotation (Line(points={{40,0},{100,0}}, color={0,0,255}));
+          connect(QINPUT, add1.u1)
+            annotation (Line(points={{-120,0},{-66,0},{-66,4},{-56,4}},
+                                                        color={0,0,127}));
+          connect(rEGCA1_1.q_0, add1.u2) annotation (Line(points={{34.2857,
+                  -10.7143},{34.2857,-46},{-56,-46},{-56,-8}},
+                                                       color={0,0,127}));
+          connect(add1.y, EC.Qext) annotation (Line(points={{-33,-2},{-24.8333,
+                  -2},{-24.8333,-2.66667},{-16.6667,-2.66667}}, color={0,0,127}));
+          connect(EC.Pref, IRR2POW) annotation (Line(points={{-16.6667,-5.33333},
+                  {-24,-5.33333},{-24,4},{-30,4},{-30,70},{-120,70}}, color={0,
+                  0,127}));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+                                           Ellipse(
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,85},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-48,2},{-20,56},{2,4},{24,-28},{48,22}},
+                  color={0,0,0},
+                  smooth=Smooth.Bezier),Text(
+                  extent={{-52,-18},{56,-66}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+        end SolarMPCLocalVQControl_ADD_ON;
       end Solar_Units;
 
       package Battery_Units
@@ -25752,7 +30432,8 @@ injections (p_0 and q_0). This method reduces repetitiveness of initialization c
             Kpp=1,
             Kpi=1,
             Pmin=-1,
-            T=999)
+            T=250,
+            SOCini=0.49)
             annotation (Placement(transformation(extent={{-16,-10},{4,10}})));
           Modelica.Blocks.Interfaces.RealInput Qext1 "Reactive Power Reference"
             annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
@@ -54596,27 +59277,27 @@ This component is the base class for the inverter components from the InverterIn
         import Modelica.Constants.pi;
         extends BusTemplatewithRenewables2(
         V1 = 1.0000000,
-        V2 = 0.9926486,
-        V3 = 0.9935714,
+        V2 = 0.99218,
+        V3 = 0.9934,
         V4 = 1.0000,
-        V5 = 0.9990979,
+        V5 = 0.99919,
         V6 = 1.0000,
-        V7 = 0.9994217,
+        V7 = 0.99989,
         V8 = 0.9999999,
-        V9 = 0.9990281,
+        V9 = 0.99940,
         V10 = 1.0000,
-        V11 = 0.9990,
-        A1 = 10.30208*pi/180,
-        A2 = 5.096955*pi/180,
-        A3 = -0.1419372*pi/180,
+        V11 = 0.9991,
+        A1 = 10.8302*pi/180,
+        A2 = 5.3910*pi/180,
+        A3 = -0.0844*pi/180,
         A4 = 0*pi/180,
-        A5 = 0.5722654*pi/180,
-        A6 =1.09702*pi/180,
-        A7 = 0.5801952*pi/180,
-        A8 = 0.6838356*pi/180,
-        A9 = 0.5695525*pi/180,
-        A10 = 0.5080193*pi/180,
-        A11 = 0.5659471*pi/180);
+        A5 = 0.3434*pi/180,
+        A6 = 0.7506*pi/180,
+        A7 = 0.3489*pi/180,
+        A8 =  0.4555*pi/180,
+        A9 = 0.3412*pi/180,
+        A10 = 0.2797*pi/180,
+        A11 = 0.3376*pi/180);
 
       end PFBus17;
 
@@ -55238,16 +59919,16 @@ This component is the base class for the inverter components from the InverterIn
 
       record PFMachine17 "New Microgrid Scenario with G2, PV, and BESS"
         extends MachineTemplatewithRenewables(
-         PG1=45.0548e6,
-         QG1=5.497117e6,
-         Pinf=1.418905e1,
-         Qinf=13.33923e6,
-         PG2=9e6,
-         QG2=-0.4020076e6,
+         PG1=47.054e6,
+         QG1=5.906e6,
+         Pinf=0,
+         Qinf=13.610e6,
+         PG2=7e6,
+         QG2=-0.213e6,
          PPV=2e6,
-         QPV=0.6771919e6,
+         QPV=0.586e6,
          PBESS=-1e6,
-         QBESS=1.002671e6);
+         QBESS=0.912e6);
           // Machine G1
 
         // Machine G2

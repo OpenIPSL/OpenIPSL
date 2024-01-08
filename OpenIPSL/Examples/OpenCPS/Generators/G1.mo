@@ -13,7 +13,7 @@ model G1 "Generation unit connected to bus BG1"
     Tpd0=5,
     Tppd0=0.07,
     Tppq0=0.09,
-    H=4.28,
+    H=3.28,
     D=1,
     Xd=1.84,
     Xq=1.75,

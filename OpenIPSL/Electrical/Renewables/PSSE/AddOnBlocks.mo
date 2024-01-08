@@ -3,9 +3,10 @@ package AddOnBlocks
   "This package contains additional add ons that can be added to the original renewable models."
   model IrradianceToPower "PV Array Power Output from Irradiance."
 
-    parameter Modelica.Units.SI.ActivePower Ypv = 1000 "Rated capacity of the PV array";
-    parameter Modelica.Units.SI.Temperature Tcstc = 25 "PV cell temperature under standard test conditions";
-    parameter Real fpv = 0.9 "PV derating factor";
+    parameter Modelica.Units.SI.ActivePower Ypv = 5 "Rated capacity of the PV array";
+    parameter Modelica.Units.SI.ApparentPower Sb = 100 "System Apparent Power [MW]";
+    parameter Modelica.Units.SI.Temperature Tcstc = 298.15 "PV cell temperature under standard test conditions";
+    parameter Real fpv = 1 "PV derating factor";
     parameter Real ap = -0.48 "Temperature coefficient of power";
     parameter Modelica.Units.SI.RadiantEnergyFluenceRate Gtstc = 1000;
 
@@ -14,9 +15,12 @@ package AddOnBlocks
 
     Modelica.Blocks.Interfaces.RealOutput Ppv
       annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-    Modelica.Blocks.Sources.CombiTimeTable SolarRadiation
+    Modelica.Blocks.Sources.CombiTimeTable SolarRadiation(table=[0.0,666.6667;
+          10,666.6667; 10.1,666.6667; 20,666.6667; 20.01,333.334; 30,333.334;
+          30.1,333.334; 40,333.334; 40.1,0; 50,0; 50.1,0; 60,0])
       annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-    Modelica.Blocks.Sources.CombiTimeTable SolarArrayTemperature
+    Modelica.Blocks.Sources.CombiTimeTable SolarArrayTemperature(table=[0.0,
+          298.15; 60,298.15])
       annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
 
@@ -24,7 +28,7 @@ package AddOnBlocks
 
   equation
 
-    Ppv = Ypv*fpv*(SolarRadiation.y[1]/Gtstc)*(1 + ap*(SolarArrayTemperature.y[1] - Tcstc));
+    Ppv = (Ypv/Sb)*fpv*(SolarRadiation.y[1]/Gtstc)*(1 + ap*(SolarArrayTemperature.y[1] - Tcstc));
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,200}),
