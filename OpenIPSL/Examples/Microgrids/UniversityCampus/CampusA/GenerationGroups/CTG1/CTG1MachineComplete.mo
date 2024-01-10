@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.GenerationGroups.CTG1;
-model CTG1MachineESVC
-  "Generation group for CTG1 containing the synchronous machine, excitation system and voltage compensator"
+model CTG1MachineComplete
+  "Generation group for CTG1 containing the synchronous machine, excitation system, voltage compensator, and turbine governor system."
   extends OpenIPSL.Interfaces.Generator;
 
   replaceable OpenIPSL.Electrical.Machines.PSSE.GENROU machine(
@@ -56,7 +56,16 @@ model CTG1MachineESVC
     annotation (Placement(transformation(extent={{-40,-64},{-32,-56}})));
   Modelica.Blocks.Sources.Constant const1(k=Modelica.Constants.inf)
     annotation (Placement(transformation(extent={{-28,-76},{-20,-68}})));
-  replaceable OpenIPSL.Electrical.Controls.PSSE.TG.ConstantPower governor
+  replaceable Electrical.Controls.PSSE.TG.GAST                   governor(
+    R=guData.guDynamics.tg.R,
+    T_1=guData.guDynamics.tg.T_1,
+    T_2=guData.guDynamics.tg.T_2,
+    T_3=guData.guDynamics.tg.T_3,
+    AT=guData.guDynamics.tg.AT,
+    K_T=guData.guDynamics.tg.K_T,
+    V_MAX=guData.guDynamics.tg.V_MAX,
+    V_MIN=guData.guDynamics.tg.V_MIN,
+    D_turb=guData.guDynamics.tg.D_turb)
     constrainedby OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-30,40},
             {-10,60}})));
@@ -102,4 +111,4 @@ equation
           -41.1429},{-38,-41.1429},{-38,6.6},{-26.1,6.6}}, color={0,0,255}));
   connect(iEEEVC.VCT, exciter.ECOMP) annotation (Line(points={{15.6889,-50.5714},
           {-42,-50.5714},{-42,-7},{-29.9,-7}}, color={0,0,127}));
-end CTG1MachineESVC;
+end CTG1MachineComplete;

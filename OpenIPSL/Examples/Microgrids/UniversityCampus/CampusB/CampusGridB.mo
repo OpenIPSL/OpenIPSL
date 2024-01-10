@@ -470,10 +470,10 @@ model CampusGridB "Microgrid Model for University Campus B"
   OpenIPSL.Electrical.Events.PwFault pwFault(
     R=0.5,
     X=0.5,
-    t1=2,
-    t2=2.1)
+    t1=1000,
+    t2=1001)
     annotation (Placement(transformation(extent={{112,40},{132,60}})));
-  GeneratorGroups.GasTurbineUnit GT1(
+  GeneratorGroups.GT.GasTurbineUnit GT1(
     P_0=pf.powerflow.machines.PG2,
     Q_0=pf.powerflow.machines.QG2,
     v_0=pf.powerflow.bus.VB1L2,
@@ -481,7 +481,7 @@ model CampusGridB "Microgrid Model for University Campus B"
         extent={{-14,-14},{14,14}},
         rotation=90,
         origin={-90,168})));
-  GeneratorGroups.GasTurbineUnit GT2(
+  GeneratorGroups.GT.GasTurbineUnit GT2(
     P_0=pf.powerflow.machines.PG3,
     Q_0=pf.powerflow.machines.QG3,
     v_0=pf.powerflow.bus.VB2L2,
@@ -489,7 +489,7 @@ model CampusGridB "Microgrid Model for University Campus B"
         extent={{-14,-14},{14,14}},
         rotation=90,
         origin={80,168})));
-  GeneratorGroups.SteamTurbineUnit ST(
+  GeneratorGroups.ST.SteamTurbineUnit ST(
     P_0=pf.powerflow.machines.PG4,
     Q_0=pf.powerflow.machines.QG4,
     v_0=pf.powerflow.bus.VB3L2,
@@ -521,7 +521,7 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={12,196})));
   Electrical.Renewables.PSSE.PV PV1(
-    M_b=409500,
+    M_b(displayUnit="V.A") = 409500,
     V_b=600,
     P_0(displayUnit="kW") = pf.powerflow.machines.PVP1,
     Q_0=pf.powerflow.machines.PVQ1,
@@ -625,6 +625,7 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={-30,-214})));
   Electrical.Renewables.PSSE.PV PV3(
+    M_b=7400,
     V_b=600,
     P_0(displayUnit="kW") = pf.powerflow.machines.PVP3,
     Q_0=pf.powerflow.machines.PVQ3,
@@ -636,8 +637,7 @@ model CampusGridB "Microgrid Model for University Campus B"
     redeclare OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1
       RenewableController,
     redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController,
-    M_b=7400)
+      PlantController)
              annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=90,
@@ -729,6 +729,7 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={50,-24})));
   Electrical.Renewables.PSSE.PV PV5(
+    M_b=894700,
     V_b=600,
     P_0=pf.powerflow.machines.PVP5,
     Q_0=pf.powerflow.machines.PVQ5,
@@ -740,8 +741,7 @@ model CampusGridB "Microgrid Model for University Campus B"
     redeclare OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1
       RenewableController,
     redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController,
-    M_b=894700)
+      PlantController)
              annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=90,
@@ -992,8 +992,13 @@ equation
           106,4},{90,4},{90,5}}, color={0,0,255}));
   connect(Line26.n, B1L9.p) annotation (Line(points={{-120,-205},{-120,-200},{
           -100,-200},{-100,-188}}, color={0,0,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-300},
-            {220,300}})),                                        Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-220,-300},{220,300}})),
-    experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+<p> The university campus microgrid accommodates two Mitsubishi MF-111 Gas Turbines. Both gas turbines are single shaft and have nominal operating speeds of 9,660 RPM, reduced to 3,600 RPM by means of a reduction gear. The generator is a two pole machine, rated at 15,000 kW, 13.8 kV at 0.90 lagging power factor while operating at 60 Hz. The excitation system of the generator is a shaft mounted main and pilot permanent magnet brushless exciter with rotating fused diodes. The turbine governor is a Woodward 2301A Dual Fuel Control.
+The campus also accomodates a steam turbine unit. The  unit is comprised of a Siemens Dresser-Rand steam turbine, connected via rotor to a Kato Engineering Synchronous Generator. The generator is a brushless field revolving generator with direct connected rotating brushless exciter. The turbine's nominal operating speed is 4,700 RPM, with a single reduction parallel shaft speed reducer that decreases the rotor speed to 1,800 RPM. The generator construction is defined by a four-pole machine, with a nominal power of 3,580 kW, 13.8 kV at 0.8 lagging power factor, operating at 60 Hz.
+The microgrid also has solar farm. The university campus microgrid has five distinct photovoltaic systems (PV) spread through the microgrid, ranging from a few kW to roughly 900 kW in nominal power. The terminal voltage of the photovoltaic installation is 0.6 kV, which is increased to 13.8 kV by means of a step-up transformer (to match the microgrid's voltage magnitude).</p>
+</html>"));
 end CampusGridB;

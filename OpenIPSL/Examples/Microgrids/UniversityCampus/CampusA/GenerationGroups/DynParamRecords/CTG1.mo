@@ -14,4 +14,9 @@ record CTG1 "Machine, ES and PSS Parameters for CTG1"
     PSSData.PSS2BTemplate     "Power system stabilizer data";
   PSS pss;
 
+  replaceable record TG = TGData.GASTCTG1 constrainedby TGData.GASTTemplate
+                              "Turbine governor data";
+  TG tg;
+
+
 end CTG1;

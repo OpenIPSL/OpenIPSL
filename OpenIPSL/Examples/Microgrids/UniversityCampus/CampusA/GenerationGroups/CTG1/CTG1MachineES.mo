@@ -49,8 +49,7 @@ model CTG1MachineES
     K_C=guData.guDynamics.excSystem.K_C,
     X_L=guData.guDynamics.excSystem.X_L,
     THETAP=guData.guDynamics.excSystem.THETAP)
-    constrainedby
-    OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
+    constrainedby OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-28,-24},
             {10,10}})));
   Modelica.Blocks.Sources.Constant const(k=0)
@@ -58,8 +57,7 @@ model CTG1MachineES
   Modelica.Blocks.Sources.Constant const1(k=Modelica.Constants.inf)
     annotation (Placement(transformation(extent={{-40,-72},{-32,-64}})));
   replaceable OpenIPSL.Electrical.Controls.PSSE.TG.ConstantPower governor
-    constrainedby
-    OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
+    constrainedby OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-30,40},
             {-10,60}})));
   replaceable OpenIPSL.Electrical.Controls.PSSE.PSS.DisabledPSS         pss

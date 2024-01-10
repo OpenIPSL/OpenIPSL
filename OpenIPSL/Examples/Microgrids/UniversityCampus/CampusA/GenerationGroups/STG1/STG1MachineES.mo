@@ -45,8 +45,7 @@ model STG1MachineES
     K_E=guData.guDynamics.excSystem.K_E,
     T_E=guData.guDynamics.excSystem.T_E,
     EFD_MAX=guData.guDynamics.excSystem.EFD_MAX)
-    constrainedby
-    OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
+    constrainedby OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-28,-24},
             {10,10}})));
   Modelica.Blocks.Sources.Constant const(k=-Modelica.Constants.inf)
@@ -54,8 +53,7 @@ model STG1MachineES
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{-40,-72},{-32,-64}})));
   replaceable OpenIPSL.Electrical.Controls.PSSE.TG.ConstantPower governor
-    constrainedby
-    OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
+    constrainedby OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-30,40},
             {-10,60}})));
   replaceable OpenIPSL.Electrical.Controls.PSSE.PSS.DisabledPSS         pss

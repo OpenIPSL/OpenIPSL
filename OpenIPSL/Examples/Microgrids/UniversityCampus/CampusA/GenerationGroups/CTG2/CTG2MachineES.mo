@@ -59,15 +59,13 @@ model CTG2MachineES
     S_EE_1=guData.guDynamics.excSystem.S_EE_1,
     E_2=guData.guDynamics.excSystem.E_2,
     S_EE_2=guData.guDynamics.excSystem.S_EE_2)
-    constrainedby
-    OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
+    constrainedby OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-28,-24},
             {10,10}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-40,-54},{-32,-46}})));
   replaceable OpenIPSL.Electrical.Controls.PSSE.TG.ConstantPower governor
-    constrainedby
-    OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
+    constrainedby OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-30,40},
             {-10,60}})));
   replaceable OpenIPSL.Electrical.Controls.PSSE.PSS.DisabledPSS         pss
