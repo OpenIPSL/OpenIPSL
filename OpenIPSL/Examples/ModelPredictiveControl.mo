@@ -20872,29 +20872,33 @@ package ModelPredictiveControl
           ap=-0.48,
           Gtstc=1000)
           annotation (Placement(transformation(extent={{44,-20},{34,-10}})));
-        Electrical.Machines.PSAT.NMD_MotorTypeI          Motor1VSD(
+        OpenIMDML.NonMultiDomain.Motors.ThreePhase.PSAT.NMD_MotorTypeIII
+                                                         Motor1VSD(
           V_b=13800,
-          Sup=true,
+          Sup=false,
           Ctrl=true,
+          H=50,
           a=0,
           b=0)
-          annotation (Placement(transformation(extent={{228,0},{208,20}})));
-        Modelica.Blocks.Sources.Constant
-                                     Sync_Speed(k=(2*Modelica.Constants.pi*SysData.fn))
+          annotation (Placement(transformation(extent={{230,0},{210,20}})));
+        Modelica.Blocks.Sources.Step Sync_Speed(
+          height=-0.5*1.9*Modelica.Constants.pi*60,
+          offset=1.9*Modelica.Constants.pi*60,
+          startTime=5)
           annotation (Placement(transformation(extent={{136,-44},{156,-24}})));
         OpenIMDML.Controls.VariableSpeedDrive.ControllerLogic.VoltsHertzController
           VfController(
           V_b=13800,
           f_max=60,
           f_min=0,
-          m0=1,
+          m0=0.9,
           Kp=1,
           Ki=1) annotation (Placement(transformation(extent={{174,-40},{192,-20}})));
         OpenIMDML.Controls.VariableSpeedDrive.PowerElectronics.AC2DCandDC2AC
           AC2DC_and_DC2AC(
           V_b=13800,
           v_0=1,
-          m0=1)
+          m0=0.9)
           annotation (Placement(transformation(extent={{174,0},{194,20}})));
         Modelica.Blocks.Math.Add3 add3_1
           annotation (Placement(transformation(extent={{168,-86},{176,-78}})));
@@ -21012,7 +21016,7 @@ package ModelPredictiveControl
         connect(add.u2, sine.y) annotation (Line(points={{83.2,-14.4},{83.2,-22},
                 {80.5,-22},{80.5,-31}}, color={0,0,127}));
         connect(AC2DC_and_DC2AC.n, Motor1VSD.p)
-          annotation (Line(points={{194,10},{208,10}}, color={0,0,255}));
+          annotation (Line(points={{194,10},{210,10}}, color={0,0,255}));
         connect(AC2DC_and_DC2AC.p, Bus5.p)
           annotation (Line(points={{174,10},{80,10},{80,16}}, color={0,0,255}));
         connect(VfController.m, AC2DC_and_DC2AC.m_input) annotation (Line(points={{188.6,
@@ -21020,9 +21024,9 @@ package ModelPredictiveControl
         connect(AC2DC_and_DC2AC.Vc, VfController.Vc) annotation (Line(points={{179.455,
                 -2},{179.4,-2},{179.4,-18}}, color={0,0,127}));
         connect(VfController.we, Motor1VSD.we)
-          annotation (Line(points={{196,-34},{224,-34},{224,-2}}, color={0,0,127}));
+          annotation (Line(points={{196,-34},{226,-34},{226,-2}}, color={0,0,127}));
         connect(Motor1VSD.wr, VfController.motor_speed)
-          annotation (Line(points={{212,-2},{212,-26},{196,-26}}, color={0,0,127}));
+          annotation (Line(points={{214,-2},{214,-26},{196,-26}}, color={0,0,127}));
         connect(Sync_Speed.y, add3_1.u1) annotation (Line(points={{157,-34},{164,-34},
                 {164,-78.8},{167.2,-78.8}}, color={0,0,127}));
         connect(add3_1.u2, IN6) annotation (Line(points={{167.2,-82},{130,-82},{130,-132},
@@ -22595,6 +22599,9 @@ package ModelPredictiveControl
           Icon(coordinateSystem(extent={{-140,-140},{140,140}})));
       end MPCAppliedEnergyOriginal_v3_G2ONLY_Table2;
     end TableSimulations;
+
+    package MPCMotor
+    end MPCMotor;
   end Luigi_Vanfretti_Special_Package;
   extends Modelica.Icons.ExamplesPackage;
 
