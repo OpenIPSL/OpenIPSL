@@ -1,0 +1,32 @@
+within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.GenerationGroups.DynParamRecords.ESData;
+record AC7BSTG2 "Type AC7B ES for STG2"
+  extends ACxBTemplate(
+    Type = "AC7B",
+    T_R=0,
+    K_PR=7.39,
+    K_IR=14.785,
+    K_DR=0,
+    T_DR=0,
+    K_PA=4.00,
+    K_IA=20.00,
+    V_AMIN=-8.15,
+    V_AMAX=8.15,
+    K_P=1.0,
+    T_E=1.1,
+    V_FEMAX=999,
+    K_L=999,
+    K_F1=0,
+    K_F2=1.0,
+    K_F3=0,
+    T_F3=1,
+    K_C=0,
+    K_D=0,
+    K_E=0.5,
+    E_1=3.5100,
+    E_2=4.680,
+    S_EE_1=0.10000E-01,
+    S_EE_2=0.50000E-01,
+    V_RMAX=1.4,
+    V_RMIN=0,
+    V_EMIN=-999);
+end AC7BSTG2;
