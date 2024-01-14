@@ -337,8 +337,7 @@ model CampusGridA "Microgrid model for university campus A"
   OpenIPSL.Electrical.Banks.PSSE.Shunt BC03(G=0, B=0.03)
                                             annotation (Placement(
         transformation(extent={{10,-188},{22,-176}})));
-  GenerationGroups.CTG2.CTG2MachineComplete
-                                        CTB(
+  GenerationGroups.CTG2.CTG2MachineES   CTB(
     P_0=pf.powerflow.machines.PG3,
     Q_0=pf.powerflow.machines.QG3,
     v_0=pf.powerflow.bus.V9,
@@ -348,8 +347,7 @@ model CampusGridA "Microgrid model for university campus A"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-80,-84})));
-  GenerationGroups.CTG1.CTG1MachineComplete
-                                        CTA(
+  GenerationGroups.CTG1.CTG1MachineESVC CTA(
     P_0=pf.powerflow.machines.PG2,
     Q_0=pf.powerflow.machines.QG2,
     v_0=pf.powerflow.bus.V7,
@@ -359,8 +357,7 @@ model CampusGridA "Microgrid model for university campus A"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,-24})));
-  GenerationGroups.STG1.STG1MachineComplete
-                                        STGA(
+  GenerationGroups.STG1.STG1MachineESVC STGA(
     P_0=pf.powerflow.machines.PG4,
     Q_0=pf.powerflow.machines.QG4,
     v_0=pf.powerflow.bus.V10,
@@ -370,8 +367,7 @@ model CampusGridA "Microgrid model for university campus A"
         extent={{-9,-9},{9,9}},
         rotation=90,
         origin={81,-83})));
-  GenerationGroups.STG2.STG2MachineComplete
-                                        STGB(
+  GenerationGroups.STG2.STG2MachineES   STGB(
     P_0=pf.powerflow.machines.PG5,
     Q_0=pf.powerflow.machines.QG5,
     v_0=pf.powerflow.bus.V12,
@@ -454,17 +450,27 @@ model CampusGridA "Microgrid model for university campus A"
     Q_0=pf.powerflow.machines.QG1,
     v_0=pf.powerflow.bus.V1,
     angle_0=pf.powerflow.bus.A1,
-    R_a=0) annotation (Placement(transformation(
+    R_a=0,
+    omega(fixed=false))
+           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-30,190})));
+        origin={-70,200})));
   Electrical.Events.Breaker BreakerMicrogrid(
     enableTrigger=false,
+    t_o=10,
     rc_enabled=false,
     t_rc=2.5) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={0,180})));
+  Electrical.Buses.Bus          AENA1(
+    V_b=69000,
+    v_0=pf.powerflow.bus.V1,
+    angle_0=pf.powerflow.bus.A1)               annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,194})));
 equation
   connect(AENA.p, L1.n)
     annotation (Line(points={{0,168},{5.55112e-16,161}}, color={0,0,255}));
@@ -601,8 +607,10 @@ equation
     annotation (Line(points={{110,-135},{110,-142}}, color={0,0,255}));
   connect(pwFault.p, W1W.p) annotation (Line(points={{-49,-60},{-60,-60},{-60,
           -40},{-80,-40},{-80,-32}}, color={0,0,255}));
-  connect(UTILITY.p, BreakerMicrogrid.r)
-    annotation (Line(points={{-20,190},{0,190},{0,186}}, color={0,0,255}));
+  connect(AENA1.p, BreakerMicrogrid.r)
+    annotation (Line(points={{0,194},{0,186}}, color={0,0,255}));
+  connect(UTILITY.p, AENA1.p)
+    annotation (Line(points={{-60,200},{0,200},{0,194}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),            Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-200},{160,220}})),

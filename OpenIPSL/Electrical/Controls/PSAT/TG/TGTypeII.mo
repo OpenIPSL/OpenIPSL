@@ -21,7 +21,7 @@ model TGTypeII "TG Type II"
   Modelica.Blocks.Interfaces.RealInput w "Rotor speed [pu]" annotation (
       Placement(
       transformation(
-        origin={-120,-40},
+        origin={-120,5e-06},
         extent={{-20,-20},{20,20}}),
       iconTransformation(
         origin={-120.0,-0.0},
@@ -46,21 +46,15 @@ model TGTypeII "TG Type II"
         origin={-20,6.66134e-16},
         extent={{-10.0,-10.0},{10.0,10.0}})));
   Modelica.Blocks.Sources.Constant const(k=wref) annotation (Placement(transformation(
-        origin={-84,70},
+        origin={-90,20},
         extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Add add2 annotation (Placement(transformation(
         origin={50,0},
         extent={{-10.0,-10.0},{10.0,10.0}})));
   Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=pmax, uMin=pmin) annotation (
       Placement(transformation(
-        origin={80,0},
+        origin={80,-5.55112e-16},
         extent={{-10.0,-10.0},{10.0,10.0}})));
-  Modelica.Blocks.Math.Add add3(k2=+1) annotation (Placement(transformation(
-        origin={-42,54},
-        extent={{-10.0,-10.0},{10.0,10.0}})));
-  Modelica.Blocks.Interfaces.RealInput u1
-               "Connector of Real input signal 2"
-    annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
 protected
   parameter Real Ro=R*S_b/Sn;
   parameter Real pmax=pmax0*Sn/S_b;
@@ -68,19 +62,13 @@ protected
 equation
 
   connect(add2.u1, pm0) annotation (Line(points={{38,6},{32,6},{32,50},{0,50},{0,120}}, color={0,0,127}));
-  connect(w, add1.u2) annotation (Line(points={{-120,-40},{-70,-40},{-70,-6},{
-          -62,-6}},                                                                 color={0,0,127}));
+  connect(add1.u1, const.y) annotation (Line(points={{-62,6},{-68,6},{-68,20},{-79,20}}, color={0,0,127}));
+  connect(w, add1.u2) annotation (Line(points={{-120,0},{-80,0},{-80,-6},{-62,-6}}, color={0,0,127}));
   connect(add2.u2, transferFunction1.y) annotation (Line(points={{38,-6},{30,-6},{30,0},{21,0}}, color={0,0,127}));
   connect(gain1.y, transferFunction1.u) annotation (Line(points={{-9,0},{-2,0}}, color={0,0,127}));
   connect(add1.y, gain1.u) annotation (Line(points={{-39,0},{-32,0}}, color={0,0,127}));
   connect(add2.y, limiter1.u) annotation (Line(points={{61,0},{68,0}}, color={0,0,127}));
   connect(limiter1.y, pm) annotation (Line(points={{91,0},{109.815,0}}, color={0,0,127}));
-  connect(const.y, add3.u1) annotation (Line(points={{-73,70},{-62,70},{-62,60},
-          {-54,60}}, color={0,0,127}));
-  connect(add3.y, add1.u1) annotation (Line(points={{-31,54},{-24,54},{-24,30},
-          {-70,30},{-70,6},{-62,6}}, color={0,0,127}));
-  connect(add3.u2, u1) annotation (Line(points={{-54,48},{-94,48},{-94,40},{
-          -120,40}}, color={0,0,127}));
   annotation (
     Icon( graphics={Rectangle(lineColor={0,0,0}, extent={{-100,-100},{100,100}}),
                                                   Text(
