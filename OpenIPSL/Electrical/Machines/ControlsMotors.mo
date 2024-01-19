@@ -232,7 +232,7 @@ package ControlsMotors "Control models"
         Modelica.Electrical.Analog.Ideal.IdealOpeningSwitch switch(Ron=1e-5, Goff=1e-5)
           annotation (Placement(transformation(extent={{10,-10},{30,10}})));
         Modelica.Electrical.Analog.Basic.Capacitor Capacitor(v(start=Vc0, fixed
-              =false),                                                     C=Cdc)
+              =true),                                                      C=Cdc)
                                                                      annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
