@@ -749,7 +749,7 @@ Control")}),                                                           Diagram(
           "Output start value";
         Modelica.Blocks.Continuous.FirstOrder firstOrder1(
           k=1,
-          T=0.001,
+          T=0.1,
           initType=Modelica.Blocks.Types.Init.SteadyState,
           y_start=1*(1.9*Modelica.Constants.pi*SysData.fn))
           annotation (Placement(transformation(extent={{-54,-90},{-34,-70}})));
