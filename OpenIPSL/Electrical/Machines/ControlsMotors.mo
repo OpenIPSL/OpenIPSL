@@ -252,17 +252,14 @@ package ControlsMotors "Control models"
         Modelica.Blocks.Sources.BooleanExpression open_circuit_condition(y=if
               Resistor.i <= 0 then true else false)
           annotation (Placement(transformation(extent={{52,6},{32,26}})));
-        Modelica.Blocks.Sources.RealExpression Pmotor(y=-(n.vr*n.ir + n.vi*n.ii)
-              *(nr_input/wb))
+        Modelica.Blocks.Sources.RealExpression Pmotor(y=-(n.vr*n.ir + n.vi*n.ii))
           annotation (Placement(transformation(extent={{24,70},{44,90}})));
-        Modelica.Blocks.Sources.RealExpression Qmotor(y=(n.vr*n.ii - n.vi*n.ir)
-              *(nr_input/wb))
+        Modelica.Blocks.Sources.RealExpression Qmotor(y=(n.vr*n.ii - n.vi*n.ir))
           annotation (Placement(transformation(extent={{24,54},{44,74}})));
         OpenIPSL.Types.PerUnit P;
         Modelica.Units.SI.ActivePower Pdc;
         OpenIPSL.Types.PerUnit Q;
         OpenIPSL.Types.PerUnit S;
-        Modelica.Units.SI.AngularVelocity rotor_speed;
 
         Modelica.Blocks.Sources.RealExpression Vmotor(y=Capacitor.v*m_input/(2*sqrt(2)
               *V_b))
@@ -304,14 +301,6 @@ package ControlsMotors "Control models"
         parameter Modelica.Units.SI.AngularVelocity wb = 2*pi*fn/N;
         Modelica.Blocks.Sources.RealExpression Smotor(y=sqrt(Pmotor.y^2 + Qmotor.y^2))
           annotation (Placement(transformation(extent={{62,38},{82,58}})));
-        Modelica.Blocks.Interfaces.RealInput nr_input annotation (Placement(
-              transformation(
-              extent={{-20,-20},{20,20}},
-              rotation=180,
-              origin={120,-70}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=180,
-              origin={130,-70})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltage annotation (
             Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -350,8 +339,6 @@ package ControlsMotors "Control models"
           Pdc = Vd0.y*Resistor.i;
           P*S_b = Pdc;
 
-
-          rotor_speed = nr_input;
 
           n.vr = vr_m.y;
           n.vi = vi_m.y;

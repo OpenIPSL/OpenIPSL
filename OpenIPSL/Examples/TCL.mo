@@ -454,163 +454,164 @@ package TCL
   model TCL_Building_no_noise
     Interfaces.PwPin pwPin
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-    Electrical.Loads.PSAT.TCL_randominit TCL1(start0=start0_TCL1) annotation (
+    Electrical.Loads.PSAT.TCL_randominit TCL1(Sn=TCL_b,
+      p0=P0,                                  start0=start0_TCL1) annotation (
         Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-70,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL7(         start0=start0_TCL7) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL7(Sn=TCL_b, p0=P0,         start0=start0_TCL7) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={50,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL9(         start0=start0_TCL9) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL9(Sn=TCL_b, p0=P0,         start0=start0_TCL9) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-70,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL10(         start0=start0_TCL10) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL10(Sn=TCL_b, p0=P0,         start0=start0_TCL10) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-50,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL11(         start0=start0_TCL11) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL11(Sn=TCL_b, p0=P0,         start0=start0_TCL11) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-30,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL13(         start0=start0_TCL13) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL13(Sn=TCL_b, p0=P0,         start0=start0_TCL13) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={10,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL2(         start0=start0_TCL2)
+    Electrical.Loads.PSAT.TCL_randominit TCL2(Sn=TCL_b,  p0=P0,        start0=start0_TCL2)
                                               annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-50,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL3(         start0=start0_TCL3) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL3(Sn=TCL_b,  p0=P0,        start0=start0_TCL3) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-30,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL4(         start0=start0_TCL4) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL4(Sn=TCL_b,  p0=P0,        start0=start0_TCL4) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-10,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL5(         start0=start0_TCL5) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL5(Sn=TCL_b,  p0=P0,        start0=start0_TCL5) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={10,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL6(         start0=start0_TCL6) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL6(Sn=TCL_b,  p0=P0,        start0=start0_TCL6) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={30,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL12(         start0=start0_TCL12) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL12(Sn=TCL_b, p0=P0,        start0=start0_TCL12) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-10,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL14(         start0=start0_TCL14) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL14(Sn=TCL_b, p0=P0,         start0=start0_TCL14) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={30,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL8(         start0=start0_TCL8) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL8(Sn=TCL_b,  p0=P0,        start0=start0_TCL8) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={70,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL15(         start0=start0_TCL15) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL15(Sn=TCL_b, p0=P0,         start0=start0_TCL15) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={50,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL16(         start0=start0_TCL16) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL16(Sn=TCL_b, p0=P0,         start0=start0_TCL16) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={70,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL17(         start0=start0_TCL17) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL17(Sn=TCL_b, p0=P0,         start0=start0_TCL17) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-70,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL18(         start0=start0_TCL18) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL18(Sn=TCL_b, p0=P0,         start0=start0_TCL18) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-50,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL19(         start0=start0_TCL19) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL19(Sn=TCL_b, p0=P0,         start0=start0_TCL19) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-30,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL21(         start0=start0_TCL21) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL21(Sn=TCL_b, p0=P0,         start0=start0_TCL21) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={10,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL20(         start0=start0_TCL20) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL20(Sn=TCL_b, p0=P0,         start0=start0_TCL20) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-10,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL22(         start0=start0_TCL22) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL22(Sn=TCL_b, p0=P0,         start0=start0_TCL22) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={30,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL23(         start0=start0_TCL23) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL23(Sn=TCL_b, p0=P0,         start0=start0_TCL23) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={50,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL24(         start0=start0_TCL24) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL24(Sn=TCL_b, p0=P0,         start0=start0_TCL24) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={70,-30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL25(         start0=start0_TCL25) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL25(Sn=TCL_b, p0=P0,         start0=start0_TCL25) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-70,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL26(         start0=start0_TCL26) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL26(Sn=TCL_b, p0=P0,         start0=start0_TCL26) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-50,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL27(         start0=start0_TCL27) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL27(Sn=TCL_b, p0=P0,         start0=start0_TCL27) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-30,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL29(         start0=start0_TCL29) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL29(Sn=TCL_b, p0=P0,         start0=start0_TCL29) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={10,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL28(         start0=start0_TCL28) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL28(Sn=TCL_b, p0=P0,         start0=start0_TCL28) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-10,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL30(         start0=start0_TCL30) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL30(Sn=TCL_b, p0=P0,         start0=start0_TCL30) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={30,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL31(         start0=start0_TCL31) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL31(Sn=TCL_b, p0=P0,         start0=start0_TCL31) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={50,-70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL32(         start0=start0_TCL32) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL32(Sn=TCL_b, p0=P0,         start0=start0_TCL32) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
