@@ -252,9 +252,11 @@ package ControlsMotors "Control models"
         Modelica.Blocks.Sources.BooleanExpression open_circuit_condition(y=if
               Resistor.i <= 0 then true else false)
           annotation (Placement(transformation(extent={{52,6},{32,26}})));
-        Modelica.Blocks.Sources.RealExpression Pmotor(y=-(n.vr*n.ir + n.vi*n.ii))
+        Modelica.Blocks.Sources.RealExpression Pmotor(y=-(n.vr*n.ir + n.vi*n.ii)
+              *SPEED_INPUT/wb)
           annotation (Placement(transformation(extent={{24,70},{44,90}})));
-        Modelica.Blocks.Sources.RealExpression Qmotor(y=(n.vr*n.ii - n.vi*n.ir))
+        Modelica.Blocks.Sources.RealExpression Qmotor(y=(n.vr*n.ii - n.vi*n.ir)
+              *SPEED_INPUT/wb)
           annotation (Placement(transformation(extent={{24,54},{44,74}})));
         OpenIPSL.Types.PerUnit P;
         Modelica.Units.SI.ActivePower Pdc;
@@ -297,6 +299,7 @@ package ControlsMotors "Control models"
           annotation (Dialog(group="DC Link Parameters"));
         parameter Real m0= 0.1 "Initial PWM Modulation Value" annotation (Dialog(group="DC Link Parameters"));
         parameter Real N=1;
+        Real SPEED_INPUT;
 
         parameter Modelica.Units.SI.AngularVelocity wb = 2*pi*fn/N;
         Modelica.Blocks.Sources.RealExpression Smotor(y=sqrt(Pmotor.y^2 + Qmotor.y^2))
@@ -306,6 +309,14 @@ package ControlsMotors "Control models"
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-46,-14})));
+        Modelica.Blocks.Interfaces.RealInput speed_input annotation (Placement(
+              transformation(
+              extent={{-20,-20},{20,20}},
+              rotation=180,
+              origin={120,-60}), iconTransformation(
+              extent={{-20,-20},{20,20}},
+              rotation=180,
+              origin={140,-60})));
       protected
         parameter OpenIPSL.Types.Voltage Vd00 = 3*sqrt(6)*v_0*V_b/Modelica.Constants.pi;
         parameter OpenIPSL.Types.Voltage Vc0 = 2*sqrt(2)*Vmotor0*V_b/m0;
@@ -332,6 +343,8 @@ package ControlsMotors "Control models"
         connect(signalCurrent.i, Ii.y) annotation (Line(points={{62,-14},{67,-14}}, color={0,0,127}));
         connect(open_circuit_condition.y, switch.control)
           annotation (Line(points={{31,16},{20,16},{20,12}},    color={255,0,255}));
+          SPEED_INPUT = speed_input;
+
           P =  (p.vr*p.ir + p.vi*p.ii);
           Q =  ((-p.vr*p.ii) + p.vi*p.ir);
           Q = 0;

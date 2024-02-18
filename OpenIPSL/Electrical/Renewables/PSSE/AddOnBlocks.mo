@@ -15,17 +15,21 @@ package AddOnBlocks
 
     Modelica.Blocks.Interfaces.RealOutput Ppv
       annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-    Modelica.Blocks.Sources.CombiTimeTable SolarRadiation(table=[0.0,666.6667;
-          10,666.6667; 10.1,666.6667; 20,666.6667; 20.01,333.334; 30,333.334;
-          30.1,333.334; 40,333.334; 40.1,0; 50,0; 50.1,0; 60,0])
+    Modelica.Blocks.Sources.CombiTimeTable SolarRadiation(table=IrradianceTable)
       annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-    Modelica.Blocks.Sources.CombiTimeTable SolarArrayTemperature(table=[0.0,
-          298.15; 60,298.15])
+    Modelica.Blocks.Sources.CombiTimeTable SolarArrayTemperature(table=
+          TemperatureTable)
       annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
 
 
 
+    parameter Real IrradianceTable[:,:]=[0.0,666.6667; 10,666.6667; 10.1,
+        666.6667; 20,666.6667; 20.01,333.334; 30,333.334; 30.1,333.334; 40,
+        333.334; 40.1,0; 50,0; 50.1,0; 60,0]
+      "Table matrix (time = first column; e.g., table=[0, 0; 1, 1; 2, 4])";
+    parameter Real TemperatureTable[:,:]=[0.0,298.15; 60,298.15]
+      "Table matrix (time = first column; e.g., table=[0, 0; 1, 1; 2, 4])";
   equation
 
     Ppv = (Ypv/Sb)*fpv*(SolarRadiation.y[1]/Gtstc)*(1 + ap*(SolarArrayTemperature.y[1] - Tcstc));

@@ -208,7 +208,7 @@ package TCL
       height=-0.3,
       duration=5000,
       offset=1,
-      startTime=0)
+      startTime=100000)
       annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
     PwTrasformerLTC_V_limiter pwTrasformerLTC_V_limiter
       annotation (Placement(transformation(extent={{-32,-10},{-12,10}})));
@@ -455,7 +455,11 @@ package TCL
     Interfaces.PwPin pwPin
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     Electrical.Loads.PSAT.TCL_randominit TCL1(Sn=TCL_b,
-      p0=P0,                                  start0=start0_TCL1) annotation (
+      p0=P0,
+      theta_ref=21,
+      theta_a=30,
+      theta_min=20.75,
+      theta_max=21.75,                        start0=start0_TCL1) annotation (
         Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
@@ -485,13 +489,20 @@ package TCL
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={10,30})));
-    Electrical.Loads.PSAT.TCL_randominit TCL2(Sn=TCL_b,  p0=P0,        start0=start0_TCL2)
+    Electrical.Loads.PSAT.TCL_randominit TCL2(Sn=TCL_b,  p0=P0,
+      theta_ref=20.2,
+      theta_a=29,
+      theta_min=20.1,
+      theta_max=20.4,                                                  start0=start0_TCL2)
                                               annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-50,70})));
-    Electrical.Loads.PSAT.TCL_randominit TCL3(Sn=TCL_b,  p0=P0,        start0=start0_TCL3) annotation (Placement(
+    Electrical.Loads.PSAT.TCL_randominit TCL3(Sn=TCL_b,  p0=P0,
+      theta_ref=18,
+      theta_min=17,
+      theta_max=19,                                                    start0=start0_TCL3) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
