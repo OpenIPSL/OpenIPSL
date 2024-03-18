@@ -31,7 +31,11 @@ model CTG1MachineComplete_MPC_simple
     annotation (choicesAllMatching=true,
                 Placement(transformation(extent={{40,-10},
             {60,10}})));
-  replaceable Electrical.Controls.PSSE.ES.SEXS                        exciter
+  replaceable ModelPredictiveControl.GenerationUnits.SEXSMPC          exciter(
+    T_AT_B=2,
+    T_B=guData.guDynamics.excSystem.T_A,
+    K=50,
+    E_MIN=0)
     constrainedby OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-28,-24},
             {10,10}})));
@@ -39,7 +43,7 @@ model CTG1MachineComplete_MPC_simple
     annotation (Placement(transformation(extent={{-40,-64},{-32,-56}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{-28,-76},{-20,-68}})));
-  replaceable Electrical.Controls.PSSE.TG.GAST                   governor(
+  replaceable ModelPredictiveControl.GenerationUnits.GASTMPC     governor(
     R=guData.guDynamics.tg.R,
     T_1=guData.guDynamics.tg.T_1,
     T_2=guData.guDynamics.tg.T_2,
@@ -57,15 +61,13 @@ model CTG1MachineComplete_MPC_simple
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Electrical.Controls.PSSE.VC.IEEEVC iEEEVC(RC=0, XC=0.05)
     annotation (Placement(transformation(extent={{44,-60},{18,-38}})));
-  Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{-70,34},{-50,54}})));
   Modelica.Blocks.Interfaces.RealInput Pm_ref
     "Connector of Real input signal 1" annotation (Placement(transformation(
-          extent={{-120,40},{-100,60}}), iconTransformation(extent={{-120,40},{
-            -100,60}})));
+          extent={{-140,40},{-100,80}}), iconTransformation(extent={{-140,40},{
+            -100,80}})));
   Modelica.Blocks.Interfaces.RealInput E_ref annotation (Placement(
-        transformation(extent={{-120,-60},{-100,-40}}), iconTransformation(
-          extent={{-120,-60},{-100,-40}})));
+        transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(
+          extent={{-140,-80},{-100,-40}})));
 equation
   connect(exciter.EFD, machine.EFD) annotation (Line(points={{11.9,-7},{38,-7},{
           38,-6}},                    color={0,0,127}));
@@ -87,14 +89,14 @@ equation
           {74,-41.1429},{41.1111,-41.1429}}, color={0,0,255}));
   connect(iEEEVC.VCT, exciter.ECOMP) annotation (Line(points={{15.6889,-50.5714},
           {-42,-50.5714},{-42,-7},{-29.9,-7}}, color={0,0,127}));
-  connect(add.y, governor.PMECH0)
-    annotation (Line(points={{-49,44},{-28,44}}, color={0,0,127}));
-  connect(machine.PMECH0, add.u2) annotation (Line(points={{61,5},{70,5},{70,28},
-          {-82,28},{-82,38},{-72,38}}, color={0,0,127}));
-  connect(add.u1, Pm_ref)
-    annotation (Line(points={{-72,50},{-110,50}}, color={0,0,127}));
-  connect(exciter.VOTHSG, E_ref) annotation (Line(points={{-29.9,-0.2},{-58,
-          -0.2},{-58,0},{-88,0},{-88,-50},{-110,-50}}, color={0,0,127}));
   connect(machine.p, pwPin)
     annotation (Line(points={{60,0},{110,0}}, color={0,0,255}));
+  connect(machine.PMECH0, governor.PMECH0) annotation (Line(points={{61,5},{74,
+          5},{74,32},{-44,32},{-44,44},{-28,44}}, color={0,0,127}));
+  connect(Pm_ref, governor.PMECHControllable) annotation (Line(points={{-120,60},
+          {-64,60},{-64,26},{-20,26},{-20,38}}, color={0,0,127}));
+  connect(E_ref, exciter.EFd_input) annotation (Line(points={{-120,-60},{-90,
+          -60},{-90,6.6},{-29.9,6.6}}, color={0,0,127}));
+  connect(exciter.VOTHSG, const.y) annotation (Line(points={{-29.9,-0.2},{-50,
+          -0.2},{-50,-46},{-22,-46},{-22,-60},{-31.6,-60}}, color={0,0,127}));
 end CTG1MachineComplete_MPC_simple;

@@ -4,7 +4,7 @@ record TGOV1STG2 "Type TGOV1 TG for STG2"
   R=0.05,
   D_t=0,
   T_1=0.2,
-  T_2=0.001,
+  T_2=0,
   T_3=0.3,
   V_MAX=1,
   V_MIN=0.3);

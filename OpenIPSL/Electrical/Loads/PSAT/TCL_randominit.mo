@@ -16,10 +16,12 @@ model TCL_randominit
   parameter Real R = 100;
   parameter Real C = 80;
   parameter Real range = 4.5;
+  parameter Real var = 0.1;
   parameter Integer start0 = 1;
+  parameter Real Cooling = -1 "If cooling, the -1 else +1";
 
   //parameter Real k = 1;
-  Real theta(start = theta_ref, fixed = true);
+  Real theta(start = theta_ref + var, fixed = true);
   Real v "voltage";
   Real anglev "voltage angle";
   Integer switch(start = start0);
@@ -34,10 +36,10 @@ public
   Interfaces.PwPin p annotation (Placement(transformation(extent={{-60,-11},{-40,
             9}}), iconTransformation(extent={{-130,-14},{-100,14}})));
 equation
-  when {theta < theta_min and pre(switch) <> 1 or theta > theta_max and pre(switch) <> 0} then
+  when {theta < theta_min and pre(switch) <> 0 or theta > theta_max and pre(switch) <> 1} then
     switch = 1 - pre(switch);
   end when;
-  der(theta) = ((-theta_a) + theta + R * P/Changeofbase) / (t1 + R * u * range);
+  der(theta) = Cooling*((-theta_a) + theta + R * P/Changeofbase) / (t1 + R * u * range);
   v = sqrt(p.vr * p.vr + p.vi * p.vi);
   anglev = atan2(p.vi, p.vr);
   P = switch *g0 * v * v * Changeofbase;

@@ -521,7 +521,6 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={12,196})));
   Electrical.Renewables.PSSE.PV PV1(
-    M_b(displayUnit="V.A") = 409500,
     V_b=600,
     P_0(displayUnit="kW") = pf.powerflow.machines.PVP1,
     Q_0=pf.powerflow.machines.PVQ1,
@@ -573,7 +572,6 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={-120,-214})));
   Electrical.Renewables.PSSE.PV PV2(
-    M_b=12600,
     V_b=600,
     P_0(displayUnit="kW") = pf.powerflow.machines.PVP2,
     Q_0=pf.powerflow.machines.PVQ2,
@@ -625,7 +623,6 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={-30,-214})));
   Electrical.Renewables.PSSE.PV PV3(
-    M_b=7400,
     V_b=600,
     P_0(displayUnit="kW") = pf.powerflow.machines.PVP3,
     Q_0=pf.powerflow.machines.PVQ3,
@@ -677,7 +674,6 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={140,4})));
   Electrical.Renewables.PSSE.PV PV4(
-    M_b=103200,
     V_b=600,
     P_0(displayUnit="kW") = pf.powerflow.machines.PVP4,
     Q_0=pf.powerflow.machines.PVQ4,
@@ -729,7 +725,6 @@ model CampusGridB "Microgrid Model for University Campus B"
         rotation=90,
         origin={50,-24})));
   Electrical.Renewables.PSSE.PV PV5(
-    M_b=894700,
     V_b=600,
     P_0=pf.powerflow.machines.PVP5,
     Q_0=pf.powerflow.machines.PVQ5,

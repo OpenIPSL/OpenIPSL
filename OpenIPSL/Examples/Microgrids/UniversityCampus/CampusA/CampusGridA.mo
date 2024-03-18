@@ -301,7 +301,7 @@ model CampusGridA "Microgrid model for university campus A"
     R=0,
     X=0.0001,
     G=0,
-    B=0) annotation (Placement(transformation(extent={{-104,30},{-84,50}})));
+    B=0) annotation (Placement(transformation(extent={{-102,30},{-82,50}})));
   OpenIPSL.Electrical.Branches.PwLine L4(
     R=0,
     X=0.0001,
@@ -337,7 +337,8 @@ model CampusGridA "Microgrid model for university campus A"
   OpenIPSL.Electrical.Banks.PSSE.Shunt BC03(G=0, B=0.03)
                                             annotation (Placement(
         transformation(extent={{10,-188},{22,-176}})));
-  GenerationGroups.CTG2.CTG2MachineES   CTB(
+  GenerationGroups.CTG2.CTG2MachineComplete
+                                        CTB(
     P_0=pf.powerflow.machines.PG3,
     Q_0=pf.powerflow.machines.QG3,
     v_0=pf.powerflow.bus.V9,
@@ -347,7 +348,8 @@ model CampusGridA "Microgrid model for university campus A"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-80,-84})));
-  GenerationGroups.CTG1.CTG1MachineESVC CTA(
+  GenerationGroups.CTG1.CTG1MachineComplete
+                                        CTA(
     P_0=pf.powerflow.machines.PG2,
     Q_0=pf.powerflow.machines.QG2,
     v_0=pf.powerflow.bus.V7,
@@ -357,7 +359,8 @@ model CampusGridA "Microgrid model for university campus A"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,-24})));
-  GenerationGroups.STG1.STG1MachineESVC STGA(
+  GenerationGroups.STG1.STG1MachineComplete
+                                        STGA(
     P_0=pf.powerflow.machines.PG4,
     Q_0=pf.powerflow.machines.QG4,
     v_0=pf.powerflow.bus.V10,
@@ -367,7 +370,8 @@ model CampusGridA "Microgrid model for university campus A"
         extent={{-9,-9},{9,9}},
         rotation=90,
         origin={81,-83})));
-  GenerationGroups.STG2.STG2MachineES   STGB(
+  GenerationGroups.STG2.STG2MachineComplete
+                                        STGB(
     P_0=pf.powerflow.machines.PG5,
     Q_0=pf.powerflow.machines.QG5,
     v_0=pf.powerflow.bus.V12,
@@ -439,9 +443,9 @@ model CampusGridA "Microgrid model for university campus A"
         rotation=90,
         origin={110,-126})));
   Electrical.Events.PwFault pwFault(
-    R=0,
-    X=0.2,
-    t1=1000,
+    R=0.5,
+    X=0.5,
+    t1=100,
     t2=1001)
     annotation (Placement(transformation(extent={{-48,-66},{-36,-54}})));
   Electrical.Machines.PSSE.GENCLS          UTILITY(
@@ -458,7 +462,7 @@ model CampusGridA "Microgrid model for university campus A"
         origin={-70,200})));
   Electrical.Events.Breaker BreakerMicrogrid(
     enableTrigger=false,
-    t_o=10,
+    t_o=2,
     rc_enabled=false,
     t_rc=2.5) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -530,10 +534,8 @@ equation
           0,-160}}, color={0,0,255}));
   connect(Load11.p, B416N.p) annotation (Line(points={{-18,-176},{-18,-168},
           {0,-168},{0,-160}}, color={0,0,255}));
-  connect(A1W.p, L2.n) annotation (Line(points={{-50,26},{-50,40},{-85,40}},
+  connect(A1W.p, L2.n) annotation (Line(points={{-50,26},{-50,40},{-83,40}},
         color={0,0,255}));
-  connect(L2.p, H2E.p) annotation (Line(points={{-103,40},{-110,40},{-110,
-          78}}, color={0,0,255}));
   connect(A2E.p, L3.p)
     annotation (Line(points={{50,26},{50,40},{85,40}}, color={0,0,255}));
   connect(L3.n, H1W.p) annotation (Line(points={{103,40},{110,40},{110,78}},
@@ -611,12 +613,14 @@ equation
     annotation (Line(points={{0,194},{0,186}}, color={0,0,255}));
   connect(UTILITY.p, AENA1.p)
     annotation (Line(points={{-60,200},{0,200},{0,194}}, color={0,0,255}));
+  connect(L2.p, H2E.p)
+    annotation (Line(points={{-101,40},{-110,40},{-110,78}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),            Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-200},{160,220}})),
     experiment(
-      StopTime=15,
-      __Dymola_NumberOfIntervals=1000,
+      StopTime=50,
+      __Dymola_NumberOfIntervals=5000,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
