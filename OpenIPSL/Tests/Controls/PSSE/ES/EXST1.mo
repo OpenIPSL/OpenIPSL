@@ -56,5 +56,6 @@ equation
   connect(gENROE.p, GEN1.p)
     annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   annotation (
-experiment(StopTime=10));
+experiment(StopTime=10),
+__OpenModelica_commandLineOptions = "--daeMode");
 end EXST1;

@@ -46,26 +46,26 @@ model PSS2A "SMIB system to test functionality of PSS2A model"
   Modelica.Blocks.Sources.Constant minusInf(k=-Modelica.Constants.inf) annotation (Placement(transformation(extent={{-96,-96},{-84,-84}})));
   Modelica.Blocks.Sources.Constant plusInf(k=Modelica.Constants.inf) annotation (Placement(transformation(extent={{-44,-96},{-56,-84}})));
   OpenIPSL.Electrical.Controls.PSSE.PSS.PSS2A pSS2A(
-    T_w2=5,
-    T_6=0,
-    T_w3=5,
-    T_w4=5,
-    T_7=5,
+    K_S1=2,
     K_S2=0.758,
     K_S3=1,
-    T_8=0.12,
-    T_9=0.1,
-    K_S1=2,
+    M= 5,
+    N= 1,
     T_1=0.47,
     T_2=0.07,
-    T_3=0.47,
-    T_4=0.07,
+    T_3= 0.47,
+    T_4= 0.07,
+    T_6= 0,
+    T_7=5,
+    T_8=0.12,
+    T_9=0.1,
+    T_w1= 0,T_w2=5,
+    T_w3=5,
+    T_w4=5,
     V_STMAX=0.1,
-    V_STMIN=-0.1,
-    M=5,
-    N=1,
-    T_w1=0)
+    V_STMIN=-0.1)
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
+
 equation
   connect(gENROE.PMECH, gENROE.PMECH0) annotation (Line(points={{-89.6,47},{-96,47},{-96,68},{-44,68},{-44,47},{-48.2,47}},
                                                      color={0,0,127}));

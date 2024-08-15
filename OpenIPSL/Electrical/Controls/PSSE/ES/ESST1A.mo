@@ -150,7 +150,7 @@ protected
   parameter Real VA0(fixed=false);
 initial equation
   IFD0 = XADIFD;
-  VA0 = Efd0 + K_LR*(IFD0 - I_LR);
+  VA0 = if IFD0 < I_LR then Efd0 else Efd0 + K_LR*(IFD0 - I_LR);
   V_REF = VA0/K_A + ECOMP0;
 equation
   connect(add3_1.y, imLimited.u)
