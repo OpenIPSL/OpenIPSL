@@ -8,8 +8,8 @@ model Contact "Contact"
 
 <h5>The development of the library is organized by:</h5>
 <dl>
-<dt><a href=\"https://faculty.rpi.edu/node/36204\">Luigi Vanfretti</a></dt>
-<dd>Associate Professor</dd>
+<dt><a href=\"https://faculty.rpi.edu/luigi-vanfretti\">Luigi Vanfretti</a></dt>
+<dd>Professor</dd>
 <dd>Department of Electrical, Computer, and Systems Engineering</dd>
 <dd>Rensselaer Polytechnic Institute</dd>
 <dd>110 8th St, Troy, NY 12180</dd>
@@ -57,30 +57,11 @@ model Contact "Contact"
    <td valign=\"top\"><a href=\"mailto:laerag@rpi.edu\">laerag@rpi.edu</a></td>
 </tr>
 
-<tr><td valign=\"top\"> Manuel Navarro Catalan </td>
-   <td valign=\"top\"> Rensselaer Polytechnic Institute </td>
-   <td valign=\"top\"><a href=\"mailto:navarm2@rpi.edu\">navarm2@rpi.edu</a></td>
-</tr>
-
 <tr><td valign=\"top\"> Maxime Baudette </td>
    <td valign=\"top\"> Lawrence Berkeley National Laboratory </td>
    <td valign=\"top\"><a href=\"mailto:baudette@lbl.gov\">baudette@lbl.gov</a></td>
 </tr>
 
-<tr><td valign=\"top\"> Meaghan Podlaski </td>
-   <td valign=\"top\"> Rensselaer Polytechnic Institute </td>
-   <td valign=\"top\"><a href=\"mailto:podlam@rpi.edu\">podlam@rpi.edu</a></td>
-</tr>
-
-<tr><td valign=\"top\"> Sergio Dorado-Rojas </td>
-   <td valign=\"top\"> Rensselaer Polytechnic Institute </td>
-   <td valign=\"top\"><a href=\"mailto:dorads@rpi.edu\">dorads@rpi.edu</a></td>
-</tr>
-
-<tr><td valign=\"top\"> Tin Rabuzin </td>
-   <td valign=\"top\"> KTH Royal Institute of Technology </td>
-   <td valign=\"top\"><a href=\"mailto:rabuzin@kth.se\">rabuzin@kth.se</a></td>
-</tr>
 </table>
 </html>"));
 

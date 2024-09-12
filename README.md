@@ -7,7 +7,7 @@
 # **OpenIPSL**: Open-Instance Power System Library
 The OpenIPSL or Open-Instance Power System Library is a library of power system component models written in the [Modelica](http://modelica.org) language that can be used for power system dynamic analysis, such as phasor time-domain simulations.
 
-The OpenIPSL is currently developed and maintained by Prof. [Luigi Vanfretti's](https://github.com/lvanfretti) research group [ALSETLab](https://github.com/ALSETLab) at [Rensselaer Polytechnic Institute](http://rpi.edu), Troy, NY, collaborators and friends, such as [Dietmar Winkler](https://github.com/dietmarw) and [FOSSEE](https://om.fossee.in/fellowship2018) (contributions are welcome!).
+The OpenIPSL is currently developed and maintained by Prof. [Luigi Vanfretti's](https://github.com/lvanfretti) research group [ALSETLab](https://github.com/ALSETLab) at [Rensselaer Polytechnic Institute](http://rpi.edu), Troy, NY, collaborators and friends, such as [Dietmar Winkler](https://github.com/dietmarw).
 
 ## Scope
 The OpenIPSL is developed to be used for research and education (therefore frequent release times may be available), with maximum compatibility with [OpenModelica](https://openmodelica.org/) (to provide a free/libre and cost-free alternative for power system dynamic simulation), to provide as many as possible typical "test networks" for use in research and teaching, and to be developed in such way that the library can efficiently be used for power system simulation within Modelica-based workflows (i.e., helping to give reference power system models for development and testing of Modelica back-end compilers) when faced with power system simulation challenges.
@@ -49,6 +49,7 @@ This Source Code Form is subject to the terms of the [3-Clause BSD license](http
 ## Acknowledgements
 
 This work was supported primarily by the following grants and institutions, in reverse chronological order:
+- 2020-2024: supported in part by the U.S. Department of Energy’s Office of Energy Efficiency and Renewable Energy (EERE) under the Advanced Manufacturing Office, Award Number DE-EE0009139.
 - 2018-2023: Dominion Energy Virginia through sponsored research projects: (2018-2019) Flexible Alternating Current Transmission System Modeling and Performance Analysis using Measurement Data, (2020-2021) Model Validation of Generator Power Plants, and (2021-2022) Cloud-Based Integrated Model-and-Measurement Analytics for Power System Applications, at Rensselaer Polytechnic Institute.
 - 2019-2021: New York State Energy Research and Development Authority (NYSERDA) through the Electric Power Transmission and Distribution (EPTD) PON 3770 High Performing Grid Program together with the New York Power Authority (NYPA).
 - 2018-2020: This work was also supported in part by the ERC Program of the National Science Foundation and DOE under NSF Award Number EEC-1041877 and in part by the CURENT Industry Partnership Program.
