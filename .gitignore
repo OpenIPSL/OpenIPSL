@@ -16,3 +16,4 @@ dymosim
 *.moe
 *.mol
 .DS_Store
+.impact*
