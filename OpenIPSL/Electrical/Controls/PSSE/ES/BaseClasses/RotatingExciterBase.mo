@@ -48,10 +48,10 @@ equation
         color={0,0,127}));
   connect(gain.u, EFD) annotation (Line(points={{42,-50},{76,-50},{76,0},{90,0}},
         color={0,0,127}));
-  connect(gain.y, Sum.u2) annotation (Line(points={{19,-50},{-12,-50},{-12,-30},
-          {-18,-30}}, color={0,0,127}));
-  connect(VE.y, Sum.u1) annotation (Line(points={{19,-10},{-12,-10},{-12,-22},{
-          -18,-22}}, color={0,0,127}));
+  connect(gain.y, Sum.u2) annotation (Line(points={{19,-50},{-12,-50},{-12,-36},
+          {-18,-36}}, color={0,0,127}));
+  connect(VE.y, Sum.u1) annotation (Line(points={{19,-10},{-12,-10},{-12,-24},{
+          -18,-24}}, color={0,0,127}));
   connect(I_C, feedback.u1) annotation (Line(points={{-100,0},{-68,0},{-68,20},
           {-58,20}}, color={0,0,127}));
   connect(feedback.y, sISO.u)

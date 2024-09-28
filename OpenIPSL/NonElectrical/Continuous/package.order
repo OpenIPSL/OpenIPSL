@@ -1,7 +1,13 @@
 DerivativeLag
+First_Order_Lag_Non_Windup
+First_Order_Lag_Non_Windup_MNLEX2
 IntegratorLimVar
 LeadLag
 LeadLagLim
+PI_No_Windup
+PID_No_Windup_AC7B
+PID_No_Windup_AC8B
+PID_No_Windup_DC4B
 RampTrackingFilter
 SimpleLag
 SimpleLagLim
@@ -9,3 +15,4 @@ SimpleLagLimVar
 SimpleLagRateLimBlock
 SimpleLagRateLimVar
 SimpleLead
+Washout
