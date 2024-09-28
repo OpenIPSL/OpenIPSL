@@ -108,6 +108,31 @@ model References "References"
 </td>
 </tr>
 <tr>
+<td>[Panasetsky2016]</td>
+<td>Panasetsky, D., Osak, A., Sidorov, D., Yong, Li:
+        &quot;Simplified variable frequency induction-motor drive model for power system stability studies and control&quot;.
+	In: IFAC-PapersOnLine,
+        November 2016,
+        <a href=\"https://www.sciencedirect.com/science/article/pii/S240589631632403X\">DOI: https://doi.org/10.1016/j.ifacol.2016.10.774</a>
+</td>
+</tr>
+<tr>
+<td>[PES-TR 66]</td>
+<td>IEEE PES Power System Dynamic Performance Committee, and IEEE PES Task Force on Microgrid Stability Analysis and Modeling:
+        &quot;Microgrid Stability Definitions, Analysis, and Modeling&quot;.
+	 In: IEEE Power & Energy Society,
+        April 2018,
+        <a href=\"https://ieeexplore.ieee.org/document/8750828\">DOI: 10.1109/TPWRS.2019.2925703</a>
+</td>
+</tr>
+<tr>
+<td>[PSSEMotor]</td>
+<td>PowerWorld:
+        &quot;Load Characteristic Models&quot;,
+        (<a href=\"https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Load%20Characteristic.htm?tocpath=Transient%20Stability%20Add-On%20(TS)%7CTransient%20Models%7CLoad%7CCharacteristic%7C_____0\">Home page</a>)
+</td>
+</tr>
+<tr>
 <td>[PSSE-AGV1]</td>
 <td>Siemens:
         &quot;PSS&reg;E Program Application Guide Volume 1&quot;,
