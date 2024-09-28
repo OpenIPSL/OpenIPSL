@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical.Renewables.PSSE;
 model PV "Framework for a photovoltaic plant including controllers"
-parameter Types.ApparentPower M_b=RenewableGenerator.SysData.S_b "Machine base power" annotation(Dialog(group= "Power flow data"));
+  parameter Modelica.Units.SI.ApparentPower M_b "Machine base" annotation (Dialog(group= "Power flow data"));
 extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enablefn=false,
     final enableV_b=false,

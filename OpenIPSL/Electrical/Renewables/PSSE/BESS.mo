@@ -1,6 +1,5 @@
 within OpenIPSL.Electrical.Renewables.PSSE;
 model BESS "Framework for a battery energy storage system plant including controllers"
-parameter Types.ApparentPower M_b=RenewableGenerator.SysData.S_b "Machine base power" annotation(Dialog(group= "Power flow data"));
 extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enablefn=true,
     final enableV_b=false,
