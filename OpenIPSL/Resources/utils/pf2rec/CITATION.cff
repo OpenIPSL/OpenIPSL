@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- name: "ALSETLab"
+title: "SMIB Tutorial: OpenIPSL Model Assembly and Power Flow Integration with GridCal"
+version: 2021-09-27
+url: "https://github.com/ALSETLab/SMIB_Tutorial"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Dorado-Rojas"
+    given-names: "Sergio A."
+  - family-names: "Laera"
+    given-names: "Giuseppe"
+  - family-names: "Castro"
+    given-names: "Marcelo"
+  - family-names: "Bogodorova"
+    given-names: "Tetiana"
+  - family-names: "Vanfretti"
+    given-names: "Luigi"
+  doi: "https://doi.org/10.3384/ecp21181147"
+  journal: "Proceedings of 14th Modelica Conference 2021"
+  start: 147 # First page number
+  end: 154 # Last page number
+  title: "Power Flow Record Structures to Initialize OpenIPSL Phasor Time-Domain Simulations with Python"
+  issn: "21650-3740" 
+  volume: 181
+  year: 2021
+  url: "https://ecp.ep.liu.se/index.php/modelica/article/view/190/150"
