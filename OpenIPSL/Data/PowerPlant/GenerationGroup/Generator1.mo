@@ -130,8 +130,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name"),
                          Line(points={{-60,-20},{-20,20},{20,-20},{60,20}},
-          color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor
-            =
+          color={28,108,200}),Ellipse(extent={{-100,-100},{100,100}}, lineColor=
            {28,108,200})}),
     Documentation(info="<html>
 <p>Generation group for the example that uses the IEEE421.5-based data set.</p>
