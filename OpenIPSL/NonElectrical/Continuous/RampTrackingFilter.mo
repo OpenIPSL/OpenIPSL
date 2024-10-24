@@ -7,8 +7,11 @@ model RampTrackingFilter "Ramp-tracking filter"
   parameter Integer M = 5 ">=0, M*N<=8";
   parameter Integer N = 1 ">=0, M*N<=8";
   parameter Real y_start = 0 "Output start value";
-  Continuous.TransferFunction TF1[M](b=fill({1},M), a=fill({T_2,1},M),each y_start=y_start);
-  Continuous.TransferFunction TF2[N](b=fill({T_1,1},N), a=fill({T_2,1},N), each y_start=y_start);
+//   Continuous.TransferFunction TF1[M](b=fill({1},M), a=fill({T_2,1},M),each y_start=y_start);
+//   Continuous.TransferFunction TF2[N](b=fill({T_1,1},N), a=fill({T_2,1},N), each y_start=y_start);
+  final parameter Boolean bypass = if M == 0 or N == 0 then true else false "Boolean parameter" annotation(Evaluate = true);
+  Continuous.TransferFunction TF1[M](b=fill({1},M), a=fill({T_2,1},M),each y_start=y_start) if bypass == false "Conditional component";
+  Continuous.TransferFunction TF2[N](b=fill({T_1,1},N), a=fill({T_2,1},N), each y_start=y_start) if bypass == false "Conditional component";
 equation
   if M == 0 or N == 0 then
     u = y;
@@ -25,8 +28,8 @@ equation
     for i in 1:M-2 loop
       connect(TF1[i].y, TF1[i+1].u);
     end for;
-    connect(TF1[M-1].y, y);
-    connect(u, TF1[M].u);
+    connect(TF1[M-1].y, TF1[M].u);
+    connect(TF1[M].y, y);
   elseif M == 1 and N ==1 then
     connect(u, TF2[1].u);
     connect(TF2[1].y, TF1[1].u);
@@ -40,8 +43,8 @@ equation
     for i in 1:M-2 loop
       connect(TF1[i].y, TF1[i+1].u);
     end for;
-    connect(TF1[M-1].y, y);
-    connect(u, TF1[M].u);
+    connect(TF1[M-1].y, TF1[M].u);
+    connect(TF1[M].y, y);
   end if;
   annotation (
     Icon(coordinateSystem(
