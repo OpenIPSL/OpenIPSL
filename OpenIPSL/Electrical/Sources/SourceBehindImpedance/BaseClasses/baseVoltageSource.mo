@@ -28,19 +28,19 @@ partial model baseVoltageSource
   RealOutput Emag0(start=E0)
     "Initial value of the internal voltage source magnitude"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-40,-110}),
+        rotation=90,
+        origin={0,110}),
         iconTransformation(extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-40,-110})));
+        rotation=90,
+        origin={0,110})));
   RealOutput Eang0(start=delta0)
     "Initial value of the internal voltage angle"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={40,-110}),
+        origin={0,-110}),
         iconTransformation(extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={40,-110})));
+        origin={0,-110})));
   parameter OpenIPSL.Types.ApparentPower M_b=SysData.S_b "Voltage Source base power rating (MVA)"
     annotation (Dialog(group="Voltage Source parameters"));
   parameter OpenIPSL.Types.PerUnit R_a=1e-3 "Internal source resistance, pu, system base"

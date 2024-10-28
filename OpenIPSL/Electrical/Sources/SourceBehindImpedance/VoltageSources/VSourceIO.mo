@@ -12,12 +12,36 @@ model VSourceIO
   Modelica.Blocks.Math.PolarToRectangular p2R
     "Convert from magnitude and angle to real and imaginary"
     annotation (Placement(transformation(extent={{-42,-22},{0,20}})));
+  // Includes conditional option to set the input as a deviation from
+  // the initialization value, or to use the input as a whole quantity.
+  parameter Boolean useEphasorInternalAsInput = true
+  "If true, the values of E0 and delta0 are computed internally and used
+  as the start value of the input, requiring only a deviation \\Delta E and 
+  \\Delta delta to be supplied. 
+  If false, the magnitude E and angle delta must be supplied, including
+  the correct value of E0 and delta0 needed for proper initialization.";
 equation
   // Internal voltage source equations
-  delta = delta0 + uDEang "Initial angle plus input increment";
-  E = E0 + uDEmag "Initial magnitude plus input increment";
-  Er = Er0 + p2R.y_re;
-  Ei = Ei0 + p2R.y_im;
+  if useEphasorInternalAsInput then
+    // Condition: true
+    // This injects a signal that is a deviation from the inital value of
+    // E0 and delta0, for the two variables, which are calculated in the base class.
+    delta = delta0 + uDEang "Initial angle plus input increment";
+    E = E0 + uDEmag "Initial magnitude plus input increment";
+    Er = Er0 + p2R.y_re;
+    Ei = Ei0 + p2R.y_im;
+
+  else
+    // Condition: false
+    // This injects a voltage phasor to define the internal voltage of the
+    // source, as the internally computed values that are needed to initialize
+    // properly E and delta (E0 and delta0) are not included, they need to be
+    // provided externally by the user.
+    delta = uDEang   "Internal voltage angle, delta, provided by the graphical input uDEang";
+    E = uDEmag   "Internal voltage magnitude, E, provided by the graphical input uDEmag";
+    Er = p2R.y_re "Real part of phasor calculated with the p2R block on the diagram layer";
+    Ei = p2R.y_im "Imaginary part of phasor calculated with the p2R block on the diagram layer";
+  end if;
   connect(p2R.u_abs, uDEmag) annotation (Line(points={{-46.2,11.6},{-94,11.6},{
           -94,60},{-120,60}}, color={0,0,127}));
   connect(p2R.u_arg, uDEang) annotation (Line(points={{-46.2,-13.6},{-94,-13.6},
@@ -97,16 +121,7 @@ which are the real and imaginary input
           textColor={0,0,0},
           textString="%name")}),
     Documentation(info="<html>
-<p>
-The purpose of this model is to support the development of Grid-Forming Inverter models as described in
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
-The model provides a voltage source with an internal voltage source and internal impedance
-whose magnitude and angle can be varied via inputs starting from their initial values.
-</p>
-<p>
-See the documentation of
-<a href=\"Modelica://OpenIPSL.Electrical.Sources.SourceBehindImpedance.BaseClasses.baseVoltageSource\">BaseClasses.baseVoltageSource</a>
-for more information.
-</p>
+<p>The purpose of this model is to support the development of Grid-Forming Inverter models as described in <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>. The model provides a voltage source with an internal voltage source and internal impedance whose magnitude and angle can be varied via inputs starting from their initial values. </p>
+<p>See the documentation of <a href=\"Modelica://OpenIPSL.Electrical.Sources.SourceBehindImpedance.BaseClasses.baseVoltageSource\">BaseClasses.baseVoltageSource</a> for more information. </p>
 </html>"));
 end VSourceIO;
