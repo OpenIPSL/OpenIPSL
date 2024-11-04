@@ -1,7 +1,8 @@
-within OpenIPSL.Tests.Sources;
+within OpenIPSL.Tests.Sources.SourcesWithRealInputs;
 model VoltageSourceReImInputVaryImag
   "Test model for the VoltageSourceReImInput model with varying the imaginary part"
-  extends VoltageSourceReImInputConstant(redeclare Modelica.Blocks.Sources.Ramp vIm(
+  extends SourcesWithRealInputs.VoltageSourceReImInputConstant
+                                        (redeclare Modelica.Blocks.Sources.Ramp vIm(
       height=3.14/8,
       duration=2.5,
       startTime=5));

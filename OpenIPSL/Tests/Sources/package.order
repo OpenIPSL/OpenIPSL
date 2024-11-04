@@ -1,5 +1,2 @@
-VoltageSourceReImInputConstant
-VoltageSourceReImInputVaryReal
-VoltageSourceReImInputVaryImag
-VoltageSourceReImInputVaryRealAndImag
-CurrentSourceReImInputConstant
+SourcesBehindImpedance
+SourcesWithRealInputs

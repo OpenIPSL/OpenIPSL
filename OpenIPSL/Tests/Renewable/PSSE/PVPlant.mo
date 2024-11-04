@@ -9,6 +9,7 @@ model PVPlant
     angle_0(displayUnit="deg") = 0.02574992,
     QFunctionality=4,
     PFunctionality=0,
+    Irr2Pow=false,
     redeclare OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
       RenewableGenerator,
     redeclare OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1
@@ -20,7 +21,8 @@ equation
   connect(pV.pwPin, GEN1.p)
     annotation (Line(points={{-40,0},{-30,0}}, color={0,0,255}));
   connect(freq.y, pV.FREQ)
-    annotation (Line(points={{-75,0},{-62,0}}, color={0,0,127}));
+    annotation (Line(points={{-75,0},{-68,0},{-68,-4},{-62,-4}},
+                                               color={0,0,127}));
   connect(pwVoltage.vi, pV.regulate_vi)
     annotation (Line(points={{-36.6,30},{-44,30},{-44,10}}, color={0,0,127}));
   connect(pwVoltage.vr, pV.regulate_vr) annotation (Line(points={{-36.6,33.6},{
@@ -30,9 +32,7 @@ equation
   connect(pwCurrent.ii, pV.branch_ii) annotation (Line(points={{-14,-6.6},{-14,
           -20},{-56,-20},{-56,-10}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=5,
-      __Dymola_NumberOfIntervals=5000,
-      __Dymola_Algorithm="Dassl"), Documentation(info="<html>
+      StopTime=5), Documentation(info="<html>
 <p>
 Simulate for 5 seconds.
 </p>

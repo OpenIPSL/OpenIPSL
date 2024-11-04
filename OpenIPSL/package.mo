@@ -10,6 +10,7 @@ annotation (preferredView="info",
   version="3.1.0-dev",
   versionDate="202x-xx-xx",
   conversion(
+    noneFromVersion="3.0.0",
     from(version={"0.8","0.8.1","1.0.0","1.5.0"}, to="2.0.0",
       script="modelica://OpenIPSL/Resources/scripts/ConvertOpenIPSL_from_1.5.0_to_2.0.0.mos"),
     from(version="2.0.0", to="3.0.0",

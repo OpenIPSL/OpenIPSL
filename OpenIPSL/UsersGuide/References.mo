@@ -12,6 +12,16 @@ model References "References"
         <a href=\"https://doi.org/10.1109/9780470545577.app4\">DOI: 10.1109/9780470545577.app4</a>
 </td>
 </tr>
+
+<tr>
+<td>[Du2021]</td>
+<td>W. Du, Y. Liu, F.K. Tuffner, R. Huang and Z. Huang:
+        &quot;Model Specification of Droop-Controlled Grid-Forming Inverters (REGFM_A1)&quot;.
+        Richland, WA, USA: Pacific Northwest National Laboratory, September 2021,
+         (<a href=\"https://www.osti.gov/biblio/1899301/\">Technical Report</a>).
+</td>
+</tr>
+
 <tr>
 <td>[IEEE1968]</td>
 <td>IEEE:

@@ -1,15 +1,11 @@
-within OpenIPSL.Tests.Sources;
-model VoltageSourceReImInputVaryRealAndImag
-  "Test model for the VoltageSourceReImInput model with varying real and imaginary parts"
-  extends VoltageSourceReImInputConstant(
-    redeclare Modelica.Blocks.Sources.Ramp vRe(
+within OpenIPSL.Tests.Sources.SourcesWithRealInputs;
+model VoltageSourceReImInputVaryReal
+  "Test model for the VoltageSourceReImInput model with varying real part"
+  extends SourcesWithRealInputs.VoltageSourceReImInputConstant
+                                        (redeclare Modelica.Blocks.Sources.Ramp vRe(
       height=0.1,
       duration=2.5,
       offset=1,
-      startTime=5),
-    redeclare Modelica.Blocks.Sources.Ramp vIm(
-      height=3.14/8,
-      duration=2.5,
       startTime=5));
   annotation (experiment(StopTime=10),
       Documentation(revisions="<html>
@@ -31,6 +27,6 @@ model VoltageSourceReImInputVaryRealAndImag
 </tr>
 </table>
 </html>", info="<html>
-<p>This model shows how to use the component in <code>Electrical.Sources.VoltageSourceReImInput</code> with user specified <strong>varying real and imaginary parts</strong> of the voltage phasor of the source.</p>
+<p>This model shows how to use the component in <code>Electrical.Sources.VoltageSourceReImInput</code> with user specified <strong>varying real and constant imaginary</strong> parts of the voltage phasor of the source.</p>
 </html>"));
-end VoltageSourceReImInputVaryRealAndImag;
+end VoltageSourceReImInputVaryReal;

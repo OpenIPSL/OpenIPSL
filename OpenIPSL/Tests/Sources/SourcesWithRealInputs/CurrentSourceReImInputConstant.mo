@@ -1,4 +1,4 @@
-within OpenIPSL.Tests.Sources;
+within OpenIPSL.Tests.Sources.SourcesWithRealInputs;
 model CurrentSourceReImInputConstant
   "Test model for the VoltageSourceReImInput model with constant input"
   extends BaseClasses.SMIB;

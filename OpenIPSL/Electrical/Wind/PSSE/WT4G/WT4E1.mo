@@ -22,8 +22,7 @@ model WT4E1 "Electrical Control for Type 4 Wind Generator"
   parameter Types.PerUnit dPMX "Max limit in power PI controller";
   parameter Types.PerUnit dPMN "Min limit in power PI controller";
   parameter Types.Time T_Power "Power filter time constant";
-  parameter Types.PerUnit KQI "MVAR/Voltage gain";
-  //should be 0.1 in PSSE
+  parameter Types.PerUnit KQI "Mvar/Voltage gain";
   parameter Types.PerUnit VMINCL=0.9 "Min voltage limit";
   parameter Types.PerUnit VMAXCL=1.1 "Max voltage limit";
   parameter Types.PerUnit KVI=120 "Voltage/Mvar gain";
@@ -33,7 +32,6 @@ model WT4E1 "Electrical Control for Type 4 Wind Generator"
   parameter Types.PerUnit Iphl=1.11 "Hard active current limit";
   parameter Types.PerUnit Iqhl=1.11 "Hard reactive current limit";
   parameter Boolean PSSEMATCH annotation (choices(choice=false "Use Integrator in Wind Control", choice=true "Ignore Integrator in Wind Control"));
-  //parameter Real Qord "Mvar order from Mvar emulator";
   Modelica.Blocks.Interfaces.RealInput P(start=p0) annotation (Placement(
         transformation(extent={{-210,-10},{-190,10}}), iconTransformation(
         extent={{-20,-20},{20,20}},

@@ -15,6 +15,8 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
   parameter Integer QFunctionality = 0 "BESS Reactive Power Control Options" annotation (Dialog(group= "Reactive Power Control Options"), choices(choice=0 "Constant local PF control", choice=1 "Constant local Q control", choice=2 "Local V control", choice=3 "Local coordinated V/Q control", choice=4 "Plant level Q control", choice=5 "Plant level V control", choice=6 "Plant level Q control + local coordinated V/Q control", choice=7 "Plant level V control + local coordinated V/Q control"));
   parameter Integer PFunctionality = 0 "BESS Real Power Control Options" annotation (Dialog(group= "Active Power Control Options", enable=(QFunctionality >=4)), choices(choice=0 "No governor response", choice=1 "Governor response with up and down regulation"));
 
+  // Irradiance to Power parameter selection
+  parameter Boolean Irr2Pow = false "Irradiance to Power Options" annotation (Dialog(group= "Irradiance to Power Add-On Capability"));
   replaceable
     OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.BaseClasses.BaseREGC
     RenewableGenerator(
@@ -46,7 +48,7 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
     refflag=refflag) if QFunctionality >= 4 annotation (choicesAllMatching=true,
       Placement(transformation(extent={{-78,-20},{-38,20}})));
   Modelica.Blocks.Math.Gain gain(k=1)
-                                 if QFunctionality < 4
+                                 if QFunctionality < 4 and not Irr2Pow
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
@@ -59,8 +61,10 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
         origin={-6,-80})));
   Modelica.Blocks.Sources.Constant freq_ref(k=SysData.fn) if QFunctionality >= 4
     annotation (Placement(transformation(extent={{-70,-60},{-80,-50}})));
-  Modelica.Blocks.Interfaces.RealInput FREQ if QFunctionality >= 4 "Connection Point Frequency"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  Modelica.Blocks.Interfaces.RealInput FREQ if QFunctionality >= 4
+    "Connection Point Frequency"
+    annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}),
+        iconTransformation(extent={{-140,-60},{-100,-20}})));
 
   Modelica.Blocks.Interfaces.RealInput branch_ir if QFunctionality >= 4 "Measured Branch Real Current"
     annotation (Placement(transformation(
@@ -94,6 +98,27 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={60,100})));
+  Modelica.Blocks.Interfaces.RealInput i2p if Irr2Pow
+    "Irradiance to Power input" annotation (Placement(transformation(extent={{-140,
+            20},{-100,60}}), iconTransformation(extent={{-140,20},{-100,60}})));
+  Modelica.Blocks.Math.Gain gain2(k=1)
+                                 if Irr2Pow and QFunctionality < 4
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-86,80})));
+  Modelica.Blocks.Math.Gain gain3(k=1)
+                                 if Irr2Pow and QFunctionality >= 4
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-86,60})));
+  Modelica.Blocks.Math.Gain gain4(k=1)
+                                 if QFunctionality >= 4 and not Irr2Pow
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=180,
+        origin={-60,-86})));
 protected
       parameter Boolean pfflag = (if QFunctionality == 0 then true else false);
       parameter Boolean vflag = (if QFunctionality == 3 or QFunctionality == 6 or QFunctionality == 7 then true else false);
@@ -102,8 +127,8 @@ protected
       parameter Boolean fflag = (if PFunctionality == 1 then true else false);
 equation
   connect(RenewableController.Iqcmd, RenewableGenerator.Iqcmd)
-    annotation (Line(points={{20.6667,11.3333},{23.9048,11.3333},{23.9048,
-          11.4286},{27.1429,11.4286}},                   color={0,0,127}));
+    annotation (Line(points={{20.6667,11.3333},{23.9048,11.3333},{23.9048,11.4286},
+          {27.1429,11.4286}},                            color={0,0,127}));
   connect(RenewableGenerator.IQ0, RenewableController.iq0) annotation (Line(
         points={{32.8571,-21.4286},{32.8571,-28},{16,-28},{16,-21.3333}},
         color={0,0,127}));
@@ -140,28 +165,23 @@ equation
           {-58,-36},{0,-36},{0,-21.3333}},          color={0,0,127}));
   connect(PlantController.q0, RenewableController.q0) annotation (Line(points={{-46,-22},
           {-46,-40},{-8,-40},{-8,-21.3333}},          color={0,0,127}));
-  connect(gain.u, RenewableGenerator.p_0) annotation (Line(points={{1.2,-60},{
-          67.1429,-60},{67.1429,-21.4286}},
-                                    color={0,0,127}));
-  connect(gain1.y, RenewableController.Qext) annotation (Line(points={{-12.6,
-          -80},{-32,-80},{-32,-5.33333},{-21.3333,-5.33333}},
-                                                         color={0,0,127}));
+  connect(gain.u, RenewableGenerator.p_0) annotation (Line(points={{1.2,-60},{67.1429,
+          -60},{67.1429,-21.4286}}, color={0,0,127}));
+  connect(gain1.y, RenewableController.Qext) annotation (Line(points={{-12.6,-80},
+          {-32,-80},{-32,-5.33333},{-21.3333,-5.33333}}, color={0,0,127}));
   connect(gain.y, RenewableController.Pref) annotation (Line(points={{-12.6,-60},
           {-30,-60},{-30,-10.6667},{-21.3333,-10.6667}}, color={0,0,127}));
-  connect(gain1.u, RenewableGenerator.q_0) annotation (Line(points={{1.2,-80},{
-          58.5714,-80},{58.5714,-21.4286}},
-                                    color={0,0,127}));
+  connect(gain1.u, RenewableGenerator.q_0) annotation (Line(points={{1.2,-80},{58.5714,
+          -80},{58.5714,-21.4286}}, color={0,0,127}));
   connect(freq_ref.y, PlantController.Freq_ref) annotation (Line(points={{-80.5,
           -55},{-88,-55},{-88,-12},{-80,-12}}, color={0,0,127}));
-  connect(PlantController.Plant_pref, RenewableGenerator.p_0) annotation (Line(
-        points={{-80,4},{-96,4},{-96,-92},{67.1429,-92},{67.1429,-21.4286}},
-        color={0,0,127}));
   connect(PlantController.Qref, RenewableGenerator.q_0) annotation (Line(points={{-80,12},
           {-98,12},{-98,-98},{58.5714,-98},{58.5714,-21.4286}},          color={
           0,0,127}));
   connect(RenewableGenerator.p, pwPin)
     annotation (Line(points={{70,0},{100,0}}, color={0,0,255}));
-  connect(PlantController.Freq, FREQ) annotation (Line(points={{-80,-4},{-92,-4},{-92,0},{-120,0}},
+  connect(PlantController.Freq, FREQ) annotation (Line(points={{-80,-4},{-92,-4},
+          {-92,-40},{-120,-40}},
                              color={0,0,127}));
   connect(PlantController.branch_ii, branch_ii) annotation (Line(points={{-62,22},{-62,96},{-40,96},{-40,120}},
                                            color={0,0,127}));
@@ -173,6 +193,20 @@ equation
                                          color={0,0,127}));
   connect(RenewableController.Ipcmd, RenewableGenerator.Ipcmd) annotation (Line(points={{20.6667,
           -11.3333},{23.9048,-11.3333},{23.9048,-11.4286},{27.1429,-11.4286}},                                                                                        color={0,0,127}));
+  connect(i2p, gain2.u)
+    annotation (Line(points={{-120,40},{-98,40},{-98,80},{-93.2,80}},
+                                                    color={0,0,127}));
+  connect(gain2.y, RenewableController.Pref) annotation (Line(points={{-79.4,80},
+          {-36,80},{-36,22},{-34,22},{-34,-10.6667},{-21.3333,-10.6667}},
+                                                                  color={0,0,127}));
+  connect(gain3.u, i2p) annotation (Line(points={{-93.2,60},{-98,60},{-98,40},{-120,
+          40}}, color={0,0,127}));
+  connect(gain4.u, RenewableGenerator.p_0) annotation (Line(points={{-52.8,-86},
+          {-40,-86},{-40,-94},{67.1429,-94},{67.1429,-21.4286}}, color={0,0,127}));
+  connect(gain4.y, PlantController.Plant_pref) annotation (Line(points={{-66.6,-86},
+          {-94,-86},{-94,4},{-80,4}}, color={0,0,127}));
+  connect(gain3.y, PlantController.Plant_pref) annotation (Line(points={{-79.4,60},
+          {-76,60},{-76,32},{-88,32},{-88,4},{-80,4}}, color={0,0,127}));
   annotation (Icon(graphics={      Ellipse(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
