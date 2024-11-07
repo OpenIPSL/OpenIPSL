@@ -1,6 +1,50 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
 model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model"
-//  extends OpenIPSL.Icons.VerifiedModel;
+  parameter Real K=30.32 "Regulation gain [1/pu]";
+  parameter Types.Time T_1=0.5 "Control time constant";
+  parameter Types.Time T_2=1e-8 "Control time constant";
+  parameter Types.Time T_3=0.1 "Control time constant";
+  parameter Types.TimeAging U_o=0.4 "Max. rate if valve opening";
+  parameter Types.TimeAging U_c=-0.4 "Max. rate if valve closing";
+  parameter Types.PerUnit P_MAX=1.5 "Max. valve position";
+  parameter Types.PerUnit P_MIN=0 "Min. valve position";
+  parameter Types.Time T_4=0.25 "HP section time constant";
+  parameter Types.PerUnit K_1=0.307
+    "Fraction of power from high pressure turbine (upper branch)";
+  parameter Types.PerUnit K_2=0
+    "Fraction of power from high pressure turbine (lower branch)";
+  parameter Types.Time T_5=10
+    "Reheat plus intermediate pressure turbine time constant";
+  parameter Types.PerUnit K_3=0
+    "Fraction of power from intermediate pressure turbine (upper branch)";
+  parameter Types.PerUnit K_4=0.23
+    "Fraction of power from intermediate pressure turbine (lower branch)";
+  parameter Types.Time T_6=0.588
+    "Reheater plus intermediate pressure turbine time constant (second)";
+  parameter Types.PerUnit K_5=0.2315
+    "Fraction of power from low pressure turbine (first LP, upper branch)";
+  parameter Types.PerUnit K_6=0.2315
+    "Fraction of power from low pressure turbine (first LP, lower branch)";
+  parameter Types.Time T_7=1e-8 "Low pressure turbine time constant";
+  parameter Types.PerUnit K_7=0
+    "Fraction of power from low pressure turbine (second LP, upper branch)";
+  parameter Types.PerUnit K_8=0
+    "Fraction of power from low pressure turbine (second LP, lower branch)";
+  parameter Types.PerUnit db1=0.0006 "Speed deadband";
+  parameter Types.PerUnit err=0 "Error deadband";
+  parameter Types.PerUnit db2=0 "Gate valve deadband";
+  parameter Types.PerUnit GV1=0 "Gate valve position 1 [pu]";
+  parameter Types.PerUnit GV2=0.25 "Gate valve position 2 [pu]";
+  parameter Types.PerUnit GV3=0.5 "Gate valve position 3 [pu]";
+  parameter Types.PerUnit GV4=0.75 "Gate valve position 4 [pu]";
+  parameter Types.PerUnit GV5=2 "Gate valve position 5 [pu]";
+  parameter Types.PerUnit PGV1=0 "Mechanical power 1 [pu]";
+  parameter Types.PerUnit PGV2=0.25 "Mechanical power 2 [pu]";
+  parameter Types.PerUnit PGV3=0.5 "Mechanical power 3 [pu]";
+  parameter Types.PerUnit PGV4=0.75 "Mechanical power 4 [pu]";
+  parameter Types.PerUnit PGV5=2 "Mechanical power 5 [pu]";
+  parameter Integer Iblock=0;
+  parameter Integer HP_LP = 1 "Turbine Output Power Selector [1(HP) or 2(LP) or 3(HP+LP)]";
   Modelica.Blocks.Interfaces.RealInput SPEED_HP "Machine speed deviation from nominal [pu]"
     annotation (Placement(transformation(extent={{-120,44},{-100,64}}),iconTransformation(extent={{-100,40},
             {-60,80}})));
@@ -76,52 +120,6 @@ model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model"
   Modelica.Blocks.Interfaces.RealOutput PMECH_LP
     "Turbine mechanical power [pu]" annotation (Placement(transformation(extent={{100,-98},
             {120,-78}}),           iconTransformation(extent={{100,-50},{120,-30}})));
-//  parameter OpenIPSL.Types.PerUnit P0=1 "Power reference of the governor";
-  parameter Real K=30.32 "Regulation gain [1/pu]";
-  parameter OpenIPSL.Types.Time T_1=0.5 "Control time constant";
-  parameter OpenIPSL.Types.Time T_2=1e-8 "Control time constant";
-  parameter OpenIPSL.Types.Time T_3=0.1 "Control time constant";
-  parameter OpenIPSL.Types.TimeAging U_o=0.4 "Max. rate if valve opening";
-  parameter OpenIPSL.Types.TimeAging U_c=-0.4 "Max. rate if valve closing";
-  parameter OpenIPSL.Types.PerUnit P_MAX=1.5 "Max. valve position";
-  parameter OpenIPSL.Types.PerUnit P_MIN=0 "Min. valve position";
-  parameter OpenIPSL.Types.Time T_4=0.25 "HP section time constant";
-  parameter OpenIPSL.Types.PerUnit K_1=0.307
-    "Fraction of power from high pressure turbine (upper branch)";
-  parameter OpenIPSL.Types.PerUnit K_2=0
-    "Fraction of power from high pressure turbine (lower branch)";
-  parameter OpenIPSL.Types.Time T_5=10
-    "Reheat plus intermediate pressure turbine time constant";
-  parameter OpenIPSL.Types.PerUnit K_3=0
-    "Fraction of power from intermediate pressure turbine (upper branch)";
-  parameter OpenIPSL.Types.PerUnit K_4=0.23
-    "Fraction of power from intermediate pressure turbine (lower branch)";
-  parameter OpenIPSL.Types.Time T_6=0.588
-    "Reheater plus intermediate pressure turbine time constant (second)";
-  parameter OpenIPSL.Types.PerUnit K_5=0.2315
-    "Fraction of power from low pressure turbine (first LP, upper branch)";
-  parameter OpenIPSL.Types.PerUnit K_6=0.2315
-    "Fraction of power from low pressure turbine (first LP, lower branch)";
-  parameter OpenIPSL.Types.Time T_7=1e-8 "Low pressure turbine time constant";
-  parameter OpenIPSL.Types.PerUnit K_7=0
-    "Fraction of power from low pressure turbine (second LP, upper branch)";
-  parameter OpenIPSL.Types.PerUnit K_8=0
-    "Fraction of power from low pressure turbine (second LP, lower branch)";
-  parameter OpenIPSL.Types.PerUnit db1=0.0006 "Speed deadband";
-  parameter OpenIPSL.Types.PerUnit err=0 "Error deadband";
-  parameter OpenIPSL.Types.PerUnit db2=0 "Gate valve deadband";
-  parameter OpenIPSL.Types.PerUnit GV1=0 "Gate valve position 1 [pu]";
-  parameter OpenIPSL.Types.PerUnit GV2=0.25 "Gate valve position 2 [pu]";
-  parameter OpenIPSL.Types.PerUnit GV3=0.5 "Gate valve position 3 [pu]";
-  parameter OpenIPSL.Types.PerUnit GV4=0.75 "Gate valve position 4 [pu]";
-  parameter OpenIPSL.Types.PerUnit GV5=2 "Gate valve position 5 [pu]";
-  parameter OpenIPSL.Types.PerUnit PGV1=0 "Mechanical power 1 [pu]";
-  parameter OpenIPSL.Types.PerUnit PGV2=0.25 "Mechanical power 2 [pu]";
-  parameter OpenIPSL.Types.PerUnit PGV3=0.5 "Mechanical power 3 [pu]";
-  parameter OpenIPSL.Types.PerUnit PGV4=0.75 "Mechanical power 4 [pu]";
-  parameter OpenIPSL.Types.PerUnit PGV5=2 "Mechanical power 5 [pu]";
-  parameter Integer Iblock=0;
-  parameter Integer HP_LP = 1 "Turbine Output Power Selector [1(HP) or 2(LP) or 3(HP+LP)]";
 
   Modelica.Blocks.Math.Add3 add_ref(k2=-1, k3=-1)
     annotation (Placement(transformation(extent={{-42,46},{-26,62}})));
@@ -148,7 +146,7 @@ model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model"
     annotation (Placement(transformation(extent={{78,-94},{90,-82}})));
   Modelica.Blocks.Math.Add add1234_HP
     annotation (Placement(transformation(extent={{78,6},{90,18}})));
-  NonElectrical.Nonlinear.Deadband1  deadband1_1(db=db1, err=err)
+  NonElectrical.Nonlinear.Deadband1 deadband1(db=db1, err=err)
     annotation (Placement(transformation(extent={{-94,46},{-78,62}})));
   Modelica.Blocks.Tables.CombiTable1Ds Lookup_GateValve_Pmech(table=[GV1,PGV1;
         GV2,PGV2; GV3,PGV3; GV4,PGV4; GV5,PGV5], smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
@@ -159,14 +157,13 @@ model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model"
   Modelica.Blocks.Interfaces.RealInput PMECH0 annotation (Placement(
         transformation(extent={{-100,-90},{-60,-50}}), iconTransformation(
           extent={{-100,-90},{-60,-50}})));
-  NonElectrical.Nonlinear.Deadband2
-            deadband2_1(y(start=GV0), db=db2)
-    annotation (Placement(transformation(extent={{58,74},{76,92}})));
+  NonElectrical.Nonlinear.Deadband2 deadband2(y(start=GV0), db=db2)
+    annotation (Placement(transformation(extent={{60,74},{76,90}})));
 protected
-  parameter OpenIPSL.Types.PerUnit p0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit GV0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit Pp_max(fixed=false);
-  parameter OpenIPSL.Types.PerUnit Pp_min(fixed=false);
+  parameter Types.PerUnit p0(fixed=false);
+  parameter Types.PerUnit GV0(fixed=false);
+  parameter Types.PerUnit Pp_max(fixed=false);
+  parameter Types.PerUnit Pp_min(fixed=false);
 
 initial equation
 
@@ -189,7 +186,7 @@ initial equation
     Pp_min = P_MIN;
 
   elseif Iblock == 1 then
-    if P_MIN == 0 then
+    if P_MIN < Modelica.Constants.eps then
       Pp_min = p0;
       Pp_max = P_MAX;
     else
@@ -198,7 +195,7 @@ initial equation
     end if;
 
   elseif Iblock == 2 then
-    if P_MAX == 0 then
+    if P_MAX < Modelica.Constants.eps then
       Pp_max = p0;
       Pp_min = P_MIN;
     else
@@ -207,7 +204,7 @@ initial equation
     end if;
 
   else
-    if (P_MAX == 0 and P_MIN == 0) then
+    if (P_MAX < Modelica.Constants.eps and P_MIN < Modelica.Constants.eps) then
       Pp_max = p0;
       Pp_min = p0;
     else
@@ -279,9 +276,9 @@ equation
     annotation (Line(points={{70,-7.4},{70,8.4},{76.8,8.4}}, color={0,0,127}));
   connect(add1234_HP.y, PMECH_HP)
     annotation (Line(points={{90.6,12},{110,12}}, color={0,0,127}));
-  connect(SPEED_HP, deadband1_1.u)
+  connect(SPEED_HP, deadband1.u)
     annotation (Line(points={{-110,54},{-95.6,54}}, color={0,0,127}));
-  connect(deadband1_1.y, LeadLag.u)
+  connect(deadband1.y, LeadLag.u)
     annotation (Line(points={{-77.2,54},{-69.6,54}}, color={0,0,127}));
   connect(add_ref.u3, Lookup_GateValve_Pmech.u) annotation (Line(points={{-43.6,
           47.6},{-48,47.6},{-48,36},{72,36},{72,54},{76.4,54}}, color={0,0,127}));
@@ -289,10 +286,10 @@ equation
           {98,54},{98,26},{-90,26},{-90,-38},{-81.6,-38}}, color={0,0,127}));
   connect(Pref.y, add_ref.u1) annotation (Line(points={{-51.2,82},{-48,82},{-48,
           60},{-43.6,60},{-43.6,60.4}}, color={0,0,127}));
-  connect(Gov_Integrator.y, deadband2_1.u) annotation (Line(points={{54.8,54},{
-          58,54},{58,72},{48,72},{48,83},{56.2,83}}, color={0,0,127}));
-  connect(deadband2_1.y, Lookup_GateValve_Pmech.u) annotation (Line(points={{
-          76.9,83},{84,83},{84,68},{72,68},{72,54},{76.4,54}}, color={0,0,127}));
+  connect(Gov_Integrator.y, deadband2.u) annotation (Line(points={{54.8,54},{58,
+          54},{58,72},{48,72},{48,82},{58.4,82}}, color={0,0,127}));
+  connect(deadband2.y, Lookup_GateValve_Pmech.u) annotation (Line(points={{76.8,
+          82},{84,82},{84,68},{72,68},{72,54},{76.4,54}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
                                                            preserveAspectRatio=
@@ -318,25 +315,22 @@ equation
           extent={{-56,-56},{-10,-84}},
           lineColor={28,108,200},
           textString="PMECH0")}),
-    Documentation(info="<html>Governor IEEEG1, IEEG1_GE and
-    IEEEG1D IEEE Type 1 Speed-Governor Model.</html>",
-    revisions="<html>
-<table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
-<tr>
+                Documentation(info="<html>
+<table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
-<td><p>PSS&reg;E Manual</p></td>
+<td><p>WECC Modified IEEE Type 1 Speed-Governing Model (PSS/E Manual)</p></td>
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td><p>2020-09</p></td>
+<td><p>2024-10-05</p></td>
 </tr>
 <tr>
 <td><p>Author</p></td>
-<td><p>Le Qi, KTH Royal Institute of Technology</p></td>
+<td><p>Giuseppe Laera, ALSETLab, RPI Rensselaer Polytechnic Institute</p></td>
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
 </tr>
 </table>
 </html>"));

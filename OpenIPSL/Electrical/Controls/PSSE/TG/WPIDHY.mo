@@ -1,49 +1,48 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
-model WPIDHY
+model WPIDHY "Woodward PID Hydro (WPIDHY) Governor"
   extends OpenIPSL.Icons.VerifiedModel;
-    parameter OpenIPSL.Types.Time T_REG=1;
+  parameter Types.Time T_REG=1
+    "Input time constant of governor, sec";
 
-  parameter OpenIPSL.Types.PerUnit REG=-0.05;
-  parameter OpenIPSL.Types.PerUnit K_P=2;
-                                //3;
+  parameter Types.PerUnit REG=-0.05 "Reg Gain";
+  parameter Types.PerUnit K_P=2 "Proportional gain, pu";
 
-  parameter OpenIPSL.Types.TimeAging K_I=0.5;
-                                     //0.3;
-  parameter OpenIPSL.Types.Time K_D=0;
+  parameter Types.TimeAging K_I=0.5 "Integral gain, pu";
+  parameter Types.Time K_D=0 "Derivative gain, pu";
 
-  parameter OpenIPSL.Types.Time T_A=0.025;
-                                 //0.01;
-  parameter OpenIPSL.Types.Time T_W=2.3;
-                               //1.47;
-  parameter OpenIPSL.Types.Time T_B=0.1;
-                               //0.25;
-  parameter OpenIPSL.Types.PerUnit VELMX=0.1;
-                                    //0.1320;
-  parameter OpenIPSL.Types.PerUnit VELMN=-0.1320;
-  parameter OpenIPSL.Types.PerUnit GATMX=1;
-  parameter OpenIPSL.Types.PerUnit GATMN=0;
-  parameter OpenIPSL.Types.PerUnit PMAX=1;
-  parameter OpenIPSL.Types.PerUnit PMIN=0;
-                                 //0.2580;
-  parameter OpenIPSL.Types.PerUnit D=2;
-                                //0;
-  parameter OpenIPSL.Types.PerUnit G0=0.08;
-                                  //0.0833;
-  parameter OpenIPSL.Types.PerUnit G1=0.3;
-                                 //0.5;
-  parameter OpenIPSL.Types.PerUnit G2=0.75;
-  parameter OpenIPSL.Types.PerUnit P1=0.25;
-                                  //0.5910;
-  parameter OpenIPSL.Types.PerUnit P2=0.75;
-                                  //0.8170;
-  parameter OpenIPSL.Types.PerUnit P3=1;
-                               //0.9785;
+  parameter Types.Time T_A=0.025
+    "Governor high frequency cutoff time constant";
+  parameter Types.Time T_W=2.3 "Water inertia time constant, sec";
+  parameter Types.Time T_B=0.1 "Gate servo time constant";
+  parameter Types.PerUnit VELMX=0.1
+    "Max gate opening velocity, pu/sec";
+  parameter Types.PerUnit VELMN=-0.1320
+    "Min gate opening velocity, pu/sec";
+  parameter Types.PerUnit GATMX=1
+    "Maximum gate velocity, pu of mwcap";
+  parameter Types.PerUnit GATMN=0
+    "Minimum gate velocity, pu of mwcap";
+  parameter Types.PerUnit PMAX=1
+    "Maximum gate opening, pu of mwcap";
+  parameter Types.PerUnit PMIN=0
+    "Minimum gate opening, pu of mwcap";
+  parameter Types.PerUnit D=2 "Turbine damping coefficient";
+  parameter Types.PerUnit G0=0.08
+    "Gate opening at speed no load, pu";
+  parameter Types.PerUnit G1=0.3 "Intermediate gate opening";
+  parameter Types.PerUnit G2=0.75 "Intermediate gate opening";
+  parameter Types.PerUnit P1=0.25 "Power at gate opening G1, pu";
+  parameter Types.PerUnit P2=0.75 "Power at gate opening G2, pu";
+  parameter Types.PerUnit P3=1 "Power at full opened gate, pu";
   Modelica.Blocks.Interfaces.RealInput SPEED
     "Machine speed deviation from nominal (pu)"
-    annotation (Placement(transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}), iconTransformation(extent = {{-100, 40}, {-60, 80}})));
+    annotation (Placement(transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}), iconTransformation(extent={{-100,20},
+            {-60,60}})));
   Modelica.Blocks.Interfaces.RealInput PELEC
     "Machine electrical power (pu)"
-    annotation (Placement(transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}),  iconTransformation(extent = {{-100, -80}, {-60, -40}})));
+    annotation (Placement(transformation(origin={-120,-60},    extent={{-20,-20},
+            {20,20}}),                                                                            iconTransformation(extent={{-100,
+            -80},{-60,-40}})));
   Modelica.Blocks.Interfaces.RealOutput PMECH "Turbine mechanical power (pu)" annotation (
     Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
   Modelica.Blocks.Math.Add add1(k1=-1)
@@ -102,7 +101,8 @@ model WPIDHY
     T1=-T_W,
     T2=T_W/2,
     y_start=p0,
-    x_start=0) annotation (Placement(transformation(extent={{24,-24},{42,-6}})));
+    x_start=0)
+    annotation (Placement(transformation(extent={{24,-24},{42,-6}})));
   Modelica.Blocks.Math.Add add2(k1=-1)
     annotation (Placement(transformation(extent={{74,-6},{86,6}})));
   Modelica.Blocks.Math.Gain gain1(k=D)
@@ -110,13 +110,13 @@ model WPIDHY
   Modelica.Blocks.Nonlinear.Limiter limiter2(uMax=PMAX, uMin=PMIN)
     annotation (Placement(transformation(extent={{52,-20},{62,-10}})));
 protected
-  parameter OpenIPSL.Types.PerUnit PREF(fixed=false);
-  parameter OpenIPSL.Types.PerUnit s00(fixed=false);
-  parameter OpenIPSL.Types.PerUnit p0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit PMECH0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit s01(fixed=false);
-  parameter OpenIPSL.Types.PerUnit s02(fixed=false);
-  parameter OpenIPSL.Types.PerUnit sG(fixed=false);
+  parameter Types.PerUnit PREF(fixed=false);
+  parameter Types.PerUnit s00(fixed=false);
+  parameter Types.PerUnit p0(fixed=false);
+  parameter Types.PerUnit PMECH0(fixed=false);
+  parameter Types.PerUnit s01(fixed=false);
+  parameter Types.PerUnit s02(fixed=false);
+  parameter Types.PerUnit sG(fixed=false);
 
 initial equation
   PREF = PELEC;//+0.00027;
@@ -180,41 +180,17 @@ equation
   annotation (
         Icon(graphics={Rectangle(lineColor = {28, 108, 200}, extent = {{-100, 100}, {100, -100}}),
         Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255},
-            fillPattern =                                                           FillPattern.Solid, extent = {{-50, 80}, {10, 40}}, textString = "SPEED"),
+            fillPattern =                                                           FillPattern.Solid, extent={{-56,60},
+              {4,20}},                                                                                                                 textString = "SPEED"),
         Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255},
-            fillPattern =                                                           FillPattern.Solid, extent = {{-50, -40}, {10, -80}}, textString = "PELEC"),
+            fillPattern =                                                           FillPattern.Solid, extent={{-56,-40},
+              {4,-80}},                                                                                                                  textString = "PELEC"),
         Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255},
             fillPattern =                                                           FillPattern.Solid, extent = {{30, 20}, {90, -20}}, textString = "PMECH"),
-        Text(lineColor={28,108,200},     extent = {{-100, 160}, {100, 100}},
+        Text(lineColor={4,7,200},        extent={{-94,172},{94,90}},
           textString="WPIDHY")}),
     Documentation(info="<html>
-<p>The following documentation is adapted from
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-Models], chapter 7.12</a>:</p>
-<blockquote>
-<p>This is a general purpose Governor/Turbine model that can be used in dynamic studies.
-The model can be used to represent many different models such as gas turbines, aeroderivative turbines and diesel engines.
-This model represents the usual PSSE implementation of the GGOV1 and a fairly complete review of this model can be found in
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[IEEE2013]</a>.
-</p>
-<p>
-[...]
-</p>
-<p>
-This model is incredibly versatile and can be used to represent different turbine models with different control modes.
-The Governor-Turbine frequency control, for example, can have different feedback signals, such as electric power, turbine output, valve stroke or even an isochronous operation.
-Isochronous operations are used when the machine operates in an isolated system. Note that, in this case, the permanent droop parameter <code>R</code> should be set to zero.
-In addition to that, the parameters can be set so a particular control loop is used.
-This model allows the representation of a frequency control system, a temperature control system and an acceleration limiter control system.
-</p>
-<p>
-[...]
-</p>
-<p>
-In order to represent a diesel generator using this model, one should be careful with setting some parameters. For example, a diesel generator needs to have <code>flag</code> set to 1.
-This is because the diesel generator have teir fluid flow proportional on the speed. In addition to that, <code>Teng</code>, which represents the time delay from the engine, should be set to a number greater than 0.
-Finally, the variable <code>Dm</code> should also be set to a number greater than 0. This is because in diesel engines, the maximum power output decreases as speed increases.
-</p>
-</blockquote>
+<p>The following documentation is adapted from <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-Models], chapter 7.5</a>3:</p>
 </html>", revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
@@ -222,17 +198,17 @@ Finally, the variable <code>Dm</code> should also be set to a number greater tha
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td><p>2020-11-22</p></td>
+<td><p>2022</p></td>
 </tr>
 <tr>
 <td><p>Author</p></td>
-<td><p><a href=\"https://github.com/maguilerac\">@maguilerac</a>,
-       <a href=\"https://github.com/marcelofcastro\">@marcelofcastro</a></p></td>
+<td><p><span style=\"font-family: Arial;\">Md Shamimul Islam, Giuseppe Laera, and Marcelo de Castro</span></p></td>
 </tr>
 <tr>
 <td><p>Contact</p></td>
 <td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(extent={{-120,-100},{100,100}})));
 end WPIDHY;

@@ -1,5 +1,5 @@
 within OpenIPSL.Tests.Controls.PSSE.ES;
-model AC8B "SMIB model example of GENROU with Excitation System AC8B"
+model AC8B "SMIB system to test functionality of exciter AC8B"
   extends OpenIPSL.Tests.BaseClasses.SMIB;
   OpenIPSL.Electrical.Machines.PSSE.GENROU gENROU(
     Xppd=0.2059,
@@ -22,12 +22,12 @@ model AC8B "SMIB model example of GENROU with Excitation System AC8B"
     M_b=100000000,
     P_0=39999952.912331,
     Q_0=5416571.3489056,
-    v_0=1) annotation (Placement(transformation(extent={{-108,-14},{-80,16}})));
+    v_0=1) annotation (Placement(transformation(extent={{-88,-16},{-58,16}})));
   Modelica.Blocks.Sources.Constant const5(k=0)     annotation (Placement(
         transformation(
-        extent={{-5,-5},{5,5}},
+        extent={{-8,-8},{8,8}},
         rotation=180,
-        origin={-41,-37})));
+        origin={-28,-48})));
   Electrical.Controls.PSSE.ES.AC8B aC8B(
     TR=0.02,
     KPR=160,
@@ -50,40 +50,43 @@ model AC8B "SMIB model example of GENROU with Excitation System AC8B"
     SE2=0.5,
     VFEMAX=8,
     VEMIN=0)
-    annotation (Placement(transformation(extent={{-80,-70},{-110,-40}})));
+    annotation (Placement(transformation(extent={{-60,-66},{-86,-40}})));
+
 equation
   connect(aC8B.EFD0, gENROU.EFD0) annotation (Line(
-      points={{-78.5,-61},{-74,-61},{-74,-18},{-72,-18},{-72,-6.5},{-78.6,-6.5}},
+      points={{-58.7,-58.2},{-56,-58.2},{-56,-58},{-48,-58},{-48,-8},{-56.5,-8}},
       color={0,0,127},
       smooth=Smooth.None));
+
   connect(gENROU.XADIFD, aC8B.XADIFD) annotation (Line(
-      points={{-78.6,-12.5},{-78.6,-42},{-76,-42},{-76,-65.5},{-78.5,-65.5}},
+      points={{-56.5,-14.4},{-58,-14.4},{-58,-14},{-52,-14},{-52,-62},{-58,-62},
+          {-58,-62.1},{-58.7,-62.1}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(aC8B.ECOMP, gENROU.ETERM) annotation (Line(points={{-78.5,-55},{-72,
-          -55},{-72,-20},{-70,-20},{-70,-3.5},{-78.6,-3.5}},          color={0,
-          0,127}));
+  connect(aC8B.ECOMP, gENROU.ETERM) annotation (Line(points={{-58.7,-53},{-42,-53},
+          {-42,-4.8},{-56.5,-4.8}}, color={0,0,127}));
   connect(gENROU.PMECH0, gENROU.PMECH) annotation (Line(
-      points={{-78.6,8.5},{-74,8.5},{-74,20},{-110,20},{-110,10},{-110.8,10}},
+      points={{-56.5,8},{-48,8},{-48,28},{-98,28},{-98,10},{-94,10},{-94,9.6},{-91,
+          9.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(aC8B.EFD, gENROU.EFD) annotation (Line(points={{-111.5,-55},{-118,-55},
-          {-118,-8},{-110.8,-8}},                    color={0,0,127}));
-  connect(gENROU.p, GEN1.p) annotation (Line(points={{-80,1},{-58.3,1},{-58.3,0},
-          {-30,0}},    color={0,0,255}));
-  connect(const5.y, aC8B.VOTHSG) annotation (Line(points={{-46.5,-37},{-52,-37},
-          {-52,-49},{-78.5,-49}},                 color={0,0,127}));
-  connect(aC8B.VUEL, const5.y) annotation (Line(points={{-89,-71.5},{-89,-76},{
-          -52,-76},{-52,-37},{-46.5,-37}},             color={0,0,127}));
-  connect(aC8B.VOEL, const5.y) annotation (Line(points={{-95,-71.5},{-95,-76},{
-          -52,-76},{-52,-37},{-46.5,-37}},              color={0,0,127}));
+  connect(aC8B.EFD, gENROU.EFD) annotation (Line(points={{-87.3,-53},{-98,-53},{
+          -98,-9.6},{-91,-9.6}}, color={0,0,127}));
+  connect(gENROU.p, GEN1.p) annotation (Line(points={{-58,0},{-30,0}},
+                       color={0,0,255}));
+  connect(const5.y, aC8B.VOTHSG) annotation (Line(points={{-36.8,-48},{-46,-48},
+          {-46,-47.8},{-58.7,-47.8}}, color={0,0,127}));
+  connect(aC8B.VUEL, const5.y) annotation (Line(points={{-67.8,-67.3},{-70,-67.3},
+          {-70,-76},{-40,-76},{-40,-48},{-36.8,-48}}, color={0,0,127}));
+  connect(aC8B.VOEL, const5.y) annotation (Line(points={{-73,-67.3},{-73,-76},{-40,
+          -76},{-40,-48},{-36.8,-48}}, color={0,0,127}));
   annotation (
 experiment(
       StopTime=10,
       Interval=0.0001,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
-    Diagram(coordinateSystem(extent={{-160,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-160,-100},{120,100}})),
+    Diagram(coordinateSystem(extent={{-100,-80},{100,100}})),
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
     conversion(noneFromVersion=""));
 end AC8B;

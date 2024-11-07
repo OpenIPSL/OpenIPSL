@@ -2,38 +2,37 @@ within OpenIPSL.Electrical.Controls.PSSE.ES;
 model ESURRY "AC1A Excitation System"
   import OpenIPSL.NonElectrical.Functions.SE;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
-  extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter(
-      VoltageReference(k=V_REF));
+  extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter(VoltageReference(k=V_REF));
   extends OpenIPSL.Icons.VerifiedModel;
-  parameter OpenIPSL.Types.Time T_R=0 "Regulator input filter time constant";
-  parameter OpenIPSL.Types.Time T_1=0 "Regulator input filter time constant";
-  parameter OpenIPSL.Types.Time T_A=0 "leadlag denominator (lag) time constant";
-  parameter OpenIPSL.Types.Time T_B=0 "leadlag numerator (lead) time constant";
-  parameter OpenIPSL.Types.Time T_C=0
-    "leadlaglim denominator (lag) time constant";
-  parameter OpenIPSL.Types.Time T_D=0
-    "leadlaglim numerator (lead) time constant";
-  parameter OpenIPSL.Types.Time T_E=0.8 "Exciter field time constant";
-  parameter OpenIPSL.Types.PerUnit K_10=1 "";
-  parameter OpenIPSL.Types.PerUnit K_16=1 "";
-  parameter OpenIPSL.Types.PerUnit K_F=0.03
-    "Rate feedback excitation system gain";
-  parameter OpenIPSL.Types.Time T_F=1 "Rate feedback time const";
-  parameter OpenIPSL.Types.PerUnit K_C=0.2
-    "Rectifier loading factor proportional to commutating reactance";
-  parameter OpenIPSL.Types.PerUnit K_D=0.48
-    "Demagnetizing factor, function of exciter alternator reactances";
-  parameter OpenIPSL.Types.PerUnit K_E=1 "Exciter field proportional constant";
-  parameter OpenIPSL.Types.PerUnit E_1=5.25
-    "Exciter output voltage for saturation factor S_E(E_1)";
-  parameter OpenIPSL.Types.PerUnit E_2=7
-    "Exciter output voltage for saturation factor S_E(E_2)";
-  parameter OpenIPSL.Types.PerUnit S_EE_1=0.03
-    "Exciter saturation factor at exciter output voltage E1";
-  parameter OpenIPSL.Types.PerUnit S_EE_2=0.1
-    "Exciter saturation factor at exciter output voltage E2";
-  parameter OpenIPSL.Types.PerUnit V_RMAX=6.03 "Maximum exciter field output";
-  parameter OpenIPSL.Types.PerUnit V_RMIN=-5.43 "Minimum exciter field output";
+  parameter Types.Time T_R=0 "Transducer time constant, sec.";
+  parameter Types.Time T_1=0 "Time constant, pu";
+  parameter Types.Time T_A=0
+    "Lead-lag numerator time constant, sec.";
+  parameter Types.Time T_B=0
+    "Lead-lag denominator time constant, sec.";
+  parameter Types.Time T_C=0
+    "Lead-lag numerator time constant, sec.";
+  parameter Types.Time T_D=0
+    "Lead-lag denominator time constant, sec";
+  parameter Types.Time T_E=0.8 "Exciter time constant, sec.";
+  parameter Types.PerUnit K_10=1 "Gain, pu";
+  parameter Types.PerUnit K_16=1 "Gain, pu";
+  parameter Types.PerUnit K_F=0.03 "Rate feedback gain, pu";
+  parameter Types.Time T_F=1 "Rate feedback time constant, sec.";
+  parameter Types.PerUnit K_C=0.2
+    "Rectifier regulation factor, pu";
+  parameter Types.PerUnit K_D=0.48
+    "Exciter internal reactance, pu";
+  parameter Types.PerUnit K_E=1
+    "Exciter field resistance constant, pu";
+  parameter Types.PerUnit E_1=5.25 "Field voltage value, 1";
+  parameter Types.PerUnit E_2=7 "Field voltage value, 2";
+  parameter Types.PerUnit S_EE_1=0.03 "Saturation factor at E1";
+  parameter Types.PerUnit S_EE_2=0.1 "Saturation factor at E2";
+  parameter Types.PerUnit V_RMAX=6.03
+    "Voltage regulator maximum output, pu";
+  parameter Types.PerUnit V_RMIN=-5.43
+    "Voltage regulator minimum output, pu";
   OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag(
     K=1,
     T=T_R,
@@ -181,22 +180,22 @@ equation
     Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
         graphics={             Text(
-          extent={{-100,160},{100,100}},
-          lineColor={28,108,200},
+          extent={{-104,172},{102,88}},
+          lineColor={14,8,200},
           textString="ESURRY")}),
     Documentation(info="<html>IEEE Type AC1A Excitation System Model.</html>",
-  revisions="<html><table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
-<tr>
+  revisions="<html>
+<table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>PSS&reg;E Manual</p></td>
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td><p>2020-09</p></td>
+<td><p>2022</p></td>
 </tr>
 <tr>
 <td><p>Author</p></td>
-<td><p><a href=\"https://github.com/tinrabuzin\">@tinrabuzin</a></p></td>
+<td><p>Md Shamimul Islam</p></td>
 </tr>
 <tr>
 <td><p>Contact</p></td>

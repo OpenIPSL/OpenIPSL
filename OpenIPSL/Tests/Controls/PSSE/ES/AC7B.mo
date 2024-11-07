@@ -1,5 +1,5 @@
 within OpenIPSL.Tests.Controls.PSSE.ES;
-model AC7B "Simple Machine Infinite Bus with Machine and Exciter"
+model AC7B "SMIB system to test functionality of exciter AC7B"
   extends OpenIPSL.Tests.BaseClasses.SMIB(pwFault(t1=2, t2=2.15));
   OpenIPSL.Electrical.Machines.PSSE.GENROU gENROU(
     P_0=40000000,
@@ -22,8 +22,7 @@ model AC7B "Simple Machine Infinite Bus with Machine and Exciter"
     Xpq=0.407,
     Tpq0=1.5)
     annotation (Placement(transformation(extent={{-88,-16},{-58,16}})));
-  Electrical.Controls.PSSE.ES.AC7B
-       aC7B(
+  Electrical.Controls.PSSE.ES.AC7B aC7B(
     T_R=0,
     K_PR=9,
     K_IR=1.5,
@@ -51,9 +50,9 @@ model AC7B "Simple Machine Infinite Bus with Machine and Exciter"
     S_EE_1=0.08,
     E_2=3.8,
     S_EE_2=0.3) annotation (Placement(transformation(
-        extent={{-20,18},{20,-18}},
+        extent={{-15,15},{15,-15}},
         rotation=180,
-        origin={-76,-52})));
+        origin={-73,-49})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-28,-88},{-40,-76}})));
 equation
@@ -61,26 +60,25 @@ equation
     annotation (Line(points={{-58,0},{-30,0}}, color={0,0,255}));
   connect(gENROU.PMECH0, gENROU.PMECH) annotation (Line(points={{-56.5,8},{-50,8},
           {-50,22},{-98,22},{-98,9.6},{-91,9.6}},color={0,0,127}));
-  connect(aC7B.EFD, gENROU.EFD) annotation (Line(points={{-87,-50},{-102,-50},{-102,
-          -9.6},{-91,-9.6}},  color={0,0,127}));
-  connect(const.y, aC7B.VOEL) annotation (Line(points={{-40.6,-82},{-76,-82},{-76,
-          -61}},     color={0,0,127}));
-  connect(aC7B.VUEL, aC7B.VOEL) annotation (Line(points={{-72,-61},{-62,-61},{-62,
-          -82},{-76,-82},{-76,-61}},     color={0,0,127}));
-  connect(gENROU.ETERM, aC7B.ECOMP) annotation (Line(points={{-56.5,-4.8},{-44,-4.8},
-          {-44,-50},{-65,-50}},       color={0,0,127}));
-  connect(gENROU.XADIFD, aC7B.XADIFD) annotation (Line(points={{-56.5,-14.4},{
-          -52,-14.4},{-52,-74},{-84,-74},{-84,-61}},
-                                           color={0,0,127}));
+  connect(const.y, aC7B.VOEL) annotation (Line(points={{-40.6,-82},{-73,-82},{-73,
+          -65.5}}, color={0,0,127}));
+  connect(aC7B.VUEL, aC7B.VOEL) annotation (Line(points={{-67,-65.5},{-66,-65.5},
+          {-66,-82},{-73,-82},{-73,-65.5}}, color={0,0,127}));
+  connect(gENROU.ETERM, aC7B.ECOMP) annotation (Line(points={{-56.5,-4.8},{-44,
+          -4.8},{-44,-49},{-56.5,-49}}, color={0,0,127}));
+  connect(gENROU.XADIFD, aC7B.XADIFD) annotation (Line(points={{-56.5,-14.4},{-52,
+          -14.4},{-52,-74},{-85,-74},{-85,-65.5}}, color={0,0,127}));
   connect(gENROU.EFD0, aC7B.EFD0) annotation (Line(points={{-56.5,-8},{-48,-8},
-          {-48,-54},{-65,-54}}, color={0,0,127}));
-  connect(aC7B.VT, aC7B.ECOMP) annotation (Line(points={{-64.9,-42.1},{-44,-42.1},
-          {-44,-50},{-65,-50}}, color={0,0,127}));
-  connect(aC7B.VOTHSG, aC7B.VOEL) annotation (Line(points={{-65,-46},{-46,-46},{
-          -46,-82},{-76,-82},{-76,-61}},  color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
-            -100},{120,100}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{120,
+          {-48,-55},{-56.5,-55}}, color={0,0,127}));
+  connect(aC7B.VT, aC7B.ECOMP) annotation (Line(points={{-56.35,-37.15},{-44,-37.15},
+          {-44,-49},{-56.5,-49}}, color={0,0,127}));
+  connect(aC7B.VOTHSG, aC7B.VOEL) annotation (Line(points={{-56.5,-43},{-46,-43},
+          {-46,-82},{-73,-82},{-73,-65.5}}, color={0,0,127}));
+  connect(aC7B.EFD, gENROU.EFD) annotation (Line(points={{-89.5,-49},{-98,-49},
+          {-98,-9.6},{-91,-9.6}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}})),                                        Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(
       StopTime=10,

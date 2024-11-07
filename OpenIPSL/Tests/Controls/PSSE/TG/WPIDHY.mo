@@ -1,6 +1,7 @@
 within OpenIPSL.Tests.Controls.PSSE.TG;
 model WPIDHY "SMIB system to test functionality of WPIDHY model"
-  extends OpenIPSL.Tests.BaseClasses.SMIB(constantLoad(angle_0=-0.0100577809552));
+  extends OpenIPSL.Tests.BaseClasses.SMIB(constantLoad(angle_0=-0.0100577809552), SysData(
+        fn=60));
   OpenIPSL.Electrical.Machines.PSSE.GENSAL gENSAL(
     Xppd=0.2,
     Xppq=0.2,
@@ -19,8 +20,9 @@ model WPIDHY "SMIB system to test functionality of WPIDHY model"
     M_b=100000000,
     P_0=39999950,
     Q_0=5416571,
-    v_0=1) annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
-  OpenIPSL.Electrical.Controls.PSSE.TG.WPIDHY wPIDHY(
+    v_0=1)
+    annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
+  Electrical.Controls.PSSE.TG.WPIDHY wPIDHY(
     T_REG=1,
     REG=-0.05,
     K_P=3,
@@ -42,20 +44,25 @@ model WPIDHY "SMIB system to test functionality of WPIDHY model"
     P1=0.5910,
     P2=0.8170,
     P3=0.9785)
-    annotation (Placement(transformation(extent={{-60,60},{-80,40}})));
+    annotation (Placement(transformation(extent={{-60,40},{-80,60}})));
 equation
   connect(wPIDHY.PELEC, gENSAL.PELEC) annotation (Line(
-      points={{-62,56},{-36,56},{-36,6},{-46,6}},
+      points={{-62,44},{-36,44},{-36,6},{-46,6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(gENSAL.EFD0,gENSAL. EFD) annotation (Line(points={{-46,-10},{-40,-10},{-40,-26},{-98,-26},{-98,-12},{-92,-12}},color={0,0,127},smooth=Smooth.None));
   connect(wPIDHY.PMECH, gENSAL.PMECH) annotation (Line(points={{-81,50},{-98,50},
           {-98,12},{-92,12}}, color={0,0,127}));
   connect(gENSAL.SPEED, wPIDHY.SPEED) annotation (Line(points={{-46,14},{-40,14},
-          {-40,44},{-62,44}}, color={0,0,127}));
+          {-40,54},{-62,54}}, color={0,0,127}));
   connect(gENSAL.p, GEN1.p) annotation (Line(points={{-48,0},{-50,0},{-50,0},{-30,0}},color={0,0,255}));
   annotation (
-experiment(StopTime=10),Documentation(info="<html>
+experiment(
+      StopTime=10,
+      Interval=0.001,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+                        Documentation(info="<html>
 <p>
 Simulate for 10 seconds.
 </p>

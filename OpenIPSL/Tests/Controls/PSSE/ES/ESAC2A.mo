@@ -6,7 +6,7 @@ model ESAC2A "SMIB system to test functionality of ESAC2A model"
     Xppq=0.2,
     Xpp=0.2,
     Xl=0.12,
-    angle_0=4.04626655578613,
+    angle_0=0.070620673811799,
     Tpd0=5,
     Tppd0=0.50000E-01,
     Tppq0=0.1,
@@ -20,8 +20,8 @@ model ESAC2A "SMIB system to test functionality of ESAC2A model"
     Xpq=0.6,
     Tpq0=0.7,
     M_b=100000000,
-    P_0=39999952.9123306,
-    Q_0=5416571.34890556,
+    P_0=39999952.912331,
+    Q_0=5416571.3489056,
     v_0=1) annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
   OpenIPSL.Electrical.Controls.PSSE.ES.ESAC2A eSAC2A(
     V_RMAX=4,
@@ -44,11 +44,11 @@ equation
                                                                        color={0,
           0,127}));
   connect(gENROU.PMECH0, gENROU.PMECH) annotation (Line(
-      points={{-46,10},{-40,10},{-40,30},{-100,30},{-100,10},{-92,10}},
+      points={{-46,10},{-40,10},{-40,30},{-100,30},{-100,12},{-92,12}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(eSAC2A.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},{-100,-10},{-92,-10}},
-                                                      color={0,0,127}));
+  connect(eSAC2A.EFD, gENROU.EFD) annotation (Line(points={{-81,-50},{-100,-50},
+          {-100,-12},{-92,-12}},                      color={0,0,127}));
   connect(gENROU.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}},
                        color={0,0,255}));
   connect(zero.y, eSAC2A.VOTHSG) annotation (Line(points={{-26.6,-46},{-59,-46}}, color={0,0,127}));

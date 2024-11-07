@@ -90,7 +90,9 @@ import OpenIPSL.NonElectrical.Functions.SE;
     annotation (Placement(transformation(extent={{180,120},{160,140}})));
   Modelica.Blocks.Math.Add DiffV2
     annotation (Placement(transformation(extent={{150,108},{130,128}})));
-  Modelica.Blocks.Math.Division division annotation (Placement(transformation(
+  NonElectrical.Nonlinear.Div0block
+                                div0block
+                                         annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={110,80})));
@@ -171,11 +173,11 @@ equation
           130},{159,130}}, color={0,0,127}));
   connect(DiffV2.u2, se1.VE_OUT) annotation (Line(points={{152,112},{156,112},{
           156,108},{161.46,108}}, color={0,0,127}));
-  connect(division.u1, DiffV1.y) annotation (Line(points={{116,92},{116,92},{116,128},{116,130},{101,130}},
-                                         color={0,0,127}));
-  connect(DiffV2.y, division.u2)
+  connect(div0block.u1, DiffV1.y) annotation (Line(points={{116,92},{116,92},{
+          116,128},{116,130},{101,130}}, color={0,0,127}));
+  connect(DiffV2.y, div0block.u2)
     annotation (Line(points={{129,118},{104,118},{104,92}}, color={0,0,127}));
-  connect(division.y, rotatingExciterWithDemagnetization.outMax) annotation (
+  connect(div0block.y, rotatingExciterWithDemagnetization.outMax) annotation (
       Line(points={{110,69},{110,60},{118,60},{118,47.5},{122.75,47.5}}, color=
           {0,0,127}));
   connect(XADIFD, rotatingExciterWithDemagnetization.XADIFD) annotation (Line(points={{80,-200},{80,-140},{134,-140},{134,28.75}}, color={0,0,127}));

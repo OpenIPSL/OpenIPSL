@@ -91,6 +91,12 @@ partial model baseMachine "Base machine for PSSE models"
   Types.PerUnit iq "q-axis armature current [pu]";
   Types.PerUnit ud "d-axis terminal voltage [pu]";
   Types.PerUnit uq "q-axis terminal voltage [pu]";
+  Modelica.Blocks.Interfaces.RealOutput QELEC(start=p0)
+    "Machine electrical power (machine base)" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={80,110})));
 protected
   parameter Types.AngularVelocity w_b=2*C.pi*fn "System base speed";
   parameter Real CoB=M_b/S_b;
@@ -111,6 +117,7 @@ equation
   SPEED = w;
   ETERM = Vt;
   PELEC = P/CoB;
+  QELEC = Q/CoB;
   [p.ir; p.ii] = -CoB*[sin(delta), cos(delta); -cos(delta), sin(delta)]*[id; iq];
   [p.vr; p.vi] = [sin(delta), cos(delta); -cos(delta), sin(delta)]*[ud; uq];
   -P = p.vr*p.ir + p.vi*p.ii;

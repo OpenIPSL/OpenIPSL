@@ -22,31 +22,30 @@ model WSIEG1 "Simple Machine Infinite Bus with Machine and Governor"
     R_a=0,
     Xpq=0.382,
     Tpq0=1)
-    annotation (Placement(transformation(extent={{-96,-20},{-60,18}})));
+    annotation (Placement(transformation(extent={{-86,-20},{-50,18}})));
   Electrical.Controls.PSSE.TG.WSIEG1
          wSIEG1(T_2=0, T_7=0,
     db1=0,
     err=0,
     db2=0.01)
-    annotation (Placement(transformation(extent={{-64,34},{-92,60}})));
+    annotation (Placement(transformation(extent={{-54,34},{-82,60}})));
 equation
   connect(gENROU.p, GEN1.p)
-    annotation (Line(points={{-60,-1},{-44,-1},{-44,0},{-30,0}},
+    annotation (Line(points={{-50,-1},{-34,-1},{-34,0},{-30,0}},
                                                color={0,0,255}));
-  connect(gENROU.EFD0,gENROU. EFD) annotation (Line(points={{-58.2,-10.5},{-44,
-          -10.5},{-44,-40},{-110,-40},{-110,-12.4},{-99.6,-12.4}},
+  connect(gENROU.EFD0,gENROU. EFD) annotation (Line(points={{-48.2,-10.5},{-40,
+          -10.5},{-40,-28},{-96,-28},{-96,-12.4},{-89.6,-12.4}},
                                                   color={0,0,127}));
-  connect(gENROU.SPEED, wSIEG1.SPEED_HP) annotation (Line(points={{-58.2,12.3},
-          {-44,12.3},{-44,54.8},{-66.8,54.8}}, color={0,0,127}));
-  connect(wSIEG1.PMECH_HP, gENROU.PMECH) annotation (Line(points={{-93.4,52.2},
-          {-110,52.2},{-110,10.4},{-99.6,10.4}}, color={0,0,127}));
-  connect(gENROU.PMECH0, wSIEG1.PMECH0) annotation (Line(points={{-58.2,8.5},{
-          -52,8.5},{-52,37.9},{-66.8,37.9}},
-                                           color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
-            -100},{120,100}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{120,
-            100}})),
+  connect(wSIEG1.PMECH_HP, gENROU.PMECH) annotation (Line(points={{-83.4,52.2},
+          {-96,52.2},{-96,10},{-92,10},{-92,10.4},{-89.6,10.4}},
+                                                 color={0,0,127}));
+  connect(gENROU.SPEED, wSIEG1.SPEED_HP) annotation (Line(points={{-48.2,12.3},
+          {-40,12.3},{-40,54.8},{-56.8,54.8}}, color={0,0,127}));
+  connect(gENROU.PMECH0, wSIEG1.PMECH0) annotation (Line(points={{-48.2,8.5},{
+          -44,8.5},{-44,37.9},{-56.8,37.9}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}})),                                  Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,100}})),
     experiment(
       StopTime=10,
       Interval=0.0001,

@@ -1,64 +1,67 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses;
 package WEHGOV
 
-  model Governor
-    parameter OpenIPSL.Types.ApparentPower S_b=100e6 "System base";
-    parameter OpenIPSL.Types.ApparentPower M_b=100e6 "System base";
-    parameter OpenIPSL.Types.PerUnit R_PERM_PE=1 "Pelec gain";
-    parameter OpenIPSL.Types.PerUnit R_PERM_GATE=1 "Feedback Gate gain";
-    parameter OpenIPSL.Types.Time T_PE=0.5 "Electrical power transducer time constant";
+  model Governor "WEHGOV governor and hydraulic actuators"
+    parameter Types.ApparentPower S_b=100e6 "System base";
+    parameter Types.ApparentPower M_b=100e6 "System base";
+    parameter Types.PerUnit R_PERM_PE=1 "Pelec gain";
+    parameter Types.PerUnit R_PERM_GATE=1 "Feedback Gate gain";
+    parameter Types.Time T_PE=0.5 "Electrical power transducer time constant";
     parameter Integer M=1 "Feedback control switch";
-    parameter OpenIPSL.Types.PerUnit SP_Band=0 "Speed deadband";
-    parameter OpenIPSL.Types.PerUnit KP=3 "Governor proportional gain";
-    parameter OpenIPSL.Types.TimeAging KI=0.36 "Governor integral gain";
-    parameter OpenIPSL.Types.Time KD=1.5 "Governor derivative gain";
-    parameter OpenIPSL.Types.Time TD=0.1 "Governor derivative controller time constant";
-    parameter OpenIPSL.Types.Time TP=0.2 "Pilot valve time constant";
-    parameter OpenIPSL.Types.PerUnit GMAX=1 "Maximum limit for the gate position";
-    parameter OpenIPSL.Types.PerUnit GMIN=0 "Minimum limit for the gate position";
-    parameter OpenIPSL.Types.PerUnit DICN=0.05 "PID integral controller limit from field tuning";
-    parameter OpenIPSL.Types.PerUnit DPV=0 "Change in valve output";
-    parameter OpenIPSL.Types.Time TDV=0.2 "Distribution valve time constant";
-    parameter OpenIPSL.Types.PerUnit GTMXOP=0.1 "Maximum gate opening rate [p.u./s]";
-    parameter OpenIPSL.Types.PerUnit GTMXCL=-0.2 "Maximum gate closing rate [p.u./s]";
-    parameter OpenIPSL.Types.PerUnit Tg=0.2 "Distribution valve limit";
-    parameter OpenIPSL.Types.PerUnit G1=0 "Gate position 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit G2=0.25 "Gate position 2 [pu]";
-    parameter OpenIPSL.Types.PerUnit G3=0.5 "Gate position 3 [pu]";
-    parameter OpenIPSL.Types.PerUnit G4=0.75 "Gate position 4 [pu]";
-    parameter OpenIPSL.Types.PerUnit G5=1 "Gate position 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG1=0 "Water flow rate 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG2=0.25 "Water flow rate 2 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG3=0.5 "Water flow rate 3 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG4=0.75 "Water flow rate 4 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG5=1 "Water flow rate 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP1=0 "Water flow rate 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP2=0.2 "Water flow rate 2 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP3=0.23 "Water flow rate 3 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP4=0.4 "Water flow rate 4 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP5=0.6 "Water flow rate 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP6=0.8 "Water flow rate 6 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP7=0.87 "Water flow rate 7 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP8=0.9 "Water flow rate 8 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP9=0.95 "Water flow rate 9 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP10=1 "Water flow rate 10 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech1=0 "Mechanical power 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech2=0 "Water flow rate 2 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech3=0.05 "Water flow rate 3 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech4=0.35 "Water flow rate 4 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech5=0.66 "Water flow rate 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech6=0.82 "Water flow rate 6 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech7=0.85 "Water flow rate 7 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech8=0.86 "Water flow rate 8 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech9=0.88 "Water flow rate 9 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech10=0.9 "Water flow rate 10 [pu]";
+    parameter Types.PerUnit SP_Band=0 "Speed deadband";
+    parameter Types.PerUnit KP=3 "Governor proportional gain";
+    parameter Types.TimeAging KI=0.36 "Governor integral gain";
+    parameter Types.Time KD=1.5 "Governor derivative gain";
+    parameter Types.Time TD=0.1 "Governor derivative controller time constant";
+    parameter Types.Time TP=0.2 "Pilot valve time constant";
+    parameter Types.PerUnit GMAX=1 "Maximum limit for the gate position";
+    parameter Types.PerUnit GMIN=0 "Minimum limit for the gate position";
+    parameter Types.PerUnit DICN=0.05 "PID integral controller limit from field tuning";
+    parameter Types.PerUnit DPV=0 "Change in valve output";
+    parameter Types.Time TDV=0.2 "Distribution valve time constant";
+    parameter Types.PerUnit GTMXOP=0.1 "Maximum gate opening rate [p.u./s]";
+    parameter Types.PerUnit GTMXCL=-0.2 "Maximum gate closing rate [p.u./s]";
+    parameter Types.PerUnit Tg=0.2 "Distribution valve limit";
+    parameter Types.PerUnit G1=0 "Gate position 1 [pu]";
+    parameter Types.PerUnit G2=0.25 "Gate position 2 [pu]";
+    parameter Types.PerUnit G3=0.5 "Gate position 3 [pu]";
+    parameter Types.PerUnit G4=0.75 "Gate position 4 [pu]";
+    parameter Types.PerUnit G5=1 "Gate position 5 [pu]";
+    parameter Types.PerUnit FLWG1=0 "Water flow rate 1 [pu]";
+    parameter Types.PerUnit FLWG2=0.25 "Water flow rate 2 [pu]";
+    parameter Types.PerUnit FLWG3=0.5 "Water flow rate 3 [pu]";
+    parameter Types.PerUnit FLWG4=0.75 "Water flow rate 4 [pu]";
+    parameter Types.PerUnit FLWG5=1 "Water flow rate 5 [pu]";
+    parameter Types.PerUnit FLWP1=0 "Water flow rate 1 [pu]";
+    parameter Types.PerUnit FLWP2=0.2 "Water flow rate 2 [pu]";
+    parameter Types.PerUnit FLWP3=0.23 "Water flow rate 3 [pu]";
+    parameter Types.PerUnit FLWP4=0.4 "Water flow rate 4 [pu]";
+    parameter Types.PerUnit FLWP5=0.6 "Water flow rate 5 [pu]";
+    parameter Types.PerUnit FLWP6=0.8 "Water flow rate 6 [pu]";
+    parameter Types.PerUnit FLWP7=0.87 "Water flow rate 7 [pu]";
+    parameter Types.PerUnit FLWP8=0.9 "Water flow rate 8 [pu]";
+    parameter Types.PerUnit FLWP9=0.95 "Water flow rate 9 [pu]";
+    parameter Types.PerUnit FLWP10=1 "Water flow rate 10 [pu]";
+    parameter Types.PerUnit Pmech1=0 "Mechanical power 1 [pu]";
+    parameter Types.PerUnit Pmech2=0 "Water flow rate 2 [pu]";
+    parameter Types.PerUnit Pmech3=0.05 "Water flow rate 3 [pu]";
+    parameter Types.PerUnit Pmech4=0.35 "Water flow rate 4 [pu]";
+    parameter Types.PerUnit Pmech5=0.66 "Water flow rate 5 [pu]";
+    parameter Types.PerUnit Pmech6=0.82 "Water flow rate 6 [pu]";
+    parameter Types.PerUnit Pmech7=0.85 "Water flow rate 7 [pu]";
+    parameter Types.PerUnit Pmech8=0.86 "Water flow rate 8 [pu]";
+    parameter Types.PerUnit Pmech9=0.88 "Water flow rate 9 [pu]";
+    parameter Types.PerUnit Pmech10=0.9 "Water flow rate 10 [pu]";
 
     Modelica.Blocks.Interfaces.RealInput SPEED
-      annotation (Placement(transformation(extent={{-220,-20},{-180,20}})));
+      annotation (Placement(transformation(extent={{-220,-20},{-180,20}}),
+          iconTransformation(extent={{-140,10},{-100,50}})));
     Modelica.Blocks.Interfaces.RealInput PELEC
-      annotation (Placement(transformation(extent={{-220,-160},{-180,-120}})));
+      annotation (Placement(transformation(extent={{-220,-160},{-180,-120}}),
+          iconTransformation(extent={{-140,-100},{-100,-60}})));
     Modelica.Blocks.Interfaces.RealInput PREF
-      annotation (Placement(transformation(extent={{-220,120},{-180,160}})));
+      annotation (Placement(transformation(extent={{-220,120},{-180,160}}),
+          iconTransformation(extent={{-140,60},{-100,100}})));
     Modelica.Blocks.Logical.Switch switch1
       annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
     OpenIPSL.NonElectrical.Continuous.SimpleLag PE_Transducer(
@@ -126,26 +129,24 @@ package WEHGOV
       y_start=sG)
       annotation (Placement(transformation(extent={{264,-108},{244,-88}})));
     Modelica.Blocks.Interfaces.RealOutput Gate_Position
-      annotation (Placement(transformation(extent={{360,-10},{380,10}})));
+      annotation (Placement(transformation(extent={{360,-10},{380,10}}),
+          iconTransformation(extent={{100,-10},{120,10}})));
 
     Modelica.Blocks.Interfaces.RealInput PMECH0
-      annotation (Placement(transformation(extent={{-220,-100},{-180,-60}})));
+      annotation (Placement(transformation(extent={{-220,-100},{-180,-60}}),
+          iconTransformation(extent={{-140,-50},{-100,-10}})));
   protected
-    parameter OpenIPSL.Types.PerUnit Pe0(fixed=false);
-    parameter OpenIPSL.Types.PerUnit Pmech0(fixed=false);
-    parameter OpenIPSL.Types.PerUnit s00(fixed=false);
-  //  parameter OpenIPSL.Types.PerUnit s01(fixed=false);
-  //  parameter OpenIPSL.Types.PerUnit s02(fixed=false);
-    parameter OpenIPSL.Types.PerUnit f0(fixed=false);
-    parameter OpenIPSL.Types.PerUnit p0(fixed=false);
-    parameter OpenIPSL.Types.PerUnit sG(fixed=false);
+    parameter Types.PerUnit Pe0(fixed=false);
+    parameter Types.PerUnit Pmech0(fixed=false);
+    parameter Types.PerUnit s00(fixed=false);
+    parameter Types.PerUnit f0(fixed=false);
+    parameter Types.PerUnit p0(fixed=false);
+    parameter Types.PerUnit sG(fixed=false);
 
   initial equation
     Pe0 = PELEC;
     Pmech0 = PMECH0;
     s00 = PELEC*R_PERM_PE;
-  //  s01 = PREF - s00;
-  //  s02 = KP*s01;
     p0 = Pmech0;
 
     sG = (if f0 > FLWG4 then ((f0-FLWG4)*(1-G4)/(1-FLWG4) + G4)
@@ -237,53 +238,61 @@ package WEHGOV
             0},{340,-120},{216,-120},{216,-98},{122,-98}}, color={0,0,127}));
     connect(PELEC, PE_Transducer.u)
       annotation (Line(points={{-200,-140},{-122,-140}}, color={0,0,127}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-180,-180},{360,180}}), graphics={Rectangle(extent={{-180,-180},{360,180}},
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),                                                                  graphics={Rectangle(extent={{-100,
+                -100},{100,100}},
               lineColor={28,108,200}),           Text(
-            extent={{-62,58},{236,-68}},
+            extent={{-84,60},{88,-56}},
             textColor={28,108,200},
             textString="Governor")}),
                             Diagram(coordinateSystem(preserveAspectRatio=false,
-            extent={{-180,-180},{360,180}})));
+            extent={{-180,-180},{360,180}})),
+                            Documentation(info="<html>
+<table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
+<td><p>Reference</p></td>
+<td><p>WEHGOV governor and hydraulic actuators (PSS/E Manual)</p></td>
+</tr>
+<tr>
+<td><p>Last update</p></td>
+<td><p>2024-10-05</p></td>
+</tr>
+<tr>
+<td><p>Author</p></td>
+<td><p>Giuseppe Laera, ALSETLab, RPI Rensselaer Polytechnic Institute</p></td>
+</tr>
+<tr>
+<td><p>Contact</p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+</tr>
+</table>
+</html>"));
   end Governor;
 
-  model Turbine
-    parameter OpenIPSL.Types.ApparentPower S_b=100e6 "System base";
-    parameter OpenIPSL.Types.ApparentPower M_b=100e6 "System base";
-    parameter OpenIPSL.Types.PerUnit G1=0 "Gate position 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit G2=0.25 "Gate position 2 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit G3=0.5 "Gate position 3 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit G4=0.75 "Gate position 4 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit G5=1 "Gate position 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG1=0 "Water flow rate 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWG2=0.25 "Water flow rate 2 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWG3=0.5 "Water flow rate 3 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWG4=0.75 "Water flow rate 4 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWG5=1 "Water flow rate 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit TW=0.2 "Water time constant [s]";
-    parameter OpenIPSL.Types.PerUnit FLWP1=0 "Water flow rate 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP2=0.2 "Water flow rate 2 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP3=0.23 "Water flow rate 3 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP4=0.4 "Water flow rate 4 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP5=0.6 "Water flow rate 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit FLWP6=0.8 "Water flow rate 6 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWP7=0.87 "Water flow rate 7 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWP8=0.9 "Water flow rate 8 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWP9=0.95 "Water flow rate 9 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit FLWP10=1 "Water flow rate 10 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech1=0 "Mechanical power 1 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech2=0 "Water flow rate 2 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech3=0.05 "Water flow rate 3 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech4=0.35 "Water flow rate 4 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech5=0.66 "Water flow rate 5 [pu]";
-    parameter OpenIPSL.Types.PerUnit Pmech6=0.82 "Water flow rate 6 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit Pmech7=0.85 "Water flow rate 7 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit Pmech8=0.86 "Water flow rate 8 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit Pmech9=0.88 "Water flow rate 9 [pu]";
-  //   parameter OpenIPSL.Types.PerUnit Pmech10=0.9 "Water flow rate 10 [pu]";
-    parameter OpenIPSL.Types.PerUnit D_TURB=0 "Turbine damping";
+  model Turbine "WEHGOV turbine dynamics"
+    parameter Types.ApparentPower S_b=100e6 "System base";
+    parameter Types.ApparentPower M_b=100e6 "System base";
+    parameter Types.PerUnit G1=0 "Gate position 1 [pu]";
+    parameter Types.PerUnit G2=0.25 "Gate position 2 [pu]";
+    parameter Types.PerUnit FLWG1=0 "Water flow rate 1 [pu]";
+    parameter Types.PerUnit FLWG2=0.25 "Water flow rate 2 [pu]";
+    parameter Types.PerUnit TW=0.2 "Water time constant [s]";
+    parameter Types.PerUnit FLWP1=0 "Water flow rate 1 [pu]";
+    parameter Types.PerUnit FLWP2=0.2 "Water flow rate 2 [pu]";
+    parameter Types.PerUnit FLWP3=0.23 "Water flow rate 3 [pu]";
+    parameter Types.PerUnit FLWP4=0.4 "Water flow rate 4 [pu]";
+    parameter Types.PerUnit FLWP5=0.6 "Water flow rate 5 [pu]";
+    parameter Types.PerUnit FLWP6=0.8 "Water flow rate 6 [pu]";
+    parameter Types.PerUnit Pmech1=0 "Mechanical power 1 [pu]";
+    parameter Types.PerUnit Pmech2=0 "Water flow rate 2 [pu]";
+    parameter Types.PerUnit Pmech3=0.05 "Water flow rate 3 [pu]";
+    parameter Types.PerUnit Pmech4=0.35 "Water flow rate 4 [pu]";
+    parameter Types.PerUnit Pmech5=0.66 "Water flow rate 5 [pu]";
+    parameter Types.PerUnit Pmech6=0.82 "Water flow rate 6 [pu]";
+    parameter Types.PerUnit D_TURB=0 "Turbine damping";
 
     Modelica.Blocks.Interfaces.RealInput Gate_Position( start=sG)
-      annotation (Placement(transformation(extent={{-140,50},{-100,90}})));
+      annotation (Placement(transformation(extent={{-140,50},{-100,90}}),
+          iconTransformation(extent={{-140,60},{-100,100}})));
     Modelica.Blocks.Tables.CombiTable1Ds Lookup_Gate_Flow(table=[G1,FLWG1; G2,
           FLWG2], smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
       annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
@@ -314,12 +323,16 @@ package WEHGOV
     Modelica.Blocks.Math.Add add1(k1=-1)
       annotation (Placement(transformation(extent={{156,-72},{176,-52}})));
     Modelica.Blocks.Interfaces.RealOutput PMECH
-      annotation (Placement(transformation(extent={{200,-10},{220,10}})));
+      annotation (Placement(transformation(extent={{200,-10},{220,10}}),
+          iconTransformation(extent={{100,-10},{120,10}})));
     Modelica.Blocks.Interfaces.RealInput SPEED annotation (Placement(
           transformation(
           extent={{-20,-20},{20,20}},
           rotation=270,
-          origin={150,120})));
+          origin={150,120}), iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={80,120})));
     Modelica.Blocks.Math.Gain gain1(k=D_TURB) annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
@@ -334,15 +347,16 @@ package WEHGOV
     Modelica.Blocks.Interfaces.RealInput PMECH0
       annotation (Placement(transformation(extent={{-140,-100},{-100,-60}})));
   protected
-    parameter OpenIPSL.Types.PerUnit Pmech0(fixed = false);
-    parameter OpenIPSL.Types.PerUnit f0(fixed=false);
-    parameter OpenIPSL.Types.PerUnit p0(fixed=false);
-    parameter OpenIPSL.Types.PerUnit sG(fixed=false);
+    parameter Types.PerUnit Pmech0(fixed = false);
+    parameter Types.PerUnit f0(fixed=false);
+    parameter Types.PerUnit p0(fixed=false);
+    parameter Types.PerUnit sG(fixed=false);
 
   initial equation
     Pmech0 = PMECH0;
     p0 = Pmech0;
 
+    // Equations with 5 points
   //   sG = (if f0 > FLWG4 then ((f0-FLWG4)*(1-G4)/(1-FLWG4) + G4)
   //  elseif
   //        f0 <= FLWG4 and f0 > FLWG3 then ((f0-FLWG3)*(G4-G3)/(FLWG4-FLWG3) + G3)
@@ -353,6 +367,7 @@ package WEHGOV
 
     sG = (f0-FLWG1)*(G2-G1)/(FLWG2-FLWG1) + G1;
 
+    // Equations with 10 points
   //   f0 = (if p0 > Pmech9 then ((p0-Pmech9)*(1-FLWP9)/(Pmech10-Pmech9) + FLWP9)
   //  elseif
   //        p0 <= Pmech9 and p0 > Pmech8 then ((p0-Pmech8)*(FLWP9-FLWP8)/(Pmech9-Pmech8) + FLWP8)
@@ -417,13 +432,33 @@ package WEHGOV
       annotation (Line(points={{41,-60},{78,-60}}, color={0,0,127}));
     connect(division.u1, Lookup_Flow_Pmech.u) annotation (Line(points={{-24,62},{-24,
             70},{60,70},{60,-60},{78,-60}}, color={0,0,127}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-              -100,-100},{200,100}}), graphics={Rectangle(extent={{-100,100},{200,
-                -100}}, lineColor={28,108,200}), Text(
-            extent={{-34,32},{140,-24}},
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),      graphics={Rectangle(extent={{-100,100},{
+                100,-100}},
+                        lineColor={28,108,200}), Text(
+            extent={{-84,32},{90,-24}},
             textColor={28,108,200},
             textString="Turbine")}),   Diagram(coordinateSystem(
-            preserveAspectRatio=false, extent={{-100,-100},{200,100}})));
+            preserveAspectRatio=false, extent={{-100,-100},{200,100}})),
+                                      Documentation(info="<html>
+<table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
+<td><p>Reference</p></td>
+<td><p>WEHGOV turbine dynamics (PSS/E Manual)</p></td>
+</tr>
+<tr>
+<td><p>Last update</p></td>
+<td><p>2024-10-05</p></td>
+</tr>
+<tr>
+<td><p>Author</p></td>
+<td><p>Giuseppe Laera, ALSETLab, RPI Rensselaer Polytechnic Institute</p></td>
+</tr>
+<tr>
+<td><p>Contact</p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+</tr>
+</table>
+</html>"));
   end Turbine;
-  annotation ();
+  annotation();
 end WEHGOV;

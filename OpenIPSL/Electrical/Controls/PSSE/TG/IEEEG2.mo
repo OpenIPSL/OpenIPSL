@@ -1,7 +1,6 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
 model IEEEG2 "IEEE Type 2 Speed-Governing Model"
   extends OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor;
-<<<<<<< Updated upstream
   parameter Real K=20 "Permanent governor gain K=1/R (pu on generator MVA base)";
   parameter Types.Time T_1=50 "Compensator time constant (sec)";
   parameter Types.Time T_2=5 "Compensator time constant (sec)";
@@ -9,16 +8,6 @@ model IEEEG2 "IEEE Type 2 Speed-Governing Model"
   parameter Types.Time T_4=1.5 "Water starting time (sec)";
   parameter Types.PerUnit P_MAX=1.043 "Upper power limit (pu on machine MVA rating)";
   parameter Types.PerUnit P_MIN=0.09 "Lower power limit (pu on machine MVA rating)";
-=======
-  import      Modelica.Units.SI;
-  parameter Real K=20 "Permanent governor gain K=1/R (pu on generator MVA base)";
-  parameter SI.Time T_1=50 "Compensator time constant (sec)";
-  parameter SI.Time T_2=5 "Compensator time constant (sec)";
-  parameter SI.Time T_3=1 "Governor time constant (sec)";
-  parameter SI.Time T_4=1.5 "Water starting time (sec)";
-  parameter SI.PerUnit P_MAX=1.043 "Upper power limit (pu on machine MVA rating)";
-  parameter SI.PerUnit P_MIN=0.09 "Lower power limit (pu on machine MVA rating)";
->>>>>>> Stashed changes
   OpenIPSL.NonElectrical.Continuous.LeadLag leadLag(
     K=K,
     T1=T_2,
@@ -41,11 +30,7 @@ model IEEEG2 "IEEE Type 2 Speed-Governing Model"
     y_start=0)
     annotation (Placement(transformation(extent={{-94,-148},{-40,-94}})));
 protected
-<<<<<<< Updated upstream
   parameter Types.PerUnit p0(fixed=false);
-=======
-  parameter SI.PerUnit p0(fixed=false);
->>>>>>> Stashed changes
 initial algorithm
   p0 := PMECH0;
 equation
@@ -75,20 +60,6 @@ equation
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<<<<<<< Updated upstream
-<td><p>2023-10</p></td>
-</tr>
-<tr>
-<td><p>Author</p></td>
-<td><p>ALSETLab, Rensselaer Polytechnic Institute</p></td>
-</tr>
-<tr>
-<td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
-</tr>
-</table>
-</html>"));
-=======
 <td><p>2020-08-11</p></td>
 </tr>
 <tr>
@@ -102,5 +73,4 @@ equation
 </table>
 </html>"),
     conversion(noneFromVersion=""));
->>>>>>> Stashed changes
 end IEEEG2;

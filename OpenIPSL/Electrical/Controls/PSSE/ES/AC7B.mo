@@ -1,40 +1,40 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model AC7B
+model AC7B "IEEE 421.5 2016 AC7B Excitation System"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   import OpenIPSL.NonElectrical.Functions.SE;
-  parameter Real T_R "Filter time constant (s)";
-  parameter Real K_PR "Voltage regulator proportional gain (pu)";
-  parameter Real K_IR "Voltage regulator integral gain (pu)";
-  parameter Real K_DR "Voltage regulator derivative gain (pu)";
-  parameter Real T_DR "Lag time constant (s)";
-  parameter Real V_RMIN "Minimum voltage regulator output (pu)";
-  parameter Real V_RMAX "Maximum voltage regulator output (pu)";
-  parameter Real K_PA "Voltage regulator proportional gain (pu)";
-  parameter Real K_IA "Voltage regulator integral gain(pu)";
-  parameter Real VA_MIN "Minimum voltage regulator output (pu)";
-  parameter Real VA_MAX "Maximum voltage regulator output (pu)";
-  parameter Real K_P "Potential circuit gain coefficient (pu)";
-  parameter Real K_L "Exciter field voltage lower limit parameter (pu)";
-  parameter Real T_E "Exciter time constant, integration rate associated with exciter
+  parameter Types.Time T_R "Filter time constant (s)";
+  parameter Types.PerUnit K_PR "Voltage regulator proportional gain (pu)";
+  parameter Types.PerUnit K_IR "Voltage regulator integral gain (pu)";
+  parameter Types.PerUnit K_DR "Voltage regulator derivative gain (pu)";
+  parameter Types.Time T_DR "Lag time constant (s)";
+  parameter Types.PerUnit V_RMIN "Minimum voltage regulator output (pu)";
+  parameter Types.PerUnit V_RMAX "Maximum voltage regulator output (pu)";
+  parameter Types.PerUnit K_PA "Voltage regulator proportional gain (pu)";
+  parameter Types.PerUnit K_IA "Voltage regulator integral gain(pu)";
+  parameter Types.PerUnit VA_MIN "Minimum voltage regulator output (pu)";
+  parameter Types.PerUnit VA_MAX "Maximum voltage regulator output (pu)";
+  parameter Types.PerUnit K_P "Potential circuit gain coefficient (pu)";
+  parameter Types.PerUnit K_L "Exciter field voltage lower limit parameter (pu)";
+  parameter Types.Time T_E "Exciter time constant, integration rate associated with exciter
   control (s)";
-  parameter Real K_C "Rectifier loading factor proportional to commutating reactance(pu)";
-  parameter Real K_D "Demagnetizing factor, a function of exciter alternator
+  parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance(pu)";
+  parameter Types.PerUnit K_D "Demagnetizing factor, a function of exciter alternator
 reactances(pu)";
-  parameter Real K_E "Exciter constant related to self-excited field(pu)";
-  parameter Real K_F1 "Excitation control system stabilizer gain(pu)";
-  parameter Real K_F2 "Excitation control system stabilizer gain(pu)";
-  parameter Real K_F3 "Excitation control system stabilizer gain(pu)";
-  parameter Real T_F3 "Excitation control system stabilizer time constant (s)";
-  parameter Real VE_MIN "Minimum exciter voltage output(pu)";
-  parameter Real VFEMAX "Exciter field current limit reference(pu)";
-  parameter Real E_1 "Exciter alternator output voltages back of commutating
+  parameter Types.PerUnit K_E "Exciter constant related to self-excited field(pu)";
+  parameter Types.PerUnit K_F1 "Excitation control system stabilizer gain(pu)";
+  parameter Types.PerUnit K_F2 "Excitation control system stabilizer gain(pu)";
+  parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain(pu)";
+  parameter Types.Time T_F3 "Excitation control system stabilizer time constant (s)";
+  parameter Types.PerUnit VE_MIN "Minimum exciter voltage output(pu)";
+  parameter Types.PerUnit VFEMAX "Exciter field current limit reference(pu)";
+  parameter Types.PerUnit E_1 "Exciter alternator output voltages back of commutating
   reactance at which saturation is defined (pu)";
-  parameter Real S_EE_1 "Exciter saturation function value at the corresponding exciter 
+  parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter 
   voltage, E1, back of commutating reactance (pu)";
-  parameter Real E_2 "Exciter alternator output voltages back of commutating
+  parameter Types.PerUnit E_2 "Exciter alternator output voltages back of commutating
   reactance at which saturation is defined (pu)";
-  parameter Real S_EE_2 "Exciter saturation function value at the corresponding exciter
+  parameter Types.PerUnit S_EE_2 "Exciter saturation function value at the corresponding exciter
     voltage, E2, back of commutating reactance(pu)";
 
   Modelica.Blocks.Continuous.Derivative imDerivativeLag(
@@ -120,16 +120,16 @@ reactances(pu)";
   Modelica.Blocks.Math.Add add3(k2=-1)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-76,102})));
-  NonElectrical.Continuous.PID_No_Windup_AC7B pID_No_Windup(
+        origin={-72,70})));
+  NonElectrical.Continuous.PID_No_Windup      pID_No_Windup(
     K_IR=K_IR,
     K_DR=K_DR,
     T_DR=T_DR,
     V_RMAX=V_RMAX,
     V_RMIN=V_RMIN,
     K_PR=K_PR,
-    VR0=VR0)
-    annotation (Placement(transformation(extent={{-36,110},{-14,126}})));
+    y_start_int=y_start_int_PID)
+    annotation (Placement(transformation(extent={{-56,92},{-10,130}})));
   Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -153,8 +153,8 @@ reactances(pu)";
     K_I=K_IA,
     V_RMAX=VA_MAX,
     V_RMIN=VA_MIN,
-    y_start=VA0)
-    annotation (Placement(transformation(extent={{78,100},{100,120}})));
+    y_start_int=y_start_int_PI)
+    annotation (Placement(transformation(extent={{66,88},{104,120}})));
 protected
 parameter Real VA0(fixed=false);
 parameter Real VR0(fixed=false);
@@ -164,6 +164,8 @@ parameter Real VE0(fixed=false);
 parameter Real VT0(fixed=false);
 parameter Real Efd0(fixed=false);
 parameter Real max_lim0(fixed=false);
+parameter Real y_start_int_PID(fixed=false);
+parameter Real y_start_int_PI(fixed=false);
 
 initial equation
   // Finding initial value of excitation voltage, VE0, via going through conditions of FEX function
@@ -184,6 +186,8 @@ initial equation
   VT0 = VT;
   Ifd0 = XADIFD;
   max_lim0 = (VFEMAX - K_D*Ifd0)/(K_E + SE(VE0,S_EE_1,S_EE_2,E_1,E_2));
+  y_start_int_PID = VR0;
+  y_start_int_PI = VA0;
 
 equation
   connect(DiffV.u2, TransducerDelay.y) annotation (Line(points={{-122,-6},{-134,
@@ -229,13 +233,11 @@ equation
           -78},{-128,46},{-116,46}}, color={0,0,127}));
   connect(DiffV.y, add3_2.u3) annotation (Line(points={{-99,0},{-94,0},{-94,22},
           {-124,22},{-124,38},{-116,38}}, color={0,0,127}));
-  connect(add3_2.y, add3.u1) annotation (Line(points={{-93,46},{-82,46},{-82,90}},
+  connect(add3_2.y, add3.u1) annotation (Line(points={{-93,46},{-78,46},{-78,58}},
                      color={0,0,127}));
   connect(imDerivativeLag.y, add3.u2) annotation (Line(points={{-75,-104},{-82,-104},
-          {-82,10},{-70,10},{-70,90}},
+          {-82,10},{-66,10},{-66,58}},
                               color={0,0,127}));
-  connect(add3.y, pID_No_Windup.u)
-    annotation (Line(points={{-76,113},{-76,120},{-38,120}}, color={0,0,127}));
   connect(VT, gain4.u) annotation (Line(points={{-111,79},{-96,79},{-96,140},{104,
           140}}, color={0,0,127}));
   connect(gain.u, rotatingExciterWithDemagnetizationVarLim.V_FE) annotation (
@@ -243,7 +245,7 @@ equation
           -44.375}}, color={0,0,127}));
   connect(product.y, variableLimiter.u) annotation (Line(points={{195,110},{198,
           110},{198,64},{132,64}}, color={0,0,127}));
-  connect(pID_No_Windup.y, add1.u1) annotation (Line(points={{-13,120},{6,120},
+  connect(pID_No_Windup.y, add1.u1) annotation (Line(points={{-7.7,111},{6,111},
           {6,116},{18,116}}, color={0,0,127}));
   connect(imDerivativeLag.u, gain1.u) annotation (Line(points={{-52,-104},{50,-104},
           {50,-60},{16,-60},{16,-56}},                      color={0,0,127}));
@@ -271,12 +273,15 @@ equation
   connect(variableLimiter.y, rotatingExciterWithDemagnetizationVarLim.I_C)
     annotation (Line(points={{109,64},{68,64},{68,60},{32,60},{32,-35},{50.125,
           -35}}, color={0,0,127}));
-  connect(pI_No_Windup.y, product.u2) annotation (Line(points={{101,110},{164,
-          110},{164,104},{172,104}}, color={0,0,127}));
+  connect(pI_No_Windup.y, product.u2) annotation (Line(points={{105.9,104},{172,
+          104}},                     color={0,0,127}));
   connect(add1.y, pI_No_Windup.u)
-    annotation (Line(points={{41,110},{78,110}}, color={0,0,127}));
+    annotation (Line(points={{41,110},{46,110},{46,104},{62.2,104}},
+                                                 color={0,0,127}));
+  connect(add3.y, pID_No_Windup.u) annotation (Line(points={{-72,81},{-72,111},{
+          -60.6,111}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
-      Icon(coordinateSystem(extent={{-200,-200},{200,160}}), graphics={
+      Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
                              Text(
           extent={{-96,-60},{-26,-80}},
           lineColor={28,108,200},
@@ -287,8 +292,27 @@ equation
           lineColor={28,108,200},
           textString="ETERM"),
         Text(
-          extent={{-16,80},{86,46}},
+          extent={{-74,140},{70,98}},
           textColor={28,108,200},
           textString="AC7B")}),
+        Documentation(info="<html>
+<table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
+<td><p>Reference</p></td>
+<td><p>IEEE 421.5 2016 AC7B Excitation System (PSS/E Manual)</p></td>
+</tr>
+<tr>
+<td><p>Last update</p></td>
+<td><p>2024-10-05</p></td>
+</tr>
+<tr>
+<td><p>Author</p></td>
+<td><p>Giuseppe Laera, ALSETLab, RPI Rensselaer Polytechnic Institute</p></td>
+</tr>
+<tr>
+<td><p>Contact</p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+</tr>
+</table>
+</html>"),
     conversion(noneFromVersion=""));
 end AC7B;
