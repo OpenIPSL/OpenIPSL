@@ -69,9 +69,5 @@ experiment(
       StopTime=10,
       Interval=0.0001,
       Tolerance=1e-06,
-      __Dymola_fixedstepsize=0.0001,
-      __Dymola_Algorithm="Dassl"),
-    Diagram(coordinateSystem(extent={{-100,-100},{100,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
-    conversion(noneFromVersion=""));
+      __Dymola_fixedstepsize=0.0001));
 end IEEEVC;

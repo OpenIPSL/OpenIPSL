@@ -1,7 +1,7 @@
 within OpenIPSL.Tests.Machines.PSSE;
 model GENTPJ
   "SMIB system to test functionality of WECC Type J generator: round rotor with saturation on both axes"
-  extends OpenIPSL.Tests.BaseClasses.SMIB (gENCLS(P_0=10017030, Q_0=8005052), GEN1(angle_0=0.070619983433093), SysData(
+  extends OpenIPSL.Tests.BaseClasses.SMIB( gENCLS(P_0=10017030, Q_0=8005052), GEN1(angle_0=0.070619983433093), SysData(
         fn=60), FAULT(v_0=0.995985, angle_0=-0.0050086621115692));
   Electrical.Machines.PSSE.GENTPJ gENTPJ(
     Tpd0=6.7,
@@ -55,17 +55,5 @@ equation
           {-100,-30},{-42,-30},{-42,-10},{-46,-10}}, color={0,0,127}));
   connect(gENTPJ.p,GEN1. p)
     annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
-  annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Ellipse(lineColor = {75,138,73},
-                fillColor={255,255,255},
-                fillPattern = FillPattern.Solid,
-                extent={{-100,-100},{100,100}}),
-        Polygon(lineColor = {0,0,255},
-                fillColor = {75,138,73},
-                pattern = LinePattern.None,
-                fillPattern = FillPattern.Solid,
-                points={{-36,60},{64,0},{-36,-60},{-36,60}})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
+  annotation (experiment(StopTime=10));
 end GENTPJ;

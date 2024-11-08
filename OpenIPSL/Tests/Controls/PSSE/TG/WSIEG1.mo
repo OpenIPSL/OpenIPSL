@@ -43,9 +43,7 @@ equation
           {-40,12.3},{-40,54.8},{-56.8,54.8}}, color={0,0,127}));
   connect(gENROU.PMECH0, wSIEG1.PMECH0) annotation (Line(points={{-48.2,8.5},{
           -44,8.5},{-44,37.9},{-56.8,37.9}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,100}})),
+  annotation (
     experiment(
       StopTime=10,
       Interval=0.0001,

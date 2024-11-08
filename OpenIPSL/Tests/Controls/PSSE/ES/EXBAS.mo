@@ -74,10 +74,7 @@ equation
           -9},{-46,-52},{-58,-52},{-58,-49}}, color={0,0,127}));
   connect(eXBAS.VOTHSG, const.y) annotation (Line(points={{-77,-34},{-88,-34},{
           -88,-58},{-66,-58},{-66,-63}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
+  annotation (
     experiment(
       StopTime=10,
       Interval=0.001,

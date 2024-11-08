@@ -71,6 +71,5 @@ equation
 experiment(
       StopTime=10,
       Interval=0.001,
-      Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06));
 end ESURRY;

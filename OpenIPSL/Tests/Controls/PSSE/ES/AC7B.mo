@@ -76,15 +76,10 @@ equation
           {-46,-82},{-73,-82},{-73,-65.5}}, color={0,0,127}));
   connect(aC7B.EFD, gENROU.EFD) annotation (Line(points={{-89.5,-49},{-98,-49},
           {-98,-9.6},{-91,-9.6}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}})),                                        Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
+  annotation (
     experiment(
       StopTime=10,
       Interval=0.0001,
       Tolerance=1e-06,
-      __Dymola_fixedstepsize=0.0001,
-      __Dymola_Algorithm="Dassl"),
-    conversion(noneFromVersion=""));
+      __Dymola_fixedstepsize=0.0001));
 end AC7B;

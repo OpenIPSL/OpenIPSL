@@ -37,12 +37,9 @@ equation
           8},{-52,36.4},{-64.2,36.4}}, color={0,0,127}));
   connect(iEEEG2.PMECH, gENSAL.PMECH) annotation (Line(points={{-85.1,43},{-98,
           43},{-98,9.6},{-91,9.6}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}})),                                        Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
+  annotation (
     experiment(
       StopTime=10,
       Interval=0.0001,
-      Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06));
 end IEEEG2;

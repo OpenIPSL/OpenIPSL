@@ -66,13 +66,8 @@ equation
           {-52,-60},{-46,-60},{-46,-4.8},{-56.5,-4.8}}, color={0,0,127}));
   connect(gENROU.EFD0, dC4B.EFD0) annotation (Line(points={{-56.5,-8},{-42,-8},
           {-42,-56.2},{-58.7,-56.2}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}})),                                        Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,100}})),
-    experiment(
+  annotation (    experiment(
       StopTime=10,
       Interval=0.0001,
-      Tolerance=1e-05,
-      __Dymola_Algorithm="Dassl"),
-    conversion(noneFromVersion=""));
+      Tolerance=1e-05));
 end DC4B;

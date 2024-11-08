@@ -60,9 +60,7 @@ equation
 experiment(
       StopTime=10,
       Interval=0.001,
-      Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"),
-                        Documentation(info="<html>
+      Tolerance=1e-06), Documentation(info="<html>
 <p>
 Simulate for 10 seconds.
 </p>

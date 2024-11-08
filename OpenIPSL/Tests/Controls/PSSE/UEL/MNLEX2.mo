@@ -79,15 +79,11 @@ equation
           0,127}));
   connect(eXAC1_1.VOEL, const.y) annotation (Line(points={{-63,-53.3},{-63,
           -62},{-26.6,-62}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
+  annotation (
     experiment(
       StopTime=10,
       Interval=0.001,
       Tolerance=1e-06,
       __Dymola_fixedstepsize=0.001,
-      __Dymola_Algorithm="Rkfix2"),
-    conversion(noneFromVersion=""));
+      __Dymola_Algorithm="Rkfix2"));
 end MNLEX2;

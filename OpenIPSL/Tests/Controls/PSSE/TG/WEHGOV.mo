@@ -50,12 +50,8 @@ equation
   connect(gENSAL.PMECH0, wEHGOV.PMECH0) annotation (Line(points={{-50.2,8.5},{
           -46,8.5},{-46,8},{-42,8},{-42,47},{-60.8,47}},
                                          color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,100}})),
-    experiment(
+  annotation (experiment(
       StopTime=10,
       Interval=0.001,
-      Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06));
 end WEHGOV;
