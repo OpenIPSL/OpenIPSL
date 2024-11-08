@@ -14,10 +14,10 @@ model WPIDHY "Woodward PID Hydro (WPIDHY) Governor [PSSE-MODELS]"
     "Governor high frequency cutoff time constant";
   parameter Types.Time T_W=2.3 "Water inertia time constant, sec";
   parameter Types.Time T_B=0.1 "Gate servo time constant";
-  parameter Types.PerUnit VELMX=0.1
-    "Max gate opening velocity, pu/sec";
-  parameter Types.PerUnit VELMN=-0.1320
-    "Min gate opening velocity, pu/sec";
+  parameter Types.TimeAging VELMX=0.1
+    "Max gate opening velocity";
+  parameter Types.TimeAging VELMN=-0.1320
+    "Min gate opening velocity";
   parameter Types.PerUnit GATMX=1
     "Maximum gate velocity, pu of mwcap";
   parameter Types.PerUnit GATMN=0
@@ -35,15 +35,15 @@ model WPIDHY "Woodward PID Hydro (WPIDHY) Governor [PSSE-MODELS]"
   parameter Types.PerUnit P2=0.75 "Power at gate opening G2, pu";
   parameter Types.PerUnit P3=1 "Power at full opened gate, pu";
   Modelica.Blocks.Interfaces.RealInput SPEED
-    "Machine speed deviation from nominal (pu)"
+    "Machine speed deviation from nominal [pu]"
     annotation (Placement(transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}), iconTransformation(extent={{-100,20},
             {-60,60}})));
   Modelica.Blocks.Interfaces.RealInput PELEC
-    "Machine electrical power (pu)"
+    "Machine electrical power [pu]"
     annotation (Placement(transformation(origin={-120,-60},    extent={{-20,-20},
             {20,20}}),                                                                            iconTransformation(extent={{-100,
             -80},{-60,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput PMECH "Turbine mechanical power (pu)" annotation (
+  Modelica.Blocks.Interfaces.RealOutput PMECH "Turbine mechanical power [pu]" annotation (
     Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
   Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{-76,-64},{-56,-44}})));
