@@ -4,38 +4,38 @@ model AC7B "AC7B Excitation System [IEEE2016]"
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   import OpenIPSL.NonElectrical.Functions.SE;
   parameter Types.Time T_R "Filter time constant (s)";
-  parameter Types.PerUnit K_PR "Voltage regulator proportional gain (pu)";
-  parameter Types.PerUnit K_IR "Voltage regulator integral gain (pu)";
-  parameter Types.PerUnit K_DR "Voltage regulator derivative gain (pu)";
+  parameter Types.PerUnit K_PR "Voltage regulator proportional gain";
+  parameter Types.PerUnit K_IR "Voltage regulator integral gain";
+  parameter Types.PerUnit K_DR "Voltage regulator derivative gain";
   parameter Types.Time T_DR "Lag time constant (s)";
-  parameter Types.PerUnit V_RMIN "Minimum voltage regulator output (pu)";
-  parameter Types.PerUnit V_RMAX "Maximum voltage regulator output (pu)";
-  parameter Types.PerUnit K_PA "Voltage regulator proportional gain (pu)";
-  parameter Types.PerUnit K_IA "Voltage regulator integral gain(pu)";
-  parameter Types.PerUnit VA_MIN "Minimum voltage regulator output (pu)";
-  parameter Types.PerUnit VA_MAX "Maximum voltage regulator output (pu)";
-  parameter Types.PerUnit K_P "Potential circuit gain coefficient (pu)";
-  parameter Types.PerUnit K_L "Exciter field voltage lower limit parameter (pu)";
+  parameter Types.PerUnit V_RMIN "Minimum voltage regulator output";
+  parameter Types.PerUnit V_RMAX "Maximum voltage regulator output";
+  parameter Types.PerUnit K_PA "Voltage regulator proportional gain";
+  parameter Types.PerUnit K_IA "Voltage regulator integral gain";
+  parameter Types.PerUnit VA_MIN "Minimum voltage regulator output";
+  parameter Types.PerUnit VA_MAX "Maximum voltage regulator output";
+  parameter Types.PerUnit K_P "Potential circuit gain coefficient";
+  parameter Types.PerUnit K_L "Exciter field voltage lower limit parameter";
   parameter Types.Time T_E "Exciter time constant, integration rate associated with exciter
   control (s)";
-  parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance(pu)";
+  parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance";
   parameter Types.PerUnit K_D "Demagnetizing factor, a function of exciter alternator
-reactances(pu)";
-  parameter Types.PerUnit K_E "Exciter constant related to self-excited field(pu)";
-  parameter Types.PerUnit K_F1 "Excitation control system stabilizer gain(pu)";
-  parameter Types.PerUnit K_F2 "Excitation control system stabilizer gain(pu)";
-  parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain(pu)";
+reactances";
+  parameter Types.PerUnit K_E "Exciter constant related to self-excited field";
+  parameter Types.PerUnit K_F1 "Excitation control system stabilizer gain";
+  parameter Types.PerUnit K_F2 "Excitation control system stabilizer gain";
+  parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain";
   parameter Types.Time T_F3 "Excitation control system stabilizer time constant (s)";
-  parameter Types.PerUnit VE_MIN "Minimum exciter voltage output(pu)";
-  parameter Types.PerUnit VFEMAX "Exciter field current limit reference(pu)";
+  parameter Types.PerUnit VE_MIN "Minimum exciter voltage output";
+  parameter Types.PerUnit VFEMAX "Exciter field current limit reference";
   parameter Types.PerUnit E_1 "Exciter alternator output voltages back of commutating
-  reactance at which saturation is defined (pu)";
-  parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter 
-  voltage, E1, back of commutating reactance (pu)";
+  reactance at which saturation is defined";
+  parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter
+  voltage, E1, back of commutating reactance";
   parameter Types.PerUnit E_2 "Exciter alternator output voltages back of commutating
-  reactance at which saturation is defined (pu)";
+  reactance at which saturation is defined";
   parameter Types.PerUnit S_EE_2 "Exciter saturation function value at the corresponding exciter
-    voltage, E2, back of commutating reactance(pu)";
+    voltage, E2, back of commutating reactance";
 
   Modelica.Blocks.Continuous.Derivative imDerivativeLag(
     k=K_F3,
@@ -285,7 +285,7 @@ equation
           extent={{-96,-60},{-26,-80}},
           lineColor={28,108,200},
           textString="
-          
+
           "),                 Text(
           extent={{-104,90},{-22,70}},
           lineColor={28,108,200},

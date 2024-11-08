@@ -1,12 +1,12 @@
 within OpenIPSL.NonElectrical.Continuous;
 model PID_No_Windup
   extends Modelica.Blocks.Interfaces.SISO;
-  parameter Types.PerUnit K_PR "Voltage regulator proportional gain (pu)";
-  parameter Types.PerUnit K_IR "Voltage regulator integral gain (pu)";
-  parameter Types.PerUnit K_DR "Voltage regulator derivative gain (pu)";
+  parameter Types.PerUnit K_PR "Voltage regulator proportional gain";
+  parameter Types.PerUnit K_IR "Voltage regulator integral gain";
+  parameter Types.PerUnit K_DR "Voltage regulator derivative gain";
   parameter Types.Time T_DR "Voltage regulator derivative channel time constant (sec)";
-  parameter Types.PerUnit V_RMAX "Maximum regulator output (pu)";
-  parameter Types.PerUnit V_RMIN "Minimum regulator output (pu)";
+  parameter Types.PerUnit V_RMAX "Maximum regulator output";
+  parameter Types.PerUnit V_RMIN "Minimum regulator output";
   parameter Real y_start_int;
   Modelica.Blocks.Continuous.Integrator    integral(
     k=K_IR,

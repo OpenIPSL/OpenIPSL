@@ -1,10 +1,10 @@
 within OpenIPSL.NonElectrical.Continuous;
 model PI_No_Windup "PI controller with no wind-up"
   extends Modelica.Blocks.Interfaces.SISO;
-  parameter Types.PerUnit K_P "Voltage regulator proportional gain (pu)";
-  parameter Types.PerUnit K_I "Voltage regulator integral gain (pu)";
-  parameter Types.PerUnit V_RMAX "Maximum regulator output (pu)";
-  parameter Types.PerUnit V_RMIN "Minimum regulator output (pu)";
+  parameter Types.PerUnit K_P "Voltage regulator proportional gain";
+  parameter Types.PerUnit K_I "Voltage regulator integral gain";
+  parameter Types.PerUnit V_RMAX "Maximum regulator output";
+  parameter Types.PerUnit V_RMIN "Minimum regulator output";
   parameter Real y_start_int;
   Modelica.Blocks.Continuous.Integrator    integral(
     k=K_I,

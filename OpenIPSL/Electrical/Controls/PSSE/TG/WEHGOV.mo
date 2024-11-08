@@ -23,23 +23,23 @@ model WEHGOV "Woodward Electric Hydro Governor Model [PSSE-MODELS]"
   parameter Types.PerUnit Tg=0.2 "Distribution valve limit";
 
   //Turbine Parameters
-  parameter Types.PerUnit G1=0 "Gate position 1 [pu]";
-  parameter Types.PerUnit G2=0.25 "Gate position 2 [pu]";
-  parameter Types.PerUnit FLWG1=0 "Water flow rate 1 [pu]";
-  parameter Types.PerUnit FLWG2=0.25 "Water flow rate 2 [pu]";
+  parameter Types.PerUnit G1=0 "Gate position 1";
+  parameter Types.PerUnit G2=0.25 "Gate position 2";
+  parameter Types.PerUnit FLWG1=0 "Water flow rate 1";
+  parameter Types.PerUnit FLWG2=0.25 "Water flow rate 2";
   parameter Types.PerUnit TW=0.2 "Water time constant [s]";
-  parameter Types.PerUnit FLWP1=0 "Water flow rate 1 [pu]";
-  parameter Types.PerUnit FLWP2=0.2 "Water flow rate 2 [pu]";
-  parameter Types.PerUnit FLWP3=0.23 "Water flow rate 3 [pu]";
-  parameter Types.PerUnit FLWP4=0.4 "Water flow rate 4 [pu]";
-  parameter Types.PerUnit FLWP5=0.6 "Water flow rate 5 [pu]";
-  parameter Types.PerUnit FLWP6=0.8 "Water flow rate 6 [pu]";
-  parameter Types.PerUnit Pmech1=0 "Mechanical power 1 [pu]";
-  parameter Types.PerUnit Pmech2=0 "Mechanical power 2 [pu]";
-  parameter Types.PerUnit Pmech3=0.05 "Mechanical power 3 [pu]";
-  parameter Types.PerUnit Pmech4=0.35 "Mechanical power 4 [pu]";
-  parameter Types.PerUnit Pmech5=0.66 "Mechanical power 5 [pu]";
-  parameter Types.PerUnit Pmech6=0.82 "Mechanical power 6 [pu]";
+  parameter Types.PerUnit FLWP1=0 "Water flow rate 1";
+  parameter Types.PerUnit FLWP2=0.2 "Water flow rate 2";
+  parameter Types.PerUnit FLWP3=0.23 "Water flow rate 3";
+  parameter Types.PerUnit FLWP4=0.4 "Water flow rate 4";
+  parameter Types.PerUnit FLWP5=0.6 "Water flow rate 5";
+  parameter Types.PerUnit FLWP6=0.8 "Water flow rate 6";
+  parameter Types.PerUnit Pmech1=0 "Mechanical power 1";
+  parameter Types.PerUnit Pmech2=0 "Mechanical power 2";
+  parameter Types.PerUnit Pmech3=0.05 "Mechanical power 3";
+  parameter Types.PerUnit Pmech4=0.35 "Mechanical power 4";
+  parameter Types.PerUnit Pmech5=0.66 "Mechanical power 5";
+  parameter Types.PerUnit Pmech6=0.82 "Mechanical power 6";
   parameter Types.PerUnit D_TURB=0 "Turbine damping";
 
   BaseClasses.WEHGOV.Turbine Turbine(

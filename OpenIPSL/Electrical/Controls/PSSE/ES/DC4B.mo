@@ -5,13 +5,13 @@ model DC4B "DC4B Excitation System [IEEE2005]"
   import
     OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.calculate_dc_exciter_params;
   parameter Types.Time T_R=0.004 "Regulator input filter time constant (sec)";
-  parameter Types.PerUnit K_PR=13 "Voltage regulator proportional gain (pu)";
-  parameter Types.PerUnit K_IR=4 "Voltage regulator integral gain (pu)";
-  parameter Types.PerUnit K_DR=6 "Voltage regulator derivative gain (pu)";
+  parameter Types.PerUnit K_PR=13 "Voltage regulator proportional gain";
+  parameter Types.PerUnit K_IR=4 "Voltage regulator integral gain";
+  parameter Types.PerUnit K_DR=6 "Voltage regulator derivative gain";
   parameter Types.Time T_DR=0.03 "Voltage regulator derivative channel time constant (sec)";
-  parameter Types.PerUnit V_RMAX=10.8 "Maximum regulator output (pu)";
-  parameter Types.PerUnit V_RMIN=-7 "Minimum regulator output (pu)";
-  parameter Types.PerUnit K_A=10.8 "Voltage regulator gain (pu)";
+  parameter Types.PerUnit V_RMAX=10.8 "Maximum regulator output";
+  parameter Types.PerUnit V_RMIN=-7 "Minimum regulator output";
+  parameter Types.PerUnit K_A=10.8 "Voltage regulator gain";
   parameter Types.Time T_A=0.01 "Voltage regulator time constant (sec)";
   parameter Types.PerUnit K_E=1  "Exciter field proportional constant";
   parameter Types.Time T_E=0.8 "Exciter field time constant";

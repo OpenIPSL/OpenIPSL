@@ -5,34 +5,34 @@ model ESURRY "AC1A Excitation System"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter(VoltageReference(k=V_REF));
   extends OpenIPSL.Icons.VerifiedModel;
   parameter Types.Time T_R=0 "Transducer time constant, sec.";
-  parameter Types.Time T_1=0 "Time constant, pu";
+  parameter Types.Time T_1=0 "Time constant";
   parameter Types.Time T_A=0
-    "Lead-lag numerator time constant, sec.";
+    "Lead-lag numerator time constant";
   parameter Types.Time T_B=0
-    "Lead-lag denominator time constant, sec.";
+    "Lead-lag denominator time constant";
   parameter Types.Time T_C=0
-    "Lead-lag numerator time constant, sec.";
+    "Lead-lag numerator time constant";
   parameter Types.Time T_D=0
-    "Lead-lag denominator time constant, sec";
-  parameter Types.Time T_E=0.8 "Exciter time constant, sec.";
-  parameter Types.PerUnit K_10=1 "Gain, pu";
-  parameter Types.PerUnit K_16=1 "Gain, pu";
-  parameter Types.PerUnit K_F=0.03 "Rate feedback gain, pu";
-  parameter Types.Time T_F=1 "Rate feedback time constant, sec.";
+    "Lead-lag denominator time constant";
+  parameter Types.Time T_E=0.8 "Exciter time constant.";
+  parameter Types.PerUnit K_10=1 "Gain";
+  parameter Types.PerUnit K_16=1 "Gain";
+  parameter Types.PerUnit K_F=0.03 "Rate feedback gain";
+  parameter Types.Time T_F=1 "Rate feedback time constant";
   parameter Types.PerUnit K_C=0.2
-    "Rectifier regulation factor, pu";
+    "Rectifier regulation factor";
   parameter Types.PerUnit K_D=0.48
-    "Exciter internal reactance, pu";
+    "Exciter internal reactance";
   parameter Types.PerUnit K_E=1
-    "Exciter field resistance constant, pu";
+    "Exciter field resistance constant";
   parameter Types.PerUnit E_1=5.25 "Field voltage value, 1";
   parameter Types.PerUnit E_2=7 "Field voltage value, 2";
   parameter Types.PerUnit S_EE_1=0.03 "Saturation factor at E1";
   parameter Types.PerUnit S_EE_2=0.1 "Saturation factor at E2";
   parameter Types.PerUnit V_RMAX=6.03
-    "Voltage regulator maximum output, pu";
+    "Voltage regulator maximum output";
   parameter Types.PerUnit V_RMIN=-5.43
-    "Voltage regulator minimum output, pu";
+    "Voltage regulator minimum output";
   OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag(
     K=1,
     T=T_R,
