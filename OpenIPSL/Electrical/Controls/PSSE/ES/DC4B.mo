@@ -1,17 +1,17 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model DC4B "DC4B Excitation System [IEEE2005]"
+model DC4B "IEEE 421.5 2005 DC4B Excitation System"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.NonElectrical.Functions.SE;
   import
     OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.calculate_dc_exciter_params;
   parameter Types.Time T_R=0.004 "Regulator input filter time constant (sec)";
-  parameter Types.PerUnit K_PR=13 "Voltage regulator proportional gain";
-  parameter Types.PerUnit K_IR=4 "Voltage regulator integral gain";
-  parameter Types.PerUnit K_DR=6 "Voltage regulator derivative gain";
+  parameter Types.PerUnit K_PR=13 "Voltage regulator proportional gain (pu)";
+  parameter Types.PerUnit K_IR=4 "Voltage regulator integral gain (pu)";
+  parameter Types.PerUnit K_DR=6 "Voltage regulator derivative gain (pu)";
   parameter Types.Time T_DR=0.03 "Voltage regulator derivative channel time constant (sec)";
-  parameter Types.PerUnit V_RMAX=10.8 "Maximum regulator output";
-  parameter Types.PerUnit V_RMIN=-7 "Minimum regulator output";
-  parameter Types.PerUnit K_A=10.8 "Voltage regulator gain";
+  parameter Types.PerUnit V_RMAX=10.8 "Maximum regulator output (pu)";
+  parameter Types.PerUnit V_RMIN=-7 "Minimum regulator output (pu)";
+  parameter Types.PerUnit K_A=10.8 "Voltage regulator gain (pu)";
   parameter Types.Time T_A=0.01 "Voltage regulator time constant (sec)";
   parameter Types.PerUnit K_E=1  "Exciter field proportional constant";
   parameter Types.Time T_E=0.8 "Exciter field time constant";
@@ -81,10 +81,10 @@ model DC4B "DC4B Excitation System [IEEE2005]"
         rotation=90,
         origin={160,-150})));
   NonElectrical.Continuous.PID_No_Windup      pID_No_Windup(
-    K_PR=K_PR,
-    K_IR=K_IR,
-    K_DR=K_DR,
-    T_DR=T_DR,
+    K_P=K_PR,
+    K_I=K_IR,
+    K_D=K_DR,
+    T_D=T_DR,
     V_RMAX=V_RMAX/K_A,
     V_RMIN=V_RMIN/K_A,
     y_start_int=y_start_int)
@@ -185,15 +185,18 @@ equation
           124},{100,102},{66,102},{66,62},{74,62}}, color={0,0,127}));
   connect(simpleLagLimVar.y, rotatingExciterLimited.I_C) annotation (Line(
         points={{97,62},{102,62},{102,0},{112.5,0}}, color={0,0,127}));
-  annotation (Icon(graphics={Text(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}}),       graphics={
+                             Text(
           extent={{-112,-60},{-42,-80}},
           lineColor={28,108,200},
           textString="VT"), Text(
           extent={{-50,142},{44,96}},
           textColor={28,108,200},
-          textString="DC4B")}),
-          Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
-        Documentation(revisions="<html>
+          textString="DC4B")}),                                  Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},{200,
+            160}})),
+        Documentation(info="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE 421.5 2005 DC4B Excitation System (PSS/E Manual)</p></td>
@@ -208,8 +211,9 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
 </tr>
 </table>
-</html>"));
+</html>"),
+    conversion(noneFromVersion=""));
 end DC4B;

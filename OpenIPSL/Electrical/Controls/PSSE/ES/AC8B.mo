@@ -1,35 +1,35 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model AC8B "AC8B Excitation System [IEEE2005]"
+model AC8B "IEEE 421.5 2005 AC8B Excitation System"
   import OpenIPSL.NonElectrical.Functions.SE;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   parameter Types.Time TR "Filter time constant (s)";
-  parameter Types.PerUnit KPR "Voltage regulator proportional gain";
-  parameter Types.PerUnit KIR "Voltage regulator integral gain";
-  parameter Types.PerUnit KDR "Voltage regulator derivative gain";
+  parameter Types.PerUnit KPR "Voltage regulator proportional gain (pu)";
+  parameter Types.PerUnit KIR "Voltage regulator integral gain (pu)";
+  parameter Types.PerUnit KDR "Voltage regulator derivative gain (pu)";
   parameter Types.Time TDR "Regulator derivative block time constant (s)";
-  parameter Types.PerUnit VPIDMAX "PID maximum limit";
-  parameter Types.PerUnit VPIDMIN "PID minimum limit";
-  parameter Types.PerUnit KA "Voltage regulator gain";
+  parameter Types.PerUnit VPIDMAX "PID maximum limit (pu)";
+  parameter Types.PerUnit VPIDMIN "PID minimum limit (pu)";
+  parameter Types.PerUnit KA "Voltage regulator gain (pu)";
   parameter Types.Time TA "Voltage regulator time constant (s)";
-  parameter Types.PerUnit VRMAX "Maximum voltage regulator output";
-  parameter Types.PerUnit VRMIN "Minimum voltage regulator output";
+  parameter Types.PerUnit VRMAX "Maximum voltage regulator output (pu)";
+  parameter Types.PerUnit VRMIN "Minimum voltage regulator output (pu)";
   parameter Types.Time TE "Exciter time constant, integration rate associated with exciter
   control (s)";
-  parameter Types.PerUnit KC "Rectifier loading factor proportional to commutating reactance";
+  parameter Types.PerUnit KC "Rectifier loading factor proportional to commutating reactance (pu)";
   parameter Types.PerUnit KD "Demagnetizing factor, a function of exciter alternator
-  reactances";
-  parameter Types.PerUnit KE "Exciter constant related to self-excited field";
-  parameter Types.PerUnit E1 "Exciter alternator output voltages back of commutating reactance
-  at which saturation is defined";
+  reactances (pu)";
+  parameter Types.PerUnit KE "Exciter constant related to self-excited field (pu)";
+  parameter Types.PerUnit E1 "Exciter alternator output voltages back of commutating reactance 
+  at which saturation is defined (pu)";
   parameter Types.PerUnit SE1 "Exciter saturation function value at the corresponding exciter
-  voltage, E1, back of commutating reactance";
+  voltage, E1, back of commutating reactance (pu)";
   parameter Types.PerUnit E2 "Exciter alternator output voltages back of commutating
-  reactance at which saturation is defined";
+  reactance at which saturation is defined (pu)";
   parameter Types.PerUnit SE2 "Exciter saturation function value at the correspponding exciter
-  voltage, E2, back of commutating reactance";
-  parameter Types.PerUnit VFEMAX "Exciter field current limit reference";
-  parameter Types.PerUnit VEMIN "Minimum exciter voltage output";
+  voltage, E2, back of commutating reactance (pu)";
+  parameter Types.PerUnit VFEMAX "Exciter field current limit reference (pu)";
+  parameter Types.PerUnit VEMIN "Minimum exciter voltage output (pu)";
 
   OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.RotatingExciterWithDemagnetizationVarLim
     rotatingExciterWithDemagnetizationVarLim(
@@ -77,10 +77,10 @@ model AC8B "AC8B Excitation System [IEEE2005]"
         rotation=90,
         origin={140,-184}),iconTransformation(extent={{-120,-80},{-100,-60}})));
   NonElectrical.Continuous.PID_No_Windup pID_No_Windup(
-    K_PR=KPR,
-    K_IR=KIR,
-    K_DR=KDR,
-    T_DR=TDR,
+    K_P=KPR,
+    K_I=KIR,
+    K_D=KDR,
+    T_D=TDR,
     V_RMAX=VPIDMAX,
     V_RMIN=VPIDMIN,
     y_start_int=y_start_int)
@@ -194,7 +194,7 @@ equation
           extent={{-42,152},{36,82}},
           lineColor={28,108,200},
           textString="AC8B")}),
-        Documentation(revisions="<html>
+        Documentation(info="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE 421.5 2005 AC8B Excitation System (PSS/E Manual)</p></td>
@@ -209,8 +209,9 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
 </tr>
 </table>
-</html>"));
+</html>"),
+    conversion(noneFromVersion=""));
 end AC8B;

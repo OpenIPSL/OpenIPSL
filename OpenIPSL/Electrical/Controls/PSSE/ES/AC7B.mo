@@ -1,41 +1,41 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model AC7B "AC7B Excitation System [IEEE2016]"
+model AC7B "IEEE 421.5 2016 AC7B Excitation System"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   import OpenIPSL.NonElectrical.Functions.SE;
   parameter Types.Time T_R "Filter time constant (s)";
-  parameter Types.PerUnit K_PR "Voltage regulator proportional gain";
-  parameter Types.PerUnit K_IR "Voltage regulator integral gain";
-  parameter Types.PerUnit K_DR "Voltage regulator derivative gain";
+  parameter Types.PerUnit K_PR "Voltage regulator proportional gain (pu)";
+  parameter Types.PerUnit K_IR "Voltage regulator integral gain (pu)";
+  parameter Types.PerUnit K_DR "Voltage regulator derivative gain (pu)";
   parameter Types.Time T_DR "Lag time constant (s)";
-  parameter Types.PerUnit V_RMIN "Minimum voltage regulator output";
-  parameter Types.PerUnit V_RMAX "Maximum voltage regulator output";
-  parameter Types.PerUnit K_PA "Voltage regulator proportional gain";
-  parameter Types.PerUnit K_IA "Voltage regulator integral gain";
-  parameter Types.PerUnit VA_MIN "Minimum voltage regulator output";
-  parameter Types.PerUnit VA_MAX "Maximum voltage regulator output";
-  parameter Types.PerUnit K_P "Potential circuit gain coefficient";
-  parameter Types.PerUnit K_L "Exciter field voltage lower limit parameter";
+  parameter Types.PerUnit V_RMIN "Minimum voltage regulator output (pu)";
+  parameter Types.PerUnit V_RMAX "Maximum voltage regulator output (pu)";
+  parameter Types.PerUnit K_PA "Voltage regulator proportional gain (pu)";
+  parameter Types.PerUnit K_IA "Voltage regulator integral gain(pu)";
+  parameter Types.PerUnit VA_MIN "Minimum voltage regulator output (pu)";
+  parameter Types.PerUnit VA_MAX "Maximum voltage regulator output (pu)";
+  parameter Types.PerUnit K_P "Potential circuit gain coefficient (pu)";
+  parameter Types.PerUnit K_L "Exciter field voltage lower limit parameter (pu)";
   parameter Types.Time T_E "Exciter time constant, integration rate associated with exciter
   control (s)";
-  parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance";
+  parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance(pu)";
   parameter Types.PerUnit K_D "Demagnetizing factor, a function of exciter alternator
-reactances";
-  parameter Types.PerUnit K_E "Exciter constant related to self-excited field";
-  parameter Types.PerUnit K_F1 "Excitation control system stabilizer gain";
-  parameter Types.PerUnit K_F2 "Excitation control system stabilizer gain";
-  parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain";
+reactances(pu)";
+  parameter Types.PerUnit K_E "Exciter constant related to self-excited field(pu)";
+  parameter Types.PerUnit K_F1 "Excitation control system stabilizer gain(pu)";
+  parameter Types.PerUnit K_F2 "Excitation control system stabilizer gain(pu)";
+  parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain(pu)";
   parameter Types.Time T_F3 "Excitation control system stabilizer time constant (s)";
-  parameter Types.PerUnit VE_MIN "Minimum exciter voltage output";
-  parameter Types.PerUnit VFEMAX "Exciter field current limit reference";
+  parameter Types.PerUnit VE_MIN "Minimum exciter voltage output(pu)";
+  parameter Types.PerUnit VFEMAX "Exciter field current limit reference(pu)";
   parameter Types.PerUnit E_1 "Exciter alternator output voltages back of commutating
-  reactance at which saturation is defined";
-  parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter
-  voltage, E1, back of commutating reactance";
+  reactance at which saturation is defined (pu)";
+  parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter 
+  voltage, E1, back of commutating reactance (pu)";
   parameter Types.PerUnit E_2 "Exciter alternator output voltages back of commutating
-  reactance at which saturation is defined";
+  reactance at which saturation is defined (pu)";
   parameter Types.PerUnit S_EE_2 "Exciter saturation function value at the corresponding exciter
-    voltage, E2, back of commutating reactance";
+    voltage, E2, back of commutating reactance(pu)";
 
   Modelica.Blocks.Continuous.Derivative imDerivativeLag(
     k=K_F3,
@@ -122,12 +122,12 @@ reactances";
         rotation=90,
         origin={-72,70})));
   NonElectrical.Continuous.PID_No_Windup      pID_No_Windup(
-    K_IR=K_IR,
-    K_DR=K_DR,
-    T_DR=T_DR,
+    K_P=K_PR,
+    K_I=K_IR,
+    K_D=K_DR,
+    T_D=T_DR,
     V_RMAX=V_RMAX,
     V_RMIN=V_RMIN,
-    K_PR=K_PR,
     y_start_int=y_start_int_PID)
     annotation (Placement(transformation(extent={{-56,92},{-10,130}})));
   Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter annotation (
@@ -281,11 +281,12 @@ equation
   connect(add3.y, pID_No_Windup.u) annotation (Line(points={{-72,81},{-72,111},{
           -60.6,111}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
-      Icon(graphics={        Text(
+      Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
+                             Text(
           extent={{-96,-60},{-26,-80}},
           lineColor={28,108,200},
           textString="
-
+          
           "),                 Text(
           extent={{-104,90},{-22,70}},
           lineColor={28,108,200},
@@ -294,7 +295,7 @@ equation
           extent={{-74,140},{70,98}},
           textColor={28,108,200},
           textString="AC7B")}),
-        Documentation(revisions="<html>
+        Documentation(info="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE 421.5 2016 AC7B Excitation System (PSS/E Manual)</p></td>
@@ -309,8 +310,9 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
 </tr>
 </table>
-</html>"));
+</html>"),
+    conversion(noneFromVersion=""));
 end AC7B;
