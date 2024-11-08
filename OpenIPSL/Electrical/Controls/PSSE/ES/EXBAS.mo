@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
 model EXBAS
-  "Basler Static Voltage Regulator Feeding DC or AC Rotating Exciter"
+  "Basler Static Voltage Regulator Feeding DC or AC Rotating Exciter [PSSE-MODELS]"
  extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   import OpenIPSL.NonElectrical.Functions.SE;
@@ -176,7 +176,7 @@ equation
           extent={{-58,142},{76,98}},
           textColor={28,108,200},
           textString="EXBAS")}),
-                  Documentation(info="<html>
+                  Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>Basler Static Voltage Regulator Feeding dc or ac Rotating Exciter (PSS/E Manual)</p></td>
@@ -191,7 +191,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

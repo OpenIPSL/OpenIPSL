@@ -163,15 +163,11 @@ equation
     annotation (Line(points={{41,-60},{78,-60}}, color={0,0,127}));
   connect(division.u1, Lookup_Flow_Pmech.u) annotation (Line(points={{-24,62},{-24,
           70},{60,70},{60,-60},{78,-60}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),      graphics={Rectangle(extent={{-100,100},{
-              100,-100}},
+  annotation (Icon(graphics={Rectangle(extent={{-100,100},{100,-100}},
                       lineColor={28,108,200}), Text(
           extent={{-84,32},{90,-24}},
           textColor={28,108,200},
-          textString="Turbine")}),   Diagram(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{200,100}})),
-                                    Documentation(info="<html>
+          textString="Turbine")}), Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>WEHGOV turbine dynamics (PSS/E Manual)</p></td>
@@ -186,7 +182,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

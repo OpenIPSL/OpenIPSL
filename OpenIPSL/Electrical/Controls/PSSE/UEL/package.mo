@@ -1,3 +1,3 @@
 within OpenIPSL.Electrical.Controls.PSSE;
-package UEL
+package UEL "Under excitation limiters"
 end UEL;

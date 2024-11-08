@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model AC8B "IEEE 421.5 2005 AC8B Excitation System"
+model AC8B "AC8B Excitation System [IEEE2005]"
   import OpenIPSL.NonElectrical.Functions.SE;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
@@ -194,7 +194,7 @@ equation
           extent={{-42,152},{36,82}},
           lineColor={28,108,200},
           textString="AC8B")}),
-        Documentation(info="<html>
+        Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE 421.5 2005 AC8B Excitation System (PSS/E Manual)</p></td>
@@ -209,9 +209,8 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"),
-    conversion(noneFromVersion=""));
+</html>"));
 end AC8B;

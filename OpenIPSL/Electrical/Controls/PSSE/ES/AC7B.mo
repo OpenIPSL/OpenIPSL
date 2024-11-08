@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model AC7B "IEEE 421.5 2016 AC7B Excitation System"
+model AC7B "AC7B Excitation System [IEEE2016]"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   import OpenIPSL.NonElectrical.Functions.SE;
@@ -281,8 +281,7 @@ equation
   connect(add3.y, pID_No_Windup.u) annotation (Line(points={{-72,81},{-72,111},{
           -60.6,111}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
-      Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
-                             Text(
+      Icon(graphics={        Text(
           extent={{-96,-60},{-26,-80}},
           lineColor={28,108,200},
           textString="
@@ -295,7 +294,7 @@ equation
           extent={{-74,140},{70,98}},
           textColor={28,108,200},
           textString="AC7B")}),
-        Documentation(info="<html>
+        Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE 421.5 2016 AC7B Excitation System (PSS/E Manual)</p></td>
@@ -310,9 +309,8 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"),
-    conversion(noneFromVersion=""));
+</html>"));
 end AC7B;

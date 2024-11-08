@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
-model WPIDHY "Woodward PID Hydro (WPIDHY) Governor"
+model WPIDHY "Woodward PID Hydro (WPIDHY) Governor [PSSE-MODELS]"
   extends OpenIPSL.Icons.VerifiedModel;
   parameter Types.Time T_REG=1
     "Input time constant of governor, sec";

@@ -1,5 +1,5 @@
 within OpenIPSL.NonElectrical.Continuous;
-model PI_No_Windup
+model PI_No_Windup "PI controller with no wind-up"
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Types.PerUnit K_P "Voltage regulator proportional gain (pu)";
   parameter Types.PerUnit K_I "Voltage regulator integral gain (pu)";
@@ -44,8 +44,7 @@ equation
   connect(limiter.y, y)
     annotation (Line(points={{89,0},{110,0}}, color={0,0,127}));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-        graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,
+    Icon(graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,
               200}),                                                      Text(
           extent={{0,44},{94,0}},
           lineColor={0,0,255},
@@ -67,7 +66,5 @@ equation
           textColor={0,0,255},
           textString="+"),
           Line(points={{-100,-140},{-60,-140},{-40,-100}}, color={0,0,0}),
-                   Line(points={{40,100},{60,140},{100,140}},color={0,0,0})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+                   Line(points={{40,100},{60,140},{100,140}},color={0,0,0})}));
 end PI_No_Windup;

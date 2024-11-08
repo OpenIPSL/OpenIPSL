@@ -187,8 +187,7 @@ equation
   ud = (-PSIq) - R_a*id;
   uq = PSId - R_a*iq;
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics={Text(
+    Icon( graphics={Text(
           extent={{-54,24},{54,-26}},
           lineColor={0,0,255},
           textString="GENTPJ")}),

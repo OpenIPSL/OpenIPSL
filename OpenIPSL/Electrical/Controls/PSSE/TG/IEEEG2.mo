@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
-model IEEEG2 "IEEE Type 2 Speed-Governing Model"
+model IEEEG2 "IEEE Type 2 Speed-Governing Model [PSSE-MODELS]"
   extends OpenIPSL.Electrical.Controls.PSSE.TG.BaseClasses.BaseGovernor;
   parameter Real K=20 "Permanent governor gain K=1/R (pu on generator MVA base)";
   parameter Types.Time T_1=50 "Compensator time constant (sec)";
@@ -48,12 +48,11 @@ equation
           -121},{-118.55,-121},{-99.4,-121}}, color={0,0,127}));
   connect(simpleLag.y, add.u2) annotation (Line(points={{-37.3,-121},{-37.3,-120},
           {-20,-120},{-20,-14},{-4.8,-14},{-4.8,-14.4}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
+  annotation (Icon(graphics={Text(
           extent={{-88,48},{10,-50}},
           lineColor={28,108,200},
-          textString="IEEEG2")}),                                Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
+          textString="IEEEG2")}),
+        Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE Type 2 Speed-Governing Model (PSS/E Manual)</p></td>
@@ -68,9 +67,8 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"),
-    conversion(noneFromVersion=""));
+</html>"));
 end IEEEG2;

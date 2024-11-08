@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.ES;
-model DC4B "IEEE 421.5 2005 DC4B Excitation System"
+model DC4B "DC4B Excitation System [IEEE2005]"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.NonElectrical.Functions.SE;
   import
@@ -185,18 +185,15 @@ equation
           124},{100,102},{66,102},{66,62},{74,62}}, color={0,0,127}));
   connect(simpleLagLimVar.y, rotatingExciterLimited.I_C) annotation (Line(
         points={{97,62},{102,62},{102,0},{112.5,0}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}),       graphics={
-                             Text(
+  annotation (Icon(graphics={Text(
           extent={{-112,-60},{-42,-80}},
           lineColor={28,108,200},
           textString="VT"), Text(
           extent={{-50,142},{44,96}},
           textColor={28,108,200},
-          textString="DC4B")}),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},{200,
-            160}})),
-        Documentation(info="<html>
+          textString="DC4B")}),
+          Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
+        Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>IEEE 421.5 2005 DC4B Excitation System (PSS/E Manual)</p></td>
@@ -211,9 +208,8 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"),
-    conversion(noneFromVersion=""));
+</html>"));
 end DC4B;

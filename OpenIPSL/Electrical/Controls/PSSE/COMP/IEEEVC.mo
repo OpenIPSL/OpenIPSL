@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.COMP;
-model IEEEVC "Voltage Regulator Current Compensating Model"
+model IEEEVC "Voltage Regulator Current Compensating Model [PSSE-MODELS]"
   import Modelica.ComplexMath.j;
   import 'abs' =
          Modelica.ComplexMath.abs;
@@ -22,13 +22,11 @@ equation
   I_T = Gen_terminal.ir + j*Gen_terminal.ii;
   connect(Gen_terminal,Bus)  annotation (Line(points={{-70,70},{70,70}},
                  color={0,0,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}),    graphics={Rectangle(extent={{-100,100},{100,-100}},
+  annotation (Icon(graphics={Rectangle(extent={{-100,100},{100,-100}},
             lineColor={28,108,200}), Text(
           extent={{-54,36},{68,-36}},
           textColor={28,108,200},
-          textString="IEEEVC")}),                                Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
+          textString="IEEEVC")}),
         Documentation(info="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
@@ -44,9 +42,8 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"),
-    conversion(noneFromVersion=""));
+</html>"));
 end IEEEVC;

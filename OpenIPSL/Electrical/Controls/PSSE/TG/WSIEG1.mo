@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
-model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model"
+model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model [PSSE-MODELS]"
   parameter Real K=30.32 "Regulation gain [1/pu]";
   parameter Types.Time T_1=0.5 "Control time constant";
   parameter Types.Time T_2=1e-8 "Control time constant";
@@ -315,7 +315,7 @@ equation
           extent={{-56,-56},{-10,-84}},
           lineColor={28,108,200},
           textString="PMECH0")}),
-                Documentation(info="<html>
+                Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>WECC Modified IEEE Type 1 Speed-Governing Model (PSS/E Manual)</p></td>
@@ -330,7 +330,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

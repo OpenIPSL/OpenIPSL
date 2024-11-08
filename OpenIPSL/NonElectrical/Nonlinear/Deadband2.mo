@@ -1,10 +1,9 @@
 within OpenIPSL.NonElectrical.Nonlinear;
-model Deadband2
+model Deadband2 "Simple deadband"
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Real db=0.1 "Deadband";
 
 algorithm
-
   when u < (pre(y) - db) then
     y :=u + db;
   end when;
@@ -17,6 +16,4 @@ algorithm
     y :=u - db;
   end when;
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
 end Deadband2;

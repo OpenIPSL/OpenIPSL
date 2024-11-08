@@ -233,16 +233,14 @@ equation
           0},{340,-120},{216,-120},{216,-98},{122,-98}}, color={0,0,127}));
   connect(PELEC, PE_Transducer.u)
     annotation (Line(points={{-200,-140},{-122,-140}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),                                                                  graphics={Rectangle(extent={{-100,
+  annotation (Icon(graphics={Rectangle(extent={{-100,
               -100},{100,100}},
             lineColor={28,108,200}),           Text(
           extent={{-84,60},{88,-56}},
           textColor={28,108,200},
           textString="Governor")}),
-                          Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-180,-180},{360,180}})),
-                          Documentation(info="<html>
+                          Diagram(coordinateSystem( extent={{-180,-180},{360,180}})),
+                          Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>WEHGOV governor and hydraulic actuators (PSS/E Manual)</p></td>
@@ -257,7 +255,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

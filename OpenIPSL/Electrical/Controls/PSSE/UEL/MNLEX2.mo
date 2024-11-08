@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.UEL;
-model MNLEX2 "Minimum Excitation Limiter"
+model MNLEX2 "Minimum Excitation Limiter [PSSE-MODELS]"
   parameter Types.PerUnit K_F2=0.1 "Rate feedback gain";
   parameter Types.Time T_F2=1 "Rate feedback time constant (>0)";
   parameter Types.PerUnit K_M=0.3 "MEL gain";
@@ -89,13 +89,12 @@ equation
   connect(derivativeLag.y, feedback.u2)
     annotation (Line(points={{63,-40},{50,-40},{50,-8}}, color={0,0,127}));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
+    Icon( graphics={
           Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,200}), Text(
           extent={{-70,28},{66,-30}},
           textColor={28,108,200},
           textString="MNLEX2")}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),Documentation(info="<html>
+    Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>Minimum Excitation Limiter (PSS/E Manual)</p></td>
@@ -110,7 +109,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

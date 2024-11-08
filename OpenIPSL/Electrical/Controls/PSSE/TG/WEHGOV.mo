@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Controls.PSSE.TG;
-model WEHGOV "Woodward Electric Hydro Governor Model"
+model WEHGOV "Woodward Electric Hydro Governor Model [PSSE-MODELS]"
   //Governor Parameters
   parameter Types.ApparentPower S_b=100e6 "System base";
   parameter Types.ApparentPower M_b=100e6 "System base";
@@ -62,8 +62,7 @@ model WEHGOV "Woodward Electric Hydro Governor Model"
     Pmech4=Pmech4,
     Pmech5=Pmech5,
     Pmech6=Pmech6,
-    D_TURB=D_TURB)
-    annotation (Placement(transformation(extent={{32,-20},{72,20}})));
+    D_TURB=D_TURB) annotation (Placement(transformation(extent={{32,-20},{72,20}})));
 
   BaseClasses.WEHGOV.Governor Governor(
     S_b=S_b,
@@ -101,8 +100,7 @@ model WEHGOV "Woodward Electric Hydro Governor Model"
     Pmech3=Pmech3,
     Pmech4=Pmech4,
     Pmech5=Pmech5,
-    Pmech6=Pmech6)
-    annotation (Placement(transformation(extent={{-56,-20},{-16,20}})));
+    Pmech6=Pmech6) annotation (Placement(transformation(extent={{-56,-20},{-16,20}})));
 
   Modelica.Blocks.Sources.Constant P_ref(k=Pref) annotation (Placement(transformation(origin={-78,30},     extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput SPEED
@@ -143,7 +141,7 @@ equation
   connect(Governor.PMECH0, Turbine.PMECH0) annotation (Line(points={{-60,-6},{
           -68,-6},{-68,-24},{18,-24},{18,-16},{28,-16}},
         color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  annotation (Icon(graphics={
           Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,200}),
           Text(
           extent={{-74,148},{76,52}},
@@ -160,9 +158,8 @@ equation
         Text(
           extent={{-64,-52},{-6,-68}},
           textColor={28,108,200},
-          textString="PELEC")}),                                 Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-                Documentation(info="<html>
+          textString="PELEC")}),
+        Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
 <td><p>Woodward Electric Hydro Governor Model (PSS/E Manual)</p></td>
@@ -177,7 +174,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p><a href=\"mailto:luigiv@kth.se\">luigiv@kth.se</a></p></td>
+<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

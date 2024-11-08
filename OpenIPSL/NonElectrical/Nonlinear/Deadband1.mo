@@ -1,5 +1,5 @@
 within OpenIPSL.NonElectrical.Nonlinear;
-model Deadband1
+model Deadband1 "Deadband with error step"
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Real db=0.1 "Deadband";
   parameter Real err=0.1 "Step";
@@ -23,7 +23,4 @@ equation
       y = 0;
     end if;
   end if;
-
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
 end Deadband1;
