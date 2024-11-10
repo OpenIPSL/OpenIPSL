@@ -27,7 +27,7 @@ model WEHGOV "Woodward Electric Hydro Governor Model [PSSE-MODELS]"
   parameter Types.PerUnit G2=0.25 "Gate position 2";
   parameter Types.PerUnit FLWG1=0 "Water flow rate 1";
   parameter Types.PerUnit FLWG2=0.25 "Water flow rate 2";
-  parameter Types.PerUnit TW=0.2 "Water time constant [s]";
+  parameter Types.Time TW=0.2 "Water time constant";
   parameter Types.PerUnit FLWP1=0 "Water flow rate 1";
   parameter Types.PerUnit FLWP2=0.2 "Water flow rate 2";
   parameter Types.PerUnit FLWP3=0.23 "Water flow rate 3";

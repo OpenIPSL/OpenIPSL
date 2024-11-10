@@ -33,16 +33,16 @@ model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model [PSSE-MODELS]"
   parameter Types.PerUnit db1=0.0006 "Speed deadband";
   parameter Types.PerUnit err=0 "Error deadband";
   parameter Types.PerUnit db2=0 "Gate valve deadband";
-  parameter Types.PerUnit GV1=0 "Gate valve position 1 [pu]";
-  parameter Types.PerUnit GV2=0.25 "Gate valve position 2 [pu]";
-  parameter Types.PerUnit GV3=0.5 "Gate valve position 3 [pu]";
-  parameter Types.PerUnit GV4=0.75 "Gate valve position 4 [pu]";
-  parameter Types.PerUnit GV5=2 "Gate valve position 5 [pu]";
-  parameter Types.PerUnit PGV1=0 "Mechanical power 1 [pu]";
-  parameter Types.PerUnit PGV2=0.25 "Mechanical power 2 [pu]";
-  parameter Types.PerUnit PGV3=0.5 "Mechanical power 3 [pu]";
-  parameter Types.PerUnit PGV4=0.75 "Mechanical power 4 [pu]";
-  parameter Types.PerUnit PGV5=2 "Mechanical power 5 [pu]";
+  parameter Types.PerUnit GV1=0 "Gate valve position 1 ";
+  parameter Types.PerUnit GV2=0.25 "Gate valve position 2 ";
+  parameter Types.PerUnit GV3=0.5 "Gate valve position 3 ";
+  parameter Types.PerUnit GV4=0.75 "Gate valve position 4 ";
+  parameter Types.PerUnit GV5=2 "Gate valve position 5 ";
+  parameter Types.PerUnit PGV1=0 "Mechanical power 1 ";
+  parameter Types.PerUnit PGV2=0.25 "Mechanical power 2 ";
+  parameter Types.PerUnit PGV3=0.5 "Mechanical power 3 ";
+  parameter Types.PerUnit PGV4=0.75 "Mechanical power 4 ";
+  parameter Types.PerUnit PGV5=2 "Mechanical power 5 ";
   parameter Integer Iblock=0;
   parameter Integer HP_LP = 1 "Turbine Output Power Selector [1(HP) or 2(LP) or 3(HP+LP)]";
   Modelica.Blocks.Interfaces.RealInput SPEED_HP "Machine speed deviation from nominal [pu]"
