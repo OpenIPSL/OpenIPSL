@@ -3,65 +3,65 @@ model AC8B "AC8B Excitation System [IEEE2005]"
   import OpenIPSL.NonElectrical.Functions.SE;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
-  parameter Types.Time TR "Filter time constant ";
-  parameter Types.PerUnit KPR "Voltage regulator proportional gain";
-  parameter Types.PerUnit KIR "Voltage regulator integral gain";
-  parameter Types.PerUnit KDR "Voltage regulator derivative gain";
-  parameter Types.Time TDR "Regulator derivative block time constant ";
-  parameter Types.PerUnit VPIDMAX "PID maximum limit";
-  parameter Types.PerUnit VPIDMIN "PID minimum limit";
-  parameter Types.PerUnit KA "Voltage regulator gain";
-  parameter Types.Time TA "Voltage regulator time constant ";
-  parameter Types.PerUnit VRMAX "Maximum voltage regulator output";
-  parameter Types.PerUnit VRMIN "Minimum voltage regulator output";
-  parameter Types.Time TE "Exciter time constant, integration rate associated with exciter
+  parameter Types.Time T_R "Filter time constant ";
+  parameter Types.PerUnit K_PR "Voltage regulator proportional gain";
+  parameter Types.PerUnit K_IR "Voltage regulator integral gain";
+  parameter Types.PerUnit K_DR "Voltage regulator derivative gain";
+  parameter Types.Time T_DR "Regulator derivative block time constant ";
+  parameter Types.PerUnit VPID_MAX "PID maximum limit";
+  parameter Types.PerUnit VPID_MIN "PID minimum limit";
+  parameter Types.PerUnit K_A "Voltage regulator gain";
+  parameter Types.Time T_A "Voltage regulator time constant ";
+  parameter Types.PerUnit V_RMAX "Maximum voltage regulator output";
+  parameter Types.PerUnit V_RMIN "Minimum voltage regulator output";
+  parameter Types.Time T_E "Exciter time constant, integration rate associated with exciter
   control ";
-  parameter Types.PerUnit KC "Rectifier loading factor proportional to commutating reactance";
-  parameter Types.PerUnit KD "Demagnetizing factor, a function of exciter alternator
+  parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance";
+  parameter Types.PerUnit K_D "Demagnetizing factor, a function of exciter alternator
   reactances";
-  parameter Types.PerUnit KE "Exciter constant related to self-excited field";
-  parameter Types.PerUnit E1 "Exciter alternator output voltages back of commutating reactance
+  parameter Types.PerUnit K_E "Exciter constant related to self-excited field";
+  parameter Types.PerUnit E_1 "Exciter alternator output voltages back of commutating reactance
   at which saturation is defined";
-  parameter Types.PerUnit SE1 "Exciter saturation function value at the corresponding exciter
+  parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter
   voltage, E1, back of commutating reactance";
-  parameter Types.PerUnit E2 "Exciter alternator output voltages back of commutating
+  parameter Types.PerUnit E_2 "Exciter alternator output voltages back of commutating
   reactance at which saturation is defined";
-  parameter Types.PerUnit SE2 "Exciter saturation function value at the correspponding exciter
+  parameter Types.PerUnit S_EE_2 "Exciter saturation function value at the correspponding exciter
   voltage, E2, back of commutating reactance";
-  parameter Types.PerUnit VFEMAX "Exciter field current limit reference";
-  parameter Types.PerUnit VEMIN "Minimum exciter voltage output";
+  parameter Types.PerUnit VFE_MAX "Exciter field current limit reference";
+  parameter Types.PerUnit VE_MIN "Minimum exciter voltage output";
 
   OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.RotatingExciterWithDemagnetizationVarLim
     rotatingExciterWithDemagnetizationVarLim(
-    T_E=TE,
-    K_E=KE,
-    E_1=E1,
-    E_2=E2,
-    S_EE_1=SE1,
-    S_EE_2=SE2,
+    T_E=T_E,
+    K_E=K_E,
+    E_1=E_1,
+    E_2=E_2,
+    S_EE_1=S_EE_1,
+    S_EE_2=S_EE_2,
     Efd0=VE0,
-    K_D=KD)
+    K_D=K_D)
     annotation (Placement(transformation(extent={{-8,-66},{36,-22}})));
-  Modelica.Blocks.Sources.Constant lowLim(k=VEMIN)
+  Modelica.Blocks.Sources.Constant lowLim(k=VE_MIN)
     annotation (Placement(transformation(extent={{100,-34},{80,-14}})));
-  Modelica.Blocks.Sources.Constant FEMAX(k=VFEMAX)
+  Modelica.Blocks.Sources.Constant FEMAX(k=VFE_MAX)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={100,50})));
-  Modelica.Blocks.Math.Add DiffV2(k2=-KD)
+  Modelica.Blocks.Math.Add DiffV2(k2=-K_D)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={50,50})));
   OpenIPSL.NonElectrical.Functions.ImSE
                                se1(
-    SE1=SE1,
-    SE2=SE2,
-    E1=E1,
-    E2=E2) annotation (Placement(transformation(
+    SE1=S_EE_1,
+    SE2=S_EE_2,
+    E1=E_1,
+    E2=E_2) annotation (Placement(transformation(
         extent={{-9,-6},{9,6}},
         rotation=180,
         origin={147,4})));
-  Modelica.Blocks.Sources.Constant const(k=KE)
+  Modelica.Blocks.Sources.Constant const(k=K_E)
     annotation (Placement(transformation(extent={{180,20},{160,40}})));
   Modelica.Blocks.Math.Add DiffV3
     annotation (Placement(transformation(extent={{120,0},{100,20}})));
@@ -77,19 +77,19 @@ model AC8B "AC8B Excitation System [IEEE2005]"
         rotation=90,
         origin={140,-184}),iconTransformation(extent={{-120,-80},{-100,-60}})));
   NonElectrical.Continuous.PID_No_Windup pID_No_Windup(
-    K_P=KPR,
-    K_I=KIR,
-    K_D=KDR,
-    T_D=TDR,
-    V_RMAX=VPIDMAX,
-    V_RMIN=VPIDMIN,
+    K_P=K_PR,
+    K_I=K_IR,
+    K_D=K_DR,
+    T_D=T_DR,
+    V_RMAX=VPID_MAX,
+    V_RMIN=VPID_MIN,
     y_start_int=y_start_int)
     annotation (Placement(transformation(extent={{-90,92},{-48,124}})));
 
   OpenIPSL.NonElectrical.Continuous.SimpleLag
                                      TransducerDelay(
     K=1,
-    T=TR,
+    T=T_R,
     y_start=ECOMP0)
     annotation (Placement(transformation(extent={{-164,-10},{-144,10}})));
   Modelica.Blocks.Math.Add3 VS annotation (Placement(transformation(
@@ -99,14 +99,14 @@ model AC8B "AC8B Excitation System [IEEE2005]"
   Modelica.Blocks.Math.Add DiffV1(k2=+1)
     annotation (Placement(transformation(extent={{-120,-60},{-100,-40}})));
   OpenIPSL.NonElectrical.Continuous.SimpleLagLim simpleLagLim(
-    K=KA,
-    T=TA,
+    K=K_A,
+    T=T_A,
     y_start=VR0,
-    outMax=VRMAX,
-    outMin=VRMIN)
+    outMax=V_RMAX,
+    outMin=V_RMIN)
     annotation (Placement(transformation(extent={{-34,98},{-14,118}})));
   OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.RectifierCommutationVoltageDrop
-    rectifierCommutationVoltageDrop(K_C=KC)
+    rectifierCommutationVoltageDrop(K_C=K_C)
     annotation (Placement(transformation(extent={{88,-86},{122,-52}})));
 
 protected
@@ -120,19 +120,19 @@ protected
 initial equation
   // Finding initial value of excitation voltage, VE0, via going through conditions of FEX function
   VE0 = invFEX(
-    K_C=KC,
+    K_C=K_C,
     Efd0=Efd0,
     Ifd0=Ifd0);
   // Case IN>0 not checked because it will be resolved in the next iteration
   VFE0 = VE0*(SE(
     VE0,
-    SE1,
-    SE2,
-    E1,
-    E2) + KE) + Ifd0*KD;
+    S_EE_1,
+    S_EE_2,
+    E_1,
+    E_2) + K_E) + Ifd0*K_D;
   VR0 = VFE0;
   V_REF = ECOMP;
-  y_start_int = VR0/KA;
+  y_start_int = VR0/K_A;
   Ifd0 = XADIFD;
 equation
   connect(TransducerDelay.u, ECOMP) annotation (Line(points={{-166,0},{-180,0},{

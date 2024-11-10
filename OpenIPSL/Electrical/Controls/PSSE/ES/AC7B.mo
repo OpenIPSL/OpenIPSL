@@ -27,7 +27,7 @@ reactances";
   parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain";
   parameter Types.Time T_F3 "Excitation control system stabilizer time constant ";
   parameter Types.PerUnit VE_MIN "Minimum exciter voltage output";
-  parameter Types.PerUnit VFEMAX "Exciter field current limit reference";
+  parameter Types.PerUnit VFE_MAX "Exciter field current limit reference";
   parameter Types.PerUnit E_1 "Exciter alternator output voltages back of commutating
   reactance at which saturation is defined";
   parameter Types.PerUnit S_EE_1 "Exciter saturation function value at the corresponding exciter
@@ -86,7 +86,7 @@ reactances";
              annotation (Placement(transformation(extent={{52,-50},{82,-20}})));
   Modelica.Blocks.Sources.Constant lowLim(k=VE_MIN)
     annotation (Placement(transformation(extent={{116,-16},{96,4}})));
-  Modelica.Blocks.Sources.Constant FEMAX(k=VFEMAX)
+  Modelica.Blocks.Sources.Constant FEMAX(k=VFE_MAX)
     annotation (Placement(transformation(extent={{-74,-24},{-54,-4}})));
   Modelica.Blocks.Math.Add DiffV2(k2=-1)
     annotation (Placement(transformation(extent={{-38,-34},{-18,-14}})));
@@ -185,7 +185,7 @@ initial equation
   V_REF = ECOMP0;
   VT0 = VT;
   Ifd0 = XADIFD;
-  max_lim0 = (VFEMAX - K_D*Ifd0)/(K_E + SE(VE0,S_EE_1,S_EE_2,E_1,E_2));
+  max_lim0 = (VFE_MAX - K_D*Ifd0)/(K_E + SE(VE0,S_EE_1,S_EE_2,E_1,E_2));
   y_start_int_PID = VR0;
   y_start_int_PI = VA0;
 

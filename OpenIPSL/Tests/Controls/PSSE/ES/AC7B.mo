@@ -45,7 +45,7 @@ model AC7B "SMIB system to test functionality of exciter AC7B"
     K_F3=0,
     T_F3=1,
     VE_MIN=0,
-    VFEMAX=5.5,
+    VFE_MAX=5.5,
     E_1=2.75,
     S_EE_1=0.08,
     E_2=3.8,
