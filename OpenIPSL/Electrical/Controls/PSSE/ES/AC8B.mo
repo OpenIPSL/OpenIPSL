@@ -3,19 +3,19 @@ model AC8B "AC8B Excitation System [IEEE2005]"
   import OpenIPSL.NonElectrical.Functions.SE;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
-  parameter Types.Time TR "Filter time constant (s)";
+  parameter Types.Time TR "Filter time constant ";
   parameter Types.PerUnit KPR "Voltage regulator proportional gain";
   parameter Types.PerUnit KIR "Voltage regulator integral gain";
   parameter Types.PerUnit KDR "Voltage regulator derivative gain";
-  parameter Types.Time TDR "Regulator derivative block time constant (s)";
+  parameter Types.Time TDR "Regulator derivative block time constant ";
   parameter Types.PerUnit VPIDMAX "PID maximum limit";
   parameter Types.PerUnit VPIDMIN "PID minimum limit";
   parameter Types.PerUnit KA "Voltage regulator gain";
-  parameter Types.Time TA "Voltage regulator time constant (s)";
+  parameter Types.Time TA "Voltage regulator time constant ";
   parameter Types.PerUnit VRMAX "Maximum voltage regulator output";
   parameter Types.PerUnit VRMIN "Minimum voltage regulator output";
   parameter Types.Time TE "Exciter time constant, integration rate associated with exciter
-  control (s)";
+  control ";
   parameter Types.PerUnit KC "Rectifier loading factor proportional to commutating reactance";
   parameter Types.PerUnit KD "Demagnetizing factor, a function of exciter alternator
   reactances";

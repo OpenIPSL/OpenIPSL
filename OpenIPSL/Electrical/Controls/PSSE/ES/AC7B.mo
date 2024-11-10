@@ -3,11 +3,11 @@ model AC7B "AC7B Excitation System [IEEE2016]"
   extends OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.BaseExciter;
   import OpenIPSL.Electrical.Controls.PSSE.ES.BaseClasses.invFEX;
   import OpenIPSL.NonElectrical.Functions.SE;
-  parameter Types.Time T_R "Filter time constant (s)";
+  parameter Types.Time T_R "Filter time constant ";
   parameter Types.PerUnit K_PR "Voltage regulator proportional gain";
   parameter Types.PerUnit K_IR "Voltage regulator integral gain";
   parameter Types.PerUnit K_DR "Voltage regulator derivative gain";
-  parameter Types.Time T_DR "Lag time constant (s)";
+  parameter Types.Time T_DR "Lag time constant ";
   parameter Types.PerUnit V_RMIN "Minimum voltage regulator output";
   parameter Types.PerUnit V_RMAX "Maximum voltage regulator output";
   parameter Types.PerUnit K_PA "Voltage regulator proportional gain";
@@ -17,7 +17,7 @@ model AC7B "AC7B Excitation System [IEEE2016]"
   parameter Types.PerUnit K_P "Potential circuit gain coefficient";
   parameter Types.PerUnit K_L "Exciter field voltage lower limit parameter";
   parameter Types.Time T_E "Exciter time constant, integration rate associated with exciter
-  control (s)";
+  control ";
   parameter Types.PerUnit K_C "Rectifier loading factor proportional to commutating reactance";
   parameter Types.PerUnit K_D "Demagnetizing factor, a function of exciter alternator
 reactances";
@@ -25,7 +25,7 @@ reactances";
   parameter Types.PerUnit K_F1 "Excitation control system stabilizer gain";
   parameter Types.PerUnit K_F2 "Excitation control system stabilizer gain";
   parameter Types.PerUnit K_F3 "Excitation control system stabilizer gain";
-  parameter Types.Time T_F3 "Excitation control system stabilizer time constant (s)";
+  parameter Types.Time T_F3 "Excitation control system stabilizer time constant ";
   parameter Types.PerUnit VE_MIN "Minimum exciter voltage output";
   parameter Types.PerUnit VFEMAX "Exciter field current limit reference";
   parameter Types.PerUnit E_1 "Exciter alternator output voltages back of commutating
