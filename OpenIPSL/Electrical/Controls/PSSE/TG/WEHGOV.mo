@@ -102,7 +102,7 @@ model WEHGOV "Woodward Electric Hydro Governor Model [PSSE-MODELS]"
     Pmech5=Pmech5,
     Pmech6=Pmech6) annotation (Placement(transformation(extent={{-56,-20},{-16,20}})));
 
-  Modelica.Blocks.Sources.Constant P_ref(k=Pref) annotation (Placement(transformation(origin={-78,30},     extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Sources.Constant P_ref(k=Pref) annotation (Placement(transformation(origin={-78,30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput SPEED
     annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
         iconTransformation(extent={{-100,40},{-60,80}})));
@@ -124,13 +124,13 @@ initial equation
   Pref = R_PERM_PE*Pe0;
 equation
   connect(Governor.Gate_Position, Turbine.Gate_Position) annotation (Line(
-        points={{-14,0},{18,0},{18,16},{28,16}},     color={0,0,127}));
+        points={{-14,0},{18,0},{18,16},{28,16}}, color={0,0,127}));
   connect(P_ref.y, Governor.PREF) annotation (Line(points={{-67,30},{-60,30},{
-          -60,16}},                     color={0,0,127}));
+          -60,16}}, color={0,0,127}));
   connect(SPEED, Governor.SPEED) annotation (Line(points={{-120,60},{-94,60},{
-          -94,6},{-60,6}},  color={0,0,127}));
+          -94,6},{-60,6}}, color={0,0,127}));
   connect(PELEC, Governor.PELEC) annotation (Line(points={{-120,-60},{-88,-60},
-          {-88,-16},{-60,-16}},               color={0,0,127}));
+          {-88,-16},{-60,-16}}, color={0,0,127}));
   connect(Turbine.SPEED, SPEED)
     annotation (Line(points={{68,24},{68,60},{-120,60}}, color={0,0,127}));
   connect(Turbine.PMECH, PMECH)
@@ -147,7 +147,7 @@ equation
           extent={{-74,148},{76,52}},
           textColor={28,108,200},
           textString="WEHGOV
-"),     Text(
+"), Text(
           extent={{-62,68},{-4,52}},
           textColor={28,108,200},
           textString="SPEED"),

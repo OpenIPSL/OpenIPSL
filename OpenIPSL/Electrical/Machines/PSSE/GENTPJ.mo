@@ -63,7 +63,7 @@ protected
   parameter Complex S=Complex(p0,q0) "Complex power on machine base";
   parameter Complex It=Complex(real(S/VT),-imag(S/VT)) "Complex current, machine base";
   parameter Complex Is=Complex(real(It + VT/Zs),imag(It + VT/Zs)) "Equivalent internal current source";
-  parameter Complex PSIpp0=Complex(real(Zs*Is),(imag(Zs*Is) - id0*(Xppqsat0-Xppdsat0)))  "Sub-transient flux linkage in stator reference frame";
+  parameter Complex PSIpp0=Complex(real(Zs*Is),(imag(Zs*Is) - id0*(Xppqsat0-Xppdsat0))) "Sub-transient flux linkage in stator reference frame";
   parameter Types.Angle ang_PSIpp0=arg(PSIpp0) "flux angle";
   parameter Types.Angle ang_It=arg(It) "current angle";
   parameter Types.Angle ang_PSIpp0andIt=ang_PSIpp0 - ang_It
@@ -90,7 +90,7 @@ protected
   parameter Types.Angle delta0=ang_PSIpp0 + atan(b*cos(
       ang_PSIpp0andIt)/(b*sin(ang_PSIpp0andIt) - a))
     "initial rotor angle in radians";
-  parameter Complex DQ_dq=Complex(cos(delta0),-sin(delta0))  "Parks transformation, from stator to rotor reference frame";
+  parameter Complex DQ_dq=Complex(cos(delta0),-sin(delta0)) "Parks transformation, from stator to rotor reference frame";
   parameter Complex PSIpp0_dq=PSIpp0*DQ_dq "Flux linkage in rotor reference frame";
   parameter Complex I_dq=conj(It*DQ_dq); //"The terminal current in rotor reference frame"
   parameter Types.PerUnit PSIppq0=imag(PSIpp0_dq)
@@ -136,7 +136,7 @@ protected
   parameter Types.PerUnit PSId0=PSIppd0 - Xppdsat0*id0;
   parameter Types.PerUnit PSIq0=PSIppq0 - Xppqsat0*iq0;
   // Constants
-  parameter Real CoB=M_b/S_b  "Constant to change from system base to machine base";
+  parameter Real CoB=M_b/S_b "Constant to change from system base to machine base";
 
 initial equation
   der(Epd) = 0;
@@ -192,7 +192,7 @@ equation
           lineColor={0,0,255},
           textString="GENTPJ")}),
     Documentation(info="<html><p>Solid rotor generator with saturation on both axes. The saturation in this model is not only function of the air-gap flux, but also of armature current magnitude. This effect is included via parameter <code>Kis</code>.</p>
-    <p> If  <code>Kis</code> is set to zero, then the model will behave like the WECC Type F Generator, that is, GENTPF.</p></html>",
+    <p> If <code>Kis</code> is set to zero, then the model will behave like the WECC Type F Generator, that is, GENTPF.</p></html>",
     revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>

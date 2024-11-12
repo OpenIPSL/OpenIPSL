@@ -101,7 +101,6 @@ reactances";
         origin={157,30})));
   Modelica.Blocks.Sources.Constant const(k=K_E)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
-        rotation=0,
         origin={162,0})));
   Modelica.Blocks.Math.Add DiffV3
     annotation (Placement(transformation(extent={{114,18},{94,38}})));
@@ -109,7 +108,7 @@ reactances";
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={52,6})));
-  Modelica.Blocks.Math.Gain gain5(k=K_D)  annotation (Placement(
+  Modelica.Blocks.Math.Gain gain5(k=K_D) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -121,7 +120,7 @@ reactances";
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-72,70})));
-  NonElectrical.Continuous.PID_No_Windup      pID_No_Windup(
+  NonElectrical.Continuous.PID_No_Windup pID_No_Windup(
     K_P=K_PR,
     K_I=K_IR,
     K_D=K_DR,
@@ -191,7 +190,7 @@ initial equation
 
 equation
   connect(DiffV.u2, TransducerDelay.y) annotation (Line(points={{-122,-6},{-134,
-          -6},{-134,0},{-147,0}},      color={0,0,127}));
+          -6},{-134,0},{-147,0}}, color={0,0,127}));
   connect(TransducerDelay.u, ECOMP)
     annotation (Line(points={{-170,0},{-200,0}}, color={0,0,127}));
   connect(gain1.y, add.u2)
@@ -202,9 +201,9 @@ equation
   connect(product.u1, gain4.y) annotation (Line(points={{172,116},{172,128},{127,
           128},{127,140}}, color={0,0,127}));
   connect(gain2.y, add.u1) annotation (Line(points={{-6,-59},{-6,-12},{-12,-12},
-          {-12,34}},                        color={0,0,127}));
+          {-12,34}}, color={0,0,127}));
   connect(FEMAX.y,DiffV2. u1) annotation (Line(points={{-53,-14},{-40,-14},{-40,
-          -18}},          color={0,0,127}));
+          -18}}, color={0,0,127}));
   connect(gain5.y, DiffV2.u2) annotation (Line(points={{-28,-139},{-28,-94},{-44,
           -94},{-44,-30},{-40,-30}},
                  color={0,0,127}));
@@ -220,10 +219,10 @@ equation
   connect(rectifierCommutationVoltageDrop.V_EX,
     rotatingExciterWithDemagnetizationVarLim.EFD) annotation (Line(points={{148.3,
           -51},{146,-51},{146,-48},{138,-48},{138,-34},{118,-34},{118,-35},{83.875,
-          -35}},                                                      color={0,0,
+          -35}}, color={0,0,
           127}));
   connect(gain2.u, EFD) annotation (Line(points={{-6,-82},{196,-82},{196,0},{210,
-          0}},                       color={0,0,127}));
+          0}}, color={0,0,127}));
   connect(rotatingExciterWithDemagnetizationVarLim.V_FE, gain1.u) annotation (
       Line(points={{50.125,-44.375},{50.125,-52},{50,-52},{50,-60},{16,-60},{16,
           -56}}, color={0,0,127}));
@@ -248,7 +247,7 @@ equation
   connect(pID_No_Windup.y, add1.u1) annotation (Line(points={{-7.7,111},{6,111},
           {6,116},{18,116}}, color={0,0,127}));
   connect(imDerivativeLag.u, gain1.u) annotation (Line(points={{-52,-104},{50,-104},
-          {50,-60},{16,-60},{16,-56}},                      color={0,0,127}));
+          {50,-60},{16,-60},{16,-56}}, color={0,0,127}));
   connect(Upper_Limit.y, variableLimiter.limit1) annotation (Line(points={{169,82},
           {152,82},{152,72},{132,72}}, color={0,0,127}));
   connect(gain.y, variableLimiter.limit2) annotation (Line(points={{161,46},{152,
@@ -274,19 +273,19 @@ equation
     annotation (Line(points={{109,64},{68,64},{68,60},{32,60},{32,-35},{50.125,
           -35}}, color={0,0,127}));
   connect(pI_No_Windup.y, product.u2) annotation (Line(points={{105.9,104},{172,
-          104}},                     color={0,0,127}));
+          104}}, color={0,0,127}));
   connect(add1.y, pI_No_Windup.u)
     annotation (Line(points={{41,110},{46,110},{46,104},{62.2,104}},
                                                  color={0,0,127}));
   connect(add3.y, pID_No_Windup.u) annotation (Line(points={{-72,81},{-72,111},{
           -60.6,111}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
-      Icon(graphics={        Text(
+      Icon(graphics={ Text(
           extent={{-96,-60},{-26,-80}},
           lineColor={28,108,200},
           textString="
 
-          "),                 Text(
+          "), Text(
           extent={{-104,90},{-22,70}},
           lineColor={28,108,200},
           textString="ETERM"),

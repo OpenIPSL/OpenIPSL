@@ -235,7 +235,7 @@ equation
     annotation (Line(points={{-200,-140},{-122,-140}}, color={0,0,127}));
   annotation (Icon(graphics={Rectangle(extent={{-100,
               -100},{100,100}},
-            lineColor={28,108,200}),           Text(
+            lineColor={28,108,200}), Text(
           extent={{-84,60},{88,-56}},
           textColor={28,108,200},
           textString="Governor")}),

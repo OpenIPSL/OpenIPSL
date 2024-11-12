@@ -40,8 +40,8 @@ model WPIDHY "Woodward PID Hydro (WPIDHY) Governor [PSSE-MODELS]"
             {-60,60}})));
   Modelica.Blocks.Interfaces.RealInput PELEC
     "Machine electrical power [pu]"
-    annotation (Placement(transformation(origin={-120,-60},    extent={{-20,-20},
-            {20,20}}),                                                                            iconTransformation(extent={{-100,
+    annotation (Placement(transformation(origin={-120,-60}, extent={{-20,-20},
+            {20,20}}), iconTransformation(extent={{-100,
             -80},{-60,-40}})));
   Modelica.Blocks.Interfaces.RealOutput PMECH "Turbine mechanical power [pu]" annotation (
     Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{100, -10}, {120, 10}})));
@@ -180,14 +180,14 @@ equation
   annotation (
         Icon(graphics={Rectangle(lineColor = {28, 108, 200}, extent = {{-100, 100}, {100, -100}}),
         Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255},
-            fillPattern =                                                           FillPattern.Solid, extent={{-56,60},
-              {4,20}},                                                                                                                 textString = "SPEED"),
+            fillPattern = FillPattern.Solid, extent={{-56,60},
+              {4,20}}, textString = "SPEED"),
         Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255},
-            fillPattern =                                                           FillPattern.Solid, extent={{-56,-40},
-              {4,-80}},                                                                                                                  textString = "PELEC"),
+            fillPattern = FillPattern.Solid, extent={{-56,-40},
+              {4,-80}}, textString = "PELEC"),
         Text(lineColor = {28, 108, 200}, fillColor = {255, 255, 255},
-            fillPattern =                                                           FillPattern.Solid, extent = {{30, 20}, {90, -20}}, textString = "PMECH"),
-        Text(lineColor={4,7,200},        extent={{-94,172},{94,90}},
+            fillPattern = FillPattern.Solid, extent = {{30, 20}, {90, -20}}, textString = "PMECH"),
+        Text(lineColor={4,7,200}, extent={{-94,172},{94,90}},
           textString="WPIDHY")}),
     Documentation(info="<html>
 <p>The following documentation is adapted from <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-Models], chapter 7.5</a>3:</p>

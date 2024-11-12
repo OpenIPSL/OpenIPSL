@@ -152,10 +152,10 @@ equation
           extent={{-100,160},{100,100}},
           lineColor={28,108,200},
           textString="HYGOV")}),
-    Documentation(info="<html> 
+    Documentation(info="<html>
 <p> This is a hydro turbine-governor model. </p>
 <p> If compared to the original PSSE implementation one will notice that the initial water head value, <code>h0</code>, is declared as a parameter.
-This allows the user to modify it, if required, in order to perform adequate studies. 
+This allows the user to modify it, if required, in order to perform adequate studies.
 The user should leave it in its default value (<code>1</code>) if they do not have any information on water head value, or if they do not wish to modify the parameter.</p>
 </html>",revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">

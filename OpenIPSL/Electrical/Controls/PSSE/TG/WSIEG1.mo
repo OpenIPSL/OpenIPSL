@@ -116,10 +116,10 @@ model WSIEG1 "WECC Modified IEEE Type 1 Speed-Governing Model [PSSE-MODELS]"
         origin={70,-62})));
   Modelica.Blocks.Interfaces.RealOutput PMECH_HP
     "Turbine mechanical power [pu]" annotation (Placement(transformation(extent={{100,2},
-            {120,22}}),          iconTransformation(extent={{100,30},{120,50}})));
+            {120,22}}), iconTransformation(extent={{100,30},{120,50}})));
   Modelica.Blocks.Interfaces.RealOutput PMECH_LP
     "Turbine mechanical power [pu]" annotation (Placement(transformation(extent={{100,-98},
-            {120,-78}}),           iconTransformation(extent={{100,-50},{120,-30}})));
+            {120,-78}}), iconTransformation(extent={{100,-50},{120,-30}})));
 
   Modelica.Blocks.Math.Add3 add_ref(k2=-1, k3=-1)
     annotation (Placement(transformation(extent={{-42,46},{-26,62}})));
@@ -291,14 +291,8 @@ equation
   connect(deadband2.y, Lookup_GateValve_Pmech.u) annotation (Line(points={{76.8,
           82},{84,82},{84,68},{72,68},{72,54},{76.4,54}}, color={0,0,127}));
   annotation (
-    Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
-                                                           preserveAspectRatio=
-            false)),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}},
-                                                        preserveAspectRatio=
-            true), graphics={Rectangle(extent={{-100,100},{100,-100}},
-                                                                     lineColor={28,108,200}),
-                     Text(
+    Icon(graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,200}),
+         Text(
           extent={{-54,80},{6,40}},
           lineColor={28,108,200},
           textString="SPEED_HP"),Text(

@@ -13,11 +13,11 @@ model DC4B "DC4B Excitation System [IEEE2005]"
   parameter Types.PerUnit V_RMIN=-7 "Minimum regulator output";
   parameter Types.PerUnit K_A=10.8 "Voltage regulator gain";
   parameter Types.Time T_A=0.01 "Voltage regulator time constant (sec)";
-  parameter Types.PerUnit K_E=1  "Exciter field proportional constant";
+  parameter Types.PerUnit K_E=1 "Exciter field proportional constant";
   parameter Types.Time T_E=0.8 "Exciter field time constant";
   parameter Types.PerUnit K_F=0.03 "Rate feedback excitation system stabilizer gain";
   parameter Types.Time T_F=1 "Rate feedback time constant";
-  parameter Types.PerUnit E_1=2.4  "Exciter output voltage for saturation factor S_E(E_1)";
+  parameter Types.PerUnit E_1=2.4 "Exciter output voltage for saturation factor S_E(E_1)";
   parameter Types.PerUnit S_EE_1=0.03 "Exciter saturation factor at exciter output voltage E1";
   parameter Types.PerUnit E_2=5.0000 "Exciter output voltage for saturation factor S_E(E_2)";
   parameter Types.PerUnit S_EE_2=0.50000 "Exciter saturation factor at exciter output voltage E2";
@@ -70,17 +70,17 @@ model DC4B "DC4B Excitation System [IEEE2005]"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-130,-80})));
-  Modelica.Blocks.Math.Gain gain(k=V_RMIN)  annotation (Placement(
+  Modelica.Blocks.Math.Gain gain(k=V_RMIN) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={132,-150})));
-  Modelica.Blocks.Math.Gain gain1(k=V_RMAX)  annotation (Placement(
+  Modelica.Blocks.Math.Gain gain1(k=V_RMAX) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={160,-150})));
-  NonElectrical.Continuous.PID_No_Windup      pID_No_Windup(
+  NonElectrical.Continuous.PID_No_Windup pID_No_Windup(
     K_P=K_PR,
     K_I=K_IR,
     K_D=K_DR,
@@ -135,7 +135,7 @@ equation
   connect(TransducerDelay.y, DiffV.u2) annotation (Line(points={{-145,0},{-134,
           0},{-134,-6},{-122,-6}}, color={0,0,127}));
   connect(VOTHSG, Vpss_Add.u1) annotation (Line(points={{-200,90},{-96,90},{-96,
-          44},{-90,44}},                        color={0,0,127}));
+          44},{-90,44}}, color={0,0,127}));
   connect(DiffV.y, Vpss_Add.u2)
     annotation (Line(points={{-99,0},{-94,0},{-94,32},{-90,32}},
                                                color={0,0,127}));
@@ -154,7 +154,7 @@ equation
   connect(VUEL_VOEL_add.y, add3_1.u2) annotation (Line(points={{-130,-69},{-130,
           -20},{-80,-20},{-80,0},{-60,0}}, color={0,0,127}));
   connect(derivativeLag.y, add3_1.u3) annotation (Line(points={{-45,-76},{-76,-76},
-          {-76,-8},{-60,-8}},                           color={0,0,127}));
+          {-76,-8},{-60,-8}}, color={0,0,127}));
   connect(VT,gain. u) annotation (Line(points={{152,-200},{152,-172},{132,-172},
           {132,-162}},
                     color={0,0,127}));
@@ -162,11 +162,11 @@ equation
           {132,-162}},
                      color={0,0,127}));
   connect(product1.u1, gain.u) annotation (Line(points={{70,130},{52,130},{52,146},
-          {194,146},{194,-184},{132,-184},{132,-162}},      color={0,0,127}));
+          {194,146},{194,-184},{132,-184},{132,-162}}, color={0,0,127}));
   connect(add3_1.y, pID_No_Windup.u) annotation (Line(points={{-37,0},{-24.6,0}},
                                   color={0,0,127}));
   connect(pID_No_Windup.y, hV_GATE.u2) annotation (Line(points={{28.3,0},{40,0},
-          {40,-32},{2,-32},{2,-53.2},{13.2,-53.2}},                 color=
+          {40,-32},{2,-32},{2,-53.2},{13.2,-53.2}}, color=
          {0,0,127}));
   connect(switch_VUEL.y2, hV_GATE.u1) annotation (Line(points={{-124,-139},
           {-124,-122},{-98,-122},{-98,-44.8},{13.2,-44.8}}, color={0,0,
@@ -176,7 +176,7 @@ equation
   connect(switch_VOEL.y2, lV_GATE.u1) annotation (Line(points={{-64,-139},
           {-64,-100},{52,-100},{52,-40.8},{61.2,-40.8}}, color={0,0,127}));
   connect(lV_GATE.y, product1.u2) annotation (Line(points={{93.4,-45},{98,-45},{
-          98,-20},{52,-20},{52,118},{70,118}},            color={0,0,127}));
+          98,-20},{52,-20},{52,118},{70,118}}, color={0,0,127}));
   connect(gain.y, simpleLagLimVar.outMin) annotation (Line(points={{132,-139},{132,
           -36},{106,-36},{106,-8},{78,-8},{78,48}}, color={0,0,127}));
   connect(gain1.y, simpleLagLimVar.outMax) annotation (Line(points={{160,-139},{

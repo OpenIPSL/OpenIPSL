@@ -41,7 +41,7 @@ model Turbine "WEHGOV turbine dynamics"
     annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
   Modelica.Blocks.Sources.Constant Turbine_Head_ref(k=1)
     annotation (Placement(transformation(extent={{-60,-76},{-40,-56}})));
-  Modelica.Blocks.Continuous.Integrator integrator(k=1/TW,  initType=
+  Modelica.Blocks.Continuous.Integrator integrator(k=1/TW, initType=
         Modelica.Blocks.Types.Init.InitialOutput,
     y_start=f0)
     annotation (Placement(transformation(extent={{20,-70},{40,-50}})));

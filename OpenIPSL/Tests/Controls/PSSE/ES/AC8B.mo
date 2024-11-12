@@ -23,7 +23,7 @@ model AC8B "SMIB system to test functionality of exciter AC8B"
     P_0=39999952.912331,
     Q_0=5416571.3489056,
     v_0=1) annotation (Placement(transformation(extent={{-88,-16},{-58,16}})));
-  Modelica.Blocks.Sources.Constant const5(k=0)     annotation (Placement(
+  Modelica.Blocks.Sources.Constant const5(k=0) annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,

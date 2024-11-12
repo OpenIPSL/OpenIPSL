@@ -156,7 +156,7 @@ equation
   connect(leadLag1.y, imDerivativeLag.u)
     annotation (Line(points={{93,-82},{84,-82}}, color={0,0,127}));
   connect(imDerivativeLag.y, add3_2.u3) annotation (Line(points={{61,-82},{-60,-82},
-          {-60,-40}},           color={0,0,127}));
+          {-60,-40}}, color={0,0,127}));
   connect(add.u2, gain.y) annotation (Line(points={{20,-32},{14,-32},{14,-38},{9,
           -38}}, color={0,0,127}));
   connect(add.u1, integrator.y)
@@ -171,7 +171,7 @@ equation
         graphics={Text(
           extent={{-66,194},{70,158}},
           textColor={28,108,200},
-          textString="EXBAS")}),                                         Icon(
+          textString="EXBAS")}), Icon(
         coordinateSystem(extent={{-100,-100},{100,100}}), graphics={Text(
           extent={{-58,142},{76,98}},
           textColor={28,108,200},

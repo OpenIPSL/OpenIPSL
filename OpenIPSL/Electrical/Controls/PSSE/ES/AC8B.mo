@@ -146,17 +146,17 @@ equation
           -69},{198,-69},{198,0},{210,0}}, color={0,0,127}));
   connect(rectifierCommutationVoltageDrop.V_EX,
     rotatingExciterWithDemagnetizationVarLim.EFD) annotation (Line(points={{86.3,
-          -69},{86.3,-70},{58,-70},{58,-44},{38.75,-44}},     color={0,0,
+          -69},{86.3,-70},{58,-70},{58,-44},{38.75,-44}}, color={0,0,
           127}));
   connect(FEMAX.y,DiffV2. u1) annotation (Line(points={{89,50},{76,50},{76,44},{
-          62,44}},        color={0,0,127}));
+          62,44}}, color={0,0,127}));
   connect(DiffV3.u1,const. y) annotation (Line(points={{122,16},{144,16},{144,30},
-          {159,30}},       color={0,0,127}));
+          {159,30}}, color={0,0,127}));
   connect(DiffV3.u2,se1. VE_OUT) annotation (Line(points={{122,4},{137.46,4}},
                                   color={0,0,127}));
   connect(rotatingExciterWithDemagnetizationVarLim.I_C, simpleLagLim.y)
     annotation (Line(points={{-10.75,-44},{-48,-44},{-48,54},{-8,54},{-8,108},{-13,
-          108}},             color={0,0,127}));
+          108}}, color={0,0,127}));
   connect(VUEL, VS.u2) annotation (Line(points={{-130,-200},{-130,-106},{-138,-106},
           {-138,-84}}, color={0,0,127}));
   connect(VOEL, VS.u3) annotation (Line(points={{-70,-200},{-70,-168},{-120,-168},
@@ -189,7 +189,7 @@ equation
           {22,16}}, color={0,0,127}));
   connect(DiffV3.y, div0block.u2)
     annotation (Line(points={{99,10},{30,10},{30,4},{22,4}}, color={0,0,127}));
-  annotation (                                                                Icon(
+  annotation ( Icon(
         graphics={Text(
           extent={{-42,152},{36,82}},
           lineColor={28,108,200},

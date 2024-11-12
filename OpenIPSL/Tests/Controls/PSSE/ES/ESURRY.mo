@@ -24,8 +24,8 @@ model ESURRY "SMIB system to test functionality of ESURRY model"
     v_0=1)
     annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
   Modelica.Blocks.Sources.Constant zero(k=0) annotation (Placement(transformation(extent={{-14,-52},{-26,-40}})));
-  Modelica.Blocks.Sources.Constant minusInf(k=0)                       annotation (Placement(transformation(extent={{-32,-78},{-40,-70}})));
-  Modelica.Blocks.Sources.Constant plusInf(k=0)                      annotation (Placement(transformation(extent={{-32,-92},{-40,-84}})));
+  Modelica.Blocks.Sources.Constant minusInf(k=0) annotation (Placement(transformation(extent={{-32,-78},{-40,-70}})));
+  Modelica.Blocks.Sources.Constant plusInf(k=0) annotation (Placement(transformation(extent={{-32,-92},{-40,-84}})));
   Electrical.Controls.PSSE.ES.ESURRY eSURRY(
     T_1=0.5,
     T_C=0.42,
@@ -50,7 +50,7 @@ model ESURRY "SMIB system to test functionality of ESURRY model"
     annotation (Placement(transformation(extent={{-60,-60},{-80,-40}})));
 equation
   connect(gENROU.PMECH,gENROU. PMECH0) annotation (Line(points={{-92,12},{-100,12},
-          {-100,30},{-40,30},{-40,10},{-46,10}},     color={0,0,127}));
+          {-100,30},{-40,30},{-40,10},{-46,10}}, color={0,0,127}));
   connect(eSURRY.VOTHSG, zero.y)
     annotation (Line(points={{-59,-46},{-26.6,-46}}, color={0,0,127}));
   connect(gENROU.ETERM, eSURRY.ECOMP) annotation (Line(points={{-46,-6},{-34,-6},
@@ -64,7 +64,7 @@ equation
   connect(plusInf.y, eSURRY.VOEL) annotation (Line(points={{-40.4,-88},{-70,-88},
           {-70,-61}}, color={0,0,127}));
   connect(gENROU.p, GEN1.p)
-    annotation (Line(points={{-48,0},{-30,0}},         color={0,0,255}));
+    annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
   connect(minusInf.y, eSURRY.VUEL) annotation (Line(points={{-40.4,-74},{-66,-74},
           {-66,-61}}, color={0,0,127}));
   annotation (

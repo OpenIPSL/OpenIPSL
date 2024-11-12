@@ -145,7 +145,7 @@ equation
                                                    color={0,0,127}));
   connect(rotatingExciterWithDemagnetization.EFD,
     rectifierCommutationVoltageDrop.V_EX) annotation (Line(points={{133.25,0},{157,
-          0}},                      color={0,0,127}));
+          0}}, color={0,0,127}));
   connect(rectifierCommutationVoltageDrop.EFD, EFD)
     annotation (Line(points={{179,0},{210,0}}, color={0,0,127}));
   connect(gain1.y,add3_3. u2)
@@ -179,7 +179,7 @@ equation
   annotation (
     Diagram(coordinateSystem(extent={{-200,-200},{200,160}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
-        graphics={             Text(
+        graphics={ Text(
           extent={{-104,172},{102,88}},
           lineColor={14,8,200},
           textString="ESURRY")}),

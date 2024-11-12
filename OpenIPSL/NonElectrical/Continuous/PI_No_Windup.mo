@@ -64,7 +64,5 @@ equation
           textColor={0,0,255},
           textString="+"),
           Line(points={{-100,-140},{-60,-140},{-40,-100}}, color={0,0,0}),
-                   Line(points={{40,100},{60,140},{100,140}},color={0,0,0})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+                   Line(points={{40,100},{60,140},{100,140}},color={0,0,0})}));
 end PI_No_Windup;
