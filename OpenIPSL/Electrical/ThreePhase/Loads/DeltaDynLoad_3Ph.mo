@@ -116,16 +116,16 @@ protected
     output Real[1, 6] Cor_Power;
     // Identifying input elements for the Coefficients
   protected
-    parameter Real coef_A=Coef[1, 1];
-    parameter Real coef_B=Coef[1, 2];
-    parameter Real coef_C=Coef[1, 3];
+    Real coef_A=Coef[1, 1];
+    Real coef_B=Coef[1, 2];
+    Real coef_C=Coef[1, 3];
     // Identifying input elements for Power
-    parameter Real Pab_cor=TPhasePower[1, 1]*coef_A;
-    parameter Real Pbc_cor=TPhasePower[1, 2]*coef_B;
-    parameter Real Pca_cor=TPhasePower[1, 3]*coef_C;
-    parameter Real Qab_cor=TPhasePower[1, 4]*coef_A;
-    parameter Real Qbc_cor=TPhasePower[1, 5]*coef_B;
-    parameter Real Qca_cor=TPhasePower[1, 6]*coef_C;
+    Real Pab_cor=TPhasePower[1, 1]*coef_A;
+    Real Pbc_cor=TPhasePower[1, 2]*coef_B;
+    Real Pca_cor=TPhasePower[1, 3]*coef_C;
+    Real Qab_cor=TPhasePower[1, 4]*coef_A;
+    Real Qbc_cor=TPhasePower[1, 5]*coef_B;
+    Real Qca_cor=TPhasePower[1, 6]*coef_C;
   algorithm
     Cor_Power := [Pab_cor, Pbc_cor, Pca_cor, Qab_cor, Qbc_cor, Qca_cor];
   end PowerDefinition;

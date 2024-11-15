@@ -115,12 +115,12 @@ protected
     Real coef_B=Coef[1, 2];
     Real coef_C=Coef[1, 3];
     // Identifying input elements for Power
-    parameter Real Pan=TPhasePower[1, 1];
-    parameter Real Pbn=TPhasePower[1, 2];
-    parameter Real Pcn=TPhasePower[1, 3];
-    parameter Real Qan=TPhasePower[1, 4];
-    parameter Real Qbn=TPhasePower[1, 5];
-    parameter Real Qcn=TPhasePower[1, 6];
+    Real Pan=TPhasePower[1, 1];
+    Real Pbn=TPhasePower[1, 2];
+    Real Pcn=TPhasePower[1, 3];
+    Real Qan=TPhasePower[1, 4];
+    Real Qbn=TPhasePower[1, 5];
+    Real Qcn=TPhasePower[1, 6];
     // Calculating Corrected Power
     Real Pa_cor=Pan*coef_A;
     Real Pb_cor=Pbn*coef_B;

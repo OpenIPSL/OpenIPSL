@@ -194,10 +194,10 @@ protected
     input Types.PerUnit Pmin "Minimum power for operating at wP100 speed";
     output Real y;
   protected
-    parameter Real K1=(w20 - wmin)/(0.2 - PMN);
-    parameter Real K2=(w40 - w20)/(0.4 - 0.2);
-    parameter Real K3=(w60 - w40)/(0.6 - 0.4);
-    parameter Real K4=(w100 - w60)/(Pmin - 0.6);
+    Real K1=(w20 - wmin)/(0.2 - PMN);
+    Real K2=(w40 - w20)/(0.4 - 0.2);
+    Real K3=(w60 - w40)/(0.6 - 0.4);
+    Real K4=(w100 - w60)/(Pmin - 0.6);
     Real K, x0, y0;
   algorithm
     if x <= PMN then
