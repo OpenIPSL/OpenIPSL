@@ -7,11 +7,11 @@ package IEEE_CIGRE
     package ReadMe "Read this before running the model."
       extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
-<p>This model tests the implemenation of &quot;IEEE ...&quot; [refHao.]</p>
-<p><br>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</p>
-<p>In Dymola the experiment annotation shoul result in the additional attributes.</p>
-<p><br>    __Dymola_fixedstepsize=0.005,</p>
-<p>    __Dymola_Algorithm=&quot;Euler&quot;</p>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<p><br><b>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</b></p>
+<h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
+<p><h4></p><p>__Dymola_fixedstepsize=0.005,</h4></p>
+<h4>__Dymola_Algorithm=&quot;Euler&quot;</h4>
 </html>"));
     end ReadMe;
 
@@ -166,6 +166,21 @@ package IEEE_CIGRE
 
   package GFM
     extends Modelica.Icons.ExamplesPackage;
+    package ReadMe "Read this before running the model."
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<p><br>GFM_TestNoFault will save the model termination status in your workspace. it generate<b> list.dat </b>file. </p>
+<p><br>GFM_InitNoFault will load the termination state from <b>list.dat</b> file as initial condition to prevent initial transient. </p>
+<p><br>GFM_InitLine will load the termination state from <b>list.dat</b> file as initial condition to prevent initial transient. </p>
+<h4><span style=\"background-color: #ffffff\">Pre-Configuration </span></h4>
+<p>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</p>
+<p>In Dymola the experiment annotation shoul result in the additional attributes.</p>
+<p>__Dymola_fixedstepsize=0.005,</p>
+<p>__Dymola_Algorithm=&quot;Euler&quot;</p>
+</html>"));
+    end ReadMe;
+
     model GFM_Test
       constant Real line_inductance = 0;
       constant Real line_resistance = 0;
@@ -322,71 +337,71 @@ package IEEE_CIGRE
 
 
 
+    model GFM_InitLine
+      "This GFM controller and Grid is initialized with initial condiction from termination of GFM_Test."
+      constant Real line_inductance = 0;
+      constant Real line_resistance = 0.1;
+
+      OpenIPSL.Electrical.Controls.IEEE_CIGRE.GFM.GridComponents.GFM_GFL_IBR_Init_SS
+                         gFM_GFL_IBR_Init_SS
+                                     annotation (Placement(transformation(rotation=0,
+              extent={{-62,-30},{-2,30}})));
+
+      Modelica.Blocks.Sources.Constant Qref(k=0)
+        annotation (Placement(transformation(extent={{-92,-6},{-80,6}})));
+      Modelica.Blocks.Sources.Constant Vref(k=1)
+        annotation (Placement(transformation(extent={{-92,-24},{-80,-12}})));
+      Modelica.Blocks.Sources.Step Pref(
+        height=0,
+        offset=0.5,
+        startTime=10)
+        annotation (Placement(transformation(extent={{-92,12},{-80,24}})));
+      OpenIPSL.Electrical.Controls.IEEE_CIGRE.GFM.GridComponents.GridWithFault gridWithFault_Init(FaultVoltage=0.5, FaultTime=1)
+                                                           annotation (Placement(
+            transformation(rotation=0, extent={{74,-30},{134,30}})));
+      Modelica.Electrical.Analog.Basic.Resistor resistor(R=line_resistance)
+        annotation (Placement(transformation(extent={{24,-10},{44,10}})));
+      Modelica.Electrical.Analog.Basic.Resistor resistor1(R=line_resistance)
+        annotation (Placement(transformation(extent={{24,-28},{44,-8}})));
+      Modelica.Electrical.Analog.Basic.Resistor resistor2(R=line_resistance)
+        annotation (Placement(transformation(extent={{24,8},{44,28}})));
+    equation
+
+      connect(Qref.y, gFM_GFL_IBR_Init_SS.Q_ref_pu)
+        annotation (Line(points={{-79.4,0},{-62,0}}, color={0,0,127}));
+      connect(Vref.y, gFM_GFL_IBR_Init_SS.V_ref_pu)
+        annotation (Line(points={{-79.4,-18},{-62,-18}}, color={0,0,127}));
+      connect(Pref.y, gFM_GFL_IBR_Init_SS.P_ref_pu)
+        annotation (Line(points={{-79.4,18},{-62,18}}, color={0,0,127}));
+      connect(gridWithFault_Init.p1, resistor.n)
+        annotation (Line(points={{74,0},{44,0}}, color={0,0,255}));
+      connect(gFM_GFL_IBR_Init_SS.n1, resistor.p)
+        annotation (Line(points={{-2,0},{24,0}}, color={0,0,255}));
+      connect(resistor2.p, gFM_GFL_IBR_Init_SS.n2)
+        annotation (Line(points={{24,18},{-2,18}}, color={0,0,255}));
+      connect(resistor2.n, gridWithFault_Init.p)
+        annotation (Line(points={{44,18},{74,18}}, color={0,0,255}));
+      connect(gFM_GFL_IBR_Init_SS.n, resistor1.p)
+        annotation (Line(points={{-2,-18},{24,-18}}, color={0,0,255}));
+      connect(resistor1.n, gridWithFault_Init.p2)
+        annotation (Line(points={{44,-18},{74,-18}}, color={0,0,255}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+            Ellipse(lineColor = {75,138,73},
+                    fillColor={255,255,255},
+                    fillPattern = FillPattern.Solid,
+                    extent={{-100,-100},{100,100}}),
+            Polygon(lineColor = {0,0,255},
+                    fillColor = {75,138,73},
+                    pattern = LinePattern.None,
+                    fillPattern = FillPattern.Solid,
+                    points={{-36,60},{64,0},{-36,-60},{-36,60}})}),  Diagram(
+            coordinateSystem(preserveAspectRatio=false)),
+        experiment(
+          StopTime=5,
+          Interval=1e-05,
+          __Dymola_fixedstepsize=1e-05,
+          __Dymola_Algorithm="Euler"));
+    end GFM_InitLine;
   end GFM;
 
-  model GFM_InitLine
-    "This GFM controller and Grid is initialized with initial condiction from termination of GFM_Test."
-    constant Real line_inductance = 0;
-    constant Real line_resistance = 0.1;
-
-    OpenIPSL.Electrical.Controls.IEEE_CIGRE.GFM.GridComponents.GFM_GFL_IBR_Init_SS
-                       gFM_GFL_IBR_Init_SS
-                                   annotation (Placement(transformation(rotation=0,
-            extent={{-62,-30},{-2,30}})));
-
-    Modelica.Blocks.Sources.Constant Qref(k=0)
-      annotation (Placement(transformation(extent={{-92,-6},{-80,6}})));
-    Modelica.Blocks.Sources.Constant Vref(k=1)
-      annotation (Placement(transformation(extent={{-92,-24},{-80,-12}})));
-    Modelica.Blocks.Sources.Step Pref(
-      height=0,
-      offset=0.5,
-      startTime=10)
-      annotation (Placement(transformation(extent={{-92,12},{-80,24}})));
-    OpenIPSL.Electrical.Controls.IEEE_CIGRE.GFM.GridComponents.GridWithFault gridWithFault_Init(FaultVoltage=0.5, FaultTime=1)
-                                                         annotation (Placement(
-          transformation(rotation=0, extent={{74,-30},{134,30}})));
-    Modelica.Electrical.Analog.Basic.Resistor resistor(R=line_resistance)
-      annotation (Placement(transformation(extent={{24,-10},{44,10}})));
-    Modelica.Electrical.Analog.Basic.Resistor resistor1(R=line_resistance)
-      annotation (Placement(transformation(extent={{24,-28},{44,-8}})));
-    Modelica.Electrical.Analog.Basic.Resistor resistor2(R=line_resistance)
-      annotation (Placement(transformation(extent={{24,8},{44,28}})));
-  equation
-
-    connect(Qref.y, gFM_GFL_IBR_Init_SS.Q_ref_pu)
-      annotation (Line(points={{-79.4,0},{-62,0}}, color={0,0,127}));
-    connect(Vref.y, gFM_GFL_IBR_Init_SS.V_ref_pu)
-      annotation (Line(points={{-79.4,-18},{-62,-18}}, color={0,0,127}));
-    connect(Pref.y, gFM_GFL_IBR_Init_SS.P_ref_pu)
-      annotation (Line(points={{-79.4,18},{-62,18}}, color={0,0,127}));
-    connect(gridWithFault_Init.p1, resistor.n)
-      annotation (Line(points={{74,0},{44,0}}, color={0,0,255}));
-    connect(gFM_GFL_IBR_Init_SS.n1, resistor.p)
-      annotation (Line(points={{-2,0},{24,0}}, color={0,0,255}));
-    connect(resistor2.p, gFM_GFL_IBR_Init_SS.n2)
-      annotation (Line(points={{24,18},{-2,18}}, color={0,0,255}));
-    connect(resistor2.n, gridWithFault_Init.p)
-      annotation (Line(points={{44,18},{74,18}}, color={0,0,255}));
-    connect(gFM_GFL_IBR_Init_SS.n, resistor1.p)
-      annotation (Line(points={{-2,-18},{24,-18}}, color={0,0,255}));
-    connect(resistor1.n, gridWithFault_Init.p2)
-      annotation (Line(points={{44,-18},{74,-18}}, color={0,0,255}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Ellipse(lineColor = {75,138,73},
-                  fillColor={255,255,255},
-                  fillPattern = FillPattern.Solid,
-                  extent={{-100,-100},{100,100}}),
-          Polygon(lineColor = {0,0,255},
-                  fillColor = {75,138,73},
-                  pattern = LinePattern.None,
-                  fillPattern = FillPattern.Solid,
-                  points={{-36,60},{64,0},{-36,-60},{-36,60}})}),  Diagram(
-          coordinateSystem(preserveAspectRatio=false)),
-      experiment(
-        StopTime=5,
-        Interval=1e-05,
-        __Dymola_fixedstepsize=1e-05,
-        __Dymola_Algorithm="Euler"));
-  end GFM_InitLine;
 end IEEE_CIGRE;

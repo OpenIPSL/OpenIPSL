@@ -17,3 +17,6 @@ dymosim
 *.mol
 .DS_Store
 .impact*
+
+!IEEE_Cigre_DLLInterface_types.h
+!IEEE_Cigre_DLLInterface.h

@@ -1,0 +1,7 @@
+1. Install visual studio
+2. Use the following command to compile .c code to .dll file
+
+cl.exe /D_USRDLL /D_WINDLL <files-to-compile> <files-to-link> /link /DLL /OUT:<desired-dll-name>.dll
+
+3. Put .dll files under Library folder 
+
