@@ -10,8 +10,11 @@ package IEEE_CIGRE
 <p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
 <p><br><b>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</b></p>
 <h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
-<p><h4></p><p>__Dymola_fixedstepsize=0.005,</h4></p>
-<h4>__Dymola_Algorithm=&quot;Euler&quot;</h4>
+<p><span style=\"font-family: Courier New;\">experiment(</span></p>
+<p><span style=\"font-family: Courier New;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StopTime=10,</span></p>
+<p><span style=\"font-family: Courier New;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tolerance=1e-05,</span></p>
+<p><span style=\"font-family: Courier New;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__Dymola_fixedstepsize=0.005,</span></p>
+<p><span style=\"font-family: Courier New;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__Dymola_Algorithm=&quot;Euler&quot;));</span></p>
 </html>"));
     end ReadMe;
 
@@ -152,13 +155,15 @@ package IEEE_CIGRE
             -22},{-36,-3},{-61,-3}}, color={0,0,127}));
     connect(sCRX.EFD, gENROU.EFD) annotation (Line(points={{-85.2,-28},{-94,
             -28},{-94,-6},{-84,-6}}, color={0,0,127}));
-      annotation (experiment(
-        StopTime=10,
-        Interval=0.005,
-        Tolerance=1e-09,
-        __Dymola_fixedstepsize=0.005,
-        __Dymola_Algorithm="Euler"), Documentation(info="<html>
-<p>This model tests the implemenation of &quot;IEEE ...&quot; [refHao.]</p>
+      annotation (Documentation(info="<html>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<p><br><br><b>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</b></p>
+<h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
+<p>experiment(</p>
+<p>StopTime=10,</p>
+<p>Tolerance=1e-05,</p>
+<p>__Dymola_fixedstepsize=0.005,</p>
+<p>__Dymola_Algorithm=&quot;Euler&quot;)</p>
 </html>"));
     end SCRX9GridFault;
 
@@ -224,11 +229,16 @@ package IEEE_CIGRE
                     fillPattern = FillPattern.Solid,
                     points={{-36,60},{64,0},{-36,-60},{-36,60}})}),  Diagram(
             coordinateSystem(preserveAspectRatio=false)),
-        experiment(
-          StopTime=20,
-          Interval=1e-05,
-          __Dymola_fixedstepsize=1e-05,
-          __Dymola_Algorithm="Euler"));
+        Documentation(info="<html>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<p><br><h4>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</h4></p>
+<h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
+<p><br>experiment(</p>
+<p>StopTime=10,</p>
+<p>Tolerance=1e-05,</p>
+<p>__Dymola_fixedstepsize=0.005,</p>
+<p>__Dymola_Algorithm=&quot;Euler&quot;)</p>
+</html>"));
     end GFM_Test;
 
     model GFM_TestNoFault
@@ -274,11 +284,16 @@ package IEEE_CIGRE
                     fillPattern = FillPattern.Solid,
                     points={{-36,60},{64,0},{-36,-60},{-36,60}})}),  Diagram(
             coordinateSystem(preserveAspectRatio=false)),
-        experiment(
-          StopTime=5,
-          Interval=1e-05,
-          __Dymola_fixedstepsize=1e-05,
-          __Dymola_Algorithm="Euler"));
+        Documentation(info="<html>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<h4>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</h4>
+<h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
+<p><br>experiment(</p>
+<p>StopTime=10,</p>
+<p>Tolerance=1e-05,</p>
+<p>__Dymola_fixedstepsize=0.005,</p>
+<p>__Dymola_Algorithm=&quot;Euler&quot;)</p>
+</html>"));
     end GFM_TestNoFault;
 
     model GFM_InitNoFault
@@ -328,11 +343,16 @@ package IEEE_CIGRE
                     fillPattern = FillPattern.Solid,
                     points={{-36,60},{64,0},{-36,-60},{-36,60}})}),  Diagram(
             coordinateSystem(preserveAspectRatio=false)),
-        experiment(
-          StopTime=5,
-          Interval=1e-05,
-          __Dymola_fixedstepsize=1e-05,
-          __Dymola_Algorithm="Rkfix4"));
+        Documentation(info="<html>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<h4>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</h4>
+<h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
+<p><br><br>experiment(</p>
+<p>StopTime=10,</p>
+<p>Tolerance=1e-05,</p>
+<p>__Dymola_fixedstepsize=0.005,</p>
+<p>__Dymola_Algorithm=&quot;Euler&quot;)</p>
+</html>"));
     end GFM_InitNoFault;
 
 
@@ -396,11 +416,16 @@ package IEEE_CIGRE
                     fillPattern = FillPattern.Solid,
                     points={{-36,60},{64,0},{-36,-60},{-36,60}})}),  Diagram(
             coordinateSystem(preserveAspectRatio=false)),
-        experiment(
-          StopTime=5,
-          Interval=1e-05,
-          __Dymola_fixedstepsize=1e-05,
-          __Dymola_Algorithm="Euler"));
+        Documentation(info="<html>
+<p>This model tests the implemenation of &quot;IEEE CIGRE&quot; DLL modeling standard to test &quot;real code&quot; models for power system analysis <a href=\"https://www.researchgate.net/publication/381482867_Integrating_the_IEEECIGRE_DLL_Modeling_Standard_to_Use_Real_Code_Models_for_Power_System_Analysis_in_Modelica_Tools\">[link to paper]</a> </p>
+<p><h4></p><p>To run this model, first set the solver to &quot;Euler&quot; and the fixed time step to &quot;0.005&quot;.</h4></p>
+<h4>In Dymola the experiment annotation shoul result in the additional attributes.</h4>
+<p><br><br>experiment(</p>
+<p>StopTime=10,</p>
+<p>Tolerance=1e-05,</p>
+<p>__Dymola_fixedstepsize=0.005,</p>
+<p>__Dymola_Algorithm=&quot;Euler&quot;)</p>
+</html>"));
     end GFM_InitLine;
   end GFM;
 
