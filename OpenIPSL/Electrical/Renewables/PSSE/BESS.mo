@@ -18,6 +18,7 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
   replaceable
     OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.BaseClasses.BaseREGC
     RenewableGenerator(
+    V_b=V_b,
     M_b=M_b,
     P_0=P_0,
     Q_0=Q_0,
@@ -37,6 +38,7 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
   replaceable
     OpenIPSL.Electrical.Renewables.PSSE.PlantController.BaseClasses.BaseREPC
     PlantController(
+    V_b=V_b,
     M_b=M_b,
     P_0=P_0,
     Q_0=Q_0,
