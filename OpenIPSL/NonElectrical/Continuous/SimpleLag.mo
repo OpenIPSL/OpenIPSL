@@ -5,7 +5,7 @@ block SimpleLag "First order lag transfer function block"
     annotation (Placement(transformation(extent={{-58,32},{-38,52}})));
   Real state(start=y_start);
   parameter Real K "Gain";
-  parameter Types.Time T "Lag time constant";
+  parameter Types.Time T "Lag time constant" annotation(Evaluate = true);
   parameter Real y_start "Output start value";
 protected
   parameter Real T_mod=if T < Modelica.Constants.eps then 1000 else T;
