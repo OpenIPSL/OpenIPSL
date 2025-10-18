@@ -82,6 +82,16 @@ model References "References"
         <a href=\"https://doi.org/10.1109/IEEESTD.2016.7553421\">DOI: 10.1109/IEEESTD.2016.7553421</a>
 </td>
 </tr>
+
+<tr>
+<td>[Laera2022]</td>
+<td>
+G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C. Mishra, K.D. Jones and R.M. Gardner,
+    &quot;Guidelines and Use Cases for Power System Dynamics Modeling and Model Verification using Modelica&quot;,
+    American Modelica Conference 2022, October 26-28, 2022, Dallas, Texas, US. <a href=\\\"https://doi.org/10.3384/ECP21186146\\\"> DOI: 10.3384/ECP21186146 </a>
+</td>
+</tr>
+
 <tr>
 <td>[Milano2010]</td>
 <td>Federico Milano:
