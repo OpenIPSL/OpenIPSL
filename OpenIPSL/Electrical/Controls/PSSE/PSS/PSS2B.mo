@@ -113,7 +113,11 @@ equation
           extent={{-40,80},{40,40}},
           lineColor={28,108,200},
           textString="PSS2B")}),
-          Documentation(info="<html>IEEE Dual-Input Stabilizer Model.</html>",
+          Documentation(info="<html>
+<p>IEEE Dual-Input Stabilizer Model.</p>
+<p>This model uses an implementation of the ramp tracking filter as described in [Laera2022], which can be found under <code>OpenIPSL.NonElectrical.Continuous.RampTrackingFilter</code>.</p>
+<p>See [Laera2022] for the expected behavior of this model.</p>
+</html>",
   revisions="<html><table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>
 <td><p>Reference</p></td>
