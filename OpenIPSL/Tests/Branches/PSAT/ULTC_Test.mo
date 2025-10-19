@@ -113,5 +113,6 @@ This model needs to be simulated for 10 seconds.
 <li><code>uLTC_VoltageControl.m</code></li>
 <li><code>uLTC_VoltageControl.der(m)</code></li>
 <li><code>B3.v</code></li>
+</ul>
 </html>"));
 end ULTC_Test;
