@@ -3376,7 +3376,7 @@ Try simulating the system with an fixed time-step solver, without a DAE mode, an
     experiment(
       StopTime=5,
       Interval=0.001,
-      Tolerance=5e-05,
-      __Dymola_fixedstepsize=0.01,
-      __Dymola_Algorithm="Rkfix2"));
+      Tolerance=5e-05),__Dymola_experimentFlags(
+        Advanced(Define(DAEsolver=true))),
+__OpenModelica_commandLineOptions = "--daeMode");
 end Nordic44_Base_Case_StateEvents;

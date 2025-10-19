@@ -3374,5 +3374,6 @@ equation
 <li><code>genEventTest.gENSAL.SPEED</code></li>
 </ul>
 <p>Simulate Compare with the results obtained in <strong>Nordic44_Base_Case_Bus_StateEvents</strong>. Note that it takes significantly less time to simulate this system.</p>
-</html>"));
+</html>"),
+__OpenModelica_commandLineOptions = "--daeMode");
 end Nordic44_Base_Case_StateEvents2;

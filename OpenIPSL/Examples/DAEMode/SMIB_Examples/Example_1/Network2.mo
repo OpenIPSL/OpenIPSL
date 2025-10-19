@@ -58,5 +58,7 @@ equation
 </ul>
 <p>Compare these results with the ones obtained in the <strong>Network1</strong> and <strong>Network3</strong>.
 Compare also with the results obtained from the simulating the systems in <strong>Example_1Mode</strong> and <strong>Example_2</strong>.</p>
-</html>"));
+</html>"),__Dymola_experimentFlags(
+        Advanced(Define(DAEsolver=true))),
+__OpenModelica_commandLineOptions = "--daeMode");
 end Network2;

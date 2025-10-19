@@ -16,5 +16,6 @@ model Nordic44_Original_Case_Line_Opening
 <li><code>G1_bus6500.gENSAL.SPEED</code></li>
 </ul>
 <p>Compare with the results obtained in <strong>Nordic44_Original_Case_Bus_Fault</strong>.</p>
-</html>"));
+</html>"),
+__OpenModelica_commandLineOptions = "--daeMode");
 end Nordic44_Original_Case_Line_Opening;

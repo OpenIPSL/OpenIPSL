@@ -23,6 +23,15 @@ model References "References"
 </tr>
 
 <tr>
+<td>[Henningsson2019]</td>
+<td>E. Henningsson, H. Olsson and L. Vanfretti:
+        &quot;DAE Solvers for Large-Scale Hybrid Models&quot;.
+        in Proceedings of the 13th International Modelica Conference, Regensburg, Germany, March 4-6, 2019.
+         (<a href=\"https://ep.liu.se/en/conference-article.aspx?series=ecp&issue=157&Article_No=50\">DOI:10.3384/ecp19157491 </a>).
+</td>
+</tr>
+
+<tr>
 <td>[IEEE1968]</td>
 <td>IEEE:
         &quot;Computer representation of excitation systems&quot;.
