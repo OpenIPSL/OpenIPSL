@@ -147,5 +147,5 @@ equation
 <td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
-</html>"));
+</html>"),experiment(StopTime=10));
 end ThreeWindingTransformer_Test;
