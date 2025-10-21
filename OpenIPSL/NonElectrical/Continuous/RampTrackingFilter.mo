@@ -101,9 +101,9 @@ equation
 
 <p>This block is used by the <code>PSS2A</code> and <code>PSS2B</code> models under <code>OpenIPSL.Electrical.Controls.PSSE.PSS</code>. This implementation has been done starting from the block diagram descriptions from [PSSE-MODELS]. </p>
 
-<p>However, as noted in [Laera2022], in order to validate the implementation against PSS/E v.33&apos;s simulation output, further analysis of the actual model response in PSS/E revealed necessary changes that deviate from the block diagrams in [PSS-MODELS]. Consequently, the implementation herein should not be expected to comply with any other &quot;generic&quot; implementation or block diagram description, but to that implemented in PSS/E v.33.</p>
+<p>However, as noted in <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Laera2022]</a>, in order to validate the implementation against PSS/E v.33&apos;s simulation output, further analysis of the actual model response in PSS/E revealed necessary changes that deviate from the block diagrams in [PSS-MODELS]. Consequently, the implementation herein should not be expected to comply with any other &quot;generic&quot; implementation or block diagram description, but to that implemented in PSS/E v.33.</p>
 
-<p>For more information please refer to [Laera2022].</p>
+<p>For more information please refer to <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Laera2022]</a>.</p>
 
 </html>"));
 end RampTrackingFilter;
