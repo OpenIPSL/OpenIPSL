@@ -51,34 +51,46 @@ equation
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         initialScale=0.05), graphics={Rectangle(extent={{-100,100},{100,-100}},
-          lineColor={0,0,0}),Text(
-          extent={{-58,40},{40,-4}},
-          lineColor={0,0,255},
-          textString="1+sT"),Text(
-          extent={{-64,20},{56,-58}},
-          lineColor={0,0,255},
-          textString="(1+sT )"),Text(
-          extent={{22,28},{44,-4}},
-          lineColor={0,0,255},
-          textString="1"),Text(
-          extent={{24,-10},{46,-42}},
-          lineColor={0,0,255},
-          textString="2"),Text(
-          extent={{54,2},{66,-16}},
-          lineColor={0,0,255},
-          textString="M"),Line(
-          points={{-60,40},{-74,40},{-74,-40},{-60,-40}},
-          color={0,0,255},
-          thickness=1),Line(
-          points={{60,40},{76,40},{76,-40},{60,-40}},
-          color={0,0,255},
-          thickness=1),Text(
-          extent={{76,48},{94,28}},
-          lineColor={0,0,255},
-          textString="N"),Line(
-          points={{-68,0},{70,0}},
-          color={0,0,255},
-          thickness=1)}),
+          lineColor={0,0,0}),
+        Line(points={{-82,62},{-82,-86}}, color={192,192,192}),
+        Polygon(
+          points={{-82,84},{-90,62},{-74,62},{-82,84}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-92,-76},{80,-76}}, color={192,192,192}),
+        Polygon(
+          points={{88,-76},{66,-68},{66,-84},{88,-76}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-78,-76},{-38,-76},{16,4}},
+          thickness=1,
+          color={238,46,47},
+          smooth=Smooth.Bezier),
+        Line(points={{102,72},{62,72},{16,4}},
+          thickness=1,
+          color={238,46,47},
+          smooth=Smooth.Bezier),
+        Line(
+          points={{-82,-76},{-42,-76}},
+          color={28,108,200},
+          thickness=1,
+          pattern=LinePattern.Dash),
+        Line(
+          points={{-42,-76},{58,72}},
+          color={28,108,200},
+          thickness=1,
+          pattern=LinePattern.Dash),
+        Line(
+          points={{58,72},{98,72}},
+          color={28,108,200},
+          thickness=1,
+          pattern=LinePattern.Dash),
+        Text(
+          extent={{-74,28},{78,-28}},
+          textColor={0,0,248},
+          textString="RTF")}),
     Documentation(revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\"><tr>
 <td><p>Reference</p></td>
