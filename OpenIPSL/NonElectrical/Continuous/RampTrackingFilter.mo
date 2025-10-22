@@ -47,10 +47,7 @@ equation
     connect(TF1[M].y, y);
   end if;
   annotation (
-    Icon(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        initialScale=0.05), graphics={Rectangle(extent={{-100,100},{100,-100}},
+    Icon( graphics={Rectangle(extent={{-100,100},{100,-100}},
           lineColor={0,0,0}),
         Line(points={{-82,62},{-82,-86}}, color={192,192,192}),
         Polygon(
@@ -64,11 +61,11 @@ equation
           lineColor={192,192,192},
           fillColor={192,192,192},
           fillPattern=FillPattern.Solid),
-        Line(points={{-78,-76},{-38,-76},{16,4}},
+        Line(points={{-82,-76},{-38,-76},{16,4}},
           thickness=1,
           color={238,46,47},
           smooth=Smooth.Bezier),
-        Line(points={{102,72},{62,72},{16,4}},
+        Line(points={{100,72},{62,72},{16,4}},
           thickness=1,
           color={238,46,47},
           smooth=Smooth.Bezier),
