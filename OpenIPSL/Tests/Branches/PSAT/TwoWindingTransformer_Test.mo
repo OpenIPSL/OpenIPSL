@@ -66,4 +66,5 @@ equation
   connect(bus3.p, lOADPQ.p) annotation (Line(points={{50,0},{70,0},{70,-10}}, color={0,0,255}));
   connect(pwLine1.p, bus2.p) annotation (Line(points={{11,10},{6,10},{6,0},{-10,0}}, color={0,0,255}));
   connect(pwLine1.n, bus3.p) annotation (Line(points={{29,10},{40,10},{40,0},{50,0}}, color={0,0,255}));
+  annotation(experiment(StopTime=10));
 end TwoWindingTransformer_Test;
