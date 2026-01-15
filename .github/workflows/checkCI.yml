@@ -7,11 +7,11 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 5
       - name: Setup python environment
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: 3.8
       - name: Install python packages
@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 5
       - name: Get moparser
@@ -46,16 +46,16 @@ jobs:
         run: "! find . -name '*.mo' -print0 | xargs -0 grep -l $'^\\xEF\\xBB\\xBF' | grep ."
       - name: Check syntax
         run: ModelicaSyntaxChecker/Linux64/moparser -v 3.4 -r OpenIPSL
-  # deprecation_checks:
-  #   timeout-minutes: 5
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 5
-  #     - name: Setup python environment
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: 3.8
-  #     - name: Check deprecated Text.lineColor annotation
-  #       run: python ./.CI/check_deprecated_line_color.py OpenIPSL
+  deprecation_checks:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 5
+      - name: Setup python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.14
+      - name: Check deprecated Text.lineColor annotation
+        run: python ./.CI/check_deprecated_line_color.py OpenIPSL
