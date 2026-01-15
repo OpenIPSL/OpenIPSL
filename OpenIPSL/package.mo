@@ -5,9 +5,10 @@ package OpenIPSL "Open-Instance Power System Library"
 annotation (preferredView="info",
   Protection(access = Access.packageDuplicate),
   uses(Complex(version="4.0.0"), Modelica(version="4.0.0")),
-  version="3.1.0-dev",
-  versionDate="202x-xx-xx",
+  version="3.1.0",
+  versionDate="2026-01-xx",
   conversion(
+    noneFromVersion="3.0.1",
     noneFromVersion="3.0.0",
     from(version={"0.8","0.8.1","1.0.0","1.5.0"}, to="2.0.0",
       script="modelica://OpenIPSL/Resources/scripts/ConvertOpenIPSL_from_1.5.0_to_2.0.0.mos"),
