@@ -12,8 +12,8 @@ extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enableS_b=true);
 
   // Parameters for selection
-  parameter Integer QFunctionality = 0 "BESS Reactive Power Control Options" annotation (Dialog(group= "Reactive Power Control Options"), choices(choice=0 "Constant local PF control", choice=1 "Constant local Q control", choice=2 "Local V control", choice=3 "Local coordinated V/Q control", choice=4 "Plant level Q control", choice=5 "Plant level V control", choice=6 "Plant level Q control + local coordinated V/Q control", choice=7 "Plant level V control + local coordinated V/Q control"));
-  parameter Integer PFunctionality = 0 "BESS Real Power Control Options" annotation (Dialog(group= "Active Power Control Options", enable=(QFunctionality >=4)), choices(choice=0 "No governor response", choice=1 "Governor response with up and down regulation"));
+parameter Integer QFunctionality = 0 "Wind Reactive Power Control Options" annotation (Dialog(group= "Reactive Power Control Options"), choices(choice=0 "Constant local PF control", choice=1 "Constant local Q control", choice=2 "Local V control", choice=3 "Local coordinated V/Q control", choice=4 "Plant level Q control", choice=5 "Plant level V control", choice=6 "Plant level Q control + local coordinated V/Q control", choice=7 "Plant level V control + local coordinated V/Q control"));
+  parameter Integer PFunctionality = 0 "Wind Real Power Control Options" annotation (Dialog(group= "Active Power Control Options", enable=(QFunctionality >=4)), choices(choice=0 "No governor response", choice=1 "Governor response with up and down regulation"));
   parameter Integer TOscillation = 0 "Wind Torque Oscillation Option" annotation (Dialog(group= "Torsional Oscillation"), choices(choice=0 "Do not Emulate torsional oscillation", choice=1 "Emulated torsional oscillations in power output"));
   replaceable
     OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.BaseClasses.BaseREGC
