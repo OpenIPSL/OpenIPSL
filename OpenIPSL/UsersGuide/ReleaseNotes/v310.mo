@@ -30,7 +30,7 @@ Key additions highlighted for this release include:
 </p>
 <ul>
 <li><strong>New machine models:</strong> CIM5, CIM6, GENTPJ.</li>
-<li><strong>Renewable Energy (WECC generic models):</strong> Renewable Energy Generator/Converter (REGC) models REGC_A; Renewable Energy Electric Controller (REEC) models REEC_A, REEC_B, and REEC_C; Renewable Energy Plant Controller(REPC) models REPC_A.</li>
+<li><strong>Renewable Energy (WECC generic models):</strong> Renewable Energy Generator/Converter (REGC) models REGC_A; Renewable Energy Electric Controller (REEC) models REEC_A, REEC_B, and REEC_C; Renewable Energy Plant Controller (REPC) models REPC_A.</li>
 <li><strong>Governing systems (thermal, gas, and hydro):</strong> DEGOV, IEEEG2, WEHGOV, WPIDHY, and WSIEG1.</li>
 <li><strong>Excitation systems and compensators:</strong> AC7B, AC8B, DC4B, ESDC1A, ESDC2A, ESURRY, EXBAS, EXNI, SCRX, and IEEEVC.</li>
 </ul>
