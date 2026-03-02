@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.PfData.TrafoData;
 partial record TrafoTemplate
-
+  extends Modelica.Icons.Record;
   parameter Real t1_trafo_1 "BI1" annotation (Dialog(enable=false));
   parameter Real t2_trafo_1 "BI1" annotation (Dialog(enable=false));
 

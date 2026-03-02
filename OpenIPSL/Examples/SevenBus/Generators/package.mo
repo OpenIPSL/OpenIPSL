@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.SevenBus;
 package Generators "Set of generation unit models"
+  extends Modelica.Icons.Package;
 annotation (Documentation(info="<html>
 <p>This package contains three generation unit models that are used in the SevenBus system. These models are:</p>
 <ul>

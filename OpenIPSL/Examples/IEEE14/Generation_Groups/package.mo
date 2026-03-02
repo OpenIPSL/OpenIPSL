@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.IEEE14;
 package Generation_Groups "Set of generation unit models used in IEEE 14-bus system"
-
+  extends Modelica.Icons.Package;
 annotation (Documentation(info="<html>
 <p>This package contains five generation unit models, composed of machine and exciter models, that are used in the IEEE 14-bus system. These models are:</p>
 <ul>

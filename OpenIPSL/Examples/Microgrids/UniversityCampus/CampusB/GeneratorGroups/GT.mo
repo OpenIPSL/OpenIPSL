@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusB.GeneratorGroups;
 package GT "Gas turbine unit for Microgrid B."
+  extends Modelica.Icons.Package;
   model GasTurbineUnit
     "Generation group for GT containing the synchronous machine, excitation system, and turbine governor system."
     extends OpenIPSL.Interfaces.Generator;

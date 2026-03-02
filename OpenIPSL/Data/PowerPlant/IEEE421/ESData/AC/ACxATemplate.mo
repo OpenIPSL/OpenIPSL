@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.IEEE421.ESData.AC;
 partial record ACxATemplate "Type AC-A Excitation System Data"
+  extends Modelica.Icons.Record;
   parameter String Type "Type of AC excitation system model";
   parameter Types.Time T_R "Regulator input filter time constant";
   parameter Types.Time T_B "Regulator denominator (lag) time constant";

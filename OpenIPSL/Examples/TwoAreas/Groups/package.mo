@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.TwoAreas;
 package Groups "Set of generation groups models for the different test systems"
+  extends Modelica.Icons.Package;
 annotation (Documentation(info="<html>
 <p>This package contains two subpackages with generation unit models. These subpackages are:</p>
 <ul>

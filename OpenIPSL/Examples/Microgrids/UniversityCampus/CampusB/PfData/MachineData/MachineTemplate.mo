@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusB.PfData.MachineData;
 partial record MachineTemplate
-
+  extends Modelica.Icons.Record;
   parameter OpenIPSL.Types.ActivePower PG1 "Gen01"
     annotation (Dialog(enable=false));
   parameter OpenIPSL.Types.ReactivePower QG1 "Gen01"

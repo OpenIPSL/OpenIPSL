@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.SevenBus;
 package Data "Power flow data records for network initialization"
+  extends Modelica.Icons.RecordsPackage;
   record SevenBus_voltages "Data record for voltage magnitude and angle"
     extends Modelica.Icons.Record;
     // Bus number 1

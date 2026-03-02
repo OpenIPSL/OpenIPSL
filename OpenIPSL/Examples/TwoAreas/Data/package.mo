@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.TwoAreas;
 package Data "Power flow data records for network initialization"
+  extends Modelica.Icons.RecordsPackage;
 annotation (Documentation(info="<html>
 <p>This package contains four different sets of data records that can be used to initialize the power network on a determined operating point.</p>
 <p>The power flow records can be used to test how the operating point alters the dynamic response observed after a disturbance.</p>

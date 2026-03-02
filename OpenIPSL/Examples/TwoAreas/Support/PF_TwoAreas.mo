@@ -1,6 +1,8 @@
 within OpenIPSL.Examples.TwoAreas.Support;
 partial record PF_TwoAreas "Template data record used to store powr flow results for initialization of power networks"
+  extends Modelica.Icons.Record;
   record Voltages "Template data record for voltage magnitudes and angles"
+    extends Modelica.Icons.Record;
     // Bus number 1
     parameter Real V1;
     parameter Real A1;
@@ -38,6 +40,7 @@ partial record PF_TwoAreas "Template data record used to store powr flow results
   end Voltages;
 
   record Machines "Template data record for active and reactive power from generation units"
+    extends Modelica.Icons.Record;
     // Gen at bus 1
     parameter Real P1_1;
     parameter Real Q1_1;
@@ -54,6 +57,7 @@ partial record PF_TwoAreas "Template data record used to store powr flow results
   end Machines;
 
   record Loads "Template data record for active and reactive power consumed by loads"
+    extends Modelica.Icons.Record;
     // Gen at bus 1
     parameter Real PL7_1;
     parameter Real QL7_1;

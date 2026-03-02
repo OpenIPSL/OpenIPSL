@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.Tutorial.Example_4.PFData.BusData;
 partial record BusTemplate "Record template for power flow solutions in buses"
-
+  extends Modelica.Icons.Record;
 parameter OpenIPSL.Types.PerUnit v1 "Voltage magnitude at bus 'B01'" annotation(Dialog(enable = false));
 parameter OpenIPSL.Types.Angle A1 "Voltage angle at bus 'B01'" annotation(Dialog(enable = false));
 

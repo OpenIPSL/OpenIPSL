@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.IEEE421.PSSData;
 partial record PSS1ATemplate "Type PSS-A Power System Stabilizer"
+  extends Modelica.Icons.Record;
   parameter Types.PerUnit K_S "PSS gain";
   parameter Types.Time T_1 "Lead-lag time constant 1";
   parameter Types.Time T_2 "Lead-lag time constant 2";

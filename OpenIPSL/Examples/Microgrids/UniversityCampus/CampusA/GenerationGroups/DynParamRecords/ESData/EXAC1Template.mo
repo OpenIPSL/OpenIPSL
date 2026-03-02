@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.GenerationGroups.DynParamRecords.ESData;
 partial record EXAC1Template "Type ST-A Excitation System Data"
+  extends Modelica.Icons.Record;
   parameter Types.Time T_R "Regulator input filter time constant";
   parameter Types.Time T_B "Regulator denominator (lag) time constant";
   parameter Types.Time T_C "Regulator numerator (lead) time constant";

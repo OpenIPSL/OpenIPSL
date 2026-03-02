@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.IEEE421.ESData.ST;
 partial record ESSTxBTemplate "Type ST-B Excitation System Data"
+  extends Modelica.Icons.Record;
   parameter Types.Time T_R "Regulator input filter time constant";
   parameter Types.PerUnit K_PR "Voltage regulator proportional gain";
   parameter Types.TimeAging K_IR "Voltage regulator integral gain";

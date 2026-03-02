@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.IEEE421.ESData.ST;
 partial record ESSTxATemplate "Type ST-A Excitation System Data"
+  extends Modelica.Icons.Record;
   parameter String Type "Type of ESSST excitation system model";
   parameter Types.Time T_R "Regulator input filter time constant";
   parameter Types.PerUnit V_IMAX "Maximum voltage error (regulator input)";

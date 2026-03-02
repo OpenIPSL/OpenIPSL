@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.AKD;
 package Components "Set of generation unit models"
+  extends Modelica.Icons.ExamplesPackage;
 annotation (Documentation(info="<html>
 <p>This package contains two generation unit models that are used in the AKD system. These models are:</p>
 <ul>

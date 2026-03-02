@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusB.PfData.BusData;
 partial record BusTemplate
-
+  extends Modelica.Icons.Record;
   // Bus B1L1
   parameter OpenIPSL.Types.PerUnit VB1L1 annotation (Dialog(enable=false));
   parameter OpenIPSL.Types.Angle AB1L1 annotation (Dialog(enable=false));

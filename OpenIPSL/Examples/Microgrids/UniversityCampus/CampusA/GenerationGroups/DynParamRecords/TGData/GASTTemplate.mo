@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.GenerationGroups.DynParamRecords.TGData;
 record GASTTemplate "Template for GAST motor model"
+  extends Modelica.Icons.Record;
   parameter Types.PerUnit R "Speed droop gain";
   parameter Types.Time T_1 "Valve response time constant";
   parameter Types.Time T_2 "Turbine response time constant";

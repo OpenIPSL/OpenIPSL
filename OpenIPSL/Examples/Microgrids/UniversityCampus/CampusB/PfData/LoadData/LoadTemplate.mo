@@ -1,6 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusB.PfData.LoadData;
 partial record LoadTemplate
-
+  extends Modelica.Icons.Record;
   parameter OpenIPSL.Types.ActivePower PL1 "Load01"
     annotation (Dialog(enable=false));
   parameter OpenIPSL.Types.ReactivePower QL1 "Load01"

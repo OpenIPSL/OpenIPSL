@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.IEEE421.PSSData;
 partial record PSS2BTemplate "Type PSS-B Power System Stabilizer"
+  extends Modelica.Icons.Record;
   parameter Types.Time T_w1 "Washout time constant 1";
   parameter Types.Time T_w2 "Washout time constant 2";
   parameter Types.Time T_6 "Lag time constant 6";

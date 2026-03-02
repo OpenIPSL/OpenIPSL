@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.GenerationGroups.DynParamRecords.ESData;
 partial record ACxBTemplate "Type AC-B Excitation System Data"
+  extends Modelica.Icons.Record;
   parameter String Type "Type of AC excitation system model";
   parameter Types.Time T_R "Regulator input filter time constant";
   parameter Types.PerUnit K_PR "Regulator proportional gain";

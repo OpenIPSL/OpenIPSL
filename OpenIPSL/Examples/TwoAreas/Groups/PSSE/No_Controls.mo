@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.TwoAreas.Groups.PSSE;
 package No_Controls "Set of generation units modeled with PSSE composed only of machines"
+  extends Modelica.Icons.Package;
   model G1 "900MVA generation unit, composed only of a machine model, connected to bus 1"
     extends TwoAreas.Support.Generator;
     OpenIPSL.Electrical.Machines.PSSE.GENSAL gENSAL(

@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.Anderson.TurbGovData;
 partial record TurbGovernorDataTemplate "Turbine-Governor Data Record Template"
+  extends Modelica.Icons.Record;
   parameter String GOV "Governor type (G = general, H = hydraulic, C = cross-compound)";
   parameter Types.PerUnit R "Turbine steady-state regulation setting or droop";
   parameter Types.PerUnit P_MAX "Maximum Turbine Output";

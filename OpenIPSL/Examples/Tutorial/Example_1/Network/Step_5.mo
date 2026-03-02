@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Tutorial.Example_1.Network;
 model Step_5 "Connecting models"
+  extends Modelica.Icons.Example;
   OpenIPSL.Electrical.Buses.Bus B1(displayPF=false) annotation (Placement(
         transformation(extent={{-80,-10},{-60,10}})));
   OpenIPSL.Electrical.Buses.Bus B2(displayPF=false) annotation (Placement(

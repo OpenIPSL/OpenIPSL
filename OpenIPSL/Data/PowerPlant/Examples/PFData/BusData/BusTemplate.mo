@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.Examples.PFData.BusData;
 partial record BusTemplate "Record template for power flow solutions in buses"
+  extends Modelica.Icons.Record;
 
   parameter OpenIPSL.Types.PerUnit v1 "Voltage magnitude at bus 'FAULT'"
     annotation (Dialog(enable=false));

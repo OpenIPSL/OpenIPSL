@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.GenerationGroups.DynParamRecords.MachineData;
 partial record MachineDataTemplate "Synchronous Machine Dynamic Data Record Template"
+  extends Modelica.Icons.Record;
   parameter Types.ApparentPower M_b "Machine base power";
   parameter Types.Time Tpd0 "d-axis transient open-circuit time constant";
   parameter Types.Time Tppd0 "d-axis sub-transient open-circuit time constant";

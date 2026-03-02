@@ -3,6 +3,7 @@ record PF_results "Data record of power flow results for model initialization"
   extends Modelica.Icons.Record;
 
   record Loads "Data record with active and reactive power consumed by loads"
+    extends Modelica.Icons.Record;
     // Load 3100_1
     parameter Real PL3100_1=90.182999*1e6;
     parameter Real QL3100_1=94.384003*1e6;

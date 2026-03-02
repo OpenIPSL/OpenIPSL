@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.Anderson.MachineData;
 partial record MachineDataTemplate "Synchronous Machine Dynamic Data Record Template"
+  extends Modelica.Icons.Record;
   parameter Types.ApparentPower M_b "Machine base power";
   parameter Types.Voltage V_b "Base voltage";
   parameter Types.PerUnit P_f "Rated power factor";

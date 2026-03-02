@@ -25,8 +25,9 @@ package DynParamRecords "Sets of generator parameters"
   end GUDynamics;
 
   package MachineData "Records with Synchronous Machine Dynamic Parameters"
-
+  extends Modelica.Icons.RecordsPackage;
     partial record MachineDataTemplate "Synchronous Machine Dynamic Data Record Template"
+      extends Modelica.Icons.Record;
       parameter Types.ApparentPower M_b "Machine base power";
       parameter Types.Time Tpd0 "d-axis transient open-circuit time constant";
       parameter Types.Time Tppd0 "d-axis sub-transient open-circuit time constant";
@@ -95,7 +96,9 @@ package DynParamRecords "Sets of generator parameters"
   end MachineData;
 
   package ESData "Records with Excitation System (ES) Parameters"
+    extends Modelica.Icons.RecordsPackage;
     partial record EXST1Template "Type EXST1 Excitation System Data"
+      extends Modelica.Icons.Record;
       parameter Types.Time T_R "Regulator input filter time constant";
       parameter Types.PerUnit V_IMAX "Maximum voltage error (regulator input)";
       parameter Types.PerUnit V_IMIN "Minimum voltage error (regulator input)";
@@ -112,6 +115,7 @@ package DynParamRecords "Sets of generator parameters"
     end EXST1Template;
 
     partial record EXAC1Template "Type EXAC1 Excitation System Data"
+      extends Modelica.Icons.Record;
       parameter Types.Time T_R "Regulator input filter time constant";
       parameter Types.Time T_B "Regulator denominator (lag) time constant";
       parameter Types.Time T_C "Regulator numerator (lead) time constant";
@@ -171,7 +175,9 @@ package DynParamRecords "Sets of generator parameters"
   end ESData;
 
   package TGData "Records with Turbine Governor (TG) Parameters"
+    extends Modelica.Icons.Record;
     record GASTTemplate "Template for GAST turbine governor model"
+      extends Modelica.Icons.Record;
       parameter Types.PerUnit R "Speed droop gain";
       parameter Types.Time T_1 "Valve response time constant";
       parameter Types.Time T_2 "Turbine response time constant";
@@ -185,6 +191,7 @@ package DynParamRecords "Sets of generator parameters"
     end GASTTemplate;
 
     record TGOV1Template "Template for TGOV1 turbine governor model"
+      extends Modelica.Icons.Record;
       parameter Types.PerUnit R "Inverse of governor gain (the actual gain is 1/R)";
       parameter Types.PerUnit D_t "Turbine damping factor (on Machine Base)";
       parameter Types.Time T_1 "Regulator time constant. It must be greater than 0";

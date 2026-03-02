@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.Anderson.PSSData;
 partial record PSSDataTemplate "Power System Stabilizer Data Record Template"
+  extends Modelica.Icons.Record;
   parameter String PSS "PSS feedback: N = no PSS, F = frequency, S = speed, P = accelarating power";
   parameter Types.PerUnit K_QV "PSS voltage gain";
   parameter Types.PerUnit K_QS "PSS speed gain";

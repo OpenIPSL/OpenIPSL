@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical;
 package Renewables "Models that can be used to represent wind, solar, and battery storage energy sources"
-
+  extends Modelica.Icons.Package;
 annotation (Documentation(info="<html>
 <p>This package contains models that can be used to create renewable energy sources, such as Photovoltaic, Wind, and Battery Energy Storage Systems.
  The models implemented are found in standard power system dynamic tools, such as Siemens PTI PSS&reg;E, PowerWorld, General Electric PSLF,

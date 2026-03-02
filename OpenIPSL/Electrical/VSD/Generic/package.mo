@@ -1,7 +1,7 @@
 within OpenIPSL.Electrical.VSD;
 package Generic
   "Generic variable speed drive control and converter model"
-
+  extends Modelica.Icons.Package;
   annotation (Documentation(info="<html>
 <p>
 This package contains components that model a variable speed drive.

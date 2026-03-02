@@ -1,5 +1,6 @@
 within OpenIPSL.Data.PowerPlant.Anderson.ESData;
 partial record ExcSystemDataTemplate "Excitation System Data Record Template"
+  extends Modelica.Icons.Record;
   parameter String VR_type "Excitation system type";
   parameter String IEEE_type "Similar to this IEEE type";
   parameter String Name "Excitation system name";

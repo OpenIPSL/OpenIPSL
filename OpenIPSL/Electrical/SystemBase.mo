@@ -1,5 +1,6 @@
 within OpenIPSL.Electrical;
 record SystemBase "System Base Definition"
+  extends Modelica.Icons.Record;
   parameter Types.ApparentPower S_b=100e6 "System base";
   parameter Types.Frequency fn=50 "System frequency";
   annotation (

@@ -1,5 +1,6 @@
 within OpenIPSL.Examples.Microgrids.UniversityCampus.CampusB.GeneratorGroups;
 package ST "Steam turbine generation unit for Microgrid B."
+  extends Modelica.Icons.Package;
   model SteamTurbineUnit
     "Generation group for ST containing the synchronous machine, excitation system, and turbine governor system."
       extends OpenIPSL.Interfaces.Generator(V_b = 13800);
