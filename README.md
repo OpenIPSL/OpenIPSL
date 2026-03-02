@@ -10,10 +10,18 @@ The OpenIPSL or Open-Instance Power System Library is a library of power system 
 The OpenIPSL is currently developed and maintained by Prof. [Luigi Vanfretti's](https://github.com/lvanfretti) research group [ALSETLab](https://github.com/ALSETLab) at [Rensselaer Polytechnic Institute](http://rpi.edu), Troy, NY, collaborators and friends, such as [Dietmar Winkler](https://github.com/dietmarw).
 
 ## Scope
-The OpenIPSL is developed to be used for research and education (therefore frequent release times may be available), with maximum compatibility with [OpenModelica](https://openmodelica.org/) (to provide a free/libre and cost-free alternative for power system dynamic simulation), to provide as many as possible typical "test networks" for use in research and teaching, and to be developed in such way that the library can efficiently be used for power system simulation within Modelica-based workflows (i.e., helping to give reference power system models for development and testing of Modelica back-end compilers) when faced with power system simulation challenges.
+The OpenIPSL is developed to be used for research and education, with maximum compatibility with as many Modelica tools as practically possible. It is developed in such way that the library can efficiently be used for power system simulation within Modelica-based workflows. It provides reference power system models for development and testing of Modelica back-end compilers, allowing to explore power system simulation challenges.
 
 Please note that the library contains only the models that can be used for dynamic studies. As such, there are no solver tools provided in this repository (no Power Flow Solvers, no Time-Domain solvers, etc.).
-The user should use a Modelica-compliant tool for simulation of models in this lirbary.
+
+The user should use a [Modelica-compliant tool](https://modelica.org/tools/) for simulation of models in this library. See the compatibility information below.
+
+## Compatibility
+OpenIPSL is:
+  - Developed with [Dymola](https://www.3ds.com/products/catia/dymola), as such, it has maximum compatibility with it.
+  - Largely compatible with [OpenModelica](https://openmodelica.org/). Compatibility with OpenModelica is reported in their [Library Coverage Testing](https://github.com/OpenModelica/OpenModelica/wiki/Library-Coverage-Testing), showing that OpenIPSL is largely compatible with it.
+  - It has also been tested with [Wolfram System Modeler](https://www.wolfram.com/system-modeler/), [Modelon Impact](https://modelon.com/modelon-impact/), and [SimulationX](https://www.keysight.com/us/en/products/design-engineering-software/computer-aided-engineering-software/multi-domain-system.html), being mostly compatible with these tools.
+  - It may work with other Modelica tools, please let us know if you are aware of the compatibility with other tools in [Discussions](https://github.com/OpenIPSL/OpenIPSL/discussions).
 
 ## History
 The iPSL is a [Modelica](https://www.modelica.org) library developed during the [iTesla project](https://cordis.europa.eu/project/id/283012/reporting).
