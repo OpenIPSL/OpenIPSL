@@ -62,15 +62,27 @@ model PlantPVD1 "Simple representation of the basic control of a PV system"
     angle_0=angle_0,
     pll_connected=false,
     v_0=v_0) annotation (Placement(transformation(origin={40,0}, extent={{-20,-20},{20,20}})));
-  OpenIPSL.Electrical.Solar.PowerFactory.General.StaVmea staVmea(angle_0=angle_0, fn=fn) annotation (Placement(transformation(origin={40,-60}, extent={{20,-20},{-20,20}})));
+  OpenIPSL.Electrical.Solar.PowerFactory.General.StaVmea staVmea(angle_0 = angle_0, fn = fn, use_ref_machine_frequency = true) annotation(
+    Placement(transformation(origin = {10, -78}, extent = {{20, -20}, {-20, 20}})));
+  CustomMe.FFT_Dominant fFT_Dominant annotation(
+    Placement(transformation(origin = {60, -64}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
 equation
-  connect(static_generator.p, p) annotation (Line(points={{62,0},{110,0}}, color={0,0,255}));
-  connect(pvd1.Ip, static_generator.id_ref) annotation (Line(points={{-18,12},{0,12},{0,16},{22,16}}, color={0,0,127}));
-  connect(pvd1.Iq, static_generator.iq_ref) annotation (Line(points={{-18,-12},{0,-12},{0,8},{22,8}}, color={0,0,127}));
-  connect(static_generator.v, pvd1.Vt) annotation (Line(points={{62,16},{70,16},{70,40},{-72,40},{-72,14},{-68,14},{-68,12},{-64,12}}, color={0,0,127}));
-  connect(static_generator.i, pvd1.It) annotation (Line(points={{62,8},{80,8},{80,46},{-80,46},{-80,0},{-64,0}}, color={0,0,127}));
-  connect(staVmea.p, p) annotation (Line(points={{62,-60},{80,-60},{80,0},{110,0}}, color={0,0,255}));
-  connect(staVmea.fe, pvd1.freq) annotation (Line(points={{18,-72},{-80,-72},{-80,-12},{-64,-12}}, color={0,0,127}));
+  connect(static_generator.p, p) annotation(
+    Line(points = {{62, 0}, {110, 0}}, color = {0, 0, 255}));
+  connect(pvd1.Ip, static_generator.id_ref) annotation(
+    Line(points = {{-18, 12}, {0, 12}, {0, 16}, {22, 16}}, color = {0, 0, 127}));
+  connect(pvd1.Iq, static_generator.iq_ref) annotation(
+    Line(points = {{-18, -12}, {0, -12}, {0, 8}, {22, 8}}, color = {0, 0, 127}));
+  connect(static_generator.v, pvd1.Vt) annotation(
+    Line(points = {{62, 16}, {70, 16}, {70, 40}, {-72, 40}, {-72, 14}, {-68, 14}, {-68, 12}, {-64, 12}}, color = {0, 0, 127}));
+  connect(static_generator.i, pvd1.It) annotation(
+    Line(points = {{62, 8}, {80, 8}, {80, 46}, {-80, 46}, {-80, 0}, {-64, 0}}, color = {0, 0, 127}));
+  connect(staVmea.p, p) annotation(
+    Line(points = {{32, -78}, {74, -78}, {74, 0}, {110, 0}}, color = {0, 0, 255}));
+  connect(staVmea.omega, fFT_Dominant.f) annotation(
+    Line(points = {{34, -66}, {42, -66}, {42, -65}, {54, -65}}, color = {0, 0, 127}));
+  connect(pvd1.freq, staVmea.fe) annotation(
+    Line(points = {{-64, -12}, {-80, -12}, {-80, -90}, {-12, -90}}, color = {0, 0, 127}));
   annotation (Icon(graphics={
         Rectangle(
           lineColor={118,18,62},

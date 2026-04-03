@@ -9,6 +9,7 @@ model GE_WT "Type 3 wind turbine machine from GE"
   parameter Types.ApparentPower GEN_base=180000000 "Base Power from the Electrical Generator";
   parameter Types.ApparentPower WT_base=162000000 "Base Power from the Turbine";
   parameter Types.ApparentPower SYS_base=100000000 "Base Power from the power system";
+  parameter Types.ApparentPower Qbase_VAr=50000000 "Q base in VAr";
   parameter Types.Frequency freq=60 "Steady state Frequency of the power system";
   parameter Integer poles=3 "Number of pole pairs";
   parameter Types.Time Tp=0.3 "Time Constant Pitch command";
@@ -25,8 +26,8 @@ model GE_WT "Type 3 wind turbine machine from GE"
   parameter Real Kptrq=3.0 "Gain Torque Controller";
   parameter Real Kitrq=0.6 "Gain of integrator of Torque Controller";
   parameter Types.Time Tpc=0.05 "Time Constant Torque controller";
-  parameter Real KQi=0.1 "Gain constant of first PI in DFIG electrical control model";
-  parameter Real KVi=40 "Gain constant of second PI in DFIG electrical control model";
+  parameter Real KQi=0.1 "Gain constant of first PI in DFIG electrical control model. Note in PU!";
+  parameter Real KVi=0.4 "Gain constant of second PI in DFIG electrical control model. Note in pu terms!";
   parameter Types.PerUnit xiqmax=0.4 "Up saturation of second PI in DFIG electrical control model";
   parameter Types.PerUnit xiqmin=-0.5 "Down saturation of second PI in DFIG electrical control model";
   parameter Real Kpllp=30;
@@ -43,18 +44,18 @@ model GE_WT "Type 3 wind turbine machine from GE"
   Types.ReactivePower Q "Reactive Power produced in SYS_base";
   OpenIPSL.Interfaces.PwPin pwPin1 annotation (Placement(
       transformation(
-        origin={-77.9122,32.2584},
-        extent={{-10.0,-10.0},{10.0,10.0}}),
+        origin={137.088,52.2584},
+        extent={{-10,-10},{10,10}}),
       iconTransformation(
-        origin={-110.0,0.0},
-        extent={{-10.0,-10.0},{10.0,10.0}})));
+        origin={-110,0},
+        extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Interfaces.RealInput Wind_Speed annotation (Placement(
       transformation(
-        origin={-80.0,60.0},
-        extent={{-20.0,-20.0},{20.0,20.0}}),
+        origin={-100,60},
+        extent={{-20,-20},{20,20}}),
       iconTransformation(
-        origin={0.0,77.9903},
-        extent={{-20.0,-20.0},{20.0,20.0}},
+        origin={0,77.9903},
+        extent={{-20,-20},{20,20}},
         rotation=-90)));
   Turbine.Turbine_Model turbine_Model1(
     GEN_base=GEN_base,
@@ -92,8 +93,8 @@ model GE_WT "Type 3 wind turbine machine from GE"
     wbase=wbase,
     wndtge_ang0=wndtge_ang0,
     wndtge_spd0=wndtge_spd0) annotation (Placement(transformation(
-        origin={-46.6105,53.4541},
-        extent={{-10.0,-10.0},{10.0,10.0}})));
+        origin={-66.6105,53.4541},
+        extent={{-10,-10},{10,10}})));
   Electrical_Control.Electrical_Control electrical_Control1(
     ex_x0_0=ex_x0_0,
     ex_x1_0=ex_x1_0,
@@ -102,9 +103,9 @@ model GE_WT "Type 3 wind turbine machine from GE"
     qmin=qmin,
     KVi=KVi,
     xiqmax=xiqmax,
-    xiqmin=xiqmin) annotation (Placement(transformation(
-        origin={-10.0,57.46},
-        extent={{-10.0,-10.0},{10.0,10.0}})));
+    xiqmin=xiqmin, Qbase_VAr = Qbase_VAr) annotation (Placement(transformation(
+        origin={0,57.46},
+        extent={{-10,-10},{10,10}})));
   Generator.Generator generator1(
     freq=freq,
     ge_x0_0=ge_x0_0,
@@ -114,8 +115,8 @@ model GE_WT "Type 3 wind turbine machine from GE"
     Kpllp=Kpllp,
     Lpp=Lpp,
     SYS_base=SYS_base) annotation (Placement(transformation(
-        origin={45.0,60.0},
-        extent={{-10.0,-10.0},{10.0,10.0}})));
+        origin={40,60},
+        extent={{-10,-10},{10,10}})));
 protected
   function cp_init
     input Real lambda;
@@ -157,6 +158,7 @@ protected
   algorithm
     last_err := 99999.0;
     lambda := 15 + 0.001;
+    lambda_sav := lambda; // addition
     stop := false;
     while lambda >= 2.001 and not stop loop
       lambda := lambda - 0.001;
@@ -205,6 +207,7 @@ protected
   algorithm
     last_err := 99999.0;
     theta := pimin - 0.005;
+    theta_sav := theta ; // addition here!
     stop := false;
     Vw1 := Vw;
     while theta <= pimax - 0.005 and not stop loop
@@ -330,49 +333,30 @@ initial algorithm
   wndtge_ang0 := -pmech/(Ktg*genbc_k_speed);
 equation
   connect(pwPin1, generator1.p) annotation (Line(
-      origin={4.0293,37.8389},
-      points={{-81.9415,-5.5805},{40.9707,-5.5805},{40.9707,11.1611}}));
+      points = {{137, 52}, {137, 49}, {40, 49}}));
   connect(generator1.Pgen, turbine_Model1.Pelec) annotation (Line(
-      origin={-0.1428,48.5266},
-      points={{53.1428,9.4734},{60.1428,9.4734},{60.1428,-8.085},{-59.4803,-8.085},
-          {-59.4803,-1.38836},{-54.4677,-1.38836}},
+      points = {{48, 58}, {60, 58}, {60, 40.4416}, {-89.6231, 40.4416}, {-89.6231, 47}, {-75, 47}},
       color={0,0,127}));
   connect(Wind_Speed, turbine_Model1.Wind_Speed) annotation (Line(
-      origin={-62.4641,60.0491},
-      points={{-17.5359,-0.0491},{4.8411,-0.0491},{4.8411,0.04919},{7.8536,
-          0.04919}},
-      color={0,0,127}));
-  connect(turbine_Model1.Pord, electrical_Control1.Pord) annotation (Line(
-      origin={-25.6589,60.1024},
-      points={{-12.9516,-0.01612},{2.6464,-0.01612},{2.6464,0.0162},{7.6589,
-          0.0162}},
+      points = {{-100, 60}, {-75, 60}},
       color={0,0,127}));
   connect(const.y, electrical_Control1.Qord) annotation (Line(
-      origin={-25.1902,68.958},
-      points={{-14.3805,1.7491},{7.1902,1.7491},{7.1902,-3.498}},
+      points = {{-39.5707, 70.7071}, {-39.5707, 65}, {-8, 65}},
       color={0,0,127}));
   P = generator1.Pgen*GEN_base/SYS_base;
   Q = generator1.Qgen*GEN_base/SYS_base;
   connect(electrical_Control1.Ipcmd, generator1.Ipcmd) annotation (Line(
-      origin={24.7437,65.082},
-      points={{-26.7437,-0.08283},{7.2437,-0.08283},{7.2437,0.0828},{12.2563,
-          0.0828}},
+      points = {{8, 65}, {31.9874, 65}, {31.9874, 130.082}, {56.7437, 130.082}},
       color={0,0,127}));
   connect(electrical_Control1.Efd, generator1.Efd) annotation (Line(
-      origin={24.7437,56.5275},
-      points={{-26.7437,2.18767},{7.2437,2.18767},{7.2437,-2.18767},{12.2563,-2.18767}},
+      points = {{8, 59}, {31.9874, 59}, {31.9874, 110.528}, {56.7437, 110.528}},
       color={0,0,127}));
-
-  connect(generator1.Qgen, electrical_Control1.Qgen) annotation (Line(
-      origin={26.605,49.271},
-      points={{26.395,4.729},{31.4075,4.729},{31.4075,-4.8235},{-44.605,-4.8235},
-          {-44.605,0.189}},
-      color={0,0,127}));
-  connect(generator1.Vt, electrical_Control1.Vterm) annotation (Line(
-      origin={17.5,65.2993},
-      points={{35.5,2.12607},{40.5125,2.12607},{40.5125,7.7132},{-40.5125,
-          7.7132},{-40.5125,-9.8393},{-35.5,-9.8393}},
-      color={0,0,127}));
+  connect(turbine_Model1.Pord, electrical_Control1.Pord) annotation(
+    Line(points = {{-59, 60}, {-8, 60}}, color = {0, 0, 127}));
+  connect(generator1.Vt, electrical_Control1.Vterm) annotation(
+    Line(points = {{48, 67}, {48, 75}, {-35, 75}, {-35, 55}, {-8, 55}}, color = {0, 0, 127}));
+  connect(electrical_Control1.Qgen, generator1.Qgen) annotation(
+    Line(points = {{-8, 49}, {-25, 49}, {-25, 80}, {65, 80}, {65, 54}, {48, 54}}, color = {0, 0, 127}));
   annotation (
     Icon(coordinateSystem(
         extent={{-100.0,-100.0},{100.0,100.0}},
