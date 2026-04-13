@@ -89,7 +89,7 @@ initial equation
   Ifd0 = XADIFD;
   VE0 = VE;
   IN0 = K_C*Ifd0/VE0;
-  if K_P == 0 and K_I == 0 then
+  if K_P <= 0 and K_I <= 0 then
     bypass_vb = true;
     VB0 = 1;
   else
@@ -111,7 +111,7 @@ initial equation
   V_REF = ECOMP0 + VA0/K_A;
 
 equation
-  if K_P == 0 and K_I == 0 then
+  if K_P <= 0 and K_I <= 0 then
     VE = 1;
   else
     VE = 'abs'(K_P*V_T + j*K_I*I_T);
