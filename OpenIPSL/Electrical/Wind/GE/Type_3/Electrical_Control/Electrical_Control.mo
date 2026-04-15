@@ -1,12 +1,12 @@
 within OpenIPSL.Electrical.Wind.GE.Type_3.Electrical_Control;
 model Electrical_Control "Type 3 wind machine electrical control"
   import Modelica.Constants.inf;
-  parameter Types.PerUnit qmax=1 "pu";
-  parameter Types.PerUnit qmin=0 "pu";
+  parameter Types.PerUnit qmax=1 "Maximum Q output from reactive power capability";
+  parameter Types.PerUnit qmin=0 "Minimum Q output from reactive power capability";
   parameter Real KQi=1;
-  parameter Real Qbase_VAr=50000000 "Reactive power base for droop";
-  parameter Types.PerUnit ex_x0_0=1 "pu";
-  parameter Types.PerUnit ex_x1_0=1 "pu";
+  parameter Real Qbase=50000000 "Reactive power base for droop";
+  parameter Types.PerUnit ex_x0_0=1 "Initial integrator value for delta Q";
+  parameter Types.PerUnit ex_x1_0=1 "Initial integrator value for exciter";
   parameter Real KVi=1;
   parameter Types.PerUnit xiqmax=1;
   parameter Types.PerUnit xiqmin=1;
@@ -108,7 +108,7 @@ protected
         origin={19.4593,103.9435},
         extent={{-10.0,-10.0},{10.0,10.0}})));
 public
-  Modelica.Blocks.Sources.Constant const1(k = Qbase_VAr) annotation(
+  Modelica.Blocks.Sources.Constant const1(k = Qbase) annotation(
     Placement(transformation(origin = {-200.541, -16.056}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(const.y, lim_exc_s12.Efd) annotation (Line(

@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.Solar.PowerFactory.WECC.PVD1;
-model Controller "Plan Control"
+model Controller "Plant Control"
   parameter Types.PerUnit Imax=1.1 "Maximum allowable total converter current";
   parameter Boolean PqFlag "Priority on current limit flag: 1=P prio.; 0 = Q prio.";
   parameter Types.Time Tg=0.02 "Inverter current regulator time constat";
@@ -40,13 +40,13 @@ model Controller "Plan Control"
     k=-1,
     y_start=-Qref/u_0) annotation (Placement(transformation(origin={182,-70}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Interfaces.RealInput freq annotation (Placement(transformation(extent={{-240,130},{-200,170}}), iconTransformation(origin={-120,-60}, extent={{-20,-20},{20,20}})));
-  Modelica.Blocks.Sources.Constant freq_ref(k= 50) annotation (Placement(transformation(origin={-182,110}, extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Sources.Constant freq_ref(k= 1) annotation (Placement(transformation(origin={-182,110}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Add add2(k1=-1) annotation (Placement(transformation(origin={-130,144}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=Modelica.Constants.inf, uMin=fdbd) annotation (Placement(transformation(origin={-90,144}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Gain frequency_droop(k=Ddn) annotation (Placement(transformation(origin={-50,144}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant active_power_reference(k=Pref) annotation (Placement(transformation(origin={-150,30}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Nonlinear.DeadZone deadband_voltage(uMax=v1, uMin=v0) annotation (Placement(transformation(origin={-70,-70}, extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Math.Gain voltage_droop(k=dqdv) annotation (Placement(transformation(origin={-30,-70}, extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Math.Gain voltage_droop(k=-dqdv) annotation (Placement(transformation(origin={-30,-70}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Qmx, uMin=Qmn) annotation (Placement(transformation(origin={50,-70}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Math.Add add1 annotation (Placement(transformation(origin={14,-70}, extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant reactive_power_reference(k=Qref) annotation (Placement(transformation(origin={-70,-110}, extent={{-10,-10},{10,10}})));
@@ -84,8 +84,6 @@ model Controller "Plan Control"
     Placement(transformation(origin = {70, 108}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Math.Product product13 annotation(
     Placement(transformation(origin = {112, 130}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Math.Gain voltage_droop1(k = -1) annotation(
-    Placement(transformation(origin = {-30, -94}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(It, compensation.u) annotation(
     Line(points = {{-220, -70}, {-162, -70}}, color = {0, 0, 127}));
@@ -167,10 +165,8 @@ equation
     Line(points = {{58, 114}, {42, 114}, {42, 116}}, color = {0, 0, 127}));
   connect(product12.u2, voltage_tripping.TrpHigh) annotation(
     Line(points = {{58, 102}, {42, 102}, {42, 106}}, color = {0, 0, 127}));
-  connect(voltage_droop.y, voltage_droop1.u) annotation(
-    Line(points = {{-18, -70}, {-18, -84}, {-54, -84}, {-54, -94}, {-42, -94}}, color = {0, 0, 127}));
-  connect(voltage_droop1.y, add1.u1) annotation(
-    Line(points = {{-18, -94}, {-14, -94}, {-14, -64}, {2, -64}}, color = {0, 0, 127}));
+  connect(voltage_droop.y, add1.u1) annotation(
+    Line(points = {{-18, -70}, {-6, -70}, {-6, -64}, {2, -64}}, color = {0, 0, 127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,200}}, initialScale=0.05), graphics={
         Text(
           origin={-186,179},

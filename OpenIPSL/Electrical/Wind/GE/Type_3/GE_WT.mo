@@ -9,7 +9,7 @@ model GE_WT "Type 3 wind turbine machine from GE"
   parameter Types.ApparentPower GEN_base=180000000 "Base Power from the Electrical Generator";
   parameter Types.ApparentPower WT_base=162000000 "Base Power from the Turbine";
   parameter Types.ApparentPower SYS_base=100000000 "Base Power from the power system";
-  parameter Types.ApparentPower Qbase_VAr=50000000 "Q base in VAr";
+  parameter Types.ApparentPower Qbase=50000000 "Base reactive power in var";
   parameter Types.Frequency freq=60 "Steady state Frequency of the power system";
   parameter Integer poles=3 "Number of pole pairs";
   parameter Types.Time Tp=0.3 "Time Constant Pitch command";
@@ -26,8 +26,8 @@ model GE_WT "Type 3 wind turbine machine from GE"
   parameter Real Kptrq=3.0 "Gain Torque Controller";
   parameter Real Kitrq=0.6 "Gain of integrator of Torque Controller";
   parameter Types.Time Tpc=0.05 "Time Constant Torque controller";
-  parameter Real KQi=0.1 "Gain constant of first PI in DFIG electrical control model. Note in PU!";
-  parameter Real KVi=0.4 "Gain constant of second PI in DFIG electrical control model. Note in pu terms!";
+  parameter Types.PerUnit KQi=0.1 "Gain constant of first PI in DFIG electrical control model.";
+  parameter Types.PerUnit KVi=0.4 "Gain constant of second PI in DFIG electrical control model.";
   parameter Types.PerUnit xiqmax=0.4 "Up saturation of second PI in DFIG electrical control model";
   parameter Types.PerUnit xiqmin=-0.5 "Down saturation of second PI in DFIG electrical control model";
   parameter Real Kpllp=30;
@@ -103,7 +103,7 @@ model GE_WT "Type 3 wind turbine machine from GE"
     qmin=qmin,
     KVi=KVi,
     xiqmax=xiqmax,
-    xiqmin=xiqmin, Qbase_VAr = Qbase_VAr) annotation (Placement(transformation(
+    xiqmin=xiqmin, Qbase = Qbase) annotation (Placement(transformation(
         origin={0,57.46},
         extent={{-10,-10},{10,10}})));
   Generator.Generator generator1(
@@ -158,7 +158,7 @@ protected
   algorithm
     last_err := 99999.0;
     lambda := 15 + 0.001;
-    lambda_sav := lambda; // addition
+    lambda_sav := lambda "Added to rectify compilation issue"; 
     stop := false;
     while lambda >= 2.001 and not stop loop
       lambda := lambda - 0.001;
@@ -173,7 +173,7 @@ protected
         if abs(new_err - last_err) < abs(new_err + last_err) or last_err >
             90000.0 then
           last_err := new_err;
-          lambda_sav := lambda;
+          lambda_sav := lambda "Allocate lambda to the saved value";
         else
           lambdaOUT := lambda_sav - last_err*(lambda - lambda_sav)/(new_err -
             last_err);
@@ -207,7 +207,7 @@ protected
   algorithm
     last_err := 99999.0;
     theta := pimin - 0.005;
-    theta_sav := theta ; // addition here!
+    theta_sav := theta "Angle saved.";
     stop := false;
     Vw1 := Vw;
     while theta <= pimax - 0.005 and not stop loop
