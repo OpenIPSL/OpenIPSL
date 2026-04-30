@@ -16,7 +16,7 @@ model StaVmea "Voltage Measurement Device"
 
 protected
   Modelica.Blocks.Interfaces.RealInput omega_internal if use_ref_machine_frequency "Helping variable/connector"; 
-  Modelica.Blocks.Interfaces.RealInput phi if use_ref_machine_frequency "Conditional angle."; 
+  Modelica.Blocks.Interfaces.RealInput phi if use_ref_machine_frequency "Conditional angle"; 
   Modelica.Blocks.Interfaces.RealInput phi_internal if use_ref_machine_frequency "Helping variable/connector"; 
 equation
   u = sqrt(p.vr^2 + p.vi^2) "Get the magnitude of the voltage phasor"; 

@@ -85,62 +85,33 @@ model Controller "Plant Control"
   Modelica.Blocks.Math.Product product13 annotation(
     Placement(transformation(origin = {112, 130}, extent = {{-10, -10}, {10, 10}})));
 equation
-  connect(It, compensation.u) annotation(
-    Line(points = {{-220, -70}, {-162, -70}}, color = {0, 0, 127}));
-  connect(compensation.y, add.u2) annotation(
-    Line(points = {{-139, -70}, {-130.5, -70}, {-130.5, -76}, {-122, -76}}, color = {0, 0, 127}));
-  connect(Vt, add.u1) annotation(
-    Line(points = {{-220, -10}, {-128, -10}, {-128, -63}, {-122, -63}, {-122, -64}}, color = {0, 0, 127}));
-  connect(numerical_limit.u, Vt) annotation(
-    Line(points = {{-82, -10}, {-220, -10}}, color = {0, 0, 127}));
-  connect(numerical_limit.y, division.u2) annotation(
-    Line(points = {{-59, -10}, {-8, -10}, {-8, -36}, {78, -36}}, color = {0, 0, 127}));
-  connect(division.y, qppriority.Iq) annotation(
-    Line(points = {{101, -30}, {106, -30}, {106, -5}, {118, -5}}, color = {0, 0, 127}));
-  connect(division1.u2, numerical_limit.y) annotation(
-    Line(points = {{78, 24}, {-8, 24}, {-8, -10}, {-59, -10}}, color = {0, 0, 127}));
-  connect(division1.y, qppriority.Ip) annotation(
-    Line(points = {{101, 30}, {106, 30}, {106, 5}, {118, 5}}, color = {0, 0, 127}));
-  connect(freq, add2.u1) annotation(
-    Line(points = {{-220, 150}, {-142, 150}}, color = {0, 0, 127}));
-  connect(deadZone.y, frequency_droop.u) annotation(
-    Line(points = {{-79, 144}, {-62, 144}}, color = {0, 0, 127}));
-  connect(freq_ref.y, add2.u2) annotation(
-    Line(points = {{-171, 110}, {-160, 110}, {-160, 138}, {-142, 138}}, color = {0, 0, 127}));
-  connect(add2.y, deadZone.u) annotation(
-    Line(points = {{-119, 144}, {-102, 144}}, color = {0, 0, 127}));
-  connect(add.y, deadband_voltage.u) annotation(
-    Line(points = {{-99, -70}, {-82, -70}}, color = {0, 0, 127}));
-  connect(voltage_droop.u, deadband_voltage.y) annotation(
-    Line(points = {{-42, -70}, {-59, -70}}, color = {0, 0, 127}));
-  connect(add1.y, limiter.u) annotation(
-    Line(points = {{25, -70}, {38, -70}}, color = {0, 0, 127}));
-  connect(reactive_power_reference.y, add1.u2) annotation(
-    Line(points = {{-59, -110}, {-10, -110}, {-10, -95}, {2, -95}, {2, -76}}, color = {0, 0, 127}));
-  connect(limiter.y, division.u1) annotation(
-    Line(points = {{61, -70}, {62.5, -70}, {62.5, -24}, {78, -24}}, color = {0, 0, 127}));
-  connect(QCurrentController.y, Iq) annotation(
-    Line(points = {{193, -70}, {210, -70}}, color = {0, 0, 127}));
-  connect(PCurrentController.y, Ip) annotation(
-    Line(points = {{193, 48}, {201.5, 48}, {201.5, 90}, {210, 90}}, color = {0, 0, 127}));
-  connect(active_power_reference.y, add4.u2) annotation(
-    Line(points = {{-139, 30}, {-80, 30}, {-80, 44}, {-62, 44}, {-62, 44}}, color = {0, 0, 127}));
-  connect(frequency_droop.y, add4.u1) annotation(
-    Line(points = {{-39, 144}, {-34, 144}, {-34, 104}, {-80, 104}, {-80, 56}, {-62, 56}}, color = {0, 0, 127}));
-  connect(add4.y, division1.u1) annotation(
-    Line(points = {{-39, 50}, {52, 50}, {52, 36}, {78, 36}, {78, 36}}, color = {0, 0, 127}));
-  connect(product1.y, PCurrentController.u) annotation(
-    Line(points = {{159, 48}, {170, 48}}, color = {0, 0, 127}));
-  connect(product1.u2, qppriority.Ipcmd) annotation(
-    Line(points = {{136, 42}, {128, 42}, {128, 20}, {144, 20}, {144, 6}, {141, 6}, {141, 5}}, color = {0, 0, 127}));
-  connect(frequency_tripping.u, freq) annotation(
-    Line(points = {{18, 150}, {0, 150}, {0, 184}, {-188, 184}, {-188, 150}, {-220, 150}}, color = {0, 0, 127}));
-  connect(voltage_tripping.u, Vt) annotation(
-    Line(points = {{18, 110}, {-128, 110}, {-128, -10}, {-220, -10}}, color = {0, 0, 127}));
-  connect(product4.y, QCurrentController.u) annotation(
-    Line(points = {{161, -70}, {168, -70}, {168, -70}, {170, -70}}, color = {0, 0, 127}));
-  connect(qppriority.Iqcmd, product4.u1) annotation(
-    Line(points = {{141, -5}, {144, -5}, {144, -52}, {130, -52}, {130, -64}, {138, -64}, {138, -64}}, color = {0, 0, 127}));
+  connect(It, compensation.u) annotation (Line(points={{-220,-70},{-162,-70}}, color={0,0,127}));
+  connect(compensation.y, add.u2) annotation (Line(points={{-139,-70},{-130.5,-70},{-130.5,-76},{-122,-76}}, color={0,0,127}));
+  connect(Vt, add.u1) annotation (Line(points={{-220,-10},{-128,-10},{-128,-63},{-122,-63},{-122,-64}}, color={0,0,127}));
+  connect(numerical_limit.u, Vt) annotation (Line(points={{-82,-10},{-220,-10}}, color={0,0,127}));
+  connect(numerical_limit.y, division.u2) annotation (Line(points={{-59,-10},{-8,-10},{-8,-36},{78,-36}}, color={0,0,127}));
+  connect(division.y, qppriority.Iq) annotation (Line(points={{101,-30},{106,-30},{106,-5},{118,-5}}, color={0,0,127}));
+  connect(division1.u2, numerical_limit.y) annotation (Line(points={{78,24},{-8,24},{-8,-10},{-59,-10}}, color={0,0,127}));
+  connect(division1.y, qppriority.Ip) annotation (Line(points={{101,30},{106,30},{106,5},{118,5}}, color={0,0,127}));
+  connect(freq, add2.u1) annotation (Line(points={{-220,150},{-142,150}}, color={0,0,127}));
+  connect(deadZone.y, frequency_droop.u) annotation (Line(points={{-79,144},{-62,144}}, color={0,0,127}));
+  connect(freq_ref.y, add2.u2) annotation (Line(points={{-171,110},{-160,110},{-160,138},{-142,138}}, color={0,0,127}));
+  connect(add2.y, deadZone.u) annotation (Line(points={{-119,144},{-102,144}}, color={0,0,127}));
+  connect(add.y, deadband_voltage.u) annotation (Line(points={{-99,-70},{-82,-70}}, color={0,0,127}));
+  connect(add1.y, limiter.u) annotation (Line(points={{25,-70},{38,-70}}, color={0,0,127}));
+  connect(reactive_power_reference.y, add1.u2) annotation (Line(points={{-59,-110},{-10,-110},{-10,-95},{2,-95},{2,-76}}, color={0,0,127}));
+  connect(limiter.y, division.u1) annotation (Line(points={{61,-70},{62.5,-70},{62.5,-24},{78,-24}}, color={0,0,127}));
+  connect(QCurrentController.y, Iq) annotation (Line(points={{193,-70},{210,-70}}, color={0,0,127}));
+  connect(PCurrentController.y, Ip) annotation (Line(points={{193,90},{210,90}}, color={0,0,127}));
+  connect(active_power_reference.y, add4.u2) annotation (Line(points={{-139,30},{-80,30},{-80,44},{-62,44},{-62,44}}, color={0,0,127}));
+  connect(frequency_droop.y, add4.u1) annotation (Line(points={{-39,144},{-34,144},{-34,104},{-80,104},{-80,56},{-62,56}}, color={0,0,127}));
+  connect(add4.y, division1.u1) annotation (Line(points={{-39,50},{52,50},{52,36},{78,36},{78,36}}, color={0,0,127}));
+  connect(product1.y, PCurrentController.u) annotation (Line(points={{161,90},{170,90},{170,90},{170,90}}, color={0,0,127}));
+  connect(product1.u2, qppriority.Ipcmd) annotation (Line(points={{138,84},{126,84},{126,20},{144,20},{144,6},{141,6},{141,5}}, color={0,0,127}));
+  connect(frequency_tripping.u, freq) annotation (Line(points={{18,150},{0,150},{0,184},{-188,184},{-188,150},{-220,150}}, color={0,0,127}));
+  connect(voltage_tripping.u, Vt) annotation (Line(points={{18,110},{-128,110},{-128,-10},{-220,-10}}, color={0,0,127}));
+  connect(product4.y, QCurrentController.u) annotation (Line(points={{161,-70},{168,-70},{168,-70},{170,-70}}, color={0,0,127}));
+  connect(qppriority.Iqcmd, product4.u1) annotation (Line(points={{141,-5},{144,-5},{144,-52},{130,-52},{130,-64},{138,-64},{138,-64}}, color={0,0,127})); 
   connect(greaterThreshold.y, switch1.u2) annotation(
     Line(points = {{162, 130}, {172, 130}}, color = {255, 0, 255}));
   connect(switch1.y, product1.u1) annotation(
@@ -167,6 +138,8 @@ equation
     Line(points = {{58, 102}, {42, 102}, {42, 106}}, color = {0, 0, 127}));
   connect(voltage_droop.y, add1.u1) annotation(
     Line(points = {{-18, -70}, {-6, -70}, {-6, -64}, {2, -64}}, color = {0, 0, 127}));
+  connect(voltage_droop.u, deadband_voltage.y) annotation(
+    Line(points = {{-42, -70}, {-59, -70}}, color = {0, 0, 127})); 
   annotation (Diagram(coordinateSystem(extent={{-200,-200},{200,200}}, initialScale=0.05), graphics={
         Text(
           origin={-186,179},

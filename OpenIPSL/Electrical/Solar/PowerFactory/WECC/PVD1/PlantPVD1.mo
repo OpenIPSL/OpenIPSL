@@ -65,7 +65,7 @@ model PlantPVD1 "Simple representation of the basic control of a PV system"
   OpenIPSL.Electrical.Solar.PowerFactory.General.StaVmea staVmea(angle_0 = angle_0, use_ref_machine_frequency = false) annotation(
     Placement(transformation(origin = {10, -78}, extent = {{20, -20}, {-20, 20}})));
   CustomMe.FFT_Dominant FFT_Dominant annotation(
-    Placement(transformation(origin = {56, -66}, extent = {{10, -10}, {-10, 10}})));
+    Placement(transformation(origin = {60, -64}, extent = {{10, -10}, {-10, 10}})));
 equation
   connect(static_generator.p, p) annotation(
     Line(points = {{62, 0}, {110, 0}}, color = {0, 0, 255}));
@@ -83,6 +83,8 @@ equation
     Line(points = {{-64, -12}, {-80, -12}, {-80, -90}, {-12, -90}}, color = {0, 0, 127}));
   connect(staVmea.omega, FFT_Dominant.f) annotation(
     Line(points = {{34, -66}, {46, -66}}, color = {0, 0, 127}));
+  //connect(FFT_Dominant.pwPin, p) annotation(
+  //  Line(points = {{72, -64}, {74, -64}, {74, 0}, {110, 0}}, color = {0, 0, 255}));
   annotation (Icon(graphics={
         Rectangle(
           lineColor={118,18,62},

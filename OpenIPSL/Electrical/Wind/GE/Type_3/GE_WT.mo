@@ -152,13 +152,13 @@ protected
     Real last_err;
     Real new_err;
     Real pwind;
-    Real lambda_sav;
+    Real lambda_save;
     Real lambda;
     Boolean stop;
   algorithm
     last_err := 99999.0;
     lambda := 15 + 0.001;
-    lambda_sav := lambda "Added to rectify compilation issue"; 
+    lambda_save := lambda "Added to rectify compilation issue"; 
     stop := false;
     while lambda >= 2.001 and not stop loop
       lambda := lambda - 0.001;
@@ -173,9 +173,9 @@ protected
         if abs(new_err - last_err) < abs(new_err + last_err) or last_err >
             90000.0 then
           last_err := new_err;
-          lambda_sav := lambda "Allocate lambda to the saved value";
+          lambda_save := lambda "Allocate lambda to the saved value";
         else
-          lambdaOUT := lambda_sav - last_err*(lambda - lambda_sav)/(new_err -
+          lambdaOUT := lambda_save - last_err*(lambda - lambda_save)/(new_err -
             last_err);
           cp := cp_init(lambdaOUT, 0.0);
           Vw := wndtge_kl*genbc_k_speed/lambdaOUT;

@@ -194,7 +194,7 @@ equation
     Diagram(coordinateSystem(
         extent={{-210,-148.5},{210,148.5}},
         preserveAspectRatio=true,
-        grid={10,10}), graphics= {Text(origin = {-135, 120}, extent = {{-25, 10}, {25, -10}}, textString = "This needs to be scaled by Q base...")}),
+        grid={10,10}), graphics= {Text(origin = {-135, 120}, extent = {{-25, 10}, {25, -10}}, textString = "Qord needs to be scaled by Q base...")}),
     Icon(coordinateSystem(
         extent={{-100.0,-100.0},{100.0,100.0}},
         preserveAspectRatio=true,
