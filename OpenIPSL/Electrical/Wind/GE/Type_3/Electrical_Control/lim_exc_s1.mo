@@ -36,9 +36,10 @@ model lim_exc_s1 "Exciter limiter model for wind machine"
         origin={0.0,-58.0717},
         extent={{-140.0,40.0},{-100.0,80.0}})));
 equation
-  if typpe == 1 then
-    if Efd >= Vt + xiqmax and Vref >= 0 or Efd <= Vt + xiqmin and Vref <= 0 then
-      y = 0;
+  
+  if typpe == 1 then  
+    if (Efd >= Vt + xiqmax and Vref >= 0) or (Efd <= Vt + xiqmin and Vref <= 0) then
+      y = 0 "First check out of limits. if so, set to 0. otherwise, pass through the voltage reference";
     else
       y = Vref;
     end if;
@@ -50,8 +51,9 @@ equation
     else
       y = Vref;
     end if;
+  
   else
-    y = 0;
+    y = 0 "If another type (not defined), then do nothing.";
   end if;
   annotation (
     Icon(coordinateSystem(

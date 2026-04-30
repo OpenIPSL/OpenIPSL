@@ -12,36 +12,31 @@ model StaVmea "Voltage Measurement Device"
   Types.PerUnit vy "Voltage component";
   Modelica.Blocks.Interfaces.RealOutput u "Voltage magnitude [pu]" annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput fe "Electrical frequency [Hz]" annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-  Modelica.Blocks.Interfaces.RealInput omega if use_ref_machine_frequency "Reference machine frequency [Hz]" annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.RealInput omega "Reference machine frequency [Hz]" annotation (Placement(transformation(extent={{-140,40},{-100,80}}))); 
 
 protected
-  Modelica.Blocks.Interfaces.RealInput omega_internal "Helping variable/connector";
-  Modelica.Blocks.Interfaces.RealInput phi if use_ref_machine_frequency "Conditional angle";
-  Modelica.Blocks.Interfaces.RealInput phi_internal "Helping variable/connector";
-  Modelica.Blocks.Interfaces.RealInput local_df if not use_ref_machine_frequency "Conditional frequency difference";
-  Modelica.Blocks.Interfaces.RealInput local_df_internal "Helping variable/connector";
+  Modelica.Blocks.Interfaces.RealInput omega_internal if use_ref_machine_frequency "Helping variable/connector"; 
+  Modelica.Blocks.Interfaces.RealInput phi if use_ref_machine_frequency "Conditional angle"; 
+  Modelica.Blocks.Interfaces.RealInput phi_internal if use_ref_machine_frequency "Helping variable/connector"; 
 equation
-  u = sqrt(p.vr^2 + p.vi^2);
+  u = sqrt(p.vr^2 + p.vi^2) "Get the magnitude of the voltage phasor"; 
   connect(omega, omega_internal);
   connect(phi, phi_internal);
-  connect(local_df, local_df_internal);
+  
   if use_ref_machine_frequency then
-    der(phi_internal) = 2*C.pi*50*(omega_internal - 1) "First this has to be transformed to the rotating reference frame (w.r.t. the frequency of the reference machine) to correspond to PowerFactory implementation
-";
+    der(phi_internal) = 2*C.pi*fn*(omega_internal - 1) "First this has to be transformed to the rotating reference frame (w.r.t. the frequency of the reference machine) to correspond to PowerFactory implementation";
     vx = p.vr*cos(phi_internal) + p.vi*sin(phi_internal);
     vy = (-p.vr*sin(phi_internal)) + p.vi*cos(phi_internal);
     der(cosphi) = (vx/u - cosphi)/Tfe;
     der(sinphi) = (vy/u - sinphi)/Tfe;
-    fe = omega_internal + df;
+    fe = omega_internal + df "Apply the calculation w.r.t provided frequency of synchronous machine";
   else
-    cosphi = vx/u;
-    sinphi = vy/u;
-    der(local_df_internal) = (df - local_df_internal)/Tfe;
     vx = p.vr;
     vy = p.vi;
-    fe = 1 + local_df_internal;
-    omega_internal = 0 "Balance equation";
-    phi_internal = 0 "Balance equation";
+    der(cosphi) = (vx/u - cosphi)/Tfe;
+    der(sinphi) = (vy/u - sinphi)/Tfe;
+    fe = 1 + df "Apply the calculation w.r.t system base frequency";
+
   end if;
   if abs(cosphi) > abs(sinphi) then
     df = der(sinphi)/cosphi/(2*C.pi*fn);
