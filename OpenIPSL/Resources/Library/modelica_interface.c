@@ -1021,10 +1021,10 @@ __declspec(dllexport) int32_T __cdecl Model_Initialize(IEEE_Cigre_DLLInterface_I
     instance->DoubleStates[5] = 0.0;
     instance->DoubleStates[6] = 0.0;
     instance->DoubleStates[7] = 0.0;
-    instance->DoubleStates[8] = 0;
+    instance->DoubleStates[8] = 0.0;//Pout / Sbase;
     instance->DoubleStates[9] = 0.0;
     instance->DoubleStates[10] = 0.0;
-    instance->DoubleStates[11] = 0;
+    instance->DoubleStates[11] = 0.0;//-Qout / Sbase;
     instance->DoubleStates[12] = 0.0;
     instance->DoubleStates[13] = 0.0;
     instance->DoubleStates[14] = 0.0;
@@ -1032,10 +1032,10 @@ __declspec(dllexport) int32_T __cdecl Model_Initialize(IEEE_Cigre_DLLInterface_I
     instance->DoubleStates[16] = 0.0;
     instance->DoubleStates[17] = 0.0;
     instance->DoubleStates[18] = 0.0;
-    instance->DoubleStates[19] = 0;
-    instance->DoubleStates[20] = 0;
-    instance->DoubleStates[21] = 0;
-    instance->DoubleStates[22] = 0;
+    instance->DoubleStates[19] = 0.0;//Pout / Sbase;
+    instance->DoubleStates[20] = 0.0;//Pout / Sbase;
+    instance->DoubleStates[21] = 0.0;//Qout / Sbase;
+    instance->DoubleStates[22] = 0.0;//Qout / Sbase;
     instance->DoubleStates[23] = 0.0;
     instance->DoubleStates[24] = 0.0;
     instance->DoubleStates[25] = 0.0;
@@ -1128,10 +1128,10 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     ErrorMessage[0] = '\0';
 
     MyModelParameters* parameters = (MyModelParameters*)instance->Parameters;
-    
-    parameters->Vbase = 6.5;
-    parameters->Sbase = 10;
-    parameters->Vdcbase = 13;
+
+    parameters->Vbase = 0.65;
+    parameters->Sbase = 1000;
+    parameters->Vdcbase = 1.3;
     parameters->KpI = 0.5;
     parameters->KiI = 1.0;
     parameters->wtype = 1;
@@ -1140,7 +1140,7 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     parameters->del_f_limit = 12;
     parameters->KpP = 0.5;
     parameters->KiP = 10;
-    parameters->Qflag = 0;
+    parameters->Qflag = 1;
     parameters->KpQ = 0.5;
     parameters->KiQ = 20;
     parameters->KpV = 0.5;
@@ -1152,7 +1152,7 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     parameters->Pmin = 0;
     parameters->Qmax = 1;
     parameters->Qmin = -1;
-    parameters->PQflag = 0;
+    parameters->PQflag = 1;
     parameters->KfDroop = 33;
     parameters->KvDroop = 5;
     parameters->K_POD = 0;
@@ -1166,13 +1166,11 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     parameters->KpVdq = 3;
     parameters->KiVdq = 10;
     parameters->Tr = 0.001;
-    parameters->Rchoke = 0.005;
-    parameters->Lchoke = 0.08;
-    parameters->Cfilt = 0.1;
+    parameters->Rchoke = 0;
+    parameters->Lchoke = 0.15;
+    parameters->Cfilt = 0.01666;
     parameters->Rdamp = 9.4868;
-    
 
-    
     // Retrieve variables from Input, Output and State
     double Vbase = parameters->Vbase;
     double Sbase = parameters->Sbase;
@@ -1483,7 +1481,7 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     // Outputs
     outputs->Ea = Ea * Vdcbase / 2.0;
     outputs->Eb = Eb * Vdcbase / 2.0;
-    outputs->Ec = Ec * Vdcbase / 2.0;
+    outputs->Ec = 0;//Ec * Vdcbase / 2.0;
     outputs->Idrefout = Idref;
     outputs->Idout = IdL1;
     outputs->Iqrefout = Iqref;
@@ -1667,18 +1665,18 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
 
     MyModelParameters* model_parameters = (MyModelParameters*)malloc(sizeof(MyModelParameters));
 
-    model_parameters->Vbase = 6.5;
-    model_parameters->Sbase = 10;
-    model_parameters->Vdcbase = 13;
+    model_parameters->Vbase = Vbase;
+    model_parameters->Sbase = Sbase;
+    model_parameters->Vdcbase = VDC_base;
     model_parameters->KpI = 0.5;
     model_parameters->KiI = 1.0;
-    model_parameters->wtype = 1;
+    model_parameters->wtype = w_type;
     model_parameters->KpPLL = 20;
     model_parameters->KiPLL = 200;
     model_parameters->del_f_limit = 12;
     model_parameters->KpP = 0.5;
     model_parameters->KiP = 10;
-    model_parameters->Qflag = 0;
+    model_parameters->Qflag = 1;
     model_parameters->KpQ = 0.5;
     model_parameters->KiQ = 20;
     model_parameters->KpV = 0.5;
@@ -1690,7 +1688,49 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
     model_parameters->Pmin = 0;
     model_parameters->Qmax = 1;
     model_parameters->Qmin = -1;
-    model_parameters->PQflag = 0;
+    model_parameters->PQflag = 1;
+    model_parameters->KfDroop = 33;
+    model_parameters->KvDroop = 3;
+    model_parameters->K_POD = 0;
+    model_parameters->T_POD = 0.01;
+    model_parameters->T1_POD = 0.01;
+    model_parameters->T2_POD = 0.001;
+    model_parameters->POD_min = -0.5;
+    model_parameters->POD_max = 0.5;
+    model_parameters->Vdip = 0.8;
+    model_parameters->Vup = 1.2;
+    model_parameters->KpVdq = 3;
+    model_parameters->KiVdq = 10;
+    model_parameters->Tr = 0.001;
+    model_parameters->Rchoke = 0;
+    model_parameters->Lchoke = 0.15;
+    model_parameters->Cfilt = 0.01666;
+    model_parameters->Rdamp = 9.4868;
+
+    model_parameters->Vbase = 0.65;
+    model_parameters->Sbase = 1000;
+    model_parameters->Vdcbase =1.3;
+    model_parameters->KpI = 0.5;
+    model_parameters->KiI = 1.0;
+    model_parameters->wtype = 1;
+    model_parameters->KpPLL = 20;
+    model_parameters->KiPLL = 200;
+    model_parameters->del_f_limit = 12;
+    model_parameters->KpP = 0.5;
+    model_parameters->KiP = 10;
+    model_parameters->Qflag = 1;
+    model_parameters->KpQ = 0.5;
+    model_parameters->KiQ = 20;
+    model_parameters->KpV = 0.5;
+    model_parameters->KiV = 150;
+    model_parameters->KpVq = 0;
+    model_parameters->KiVq = 0;
+    model_parameters->Imax = 1.2;
+    model_parameters->Pmax = 1;
+    model_parameters->Pmin = 0;
+    model_parameters->Qmax = 1;
+    model_parameters->Qmin = -1;
+    model_parameters->PQflag = 1;
     model_parameters->KfDroop = 33;
     model_parameters->KvDroop = 5;
     model_parameters->K_POD = 0;
@@ -1704,55 +1744,17 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
     model_parameters->KpVdq = 3;
     model_parameters->KiVdq = 10;
     model_parameters->Tr = 0.001;
-    model_parameters->Rchoke = 0.005;
-    model_parameters->Lchoke = 0.08;
-    model_parameters->Cfilt = 0.1;
+    model_parameters->Rchoke = 0;
+    model_parameters->Lchoke = 0.15;
+    model_parameters->Cfilt = 0.01666;
     model_parameters->Rdamp = 9.4868;
-
 
 
     instance->Parameters = model_parameters;
 
     double* states = malloc(36 * sizeof(double));
-    
     instance->DoubleStates = states;
-    instance->DoubleStates[0] = 0.0;
-    instance->DoubleStates[1] = 0.0;
-    instance->DoubleStates[2] = 0.0;
-    instance->DoubleStates[3] = 0.0;
-    instance->DoubleStates[4] = 0.0;
-    instance->DoubleStates[5] = 0.0;
-    instance->DoubleStates[6] = 0.0;
-    instance->DoubleStates[7] = 0.0;
-    instance->DoubleStates[8] = 0;
-    instance->DoubleStates[9] = 0.0;
-    instance->DoubleStates[10] = 0.0;
-    instance->DoubleStates[11] = 0;
-    instance->DoubleStates[12] = 0.0;
-    instance->DoubleStates[13] = 0.0;
-    instance->DoubleStates[14] = 0.0;
-    instance->DoubleStates[15] = 0.0;
-    instance->DoubleStates[16] = 0.0;
-    instance->DoubleStates[17] = 0.0;
-    instance->DoubleStates[18] = 0.0;
-    instance->DoubleStates[19] = 0;
-    instance->DoubleStates[20] = 0;
-    instance->DoubleStates[21] = 0;
-    instance->DoubleStates[22] = 0;
-    instance->DoubleStates[23] = 0.0;
-    instance->DoubleStates[24] = 0.0;
-    instance->DoubleStates[25] = 0.0;
-    instance->DoubleStates[26] = 0.0;
-    instance->DoubleStates[27] = 0.0;
-    instance->DoubleStates[28] = 0.0;
-    instance->DoubleStates[29] = 0.0;
-    instance->DoubleStates[30] = 0.0;
-    instance->DoubleStates[31] = 0.0;
-    instance->DoubleStates[32] = 0.0;
-    instance->DoubleStates[33] = 0.0;
-    instance->DoubleStates[34] = 0.0;
-    instance->DoubleStates[35] = 0.0;
-    
+
     Model_Initialize(instance);
 
     return (void*)instance;
@@ -1771,22 +1773,20 @@ __declspec(dllexport) void __cdecl deinit_gfm_model(IEEE_Cigre_DLLInterface_Inst
 __declspec(dllexport) void __cdecl update_gfm_input(IEEE_Cigre_DLLInterface_Instance* instance, double sim_time_input, double va, double vb,
     double vc, double ia, double ib, double ic, double ial, double ibl, double icl, double pref, double qref, double vref) {
 
-    if (sim_time_input != sim_time)
-    {
-        MyModelInputs* inputs = (MyModelInputs*)instance->ExternalInputs;
-        inputs->Va = va / 1000;
-        inputs->Vb = vb / 1000;
-        inputs->Vc = vc / 1000;
-        inputs->Ia = ia / 1000;
-        inputs->Ib = ib / 1000;
-        inputs->Ic = ic / 1000;
-        inputs->IaL1 = ial / 1000;
-        inputs->IbL1 = ibl / 1000;
-        inputs->IcL1 = icl / 1000;
-        inputs->Pref = pref;
-        inputs->Qref = qref;
-        inputs->Vref = vref;
-    }
+    MyModelInputs* inputs = (MyModelInputs*)instance->ExternalInputs;
+    inputs->Va = va / 1000;
+    inputs->Vb = vb / 1000;
+    inputs->Vc = vc / 1000;
+    inputs->Ia = ia / 1000;
+    inputs->Ib = ib / 1000;
+    inputs->Ic = ic / 1000;
+    inputs->IaL1 = ial / 1000;
+    inputs->IbL1 = ibl / 1000;
+    inputs->IcL1 = icl / 1000;
+    inputs->Pref = pref;
+    inputs->Qref = qref;
+    inputs->Vref = vref;
+
     sim_time = sim_time_input;
 };
 

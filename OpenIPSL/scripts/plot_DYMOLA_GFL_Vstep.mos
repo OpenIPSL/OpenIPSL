@@ -1,0 +1,54 @@
+// ============================================================================
+//  Plot script  :  DYMOLA_GFL_Vstep
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.DYMOLA_GFL_Vstep
+//  Category     :  VOLTAGE STEP (sustained grid voltage change)
+//
+//  Topology     :  IBR -- EMTPtransformerZeroSeq -- GridWithFault (230 kV).
+//  Event        :  Grid voltage steps down to 0.95 pu at t = 2 s and STAYS
+//                  (GridWithFault: FaultVoltage=0.95, FaultTime=2, FaultDuration=10
+//                   -> persists to the end of the run). P_ref=0.5, Q_ref=0.03 pu.
+//
+//  Plot window  :  V/I zoomed on the step onset (~1 cycle before, several after);
+//                  P/Q over a wider window to show the new steady operating point.
+//                  1 cycle (60 Hz) = 0.016667 s.
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]                            Q [Mvar]    : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_DYMOLA_GFL_Vstep.mos");
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.DYMOLA_GFL_Vstep",
+  stopTime=3.0, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="DYMOLA_GFL_Vstep");
+
+// --- Figure 1 : phase voltages [V] ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Vstep: phase voltages (step to 0.95 pu @ 2 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={1.98, 2.30, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Vstep: phase currents",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={1.98, 2.30, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Vstep: active power P",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={1.90, 2.90, 10, -2});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Vstep: reactive power Q",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={1.90, 2.90, 6, -6});

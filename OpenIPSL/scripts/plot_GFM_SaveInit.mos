@@ -1,0 +1,54 @@
+// ============================================================================
+//  Plot script  :  GFM_SaveInit
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_SaveInit
+//  Category     :  VOLTAGE-DIP (deep grid fault)
+//
+//  Events       :  Grid voltage dip to 0.40 pu at t = 5.0 s, cleared at 5.1 s
+//                  (GridWithFault: FaultVoltage=0.4, FaultTime=5, FaultDuration=0.1).
+//                  (P_ref step is at t=10 s and never occurs in this window.)
+//
+//  Plot window  :  centred on the deep dip. 1 cycle (60 Hz) = 0.016667 s.
+//                  V/I: ~1 cycle pre-fault + 0.1 s dip + recovery cycles.
+//                  P/Q: wider window for the slower recovery envelope.
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]                            Q [Mvar]    : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_GFM_SaveInit.mos");
+//  Note: this model also writes terminal states to list.dat at simulation end.
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_SaveInit",
+  stopTime=5.9, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="GFM_SaveInit");
+
+// --- Figure 1 : phase voltages [V] ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="GFM_SaveInit: phase voltages (0.4 pu deep dip @ 5 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={4.98, 5.25, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="GFM_SaveInit: phase currents (fault-current response)",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={4.98, 5.25, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="GFM_SaveInit: active power P",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={4.95, 5.70, 12, -4});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="GFM_SaveInit: reactive power Q",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={4.95, 5.70, 10, -10});

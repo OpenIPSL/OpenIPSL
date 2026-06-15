@@ -1,0 +1,61 @@
+// ============================================================================
+//  Plot script  :  GFM_EMTPFullPSCAD
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_EMTPFullPSCAD
+//  Category     :  SHORT-CIRCUIT + grid voltage dip (two events)
+//
+//  Topology     :  IBR -- EMTPtransformerZeroSeq -- SmoothShortFault --
+//                  GFM_PSCAD GridWithFault (230 kV).
+//  Events
+//    * P_ref step 0.5 -> 0.7 pu at t = 2 s   (not in plot window)
+//    * Smooth three-phase short (R=5 ohm) at t = 5.0 s, cleared at 5.1 s
+//      (SmoothShortFault default faultTime=5, faultDuration=0.1).
+//    * Grid voltage dip to 0.95 pu at t = 6.0 s (PSCAD GridWithFault:
+//      FaultVoltage=0.95, FaultTime=6, FaultDuration=10 -> stays to the end).
+//    Q_ref = 0.06 pu.
+//
+//  Plot window  :  V/I are zoomed on the SHORT at t = 5 s.
+//                  To inspect the waveforms of the t = 6 s grid dip instead,
+//                  change the V/I ranges to {5.98, 6.30, ...}.
+//                  P/Q use a wide window [4.9, 6.6] so BOTH events are visible.
+//                  1 cycle (60 Hz) = 0.016667 s.
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]                            Q [Mvar]    : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_GFM_EMTPFullPSCAD.mos");
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_EMTPFullPSCAD",
+  stopTime=7.0, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="GFM_EMTPFullPSCAD");
+
+// --- Figure 1 : phase voltages [V] (zoom on short @ 5 s) ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFullPSCAD: phase voltages (short @ 5 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={4.98, 5.30, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] (zoom on short @ 5 s) ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFullPSCAD: phase currents (short @ 5 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={4.98, 5.30, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] (both events) ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFullPSCAD: active power P (short @5 s and dip @6 s)",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={4.90, 6.60, 12, -4});
+
+// --- Figure 4 : reactive power Q [Mvar] (both events) ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFullPSCAD: reactive power Q (short @5 s and dip @6 s)",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={4.90, 6.60, 10, -10});

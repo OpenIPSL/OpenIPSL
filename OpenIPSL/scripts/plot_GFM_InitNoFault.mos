@@ -1,0 +1,54 @@
+// ============================================================================
+//  Plot script  :  GFM_InitNoFault
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_InitNoFault
+//  Category     :  STEADY STATE (initialised from list.dat)
+//
+//  Events       :  none. The IBR (GFM_GFL_IBR_Init_SS) is initialised with the
+//                  saved steady state (list.dat), and the grid has no fault
+//                  (FaultVoltage=1). The point of this case is that there is
+//                  NO start-up transient -- the traces should be flat from t=0.
+//
+//  Plot window  :  short window to demonstrate the absence of an initial
+//                  transient (compare against GFM_TestNoFault, which starts cold).
+//
+//  IBR instance :  "gFM_GFL_IBR_Init_SS"   (NOT gFM_GFL_IBR)
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]                            Q [Mvar]    : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_GFM_InitNoFault.mos");
+//  Prerequisite : list.dat must exist (run GFM_TestNoFault / GFM_SaveInit first).
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_InitNoFault",
+  stopTime=1.5, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="GFM_InitNoFault");
+
+// --- Figure 1 : phase voltages [V] ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="GFM_InitNoFault: phase voltages (initialised - no transient)",
+  y={"gFM_GFL_IBR_Init_SS.grid_sensor_a.voltage","gFM_GFL_IBR_Init_SS.grid_sensor_b.voltage","gFM_GFL_IBR_Init_SS.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={0.0, 0.3, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="GFM_InitNoFault: phase currents (initialised - no transient)",
+  y={"gFM_GFL_IBR_Init_SS.grid_sensor_a.current","gFM_GFL_IBR_Init_SS.grid_sensor_b.current","gFM_GFL_IBR_Init_SS.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={0.0, 0.3, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="GFM_InitNoFault: active power P (flat at reference)",
+  y={"gFM_GFL_IBR_Init_SS.out[11]"},
+  legends={"P [MW]"},
+  range={0.0, 1.5, 8, -1});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="GFM_InitNoFault: reactive power Q (flat at reference)",
+  y={"gFM_GFL_IBR_Init_SS.out[12]"},
+  legends={"Q [Mvar]"},
+  range={0.0, 1.5, 3, -3});

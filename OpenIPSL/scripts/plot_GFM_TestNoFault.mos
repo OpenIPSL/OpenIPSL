@@ -1,0 +1,55 @@
+// ============================================================================
+//  Plot script  :  GFM_TestNoFault
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_TestNoFault
+//  Category     :  STEADY STATE (no disturbance)
+//
+//  Events       :  none. FaultVoltage=1 (no dip), P_ref step height=0.
+//                  The model starts from a cold state (filter L/C at 0), so
+//                  the only transient is the initial energisation near t = 0.
+//
+//  Plot window  :  V/I zoom on the start-up transient [0, 0.4] s;
+//                  P/Q over [0, 2] s to confirm they settle to the references
+//                  (P_ref = 0.5 pu -> ~5 MW, Q_ref = 0 -> ~0 Mvar).
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V]  : grid_sensor_{a,b,c}.voltage
+//    Current [A]  : grid_sensor_{a,b,c}.current
+//    P [MW]       : out[11]      Q [Mvar] : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_GFM_TestNoFault.mos");
+//  Note: this model writes its terminal states to list.dat (used by the
+//        GFM_Init* cases). range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_TestNoFault",
+  stopTime=2.0, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="GFM_TestNoFault");
+
+// --- Figure 1 : phase voltages [V] (start-up) ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="GFM_TestNoFault: phase voltages (start-up transient)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={0.0, 0.4, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] (start-up) ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="GFM_TestNoFault: phase currents (start-up transient)",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={0.0, 0.4, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="GFM_TestNoFault: active power P settling to reference",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={0.0, 2.0, 8, -1});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="GFM_TestNoFault: reactive power Q settling to reference",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={0.0, 2.0, 3, -3});

@@ -1,0 +1,59 @@
+// ============================================================================
+//  Plot script  :  GFM_Test
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_Test
+//  Category     :  VOLTAGE-DIP (grid fault)
+//
+//  Events
+//    * P_ref step 0.5 -> 0.7 pu at t = 2 s   (secondary, not in plot window)
+//    * Grid voltage dip to 0.80 pu at t = 5.0 s, cleared at t = 5.1 s
+//      (GridWithFault: FaultVoltage=0.8, FaultTime=5, FaultDuration=0.1)
+//
+//  Plot window  :  centred on the fault. 60 Hz -> 1 cycle = 0.016667 s.
+//                  V/I show ~1 cycle pre-fault + the 0.1 s dip + recovery.
+//                  P/Q use a wider window to show the slower envelope.
+//
+//  Signals (IBR instance "gFM_GFL_IBR", terminal = 6.5 kV / 10 MVA base)
+//    Voltage [V]  : grid_sensor_{a,b,c}.voltage   (instantaneous phase)
+//    Current [A]  : grid_sensor_{a,b,c}.current    (instantaneous phase)
+//    P [MW]       : out[11]   (Pout = Pelec*Sbase)
+//    Q [Mvar]     : out[12]   (Qout = Qelec*Sbase)
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_GFM_Test.mos");
+//  Notes:
+//   * Euler @ fixedstepsize=1e-5 s is required (EMT LC filter ~670 Hz).
+//   * Y ranges are generous; range = {x_min, x_max, y_max, y_min}.
+//     Edit y_max/y_min if a trace clips.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_Test",
+  stopTime=5.8, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="GFM_Test");
+
+// --- Figure 1 : phase voltages [V] ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="GFM_Test: phase voltages at IBR terminal (0.8 pu dip @ 5 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={4.98, 5.20, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="GFM_Test: phase currents at IBR terminal",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={4.98, 5.20, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="GFM_Test: active power P",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={4.95, 5.60, 12, -4});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="GFM_Test: reactive power Q",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={4.95, 5.60, 10, -10});

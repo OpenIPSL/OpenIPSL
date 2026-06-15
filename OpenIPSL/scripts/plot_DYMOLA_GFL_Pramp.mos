@@ -1,0 +1,56 @@
+// ============================================================================
+//  Plot script  :  DYMOLA_GFL_Pramp
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.DYMOLA_GFL_Pramp
+//  Category     :  POWER RAMP (no fault)
+//
+//  Topology     :  IBR -- EMTPtransformerZeroSeq -- GridWithFault (no fault:
+//                  FaultTime=10 is past this run).
+//  Event        :  P_ref ramps 0 -> 0.4 pu over [2, 2.8] s (Ramp: height=0.4,
+//                  duration=0.8, startTime=2). Q_ref ramps -0.03 -> +0.02 pu
+//                  over the same interval.
+//
+//  Plot window  :  WIDE window covering the whole ramp plus settling -- this is
+//                  a slow set-point change, NOT a fast transient, so there is no
+//                  "one cycle" zoom. V/I show the envelope growing as P rises.
+//                  [1.9, 3.1] s for V/I, [1.8, 3.4] s for P/Q.
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]                            Q [Mvar]    : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_DYMOLA_GFL_Pramp.mos");
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.DYMOLA_GFL_Pramp",
+  stopTime=3.6, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="DYMOLA_GFL_Pramp");
+
+// --- Figure 1 : phase voltages [V] (envelope ~constant, grid is stiff) ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Pramp: phase voltages during P ramp [2, 2.8] s",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={1.9, 3.1, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] (envelope grows with P) ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Pramp: phase currents (amplitude rises with P)",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={1.9, 3.1, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] (the ramp) ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Pramp: active power P (ramp 0 -> ~4 MW)",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={1.8, 3.4, 6, -2});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Pramp: reactive power Q",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={1.8, 3.4, 2, -2});

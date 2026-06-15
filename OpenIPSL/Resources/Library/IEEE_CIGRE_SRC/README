@@ -1,7 +1,21 @@
 1. Install visual studio
 2. Use the following command to compile .c code to .dll file
 
-cl.exe /D_USRDLL /D_WINDLL <files-to-compile> <files-to-link> /link /DLL /OUT:<desired-dll-name>.dll
+2.1 For 32 bit build, first initialize with this command(fill ****with your VS code installation location or find path for "vcvarsall.bat"):
+
+"<****\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat>" x86
+
+2.2 Then run:
+
+cl .\src\GFM_GFL_IBR.c /I .\inc /LD /link /OUT:GFM_GFL_IBR_X86.dll
+
+2.3 For 64 bit build, first initialize:
+
+"<****\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat>" x64
+
+2.4 Then run:
+
+cl .\src\GFM_GFL_IBR.c /I .\inc /LD /link /OUT:GFM_GFL_IBR_X64.dll
 
 3. Put .dll files under Library folder 
 

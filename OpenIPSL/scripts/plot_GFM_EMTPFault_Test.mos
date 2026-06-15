@@ -1,0 +1,53 @@
+// ============================================================================
+//  Plot script  :  GFM_EMTPFault_Test
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_EMTPFault_Test
+//  Category     :  SHORT-CIRCUIT (three-phase short to ground, EMTP grid)
+//
+//  Events
+//    * P_ref step 0.5 -> 0.7 pu at t = 2 s   (secondary, not in plot window)
+//    * Three-phase short to ground (R=5 ohm) at t = 5.0 s, cleared at 5.1 s
+//      (ShortFault default: faultTime=5, faultDuration=0.1) ahead of the EMTPGrid.
+//
+//  Plot window  :  centred on the short. 1 cycle (60 Hz) = 0.016667 s.
+//                  V/I show ~1 cycle pre-fault, the 0.1 s short, and recovery.
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]                            Q [Mvar]    : out[12]
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_GFM_EMTPFault_Test.mos");
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.GFM_EMTPFault_Test",
+  stopTime=5.9, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="GFM_EMTPFault_Test");
+
+// --- Figure 1 : phase voltages [V] ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFault_Test: phase voltages (3-ph short @ 5 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={4.98, 5.25, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFault_Test: phase currents (fault-current response)",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={4.98, 5.25, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFault_Test: active power P",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={4.95, 5.70, 12, -4});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="GFM_EMTPFault_Test: reactive power Q",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={4.95, 5.70, 10, -10});

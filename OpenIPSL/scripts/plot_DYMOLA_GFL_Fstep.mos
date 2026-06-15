@@ -1,0 +1,61 @@
+// ============================================================================
+//  Plot script  :  DYMOLA_GFL_Fstep
+//  Model        :  OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.DYMOLA_GFL_Fstep
+//  Category     :  FREQUENCY STEP (grid frequency disturbance)
+//
+//  Topology     :  IBR -- EMTPtransformerZeroSeq -- GridFStep (230 kV).
+//  Event        :  Grid frequency steps -0.5 Hz (60 -> 59.5 Hz) at t = 2 s
+//                  (GridFStep: FstepTime=2, deltaF=-0.5, fnorm=60).
+//                  P_ref = 0.5 pu, Q_ref = 0.07 pu (constant).
+//
+//  Plot window  :  V/I zoomed tight on the step (~1 cycle before, several after);
+//                  P/Q and the PLL frequency over a wider window to show the
+//                  droop response settling. 1 cycle (60 Hz) = 0.016667 s.
+//
+//  Signals (IBR instance "gFM_GFL_IBR")
+//    Voltage [V] : grid_sensor_{a,b,c}.voltage   Current [A] : grid_sensor_{a,b,c}.current
+//    P [MW] : out[11]    Q [Mvar] : out[12]    Freq [Hz] : out[10] (Freqpll)
+//
+//  Tool: Dymola.   Run with:  RunScript("plot_DYMOLA_GFL_Fstep.mos");
+//        range = {x_min, x_max, y_max, y_min}.
+// ============================================================================
+
+simulateModel("OpenIPSL.Tests.Controls.IEEE_CIGRE.GFM.DYMOLA_GFL_Fstep",
+  stopTime=3.0, outputInterval=1e-4,
+  method="Euler", fixedstepsize=1e-5,
+  resultFile="DYMOLA_GFL_Fstep");
+
+// --- Figure 1 : phase voltages [V] ---
+createPlot(id=1, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Fstep: phase voltages (-0.5 Hz step @ 2 s)",
+  y={"gFM_GFL_IBR.grid_sensor_a.voltage","gFM_GFL_IBR.grid_sensor_b.voltage","gFM_GFL_IBR.grid_sensor_c.voltage"},
+  legends={"v_a [V]","v_b [V]","v_c [V]"},
+  range={1.98, 2.25, 7500, -7500});
+
+// --- Figure 2 : phase currents [A] ---
+createPlot(id=2, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Fstep: phase currents",
+  y={"gFM_GFL_IBR.grid_sensor_a.current","gFM_GFL_IBR.grid_sensor_b.current","gFM_GFL_IBR.grid_sensor_c.current"},
+  legends={"i_a [A]","i_b [A]","i_c [A]"},
+  range={1.98, 2.25, 4000, -4000});
+
+// --- Figure 3 : active power P [MW] (droop response) ---
+createPlot(id=3, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Fstep: active power P (frequency-droop response)",
+  y={"gFM_GFL_IBR.out[11]"},
+  legends={"P [MW]"},
+  range={1.90, 2.80, 10, -2});
+
+// --- Figure 4 : reactive power Q [Mvar] ---
+createPlot(id=4, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Fstep: reactive power Q",
+  y={"gFM_GFL_IBR.out[12]"},
+  legends={"Q [Mvar]"},
+  range={1.90, 2.80, 6, -6});
+
+// --- Figure 5 : PLL frequency [Hz] (the disturbance itself) ---
+createPlot(id=5, erase=true, autoscale=false, grid=true,
+  heading="DYMOLA_GFL_Fstep: PLL frequency",
+  y={"gFM_GFL_IBR.out[10]"},
+  legends={"f_pll [Hz]"},
+  range={1.90, 2.80, 60.2, 59.3});

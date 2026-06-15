@@ -809,7 +809,7 @@ IEEE_Cigre_DLLInterface_Model_Info Model_Info = {
     .ModelLastModifiedBy = "Deepak Ramasubramanian",                    // Model last modified by
     .ModelModifiedComment = "Version 1.1.0.0 for IEEE/Cigre DLL API V2",// Model modified comment
     .ModelModifiedHistory = "First instance",                           // Model modified history
-    .FixedStepBaseSampleTime = 0.00001,                                 // Time Step sampling time (sec)
+    .FixedStepBaseSampleTime = 0.00002,                                 // Time Step sampling time (sec)
 
     // Inputs
     .NumInputPorts = 12,                                                // Number of Input Signals
@@ -1129,11 +1129,11 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
 
     MyModelParameters* parameters = (MyModelParameters*)instance->Parameters;
     
-    parameters->Vbase = 6.5;
-    parameters->Sbase = 10;
-    parameters->Vdcbase = 13;
+    parameters->Vbase = 0.65;
+    parameters->Sbase = 100;
+    parameters->Vdcbase = 1.5;
     parameters->KpI = 0.5;
-    parameters->KiI = 1.0;
+    parameters->KiI = 20;
     parameters->wtype = 1;
     parameters->KpPLL = 20;
     parameters->KiPLL = 200;
@@ -1143,8 +1143,8 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     parameters->Qflag = 0;
     parameters->KpQ = 0.5;
     parameters->KiQ = 20;
-    parameters->KpV = 0.5;
-    parameters->KiV = 150;
+    parameters->KpV = 1;
+    parameters->KiV = 10;
     parameters->KpVq = 0;
     parameters->KiVq = 0;
     parameters->Imax = 1.2;
@@ -1152,9 +1152,9 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     parameters->Pmin = 0;
     parameters->Qmax = 1;
     parameters->Qmin = -1;
-    parameters->PQflag = 0;
-    parameters->KfDroop = 33;
-    parameters->KvDroop = 5;
+    parameters->PQflag = 1;
+    parameters->KfDroop = 20;
+    parameters->KvDroop = 30;
     parameters->K_POD = 0;
     parameters->T_POD = 0.01;
     parameters->T1_POD = 0.01;
@@ -1166,9 +1166,9 @@ __declspec(dllexport) int32_T __cdecl Model_Outputs(IEEE_Cigre_DLLInterface_Inst
     parameters->KpVdq = 3;
     parameters->KiVdq = 10;
     parameters->Tr = 0.001;
-    parameters->Rchoke = 0.005;
-    parameters->Lchoke = 0.08;
-    parameters->Cfilt = 0.1;
+    parameters->Rchoke = 0;
+    parameters->Lchoke = 0.1;
+    parameters->Cfilt = 0.016666;
     parameters->Rdamp = 9.4868;
     
 
@@ -1667,11 +1667,11 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
 
     MyModelParameters* model_parameters = (MyModelParameters*)malloc(sizeof(MyModelParameters));
 
-    model_parameters->Vbase = 6.5;
-    model_parameters->Sbase = 10;
-    model_parameters->Vdcbase = 13;
+    model_parameters->Vbase = 0.65;
+    model_parameters->Sbase = 100;
+    model_parameters->Vdcbase = 1.5;
     model_parameters->KpI = 0.5;
-    model_parameters->KiI = 1.0;
+    model_parameters->KiI = 20;
     model_parameters->wtype = 1;
     model_parameters->KpPLL = 20;
     model_parameters->KiPLL = 200;
@@ -1681,8 +1681,8 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
     model_parameters->Qflag = 0;
     model_parameters->KpQ = 0.5;
     model_parameters->KiQ = 20;
-    model_parameters->KpV = 0.5;
-    model_parameters->KiV = 150;
+    model_parameters->KpV = 1;
+    model_parameters->KiV = 10;
     model_parameters->KpVq = 0;
     model_parameters->KiVq = 0;
     model_parameters->Imax = 1.2;
@@ -1690,9 +1690,9 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
     model_parameters->Pmin = 0;
     model_parameters->Qmax = 1;
     model_parameters->Qmin = -1;
-    model_parameters->PQflag = 0;
-    model_parameters->KfDroop = 33;
-    model_parameters->KvDroop = 5;
+    model_parameters->PQflag = 1;
+    model_parameters->KfDroop = 20;
+    model_parameters->KvDroop = 30;
     model_parameters->K_POD = 0;
     model_parameters->T_POD = 0.01;
     model_parameters->T1_POD = 0.01;
@@ -1704,9 +1704,9 @@ __declspec(dllexport) void* __cdecl init_gfm_model(double c_filt, double r_filta
     model_parameters->KpVdq = 3;
     model_parameters->KiVdq = 10;
     model_parameters->Tr = 0.001;
-    model_parameters->Rchoke = 0.005;
-    model_parameters->Lchoke = 0.08;
-    model_parameters->Cfilt = 0.1;
+    model_parameters->Rchoke = 0;
+    model_parameters->Lchoke = 0.1;
+    model_parameters->Cfilt = 0.016666;
     model_parameters->Rdamp = 9.4868;
 
 
