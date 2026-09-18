@@ -20,8 +20,8 @@ model Order5_Type1 "5th order machine model, type 1"
 protected
   parameter Types.PerUnit vf00=V_MBtoSB*(e1q0 + (xd - x1d)*id0) "Init. val. [pu, SB]";
   parameter Types.PerUnit e1q0=vq0 + ra*iq0 + x1d*id0 "Initialization";
-  parameter Types.PerUnit e1d0=vd0 + ra*id0 - x1q*iq0 "Initialization*";
-  parameter Types.PerUnit e2d0=vd0 + ra*id0 - x1q*iq0 "Initialization";
+  parameter Types.PerUnit e1d0=(xq - x1q - T2q0/T1q0*x1d/x1q*(xq - x1q))*iq0 "Initialization";
+  parameter Types.PerUnit e2d0=vd0 + ra*id0 - x1d*iq0 "Initialization";
 initial equation
   der(e1q) = 0;
   der(e1d) = 0;
@@ -33,7 +33,7 @@ equation
   der(e2d) = ((-e2d) + e1d + (x1q - x1d + T2q0/T1q0*x1d/x1q*(xq - x1q))*iq)/
     T2q0 "differential equations/";
   e1q = vq + ra*iq + x1d*id;
-  e2d = vd + ra*id - x1q*iq "relation between voltages and currents/";
+  e2d = vd + ra*id - x1d*iq "relation between voltages and currents/";
   vf0 = vf00;
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={Text(
           origin={0,60},
