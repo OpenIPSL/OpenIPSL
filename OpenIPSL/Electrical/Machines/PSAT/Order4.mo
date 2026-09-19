@@ -22,7 +22,8 @@ initial equation
 
 equation
   der(e1q) = ((-e1q) - (xd - x1d)*id + vf_MB)/T1d0;
-  if abs(xq-x1q) < Modelica.Constants.small then // safe-guard against division by zero.
+  if abs(xq - x1q) > Modelica.Constants.small then
+    // e1d is a genuine state only when xq differs from x1q (see PSAT manual).
     der(e1d) = ((-e1d) + (xq - x1q)*iq)/T1q0 "differential equations *";
   else
     der(e1d) = (-e1d)/T1q0 "differential equations *";
