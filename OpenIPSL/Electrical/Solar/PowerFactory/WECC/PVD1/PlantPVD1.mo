@@ -81,8 +81,7 @@ equation
     Line(points = {{32, -78}, {74, -78}, {74, 0}, {110, 0}}, color = {0, 0, 255}));
   connect(pvd1.freq, staVmea.fe) annotation(
     Line(points = {{-64, -12}, {-80, -12}, {-80, -90}, {-12, -90}}, color = {0, 0, 127}));
-//connect(FFT_Dominant.pwPin, p) annotation(
-//  Line(points = {{72, -64}, {74, -64}, {74, 0}, {110, 0}}, color = {0, 0, 255}));
+
   connect(staVmea.omega, const.y) annotation(
     Line(points = {{34, -66}, {45, -66}}, color = {0, 0, 127}));
   annotation (Icon(graphics={

@@ -12,7 +12,7 @@ model StaVmea "Voltage Measurement Device"
   Types.PerUnit vy "Voltage component";
   Modelica.Blocks.Interfaces.RealOutput u "Voltage magnitude [pu]" annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput fe "Electrical frequency [Hz]" annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-  Modelica.Blocks.Interfaces.RealInput omega "Reference machine frequency [Hz]" annotation (Placement(transformation(extent={{-140,40},{-100,80}}))); 
+  Modelica.Blocks.Interfaces.RealInput omega if use_ref_machine_frequency "Reference machine frequency [Hz]" annotation (Placement(transformation(extent={{-140,40},{-100,80}}))); 
 
 protected
   Modelica.Blocks.Interfaces.RealInput omega_internal if use_ref_machine_frequency "Helping variable/connector"; 

@@ -9,7 +9,7 @@ model GE_WT "Type 3 wind turbine machine from GE"
   parameter Types.ApparentPower GEN_base=180000000 "Base Power from the Electrical Generator";
   parameter Types.ApparentPower WT_base=162000000 "Base Power from the Turbine";
   parameter Types.ApparentPower SYS_base=100000000 "Base Power from the power system";
-  parameter Types.ApparentPower Qbase=50000000 "Base reactive power in var";
+  parameter Types.ApparentPower Qbase=50000000 "Base reactive power";
   parameter Types.Frequency freq=60 "Steady state Frequency of the power system";
   parameter Integer poles=3 "Number of pole pairs";
   parameter Types.Time Tp=0.3 "Time Constant Pitch command";
