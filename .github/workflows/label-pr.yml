@@ -9,20 +9,20 @@ permissions:
 
 jobs:
   label:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26
     steps:
       - name: Label PR based on title
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const title = context.payload.pull_request.title.toLowerCase();
             const labels = [];
-            
+
             // Check for breaking change indicator (!)
             if (title.includes('!:') || title.match(/!\([^)]+\):/)) {
               labels.push('breaking');
             }
-            
+
             // Match conventional commit types
             if (title.startsWith('feat') || title.includes('feature')) {
               labels.push('feat');
@@ -47,7 +47,7 @@ jobs:
             } else if (title.startsWith('revert')) {
               labels.push('revert');
             }
-            
+
             // Add labels if any were identified
             if (labels.length > 0) {
               await github.rest.issues.addLabels({
@@ -56,6 +56,6 @@ jobs:
                 issue_number: context.payload.pull_request.number,
                 labels: labels
               });
-              
+
               console.log(`Added labels: ${labels.join(', ')}`);
             }
