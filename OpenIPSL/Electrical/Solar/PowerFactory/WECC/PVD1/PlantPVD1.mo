@@ -62,7 +62,7 @@ model PlantPVD1 "Simple representation of the basic control of a PV system"
     angle_0=angle_0,
     pll_connected=false,
     v_0=v_0) annotation (Placement(transformation(origin={40,0}, extent={{-20,-20},{20,20}})));
-  OpenIPSL.Electrical.Solar.PowerFactory.General.StaVmea staVmea(angle_0 = angle_0, use_ref_machine_frequency = false) annotation(
+  OpenIPSL.Electrical.Solar.PowerFactory.General.StaVmea staVmea(angle_0 = angle_0, use_ref_machine_frequency = true) annotation(
     Placement(transformation(origin = {10, -78}, extent = {{20, -20}, {-20, 20}})));
   Modelica.Blocks.Sources.Constant const(k = 1)  annotation(
     Placement(transformation(origin = {56, -66}, extent = {{10, -10}, {-10, 10}})));
