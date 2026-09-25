@@ -26,7 +26,7 @@ model AVRTypeI "PSAT AVR Type 1"
   parameter Types.PerUnit v0=1 "Initialization";
 protected
   parameter Types.PerUnit vf00(fixed=false) "Initialization";
-  parameter Types.PerUnit vr0=vf00 - Ae*Modelica.Math.exp(Be*abs(vf00)) "Initialization";
+  parameter Types.PerUnit vr0=vf00 + Ae*Modelica.Math.exp(Be*abs(vf00))*vf00 "Initialization";
 public
   Modelica.Blocks.Interfaces.RealOutput vref0 "Voltage reference at t=0 [pu]"
     annotation (Placement(transformation(
@@ -52,7 +52,7 @@ public
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     k=1,
     T=Te) annotation (Placement(transformation(extent={{52,-10},{72,10}})));
-  NonElectrical.Nonlinear.CeilingBlock ceilingBlock
+  NonElectrical.Nonlinear.CeilingBlock ceilingBlock(Ae=Ae, Be=Be)
     annotation (Placement(transformation(extent={{70,30},{50,50}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrder2(
     k=1,
