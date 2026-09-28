@@ -7,7 +7,7 @@ model TGTypeIII_test "Simple system to test functionality of TG type III model"
   OpenIPSL.Electrical.Controls.PSAT.TG.TGTypeIII tGTypeIII(
     Tg=0.2,
     Tp=0.04,
-    delta=0.3,
+    delta=1.15,
     sigma=0.04,
     Tr=5,
     vmin=-0.1,

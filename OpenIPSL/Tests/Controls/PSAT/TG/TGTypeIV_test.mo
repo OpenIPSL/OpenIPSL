@@ -8,7 +8,7 @@ model TGTypeIV_test "Simple system to test functionality of TG type VI model"
     Ki=0.105,
     Tg=0.2,
     Tp=0.04,
-    delta=0.3,
+    delta=1.15,
     sigma=0.05,
     Tr=5,
     vmin=-0.1,
