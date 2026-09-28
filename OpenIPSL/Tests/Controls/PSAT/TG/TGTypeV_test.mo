@@ -57,5 +57,6 @@ equation
             -100},{100,100}}), graphics={Text(
           extent={{-14,-46},{60,-58}},
           textColor={0,0,255},
-          textString="Wref perturbation with sine signal 5-10s")}));
+          textString="Wref perturbation with sine signal 5-10s")}),
+    experiment(StopTime=10));
 end TGTypeV_test;

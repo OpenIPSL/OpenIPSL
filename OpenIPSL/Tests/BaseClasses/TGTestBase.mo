@@ -1,10 +1,10 @@
 within OpenIPSL.Tests.BaseClasses;
 partial model TGTestBase "Base class for tests involving turbine governors."
-  OpenIPSL.Electrical.Loads.PSAT.PQ pwLoadPQ1(
-    angle_0=0,
-    P_0=80000,
-    Q_0=60000,
-    v_0=1) annotation (Placement(transformation(
+  OpenIPSL.Electrical.Loads.PSAT.VoltageDependent pwLoadPQ1(
+    angle_0=-0.0112385183,
+    P_0=8000000,
+    Q_0=6000000,
+    v_0=0.9898538214) annotation (Placement(transformation(
         origin={120.071,10},
         extent={{-5.92912,-6.00002},{5.92911,6.00001}})));
   OpenIPSL.Electrical.Branches.PwLine pwLineFault(
@@ -30,11 +30,11 @@ partial model TGTestBase "Base class for tests involving turbine governors."
     X=0.1) annotation (Placement(transformation(
         origin={86,-10},
         extent={{-10,-10},{10,10}})));
-  OpenIPSL.Electrical.Loads.PSAT.PQ pwLoadPQ2(
-    angle_0=0,
-    P_0=80000,
-    Q_0=60000,
-    v_0=1) annotation (Placement(transformation(
+  OpenIPSL.Electrical.Loads.PSAT.VoltageDependent pwLoadPQ2(
+    angle_0=-0.0150284654,
+    P_0=8000000,
+    Q_0=6000000,
+    v_0=0.9863732373) annotation (Placement(transformation(
         origin={118,-26},
         extent={{-6,-6},{6,6}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine1(
@@ -63,8 +63,8 @@ partial model TGTestBase "Base class for tests involving turbine governors."
   Electrical.Machines.PSAT.Order3 gen(
     D=0,
     M=10,
-    P_0=160410,
-    Q_0=120120,
+    P_0=16035269.87,
+    Q_0=11859436.51,
     Sn= 20000000,
     T1d0=8,
     V_b=400000,
@@ -79,11 +79,11 @@ partial model TGTestBase "Base class for tests involving turbine governors."
 
   Electrical.Buses.Bus bus1 annotation (
     Placement(transformation(origin={32,0}, extent = {{-10, -10}, {10, 10}})));
-  Electrical.Buses.Bus bus2 annotation (
+  Electrical.Buses.Bus bus2(v_0=0.9932462315, angle_0=-0.0074701840) annotation (
     Placement(transformation(origin={68,0}, extent = {{-10, -10}, {10, 10}})));
-  Electrical.Buses.Bus bus3 annotation (
+  Electrical.Buses.Bus bus3(v_0=0.9863732373, angle_0=-0.0150284654) annotation (
     Placement(transformation(origin={106,-10}, extent = {{-10, -10}, {10, 10}})));
-  Electrical.Buses.Bus bus4 annotation (
+  Electrical.Buses.Bus bus4(v_0=0.9898538214, angle_0=-0.0112385183) annotation (
     Placement(transformation(origin={106,20}, extent = {{-10, -10}, {10, 10}})));
 equation
 
