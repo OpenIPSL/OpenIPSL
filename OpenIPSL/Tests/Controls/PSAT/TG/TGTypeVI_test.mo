@@ -2,6 +2,8 @@ within OpenIPSL.Tests.Controls.PSAT.TG;
 model TGTypeVI_test "Simple system to test functionality of TG type VI model"
   extends BaseClasses.TGTestBase;
   extends Modelica.Icons.Example;
+  parameter OpenIPSL.Types.PerUnit pm0(fixed=false)
+    "Initial mechanical power of the machine, on the system base";
   OpenIPSL.Electrical.Controls.PSAT.TG.TGTypeVI tGTypeVI(
     Ka=3.33333,
     Ta=0.07,
@@ -17,7 +19,7 @@ model TGTypeVI_test "Simple system to test functionality of TG type VI model"
     beta=0.1,
     Tw=2.67,
     dref=0,
-    po=0.16074) annotation (Placement(transformation(extent={{-68,-24},{-40,4}})));
+    po=pm0) annotation (Placement(transformation(extent={{-68,-24},{-40,4}})));
   Modelica.Blocks.Sources.Sine sine2(
     f=0.2,
     startTime=10,
@@ -31,6 +33,8 @@ model TGTypeVI_test "Simple system to test functionality of TG type VI model"
     startTime=5,
     amplitude=0.001,
     offset=1) annotation (Placement(transformation(origin={-26,-40}, extent={{6.00002,-6.00001},{-6,6.00001}})));
+initial equation
+  pm0 = gen.pm0;
 equation
 
   connect(sine1.y, Perturbation.u1) annotation (Line(
