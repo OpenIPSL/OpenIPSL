@@ -8,7 +8,7 @@ model FrequencyDependent "Fl - Frequency Dependent Load"
   parameter Types.Time Tf=0.1 "Filter time constant";
   Types.PerUnit deltaw "Frequency deviation";
 protected
-  Real a "Auxiliary variable, voltage division";
+  Real a(start=1) "Auxiliary variable, voltage division";
   Real x(start=0) "auxiliary variable";
 initial equation
   der(x) = 0;

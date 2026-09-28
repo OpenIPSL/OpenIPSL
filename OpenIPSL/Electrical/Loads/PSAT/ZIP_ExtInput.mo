@@ -8,7 +8,7 @@ model ZIP_ExtInput "PSAT ZIP load with additional input"
   parameter Types.PerUnit Qi=0.33 "Reactive current";
   parameter Types.PerUnit Qp=1 - Qz - Qi "Reactive power";
 protected
-  Real a "Auxiliary variable, voltage division";
+  Real a(start=1) "Auxiliary variable, voltage division";
 public
   Modelica.Blocks.Interfaces.RealInput u annotation (Placement(transformation(
           extent={{-140,-20},{-100,20}}),

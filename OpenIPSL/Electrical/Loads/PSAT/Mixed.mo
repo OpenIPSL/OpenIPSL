@@ -11,7 +11,7 @@ model Mixed "Mixload - Mixed Load"
   parameter Types.Time Tft=0.007 "Time constant of voltage angle filter";
   Types.PerUnit deltaw "Frequency deviation";
 protected
-  Real a "Auxiliary variable, voltage division";
+  Real a(start=1) "Auxiliary variable, voltage division";
   Real b "Auxiliary variable, derivation";
   Real x(start=-v_0/Tfv);
   Real y(start=0);

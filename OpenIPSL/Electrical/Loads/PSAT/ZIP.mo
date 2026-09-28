@@ -8,7 +8,7 @@ model ZIP "ZIP Load"
   parameter Types.PerUnit Qi=0.33 "Reactive current";
   parameter Types.PerUnit Qp=1 - Qz - Qi "Reactive power";
 protected
-  Real a "Auxiliary variable, voltage division";
+  Real a(start=1) "Auxiliary variable, voltage division";
 equation
   a = v/v_0;
   P = P_0/S_b*(Pz*a^2 + Pi*a + Pp);

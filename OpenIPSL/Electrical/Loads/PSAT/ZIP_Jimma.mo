@@ -10,7 +10,7 @@ model ZIP_Jimma "Jimma - Jimma's Load"
   parameter Types.PerUnit Qp=1 - Qz - Qi "Reactive power";
   parameter Types.TimeAging Kv=100 "coefficient of the voltage time derivative";
 protected
-  Real a "Auxiliary variable, voltage division";
+  Real a(start=1) "Auxiliary variable, voltage division";
   Real b "Auxiliary variable, derivation";
   Real x(start=0);
 initial equation

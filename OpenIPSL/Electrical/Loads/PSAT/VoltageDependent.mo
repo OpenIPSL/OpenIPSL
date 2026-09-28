@@ -4,7 +4,7 @@ model VoltageDependent "Voltage Dependent Load"
   parameter Real alphap=2.0 "Active power exponent";
   parameter Real alphaq=2.0 "Reactive power exponent";
 protected
-  Real a "Auxiliary variable, voltage division";
+  Real a(start=1) "Auxiliary variable, voltage division";
 equation
   a = v/v_0;
   P = P_0/S_b*a^alphap;
