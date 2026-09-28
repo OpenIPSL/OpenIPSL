@@ -13,12 +13,12 @@ model TGTypeV
   parameter Real sigma "Permanent speed droop [pu/pu]";
   parameter Types.PerUnit Pref;
   Types.PerUnit G "Gate opening";
-  Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=Pref)
     annotation (Placement(transformation(extent={{64,-6},{76,6}})));
   Modelica.Blocks.Math.Gain gain(k=1/Tg, y(start=0))
     annotation (Placement(transformation(extent={{24,-6},{36,6}})));
-  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.SteadyState,
+  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=Pref) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         origin={190,0})));
@@ -33,7 +33,7 @@ model TGTypeV
   Modelica.Blocks.Interfaces.RealOutput Pm "Power Pm [pu]" annotation (
       Placement(transformation(extent={{220,-6},{232,6}}),iconTransformation(
           extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Continuous.Integrator integrator4(initType=Modelica.Blocks.Types.Init.SteadyState,
+  Modelica.Blocks.Continuous.Integrator integrator4(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=Pref)
     annotation (Placement(transformation(extent={{-36,-6},{-24,6}})));
   Modelica.Blocks.Math.Gain Integral(k=Ki)
@@ -46,7 +46,7 @@ model TGTypeV
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={-110,20})));
-  Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=0)
     annotation (Placement(transformation(extent={{-76,-6},{-64,6}})));
   Modelica.Blocks.Math.Gain Proportional(k=Kp)

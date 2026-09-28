@@ -17,7 +17,7 @@ model TGTypeVI
   parameter Types.PerUnit dref;
   parameter Types.PerUnit po;
   Types.PerUnit G "Gate opening [pu]";
-  Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=po*(gmax - gmin))
     annotation (Placement(transformation(extent={{-8,14},{4,26}})));
   Modelica.Blocks.Sources.Constant one(k=1) annotation (Placement(transformation(
@@ -26,7 +26,7 @@ model TGTypeVI
         origin={110,0})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-176,-36},{-164,-24}})));
-  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=po) annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=180,
@@ -49,7 +49,7 @@ model TGTypeVI
   Modelica.Blocks.Math.Feedback w_fb annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         origin={-160,20})));
-  Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=po*(gmax - gmin))
     annotation (Placement(transformation(extent={{-96,14},{-84,26}})));
   Modelica.Blocks.Math.Gain Proportional(k=beta)

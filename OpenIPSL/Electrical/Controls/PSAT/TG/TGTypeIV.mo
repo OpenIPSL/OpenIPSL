@@ -21,7 +21,7 @@ model TGTypeIV
   parameter Real Pref;
   Types.PerUnit deltaG "Gate position variation";
   Types.PerUnit v "Gate opening rate";
-  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=int3)
     annotation (Placement(transformation(extent={{34,-6},{46,6}})));
   Modelica.Blocks.Math.Gain gain(k=1/(Tg*Tp))
@@ -30,7 +30,7 @@ model TGTypeIV
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={-10,-20})));
-  Modelica.Blocks.Continuous.Integrator integrator2(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator2(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=int2)
     annotation (Placement(transformation(extent={{-16,-6},{-4,6}})));
   Modelica.Blocks.Math.Feedback feedback
@@ -48,7 +48,7 @@ model TGTypeIV
   Modelica.Blocks.Math.Gain gain5(k=1/Tr) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         origin={-10,-60})));
-  Modelica.Blocks.Continuous.Integrator integrator4(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator4(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=int4) annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=180,
@@ -62,7 +62,7 @@ model TGTypeIV
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={110,-40})));
-  Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=int5) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         origin={120,-20})));
@@ -81,7 +81,7 @@ model TGTypeIV
       Placement(transformation(extent={{160,-10},{180,10}}),
                                                          iconTransformation(
           extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Continuous.Integrator integrator1(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator1(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=int1)
     annotation (Placement(transformation(extent={{-126,-6},{-114,6}})));
   Modelica.Blocks.Math.Gain gain6(k=Ki)

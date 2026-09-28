@@ -21,7 +21,7 @@ model TGTypeIII
   parameter Real int3;
   Types.PerUnit deltaG "Gate position variation";
   Types.PerUnit G "Gate position";
-  Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=0) annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Math.Gain gain(k=1/(Tg*Tp))
     annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
@@ -29,7 +29,7 @@ model TGTypeIII
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-76,-30})));
-  Modelica.Blocks.Continuous.Integrator integrator1(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator1(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=0)
     annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
   Modelica.Blocks.Math.Feedback feedback
@@ -39,7 +39,7 @@ model TGTypeIII
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-76,30})));
-  Modelica.Blocks.Math.Gain gain3(k=sigma/Tr) annotation (Placement(
+  Modelica.Blocks.Math.Gain gain3(k=delta/Tr) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -47,7 +47,7 @@ model TGTypeIII
   Modelica.Blocks.Math.Gain gain5(k=1/Tr) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={-74,-90})));
-  Modelica.Blocks.Continuous.Integrator integrator2(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator2(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=0) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -61,7 +61,7 @@ model TGTypeIII
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={140,-70})));
-  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.NoInit,
+  Modelica.Blocks.Continuous.Integrator integrator3(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=int3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={150,-40})));
@@ -78,7 +78,7 @@ model TGTypeIII
       Placement(transformation(extent={{200,-10},{220,10}}), iconTransformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=vmax, uMin=vmin)
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=gmax, uMin=gmin)
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=gmax - P_0, uMin=gmin - P_0)
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Math.Add add(k1=+1, k2=-1)
     annotation (Placement(transformation(extent={{-200,-10},{-180,10}})));
