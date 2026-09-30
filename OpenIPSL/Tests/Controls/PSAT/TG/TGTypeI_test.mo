@@ -21,5 +21,5 @@ equation
 
   connect(tGTypeI.pm, gen.pm) annotation (Line(points={{-38.6,-10},{-24,-10}}, color={0,0,127}));
   connect(tGTypeI.w, gen.w) annotation (Line(points={{-70.8,-10},{-80,-10},{-80,40},{30,40},{30,18},{22,18}}, color={0,0,127}));
-  annotation (experiment(StopTime=10));
+  annotation (experiment(StopTime=60));
 end TGTypeI_test;

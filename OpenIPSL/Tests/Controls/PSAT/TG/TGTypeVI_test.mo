@@ -54,5 +54,5 @@ equation
           extent={{-14,-46},{60,-58}},
           textColor={0,0,255},
           textString="Wref perturbation with sine signal 5-10s")}),
-experiment(StopTime=10));
+experiment(StopTime=60));
 end TGTypeVI_test;
