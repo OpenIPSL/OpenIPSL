@@ -18,7 +18,9 @@ model TGTypeIII
   parameter Real a13 "Deriv. of flow rate vs. gate position";
   parameter Real a21 "Deriv. of torque vs. turbine head";
   parameter Real a23 "Deriv. of torque vs. gate position";
-  parameter Real int3;
+  final parameter Types.PerUnit G_0=P_0/a23
+    "Gate position at the power flow (pm = a23*G in steady state)";
+  parameter Real int3=a13*a21/a11*G_0 "Initial turbine state";
   Types.PerUnit deltaG "Gate position variation";
   Types.PerUnit G "Gate position";
   Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.InitialState,
@@ -78,7 +80,7 @@ model TGTypeIII
       Placement(transformation(extent={{200,-10},{220,10}}), iconTransformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=vmax, uMin=vmin)
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=gmax - P_0, uMin=gmin - P_0)
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=gmax - G_0, uMin=gmin - G_0)
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Math.Add add(k1=+1, k2=-1)
     annotation (Placement(transformation(extent={{-200,-10},{-180,10}})));
@@ -90,7 +92,7 @@ model TGTypeIII
     annotation (Placement(transformation(extent={{50,-10},{70,10}})));
   Modelica.Blocks.Math.Add add2
     annotation (Placement(transformation(extent={{172,-10},{192,10}})));
-  Modelica.Blocks.Sources.Constant const(k=P_0)
+  Modelica.Blocks.Sources.Constant const(k=G_0)
     annotation (Placement(transformation(extent={{10,40},{30,60}})));
   Modelica.Blocks.Sources.Constant const1(k=wref)
     annotation (Placement(transformation(extent={{-240,10},{-220,30}})));

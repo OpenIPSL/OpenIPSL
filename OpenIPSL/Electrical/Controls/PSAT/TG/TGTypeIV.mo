@@ -105,11 +105,13 @@ model TGTypeIV
   Modelica.Blocks.Sources.Constant const1(k=wref)
     annotation (Placement(transformation(extent={{-196,4},{-184,16}})));
 protected
-  parameter Real int1=sigma*Pref;
+  parameter Real G_0=Pref/a23
+    "Gate position at the power flow (pm = a23*G in steady state)";
+  parameter Real int1=sigma*G_0;
   parameter Real int2=0;
-  parameter Real int3=Pref;
-  parameter Real int4=Tr*Pref;
-  parameter Real int5=a13*a21/a11*Pref;
+  parameter Real int3=G_0;
+  parameter Real int4=Tr*G_0;
+  parameter Real int5=a13*a21/a11*G_0;
 equation
   deltaG = limiter1.y;
   v = limiter.y;
