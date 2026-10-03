@@ -14,8 +14,8 @@ initial equation
   der(phi) = 0;
 equation
   a = v/v_0;
-  // the voltage angle minus phi, from the phasor rotated by -phi: it never wraps where anglev does
-  deltaw = atan2(p.vi*cos(phi) - p.vr*sin(phi), p.vr*cos(phi) + p.vi*sin(phi))/(2*C.pi*fn*Tf);
+  deltaw = atan2(p.vi*cos(phi) - p.vr*sin(phi), p.vr*cos(phi) + p.vi*sin(phi))/(2*C.pi*fn*Tf) 
+      "The voltage angle minus phi, from the phasor rotated by -phi: it never wraps where anglev does";
   der(phi) = 2*C.pi*fn*deltaw;
   P = P_0/S_b*a^alpha_p*(1 + deltaw)^beta_p;
   Q = Q_0/S_b*a^alpha_q*(1 + deltaw)^beta_q;
