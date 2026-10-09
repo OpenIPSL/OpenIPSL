@@ -14,6 +14,9 @@ model AVRTypeII "PSAT AVR Type 2"
            {{-140,40},{-100,80}})));
   parameter Types.PerUnit vrmin=-5 "Minimum regulator voltage";
   parameter Types.PerUnit vrmax=5 "Maximum regulator voltage";
+  parameter Boolean useWindupGuard=true
+    "true (default, reproduces PSAT): LagLimWindupGuard, PSAT's non-windup limit; false: SimpleLagLim, as before this option (same output, its state winds up past the limit)"
+    annotation (Evaluate=true, choices(checkBox=true), Dialog(group="Limiter"));
   parameter Real Ka=100 "Amplifier gain [pu/pu]";
   parameter Types.Time Ta=0.5 "Amplifier time constant";
   parameter Real Kf=0.15 "Stabilizer gain [pu/pu]";
@@ -83,8 +86,15 @@ public
     outMin=vrmin,
     K=Ka,
     T=Ta,
-    y_start=vr10)
+    y_start=vr10) if not useWindupGuard
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  NonElectrical.Continuous.LagLimWindupGuard lagLimWindupGuard(
+    outMax=vrmax,
+    outMin=vrmin,
+    K=Ka,
+    T=Ta,
+    y_start=vr10) if useWindupGuard
+    annotation (Placement(transformation(extent={{-10,14},{10,34}})));
 initial algorithm
   vf00 := vf0;
 algorithm
@@ -115,6 +125,10 @@ equation
     annotation (Line(points={{-31,0},{-12,0}}, color={0,0,127}));
   connect(simpleLagLim.y, feedback.u1)
     annotation (Line(points={{11,0},{11,0},{32,0}}, color={0,0,127}));
+  connect(feedback1.y, lagLimWindupGuard.u)
+    annotation (Line(points={{-31,0},{-20,0},{-20,24},{-12,24}}, color={0,0,127}));
+  connect(lagLimWindupGuard.y, feedback.u1)
+    annotation (Line(points={{11,24},{20,24},{20,0},{32,0}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(
         extent={{-100,-100},{100,100}},
@@ -181,5 +195,15 @@ equation
  (see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2013], section 18.3.2</a>)
  when it actually is the &quot;IEEE <strong>Type I</strong>&quot;
  (see <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Milano2010], chapter 16.2.1</a>).</p>
+<h5>Limiter of the regulator</h5>
+<p>The default, <code>useWindupGuard = true</code>, reproduces PSAT: the regulator is a lag with a non-windup limit,
+<a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>, as in PSAT 2.1.11
+(<code>@AVclass/fcall.m</code>): while the regulator is at a limit and its input pushes it further out, its state does
+not move. With <code>useWindupGuard = false</code> the model uses
+<a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a>, as before this option existed.
+Its output is the same, but its state runs past the limit until the input turns back, and it needs more events.
+<a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeII_LagLimWindupGuard\">AVRTypeII_LagLimWindupGuard</a> and
+<a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeII_SimpleLagLim\">AVRTypeII_SimpleLagLim</a> show the
+difference.</p>
 </html>"));
 end AVRTypeII;
