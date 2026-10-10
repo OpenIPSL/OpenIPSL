@@ -12,8 +12,7 @@ model LoadTestThLoad "Simple system to test functionality of thermostatically co
     Q_0=600000,
     v_0=0.999519320578487,
     angle_0=-0.000760311717819549,
-    Ti=12,
-    Kl=1) annotation (Placement(transformation(extent={{70,-40},{90,-20}})));
+    Ti=12) annotation (Placement(transformation(extent={{70,-40},{90,-20}})));
 equation
   connect(Tref.y, thLoad.t_ref) annotation (Line(points={{41,-30},{50,-30},{50,-22},{68,-22}}, color={0,0,127}));
   connect(T_a.y, thLoad.t_a) annotation (Line(points={{41,-70},{60,-70},{60,-30},{68,-30}}, color={0,0,127}));
