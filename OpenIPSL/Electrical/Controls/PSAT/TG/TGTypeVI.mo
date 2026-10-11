@@ -52,6 +52,10 @@ model TGTypeVI
   Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.InitialState,
       y_start=po*(gmax - gmin))
     annotation (Placement(transformation(extent={{-96,14},{-84,26}})));
+  Modelica.Blocks.Math.Feedback dw "Speed deviation from nominal, w - 1"
+    annotation (Placement(transformation(extent={{42,44},{54,56}})));
+  Modelica.Blocks.Sources.Constant nominal(k=1) "Nominal speed"
+    annotation (Placement(transformation(extent={{30,24},{42,36}})));
   Modelica.Blocks.Math.Gain Proportional(k=beta)
     annotation (Placement(transformation(extent={{64,44},{76,56}})));
   Modelica.Blocks.Math.Gain gain8(k=Ki) annotation (Placement(transformation(
@@ -180,10 +184,10 @@ equation
       points={{22.6,20},{30,20},{30,-26},{-136.8,-26},{-136.8,-20.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(w_fb.y, Proportional.u) annotation (Line(
-      points={{-154.6,20},{-150,20},{-150,50},{62.8,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
+  connect(dw.y, Proportional.u) annotation (Line(points={{53.4,50},{62.8,50}}, color={0,0,127}));
+  connect(we, dw.u1) annotation (Line(points={{-190,0},{-172,0},{-172,62},{36,62},{36,50},{43.2,50}},
+        color={0,0,127}));
+  connect(nominal.y, dw.u2) annotation (Line(points={{42.6,30},{48,30},{48,45.2}}, color={0,0,127}));
   connect(integrator3.y, division.u1) annotation (Line(points={{176.6,20},{180,20},{180,-10},{60,-10},{60,23.6},{62.8,23.6}},
                                                                                                                             color={0,0,127}));
   connect(limiter1.y, servo_fb.u2) annotation (Line(points={{22.6,20},{30,20},{30,6},{-54,6},{-54,15.2}},
