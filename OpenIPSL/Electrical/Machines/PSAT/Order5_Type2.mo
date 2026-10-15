@@ -29,7 +29,7 @@ protected
   parameter Types.PerUnit vf00=V_MBtoSB*(K1*id0 + e1q0)/(1 - Taa/T1d0)
     "Initial value (system base)";
 initial equation
-  //der(e1q) = 0;
+  der(e1q) = 0;
   der(e2q) = 0;
   der(e2d) = 0;
 equation
