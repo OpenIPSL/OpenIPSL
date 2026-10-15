@@ -39,7 +39,7 @@ partial model baseMachine "Base machine for PSAT models"
     displayUnit="rad") "Rotor angle" annotation (Placement(transformation(
         origin={110,60},
         extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Interfaces.RealOutput w(start=1) "Rotor speed [pu]"
+  Modelica.Blocks.Interfaces.RealOutput w(start=1, fixed=true) "Rotor speed [pu]"
     annotation (Placement(transformation(
         origin={110,90},
         extent={{-10,-10},{10,10}})));
