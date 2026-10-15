@@ -1,5 +1,5 @@
 within OpenIPSL.Tests.Machines.PSAT;
-model Order5Type2test2_AVR "Order 5 machine type 2 with an AVR type III from PSAT, to test that the machine starts in steady state with its field voltage coming from the regulator (initial conditions of the PSAT machines, issue #144)"
+model Order5Type2test2_AVR "Order 5 machine type 2 with an AVR type III from PSAT, to test that the machine starts in steady state with its field voltage coming from the regulator (initial conditions of the PSAT machines, issue #144, pull request #423)"
   extends OpenIPSL.Tests.BaseClasses.MachineTestBase;
   extends Modelica.Icons.Example;
   OpenIPSL.Electrical.Controls.PSAT.AVR.AVRtypeIII AVRtypeIII1(
@@ -60,8 +60,8 @@ equation
 its <code>der(e1q) = 0</code> had been commented out in 2017 (issue #144, the fixes to the examples that use PSAT machines), so each tool chose
 the start of <code>e1q</code> itself. PSAT starts every state of the machine in steady state: <code>e2q</code> and <code>e2d</code> from the stator equations,
 <code>e1q</code> from the steady-state formula, and the field voltage from the <code>e1q</code> equation (<code>@SYclass/setx0.m</code>; the PSAT manual,
-section 5.1.5, initialises every device by solving 0 = f(x, y, u)). The pull request that gave the PSAT machines their initial conditions
-(<code>delta</code> and <code>w</code> fixed at their start values as the PSS/E machines have them, and <code>der(e1q) = 0</code> here) adds this test to show it.</p>
+section 5.1.5, initialises every device by solving 0 = f(x, y, u)). The pull request that gave the PSAT machines their initial conditions (OpenIPSL/OpenIPSL#423:
+<code>delta</code> and <code>w</code> fixed at their start values as the PSS/E machines have them, and <code>der(e1q) = 0</code> here) adds this test to show it.</p>
 <p>The regulator is in the loop on purpose: the field voltage of the machine comes from the AVR, which is initialised at <code>vf0</code>, so that
 <code>der(e1q) = 0</code> is satisfied only when the machine and the regulator agree on the operating point. The voltage input of the regulator is not fixed
 (unlike in <code>Order4test2_AVR</code>): the regulator initialises itself from it (<code>vref = v</code>, <code>vm = v</code>), and with every state of this
