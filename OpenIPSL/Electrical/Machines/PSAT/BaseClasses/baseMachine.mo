@@ -79,7 +79,7 @@ partial model baseMachine "Base machine for PSAT models"
   Types.PerUnit id(start=id0) "d-axis current";
   Types.PerUnit iq(start=iq0) "q-axis current";
 protected
-  Types.PerUnit pe(start=pm00) "electrical power transmitted through the air-gap";
+  Types.PerUnit pe(start=pm00*S_SBtoMB) "electrical power transmitted through the air-gap";
   Types.PerUnit vf_MB=vf*V_b/Vn "field voltage on machine base";
   parameter Types.AngularVelocity w_b=2*C.pi*fn "Base frequency in rad/s";
   // Define multiplicative transforms to go from one pu-base to another:
