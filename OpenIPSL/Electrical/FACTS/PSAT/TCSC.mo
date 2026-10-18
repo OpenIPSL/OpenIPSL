@@ -50,10 +50,16 @@ model TCSC "Thyristor Controlled Series Compensator"
   parameter Types.PerUnit B=0 "Shunt half susceptance"
   annotation (Dialog(group="Device parameters"));
 
-  parameter Types.Angle alpha0=0.8 "Initial firing angle"
+  parameter Types.Angle alpha0=initialFiringAngle(
+      b0=xTCSC0/X/(X*(1 - xTCSC0/X)),
+      xL=xL,
+      xC=xC,
+      tol=alphaTol) "Initial firing angle: by default the angle at which the TCSC has the susceptance of the compensation xTCSC0, found as PSAT's TCclass/setx0.m finds it"
    annotation (Dialog(enable=ctrl == Ctrl.alpha, group="Initialization"));
-  parameter Types.PerUnit xTCSC0=0 "Initial reactance"
-   annotation (Dialog(enable=ctrl <> Ctrl.alpha, group="Initialization"));
+  parameter Types.PerUnit xTCSC0=0 "Initial series compensation reactance (both models: the firing angle model starts at the angle that gives its susceptance)"
+   annotation (Dialog(group="Initialization"));
+  parameter Real alphaTol=1e-5 "Tolerance on the susceptance in the search for the initial firing angle (PSAT's power flow tolerance, Settings.lftol)"
+   annotation (Dialog(enable=ctrl == Ctrl.alpha, group="Initialization"));
 
   Types.PerUnit vk "Bus voltage of bus k";
   Types.PerUnit vm "Bus voltage of bus m";
@@ -92,6 +98,82 @@ protected
   parameter Real x1_min=if alphaCtrl then alpha_min else xTCSC_min annotation (Evaluate=true);
   parameter Real x1_max=if alphaCtrl then alpha_max else xTCSC_max annotation (Evaluate=true);
   parameter Real x10=if alphaCtrl then alpha0 else xTCSC0 annotation (Evaluate=true);
+
+  function susceptance "Susceptance of the firing angle model and its derivative, PSAT's TCclass/balpha.m"
+    extends Modelica.Icons.Function;
+    input Real alpha "Firing angle";
+    input Types.PerUnit xL "Reactance (inductive)";
+    input Types.PerUnit xC "Reactance (capacitive)";
+    output Real b "Susceptance at alpha (balpha.m, type 1)";
+    output Real db "Derivative of the susceptance with respect to alpha (balpha.m, type 2)";
+  protected
+    Real kx1=sqrt(xC/xL);
+    Real kx2=kx1*kx1;
+    Real kx3=kx2*kx1;
+    Real kx4=kx3*kx1;
+    Real ckf;
+    Real skf;
+    Real ck2;
+    Real c2a=cos(2*alpha);
+    Real s2a=sin(2*alpha);
+    Real caf=cos(alpha);
+    Real saf=sin(alpha);
+    Real ca2=caf*caf;
+  algorithm
+    ckf := cos(kx1*(C.pi - alpha));
+    skf := sin(kx1*(C.pi - alpha));
+    b := C.pi*(kx4 - 2*kx2 + 1)*ckf/(xC*((C.pi*kx4 - C.pi - 2*kx4*alpha + 2*alpha*kx2 - kx4*s2a + kx2*s2a - 4*kx2*caf*saf)*ckf - 4*kx3*caf*caf*skf));
+    ckf := cos(kx1*(-C.pi + alpha));
+    skf := sin(kx1*(-C.pi + alpha));
+    ck2 := ckf*ckf;
+    db := 2*C.pi*(-kx4 + 2*kx2 - 1)*(2*skf*skf*kx1*kx3*ca2 - ck2*kx4 + ck2*kx2 - ck2*kx4*c2a + ck2*kx2*c2a + 2*ck2*kx2*saf*saf - 2*ck2*kx2*ca2 - 4*ckf*kx3*caf*skf*saf + 2*kx3*ca2*ck2*kx1)/xC/(ckf*C.pi*kx4 - ckf*C.pi - 2*ckf*kx4*alpha + 2*ckf*alpha*kx2 - ckf*kx4*s2a + ckf*kx2*s2a - 4*ckf*kx2*caf*saf + 4*kx3*ca2*skf)^2;
+    annotation (Documentation(info="<html>
+<p>The susceptance of PSAT's firing angle TCSC model and its derivative, written as PSAT 2.1.11 writes them in
+<code>@TCclass/balpha.m</code> (types 1 and 2).</p>
+</html>"));
+  end susceptance;
+
+  function initialFiringAngle "Firing angle at which the TCSC has a given susceptance, found as PSAT's TCclass/setx0.m finds it"
+    extends Modelica.Icons.Function;
+    input Real b0 "Susceptance to reach";
+    input Types.PerUnit xL "Reactance (inductive)";
+    input Types.PerUnit xC "Reactance (capacitive)";
+    input Real tol=1e-5 "Tolerance on the susceptance";
+    output Real alpha "Firing angle";
+  protected
+    Real a;
+    Real bk;
+    Real dbk;
+    Real b1;
+    Real best=Modelica.Constants.inf;
+    Integer iter=0;
+  algorithm
+    alpha := -C.pi/2;
+    for i in 0:integer(floor(C.pi/0.025)) loop
+      a := -C.pi/2 + 0.025*i;
+      (bk, dbk) := susceptance(a, xL, xC);
+      if abs(bk - b0) < best then
+        best := abs(bk - b0);
+        alpha := a;
+        b1 := bk;
+      end if;
+    end for;
+    while abs(b1 - b0) > tol loop
+      if iter > 20 then
+        break;
+      end if;
+      (b1, dbk) := susceptance(alpha, xL, xC);
+      alpha := alpha - (b1 - b0)/dbk;
+      iter := iter + 1;
+    end while;
+    assert(iter <= 20, "TCSC: the search for the initial firing angle did not converge in 20 Newton steps (PSAT warns the same)", AssertionLevel.warning);
+    annotation (Documentation(info="<html>
+<p>The search of PSAT 2.1.11's <code>@TCclass/setx0.m</code>, step by step, so that the model starts at the angle PSAT
+starts at: the angle of a grid from -&pi;/2 in steps of 0.025 rad whose susceptance is closest to <code>b0</code>, then
+Newton steps while the susceptance last computed differs from <code>b0</code> by more than <code>tol</code>, at most 21.
+The susceptance has poles between the limits of the grid, so another search could find another angle.</p>
+</html>"));
+  end initialFiringAngle;
 equation
   vk = sqrt(p.vr^2 + p.vi^2) "Voltage magnitude of sending bus";
   vm = sqrt(n.vr^2 + n.vi^2) "Voltage magnitude of receiving bus";
