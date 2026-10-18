@@ -59,7 +59,7 @@ is verified against PSAT 2.1.11 (initial values and time response, in Dymola, Op
 same network, operating point, machine, regulator and disturbances, so its trajectories can be compared with PSAT's
 directly. <a href=\"modelica://OpenIPSL.Tests.Machines.PSAT.Order5Type2test2_AVR\">Order5Type2test2_AVR</a> tests the
 same pair on the network of the other machine tests, whose trajectories are not compared with PSAT. Added by
-OpenIPSL/OpenIPSL#NNN.</p>
+OpenIPSL/OpenIPSL#426.</p>
 <p>As in <code>Order5Type2test2_AVR</code>, the voltage input of the regulator is not fixed: the regulator
 initialises itself from it, and with every state of this machine started in steady state a fixed <code>v</code> is one
 initial condition too many.</p>
