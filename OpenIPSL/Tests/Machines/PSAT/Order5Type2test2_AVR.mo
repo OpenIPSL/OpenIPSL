@@ -72,8 +72,11 @@ machine started in steady state, a fixed <code>v</code> is one initial condition
 <li><code>order5Type2_Inputs_Outputs.w</code>, <code>order5Type2_Inputs_Outputs.delta</code> and <code>AVRtypeIII1.vf</code>: no movement before the line opening.</li>
 </ul>
 <h4>Reference</h4>
-<p>The machine and regulator data are those of the unit test <code>ut_avr_type3_order5_type2</code> of ALSETLab/PSAT-2-Modelica, which is verified against PSAT 2.1.11
-(initial values and time response, in Dymola, OpenModelica and System Modeler) on its own network. This test uses the network of the other machine tests,
-so its trajectories are not compared with PSAT.</p>
+<p>The regulator data and the machine's per-unit parameters (reactances, time constants, inertia and damping) are those of the unit test
+<code>ut_avr_type3_order5_type2</code> of ALSETLab/PSAT-2-Modelica, which is verified against PSAT 2.1.11 (initial values and time response, in Dymola,
+OpenModelica and System Modeler) on its own network. The machine's rating and operating point are not: this test uses the network of the other machine
+tests, so the machine is rated 370 MVA and 200 kV and delivers 16 MW, where the unit test's machine is rated 100 MVA and 400 kV and delivers 40 MW, and its
+trajectories are not compared with PSAT. <a href=\"modelica://OpenIPSL.Tests.Machines.PSAT.Order5Type2_AVR_SMIBPSAT\">Order5Type2_AVR_SMIBPSAT</a> is the
+unit test's twin on <a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIBPSAT\">SMIBPSAT</a>, with all of its data, and is compared with PSAT.</p>
 </html>"));
 end Order5Type2test2_AVR;
