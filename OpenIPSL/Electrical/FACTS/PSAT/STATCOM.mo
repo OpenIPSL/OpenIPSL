@@ -1,5 +1,5 @@
 within OpenIPSL.Electrical.FACTS.PSAT;
-model STATCOM "Static Var Compensator"
+model STATCOM "Static Synchronous Compensator (PSAT)"
   extends OpenIPSL.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,
     final enableQ_0=true,
@@ -145,6 +145,8 @@ to the bus voltage so that only reactive power is exchanged between the ac syste
 and the STATCOM.
 </p>
 </blockquote>
+<p><b>Limiter.</b> <code>useWindupGuard = true</code> (the default) limits the current with <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>, PSAT's non-windup limit (<code>@STclass/fcall.m</code>, <code>fm_windup</code>); <code>false</code> uses <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a>, as before the option. The two give the same output; their state and the events differ. <code>SimpleLagLim</code>'s anti-windup relation is zero at rest, and System Modeler makes an event of each of its sign changes: with it the STATCOM at rest stops after thousands of events in System Modeler, with the guard it runs.</p>
+<p>The input <code>v_POD</code> adds to the voltage reference (a power oscillation damper, or a reference step).</p>
 </html>", revisions="<html>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td><p>Reference</p></td>
