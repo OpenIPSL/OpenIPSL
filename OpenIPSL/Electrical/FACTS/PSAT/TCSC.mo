@@ -25,9 +25,9 @@ model TCSC "Thyristor Controlled Series Compensator (PSAT), constant power flow 
    annotation (Dialog(enable=ctrl == Ctrl.alpha, group="Device parameters"));
   parameter Types.Angle alpha_max=0.85 " Maximum firing angle"
    annotation (Dialog(enable=ctrl == Ctrl.alpha, group="Device parameters"));
-  parameter Types.PerUnit xTCSC_min=-0.05 "Minimum reactance"
+  parameter Types.PerUnit xTCSC_min=-0.05 "Minimum reactance (device base)"
    annotation (Dialog(enable=ctrl <> Ctrl.alpha, group="Device parameters"));
-  parameter Types.PerUnit xTCSC_max=0.05 "Maximum reactance"
+  parameter Types.PerUnit xTCSC_max=0.05 "Maximum reactance (device base)"
    annotation (Dialog(enable=ctrl <> Ctrl.alpha, group="Device parameters"));
 
   // parameter Real Cp=0.10 "Percentage of series compensation [%] (only for power flow calculation)";
@@ -54,12 +54,12 @@ model TCSC "Thyristor Controlled Series Compensator (PSAT), constant power flow 
   annotation (Dialog(group="Device parameters"));
 
   parameter Types.Angle alpha0=initialFiringAngle(
-      b0=xTCSC0/X/(X*(1 - xTCSC0/X)),
+      b0=x0/X/(X*(1 - x0/X)),
       xL=xL,
       xC=xC,
       tol=alphaTol) "Initial firing angle: by default the angle at which the TCSC has the susceptance of the compensation xTCSC0, found as PSAT's TCclass/setx0.m finds it"
    annotation (Dialog(enable=ctrl == Ctrl.alpha, group="Initialization"));
-  parameter Types.PerUnit xTCSC0=0 "Initial series compensation reactance (both models: the firing angle model starts at the angle that gives its susceptance)"
+  parameter Types.PerUnit xTCSC0=0 "Initial series compensation reactance, device base (both models: the firing angle model starts at the angle that gives its susceptance)"
    annotation (Dialog(group="Initialization"));
   parameter Real alphaTol=1e-5 "Tolerance on the susceptance in the search for the initial firing angle (PSAT's power flow tolerance, Settings.lftol)"
    annotation (Dialog(enable=ctrl == Ctrl.alpha, group="Initialization"));
@@ -104,12 +104,15 @@ protected
   parameter Types.PerUnit xL=x_L*(Vn^2/Sn)*(S_b/V_b^2) "Reactance (inductive)";
   parameter Types.PerUnit xC=x_C*(Vn^2/Sn)*(S_b/V_b^2) "Reactance (capacitive)";
   parameter Types.PerUnit X=XL*(Vn^2/Sn)*(S_b/V_b^2) "Line Reactance";
+  parameter Types.PerUnit x0=xTCSC0*(Vn^2/Sn)*(S_b/V_b^2) "Initial series compensation reactance (system base)";
+  parameter Types.PerUnit xmax=xTCSC_max*(Vn^2/Sn)*(S_b/V_b^2) "Maximum reactance (system base)";
+  parameter Types.PerUnit xmin=xTCSC_min*(Vn^2/Sn)*(S_b/V_b^2) "Minimum reactance (system base)";
   parameter Types.PerUnit y=1/X "Line admittance";
   parameter Real kx=sqrt(xC/xL) "Square root of the ratio of the capacitive to the inductive reactance";
   // parameter Types.PerUnit XL2=(1 - Cp)*XL "Simplified line reactance for power flow calculation";
-  parameter Real x1_min=if alphaCtrl then alpha_min else xTCSC_min "Lower limit of the lag: angle or reactance" annotation (Evaluate=true);
-  parameter Real x1_max=if alphaCtrl then alpha_max else xTCSC_max "Upper limit of the lag: angle or reactance" annotation (Evaluate=true);
-  parameter Real x10=if alphaCtrl then alpha0 else xTCSC0 "Initial angle or reactance" annotation (Evaluate=true);
+  parameter Real x1_min=if alphaCtrl then alpha_min else xmin "Lower limit of the lag: angle or reactance" annotation (Evaluate=true);
+  parameter Real x1_max=if alphaCtrl then alpha_max else xmax "Upper limit of the lag: angle or reactance" annotation (Evaluate=true);
+  parameter Real x10=if alphaCtrl then alpha0 else x0 "Initial angle or reactance" annotation (Evaluate=true);
 
   function susceptance "Susceptance of the firing angle model and its derivative, PSAT's TCclass/balpha.m"
     extends Modelica.Icons.Function;
