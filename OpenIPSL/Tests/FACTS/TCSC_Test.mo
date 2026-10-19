@@ -22,7 +22,7 @@ model TCSC_Test "Simple model to test the functionality of TCSC"
     pref=-0.0500733,
     G=0,
     B=0,
-    xTCSC0=0.0133767) annotation (Placement(transformation(extent={{40,10},{60,30}})));
+    xTCSC0=-0.0200977339398) annotation (Placement(transformation(extent={{40,10},{60,30}})));
   inner Electrical.SystemBase SysData annotation (Placement(transformation(extent={{-100,80},{-60,100}})));
   Electrical.Branches.PwLine pwLineInf(
     displayPF=true,
