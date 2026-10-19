@@ -56,6 +56,7 @@ protected
   parameter Types.PerUnit i0=(Q_0/S_b)/v_0 "Initial current";
   parameter Types.PerUnit v_ref=i0/Kr + v_0 "Reference voltage";
 
+public
   NonElectrical.Continuous.SimpleLagLim simpleLagLim(
     K=Kr,
     T=Tr,

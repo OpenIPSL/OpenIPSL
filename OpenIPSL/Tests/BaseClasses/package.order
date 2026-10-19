@@ -3,5 +3,6 @@ MachineTestBase
 SMIB
 SMIBAddOn
 SMIBPSAT
+SMIBPSATSeries
 SMIBRenewable
 TGTestBase
