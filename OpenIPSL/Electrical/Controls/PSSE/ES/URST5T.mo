@@ -128,7 +128,10 @@ equation
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td>2016-04-29</td>
+<td>2026-10-24 by <a href=\"https://github.com/lvanfretti\">@lvanfretti</a>: the test
+<a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.ES.URST5T\">Tests.Controls.PSSE.ES.URST5T</a> gives its machine's
+<code>angle_0</code> in radians; see <a href=\"https://github.com/OpenIPSL/OpenIPSL/pull/427\">OpenIPSL #427</a>
+for details (first version 2016-04-29)</td>
 </tr>
 <tr>
 <td><p>Author</p></td>
