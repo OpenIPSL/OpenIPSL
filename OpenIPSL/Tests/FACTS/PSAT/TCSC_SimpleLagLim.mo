@@ -1,6 +1,6 @@
 within OpenIPSL.Tests.FACTS.PSAT;
 model TCSC_SimpleLagLim
-  "SMIB system to test the PSAT TCSC with its previous limiter (SimpleLagLim), compared with TCSC_LagLimWindupGuard"
+  "SMIB system to test the PSAT TCSC with its default limiter (SimpleLagLim), compared with TCSC_LagLimWindupGuard"
   extends OpenIPSL.Tests.BaseClasses.SMIBPSATSeries(
     pwLine1(t1=6, t2=8),
     GEN1(angle_0=0.0328734403043844),
@@ -78,18 +78,20 @@ equation
   annotation (experiment(StopTime=20, Tolerance=1e-06),
     Documentation(info="<html>
 <p>The PSAT TCSC between buses <code>SERIES2</code> and <code>SERIES1</code> of
-<a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIBPSATSeries\">SMIBPSATSeries</a>, with its previous limiter,
+<a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIBPSATSeries\">SMIBPSATSeries</a>, with its default limiter,
 <code>SimpleLagLim</code> (<code>useWindupGuard = false</code>), a classical machine at <code>GEN1</code> and a load at
 <code>SERIES1</code> that the TCSC line feeds. The fault at 2 s drives the TCSC's reactance to its upper limit; the
 line <code>LOAD - SERIES1</code> opened from 6 s to 8 s leaves the load on the TCSC line alone, its power flow above
 the reference, and drives the reactance to its lower limit until about 9.4 s.</p>
 <p><a href=\"modelica://OpenIPSL.Tests.FACTS.PSAT.TCSC_LagLimWindupGuard\">TCSC_LagLimWindupGuard</a> is the same test
-with the default limiter, <code>LagLimWindupGuard</code>, which reproduces PSAT's non-windup limit.</p>
+with <code>LagLimWindupGuard</code> (<code>useWindupGuard = true</code>), which reproduces PSAT's non-windup limit; the
+TCSC's documentation says why it is not the default.</p>
 <p>What to plot, from this test and its pair (the variables of the limiter in use carry its name):</p>
 <ul>
 <li><code>tcsc.X1.state</code> here and <code>tcsc.lagLimWindupGuard.state</code> in the pair, against the limits
 (&plusmn;0.05 pu): this is where the two differ.</li>
-<li><code>tcsc.x1</code> and <code>tcsc.pkm</code>: the same in both tests.</li>
+<li><code>tcsc.x1</code> and <code>tcsc.pkm</code>: the same in both tests to within 1.4e-4 pu (Dymola, OpenModelica and
+System Modeler; the guard's limits are tested without events, so the two leave a limit a step apart).</li>
 <li>The number of state events in the simulation log.</li>
 </ul>
 <p>The network, the machine, the load and the TCSC are those of the PSAT-2-Modelica unit test <code>facts_tcsc</code>,

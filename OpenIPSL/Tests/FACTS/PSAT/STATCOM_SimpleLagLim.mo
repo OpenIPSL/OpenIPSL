@@ -72,8 +72,9 @@ test with the default limiter, <code>LagLimWindupGuard</code>, which reproduces 
 <li><code>statcom.simpleLagLim.state</code> here and <code>statcom.lagLimWindupGuard.state</code> in the pair, against the
 limits (&plusmn;0.5 pu): this is where the two differ. <code>SimpleLagLim</code>'s state runs past the limit and is reset
 to it whenever the input turns back; <code>LagLimWindupGuard</code>'s stops at the limit.</li>
-<li><code>statcom.Q</code> and <code>SHUNT.v</code>: the same in both tests. The limiters' outputs leave the limit at
-the same time, so the system does not see the difference.</li>
+<li><code>statcom.Q</code> and <code>SHUNT.v</code>: the same in both tests to within 3e-5 pu (Dymola and
+OpenModelica). The limiters' outputs leave the limit within a step of each other, so the system does not see the
+difference.</li>
 <li>The number of state events in the simulation log: every reset of <code>SimpleLagLim</code> is an event. In
 System Modeler its anti-windup relation, zero at rest, makes an event of every round-off sign change, and this test
 stops there before any disturbance; with <code>LagLimWindupGuard</code> it runs.</li>
