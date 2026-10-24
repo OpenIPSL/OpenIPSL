@@ -29,7 +29,7 @@ partial model SMIB "SMIB - Single Machine Infinite Base system with one load."
     PQBRAK=0.7,
     d_t=0,
     d_P=0,
-    angle_0=-0.5762684,
+    angle_0=-0.01005778,
     t1=0,
     characteristic=2,
     P_0=50000000,
@@ -95,4 +95,13 @@ equation
     annotation (Line(points={{54.6,30},{40,30}}, color={0,0,255}));
   connect(pwLine2.n, GEN2.p) annotation (Line(points={{65.4,30},{70,30},{70,0},{80,0}},
                    color={0,0,255}));
+  annotation (Documentation(info="<html>
+<p>The network of the tests of the PSS/E models: a machine and its controls are connected at bus <code>GEN1</code>
+by the model that extends this one; <code>GEN2</code> is an infinite bus (<code>GENCLS</code> with <code>H=0</code>);
+a fault at bus <code>FAULT</code> from 2 s to 2.15 s.</p>
+<p>The power flow data (<code>v_0</code>, <code>angle_0</code>, <code>P_0</code>, <code>Q_0</code>) is the PSS/E power
+flow of this operating point. Every <code>angle_0</code>, here and in the models that extend this one, is in radians,
+the unit of the parameter: the angle of bus <code>LOAD</code>, -0.5762684 degrees in PSS/E, is
+<code>constantLoad.angle_0=-0.01005778</code> rad.</p>
+</html>"));
 end SMIB;
