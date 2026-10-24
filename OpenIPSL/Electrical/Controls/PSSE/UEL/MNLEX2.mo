@@ -7,6 +7,9 @@ model MNLEX2 "Minimum Excitation Limiter [PSSE-MODELS]"
   parameter Types.PerUnit MEL_MAX=0.1 "Maximum limiter output";
   parameter Types.PerUnit Q_0=2.5 "Reactive power circle center in PQ plane (pu on machine base)";
   parameter Types.PerUnit Radius=3 "Reactive power circle radius in PQ plane (pu on machine base)";
+  parameter Boolean useWindupGuard=true
+    "true (default, as PSS/E, which holds the MEL state at its limit): LagLimWindupGuard; false: SimpleLagLim, as before this option (same output, its state winds up past the limit and is reset at every sign change of the relation K_M*u - state)"
+    annotation (Evaluate=true, choices(checkBox=true), Dialog(group="Limiter"));
   Modelica.Blocks.Interfaces.RealInput QELEC
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealInput Eterm
@@ -37,8 +40,15 @@ model MNLEX2 "Minimum Excitation Limiter [PSSE-MODELS]"
     T=T_M,
     y_start=0,
     outMax=MEL_MAX,
-    outMin=0)
+    outMin=0) if not useWindupGuard
     annotation (Placement(transformation(extent={{68,-10},{88,10}})));
+  NonElectrical.Continuous.LagLimWindupGuard lagLimWindupGuard(
+    K=K_M,
+    T=T_M,
+    y_start=0,
+    outMax=MEL_MAX,
+    outMin=0) if useWindupGuard
+    annotation (Placement(transformation(extent={{68,22},{88,42}})));
   Modelica.Blocks.Interfaces.RealOutput VUEL
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
@@ -83,6 +93,10 @@ equation
     annotation (Line(points={{59,0},{66,0}}, color={0,0,127}));
   connect(simpleLagLim.y, VUEL)
     annotation (Line(points={{89,0},{110,0}}, color={0,0,127}));
+  connect(feedback.y, lagLimWindupGuard.u)
+    annotation (Line(points={{59,0},{62,0},{62,32},{66,32}}, color={0,0,127}));
+  connect(lagLimWindupGuard.y, VUEL)
+    annotation (Line(points={{89,32},{96,32},{96,0},{110,0}}, color={0,0,127}));
   connect(derivativeLag.u, VUEL) annotation (Line(points={{86,-40},{96,-40},{
           96,0},{110,0}},
                        color={0,0,127}));
@@ -101,7 +115,7 @@ equation
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td><p>2024-10-05</p></td>
+<td><p>2026-10-24</p></td>
 </tr>
 <tr>
 <td><p>Author</p></td>
@@ -112,5 +126,24 @@ equation
 <td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
+</html>", info="<html>
+<p>Minimum excitation limiter MNLEX2 of PSS/E (PSS&reg;E Model Library, Minimum Excitation Limiter Models, MNLEX2):
+the limiter output <code>VUEL</code> is the lag <code>K_M/(1 + sT_M)</code>, limited to [0, <code>MEL_MAX</code>]
+by a non-windup limit, of the signal <code>(Q - Q_0 E_t^2)^2 + P^2 - (Radius E_t^2)^2</code> minus the rate
+feedback <code>sK_F2/(1 + sT_F2)</code> of <code>VUEL</code>. While the machine operates inside the circle the
+signal is negative and the limiter rests at its lower limit, 0.</p>
+<h5>Limiter of the MEL lag</h5>
+<p>The default, <code>useWindupGuard = true</code>, holds the lag's state at the limit as PSS/E does: in a PSS/E 36.2
+run of the twin of <a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.UEL.MNLEX2\">Tests.Controls.PSSE.UEL.MNLEX2</a>
+the MEL state (STATE K+1) stays exactly at 0 while its input pushes it below the limit, which is
+<a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>'s formulation
+(the derivative is zero at a limit while the input pushes outward). With <code>useWindupGuard = false</code> the
+model uses <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a>, as before this
+option existed: the same output, but a state that winds up past the limit (to -200 in that test) and is reset to
+the limit at every sign change of <code>K_M u - state</code>, an event each - once every 0.77 s while the limiter is
+inactive, its normal state, because that relation rests at zero and round-off flips it.
+<a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.UEL.MNLEX2_SimpleLagLim\">MNLEX2_SimpleLagLim</a> and
+<a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.UEL.MNLEX2_LagLimWindupGuard\">MNLEX2_LagLimWindupGuard</a> show
+the difference.</p>
 </html>"));
 end MNLEX2;
