@@ -100,8 +100,9 @@ equation
 by the model that extends this one; <code>GEN2</code> is an infinite bus (<code>GENCLS</code> with <code>H=0</code>);
 a fault at bus <code>FAULT</code> from 2 s to 2.15 s.</p>
 <p>The power flow data (<code>v_0</code>, <code>angle_0</code>, <code>P_0</code>, <code>Q_0</code>) is the PSS/E power
-flow of this operating point. Every <code>angle_0</code>, here and in the models that extend this one, is in radians,
-the unit of the parameter: the angle of bus <code>LOAD</code>, -0.5762684 degrees in PSS/E, is
-<code>constantLoad.angle_0=-0.01005778</code> rad.</p>
+flow of this operating point. <code>angle_0</code> is in radians, the unit of the parameter, while PSS/E reports
+angles in degrees: the angle of bus <code>LOAD</code>, -0.5762684 degrees in PSS/E, is
+<code>constantLoad.angle_0=-0.01005778</code> rad. A model that extends this one must give its machine's
+<code>angle_0</code> in radians as well.</p>
 </html>"));
 end SMIB;

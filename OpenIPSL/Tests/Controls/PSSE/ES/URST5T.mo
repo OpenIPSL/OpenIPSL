@@ -6,7 +6,7 @@ model URST5T "SMIB system to test functionality of URST5T model"
     Xppq=0.2,
     Xpp=0.2,
     Xl=0.12,
-    angle_0=0.070620673811798,
+    angle_0=0.070620673811799,
     Tpd0=5,
     Tppd0=0.50000E-01,
     Tppq0=0.1,
