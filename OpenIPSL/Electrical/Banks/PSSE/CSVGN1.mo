@@ -73,12 +73,21 @@ model CSVGN1 "STATIC SHUNT COMPENSATOR MODEL"
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   NonElectrical.Continuous.LeadLagLim leadLagLim(
     K=K,
-    T1=T2+C.eps,
-    T2=T4+C.eps,
+    T1=T2,
+    T2=T4,
     outMax=VMAX,
     outMin=VMIN,
-    y_start=k30)
+    y_start=k30) if T2 > C.eps
+    "The limited lead-lag (1 + sT2)/(1 + sT4) when it has a lead, T2 > 0 (T4 > 0 then)"
     annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
+  NonElectrical.Continuous.SimpleLagLim lagLimT4(
+    K=1,
+    T=T4,
+    outMax=VMAX,
+    outMin=VMIN,
+    y_start=k30) if T2 <= C.eps
+    "The same block without a lead, 1/(1 + sT4) with the limits VMAX and VMIN, as PSS/E takes T2 = 0; with T4 = 0 the limited gain"
+    annotation (Placement(transformation(extent={{-12,-30},{8,-10}})));
   Modelica.Blocks.Interfaces.RealInput VOTHSG
     annotation (Placement(transformation(extent={{-140,-70},{-100,-30}})));
   Modelica.Blocks.Math.Add add2(k2=-1)
@@ -138,6 +147,10 @@ equation
     annotation (Line(points={{-19,0},{-14,0}}, color={0,0,127}));
   connect(leadLagLim.y, LagLim.u)
     annotation (Line(points={{9,0},{14,0}}, color={0,0,127}));
+  connect(leadLag.y, lagLimT4.u)
+    annotation (Line(points={{-19,0},{-16,0},{-16,-20},{-14,-20}}, color={0,0,127}));
+  connect(lagLimT4.y, LagLim.u)
+    annotation (Line(points={{9,-20},{12,-20},{12,0},{14,0}}, color={0,0,127}));
   connect(LagLim.y, product1.u2)
     annotation (Line(points={{37,0},{40,0},{40,-6},{44,-6}}, color={0,0,127}));
   connect(VOTHSG, add2.u2) annotation (Line(points={{-120,-50},{-90,-50},{-90,-36},
@@ -165,7 +178,7 @@ equation
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td>2020-09</td>
+<td>2026-10-24 (first version 2020-09)</td>
 </tr>
 <tr>
 <td><p>Author</p></td>
@@ -176,5 +189,22 @@ equation
 <td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
+</html>", info="<html>
+<p>Static shunt compensator CSVGN1 of PSS/E (PSS&reg;E Model Library, Generator Models, CSVGN1): the bus voltage
+error, less <code>VOTHSG</code>, passes the lead-lag <code>K (1 + sT1)/(1 + sT3)</code>, the limited lead-lag
+<code>(1 + sT2)/(1 + sT4)</code> (limits <code>VMAX</code>, <code>VMIN</code>) and the thyristor lag
+<code>1/(1 + sT5)</code> (limits 1 and <code>RMIN/MBASE</code>); scaled by <code>MBASE/S_b</code> and taken from
+<code>CBASE/S_b</code> it is the susceptance <code>Y</code>. PSS/E asks for <code>T3 &gt; 0</code>; <code>T1</code>,
+<code>T2</code>, <code>T4</code> and <code>T5</code> may be zero.</p>
+<h5>The limited lead-lag when T2 = 0</h5>
+<p>With <code>T2 = 0</code> the factor <code>(1 + sT2)/(1 + sT4)</code> is a lag, and the model uses
+<a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a> (<code>lagLimT4</code>; with
+<code>T4 = 0</code> too, the limited gain); with <code>T2 &gt; 0</code> it uses
+<a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LeadLagLim\">LeadLagLim</a> (<code>leadLagLim</code>), whose
+realisation integrates with the gain <code>1/T2</code>. Until 2026-10-24 the model gave that block
+<code>T2 + eps</code> and <code>T4 + eps</code> (eps = 2.2e-16) whatever <code>T2</code>: with the usual data
+<code>T2 = T4 = 0</code> the integrator gain was 4.5e15 on a state the output does not use, and
+<a href=\"modelica://OpenIPSL.Tests.Banks.PSSE.CSVGN1\">Tests.Banks.PSSE.CSVGN1</a> stopped at its fault at any
+tolerance tighter than Dymola's default 1e-4, in OpenModelica too. The outputs do not change.</p>
 </html>"));
 end CSVGN1;
