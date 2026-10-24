@@ -87,7 +87,8 @@ model TCSC "Thyristor Controlled Series Compensator (PSAT), constant power flow 
     T=Tr,
     y_start=x10,
     outMax=x1_max,
-    outMin=x1_min) if useWindupGuard "Lag with PSAT's non-windup limits on the reactance or firing angle (useWindupGuard = true)" annotation (Placement(transformation(extent={{40,14},{60,34}})));
+    outMin=x1_min) if useWindupGuard "Lag with PSAT's non-windup limits on the reactance or firing angle (useWindupGuard = true)" annotation (Placement(transformation(extent={{40,30},
+            {60,50}})));
   Modelica.Blocks.Routing.RealPassThrough x1Limited
     "The output of the limiter in use (a conditional component can only be connected)"
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
@@ -218,9 +219,11 @@ equation
   connect(Pkm.y, powerDiff.u1) annotation (Line(points={{-59,-40},{-48,-40}}, color={0,0,127}));
   connect(Pref.y, powerDiff.u2) annotation (Line(points={{-59,-60},{-40,-60},{-40,-48}}, color={0,0,127}));
   connect(feedback.y, X1.u) annotation (Line(points={{29,0},{38,0}}, color={0,0,127}));
-  connect(feedback.y, lagLimWindupGuard.u) annotation (Line(points={{29,0},{34,0},{34,24},{38,24}}, color={0,0,127}));
+  connect(feedback.y, lagLimWindupGuard.u) annotation (Line(points={{29,0},{34,
+          0},{34,40},{38,40}},                                                                      color={0,0,127}));
   connect(X1.y, x1Limited.u) annotation (Line(points={{61,0},{68,0}}, color={0,0,127}));
-  connect(lagLimWindupGuard.y, x1Limited.u) annotation (Line(points={{61,24},{64,24},{64,0},{68,0}}, color={0,0,127}));
+  connect(lagLimWindupGuard.y, x1Limited.u) annotation (Line(points={{61,40},{
+          64,40},{64,0},{68,0}},                                                                     color={0,0,127}));
   connect(stabilizer.y, feedback.u1) annotation (Line(points={{1,0},{12,0}}, color={0,0,127}));
   connect(Vs_pod, stabilizer.u) annotation (Line(points={{0,120},{0,40},{-40,40},
           {-40,0},{-22,0}}, color={0,0,127}));

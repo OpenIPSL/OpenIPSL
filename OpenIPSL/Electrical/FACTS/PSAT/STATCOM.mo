@@ -72,7 +72,7 @@ public
     outMax=i_max,
     outMin=i_min,
     u(start=u0)) if useWindupGuard
-    annotation (Placement(transformation(extent={{0,24},{40,64}})));
+    annotation (Placement(transformation(extent={{0,48},{40,88}})));
 equation
   v = sqrt(p.vr^2 + p.vi^2);
   0 = p.vr*p.ir + p.vi*p.ii;
@@ -82,9 +82,10 @@ equation
   connect(simpleLagLim.y, i_SH) annotation (Line(points={{42,0},{70,0}}, color={0,0,127}));
   connect(feedback.y, simpleLagLim.u)
     annotation (Line(points={{-25,0},{-4,0}}, color={0,0,127}));
-  connect(lagLimWindupGuard.y, i_SH) annotation (Line(points={{42,44},{56,44},{56,0},{70,0}}, color={0,0,127}));
+  connect(lagLimWindupGuard.y, i_SH) annotation (Line(points={{42,68},{56,68},{
+          56,0},{70,0}},                                                                      color={0,0,127}));
   connect(feedback.y, lagLimWindupGuard.u)
-    annotation (Line(points={{-25,0},{-14,0},{-14,44},{-4,44}}, color={0,0,127}));
+    annotation (Line(points={{-25,0},{-14,0},{-14,68},{-4,68}}, color={0,0,127}));
   connect(V.y, feedback.u1) annotation (Line(points={{-69,40},{-64,40},{-64,8},{
           -48,8}}, color={0,0,127}));
   connect(V_ref.y, feedback.u3) annotation (Line(points={{-69,-40},{-64,-40},{-64,
