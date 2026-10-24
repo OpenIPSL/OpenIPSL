@@ -72,13 +72,13 @@ model CSVGN1 "STATIC SHUNT COMPENSATOR MODEL"
     y_start=k30)
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   NonElectrical.Continuous.LeadLagLim leadLagLim(
-    K=K,
+    K=1,
     T1=T2,
     T2=T4,
     outMax=VMAX,
     outMin=VMIN,
     y_start=k30) if T2 > C.eps
-    "The limited lead-lag (1 + sT2)/(1 + sT4) when it has a lead, T2 > 0 (T4 > 0 then)"
+    "The limited lead-lag (1 + sT2)/(1 + sT4) when it has a lead, T2 > 0; it then needs the lag T4 > 0 (asserted); the gain K is in leadLag"
     annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
   NonElectrical.Continuous.SimpleLagLim lagLimT4(
     K=1,
@@ -115,6 +115,7 @@ initial equation
   k0 = k30/K;
   Vref = V - k0;
 equation
+  assert(T2 <= C.eps or T4 > C.eps, "CSVGN1: a lead T2 > 0 in the limited lead-lag (1 + sT2)/(1 + sT4) needs a lag T4 > 0; LeadLagLim divides by its lag time constant");
   v = sqrt(p.vr^2 + p.vi^2);
   anglev = atan2(p.vi, p.vr);
   [p.ir; p.ii] = -[sin(delta0), cos(delta0); -cos(delta0), sin(delta0)]*[id; iq];
@@ -201,7 +202,9 @@ error, less <code>VOTHSG</code>, passes the lead-lag <code>K (1 + sT1)/(1 + sT3)
 <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a> (<code>lagLimT4</code>; with
 <code>T4 = 0</code> too, the limited gain); with <code>T2 &gt; 0</code> it uses
 <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LeadLagLim\">LeadLagLim</a> (<code>leadLagLim</code>), whose
-realisation integrates with the gain <code>1/T2</code>. Until 2026-10-24 the model gave that block
+realisation integrates with the reciprocal of its lead time constant (its <code>T1</code>, this model's <code>T2</code>)
+and divides by its lag (its <code>T2</code>, this model's <code>T4</code>), so a lead needs a lag: an assertion asks
+for <code>T4 &gt; 0</code> when <code>T2 &gt; 0</code>. Until 2026-10-24 the model gave that block
 <code>T2 + eps</code> and <code>T4 + eps</code> (eps = 2.2e-16) whatever <code>T2</code>: with the usual data
 <code>T2 = T4 = 0</code> the integrator gain was 4.5e15 on a state the output does not use, and
 <a href=\"modelica://OpenIPSL.Tests.Banks.PSSE.CSVGN1\">Tests.Banks.PSSE.CSVGN1</a> stopped at its fault at any
