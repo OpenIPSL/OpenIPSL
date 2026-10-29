@@ -17,3 +17,8 @@ dymosim
 *.mol
 .DS_Store
 .impact*
+# IEEE/CIGRE DLL models: the headers next to the C sources and the prebuilt libraries are tracked
+!OpenIPSL/Resources/C-Sources/IEEE_CIGRE/include/*.h
+!OpenIPSL/Resources/Library/win64/*.dll
+!OpenIPSL/Resources/Library/win64/*.lib
+!OpenIPSL/Resources/Library/linux64/*.so

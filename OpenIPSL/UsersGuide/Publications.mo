@@ -19,6 +19,11 @@ model Publications "Publications"
 
 <ul>
 
+<li>H. Chang and L. Vanfretti,
+    &quot;EMT Modelling and Simulation of Grid Following Converters in Modelica Integrating the IEEE/CIGRE 'Real Code'/DLL Modelling Guidelines,&quot;
+    CIGRE Paris Session 2026, paper C4-10724, Paris, France, August 2026.
+    <a href=\"https://www.e-cigre.org/publications/detail/c4-10724-2026-emt-modelling-and-simulation-of-grid-following-converters-in-modelica-integrating-the-ieeecigre-real-codedll-modelling-guidelines.html\">e-cigre: C4-10724</a>.</li>
+
 <li>F. Fachini, H. Chang, T. Bogodorova, and L. Vanfretti,
     &quot;Customized open source renewable energy models validated through PHIL lab experiments,&quot;
     Renewable Energy, Volume 244, 2025, 122627, ISSN 0960-1481,
@@ -53,6 +58,11 @@ model Publications "Publications"
     &quot;Building Models for Stability and Control Design Analysis using Modelica and the OpenIPSL,&quot;
     Proceedings of the American Modelica Conference 2024, October 14-16, 2024, Storrs, Connecticut, USA.
     <a href=\"https://doi.org/10.3384/ecp20763\">DOI: 10.3384/ecp20763</a>.</li>
+
+<li>H. Chang and L. Vanfretti,
+    &quot;Integrating the IEEE/CIGRE DLL Modeling Standard to Use 'Real Code' Models for Power System Analysis in Modelica Tools,&quot;
+    Proceedings of the American Modelica Conference 2024, October 14-16, 2024, Storrs, Connecticut, USA.
+    <a href=\"https://doi.org/10.3384/ecp20772\">DOI: 10.3384/ecp20772</a>.</li>
 
 <li> L. Vanfretti and C.R. Laughman,
     &quot;Power System Modeling for Identification and Control Applications using Modelica and OpenIPSL,&quot;
