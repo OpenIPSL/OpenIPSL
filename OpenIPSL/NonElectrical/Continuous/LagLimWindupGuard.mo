@@ -7,6 +7,9 @@ block LagLimWindupGuard
   parameter Real y_start "Output start value";
   parameter Real outMax "Maximum output value";
   parameter Real outMin "Minimum output value";
+  parameter Boolean eventLimits=true
+    "true (the default): the state is held at a limit and released from it at events; false: the limits are tested without events, the form of OpenIPSL #424, kept for comparison"
+    annotation (Evaluate=true, choices(checkBox=true));
   Real state(start=y_start) "State of the lag, held between outMin and outMax";
   Boolean atMax(start=false, fixed=true) "Held at outMax: from the event at which the state reaches it with the input pushing outward to the event at which K*u falls below outMax";
   Boolean atMin(start=false, fixed=true) "Held at outMin: from the event at which the state reaches it with the input pushing outward to the event at which K*u rises above outMin";
@@ -16,14 +19,24 @@ protected
 initial equation
   state = y_start;
 equation
-  when {state >= outMax, pre(atMax) and K*u < outMax} then
-    atMax = state >= outMax and K*u >= outMax;
-  end when;
-  when {state <= outMin, pre(atMin) and K*u > outMin} then
-    atMin = state <= outMin and K*u <= outMin;
-  end when;
-  T_mod*der(state) = if noLag or atMax or atMin then 0 else K*u - state
-    "PSAT's fm_windup: held while the input pushes outward, released when K*u crosses back inside the limit, a relation that is not zero while the state is held. Without a lag the state is not used and stays at y_start";
+  if eventLimits then
+    when {state >= outMax, pre(atMax) and K*u < outMax} then
+      atMax = state >= outMax and K*u >= outMax;
+    end when;
+    when {state <= outMin, pre(atMin) and K*u > outMin} then
+      atMin = state <= outMin and K*u <= outMin;
+    end when;
+    T_mod*der(state) = if noLag or atMax or atMin then 0 else K*u - state
+      "PSAT's fm_windup: held while the input pushes outward, released when K*u crosses back inside the limit, a relation that is not zero while the state is held. Without a lag the state is not used and stays at y_start";
+  else
+    atMax = false "Not used without events";
+    atMin = false "Not used without events";
+    T_mod*der(state) = noEvent(if noLag then 0
+      elseif state >= outMax then min(K*u - state, 0)
+      elseif state <= outMin then max(K*u - state, 0)
+      else K*u - state)
+      "OpenIPSL #424: at a limit the state may only move back inside, tested without events; the release is found only when the solver's step has shrunk enough to see it";
+  end if;
   y = if noLag then smooth(0, noEvent(max(min(K*u, outMax), outMin)))
     else smooth(0, noEvent(max(min(state, outMax), outMin)))
     "The limits also bound the output while the state overshoots a limit by the solver's tolerance";
@@ -52,7 +65,8 @@ numerical noise changes its sign again and again; a tool that stops at every suc
 Modeler) spends thousands of events on it. Here the release is tested on <code>K*u</code> against the limit,
 which is not zero while the state is held.</li>
 </ul>
-<p>Until this version the limits were tested inside <code>noEvent</code>, as the <code>strict</code> option of
+<p><code>eventLimits = false</code> keeps the earlier form (OpenIPSL #424), for comparison: the limits are tested
+inside <code>noEvent</code>, as the <code>strict</code> option of
 <a href=\"modelica://Modelica.Blocks.Continuous.LimIntegrator\">Modelica.Blocks.Continuous.LimIntegrator</a> does.
 Without an event the release is found only when the solver's step has shrunk enough to see it, late or not at all:
 on the cases of the PSAT-2-Modelica tool chain (84 simulations of PSAT systems and unit tests, against an exact
