@@ -90,8 +90,7 @@ TCSC's documentation says why it is not the default.</p>
 <ul>
 <li><code>tcsc.X1.state</code> here and <code>tcsc.lagLimWindupGuard.state</code> in the pair, against the limits
 (&plusmn;0.05 pu): this is where the two differ.</li>
-<li><code>tcsc.x1</code> and <code>tcsc.pkm</code>: the same in both tests to within 1.4e-4 pu (Dymola, OpenModelica and
-System Modeler; the guard's limits are tested without events, so the two leave a limit a step apart).</li>
+<li><code>tcsc.x1</code> and <code>tcsc.pkm</code>: the same in both tests to within 1.9e-5 pu in Dymola (both limiters' limits are events).</li>
 <li>The number of state events in the simulation log.</li>
 </ul>
 <p>The network, the machine, the load and the TCSC are those of the PSAT-2-Modelica unit test <code>facts_tcsc</code>,

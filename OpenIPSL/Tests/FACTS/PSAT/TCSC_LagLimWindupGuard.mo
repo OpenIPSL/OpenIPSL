@@ -6,8 +6,7 @@ model TCSC_LagLimWindupGuard
     Documentation(info="<html>
 <p><a href=\"modelica://OpenIPSL.Tests.FACTS.PSAT.TCSC_SimpleLagLim\">TCSC_SimpleLagLim</a> with the PSAT TCSC's
 other limiter, <code>LagLimWindupGuard</code> (<code>useWindupGuard = true</code>), which reproduces PSAT's non-windup
-limit: the state stops at the limit while the input pushes outward. It is not the TCSC's default because its limits
-are tested without events and the TCSC swings between its limits (the TCSC's documentation). The pair's documentation
+limit: the state stops at the limit while the input pushes outward. It is not the TCSC's default (the TCSC's documentation). The pair's documentation
 says what to plot.</p>
 </html>"));
 end TCSC_LagLimWindupGuard;

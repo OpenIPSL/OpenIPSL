@@ -73,11 +73,11 @@ is the same test with the default limiter, <code>LagLimWindupGuard</code>, which
 (<code>avr.vrmax</code>, <code>avr.vrmin</code>): this is where the two differ. <code>SimpleLagLim</code>'s state runs past the limit and is reset to it whenever
 the input turns back; <code>LagLimWindupGuard</code>'s stops at the limit.</li>
 <li><code>avr.simpleLagLim.y</code> and <code>avr.lagLimWindupGuard.y</code>, and <code>machine.v</code>: the same in both
-tests. The limiters' outputs leave the limit within 2 ms of each other (<code>LagLimWindupGuard</code> tests its limits
-without events), so the system hardly sees the difference: <code>machine.v</code> agrees within 3e-6 pu.</li>
-<li>The number of state events in the simulation log: 27 and 0 with <code>SimpleLagLim</code> and <code>LagLimWindupGuard</code> in Dymola
-2026x with the test's experiment settings (the count changes a little with the output interval); every reset of
-<code>SimpleLagLim</code> is an event, and <code>LagLimWindupGuard</code> has none.</li>
+tests. The limiters' outputs leave the limit at the same instant (both limiters' limits are events), so the system hardly sees the difference: <code>machine.v</code> agrees
+within 2e-7 pu.</li>
+<li>The number of state events in the simulation log: 27 and 6 with <code>SimpleLagLim</code> and <code>LagLimWindupGuard</code> in Dymola
+2026x with the test's experiment settings (the count changes a little with the output interval); every reset of <code>SimpleLagLim</code> is an event, <code>LagLimWindupGuard</code>'s are the moments its state
+reaches and leaves a limit.</li>
 </ul>
 <p><a href=\"modelica://OpenIPSL.Tests.NonElectrical.Continuous.LagLimWindupGuard\">Tests.NonElectrical.Continuous.LagLimWindupGuard</a>
 shows the two limiters side by side in one model.</p>
