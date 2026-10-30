@@ -37,8 +37,8 @@ model TCSC "Thyristor Controlled Series Compensator (PSAT), constant power flow 
   annotation (Dialog(group="Device parameters"));
   parameter Real Ki=1 "Integral gain of PI controller [pu/pu]"
    annotation (Dialog(group="Device parameters"));
-  parameter Boolean useWindupGuard=false
-    "false (the default): SimpleLagLim, as before this option; its limits are events, which the TCSC's swings between its limits need to reproduce PSAT in every tool. true: LagLimWindupGuard, PSAT's non-windup limit (TCclass/fcall.m, fm_windup)"
+  parameter Boolean useWindupGuard=true
+    "true (the default): LagLimWindupGuard, PSAT's non-windup limit (TCclass/fcall.m, fm_windup), held at and released from its limits at events. false: SimpleLagLim, the default until this version; its state winds up past the limit"
     annotation (Dialog(group="Device parameters"));
   parameter Real Kr=10 "Gain of stabilizing signal [pu/pu]"
    annotation (Dialog(group="Device parameters"));
@@ -81,13 +81,13 @@ model TCSC "Thyristor Controlled Series Compensator (PSAT), constant power flow 
     T=Tr,
     y_start=x10,
     outMax=x1_max,
-    outMin=x1_min) if not useWindupGuard "Lag with limits on the reactance or firing angle, SimpleLagLim (useWindupGuard = false, the default)" annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+    outMin=x1_min) if not useWindupGuard "Lag with limits on the reactance or firing angle, SimpleLagLim (useWindupGuard = false)" annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   NonElectrical.Continuous.LagLimWindupGuard lagLimWindupGuard(
     K=1,
     T=Tr,
     y_start=x10,
     outMax=x1_max,
-    outMin=x1_min) if useWindupGuard "Lag with PSAT's non-windup limits on the reactance or firing angle (useWindupGuard = true)" annotation (Placement(transformation(extent={{40,30},
+    outMin=x1_min) if useWindupGuard "Lag with PSAT's non-windup limits on the reactance or firing angle (useWindupGuard = true, the default)" annotation (Placement(transformation(extent={{40,30},
             {60,50}})));
   Modelica.Blocks.Routing.RealPassThrough x1Limited
     "The output of the limiter in use (a conditional component can only be connected)"
@@ -307,8 +307,28 @@ A TCSC Regulator according to
 </p>
 <p><strong>One control mode.</strong> The model implements PSAT's <em>constant power flow</em> control only: a PI controller on the difference between the reference <code>pref</code> and the active power flowing from <code>p</code> to <code>n</code> (PSAT's <code>Tcsc.con</code> control 2, the flow measured at the sending end, column 4 = 1), with the reactance model (<code>ctrl = Ctrl.xTCSC</code>, PSAT's type 1) or the firing angle model (<code>ctrl = Ctrl.alpha</code>, type 2). PSAT's constant reactance or angle (control 1) and the flow measured at both ends (column 4 = 2) are not implemented.</p>
 <p>The model is the whole line: its reactance <code>XL</code> and the series element, whose susceptance adds to the line's, as PSAT's <code>@TCclass/btcsc.m</code> computes it. With the reactance model <code>xTCSC0</code> is the initial compensation; with the firing angle model the initial angle <code>alpha0</code> is by default the angle at which the susceptance equals that of <code>xTCSC0</code>, found by PSAT's own search (<code>@TCclass/setx0.m</code>).</p>
-<p><strong>Limiter.</strong> <code>useWindupGuard = false</code> (the default) limits the lag with <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a>, as before the option; <code>true</code> uses <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>, PSAT's non-windup limit (<code>@TCclass/fcall.m</code>, <code>fm_windup</code>). When the lag sits on a limit once, the two give the same output and only their state and the events differ. The TCSC, however, swings between its limits under constant power flow control, and then the moment the state leaves a limit decides the next swing. With the guard's earlier form, whose limits were tested without events (OpenIPSL #424), that moment fell where the
-solver's step put it, and the same model gave different trajectories in Dymola, OpenModelica and System Modeler and on different output grids: on the PSAT-2-Modelica unit tests <code>facts_tcsc_alpha</code> and <code>facts_tcsc_bases</code> the firing angle or reactance was up to 0.25 pu off PSAT in 4 of 12 runs (three tools, output every 1 ms and 10 ms). With <code>SimpleLagLim</code>, whose limits are events, all 12 runs agree with PSAT. The STATCOM keeps the guard as its default: it saturates once, and <code>SimpleLagLim</code>'s anti-windup relation, zero at rest, stops System Modeler.</p>
+<p><strong>Limiter.</strong> <code>useWindupGuard = true</code> (the default) limits the lag with <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>, PSAT's non-windup limit (<code>@TCclass/fcall.m</code>, <code>fm_windup</code>): the state stops at a limit while the
+input pushes outward. <code>false</code> uses <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a>, the default until this version. Under constant power flow
+control the TCSC swings between its limits, and the moment the state leaves a limit decides the next swing, so how the
+limiter finds that moment matters. Three forms were compared on the PSAT-2-Modelica unit tests <code>facts_tcsc</code>,
+<code>facts_tcsc_alpha</code> and <code>facts_tcsc_bases</code> (Dymola, OpenModelica and System Modeler, output every 1 ms
+and 10 ms: 18 runs per form):</p>
+<ul>
+<li><code>LagLimWindupGuard</code> with its limits tested without events (<code>eventLimits = false</code>, the form of
+OpenIPSL #424): the moment falls where the solver's step puts it. 4 of the 18 runs were 0.10 to 0.25 pu off PSAT in
+<code>x1</code>, and the trajectories differed between tools and between output grids by up to 0.25 pu. This was why
+<code>SimpleLagLim</code> was the default.</li>
+<li><code>LagLimWindupGuard</code> with its limits as events (the default): Dymola and OpenModelica match PSAT in all 12
+of their runs (<code>x1</code> within 3.4e-3 pu, as with <code>SimpleLagLim</code>), the two tools agree within 5e-5 pu and
+the two output grids within 3.4e-5 pu, with 15 to 21 state events where <code>SimpleLagLim</code> has 43 to 49.
+System Modeler 15.0 is 0.05 to 0.25 pu off PSAT in 4 of its 6 runs: it activates the release at an instant at which
+the release condition is still false, and the state stays at the limit. This is a fault of the tool;
+<code>useWindupGuard = false</code> avoids it there.</li>
+<li><code>SimpleLagLim</code>: matches PSAT in all 18 runs, but its state winds up past the limit and is reset at an
+event each time the input turns back.</li>
+</ul>
+<p>The <a href=\"modelica://OpenIPSL.Electrical.FACTS.PSAT.STATCOM\">STATCOM</a> has the same default; there
+<code>SimpleLagLim</code>'s anti-windup relation, zero at rest, stops System Modeler.</p>
 </html>", revisions="<html>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td><p>Reference</p></td>
