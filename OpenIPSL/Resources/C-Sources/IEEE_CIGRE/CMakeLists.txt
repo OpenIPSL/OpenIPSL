@@ -84,6 +84,17 @@ else()
   set(_oipsl_warnings -Wall -Wextra)
 endif()
 
+# No floating-point contraction: clang (and gcc outside ISO C mode) fuses a*b+c into one fused multiply-add
+# wherever the target has it (every 64-bit ARM; x86-64 only with -mfma). The fused result is rounded once
+# instead of twice, so the same C source gives different last bits on ARM and on x86-64. Measured on Apple
+# Silicon (2026-10-31): GFM_GFL_IBR's start-up transient amplifies that to a visibly different trajectory
+# (P off by up to 2.6 Sbase in the first 0.4 s of the GFL tests, several extra current-zero events), while with
+# -ffp-contract=off the ARM results equal the x86-64 ones to 2e-9 relative, the same as Linux against Windows.
+# MSVC does not contract under its default /fp:precise.
+if(NOT MSVC)
+  list(APPEND _oipsl_warnings -ffp-contract=off)
+endif()
+
 # oipsl_target_settings(<target>): reproducible MSVC builds (/Brepro: no time stamps in the PE files, so a
 # rebuild of the same sources gives bit-identical DLLs and import libraries)
 function(oipsl_target_settings target)
