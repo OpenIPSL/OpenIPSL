@@ -6,7 +6,8 @@
 #   SCRX9        Windows: SCRX9.dll + SCRX9.lib              Linux: libSCRX9.so
 #   GFM_GFL_IBR  Windows: GFM_GFL_IBR.dll + GFM_GFL_IBR.lib  Linux: libGFM_GFL_IBR.so
 # "cmake --install" copies them to <prefix>/Library/<platform>, where <platform> is win64, win32, linux64,
-# linux32 or darwin64 and the default <prefix> is OpenIPSL/Resources, i.e. the files land in
+# linux32 or darwin64 on x86, aarch64-linux or aarch64-darwin on 64-bit ARM, and the default <prefix> is
+# OpenIPSL/Resources, i.e. the files land in
 # OpenIPSL/Resources/Library/<platform>/, the folder that the Modelica annotation
 # LibraryDirectory="modelica://OpenIPSL/Resources/Library" points to.
 #
@@ -41,13 +42,20 @@ if(NOT _oipsl_multi_config AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-# Platform folder names of the Modelica specification (section 12.9.4 of MLS 3.6)
+# Platform folder names: those of the Modelica specification (section 12.9.4 of MLS 3.6) on x86, and the
+# <processor>-<os> names that OpenModelica (OPENMODELICA_SPEC_PLATFORM) and the FMI 3.0 platform tuples use on
+# 64-bit ARM, aarch64-linux and aarch64-darwin (Apple Silicon). The pointer size decides, not the processor name:
+# a 32-bit armhf build on a 64-bit kernel reports CMAKE_SYSTEM_PROCESSOR aarch64 (Raspberry Pi OS 32-bit on a
+# Pi 4/400, measured 2026-11-01) and belongs in linux32
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
   set(_oipsl_bits 64)
 else()
   set(_oipsl_bits 32)
 endif()
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64|ARM64)$" AND CMAKE_SYSTEM_NAME MATCHES "^(Linux|Darwin)$" AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+  string(TOLOWER "${CMAKE_SYSTEM_NAME}" _oipsl_os)
+  set(_oipsl_platform "aarch64-${_oipsl_os}")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   set(_oipsl_platform "win${_oipsl_bits}")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set(_oipsl_platform "linux${_oipsl_bits}")
