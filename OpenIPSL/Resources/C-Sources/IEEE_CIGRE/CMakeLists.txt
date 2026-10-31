@@ -9,7 +9,12 @@
 # linux32 or darwin64 on x86, aarch64-linux or aarch64-darwin on 64-bit ARM, and the default <prefix> is
 # OpenIPSL/Resources, i.e. the files land in
 # OpenIPSL/Resources/Library/<platform>/, the folder that the Modelica annotation
-# LibraryDirectory="modelica://OpenIPSL/Resources/Library" points to.
+# LibraryDirectory="modelica://OpenIPSL/Resources/Library" points to. On Apple Silicon the install also
+# creates the symbolic link Library/arm64-darwin -> aarch64-darwin, because OpenModelica searches
+# <processor>-<os> with Apple's processor name (arm64-darwin) while System Modeler searches aarch64-darwin
+# (measured 2026-10-31), and gives each library an absolute install name (LC_ID_DYLIB), because neither
+# tool's simulation executable carries an rpath to the library folder; macOS libraries are therefore built
+# on the user's machine and not shipped.
 #
 #   cmake -S . -B <build> -DCMAKE_BUILD_TYPE=Release
 #   cmake --build <build> --config Release
@@ -123,6 +128,13 @@ function(oipsl_add_cigre_library name source)
   if(UNIX)
     target_link_libraries(${name} PRIVATE m)
   endif()
+  if(APPLE)
+    # dyld resolves the install name, not the -L folder the tool linked with: an absolute path to the installed
+    # file is the only form that both System Modeler's and OpenModelica's executables load without
+    # DYLD_LIBRARY_PATH (they have no LC_RPATH for the library folder). Known at configure time only: pass the
+    # same prefix to "cmake --install" (or none) as to the configure step.
+    set_target_properties(${name} PROPERTIES INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/${OIPSL_INSTALL_DIR}")
+  endif()
   # ELF: -Bsymbolic binds the adapter's calls to the Model_* entry points of its own library. Every
   # IEEE/CIGRE library exports the same Model_* names; without it, ELF symbol interposition makes the adapter
   # of the second library loaded into a process call the Model_* functions of the first one. Windows DLLs
@@ -181,5 +193,11 @@ foreach(_oipsl_order IN ITEMS scrx9_first gfm_first)
   oipsl_target_settings(two_libraries_test_${_oipsl_order})
   add_test(NAME two_libraries_test_${_oipsl_order} COMMAND two_libraries_test_${_oipsl_order})
 endforeach()
+
+# OpenModelica on Apple Silicon looks in arm64-darwin (its OPENMODELICA_SPEC_PLATFORM), System Modeler in
+# aarch64-darwin: one folder, one link, both tools.
+if(OIPSL_PLATFORM STREQUAL "aarch64-darwin")
+  install(CODE "file(CREATE_LINK aarch64-darwin \"\${CMAKE_INSTALL_PREFIX}/Library/arm64-darwin\" SYMBOLIC)")
+endif()
 
 message(STATUS "IEEE/CIGRE libraries install into ${CMAKE_INSTALL_PREFIX}/${OIPSL_INSTALL_DIR}")
