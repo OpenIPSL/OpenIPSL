@@ -3,18 +3,17 @@
 # Each model library is one shared library = the model source (written to the IEEE/CIGRE DLL Modeling
 # Standard, API V2) + the generic OpenIPSL adapter (src/oipsl_cigre_adapter.c) compiled with
 # -DOIPSL_PREFIX=<Name>:
-#   SCRX9        Windows: SCRX9.dll + SCRX9.lib              Linux: libSCRX9.so
-#   GFM_GFL_IBR  Windows: GFM_GFL_IBR.dll + GFM_GFL_IBR.lib  Linux: libGFM_GFL_IBR.so
+#   SCRX9        Windows: SCRX9.dll + SCRX9.lib              Linux: libSCRX9.so        macOS: libSCRX9.a
+#   GFM_GFL_IBR  Windows: GFM_GFL_IBR.dll + GFM_GFL_IBR.lib  Linux: libGFM_GFL_IBR.so  macOS: libGFM_GFL_IBR.a
 # "cmake --install" copies them to <prefix>/Library/<platform>, where <platform> is win64, win32, linux64,
 # linux32 or darwin64 on x86, aarch64-linux or aarch64-darwin on 64-bit ARM, and the default <prefix> is
 # OpenIPSL/Resources, i.e. the files land in
 # OpenIPSL/Resources/Library/<platform>/, the folder that the Modelica annotation
 # LibraryDirectory="modelica://OpenIPSL/Resources/Library" points to. On Apple Silicon the install also
-# creates the symbolic link Library/arm64-darwin -> aarch64-darwin, because OpenModelica searches
-# <processor>-<os> with Apple's processor name (arm64-darwin) while System Modeler searches aarch64-darwin
-# (measured 2026-10-31), and gives each library an absolute install name (LC_ID_DYLIB), because neither
-# tool's simulation executable carries an rpath to the library folder; macOS libraries are therefore built
-# on the user's machine and not shipped.
+# copies the archives to Library/arm64-darwin, because OpenModelica searches <processor>-<os> with Apple's
+# processor name (arm64-darwin) while System Modeler searches aarch64-darwin (measured 2026-10-31). macOS gets
+# static archives (with renamed Model_* entry points) instead of dylibs, because neither tool's simulation
+# executable carries an rpath to the library folder (see oipsl_add_cigre_library).
 #
 #   cmake -S . -B <build> -DCMAKE_BUILD_TYPE=Release
 #   cmake --build <build> --config Release
@@ -35,6 +34,10 @@ if(POLICY CMP0091)
   cmake_policy(SET CMP0091 NEW)
 endif()
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+# macOS: the archives run on macOS 11.0 (the first release for Apple Silicon) and later, not only on the build
+# host's release. Ignored on other systems; -DCMAKE_OSX_DEPLOYMENT_TARGET=<version> overrides it.
+set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS version of the libraries")
 
 project(OpenIPSL_IEEE_CIGRE VERSION 1.0.0 LANGUAGES C)
 
@@ -77,6 +80,19 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${_oipsl_resources}" CACHE PATH "Installs into <prefix>/Library/<platform>" FORCE)
 endif()
 set(OIPSL_INSTALL_DIR "Library/${OIPSL_PLATFORM}")
+# OpenModelica on Apple Silicon looks in arm64-darwin (its OPENMODELICA_SPEC_PLATFORM, with Apple's processor name),
+# System Modeler only in aarch64-darwin (measured 2026-10-31): the archives go into both. Two copies, not a link,
+# so that the folders also survive a checkout on Windows.
+set(OIPSL_INSTALL_DIRS "${OIPSL_INSTALL_DIR}")
+if(OIPSL_PLATFORM STREQUAL "aarch64-darwin")
+  list(APPEND OIPSL_INSTALL_DIRS "Library/arm64-darwin")
+endif()
+
+# Reproducible static archives on macOS: ar records the build time in every archive member; Apple's ranlib -D
+# rewrites the archive with zero time stamps
+if(APPLE)
+  set(CMAKE_C_ARCHIVE_FINISH "<CMAKE_RANLIB> -D -no_warning_for_no_symbols -c <TARGET>")
+endif()
 
 # Libraries and test programs side by side, so that the tests find the DLLs on Windows
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
@@ -128,13 +144,6 @@ function(oipsl_add_cigre_library name source)
   if(UNIX)
     target_link_libraries(${name} PRIVATE m)
   endif()
-  if(APPLE)
-    # dyld resolves the install name, not the -L folder the tool linked with: an absolute path to the installed
-    # file is the only form that both System Modeler's and OpenModelica's executables load without
-    # DYLD_LIBRARY_PATH (they have no LC_RPATH for the library folder). Known at configure time only: pass the
-    # same prefix to "cmake --install" (or none) as to the configure step.
-    set_target_properties(${name} PROPERTIES INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/${OIPSL_INSTALL_DIR}")
-  endif()
   # ELF: -Bsymbolic binds the adapter's calls to the Model_* entry points of its own library. Every
   # IEEE/CIGRE library exports the same Model_* names; without it, ELF symbol interposition makes the adapter
   # of the second library loaded into a process call the Model_* functions of the first one. Windows DLLs
@@ -143,10 +152,37 @@ function(oipsl_add_cigre_library name source)
     target_link_options(${name} PRIVATE "LINKER:-Bsymbolic")
   endif()
   oipsl_target_settings(${name})
-  install(TARGETS ${name}
-    RUNTIME DESTINATION "${OIPSL_INSTALL_DIR}"
-    LIBRARY DESTINATION "${OIPSL_INSTALL_DIR}"
-    ARCHIVE DESTINATION "${OIPSL_INSTALL_DIR}")
+  if(APPLE)
+    # macOS installs a static archive lib<Name>.a instead of the dylib (the dylib is still built for the C tests).
+    # Neither System Modeler's nor OpenModelica's simulation executable has an LC_RPATH to the library folder, and
+    # OpenModelica starts it through /bin/sh, which drops DYLD_LIBRARY_PATH, so a dylib would only load with an
+    # absolute install name, the path of one machine (measured 2026-10-31 and 2026-11-01). An archive is linked
+    # into the executable and needs nothing at run time. The standard's eight Model_* entry points are renamed
+    # <Name>_Model_* in it, so that a model using two of these libraries links both archives without duplicate
+    # symbols; the adapter calls the renamed functions of its own model.
+    set(_oipsl_renames "")
+    foreach(_oipsl_entry IN ITEMS GetInfo CheckParameters Initialize Outputs FirstCall Iterate Terminate PrintInfo)
+      list(APPEND _oipsl_renames "Model_${_oipsl_entry}=${name}_Model_${_oipsl_entry}")
+    endforeach()
+    add_library(${name}_static STATIC "src/${source}" src/oipsl_cigre_adapter.c)
+    target_include_directories(${name}_static PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    target_compile_definitions(${name}_static PRIVATE OIPSL_PREFIX=${name} ${_oipsl_renames})
+    target_compile_options(${name}_static PRIVATE ${_oipsl_warnings})
+    set_target_properties(${name}_static PROPERTIES
+      OUTPUT_NAME ${name}
+      C_VISIBILITY_PRESET hidden
+      POSITION_INDEPENDENT_CODE ON)
+    # install(FILES), not install(TARGETS): the latter runs ranlib again on the installed archive on Apple, which
+    # writes the install time into its table of contents
+    foreach(_oipsl_dir IN LISTS OIPSL_INSTALL_DIRS)
+      install(FILES "$<TARGET_FILE:${name}_static>" DESTINATION "${_oipsl_dir}")
+    endforeach()
+  else()
+    install(TARGETS ${name}
+      RUNTIME DESTINATION "${OIPSL_INSTALL_DIR}"
+      LIBRARY DESTINATION "${OIPSL_INSTALL_DIR}"
+      ARCHIVE DESTINATION "${OIPSL_INSTALL_DIR}")
+  endif()
 
   add_executable(adapter_test_${name} test/adapter_test.c)
   target_include_directories(adapter_test_${name} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -194,10 +230,21 @@ foreach(_oipsl_order IN ITEMS scrx9_first gfm_first)
   add_test(NAME two_libraries_test_${_oipsl_order} COMMAND two_libraries_test_${_oipsl_order})
 endforeach()
 
-# OpenModelica on Apple Silicon looks in arm64-darwin (its OPENMODELICA_SPEC_PLATFORM), System Modeler in
-# aarch64-darwin: one folder, one link, both tools.
-if(OIPSL_PLATFORM STREQUAL "aarch64-darwin")
-  install(CODE "file(CREATE_LINK aarch64-darwin \"\${CMAKE_INSTALL_PREFIX}/Library/arm64-darwin\" SYMBOLIC)")
+# The static archives in one program, in both orders: the renamed entry points must not collide
+if(APPLE)
+  foreach(_oipsl_order IN ITEMS scrx9_first gfm_first)
+    add_executable(two_archives_test_${_oipsl_order} test/two_libraries_test.c)
+    target_include_directories(two_archives_test_${_oipsl_order} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    target_compile_options(two_archives_test_${_oipsl_order} PRIVATE ${_oipsl_warnings})
+    if(_oipsl_order STREQUAL "scrx9_first")
+      target_link_libraries(two_archives_test_${_oipsl_order} PRIVATE SCRX9_static GFM_GFL_IBR_static m)
+    else()
+      target_link_libraries(two_archives_test_${_oipsl_order} PRIVATE GFM_GFL_IBR_static SCRX9_static m)
+    endif()
+    add_test(NAME two_archives_test_${_oipsl_order} COMMAND two_archives_test_${_oipsl_order})
+  endforeach()
 endif()
 
-message(STATUS "IEEE/CIGRE libraries install into ${CMAKE_INSTALL_PREFIX}/${OIPSL_INSTALL_DIR}")
+foreach(_oipsl_dir IN LISTS OIPSL_INSTALL_DIRS)
+  message(STATUS "IEEE/CIGRE libraries install into ${CMAKE_INSTALL_PREFIX}/${_oipsl_dir}")
+endforeach()
