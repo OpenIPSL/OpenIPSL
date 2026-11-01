@@ -73,8 +73,8 @@ inside <code>noEvent</code>, as the <code>strict</code> option of
 Without an event the release is found only when the solver's step has shrunk enough to see it, late or not at all:
 on the cases of the PSAT-2-Modelica tool chain (84 simulations of PSAT systems and unit tests, against an exact
 Dymola run with a tolerance of 1e-10) the release came up to 0.15 s late in Dymola, where one of them left PSAT's
-tolerance, and up to 0.3 s late in OpenModelica; with the events here every release happened, within 18 ms of the
-exact run in OpenModelica and 61 ms in Dymola (the 61 ms on a field voltage that cycles in and out of its limit with
+tolerance, and up to 0.3 s late in OpenModelica; with the events here every release happened, within 61 ms of the
+exact run in Dymola and in OpenModelica (the 61 ms on a field voltage that cycles in and out of its limit with
 a time constant of 1e-4 s). The events also made the runs faster, not slower: the total run time of those cases fell
 by about a fifth in Dymola and in OpenModelica. The release is not tested on <code>K*u - state</code>, the turning
 of the derivative: that relation is exactly zero while the state is held, and a tool may stop at every sign change of
