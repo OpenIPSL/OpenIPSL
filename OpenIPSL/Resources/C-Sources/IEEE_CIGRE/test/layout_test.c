@@ -33,14 +33,17 @@ BSD 3-Clause License, see the LICENSE file of OpenIPSL.
 
 /* The vendor code keeps its own warnings (left alone on purpose, see README.md); they are not this test's.
    "Potentially uninitialized" warnings come from the optimiser after the pop below, so they are switched off
-   for the whole file (the test's own code has no such variables). */
+   for the whole file (the test's own code has no such variables). clang also defines __GNUC__ but names that
+   warning differently and reports gcc's name as an unknown warning group. */
 #if defined(_MSC_VER)
 #  pragma warning(disable : 4701 4703)
 #  pragma warning(push, 0)
 #elif defined(__GNUC__)
-#  pragma GCC diagnostic ignored "-Wpragmas"
-#  pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-#  pragma GCC diagnostic ignored "-Wsometimes-uninitialized"
+#  if defined(__clang__)
+#    pragma GCC diagnostic ignored "-Wsometimes-uninitialized"
+#  else
+#    pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#  endif
 #  pragma GCC diagnostic push
 #  pragma GCC diagnostic ignored "-Wunused-variable"
 #  pragma GCC diagnostic ignored "-Wunused-but-set-variable"
