@@ -11,31 +11,31 @@ block LagLimWindupGuard
     "true (the default): the state is held at a limit and released from it at events; false: the limits are tested without events, the form of OpenIPSL #424, kept for comparison"
     annotation (Evaluate=true, choices(checkBox=true));
   Real state(start=y_start) "State of the lag, held between outMin and outMax";
-  Boolean atMax(start=false, fixed=true) "Held at outMax: from the event at which the state reaches it with the input pushing outward to the event at which K*u falls below outMax";
-  Boolean atMin(start=false, fixed=true) "Held at outMin: from the event at which the state reaches it with the input pushing outward to the event at which K*u rises above outMin";
+  Boolean atMax(start=false, fixed=true) "Held at outMax: from the start or the event at which the state is at it with the input pushing outward to the event at which K*u falls below outMax";
+  Boolean atMin(start=false, fixed=true) "Held at outMin: from the start or the event at which the state is at it with the input pushing outward to the event at which K*u rises above outMin";
 protected
   parameter Boolean noLag=T < Modelica.Constants.eps "Without a lag, the output is the limited gain";
   parameter Types.Time T_mod=if noLag then 1000 else T "Any positive value when there is no lag: the state is then held";
 initial equation
   state = y_start;
 equation
-  if eventLimits then
-    when {state >= outMax, pre(atMax) and K*u < outMax} then
+  if eventLimits and not noLag then
+    when {initial(), state >= outMax and K*u > outMax, pre(atMax) and K*u < outMax} then
       atMax = state >= outMax and K*u >= outMax;
     end when;
-    when {state <= outMin, pre(atMin) and K*u > outMin} then
+    when {initial(), state <= outMin and K*u < outMin, pre(atMin) and K*u > outMin} then
       atMin = state <= outMin and K*u <= outMin;
     end when;
-    T_mod*der(state) = if noLag or atMax or atMin then 0 else K*u - state
-      "PSAT's fm_windup: held while the input pushes outward, released when K*u crosses back inside the limit, a relation that is not zero while the state is held. Without a lag the state is not used and stays at y_start";
+    T_mod*der(state) = if atMax or atMin then 0 else K*u - state
+      "PSAT's fm_windup: held while the state is at a limit and the input pushes outward, from the start on, released when K*u crosses back inside the limit, a relation that is not zero while the state is held";
   else
-    atMax = false "Not used without events";
-    atMin = false "Not used without events";
+    atMax = false "Not used without events or without a lag";
+    atMin = false "Not used without events or without a lag";
     T_mod*der(state) = noEvent(if noLag then 0
       elseif state >= outMax then min(K*u - state, 0)
       elseif state <= outMin then max(K*u - state, 0)
       else K*u - state)
-      "OpenIPSL #424: at a limit the state may only move back inside, tested without events; the release is found only when the solver's step has shrunk enough to see it";
+      "OpenIPSL #424: at a limit the state may only move back inside, tested without events; the release is found only when the solver's step has shrunk enough to see it. Without a lag the state is not used and stays at y_start";
   end if;
   y = if noLag then smooth(0, noEvent(max(min(K*u, outMax), outMin)))
     else smooth(0, noEvent(max(min(state, outMax), outMin)))
@@ -47,16 +47,18 @@ out, its derivative is zero; as soon as the input turns back, the state leaves t
 non-windup limits the same way (<code>fm_windup.m</code>: the derivative set to zero and the state clipped at the
 limit while the input is beyond it).</p>
 <p>Both moments are events. The state is held (<code>atMax</code>, <code>atMin</code>) from the event at which it
-reaches a limit with the input pushing outward, and released at the event at which <code>K*u</code> crosses back inside
-the limit: PSAT's own test, on the input against the limit. While the state is held that relation is not zero, so it
+is at a limit with the input pushing outward, or from the start when it starts there, and released at the event at
+which <code>K*u</code> crosses back inside the limit: PSAT's own test, on the input against the limit. The hold is
+tested on both the state and the input, so it takes effect again when the input turns outward while the state is
+still at the limit. While the state is held that relation is not zero, so it
 does not chatter, and its crossing is located by the tool's event iteration instead of by the step that happens to
 pass it.</p>
 <p>It differs from <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a> in two
 ways:</p>
 <ul>
 <li><code>SimpleLagLim</code> lets its state run past the limit while its output is clamped, and resets it to the
-limit whenever the input turns back below that state. Its output therefore leaves the limit at about the same time as
-here (within 2 ms in the test pairs, see below), but its state winds up (ten times the limit in
+limit whenever the input turns back below that state. Its output therefore leaves the limit together with the one
+here, but its state winds up (ten times the limit in
 <a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeII_SimpleLagLim\">AVRTypeII_SimpleLagLim</a>), and every
 reset is an event. Here the state stops at the limit.</li>
 <li><code>SimpleLagLim</code> detects that turning point with the relation <code>K*u - state &lt; 0</code> (and
