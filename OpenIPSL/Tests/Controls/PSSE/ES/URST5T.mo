@@ -65,8 +65,8 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(gENROU.PELEC, uRST5T.ECOMP) annotation (Line(
-      points={{-46,6},{-34,6},{-34,-50},{-59,-50}},
+  connect(gENROU.ETERM, uRST5T.ECOMP) annotation (Line(
+      points={{-46,-6},{-34,-6},{-34,-50},{-59,-50}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(uRST5T.EFD, gENROU.EFD) annotation (Line(
@@ -79,5 +79,19 @@ equation
                                                                         color={
           0,0,127}));
   annotation (
-experiment(StopTime=10));
+experiment(StopTime=10),
+    Documentation(info="<html>
+<p>A GENROU with the URST5T excitation system at <code>GEN1</code> of
+<a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIB\">SMIB</a>, the fault from 2.0 to 2.15 s. The machine's terminal
+voltage <code>ETERM</code> feeds the exciter's <code>ECOMP</code> and, through it, <code>VT</code>: in PSS/E's URST5T
+both are the terminal voltage (the sensed voltage EC and the voltage VT that scales the limits VRMAX and VRMIN of the
+final filter), and so in <a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.ES.ST5B\">ST5B</a>'s test. Until 2026-10-24
+this test fed the electrical power <code>PELEC</code> into <code>ECOMP</code>: the regulator then held the power, the
+limits of the final filter were +-4 instead of +-10 and followed the power through the fault, clamping the field
+voltage to 0.19 pu while PSS/E gives 1.0, and, with the machine angle still in degrees, were swapped at t = 0.
+With <code>ETERM</code> the test agrees with a PSS/E 36.2 run of the same network and data within PSS/E's own step
+spread (field voltage 1.9e-3 pu, speed 1.1e-5, angle 5.4e-4 rad).</p>
+<p>Variables of interest: <code>uRST5T.EFD</code>, <code>uRST5T.simpleLagLimVar.outMax</code> and
+<code>outMin</code> (the limits VRMAX*VT and VRMIN*VT), <code>gENROU.ETERM</code>, <code>gENROU.w</code>.</p>
+</html>"));
 end URST5T;
