@@ -19,3 +19,4 @@
 *.dll binary
 *.lib binary
 *.so binary
+*.a binary
