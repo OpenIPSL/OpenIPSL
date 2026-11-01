@@ -5,8 +5,9 @@ class README "How to run the IEEE/CIGRE DLL tests in each tool"
   annotation (DocumentationClass=true, Documentation(info="<html>
 <h4>Before running</h4>
 <p>
-The tests need the shared libraries of the models in <code>OpenIPSL/Resources/Library/win64/</code> (Windows) or
-<code>OpenIPSL/Resources/Library/linux64/</code> (Linux). They are shipped for both platforms:
+The tests need the libraries of the models in <code>OpenIPSL/Resources/Library/win64/</code> (Windows),
+<code>linux64/</code> (Linux on x86-64), <code>aarch64-linux/</code> (Linux on 64-bit ARM) or <code>aarch64-darwin/</code>
+and <code>arm64-darwin/</code> (macOS on Apple Silicon). They are shipped for all four platforms:
 </p>
 <ul>
 <li>win64: <code>SCRX9.dll</code>, <code>SCRX9.lib</code>, <code>GFM_GFL_IBR.dll</code>, <code>GFM_GFL_IBR.lib</code>,
@@ -17,6 +18,17 @@ under WSL2 (glibc 2.43; the libraries need glibc 2.4 or newer). Dymola, OpenMode
 tests with them on Ubuntu 24.04 LTS under WSL2 (glibc 2.39, 2026-10-25) and reproduced their Windows results. A
 System Modeler simulation executable run outside the tool needs <code>Resources/Library/linux64</code> on
 <code>LD_LIBRARY_PATH</code>.</li>
+<li>aarch64-linux: <code>libSCRX9.so</code>, <code>libGFM_GFL_IBR.so</code>, built with gcc 14.2.0 on a Raspberry Pi
+400 with the 64-bit Raspberry Pi OS (Debian 13, glibc 2.41; the libraries need glibc 2.17 or newer). OpenModelica
+1.27.2 ran the 15 runs of the verification with them on that Pi (2026-11-01): 15 of 15 finish, with the same events
+as on x86-64 and the results of Linux x86-64 to 9.2e-10 relative (4.5e-9 against Windows, at the start-up of
+GFL_Fault). Dymola and System Modeler are not available for Linux on ARM.</li>
+<li>aarch64-darwin and arm64-darwin (the same files): <code>libSCRX9.a</code>, <code>libGFM_GFL_IBR.a</code>, static
+archives built with Apple clang 21.0.0 for macOS 11.0 and later; System Modeler uses the first folder, OpenModelica
+the second. On a Mac mini with Apple M2 Pro (2026-10-31 and 2026-11-01), System Modeler 15.0 finished 13 of the 15
+runs (the same two failures of master's native SCRX as on x86-64) and OpenModelica 1.27.1, built from source on the
+Mac, 15 of 15, both with the same events as on x86-64 and the Windows results to 4.6e-9 relative. Dymola is not
+available for macOS.</li>
 </ul>
 <h4>Building the libraries</h4>
 <p>
@@ -35,7 +47,13 @@ folder of Visual Studio 2026), builds, runs the C tests with <code>ctest</code> 
 or from Windows <code>wsl.exe -d Ubuntu-26.04 -- sh
 /mnt/&lt;drive&gt;/&lt;checkout&gt;/OpenIPSL/Resources/C-Sources/IEEE_CIGRE/build_linux64.sh</code>. It builds, runs
 the C tests and installs <code>libSCRX9.so</code> and <code>libGFM_GFL_IBR.so</code> into
-<code>OpenIPSL/Resources/Library/linux64/</code>.</li>
+<code>OpenIPSL/Resources/Library/linux64/</code>; on 64-bit ARM Linux the same script installs them into
+<code>aarch64-linux/</code>.</li>
+<li>macOS (Apple clang, Xcode command line tools and CMake): from a terminal in that folder run the four CMake commands
+of <a href=\"modelica://OpenIPSL.Electrical.Controls.IEEE_CIGRE.README\">Electrical.Controls.IEEE_CIGRE.README</a>
+(&quot;Building on macOS&quot;). They build, run the C tests and install <code>libSCRX9.a</code> and
+<code>libGFM_GFL_IBR.a</code> into <code>OpenIPSL/Resources/Library/aarch64-darwin/</code> and
+<code>arm64-darwin/</code>.</li>
 </ul>
 <p>
 Keep the build tree out of folders that Dropbox or OneDrive synchronise (both scripts default to a temporary folder).

@@ -51,8 +51,9 @@ constructor allocated. A NULL handle is a no-op.
     Documentation(info="<html>
 <p>
 External object holding one instance of the IEEE/CIGRE DLL <strong>GFM-GFL-IBR-PWM-Model</strong> (version 1.1.0.0,
-Deepak Ramasubramanian, EPRI). The shared library is <code>GFM_GFL_IBR.dll</code> (win64, MSVC) or
-<code>libGFM_GFL_IBR.so</code> (linux64, gcc) in <code>OpenIPSL/Resources/Library/&lt;platform&gt;/</code>, built from
+Deepak Ramasubramanian, EPRI). The shared library is <code>GFM_GFL_IBR.dll</code> (win64, MSVC),
+<code>libGFM_GFL_IBR.so</code> (linux64 and aarch64-linux, gcc) or the static archive <code>libGFM_GFL_IBR.a</code>
+(aarch64-darwin and arm64-darwin, Apple clang) in <code>OpenIPSL/Resources/Library/&lt;platform&gt;/</code>, built from
 <code>OpenIPSL/Resources/C-Sources/IEEE_CIGRE/</code>. Every external function of this package binds to it through
 <code>annotation(Library=&quot;GFM_GFL_IBR&quot;, LibraryDirectory=&quot;modelica://OpenIPSL/Resources/Library&quot;)</code>.
 </p>

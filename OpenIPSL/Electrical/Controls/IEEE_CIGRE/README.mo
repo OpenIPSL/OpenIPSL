@@ -14,6 +14,11 @@ licence of every file</td></tr>
 <tr><td><code>Library/win64/</code></td><td><code>SCRX9.dll</code>, <code>SCRX9.lib</code>, <code>GFM_GFL_IBR.dll</code>,
 <code>GFM_GFL_IBR.lib</code> (DLL and MSVC import library of each model)</td></tr>
 <tr><td><code>Library/linux64/</code></td><td><code>libSCRX9.so</code>, <code>libGFM_GFL_IBR.so</code></td></tr>
+<tr><td><code>Library/aarch64-linux/</code></td><td><code>libSCRX9.so</code>, <code>libGFM_GFL_IBR.so</code> for Linux on 64-bit
+ARM (for example a Raspberry Pi 4, 400 or 5 with a 64-bit operating system)</td></tr>
+<tr><td><code>Library/aarch64-darwin/</code>, <code>Library/arm64-darwin/</code></td><td><code>libSCRX9.a</code>,
+<code>libGFM_GFL_IBR.a</code> for macOS on Apple Silicon: static archives, the same files in both folders (System Modeler
+searches <code>aarch64-darwin</code>, OpenModelica <code>arm64-darwin</code>)</td></tr>
 <tr><td><code>Library/README.md</code></td><td>what the binaries are and how they were built</td></tr>
 </table>
 <h4>Build platform of the shipped binaries</h4>
@@ -27,7 +32,30 @@ linked with <code>-Wl,-Bsymbolic</code> so that each library's adapter calls the
 when a simulation loads both libraries. The libraries use glibc symbol versions up to <code>GLIBC_2.4</code> only
 (<code>objdump -T</code>), so they load with any current C library (the three tools ran them on glibc 2.39); rebuild
 from source if one does not load on a particular distribution.</li>
+<li>aarch64-linux: gcc 14.2.0 on a Raspberry Pi 400 with the 64-bit Raspberry Pi OS (Debian 13, glibc 2.41), the
+same flags and <code>-Wl,-Bsymbolic</code> as linux64; glibc symbol versions up to <code>GLIBC_2.17</code> only, the
+first glibc for 64-bit ARM.</li>
+<li>aarch64-darwin and arm64-darwin: Apple clang 21.0.0 (Xcode 27.2) on a Mac mini with Apple M2 Pro, macOS 27.2,
+for macOS 11.0 and later (<code>CMAKE_OSX_DEPLOYMENT_TARGET</code>). macOS gets static archives instead of dynamic
+libraries: neither System Modeler's nor OpenModelica's simulation executable carries a search path (rpath) to the
+library folder, and OpenModelica starts the executable through <code>/bin/sh</code>, which drops
+<code>DYLD_LIBRARY_PATH</code>, so a <code>.dylib</code> would load only with an absolute install name, a path that
+exists on one machine only. An archive is linked into the simulation executable and needs nothing at run time. Inside
+each archive the standard's entry points are renamed <code>&lt;Name&gt;_Model_*</code>, so that a model with two of
+these libraries links both.</li>
+<li>All gcc and clang builds use <code>-ffp-contract=off</code> (set by the CMake project): on 64-bit ARM, clang
+(and gcc outside ISO C mode) would otherwise fuse <code>a*b+c</code> into one fused multiply-add, which rounds once
+instead of twice. The GFM/GFL inverter amplifies that last-bit difference into a different trajectory (P off by up to
+2.6 times its rating in the first 0.4 s of the GFL tests, extra current-zero events); without fusion the ARM results
+equal the x86-64 ones to the print floor of the result files. A build outside the CMake project must pass the flag
+itself.</li>
 </ul>
+<p>
+Each shipped binary is reproduced bit for bit by a rebuild of the same sources with the same tool chain (checked by
+building twice in two build folders: win64 and linux64 on 2026-10-28, the ARM libraries on 2026-11-01); another
+compiler or SDK version gives files that differ in a few bytes or more. The Library <code>README.md</code> lists
+the size and SHA-256 of every file.
+</p>
 <p>
 A CI job is proposed separately: a GitHub Actions job that builds and tests the same sources on
 <code>windows-latest</code> and <code>ubuntu-latest</code> and uploads the libraries as artifacts, without committing
@@ -76,14 +104,40 @@ The script configures, builds, tests and installs <code>lib&lt;Name&gt;.so</code
 a folder is given as the first argument; the equivalent commands are the four CMake lines above with that build
 directory and without <code>-G</code>.
 </p>
+<p>
+On 64-bit ARM Linux (for example Raspberry Pi OS 64-bit on a Raspberry Pi 4, 400 or 5) the same script builds the
+libraries and installs them into <code>OpenIPSL/Resources/Library/aarch64-linux/</code>, the folder that OpenModelica
+searches there (it never searches <code>linux64</code> on ARM). The CMake project chooses the folder from the pointer
+size, not from the processor name: a 32-bit (armhf) system on a 64-bit kernel, as the 32-bit Raspberry Pi OS on a
+Pi 4 or 400, reports the processor <code>aarch64</code> too and installs into <code>linux32</code>; no 32-bit ARM
+library is shipped or verified.
+</p>
+<h4>Building on macOS (Apple Silicon, clang and CMake)</h4>
+<p>
+Requirements: the Xcode command line tools (<code>xcode-select --install</code>) and CMake 3.20 or newer (for example
+from Homebrew). From a terminal in <code>OpenIPSL/Resources/C-Sources/IEEE_CIGRE</code>:
+</p>
+<pre>
+cmake -S . -B /tmp/cigre_build_macos -DCMAKE_BUILD_TYPE=Release
+cmake --build /tmp/cigre_build_macos
+ctest --test-dir /tmp/cigre_build_macos --output-on-failure
+cmake --install /tmp/cigre_build_macos
+</pre>
+<p>
+The install writes <code>libSCRX9.a</code> and <code>libGFM_GFL_IBR.a</code> into both
+<code>OpenIPSL/Resources/Library/aarch64-darwin/</code> and <code>arm64-darwin/</code> (two copies, no link, so the
+folders also survive a checkout on Windows). The build makes the dynamic libraries too, for the C tests, but does not
+install them, and adds a test that links both archives into one program.
+</p>
 <h4>How each tool finds the library</h4>
 <p>
 Every external function carries <code>annotation(Library=&quot;&lt;Name&gt;&quot;,
 LibraryDirectory=&quot;modelica://OpenIPSL/Resources/Library&quot;)</code>; the tools add the platform folder
-(<code>win64</code>, <code>linux64</code>) themselves. Nothing has to be copied and no environment variable has to be
-set inside the tools. Measured on Windows 11 and, with the shipped <code>linux64</code> libraries, on Ubuntu 24.04
-LTS under WSL2 (glibc 2.39), both on 2026-10-25: each tool reproduced its Windows results on Linux to 4.5e-9
-relative.
+(<code>win64</code>, <code>linux64</code>, <code>aarch64-linux</code>, <code>aarch64-darwin</code> or
+<code>arm64-darwin</code>) themselves. Nothing has to be copied and no environment variable has to be set inside the
+tools. Measured on Windows 11 and, with the shipped <code>linux64</code> libraries, on Ubuntu 24.04 LTS under WSL2
+(glibc 2.39), both on 2026-10-25: each tool reproduced its Windows results on Linux to 4.5e-9 relative. On 64-bit
+ARM, see below.
 </p>
 <ul>
 <li><strong>Dymola</strong> (2026x Refresh 1, MSVC): links <code>&lt;Name&gt;.lib</code>, switches to a 64-bit
@@ -108,6 +162,17 @@ model check.</li>
 (<code>RUNPATH</code>, <code>RPATH</code>), so it also runs outside the tool. System Modeler does not: to run a
 System Modeler simulation executable outside the tool, put <code>Resources/Library/linux64</code> on
 <code>LD_LIBRARY_PATH</code> first.</li>
+<li><strong>On 64-bit ARM Linux</strong> OpenModelica searches <code>Resources/Library/aarch64-linux</code> and the base
+folder, never <code>linux64</code>, and writes the folder into the executable (<code>RPATH</code>) as on x86-64.
+Checked with OpenModelica 1.27.2 (the OpenModelica arm64 package for Debian 13) on a Raspberry Pi 400 with the 64-bit
+Raspberry Pi OS (2026-11-01). Neither Dymola nor System Modeler is available for Linux on ARM.</li>
+<li><strong>On macOS (Apple Silicon)</strong> System Modeler searches only <code>Resources/Library/aarch64-darwin</code>,
+OpenModelica only <code>arm64-darwin</code>, <code>darwin64</code> and the base folder (OpenModelica's
+<code>&lt;processor&gt;-&lt;os&gt;</code> name, with Apple's processor name <code>arm64</code>), hence the same archives
+in two folders. Both tools link the static archive into the simulation executable, which then needs no environment
+variable, inside the tool or outside it. Checked with System Modeler 15.0 and with OpenModelica 1.27.1 built from
+source on the Mac (Apple clang, without ColPack) on a Mac mini with Apple M2 Pro. Dymola is not available for
+macOS.</li>
 </ul>
 <h4>The fixed-step contract</h4>
 <p>

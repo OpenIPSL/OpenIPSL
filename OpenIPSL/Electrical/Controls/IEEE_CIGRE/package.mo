@@ -50,7 +50,12 @@ functions: several instances of the same model can run side by side in one simul
 Binaries are shipped for <strong>win64</strong> (<code>Resources/Library/win64/&lt;Name&gt;.dll</code> and
 <code>&lt;Name&gt;.lib</code>, built with MSVC 19.51 x64, Visual Studio Community 2026 18.11.2, static runtime
 <code>/MT</code>) and <strong>linux64</strong> (<code>Resources/Library/linux64/lib&lt;Name&gt;.so</code>, built with
-gcc 15.2.0 on Ubuntu 26.04.1 LTS under WSL2, glibc 2.43, linked with <code>-Bsymbolic</code>). On any other platform, or when a shipped binary does not
+gcc 15.2.0 on Ubuntu 26.04.1 LTS under WSL2, glibc 2.43, linked with <code>-Bsymbolic</code>), and for 64-bit ARM:
+<strong>aarch64-linux</strong> (<code>Resources/Library/aarch64-linux/lib&lt;Name&gt;.so</code>, for example a
+Raspberry Pi 4, 400 or 5 with a 64-bit operating system; built with gcc 14.2.0 on the 64-bit Raspberry Pi OS,
+Debian 13) and <strong>macOS on Apple Silicon</strong> (static archives <code>lib&lt;Name&gt;.a</code>, the same files
+in <code>Resources/Library/aarch64-darwin/</code> for System Modeler and in <code>arm64-darwin/</code> for OpenModelica;
+built with Apple clang 21.0.0 for macOS 11.0 and later). On any other platform, or when a shipped binary does not
 load, build the libraries from <code>Resources/C-Sources/IEEE_CIGRE/</code> as described in the
 <a href=\"modelica://OpenIPSL.Electrical.Controls.IEEE_CIGRE.README\">README</a>.
 </p>
@@ -58,8 +63,11 @@ load, build the libraries from <code>Resources/C-Sources/IEEE_CIGRE/</code> as d
 <p>
 The binding of the shared libraries was checked with Dymola 2026x Refresh 1, OpenModelica 1.27.1 and Wolfram System
 Modeler 15.0 on Windows 11 and, with the shipped <code>linux64</code> libraries, on Ubuntu 24.04 LTS under WSL2
-(2026-10-25). System Modeler asks once to trust the external functions of the library; the README explains this
-and how each tool finds the shared library.
+(2026-10-25). On 64-bit ARM the tests were run with System Modeler 15.0 and OpenModelica 1.27.1 (built from source on
+the Mac) on macOS with Apple M2 Pro (2026-10-31 and 2026-11-01), and with OpenModelica 1.27.2 on a Raspberry Pi 400
+(2026-11-01); both reproduce the x86-64 results to the print floor of the result files. Dymola is not available for
+these platforms. System Modeler asks once to trust the external functions of the library; the README explains this
+and how each tool finds the library.
 </p>
 <h4>References</h4>
 <ul>

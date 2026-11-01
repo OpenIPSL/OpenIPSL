@@ -53,7 +53,8 @@ allocated. A NULL handle is a no-op.
     Documentation(info="<html>
 <p>
 External object holding one instance of the IEEE/CIGRE DLL model <strong>SCRX9</strong> (version 1.1.0.0, API V2).
-The shared library is <code>SCRX9.dll</code> (win64, MSVC) or <code>libSCRX9.so</code> (linux64, gcc) in
+The library is <code>SCRX9.dll</code> (win64, MSVC), <code>libSCRX9.so</code> (linux64 and aarch64-linux, gcc) or
+the static archive <code>libSCRX9.a</code> (aarch64-darwin and arm64-darwin, Apple clang) in
 <code>OpenIPSL/Resources/Library/&lt;platform&gt;/</code>, built from
 <code>OpenIPSL/Resources/C-Sources/IEEE_CIGRE/</code>. Every external function of this package binds to it through
 <code>annotation(Library=&quot;SCRX9&quot;, LibraryDirectory=&quot;modelica://OpenIPSL/Resources/Library&quot;)</code>.
