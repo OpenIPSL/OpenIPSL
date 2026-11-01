@@ -22,3 +22,4 @@ dymosim
 !OpenIPSL/Resources/Library/win64/*.dll
 !OpenIPSL/Resources/Library/win64/*.lib
 !OpenIPSL/Resources/Library/linux64/*.so
+!OpenIPSL/Resources/Library/aarch64-linux/*.so
