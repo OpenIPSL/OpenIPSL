@@ -3,8 +3,9 @@
 This folder holds the C sources, the build project and the test of the external libraries used by
 `OpenIPSL.Electrical.Controls.IEEE_CIGRE`: controller models written according to the IEEE/CIGRE DLL Modeling
 Standard (API V2), each compiled together with a small OpenIPSL adapter into one shared library per model. The
-prebuilt libraries are in `../../Library/win64` and `../../Library/linux64`; their provenance is in
-`../../Library/README.md`.
+prebuilt libraries are in `../../Library/win64`, `../../Library/linux64`, `../../Library/aarch64-linux` and, for
+macOS on Apple Silicon, `../../Library/aarch64-darwin` and `../../Library/arm64-darwin` (the same static archives
+in both); their provenance is in `../../Library/README.md`.
 
 | Library | Model | Origin | Sample time (compile-time constant) |
 |---|---|---|---|
@@ -26,8 +27,8 @@ and the class `OpenIPSL.Electrical.Controls.IEEE_CIGRE.Provenance`.
 | `test/adapter_test.c` | test program, built once per library and run by `ctest` |
 | `test/layout_test.c` | layout test, built once per library: the model's private structures against the adapter's block layout |
 | `test/two_libraries_test.c` | one program linked against both libraries (both link orders) |
-| `CMakeLists.txt` | build project: one SHARED library and one test per model; `install()` into `../../Library/<platform>` |
-| `build_win64.bat`, `build_linux64.sh` | the two builds as they were run for the shipped binaries |
+| `CMakeLists.txt` | build project: one SHARED library and one test per model; `install()` into `../../Library/<platform>`; on macOS one STATIC archive per model is installed instead |
+| `build_win64.bat`, `build_linux64.sh` | the builds as they were run for the shipped binaries (`build_linux64.sh` also for `aarch64-linux`; on macOS the four CMake commands below) |
 
 ## The OpenIPSL adapter
 
@@ -102,18 +103,56 @@ ctest --test-dir <build> --output-on-failure
 cmake --install <build>
 ```
 
+Linux on 64-bit ARM (for example the 64-bit Raspberry Pi OS on a Raspberry Pi 4, 400 or 5): the same
+`sh build_linux64.sh [build folder]`; the CMake project installs into `aarch64-linux`, the folder OpenModelica
+searches there (never `linux64`). The folder follows the pointer size, not the processor name: a 32-bit (armhf)
+system on a 64-bit kernel, such as the 32-bit Raspberry Pi OS on a Pi 4 or 400, reports the processor `aarch64`
+too and installs into `linux32` (not shipped, not verified).
+
+macOS, Apple Silicon (Xcode command line tools, CMake 3.20 or newer, for example from Homebrew):
+
+```sh
+cmake -S . -B /tmp/cigre_build_macos -DCMAKE_BUILD_TYPE=Release
+cmake --build /tmp/cigre_build_macos
+ctest --test-dir /tmp/cigre_build_macos --output-on-failure
+cmake --install /tmp/cigre_build_macos
+```
+
 `cmake --install` copies `<Name>.dll` + `<Name>.lib` (Windows) or `lib<Name>.so` (Linux) to
-`OpenIPSL/Resources/Library/<platform>/` (platform `win64`, `linux64`, ... from the target system and pointer
-size). With `--prefix <stage>` they go to `<stage>/Library/<platform>/` instead. A CI job that builds, tests
-and installs this way on `ubuntu-latest` and `windows-latest` and uploads `stage` as an artifact is proposed
-separately; it would not commit binaries. The committed binaries are those listed below.
+`OpenIPSL/Resources/Library/<platform>/` (platform `win64`, `linux64`, `aarch64-linux`, ... from the target
+system, processor and pointer size). On macOS it copies the static archive `lib<Name>.a` instead, on Apple
+Silicon into both `aarch64-darwin` (System Modeler's folder) and `arm64-darwin` (OpenModelica's), as two copies
+rather than a link so that the folders survive a checkout on Windows. With `--prefix <stage>` they go to
+`<stage>/Library/<platform>/` instead. A CI job that builds, tests and installs this way on `ubuntu-latest` and
+`windows-latest` and uploads `stage` as an artifact is proposed separately; it would not commit binaries. The
+committed binaries are those listed below.
+
+Why archives on macOS: neither System Modeler's nor OpenModelica's simulation executable has an `LC_RPATH` to the
+library folder, and OpenModelica starts the executable through `/bin/sh`, which drops `DYLD_LIBRARY_PATH`. A dylib
+with the default install name `@rpath/lib<Name>.dylib` therefore does not load (System Modeler: "Library not
+loaded", exit -6; OpenModelica aborts inside `simulate()`), and one with an absolute install name loads only from
+the folder it was built for (measured 2026-10-31 and 2026-11-01). An archive is linked into the simulation
+executable. Inside it the standard's eight entry points are renamed `<Name>_Model_*` (`-DModel_GetInfo=<Name>_Model_GetInfo`
+and so on, as `test/layout_test.c` does), so that a model using two of these libraries links both archives
+without duplicate symbols; only the adapter calls them. The dylibs are still built, for the C tests.
 
 Compiler settings (from `CMakeLists.txt`): C11; MSVC `/O2 /Ob2 /DNDEBUG /W4 /utf-8 /Brepro`, linked with
 `/Brepro`, and the static C runtime `/MT` (`CMAKE_MSVC_RUNTIME_LIBRARY = MultiThreaded`), so the DLLs depend on
-`KERNEL32.dll` only and contain no time stamps; gcc `-O3 -DNDEBUG -Wall -Wextra -fvisibility=hidden -fPIC`,
-linked with `-Wl,-Bsymbolic -lm` (Linux). With MinGW the libraries get the same names (`<Name>.dll`, import
+`KERNEL32.dll` only and contain no time stamps; gcc and clang `-O3 -DNDEBUG -Wall -Wextra -fvisibility=hidden
+-fPIC -ffp-contract=off`, linked with `-Wl,-Bsymbolic -lm` (Linux); on macOS `CMAKE_OSX_DEPLOYMENT_TARGET` 11.0
+and archives finished with `ranlib -D` (zero time stamps). With MinGW the libraries get the same names (`<Name>.dll`, import
 library `<Name>.lib`). The sources also build with OpenModelica's MinGW-w64 gcc 16.1.0 (ucrt64; put
 `tools\msys\ucrt64\bin` first on PATH), where all six tests pass too.
+
+`-ffp-contract=off`: without it clang (by default) and gcc outside ISO C mode fuse `a*b+c` into one fused
+multiply-add wherever the processor has one (every 64-bit ARM; x86-64 only with `-mfma`), which rounds once
+instead of twice. `GFM_GFL_IBR`'s start-up transient amplifies that last-bit difference into a different
+trajectory: measured on Apple Silicon and on a Raspberry Pi 400, `Iqref` 0.38 pu off at 5.9 ms, P up to 2.6 times
+the converter rating off in the first 0.4 s of the GFL tests, extra current-zero events, and `GFL_VoltageStep`
+settling at another operating point. With the flag the ARM results equal the x86-64 ones to the print floor of the
+result files. The CMake project passes it to every gcc and clang build; MSVC does not contract under its default
+`/fp:precise`, and gcc with `-std=c11` (what CMake passes) does not either. **A build outside the CMake project
+(a hand-written makefile, a tool's own compile of the sources) must add `-ffp-contract=off` itself.**
 
 Warnings: the adapter and the three test programs compile without warnings with all three compilers. The model sources keep
 their own warnings, left alone on purpose (the control logic is not edited to silence them): unused local
@@ -145,16 +184,23 @@ fails 5 of its checks in either order.
 
 Results on 2026-10-25 (after the review fixes): `ctest` 6 of 6 passed with MSVC, gcc (WSL) and MinGW gcc;
 `adapter_test` 55 (SCRX9) and 60 (GFM_GFL_IBR) checks, `layout_test` 27 and 76 checks, `two_libraries_test`
-14 checks in each link order.
+14 checks in each link order. On 64-bit ARM (2026-11-01): 6 of 6 with gcc 14.2.0 on a Raspberry Pi 400 (64-bit
+Raspberry Pi OS); 8 of 8 with Apple clang 21.0.0 on macOS 27.2 (Apple M2 Pro), the six plus
+`two_archives_test` (the two static archives in one program, both link orders, 14 checks each).
 
 ## Shipped binaries
 
 Built on 2026-10-28 with `build_win64.bat` (Visual Studio Community 2026 18.11.2) and `build_linux64.sh`, after
 the adapter change of that day (message pointers start as an empty string, not NULL; the outputs are bit-identical
 to the libraries of 2026-10-25); details, sizes and the tool lookups are in `../../Library/README.md`.
-Both builds are reproducible with the same tool chain: two build folders gave bit-identical DLLs, import
-libraries and shared objects. A newer Visual Studio or Windows SDK gives DLLs that differ in a few bytes (import
-hints and the hash derived from them; see `../../Library/README.md`). The libraries are meant to be rebuilt and
+The 64-bit ARM libraries were built on 2026-11-01 from the same sources (the CMake project as of this commit):
+`aarch64-linux` with `build_linux64.sh` and gcc 14.2.0 on a Raspberry Pi 400 (64-bit Raspberry Pi OS, Debian 13),
+`aarch64-darwin` and `arm64-darwin` (the same two archives) with the four CMake commands above and Apple clang
+21.0.0 (Xcode 27.2, macOS SDK 27.2) on a Mac mini with Apple M2 Pro, macOS 27.2.
+Every build is reproducible with its tool chain: two build folders gave bit-identical DLLs, import libraries,
+shared objects and archives (win64 and linux64 on 2026-10-28, the ARM libraries on 2026-11-01). A newer Visual
+Studio or Windows SDK gives DLLs that differ in a few bytes (import hints and the hash derived from them; see
+`../../Library/README.md`); another gcc or clang version can change the code itself. The libraries are meant to be rebuilt and
 re-shipped with the current tool chain when the tools are updated, so that they never become stale binaries;
 `../../Library/README.md`, section "Rebuilding", explains why.
 
@@ -166,10 +212,14 @@ re-shipped with the current tool chain when the tools are updated, so that they 
 | `win64/GFM_GFL_IBR.lib` | (import library) | `307dc68ef7c447adf2db325e3f2a144508f909380da212b83edcdc5f1efffee4` |
 | `linux64/libSCRX9.so` | gcc 15.2.0, `-Wl,-Bsymbolic`, Ubuntu 26.04.1 (WSL2), glibc 2.43 | `171f5e3209d74b7397175a09c7d7d3e3066eb4381f55eb8b9a91708e9da5e7e4` |
 | `linux64/libGFM_GFL_IBR.so` | gcc 15.2.0, `-Wl,-Bsymbolic`, Ubuntu 26.04.1 (WSL2), glibc 2.43 | `3e4435d94695d1cfe0853ef871ee9d190796afbba2347accc9bc761c3d4a2e32` |
+| `aarch64-linux/libSCRX9.so` | gcc 14.2.0, `-Wl,-Bsymbolic`, Raspberry Pi OS 64-bit (Debian 13), glibc 2.41 | `dbab0750e40f1657ea7af55a2bb32768caeb996dce628b515a007d2136ad8e28` |
+| `aarch64-linux/libGFM_GFL_IBR.so` | gcc 14.2.0, `-Wl,-Bsymbolic`, Raspberry Pi OS 64-bit (Debian 13), glibc 2.41 | `f163158fe14205e09a20a4b8d0dfd4de7279c1c7f49cf84b35b91d9729a5a433` |
+| `aarch64-darwin/libSCRX9.a`, `arm64-darwin/libSCRX9.a` | Apple clang 21.0.0, static archive, macOS 11.0 and later | `61b8cbffaa2eaf4e7b3173636bd8717a21f1a02192644940e571988935452073` |
+| `aarch64-darwin/libGFM_GFL_IBR.a`, `arm64-darwin/libGFM_GFL_IBR.a` | Apple clang 21.0.0, static archive, macOS 11.0 and later | `8e6d779e5314350de09c16aa6fb463d6ab43640e846a5bbf810c537aa706fcab` |
 
 After a rebuild, update both tables (here and in `../../Library/README.md`).
 
-## How the Modelica tools find the libraries (measured on Windows 11, 2026-10-25)
+## How the Modelica tools find the libraries (measured on Windows 11, 2026-10-25; 64-bit ARM 2026-10-31 and 2026-11-01)
 
 All three tools link the import library `win64/<Name>.lib` named by `annotation(Library="<Name>",
 LibraryDirectory="modelica://OpenIPSL/Resources/Library")` and load `win64/<Name>.dll` from the library folder;
@@ -182,7 +232,21 @@ tests with the shipped `linux64` libraries and reproduced their Windows results;
 library folder into the executable, System Modeler does not, so a System Modeler executable run outside the tool
 needs `Resources/Library/linux64` on `LD_LIBRARY_PATH`.
 
+On 64-bit ARM Linux, OpenModelica 1.27.2 (the OpenModelica arm64 package for Debian 13) searches
+`Resources/Library/aarch64-linux` and the base folder, never `linux64`, and writes the folder into the executable
+(`RPATH`); it ran the tests with the shipped `aarch64-linux` libraries on a Raspberry Pi 400 (2026-11-01). On macOS
+(Apple Silicon), System Modeler 15.0 searches only `aarch64-darwin`, and OpenModelica 1.27.1 (built from source on
+the Mac) only `arm64-darwin`, `darwin64` and the base folder; both link the static archive into the simulation
+executable, which then needs no environment variable. Dymola is not available on either platform, and System Modeler
+not on Linux for ARM.
+
 ## Known limitations
+
+- Platforms: win64, linux64, aarch64-linux and macOS on Apple Silicon are shipped and verified. Not built or
+  verified: 32-bit Windows and Linux, 32-bit ARM (armhf; an armhf OpenModelica 1.27.2 searches
+  `Resources/Library/arm-linuxeabihf`), macOS on Intel (the project would install archives into `darwin64`), and
+  Windows on ARM. A universal (arm64 and x86_64) macOS build is not handled; a cross build on Apple Silicon with
+  `-DCMAKE_OSX_ARCHITECTURES=x86_64` needs `-DOIPSL_PLATFORM=darwin64`.
 
 - The sample time of each model is a compile-time constant of the model (`Model_Info.FixedStepBaseSampleTime`):
   1e-5 s for GFM_GFL_IBR, 0.005 s for SCRX9. The PSCAD test setup of PR #362 used 2e-5 s for the GFM model;

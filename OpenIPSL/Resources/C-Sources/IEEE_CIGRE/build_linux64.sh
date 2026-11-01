@@ -1,6 +1,8 @@
 #!/bin/sh
 # Builds, tests and installs the IEEE/CIGRE model libraries of OpenIPSL for linux64 with gcc.
 # Result: ../../Library/linux64/libSCRX9.so and libGFM_GFL_IBR.so
+# On 64-bit ARM Linux the same script installs into ../../Library/aarch64-linux (the shipped aarch64-linux
+# libraries were built this way on a Raspberry Pi 400, 64-bit Raspberry Pi OS, gcc 14.2.0, CMake 3.31.6).
 #
 # Usage: sh build_linux64.sh [build folder]        (default build folder: /tmp/cigre_build_linux64)
 # Shipped binaries were built on Ubuntu 26.04.1 LTS under WSL2 (gcc 15.2.0, glibc 2.43, CMake 4.2.3);
