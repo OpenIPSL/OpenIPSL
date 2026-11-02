@@ -10,6 +10,7 @@ Check Modelica HTML documentation for link validity
 
 import re
 import os
+import http.cookiejar
 try:
     import urllib2
 except ImportError:
@@ -59,7 +60,9 @@ def _checkURL(url):
 
     try:
         req = urllib2.Request(url, headers=headers)
-        rc = urllib2.urlopen(req, timeout=timeout).getcode()
+        opener = urllib2.build_opener(
+            urllib2.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+        rc = opener.open(req, timeout=timeout).getcode()
         print(f'[checkLinks]   -> {rc}', flush=True, file=sys.stderr)
         return (url, rc)
     except urllib2.HTTPError as e:
@@ -79,12 +82,6 @@ def _checkURL(url):
             # Warn but don't fail on server errors (often transient, work in browser)
             print(f'[checkLinks] WARNING: {url} returned 500 (server error, may be transient)', flush=True, file=sys.stderr)
             return (url, 200)
-        elif rc in (301, 302):
-            # Handle redirect errors
-            try:
-                rc = urllib2.build_opener(urllib2.HTTPCookieProcessor).open(url, timeout=timeout).getcode()
-            except Exception:
-                pass
         return (url, rc)
     except Exception as e:
         print(f'[checkLinks]   -> Timeout/error: {type(e).__name__}', flush=True, file=sys.stderr)
