@@ -7,18 +7,36 @@ block LagLimWindupGuard
   parameter Real y_start "Output start value";
   parameter Real outMax "Maximum output value";
   parameter Real outMin "Minimum output value";
+  parameter Boolean eventLimits=true
+    "true (the default): the state is held at a limit and released from it at events; false: the limits are tested without events, the form of OpenIPSL #424, kept for comparison"
+    annotation (Evaluate=true, choices(checkBox=true));
   Real state(start=y_start) "State of the lag, held between outMin and outMax";
+  Boolean atMax(start=false, fixed=true) "Held at outMax: from the start or the event at which the state is at it with the input pushing outward to the event at which K*u falls below outMax";
+  Boolean atMin(start=false, fixed=true) "Held at outMin: from the start or the event at which the state is at it with the input pushing outward to the event at which K*u rises above outMin";
 protected
   parameter Boolean noLag=T < Modelica.Constants.eps "Without a lag, the output is the limited gain";
   parameter Types.Time T_mod=if noLag then 1000 else T "Any positive value when there is no lag: the state is then held";
 initial equation
   state = y_start;
 equation
-  T_mod*der(state) = noEvent(if noLag then 0
-    elseif state >= outMax then min(K*u - state, 0)
-    elseif state <= outMin then max(K*u - state, 0)
-    else K*u - state)
-    "At a limit the state may only move back inside. The limits are tested without events, as the strict option of Modelica.Blocks.Continuous.LimIntegrator does: tested with events, the relation chatters while the state leaves a limit. Without a lag the state is not used and stays at y_start";
+  if eventLimits and not noLag then
+    when {initial(), state >= outMax and K*u > outMax, pre(atMax) and K*u < outMax} then
+      atMax = state >= outMax and K*u >= outMax;
+    end when;
+    when {initial(), state <= outMin and K*u < outMin, pre(atMin) and K*u > outMin} then
+      atMin = state <= outMin and K*u <= outMin;
+    end when;
+    T_mod*der(state) = if atMax or atMin then 0 else K*u - state
+      "PSAT's fm_windup: held while the state is at a limit and the input pushes outward, from the start on, released when K*u crosses back inside the limit, a relation that is not zero while the state is held";
+  else
+    atMax = false "Not used without events or without a lag";
+    atMin = false "Not used without events or without a lag";
+    T_mod*der(state) = noEvent(if noLag then 0
+      elseif state >= outMax then min(K*u - state, 0)
+      elseif state <= outMin then max(K*u - state, 0)
+      else K*u - state)
+      "OpenIPSL #424: at a limit the state may only move back inside, tested without events; the release is found only when the solver's step has shrunk enough to see it. Without a lag the state is not used and stays at y_start";
+  end if;
   y = if noLag then smooth(0, noEvent(max(min(K*u, outMax), outMin)))
     else smooth(0, noEvent(max(min(state, outMax), outMin)))
     "The limits also bound the output while the state overshoots a limit by the solver's tolerance";
@@ -27,37 +45,42 @@ equation
 (non-windup limit on a single time constant block): while the state is at a limit and the input pushes it further
 out, its derivative is zero; as soon as the input turns back, the state leaves the limit. PSAT implements its
 non-windup limits the same way (<code>fm_windup.m</code>: the derivative set to zero and the state clipped at the
-limit).</p>
+limit while the input is beyond it).</p>
+<p>Both moments are events. The state is held (<code>atMax</code>, <code>atMin</code>) from the event at which it
+is at a limit with the input pushing outward, or from the start when it starts there, and released at the event at
+which <code>K*u</code> crosses back inside the limit: PSAT's own test, on the input against the limit. The hold is
+tested on both the state and the input, so it takes effect again when the input turns outward while the state is
+still at the limit. While the state is held that relation is not zero, so it
+does not chatter, and its crossing is located by the tool's event iteration instead of by the step that happens to
+pass it.</p>
 <p>It differs from <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a> in two
 ways:</p>
 <ul>
 <li><code>SimpleLagLim</code> lets its state run past the limit while its output is clamped, and resets it to the
-limit whenever the input turns back below that state. Its output therefore leaves the limit at about the same time as
-here (within 2 ms in the test pairs, see below), but its state winds up (ten times the limit in
+limit whenever the input turns back below that state. Its output therefore leaves the limit together with the one
+here, but its state winds up (ten times the limit in
 <a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeII_SimpleLagLim\">AVRTypeII_SimpleLagLim</a>), and every
 reset is an event. Here the state stops at the limit.</li>
 <li><code>SimpleLagLim</code> detects that turning point with the relation <code>K*u - state &lt; 0</code> (and
 <code>&gt; 0</code>) in a <code>when</code> condition. In steady state <code>K*u - state</code> is exactly zero, so
 numerical noise changes its sign again and again; a tool that stops at every such sign change (Wolfram System
-Modeler) spends thousands of events on it. Here no relation generates events: the comparison with zero is a
-continuous <code>min</code> or <code>max</code>, and the limit tests <code>state &gt;= outMax</code> and
-<code>state &lt;= outMin</code> are inside <code>noEvent</code> as well.</li>
+Modeler) spends thousands of events on it. Here the release is tested on <code>K*u</code> against the limit,
+which is not zero while the state is held.</li>
 </ul>
-<p>The limits are tested without events for the same reason that
-<a href=\"modelica://Modelica.Blocks.Continuous.LimIntegrator\">Modelica.Blocks.Continuous.LimIntegrator</a> offers its
-<code>strict</code> option: when the state leaves a limit, the relation <code>state &gt;= outMax</code> sits on its
-boundary with the derivative zero on one side and pointing at the boundary on the other, and a tool that handles the
-relation with events walks through its hysteresis band in a cluster of events (on
-<a href=\"modelica://OpenIPSL.Examples.IEEE14.IEEE_14_Buses\">Examples.IEEE14.IEEE_14_Buses</a>, 2 to 13 events
-within a millisecond at each limit exit, in Dymola, OpenModelica and System Modeler alike). Without events the
-integrator is not restarted when the state reaches or leaves a limit. The state may pass a limit by the error of the
-step that reaches it, and keeps that excess while the input pushes outward (6.5e-4 above a ceiling of 7.32 when the
-AVR of <a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.PSS.PSSTypeIII_LagLimWindupGuard\">PSSTypeIII_LagLimWindupGuard</a>
-reaches it during the fault, in Dymola with a tolerance of 1e-6); the output is clipped to the limits separately, so
-the excess does not reach it while the state is at the limit. When the output leaves a limit, it does so up to 2 ms
-earlier or later than with events (in
-<a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeII_LagLimWindupGuard\">AVRTypeII_LagLimWindupGuard</a>,
-1.9 ms later after the voltage reference step).</p>
+<p><code>eventLimits = false</code> keeps the earlier form (OpenIPSL #424), for comparison: the limits are tested
+inside <code>noEvent</code>, as the <code>strict</code> option of
+<a href=\"modelica://Modelica.Blocks.Continuous.LimIntegrator\">Modelica.Blocks.Continuous.LimIntegrator</a> does.
+Without an event the release is found only when the solver's step has shrunk enough to see it, late or not at all:
+on the cases of the PSAT-2-Modelica tool chain (84 simulations of PSAT systems and unit tests, against an exact
+Dymola run with a tolerance of 1e-10) the release came up to 0.15 s late in Dymola, where one of them left PSAT's
+tolerance, and up to 0.3 s late in OpenModelica; with the events here every release happened, within 61 ms of the
+exact run in Dymola and in OpenModelica (the 61 ms on a field voltage that cycles in and out of its limit with
+a time constant of 1e-4 s). The events also made the runs faster, not slower: the total run time of those cases fell
+by about a fifth in Dymola and in OpenModelica. The release is not tested on <code>K*u - state</code>, the turning
+of the derivative: that relation is exactly zero while the state is held, and a tool may stop at every sign change of
+its numerical noise (System Modeler 15.0 did, 148985 events on those cases).</p>
+<p>The output is clipped to the limits separately, so an overshoot of the state by the error of the step that reaches
+a limit does not reach the output.</p>
 <p>With <code>T = 0</code> the output is <code>K*u</code> limited to [<code>outMin</code>, <code>outMax</code>], as in
 <code>SimpleLagLim</code>.</p>
 <p><a href=\"modelica://OpenIPSL.Tests.NonElectrical.Continuous.LagLimWindupGuard\">Tests.NonElectrical.Continuous.LagLimWindupGuard</a>
@@ -70,7 +93,7 @@ shows the two limiters side by side; plot their <code>state</code> and <code>y</
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td>2026-10-15</td>
+<td>2026-10-30</td>
 </tr>
 <tr>
 <td><p>Author</p></td>

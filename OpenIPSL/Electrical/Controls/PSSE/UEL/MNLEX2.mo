@@ -47,7 +47,8 @@ model MNLEX2 "Minimum Excitation Limiter [PSSE-MODELS]"
     T=T_M,
     y_start=0,
     outMax=MEL_MAX,
-    outMin=0) if useWindupGuard
+    outMin=0,
+    eventLimits=false) if useWindupGuard
     annotation (Placement(transformation(extent={{68,22},{88,42}})));
   Modelica.Blocks.Interfaces.RealOutput VUEL
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
@@ -145,5 +146,7 @@ inactive, its normal state, because that relation rests at zero and round-off fl
 <a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.UEL.MNLEX2_SimpleLagLim\">MNLEX2_SimpleLagLim</a> and
 <a href=\"modelica://OpenIPSL.Tests.Controls.PSSE.UEL.MNLEX2_LagLimWindupGuard\">MNLEX2_LagLimWindupGuard</a> show
 the difference.</p>
+<p>The guard runs with <code>eventLimits = false</code>, the form of OpenIPSL #424 with which the PSS/E run above was
+compared: its default, the limits as events, was developed and verified against PSAT, not PSS/E.</p>
 </html>"));
 end MNLEX2;
