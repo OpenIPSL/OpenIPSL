@@ -137,7 +137,7 @@ equation
   der(Epd) = (1/Tpq0)*(-1)*qsat*Ed1;
   der(PSIppd) = -(dsat)*((Xpd-Xppd)/(Xd-Xppd))*(Eq2/Tppd0);
   der(PSIppq) = (qsat)*((Xpq-Xppq)/(Xq-Xppq))*(Ed2/Tppq0);
-  Te = PSId*iq - PSIq*id;
+  Te = (PSId*iq - PSIq*id)/(1 + w) "Electrical torque: the electrical power divided by the speed, as PSS/E's GENTPJ1 integrates its swing equation (GENROU takes the power itself)";
   // Unsaturated air-gap flux:
   PSIpp = sqrt((uq+iq*R_a+id*Xl)*(uq+iq*R_a+id*Xl)+(ud+id*R_a-iq*Xl)*(ud+id*R_a-iq*Xl));
   // Saturation on d-axis:
@@ -175,7 +175,8 @@ equation
           textColor={0,0,255},
           textString="GENTPJ")}),
     Documentation(info="<html><p>Solid rotor generator with saturation on both axes. The saturation in this model is not only function of the air-gap flux, but also of armature current magnitude. This effect is included via parameter <code>Kis</code>.</p>
-    <p> If <code>Kis</code> is set to zero, then the model will behave like the WECC Type F Generator, that is, GENTPF.</p></html>",
+    <p> If <code>Kis</code> is set to zero, then the model will behave like the WECC Type F Generator, that is, GENTPF.</p>
+    <p>The electrical torque is the electrical power divided by the speed, <code>Te = (PSId*iq - PSIq*id)/(1 + w)</code>, so that the swing equation reads 2H dw/dt = (PMECH - PELEC)/(1 + w) as in PSS&reg;E's GENTPJ1. This differs from GENROU, which takes the electrical power itself as the torque, <code>Te = PSId*iq - PSIq*id</code>, as GENSAL, GENROE and GENSAE do; <code>baseMachine</code> only subtracts <code>Te</code> in the swing equation. The torque was read from PSS&reg;E 36.2.1's own state channels on the SMIB test of this model (case study 9 of ALSETLab/PSSE-2-Modelica, issue #417): with the power as the torque the swing mode was about 2&nbsp;% more damped than in PSS&reg;E (damping ratio 0.0939 against 0.0919 at 1&nbsp;ms and 0.0921 at 0.25&nbsp;ms), with the power divided by the speed it is 0.0921, and every state lies inside PSS&reg;E's own difference between those two time steps, in Dymola and OpenModelica, with and without saturation.</p></html>",
     revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>
