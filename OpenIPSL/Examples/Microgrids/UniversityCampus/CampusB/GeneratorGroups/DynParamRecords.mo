@@ -175,7 +175,7 @@ package DynParamRecords "Sets of generator parameters"
   end ESData;
 
   package TGData "Records with Turbine Governor (TG) Parameters"
-    extends Modelica.Icons.Record;
+    extends Modelica.Icons.RecordsPackage;
     record GASTTemplate "Template for GAST turbine governor model"
       extends Modelica.Icons.Record;
       parameter Types.PerUnit R "Speed droop gain";
