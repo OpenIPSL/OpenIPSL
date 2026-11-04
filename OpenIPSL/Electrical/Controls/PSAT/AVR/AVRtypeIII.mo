@@ -147,7 +147,9 @@ default, <code>useWindupGuard = true</code>, does the same with
 <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>;
 <code>useWindupGuard = false</code> keeps the model as it was before this option, a lag whose state winds up past
 the limits followed by a limiter on its output, which leaves a limit later than PSAT once the field voltage has
-been held there.</li>
+been held there. A model whose field voltage reaches a limit therefore behaves differently with the default than it
+did before this option; one that never reaches its limits does not change. <code>busFed = false</code>, the default,
+leaves out only the bus-fed scaling, not the limit.</li>
 </ul>
 <p><a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeIII_BusFed_on\">Tests.Controls.PSAT.AVR.AVRTypeIII_BusFed_on</a>
 and <a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR.AVRTypeIII_BusFed_off\">AVRTypeIII_BusFed_off</a> show the

@@ -27,7 +27,7 @@ model AVRTypeIII_BusFed_on
     T1=1,
     Te=0.4,
     Tr=0.04,
-    busFed=true) "Bus-fed; its ceiling 3.0 pu, above what the bus-fed field voltage reaches in the fault"
+    busFed=true) "Bus-fed; its ceiling 3.0 pu, above the bus-fed field voltage's peak of 2.35 pu"
     annotation (Placement(transformation(extent={{-96,54},{-72,30}})));
   Modelica.Blocks.Sources.Constant noPSS(k=0) "No stabiliser signal"
     annotation (Placement(transformation(extent={{-120,42},{-108,54}})));
@@ -55,11 +55,13 @@ test with <code>busFed = false</code>; the two side by side show what the bus-fe
 <p>Two disturbances: a fault at bus <code>FAULT</code> from 2 s to 2.45 s, longer than the 0.15 s of
 <code>SMIBPSAT</code>, and the line from <code>LOAD</code> to <code>SHUNT</code> (<code>pwLine1</code>) opened at 6 s
 and closed again at 8 s. A bus-fed exciter draws its power from the generator's terminals, so its output falls with
-the terminal voltage: in the fault <code>machine.v</code> is near 0.57 pu, and the regulator's command is scaled by
-<code>v/v0</code>. The ceiling, <code>vfmax</code> = 3.0 pu against an initial field voltage of 1.31 pu, is high
-enough that the scaled command stays below it, so the scaling shows in <code>avr.vf</code> instead of being cut off
-by the limit: bus-fed, the field voltage peaks near 2.3 pu; not bus-fed it rises to the ceiling, where the non-windup
-limit (<code>useWindupGuard = true</code>, the default) holds it.</p>
+the terminal voltage: in the fault <code>machine.v</code> is near 0.57 pu, and the input of the field circuit,
+<code>avr.fieldCommand.y</code>, is scaled by <code>v/v0</code>, to at most 2.75 pu. The ceiling, <code>vfmax</code> =
+3.0 pu against an initial field voltage of 1.31 pu, is above that, so the scaling shows in <code>avr.vf</code> instead
+of being cut off by the limit. When the fault is cleared the voltage returns and the command jumps to 4.5 pu, but the
+field circuit's lag (<code>Te</code> = 0.4 s) keeps the field voltage below the ceiling: bus-fed, it peaks at
+2.35 pu at 2.6 s and the limit never acts. Not bus-fed, the field voltage rises to the ceiling in the fault, where the
+non-windup limit (<code>useWindupGuard = true</code>, the default) holds it.</p>
 <h4>Why this test exists</h4>
 <p>It is the library twin of the unit test <code>ut_avr_type3_busfed_on</code> of ALSETLab/PSAT-2-Modelica, which
 is verified against PSAT 2.1.11: the same network, operating point, machine, regulator and disturbances. The unit
@@ -69,8 +71,9 @@ test sets column 9 of PSAT's <code>Exc.con</code>, so that PSAT scales the input
 at 0.</p>
 <h4>What to plot</h4>
 <ul>
-<li><code>avr.vf</code> of this test and of <code>AVRTypeIII_BusFed_off</code>, from 1.5 s to 10 s: from the fault on
-the bus-fed field voltage is the lower one, by up to 1 pu, until the swings after the fault have died out.</li>
+<li><code>avr.vf</code> of this test and of <code>AVRTypeIII_BusFed_off</code>, from 1.5 s to 10 s: in the fault and
+just after it the bus-fed field voltage is the lower one, by up to 1 pu at 2.38 s; the two cross at 3.2 s, and in the
+recovery the bus-fed one is the higher, by up to 0.19 pu at 4.2 s.</li>
 <li><code>machine.delta</code> of both: the weaker field of the bus-fed exciter in the fault changes the first swings.</li>
 <li><code>machine.v</code>, <code>machine.P</code>, <code>machine.Q</code> and <code>avr.vf</code> through the fault
 and the line opening, against PSAT's results of the unit test (the first 10 s, the length of the PSAT run).</li>
