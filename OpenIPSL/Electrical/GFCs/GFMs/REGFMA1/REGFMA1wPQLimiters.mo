@@ -167,6 +167,9 @@ model REGFMA1wPQLimiters
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,-110})));
+  Modelica.Blocks.Interfaces.RealOutput omega_dev
+    "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
+    annotation (Placement(transformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.RealOutput omega_droop
     "Speed output from the P-f droop controller"
     annotation (Placement(transformation(extent={{100,-110},{120,-90}})));
@@ -255,6 +258,7 @@ equation
     annotation (Line(points={{91,-80},{110,-80}}, color={0,0,127}));
   connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{4,38},{4,30},{-60,30},{-60,-110}}, color={0,0,127}));
   connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
+  connect(pfdroopcntrl.omega_dev, omega_dev) annotation (Line(points={{1,-54},{64,-54},{64,20},{110,20}}, color={0,0,127}));
   connect(pfdroopcntrl.omega_droop, omega_droop) annotation (Line(points={{1,
           -48},{60,-48},{60,-100},{110,-100}}, color={0,0,127}));
   connect(VS.p, p)

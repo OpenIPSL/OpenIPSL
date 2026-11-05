@@ -20,6 +20,10 @@ partial model PFdrpCntrlSchemeBase
     "Speed output from the P-f droop controller"
     annotation (Placement(transformation(extent={{200,-90},{220,-70}}),
         iconTransformation(extent={{200,-90},{220,-70}})));
+  Modelica.Blocks.Interfaces.RealOutput omega_dev
+    "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
+    annotation (Placement(transformation(extent={{200,-150},{220,-130}}),
+        iconTransformation(extent={{200,-150},{220,-130}})));
   Modelica.Blocks.Interfaces.RealOutput delta_droop
     "Desired internal angle from the P-f droop controller"
     annotation (Placement(transformation(extent={{200,70},{220,90}}),
@@ -74,6 +78,7 @@ equation
                                                 color={0,0,127}));
   connect(Edelta0, pfdroop.Edelta0) annotation (Line(points={{80,-220},{80,-180},
           {8,-180},{8,-24}},color={0,0,127}));
+  connect(pfdroop.omega_dev, omega_dev) annotation (Line(points={{22,-18},{40,-18},{40,-140},{210,-140}}, color={0,0,127}));
   connect(pfdroop.delta_droop, delta_droop)
     annotation (Line(points={{22,0},{120,0},{120,80},{210,80}},
                                               color={0,0,127}));
