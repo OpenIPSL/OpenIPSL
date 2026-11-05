@@ -28,7 +28,7 @@ model Qlimiter "Reactiver power limiter"
     outMin=-Modelica.Constants.inf,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
-    y_start=Qmax - Q0)
+    y_start=0)
     annotation (Placement(transformation(extent={{-40,40},{0,80}})));
   Modelica.Blocks.Interfaces.RealInput Q0_ini
     "Initial value of the of the active power" annotation (Placement(
@@ -61,7 +61,7 @@ model Qlimiter "Reactiver power limiter"
     outMin=0.0,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
-    y_start=Qmin - Q0)
+    y_start=0)
     annotation (Placement(transformation(extent={{-40,-100},{0,-60}})));
   parameter Real kiqmax=20.0 "Integral gain of the Qmax and Qmin Controller. Range when VFLAG=1 is [3-20] pu. Range when VFLAG = 0, [3-30] pu";
 protected
@@ -123,6 +123,12 @@ Limiters"),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-200},{200,200}})),
     Documentation(info="<html>
+<p>
 This model implements the reactive power limiter. The upper branch limits the the maximum power, while the lower branch limits the minimum power.
+</p>
+<p>
+Their integrators start at zero, inside their limits: with the reactive power between <code>Qmin</code> and <code>Qmax</code> the limiter output is zero and stays zero until a limit is crossed.
+The input <code>Q0_ini</code> is kept for compatibility and no longer sets a start value.
+</p>
 </html>"));
 end Qlimiter;
