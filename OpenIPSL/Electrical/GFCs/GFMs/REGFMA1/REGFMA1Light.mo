@@ -26,6 +26,7 @@ model REGFMA1Light
         origin={12,-86})));
   BasicComponentsAndCntrlSchemes.QVdrpCntrlScheme q_v_droop_scheme(
     Tr=qTr,
+    Tvf=Tvf,
     EMax=EMax,
     EMin=EMin,
     QVFlag_val_k=true,
@@ -81,7 +82,9 @@ model REGFMA1Light
   parameter Real Tr=0.1
     "Filter time constant, sec. Normal Range: [0.01 - 0.1 sec.]" annotation (
       Dialog(tab="P-f Droop", group="P-f droop controller parameters"));
-  parameter Real qTr=0.01 "Filter time constant. Range: [0.01 - 0.1 sec.]"
+  parameter Real qTr=0.01 "Reactive power measurement filter time constant (Tqf). Range: [0.01 - 0.1 sec.]"
+    annotation (Dialog(tab="Q-v Droop", group="Filter Parameters"));
+  parameter Real Tvf=qTr "Voltage measurement filter time constant (Tvf). Range: [0.01 - 0.1 sec.]"
     annotation (Dialog(tab="Q-v Droop", group="Filter Parameters"));
   parameter Real EMax=1.15 "Max. Edroop"
     annotation (Dialog(tab="Q-v Droop", group="E Limiters"));

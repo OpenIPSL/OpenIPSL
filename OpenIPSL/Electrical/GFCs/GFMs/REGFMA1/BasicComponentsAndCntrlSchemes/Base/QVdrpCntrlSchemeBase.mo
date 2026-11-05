@@ -9,7 +9,8 @@ partial model QVdrpCntrlSchemeBase
   Modelica.Blocks.Interfaces.RealInput Qmeas
     "Value of the reactive power measurement"
     annotation (Placement(transformation(extent={{-240,-180},{-200,-140}})));
-  parameter Real Tr=0.01 "Filter time constant. Range: [0.01 - 0.1 sec.]";
+  parameter Real Tr=0.01 "Reactive power measurement filter time constant (Tqf). Range: [0.01 - 0.1 sec.]";
+  parameter Real Tvf=Tr "Voltage measurement filter time constant (Tvf). Range: [0.01 - 0.1 sec.]";
 
   Modelica.Blocks.Interfaces.RealInput Vref "Voltage mangitude reference"
     annotation (Placement(transformation(extent={{-240,80},{-200,120}})));
@@ -55,7 +56,7 @@ partial model QVdrpCntrlSchemeBase
   Modelica.Blocks.Interfaces.RealInput Vmeas
     "Value of the terminal voltage measurement"
     annotation (Placement(transformation(extent={{-240,140},{-200,180}})));
-  LPFilter Vfilt(Tr=Tr, y0val=V0) "Filtered voltage measurement"
+  LPFilter Vfilt(Tr=Tvf, y0val=V0) "Filtered voltage measurement"
     annotation (Placement(transformation(extent={{-160,150},{-140,170}})));
 
   Modelica.Blocks.Math.Feedback sum_Vcmd_Vinv "Vcmd-Vinv" annotation (Placement(
