@@ -16,15 +16,29 @@ block LagLimWindupGuard
 protected
   parameter Boolean noLag=T < Modelica.Constants.eps "Without a lag, the output is the limited gain";
   parameter Types.Time T_mod=if noLag then 1000 else T "Any positive value when there is no lag: the state is then held";
+  Boolean stateHigh=eventLimits and not noLag and state >= outMax
+    "Event-generating, read by the when-clauses: the state at or above outMax";
+  Boolean inputAbove=eventLimits and not noLag and K*u > outMax
+    "Event-generating, read by the when-clauses: K*u above outMax, pushing outward";
+  Boolean inputHigh=eventLimits and not noLag and K*u >= outMax
+    "Event-generating, read by the when-clauses: K*u at or above outMax";
+  Boolean stateLow=eventLimits and not noLag and state <= outMin
+    "Event-generating, read by the when-clauses: the state at or below outMin";
+  Boolean inputBelow=eventLimits and not noLag and K*u < outMin
+    "Event-generating, read by the when-clauses: K*u below outMin, pushing outward";
+  Boolean inputLow=eventLimits and not noLag and K*u <= outMin
+    "Event-generating, read by the when-clauses: K*u at or below outMin";
 initial equation
   state = y_start;
 equation
   if eventLimits and not noLag then
-    when {initial(), state >= outMax and K*u > outMax, pre(atMax) and K*u < outMax} then
-      atMax = state >= outMax and K*u >= outMax;
+    when {initial(), stateHigh and inputAbove, pre(atMax) and not inputHigh} then
+      atMax = stateHigh and inputHigh
+        "The Booleans, not the relations: inside a when-clause a relation is taken literally (Modelica 3.6, section 8.5), so it can disagree with the event that activated the clause";
     end when;
-    when {initial(), state <= outMin and K*u < outMin, pre(atMin) and K*u > outMin} then
-      atMin = state <= outMin and K*u <= outMin;
+    when {initial(), stateLow and inputBelow, pre(atMin) and not inputLow} then
+      atMin = stateLow and inputLow
+        "The Booleans, not the relations: inside a when-clause a relation is taken literally (Modelica 3.6, section 8.5), so it can disagree with the event that activated the clause";
     end when;
     T_mod*der(state) = if atMax or atMin then 0 else K*u - state
       "PSAT's fm_windup: held while the state is at a limit and the input pushes outward, from the start on, released when K*u crosses back inside the limit, a relation that is not zero while the state is held";
@@ -53,6 +67,13 @@ tested on both the state and the input, so it takes effect again when the input 
 still at the limit. While the state is held that relation is not zero, so it
 does not chatter, and its crossing is located by the tool's event iteration instead of by the step that happens to
 pass it.</p>
+<p>The when-clauses read the relations through Booleans declared outside them (<code>stateHigh</code>,
+<code>inputAbove</code>, <code>inputHigh</code> and their counterparts at <code>outMin</code>), not the relations
+themselves. Inside a when-clause a relation is taken literally and generates no event (Modelica 3.6, section 8.5),
+while the same relation in the clause's condition is the event-generating one, whose crossing a tool locates
+within its tolerance: at the event that releases the state, a relation written in the body may still be on the
+outward side of the limit and keep the state held. Wolfram System Modeler 15.0 did that at 20 of 666 releases
+of the PSAT-2-Modelica cases; the Booleans have one value at an event, the one that activated the clause.</p>
 <p>It differs from <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a> in two
 ways:</p>
 <ul>
@@ -93,7 +114,7 @@ shows the two limiters side by side; plot their <code>state</code> and <code>y</
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td>2026-10-30</td>
+<td>2026-11-05</td>
 </tr>
 <tr>
 <td><p>Author</p></td>
