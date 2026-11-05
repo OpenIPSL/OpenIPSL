@@ -10,7 +10,7 @@ model CombiningComponents
   Modelica.Blocks.Sources.Ramp Pstep(
     height=0.1,
     duration=5,
-    offset=0.4,
+    offset=0,
     startTime=20)
     annotation (Placement(transformation(extent={{-320,-50},{-300,-30}})));
   Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60)
@@ -20,7 +20,7 @@ model CombiningComponents
     mp=0.01,
     Tr=0.1)
     annotation (Placement(transformation(extent={{-260,-80},{-220,-40}})));
-  Modelica.Blocks.Math.Gain gain2P0pu(k=1/100) annotation (Placement(
+  Modelica.Blocks.Math.Gain gain2P0pu(k=1/VS.M_b) "Initial active power (W) to pu on the source base" annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
@@ -28,17 +28,19 @@ model CombiningComponents
   Modelica.Blocks.Sources.Ramp Vref(
     height=0.1,
     duration=1,
-    offset=0.5,
+    offset=0,
     startTime=46)
     annotation (Placement(transformation(extent={{-360,58},{-340,78}})));
   Modelica.Blocks.Sources.Ramp Vref1(
     height=-0.1,
     duration=1.0,
-    offset=0.5,
+    offset=0,
     startTime=40)
     annotation (Placement(transformation(extent={{-360,20},{-340,40}})));
-  Modelica.Blocks.Math.Add add
+  Modelica.Blocks.Math.Add3 add "Vref = Vref0 of the initial operating point plus the two ramps"
     annotation (Placement(transformation(extent={{-320,40},{-300,60}})));
+  Modelica.Blocks.Math.Add addPref0 "Pref = Pref0 of the initial operating point plus the ramp"
+    annotation (Placement(transformation(extent={{-290,-50},{-276,-36}})));
   Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.QVdrpCntrlScheme q_v_droop_scheme(
     QVFlag_val_k=true,
     VFlag_val_k=true,
@@ -48,7 +50,7 @@ model CombiningComponents
     annotation (Placement(transformation(extent={{-318,-84},{-298,-64}})));
   Modelica.Blocks.Sources.RealExpression sig_q0(y=VS.q0)
     annotation (Placement(transformation(extent={{-320,-14},{-300,6}})));
-  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/100) annotation (Placement(
+  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/VS.M_b) "Initial reactive power (var) to pu on the source base" annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         origin={-274,-4})));
@@ -78,11 +80,17 @@ equation
   connect(Vref.y, add.u1) annotation (Line(points={{-339,68},{-332,68},{-332,56},
           {-322,56}}, color={0,0,127}));
   connect(Vref1.y, add.u2) annotation (Line(points={{-339,30},{-334,30},{-334,
-          44},{-322,44}}, color={0,0,127}));
+          50},{-322,50}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, add.u3) annotation (Line(points={{-224,21},{-224,
+          14},{-328,14},{-328,42},{-322,42}}, color={0,0,127}));
   connect(q_v_droop_scheme.Vref, add.y) annotation (Line(points={{-262,51},{
           -294,51},{-294,50},{-299,50}}, color={0,0,127}));
-  connect(Pstep.y, basic_dROOP.Pref) annotation (Line(points={{-299,-40},{-270,
-          -40},{-270,-52},{-262,-52}}, color={0,0,127}));
+  connect(Pstep.y, addPref0.u1) annotation (Line(points={{-299,-40},{-291.4,-40},
+          {-291.4,-38.8}}, color={0,0,127}));
+  connect(addPref0.y, basic_dROOP.Pref) annotation (Line(points={{-275.3,-43},{-270,
+          -43},{-270,-52},{-262,-52}}, color={0,0,127}));
+  connect(basic_dROOP.Pref0, addPref0.u2) annotation (Line(points={{-240,-81},{-240,
+          -90},{-296,-90},{-296,-47.2},{-291.4,-47.2}}, color={0,0,127}));
   connect(sig_Pmeas.y, basic_dROOP.Pmeas) annotation (Line(points={{-297,-74},{
           -280,-74},{-280,-68},{-262,-68}}, color={0,0,127}));
   connect(sig_q0.y, gain2Q0pu.u)
@@ -111,7 +119,12 @@ equation
         grid={2,2})),
 
     Documentation(info="<html>
+<p>
 Illustrates how to combine the different components in this sub-package to create the
 <code>REGFMA1light</code> model.
+</p>
+<p>
+The references start from the outputs <code>basic_dROOP.Pref0</code> and <code>q_v_droop_scheme.Vref0</code>, the references of the initial operating point, so the model starts in steady state.
+</p>
 </html>"));
 end CombiningComponents;

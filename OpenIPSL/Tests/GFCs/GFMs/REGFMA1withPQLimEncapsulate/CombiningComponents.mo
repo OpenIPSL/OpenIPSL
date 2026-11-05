@@ -14,7 +14,7 @@ model CombiningComponents
     f0=60,
     mp=0.01,
     Tr=0.1) annotation (Placement(transformation(extent={{-240,-40},{-200,0}})));
-  Modelica.Blocks.Math.Gain gain2P0pu(k=1/100) annotation (Placement(
+  Modelica.Blocks.Math.Gain gain2P0pu(k=1/VS.M_b) "Initial active power (W) to pu on the source base" annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
@@ -22,16 +22,16 @@ model CombiningComponents
   Modelica.Blocks.Sources.Ramp Vref(
     height=0.1,
     duration=1,
-    offset=0.5,
+    offset=0,
     startTime=66)
     annotation (Placement(transformation(extent={{-340,158},{-320,178}})));
   Modelica.Blocks.Sources.Ramp Vref1(
     height=-0.1,
     duration=1.0,
-    offset=0.5,
+    offset=0,
     startTime=50)
     annotation (Placement(transformation(extent={{-340,120},{-320,140}})));
-  Modelica.Blocks.Math.Add add
+  Modelica.Blocks.Math.Add3 add "Vref = Vref0 of the initial operating point plus the two ramps"
     annotation (Placement(transformation(extent={{-300,140},{-280,160}})));
   Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.QVdrpCntrlSchemeQLim
     q_v_droop_scheme(
@@ -43,7 +43,7 @@ model CombiningComponents
     annotation (Placement(transformation(extent={{-278,-38},{-258,-18}})));
   Modelica.Blocks.Sources.RealExpression sig_q0(y=VS.q0)
     annotation (Placement(transformation(extent={{-338,90},{-318,110}})));
-  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/100) annotation (Placement(
+  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/VS.M_b) "Initial reactive power (var) to pu on the source base" annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         origin={-292,100})));
@@ -76,24 +76,26 @@ model CombiningComponents
     annotation (Placement(transformation(extent={{-310,50},{-290,70}})));
   Modelica.Blocks.Math.Add3 add3_1_Pref
     annotation (Placement(transformation(extent={{-320,-20},{-300,0}})));
+  Modelica.Blocks.Math.Add addPref0 "Pref = Pref0 of the initial operating point plus the changes"
+    annotation (Placement(transformation(extent={{-290,-20},{-276,-6}})));
   Modelica.Blocks.Sources.Ramp Pstep(
     height=0.1,
     duration=5,
-    offset=0.4,
+    offset=0,
     startTime=2.5)
     annotation (Placement(transformation(extent={{-380,-12},{-360,8}})));
   Modelica.Blocks.Sources.Pulse Pfilt_upper(
     amplitude=8,
     period=2,
     nperiod=1,
-    offset=0.1,
+    offset=0,
     startTime=5.0)
     annotation (Placement(transformation(extent={{-380,-60},{-360,-40}})));
   Modelica.Blocks.Sources.Pulse Pfilt_lower(
     amplitude=-0.5,
     period=3,
     nperiod=1,
-    offset=0.2,
+    offset=0,
     startTime=40)
     annotation (Placement(transformation(extent={{-380,-100},{-360,-80}})));
 equation
@@ -110,7 +112,7 @@ equation
           {-312,156},{-302,156}},
                       color={0,0,127}));
   connect(Vref1.y, add.u2) annotation (Line(points={{-319,130},{-314,130},
-          {-314,144},{-302,144}},
+          {-314,150},{-302,150}},
                           color={0,0,127}));
   connect(q_v_droop_scheme.Vref, add.y) annotation (Line(points={{-242,
           151},{-274,151},{-274,150},{-279,150}},
@@ -146,8 +148,14 @@ equation
     annotation (Line(points={{-282,60},{-289,60}}, color={0,0,127}));
   connect(sig_Qmeas_4qfilt.y, Qfilt.u)
     annotation (Line(points={{-319,60},{-312,60}}, color={0,0,127}));
-  connect(add3_1_Pref.y, basic_dROOP.Pref) annotation (Line(points={{-299,
-          -10},{-299,-12},{-242,-12}}, color={0,0,127}));
+  connect(add3_1_Pref.y, addPref0.u1) annotation (Line(points={{-299,-10},{-291.4,
+          -10},{-291.4,-8.8}}, color={0,0,127}));
+  connect(addPref0.y, basic_dROOP.Pref) annotation (Line(points={{-275.3,-13},{-260,
+          -13},{-260,-12},{-242,-12}}, color={0,0,127}));
+  connect(basic_dROOP.Pref0, addPref0.u2) annotation (Line(points={{-220,-41},{-220,
+          -50},{-296,-50},{-296,-17.2},{-291.4,-17.2}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, add.u3) annotation (Line(points={{-204,122.5},{-204,
+          116},{-306,116},{-306,142},{-302,142}}, color={0,0,127}));
   connect(Pstep.y, add3_1_Pref.u1)
     annotation (Line(points={{-359,-2},{-322,-2}}, color={0,0,127}));
   connect(Pfilt_upper.y, add3_1_Pref.u2) annotation (Line(points={{-359,
@@ -163,7 +171,12 @@ equation
         coordinateSystem(extent={{-400,-200},{100,200}}, initialScale=0.5)),
 
     Documentation(info="<html>
+<p>
 Illustrates how to combine the different components in this sub-package to create the
 <code>REGFMA1PQLimiters</code> model.
+</p>
+<p>
+The references start from the outputs <code>basic_dROOP.Pref0</code> and <code>q_v_droop_scheme.Vref0</code>, the references of the initial operating point, so the model starts in steady state.
+</p>
 </html>"));
 end CombiningComponents;
