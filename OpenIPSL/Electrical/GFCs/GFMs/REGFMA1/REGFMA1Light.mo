@@ -146,6 +146,18 @@ model REGFMA1Light
                                       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={110,-80})));
+  Modelica.Blocks.Interfaces.RealOutput Vref0
+    "Voltage reference of the initial operating point, to be fed back to Vref"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-60,-110})));
+  Modelica.Blocks.Interfaces.RealOutput Pref0
+    "Active power reference of the initial operating point (pu, machine base), to be fed back to Pref"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-20,-110})));
   Modelica.Blocks.Interfaces.RealOutput omega_droop
     "Speed output from the P-f droop controller"
     annotation (Placement(transformation(extent={{100,-110},{120,-90}})));
@@ -205,6 +217,8 @@ equation
     annotation (Line(points={{91,-60},{110,-60}}, color={0,0,127}));
   connect(sigaEdelta.y,Edelta)
     annotation (Line(points={{91,-80},{110,-80}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{4,38},{4,30},{-60,30},{-60,-110}}, color={0,0,127}));
+  connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
   connect(pfdroopcntrl.omega_droop, omega_droop) annotation (Line(points={{1,
           -48},{60,-48},{60,-100},{110,-100}}, color={0,0,127}));
   annotation (Icon(graphics={
@@ -323,6 +337,11 @@ equation
 <p>
 This is the simplest representation of the REGFM_A1 model.
 It includes both P-f and Q-v droop control schemes. Differently from <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>, it does not include limiters for the active and reactive power, and fault current limiter functionalities. </p>
+<p>
+All parameters of the controls are in per unit on the converter base <code>M_b</code> (in VA), as in PSS/E; the measured active and reactive power are converted from the system base.
+The outputs <code>Pref0</code> and <code>Vref0</code> are the references of the initial operating point, computed from the power flow data at initialization.
+Feeding them back to the inputs <code>Pref</code> and <code>Vref</code> (plus any change a test applies) starts the model in steady state for any power flow and any setting of the flags.
+</p>
 
 </html>"));
 end REGFMA1Light;
