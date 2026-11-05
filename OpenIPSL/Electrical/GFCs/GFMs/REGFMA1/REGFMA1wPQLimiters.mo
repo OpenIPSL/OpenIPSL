@@ -187,7 +187,7 @@ model REGFMA1wPQLimiters
     annotation (Dialog(group="Power flow data"));
   parameter Types.PerUnit v_0=1.0 "Initial voltage magnitude"
     annotation (Dialog(group="Power flow data"));
-  parameter Types.Angle angle_0=4.038907 "Initial voltage angle"
+  parameter Types.Angle angle_0=0.070620799598684 "Initial voltage angle (rad)"
     annotation (Dialog(group="Power flow data"));
   parameter Types.Frequency fn=SysData.fn "System frequency (Hz)"
     annotation (Dialog(group="Power flow data"));
