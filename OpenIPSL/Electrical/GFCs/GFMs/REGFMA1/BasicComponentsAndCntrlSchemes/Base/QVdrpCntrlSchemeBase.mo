@@ -75,12 +75,13 @@ partial model QVdrpCntrlSchemeBase
         origin={40,140})));
   parameter Real kpv=0.01 "Proportional gain of the voltage controller";
   Modelica.Blocks.Continuous.LimIntegrator kivInt(
-    k=kiv,
+    k=if VFlag_val_k then kiv else 0,
     outMax=EMax,
     outMin=EMin,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
-    y_start=E0)
+    y_start=if VFlag_val_k then E0 else 0)
+    "Integral part of the voltage PI controller; with VFlag = 0 it is not used and is held at zero, as PSS/E holds it"
     annotation (Placement(transformation(extent={{80,100},{100,120}})));
   parameter Real kiv=5.86 "Integral grain of the voltage controller";
   Modelica.Blocks.Math.Add sum_PI "PI controller summing junction" annotation (
@@ -220,6 +221,9 @@ Initialization from the power flow: with <code>QVFlag = 0</code> the reactive po
 with <code>QVFlag = 1</code> it is zero. The output <code>Vref0</code> is the voltage reference that holds the initial operating point:
 <code>V0 + mq*Q0</code> (<code>VFlag = 1</code>) or <code>E0 + mq*Q0</code> (<code>VFlag = 0</code>) with <code>QVFlag = 1</code>,
 and <code>V0</code> or <code>E0</code> with <code>QVFlag = 0</code>. A test feeds it back to the input <code>Vref</code>, so that one power flow serves all four flag pairs.
+</p>
+<p>
+With <code>VFlag = 0</code> the voltage PI controller is not used: its integrator <code>kivInt</code> starts at zero and has gain zero, so it does not wind up while the internal voltage follows the limited droop command.
 </p>
 
 </html>"));
