@@ -210,7 +210,7 @@ model REGFMA1wPQLimiters
   parameter Types.Frequency fn=SysData.fn "System frequency (Hz)"
     annotation (Dialog(group="Power flow data"));
   parameter Boolean QVFlag_val_k=true
-    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Qfilt = Qinv. QVFlag = 1 = true, Qref = 0."
+    "QVFlag = false (0): Qref = Q0, the initial Qinv; true (1): Qref = 0. It only selects the reference a plant controller would change; with no Qref input both give the same response (see Documentation)"
     annotation (Dialog(group="Control Mode Setting (VFLAG and QVFLAG)"));
   parameter Boolean VFlag_val_k=true
     "VFlag = true/false switches the voltage control mode. VFlag = 0 = false, E limited. VFlag = 1 = true, PI with E limited."
@@ -384,6 +384,11 @@ Differently from <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]<
 All parameters of the controls are in per unit on the converter base <code>M_b</code> (in VA), as in PSS/E; the measured active and reactive power are converted from the system base.
 The outputs <code>Pref0</code> and <code>Vref0</code> are the references of the initial operating point, computed from the power flow data at initialization.
 Feeding them back to the inputs <code>Pref</code> and <code>Vref</code> (plus any change a test applies) starts the model in steady state for any power flow and any setting of the flags.
+</p>
+<p>
+<code>QVFlag</code> only selects which reference a plant controller acts on: <code>Qref</code> with <code>QVFlag = 0</code>, <code>Vref</code> with <code>QVFlag = 1</code> <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
+This model has no <code>Qref</code> input: <code>Qref</code> is the constant <code>Q0</code> (<code>QVFlag = 0</code>) or zero (<code>QVFlag = 1</code>), and <code>Vref0</code> absorbs the difference <code>mq*Q0</code>.
+With <code>Vref0</code> fed back, both settings therefore give identical trajectories for the same <code>VFlag</code>; only a change of <code>Vref</code> reaches the droop.
 </p>
 
 </html>"));

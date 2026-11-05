@@ -346,6 +346,11 @@ All parameters of the controls are in per unit on the converter base <code>M_b</
 The outputs <code>Pref0</code> and <code>Vref0</code> are the references of the initial operating point, computed from the power flow data at initialization.
 Feeding them back to the inputs <code>Pref</code> and <code>Vref</code> (plus any change a test applies) starts the model in steady state for any power flow and any setting of the flags.
 </p>
+<p>
+This variant fixes <code>QVFlag = 1</code> (<code>Qref = 0</code>) and <code>VFlag = 1</code>.
+In REGFM_A1 <code>QVFlag</code> only selects which reference a plant controller acts on (<code>Qref</code> with <code>QVFlag = 0</code>, <code>Vref</code> with <code>QVFlag = 1</code>);
+with no <code>Qref</code> input and <code>Vref0</code> fed back, <code>QVFlag = 0</code> would give the same trajectories, as the tests of <code>REGFMA1wPQLimiters</code> show.
+</p>
 
 </html>"));
 end REGFMA1Light;

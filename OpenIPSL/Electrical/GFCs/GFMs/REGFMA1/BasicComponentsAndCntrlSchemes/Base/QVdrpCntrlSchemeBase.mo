@@ -59,7 +59,7 @@ partial model QVdrpCntrlSchemeBase
     annotation (Placement(transformation(extent={{80,146},{100,166}})));
 
   parameter Boolean QVFlag_val_k=true
-    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Q0, the initial Qinv. QVFlag = 1 = true, Qref = 0.";
+    "QVFlag = false (0): Qref = Q0, the initial Qinv; true (1): Qref = 0. It only selects the reference a plant controller would change; with no Qref input both give the same response (see Documentation)";
   parameter Boolean VFlag_val_k=true
     "VFlag = true/false switches the voltage control mode. VFlag = 0 = false, E limited. VFlag = 1 = true, PI with E limited.";
   Modelica.Blocks.Interfaces.RealInput Vmeas
@@ -221,6 +221,11 @@ Initialization from the power flow: with <code>QVFlag = 0</code> the reactive po
 with <code>QVFlag = 1</code> it is zero. The output <code>Vref0</code> is the voltage reference that holds the initial operating point:
 <code>V0 + mq*Q0</code> (<code>VFlag = 1</code>) or <code>E0 + mq*Q0</code> (<code>VFlag = 0</code>) with <code>QVFlag = 1</code>,
 and <code>V0</code> or <code>E0</code> with <code>QVFlag = 0</code>. A test feeds it back to the input <code>Vref</code>, so that one power flow serves all four flag pairs.
+</p>
+<p>
+<code>QVFlag</code> only selects which reference a plant controller acts on: <code>Qref</code> with <code>QVFlag = 0</code>, <code>Vref</code> with <code>QVFlag = 1</code> <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
+This model has no <code>Qref</code> input: <code>Qref</code> is the constant <code>Q0</code> (<code>QVFlag = 0</code>) or zero (<code>QVFlag = 1</code>), and <code>Vref0</code> absorbs the difference <code>mq*Q0</code>.
+With <code>Vref0</code> fed back, both settings therefore give identical trajectories for the same <code>VFlag</code>; only a change of <code>Vref</code> reaches the droop.
 </p>
 <p>
 With <code>VFlag = 0</code> the voltage PI controller is not used: its integrator <code>kivInt</code> starts at zero and has gain zero, so it does not wind up while the internal voltage follows the limited droop command.
