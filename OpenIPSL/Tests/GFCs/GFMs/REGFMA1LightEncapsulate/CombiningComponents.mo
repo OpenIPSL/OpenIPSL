@@ -13,7 +13,7 @@ model CombiningComponents
     offset=0.4,
     startTime=20)
     annotation (Placement(transformation(extent={{-320,-50},{-300,-30}})));
-  Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60, M_b=100)
+  Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60)
     annotation (Placement(transformation(extent={{-102,-20},{-62,20}})));
   Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.PFdrpScheme basic_dROOP(
     f0=60,

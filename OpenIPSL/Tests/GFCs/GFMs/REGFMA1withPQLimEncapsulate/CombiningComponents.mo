@@ -7,7 +7,7 @@ model CombiningComponents
       X=1e-3,
       t1=62.0,
       t2=62.15));
-  Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60, M_b=100)
+  Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60)
     annotation (Placement(transformation(extent={{-102,-18},{-62,22}})));
   Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.PfdrpControlSchemePLim
     basic_dROOP(

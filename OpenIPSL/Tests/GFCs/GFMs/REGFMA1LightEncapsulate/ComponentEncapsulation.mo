@@ -27,7 +27,6 @@ model ComponentEncapsulation "Test the packaged REGF_A1_Light model"
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-180,20},{-160,40}})));
   Electrical.GFCs.GFMs.REGFMA1.REGFMA1Light GFC(
-    M_b=5,
     R_a=1e-12,
     X_d=0.001,
     mp=0.02,

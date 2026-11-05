@@ -18,7 +18,7 @@ model REGFMA1Light
     f0=f0,
     mp=mp,
     Tr=Tr) annotation (Placement(transformation(extent={{-40,-60},{0,-20}})));
-  Modelica.Blocks.Math.Gain gain2P0pu(k=1/SysData.S_b)
+  Modelica.Blocks.Math.Gain gain2P0pu(k=1/M_b) "Initial active power, pu on the machine base"
                                               annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
@@ -33,11 +33,11 @@ model REGFMA1Light
     kpv=kpv,
     kiv=kiv,
     mq=mq) annotation (Placement(transformation(extent={{-40,40},{0,76}})));
-  Modelica.Blocks.Sources.RealExpression sig_Pmeas(y=VS.P_meas)
+  Modelica.Blocks.Sources.RealExpression sig_Pmeas(y=VS.P_meas*S_b/M_b) "Active power, pu on the machine base"
     annotation (Placement(transformation(extent={{-82,-58},{-62,-38}})));
   Modelica.Blocks.Sources.RealExpression sig_q0(y=VS.q0)
     annotation (Placement(transformation(extent={{-84,-10},{-64,10}})));
-  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/SysData.S_b)
+  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/M_b) "Initial reactive power, pu on the machine base"
                                                annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
@@ -47,7 +47,7 @@ model REGFMA1Light
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-12,4})));
-  Modelica.Blocks.Sources.RealExpression sig_Qmeas(y=VS.Q_meas)
+  Modelica.Blocks.Sources.RealExpression sig_Qmeas(y=VS.Q_meas*S_b/M_b) "Reactive power, pu on the machine base"
     annotation (Placement(transformation(extent={{-84,20},{-64,40}})));
   Modelica.Blocks.Sources.RealExpression sig_Vmeas(y=VS.V) annotation (
       Placement(transformation(
@@ -68,11 +68,11 @@ model REGFMA1Light
                                             annotation (Placement(
         transformation(extent={{-131,45},{-101,75}})));
 
-  parameter Real M_b=100 "Voltage Source base power rating (MVA)"
+  parameter Types.ApparentPower M_b=SysData.S_b "Voltage source base power rating (VA); the control parameters are in pu on this base"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter Real R_a=1e-3 "Internal source resistance, pu, system base"
+  parameter Types.PerUnit R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, system base"
+  parameter Types.PerUnit X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
   parameter Real f0=SysData.fn "Synchronous frequency, f0 = 60 Hz" annotation (Dialog(
         tab="P-f Droop", group="P-f droop controller parameters"));
