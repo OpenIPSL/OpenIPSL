@@ -4,7 +4,7 @@ model SolarPVTest
   extends OpenIPSL.Tests.BaseClasses.SMIB;
   OpenIPSL.Electrical.Solar.PSAT.ConstantPQPV.PV1 SPV(
     Q_0=5.416582/100,
-    angle_0=0.070492225331847,
+    angle_0=0.0706207995986839,
     v_0=1.0,
     vref=1.0,
     P_0=0.4) annotation (Placement(transformation(
