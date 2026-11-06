@@ -61,8 +61,8 @@ protected
   parameter OpenIPSL.Types.PerUnit vi0=v_0*sin(angle_0) "Initial value of the imaginary part of the terminal voltage";
   parameter OpenIPSL.Types.PerUnit ir0=-CoB*(p0*vr0 + q0*vi0)/(vr0^2 + vi0^2) "Initial value of the real part of the current";
   parameter OpenIPSL.Types.PerUnit ii0=-CoB*(p0*vi0 - q0*vr0)/(vr0^2 + vi0^2) "Initial value of the imaginary part of the current";
-  parameter OpenIPSL.Types.PerUnit Er0 = vr0 + CoB*R_a*ir0 - CoB*X_d*ii0 "Initial value of the real part of the internal voltage source phasor";
-  parameter OpenIPSL.Types.PerUnit Ei0 = vi0 + CoB*R_a*ii0 + CoB*X_d*ir0 "Initial value of the imaginary part of the internal voltage source phasor";
+  parameter OpenIPSL.Types.PerUnit Er0 = vr0 + CoB*R_a*(-ir0) - CoB*X_d*(-ii0) "Initial value of the real part of the internal voltage source phasor (the equation for Er at the initial current, which flows into the pin)";
+  parameter OpenIPSL.Types.PerUnit Ei0 = vi0 + CoB*R_a*(-ii0) + CoB*X_d*(-ir0) "Initial value of the imaginary part of the internal voltage source phasor (the equation for Ei at the initial current, which flows into the pin)";
   parameter OpenIPSL.Types.PerUnit E0 = sqrt(Er0^2+Ei0^2) "Initial value of the internal voltage source phasor magnitude";
   parameter OpenIPSL.Types.Angle delta0 = atan2(Ei0, Er0) "Initial value of the internal voltage source phasor angle";
   Real Er(start=Er0) "Internal voltage source, real part";
