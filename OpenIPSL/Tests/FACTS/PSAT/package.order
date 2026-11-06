@@ -2,3 +2,4 @@ STATCOM_SimpleLagLim
 STATCOM_LagLimWindupGuard
 TCSC_SimpleLagLim
 TCSC_LagLimWindupGuard
+tcsc_alpha_4bus
