@@ -97,13 +97,13 @@ model VSIOforGFM
     annotation (Dialog(group="Power flow data"));
   parameter Types.PerUnit v_0=1.0 "Initial voltage magnitude"
     annotation (Dialog(group="Power flow data"));
-  parameter Types.Angle angle_0=4.038907 "Initial voltage angle"
+  parameter Types.Angle angle_0=0.070620799598684 "Initial voltage angle (rad)"
     annotation (Dialog(group="Power flow data"));
-  parameter Real M_b=100 "Voltage Source base power rating (MVA)"
+  parameter Types.ApparentPower M_b=SysData.S_b "Voltage source base power rating (VA)"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter Real R_a=1e-3 "Internal source resistance, pu, system base"
+  parameter Types.PerUnit R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, system base"
+  parameter Types.PerUnit X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
 equation
   connect(Pmeas.y, P_meas) annotation (Line(

@@ -41,11 +41,11 @@ partial model baseVoltageSource
         iconTransformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-110})));
-  parameter OpenIPSL.Types.ApparentPower M_b=SysData.S_b "Voltage Source base power rating (MVA)"
+  parameter OpenIPSL.Types.ApparentPower M_b=SysData.S_b "Voltage source base power rating (VA)"
     annotation (Dialog(group="Voltage Source parameters"));
-  parameter OpenIPSL.Types.PerUnit R_a=1e-3 "Internal source resistance, pu, system base"
+  parameter OpenIPSL.Types.PerUnit R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
-  parameter OpenIPSL.Types.PerUnit X_d=0.2 "Internal source d-axis reactance, pu, system base"
+  parameter OpenIPSL.Types.PerUnit X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
   OpenIPSL.Types.PerUnit V(start=v_0) "Bus voltage magnitude";
   OpenIPSL.Types.Angle anglev(start=angle_0) "Bus voltage angle";
@@ -61,20 +61,19 @@ protected
   parameter OpenIPSL.Types.PerUnit vi0=v_0*sin(angle_0) "Initial value of the imaginary part of the terminal voltage";
   parameter OpenIPSL.Types.PerUnit ir0=-CoB*(p0*vr0 + q0*vi0)/(vr0^2 + vi0^2) "Initial value of the real part of the current";
   parameter OpenIPSL.Types.PerUnit ii0=-CoB*(p0*vi0 - q0*vr0)/(vr0^2 + vi0^2) "Initial value of the imaginary part of the current";
-  parameter OpenIPSL.Types.PerUnit Er0 = vr0 + CoB*R_a*(-ir0) - CoB*X_d*(-ii0) "Initial value of the real part of the internal voltage source phasor (the equation for Er at the initial current, which flows into the pin)";
-  parameter OpenIPSL.Types.PerUnit Ei0 = vi0 + CoB*R_a*(-ii0) + CoB*X_d*(-ir0) "Initial value of the imaginary part of the internal voltage source phasor (the equation for Ei at the initial current, which flows into the pin)";
+  parameter OpenIPSL.Types.PerUnit Er0 = vr0 + R_a/CoB*(-ir0) - X_d/CoB*(-ii0) "Initial value of the real part of the internal voltage source phasor (the equation for Er at the initial current, which flows into the pin)";
+  parameter OpenIPSL.Types.PerUnit Ei0 = vi0 + R_a/CoB*(-ii0) + X_d/CoB*(-ir0) "Initial value of the imaginary part of the internal voltage source phasor (the equation for Ei at the initial current, which flows into the pin)";
   parameter OpenIPSL.Types.PerUnit E0 = sqrt(Er0^2+Ei0^2) "Initial value of the internal voltage source phasor magnitude";
   parameter OpenIPSL.Types.Angle delta0 = atan2(Ei0, Er0) "Initial value of the internal voltage source phasor angle";
   Real Er(start=Er0) "Internal voltage source, real part";
   Real Ei(start=Ei0) "Internal voltage source, imaginary part";
 equation
-  Er = p.vr + CoB*R_a*(-p.ir) - CoB*X_d*(-p.ii) "Equation linking the internal voltage source to the terminal bus and the pin";
-  Ei = p.vi + CoB*R_a*(-p.ii) + CoB*X_d*(-p.ir) "Equation linking the internal voltage source to the terminal bus and the pin";
+  Er = p.vr + R_a/CoB*(-p.ir) - X_d/CoB*(-p.ii) "Equation linking the internal voltage source to the terminal bus and the pin; R_a/CoB and X_d/CoB are the machine-base impedance on the system base";
+  Ei = p.vi + R_a/CoB*(-p.ii) + X_d/CoB*(-p.ir) "Equation linking the internal voltage source to the terminal bus and the pin; R_a/CoB and X_d/CoB are the machine-base impedance on the system base";
   -P = p.vr*p.ir + p.vi*p.ii "Active power injection";
   -Q = p.vi*p.ir - p.vr*p.ii "Reactive power injection";
   V = sqrt(p.vr^2 + p.vi^2) "Terminal voltage magnitude";
   anglev = atan2(p.vi, p.vr) "Terminal voltage angle";
-  // Assining variables to outputs
   Emag = sqrt(Er^2+Ei^2) "Attaching a variable to the RealOutput Emag of the model";
   Edelta = atan2(Ei,Er) "Attaching a variable to the RealOutput Edelta of the model";
   Emag0 = E0 "Attaching the initial value to the RealOutput Emag0";
@@ -89,6 +88,10 @@ equation
 This partial model is used to develop variants of a voltage source with an internal voltage source and internal impedance whose magnitude and angle.
 
 The initial values of the internal voltage source magnitude and angle are calculated based on the impedance and power flow data.
+</p>
+<p>
+The internal impedance <code>R_a + jX_d</code> is given in per unit on the machine base <code>M_b</code> (in VA, as for the machines of the library).
+The pin quantities are on the system base <code>S_b</code>, so the equations use the impedance divided by <code>CoB = M_b/S_b</code>.
 
 It is based on <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>, with the difference that the internal impedance includes a resistance and not only a reactance. </p>
 

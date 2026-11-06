@@ -34,7 +34,7 @@ model Plimiter "Activer power limiter"
     outMin=-Modelica.Constants.inf,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
-    y_start=Pmax - P0)
+    y_start=0)
     annotation (Placement(transformation(extent={{-40,40},{0,80}})));
   Modelica.Blocks.Interfaces.RealInput P0_ini
     "Initial value of the of the active power" annotation (Placement(
@@ -57,11 +57,12 @@ model Plimiter "Activer power limiter"
     "Proportional gain of the overload mitigation controller"
     annotation (Placement(transformation(extent={{-40,-160},{0,-120}})));
   Modelica.Blocks.Continuous.LimIntegrator lim_kipmax_Pmin(
+    k=kipmax,
     outMax=Modelica.Constants.inf,
     outMin=0.0,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
-    y_start=Pmin - P0)
+    y_start=0)
     annotation (Placement(transformation(extent={{-40,-100},{0,-60}})));
   parameter Real kipmax=0.1
     "Integral gain of theoverload mitigation controller. Nomral Range: [0.05-0.2] pu/s";
@@ -124,6 +125,13 @@ Limiters"),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-200},{200,200}})),
     Documentation(info="<html>
+<p>
 This model implements the active power limiter. The upper branch limits the the maximum power, while the lower branch limits the minimum power.
+</p>
+<p>
+Both branches are PI controllers with the gains <code>kppmax</code> and <code>kipmax</code>, as in the REGFM_A1 specification <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
+Their integrators start at zero, inside their limits: with the active power between <code>Pmin</code> and <code>Pmax</code> the limiter output is zero and stays zero until a limit is crossed.
+The input <code>P0_ini</code> is kept for compatibility and no longer sets a start value.
+</p>
 </html>"));
 end Plimiter;

@@ -23,7 +23,7 @@ model REGFMA1wPQLimiters
     kppmax=kppmax,
     kipmax=kipmax)
     annotation (Placement(transformation(extent={{-40,-60},{0,-20}})));
-  Modelica.Blocks.Math.Gain gain2P0pu(k=1/SysData.S_b)
+  Modelica.Blocks.Math.Gain gain2P0pu(k=1/M_b) "Initial active power, pu on the machine base"
                                               annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
@@ -31,6 +31,7 @@ model REGFMA1wPQLimiters
         origin={12,-86})));
   PQLimitersAndCntrlSchemes.QVdrpCntrlSchemeQLim q_v_droop_scheme(
     Tr=qTr,
+    Tvf=Tvf,
     EMax=EMax,
     EMin=EMin,
     QVFlag_val_k=QVFlag_val_k,
@@ -43,11 +44,11 @@ model REGFMA1wPQLimiters
     kpqmax=kpqmax,
     kiqmax=kiqmax)
     annotation (Placement(transformation(extent={{-40,40},{0,76}})));
-  Modelica.Blocks.Sources.RealExpression sig_Pmeas(y=VS.P_meas)
+  Modelica.Blocks.Sources.RealExpression sig_Pmeas(y=VS.P_meas*S_b/M_b) "Active power, pu on the machine base"
     annotation (Placement(transformation(extent={{-82,-58},{-62,-38}})));
   Modelica.Blocks.Sources.RealExpression sig_q0(y=VS.q0)
     annotation (Placement(transformation(extent={{-84,-10},{-64,10}})));
-  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/SysData.S_b)
+  Modelica.Blocks.Math.Gain gain2Q0pu(k=1/M_b) "Initial reactive power, pu on the machine base"
                                                annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
@@ -57,7 +58,7 @@ model REGFMA1wPQLimiters
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-12,6})));
-  Modelica.Blocks.Sources.RealExpression sig_Qmeas(y=VS.Q_meas)
+  Modelica.Blocks.Sources.RealExpression sig_Qmeas(y=VS.Q_meas*S_b/M_b) "Reactive power, pu on the machine base"
     annotation (Placement(transformation(extent={{-84,20},{-64,40}})));
   Modelica.Blocks.Sources.RealExpression sig_Vmeas(y=VS.V) annotation (
       Placement(transformation(
@@ -77,11 +78,11 @@ model REGFMA1wPQLimiters
                                             annotation (Placement(
         transformation(extent={{-131,45},{-101,75}})));
 
-  parameter Real M_b=100 "Voltage Source base power rating (MVA)"
+  parameter Types.ApparentPower M_b=SysData.S_b "Voltage source base power rating (VA); the control parameters are in pu on this base"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter Real R_a=1e-3 "Internal source resistance, pu, system base"
+  parameter Types.PerUnit R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, system base"
+  parameter Types.PerUnit X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
   parameter Real f0=SysData.fn "System frequency, f0 = 60 (Hz)" annotation (Dialog(
         tab="P-f Droop", group="P-f droop controller parameters"));
@@ -90,7 +91,9 @@ model REGFMA1wPQLimiters
   parameter Real Tr=0.1
     "Filter time constant, sec. Normal Range: [0.01 - 0.1 sec.]" annotation (
       Dialog(tab="P-f Droop", group="P-f droop controller parameters"));
-  parameter Real qTr=0.01 "Filter time constant. Range: [0.01 - 0.1 sec.]"
+  parameter Real qTr=0.01 "Reactive power measurement filter time constant (Tqf). Range: [0.01 - 0.1 sec.]"
+    annotation (Dialog(tab="Q-v Droop", group="Filter Parameters"));
+  parameter Real Tvf=qTr "Voltage measurement filter time constant (Tvf). Range: [0.01 - 0.1 sec.]"
     annotation (Dialog(tab="Q-v Droop", group="Filter Parameters"));
   parameter Real EMax=1.15 "Max. Edroop"
     annotation (Dialog(tab="Q-v Droop", group="E Limiters"));
@@ -152,6 +155,21 @@ model REGFMA1wPQLimiters
                                       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={110,-80})));
+  Modelica.Blocks.Interfaces.RealOutput Vref0
+    "Voltage reference of the initial operating point, to be fed back to Vref"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-60,-110})));
+  Modelica.Blocks.Interfaces.RealOutput Pref0
+    "Active power reference of the initial operating point (pu, machine base), to be fed back to Pref"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-20,-110})));
+  Modelica.Blocks.Interfaces.RealOutput omega_dev
+    "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
+    annotation (Placement(transformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.RealOutput omega_droop
     "Speed output from the P-f droop controller"
     annotation (Placement(transformation(extent={{100,-110},{120,-90}})));
@@ -187,12 +205,12 @@ model REGFMA1wPQLimiters
     annotation (Dialog(group="Power flow data"));
   parameter Types.PerUnit v_0=1.0 "Initial voltage magnitude"
     annotation (Dialog(group="Power flow data"));
-  parameter Types.Angle angle_0=4.038907 "Initial voltage angle"
+  parameter Types.Angle angle_0=0.070620799598684 "Initial voltage angle (rad)"
     annotation (Dialog(group="Power flow data"));
   parameter Types.Frequency fn=SysData.fn "System frequency (Hz)"
     annotation (Dialog(group="Power flow data"));
   parameter Boolean QVFlag_val_k=true
-    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Qfilt = Qinv. QVFlag = 1 = true, Qref = 0."
+    "QVFlag = false (0): Qref = Q0, the initial Qinv; true (1): Qref = 0. It only selects the reference a plant controller would change; with no Qref input both give the same response (see Documentation)"
     annotation (Dialog(group="Control Mode Setting (VFLAG and QVFLAG)"));
   parameter Boolean VFlag_val_k=true
     "VFlag = true/false switches the voltage control mode. VFlag = 0 = false, E limited. VFlag = 1 = true, PI with E limited."
@@ -238,6 +256,9 @@ equation
     annotation (Line(points={{91,-60},{110,-60}}, color={0,0,127}));
   connect(sigaEdelta.y,Edelta)
     annotation (Line(points={{91,-80},{110,-80}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{4,38},{4,30},{-60,30},{-60,-110}}, color={0,0,127}));
+  connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
+  connect(pfdroopcntrl.omega_dev, omega_dev) annotation (Line(points={{1,-54},{64,-54},{64,20},{110,20}}, color={0,0,127}));
   connect(pfdroopcntrl.omega_droop, omega_droop) annotation (Line(points={{1,
           -48},{60,-48},{60,-100},{110,-100}}, color={0,0,127}));
   connect(VS.p, p)
@@ -359,6 +380,16 @@ equation
 This is the second variant representation of the REGFM_A1 model.
 It includes both P-f and Q-v droop control schemes, and limiters for the active and reactive power.
 Differently from <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>, it does not include fault current limiter functionalities. </p>
+<p>
+All parameters of the controls are in per unit on the converter base <code>M_b</code> (in VA), as in PSS/E; the measured active and reactive power are converted from the system base.
+The outputs <code>Pref0</code> and <code>Vref0</code> are the references of the initial operating point, computed from the power flow data at initialization.
+Feeding them back to the inputs <code>Pref</code> and <code>Vref</code> (plus any change a test applies) starts the model in steady state for any power flow and any setting of the flags.
+</p>
+<p>
+<code>QVFlag</code> only selects which reference a plant controller acts on: <code>Qref</code> with <code>QVFlag = 0</code>, <code>Vref</code> with <code>QVFlag = 1</code> <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
+This model has no <code>Qref</code> input: <code>Qref</code> is the constant <code>Q0</code> (<code>QVFlag = 0</code>) or zero (<code>QVFlag = 1</code>), and <code>Vref0</code> absorbs the difference <code>mq*Q0</code>.
+With <code>Vref0</code> fed back, both settings therefore give identical trajectories for the same <code>VFlag</code>; only a change of <code>Vref</code> reaches the droop.
+</p>
 
 </html>"));
 end REGFMA1wPQLimiters;

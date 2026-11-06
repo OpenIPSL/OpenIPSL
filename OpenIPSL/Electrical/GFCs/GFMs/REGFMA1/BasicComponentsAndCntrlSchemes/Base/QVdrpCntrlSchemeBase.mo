@@ -9,7 +9,8 @@ partial model QVdrpCntrlSchemeBase
   Modelica.Blocks.Interfaces.RealInput Qmeas
     "Value of the reactive power measurement"
     annotation (Placement(transformation(extent={{-240,-180},{-200,-140}})));
-  parameter Real Tr=0.01 "Filter time constant. Range: [0.01 - 0.1 sec.]";
+  parameter Real Tr=0.01 "Reactive power measurement filter time constant (Tqf). Range: [0.01 - 0.1 sec.]";
+  parameter Real Tvf=Tr "Voltage measurement filter time constant (Tvf). Range: [0.01 - 0.1 sec.]";
 
   Modelica.Blocks.Interfaces.RealInput Vref "Voltage mangitude reference"
     annotation (Placement(transformation(extent={{-240,80},{-200,120}})));
@@ -19,16 +20,25 @@ partial model QVdrpCntrlSchemeBase
   parameter Real EMax=1.15 "Max. Edroop";
   parameter Real EMin=0 "Min. Edroop";
   Modelica.Blocks.Sources.BooleanConstant QVFlag_val(k=QVFlag_val_k)
-    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Qfilt = Qinv. QVFlag = 1 = true, Qref = 0."
+    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Q0, the initial Qinv. QVFlag = 1 = true, Qref = 0."
     annotation (Placement(transformation(extent={{-200,-10},{-180,10}})));
   Modelica.Blocks.Logical.Switch QVFlag_switch
-    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Qfilt = Qinv. QVFlag = 1 = true, Qref = 0."
+    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Q0, the initial Qinv. QVFlag = 1 = true, Qref = 0."
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.Constant Qref0(k=0)
     "Reactive power Qref set to zero when QVFlag = 1" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         origin={-190,50})));
+  Modelica.Blocks.Sources.Constant QrefInit(k=Q0)
+    "Reactive power reference held at the initial reactive power Q0 when QVFlag = 0"
+    annotation (Placement(transformation(extent={{-200,-60},{-180,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput Vref0
+    "Voltage reference of the initial operating point, to be fed back to Vref"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={160,-210})));
   Modelica.Blocks.Logical.Switch VFlag_switch
     "VFlag is used to change the voltage control mode" annotation (Placement(
         transformation(
@@ -49,13 +59,13 @@ partial model QVdrpCntrlSchemeBase
     annotation (Placement(transformation(extent={{80,146},{100,166}})));
 
   parameter Boolean QVFlag_val_k=true
-    "QVFlag = true/false switches the Qref input. QVFlag = 0 = false, Qref = Qfilt = Qinv. QVFlag = 1 = true, Qref = 0.";
+    "QVFlag = false (0): Qref = Q0, the initial Qinv; true (1): Qref = 0. It only selects the reference a plant controller would change; with no Qref input both give the same response (see Documentation)";
   parameter Boolean VFlag_val_k=true
     "VFlag = true/false switches the voltage control mode. VFlag = 0 = false, E limited. VFlag = 1 = true, PI with E limited.";
   Modelica.Blocks.Interfaces.RealInput Vmeas
     "Value of the terminal voltage measurement"
     annotation (Placement(transformation(extent={{-240,140},{-200,180}})));
-  LPFilter Vfilt(Tr=Tr, y0val=V0) "Filtered voltage measurement"
+  LPFilter Vfilt(Tr=Tvf, y0val=V0) "Filtered voltage measurement"
     annotation (Placement(transformation(extent={{-160,150},{-140,170}})));
 
   Modelica.Blocks.Math.Feedback sum_Vcmd_Vinv "Vcmd-Vinv" annotation (Placement(
@@ -65,12 +75,13 @@ partial model QVdrpCntrlSchemeBase
         origin={40,140})));
   parameter Real kpv=0.01 "Proportional gain of the voltage controller";
   Modelica.Blocks.Continuous.LimIntegrator kivInt(
-    k=kiv,
-    outMax=EMax,
-    outMin=EMin,
+    k=if VFlag_val_k then kiv else 0,
+    outMax=if VFlag_val_k then EMax else max(EMax, 0),
+    outMin=if VFlag_val_k then EMin else min(EMin, 0),
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
-    y_start=E0)
+    y_start=if VFlag_val_k then E0 else 0)
+    "Integral part of the voltage PI controller; with VFlag = 0 it is not used and is held at zero, as PSS/E holds it, its limits widened to include zero"
     annotation (Placement(transformation(extent={{80,100},{100,120}})));
   parameter Real kiv=5.86 "Integral grain of the voltage controller";
   Modelica.Blocks.Math.Add sum_PI "PI controller summing junction" annotation (
@@ -104,12 +115,16 @@ protected
   parameter Real Q0(fixed=false);
   parameter Real E0(fixed=false);
   parameter Real V0(fixed=false);
+  parameter Real Vref_0(fixed=false) "Voltage reference of the initial operating point";
 
 initial equation
     Q0 = Qout0 "Assign the value coming from the voltage source to the inital value of PQ0 used by the filter block";
     E0 = Emag0 "Assign the value of the internal voltage magnitude of the voltage source";
     V0 = Vt0 "Assign the value coming from the voltage source to the initial value of V0 used by the filter block";
+    Vref_0 = (if VFlag_val_k then V0 else E0) - mq*((if QVFlag_val_k then 0 else Q0) - Q0)
+      "Vcmd = Vref + mq*(Qref - Qfilt) must equal the filtered voltage V0 (VFlag = 1, PI integrator at rest) or the internal voltage E0 (VFlag = 0); the Q limiter output is zero with Q0 inside its limits";
 equation
+  Vref0 = Vref_0 "Voltage reference of the initial operating point";
   connect(Qfilt.y, qv_drp1.Qfilt) annotation (Line(points={{-159,-160},{-152,-160},
           {-152,-100},{-80,-100},{-80,-24},{-66,-24}},
                                color={0,0,127}));
@@ -123,8 +138,8 @@ equation
           {-174,50},{-179,50}}, color={0,0,127}));
   connect(QVFlag_switch.y, qv_drp1.Qref)
     annotation (Line(points={{-98,0},{-66,0}}, color={0,0,127}));
-  connect(QVFlag_switch.u3, Qfilt.y) annotation (Line(points={{-144,-16},{-152,-16},
-          {-152,-160},{-159,-160}}, color={0,0,127}));
+  connect(QVFlag_switch.u3, QrefInit.y) annotation (Line(points={{-144,-16},{-174,-16},
+          {-174,-50},{-179,-50}}, color={0,0,127}));
   connect(VFlag_switch.y, Edroop) annotation (Line(points={{182,0},{186,0},{186,
           0},{210,0}}, color={0,0,127}));
   connect(qv_drp1.Vout_qv_droop, Elims.u) annotation (Line(points={{3,0},{20,0},
@@ -177,7 +192,7 @@ Set --> Qref = 0"),
           textColor={28,108,200},
           textString="u2 = false
 QVFlag = 0
-Set --> Qref = Qinv"),
+Set --> Qref = Q0"),
         Text(
           extent={{116,66},{196,40}},
           textColor={28,108,200},
@@ -200,6 +215,21 @@ Set --> E Limited"),
 This is a partial model (or base model) that is extended to implement the Q-f droop scheme variants.
 It contains the basic droop function and the reactive power measurement filter.
 A red triangle indicates the input for the signal of the reactive power limiter.
+<p>
+Initialization from the power flow: with <code>QVFlag = 0</code> the reactive power reference <code>Qref</code> is held at the initial reactive power <code>Q0</code>
+(the initial <code>Qinv</code>, as the REGFM_A1 specification <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a> and PSS/E initialize it);
+with <code>QVFlag = 1</code> it is zero. The output <code>Vref0</code> is the voltage reference that holds the initial operating point:
+<code>V0 + mq*Q0</code> (<code>VFlag = 1</code>) or <code>E0 + mq*Q0</code> (<code>VFlag = 0</code>) with <code>QVFlag = 1</code>,
+and <code>V0</code> or <code>E0</code> with <code>QVFlag = 0</code>. A test feeds it back to the input <code>Vref</code>, so that one power flow serves all four flag pairs.
+</p>
+<p>
+<code>QVFlag</code> only selects which reference a plant controller acts on: <code>Qref</code> with <code>QVFlag = 0</code>, <code>Vref</code> with <code>QVFlag = 1</code> <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
+This model has no <code>Qref</code> input: <code>Qref</code> is the constant <code>Q0</code> (<code>QVFlag = 0</code>) or zero (<code>QVFlag = 1</code>), and <code>Vref0</code> absorbs the difference <code>mq*Q0</code>.
+With <code>Vref0</code> fed back, both settings therefore give identical trajectories for the same <code>VFlag</code>; only a change of <code>Vref</code> reaches the droop.
+</p>
+<p>
+With <code>VFlag = 0</code> the voltage PI controller is not used: its integrator <code>kivInt</code> starts at zero and has gain zero, so it does not wind up while the internal voltage follows the limited droop command.
+</p>
 
 </html>"));
 end QVdrpCntrlSchemeBase;
