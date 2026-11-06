@@ -37,11 +37,15 @@ equation
   end if;
 
   if Open then
-    is = Complex(0);
-    ir = Complex(0);
+  s.ir = 0; 
+  s.ii = 0; 
+  r.ir = 0; 
+  r.ii = 0;
   else
-    vs = vr;
-    is = -ir;
+  s.vr = r.vr; 
+  s.vi = r.vi; 
+  s.ir = -r.ir; 
+  s.ii = -r.ii;
   end if;
 
   connect(Trigger, Open) annotation (Line(points={{0,120},{0,60},{0,0},{6,0}}, color={255,0,255}));

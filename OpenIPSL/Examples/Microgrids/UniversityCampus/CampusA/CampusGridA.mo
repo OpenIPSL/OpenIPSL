@@ -470,6 +470,7 @@ model CampusGridA "Microgrid model for university campus A"
         rotation=90,
         origin={0,180})));
 equation
+  connect(BreakerMicrogrid.s, AENA.p);
   connect(AENA.p, L1.n)
     annotation (Line(points={{0,168},{5.55112e-16,161}}, color={0,0,255}));
   connect(L1.p, AENB.p) annotation (Line(points={{-5.55112e-16,143},{0,138}},
