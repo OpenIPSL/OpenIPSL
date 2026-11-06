@@ -86,7 +86,7 @@ Simulate and plot the <code>pwLine.P12</code> and <code>pwLine.Q12</code>, which
 </p>
 
 <p>
-The active power reference is ramped-down at 20 sec., while the voltage magnitude reference is ramped-up at 40 and 46 sec.
+The active power reference is ramped up by 0.2 pu from 5 to 7.5 sec. and gets two pulses of 1 sec., of 8 pu at 10 sec. and of 20 pu at 20 sec., which drive it against the P limits; the voltage magnitude reference is ramped up by 0.1 pu at 30 sec. and again at 36 sec.
 </p>
 <p>
 The references start from the outputs <code>GFC.Pref0</code> and <code>GFC.Vref0</code>, the references of the initial operating point, so the model starts in steady state.
