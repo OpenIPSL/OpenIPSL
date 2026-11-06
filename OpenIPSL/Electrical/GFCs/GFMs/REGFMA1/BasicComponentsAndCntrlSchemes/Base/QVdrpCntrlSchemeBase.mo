@@ -76,12 +76,12 @@ partial model QVdrpCntrlSchemeBase
   parameter Real kpv=0.01 "Proportional gain of the voltage controller";
   Modelica.Blocks.Continuous.LimIntegrator kivInt(
     k=if VFlag_val_k then kiv else 0,
-    outMax=EMax,
-    outMin=EMin,
+    outMax=if VFlag_val_k then EMax else max(EMax, 0),
+    outMin=if VFlag_val_k then EMin else min(EMin, 0),
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     limitsAtInit=false,
     y_start=if VFlag_val_k then E0 else 0)
-    "Integral part of the voltage PI controller; with VFlag = 0 it is not used and is held at zero, as PSS/E holds it"
+    "Integral part of the voltage PI controller; with VFlag = 0 it is not used and is held at zero, as PSS/E holds it, its limits widened to include zero"
     annotation (Placement(transformation(extent={{80,100},{100,120}})));
   parameter Real kiv=5.86 "Integral grain of the voltage controller";
   Modelica.Blocks.Math.Add sum_PI "PI controller summing junction" annotation (
