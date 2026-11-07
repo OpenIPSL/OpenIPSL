@@ -30,28 +30,23 @@ model VRe "Virtual Resistor Computation"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,110})));
-  parameter Real R_a=1e-3 "Internal source resistance, pu, system base"
+  parameter Real R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
-  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, system base"
+  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
-  parameter Real Imax = 2.0 "Inverter allowable maximum output current"
+  parameter Real Imax = 2.0 "Inverter allowable maximum output current, pu, machine base"
     annotation (Dialog(group="Current Limiter Setting"));
-  Real numval(start=0) "Numerator of the expression within the division of R_e computation";
-  Real Ra2pXd2(start=0) "Square sume of the voltage source resistance and reactance";
-  Real divres(start=0) "Result of the division in the R_e computation";
-  Real subsval(start=0) "Result of substraction in the R_e computation";
+  Real numval(start=0) "Numerator of the expression within the division of R_e computation: |E - V|^2";
+  Real Ra2pXd2(start=0) "Square sum of the voltage source resistance and reactance, |R_a + jX_d|^2";
+  Real divres(start=0) "Result of the division in the R_e computation: |E - V|^2/Imax^2";
+  Real subsval(start=0) "Result of subtraction in the R_e computation; positive when the current through R_a + jX_d would exceed Imax";
 equation
-  numval = Emag^2 + V^2 - 2*Emag*V*cos(Eang-anglev);
-  divres = numval/Imax^2;
-  Ra2pXd2 = R_a^2+X_d^2;
-  subsval = divres - Ra2pXd2;
-  if subsval > 0.0 then
-    R_e = sqrt(max(subsval,Modelica.Constants.eps));
-  elseif subsval < 0.0 then
-    R_e = 0.0;
-  else
-    R_e = 0.0;
-  end if;
+  numval = Emag^2 + V^2 - 2*Emag*V*cos(Eang-anglev) "|E - V|^2 by the law of cosines";
+  divres = numval/Imax^2 "|E - V|^2/Imax^2, the squared impedance that limits the current to Imax";
+  Ra2pXd2 = R_a^2+X_d^2 "|R_a + jX_d|^2";
+  subsval = divres - Ra2pXd2 "Positive when |E - V|/|R_a + jX_d| > Imax";
+  R_e = noEvent(if subsval > 0 then sqrt(max(divres - X_d^2, R_a^2)) - R_a else 0)
+    "The exact root of |E - V| = Imax*|R_a + R_e + jX_d|, zero when the current is below Imax; continuous at the switch, which is evaluated without an event (see Documentation)";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -92,5 +87,23 @@ equation
           extent={{-80,88},{80,-72}},
           textColor={28,108,200},
           textString="V",
-          textStyle={TextStyle.Bold})}));
+          textStyle={TextStyle.Bold})}),
+    Documentation(info="<html>
+<p>
+The virtual resistance of the current limiter of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>, section IV-C:
+the resistance <code>R_e</code> in series with the source impedance <code>R_a + jX_d</code> (pu, machine base) for which the current that the
+internal voltage <code>E</code> (inputs <code>Emag</code>, <code>Eang</code>) drives into the terminal voltage <code>V</code>
+(inputs <code>V</code>, <code>anglev</code>) has the magnitude <code>Imax</code>:
+</p>
+<p>
+<code>|E - V| = Imax |R_a + R_e + jX_d|</code>, so <code>R_e = sqrt(|E - V|^2/Imax^2 - X_d^2) - R_a</code>
+when <code>|E - V|/|R_a + jX_d| &gt; Imax</code>, and <code>R_e = 0</code> otherwise.
+</p>
+<p>
+<code>E</code> must be the commanded internal voltage (the droop command), not the voltage of a source that the limiter has already changed:
+fed back the limited voltage, <code>R_e</code> collapses to zero. The two branches meet at the switch (<code>R_e = 0</code> there),
+which is evaluated without an event: within an algebraic loop through the network an event keeps the previous branch while the network
+is solved at a switching, and a network can then converge to another of its solutions (a load bus at zero voltage, seen at a fault's clearing).
+</p>
+</html>"));
 end VRe;

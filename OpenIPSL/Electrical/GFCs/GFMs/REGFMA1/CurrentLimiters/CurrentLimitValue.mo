@@ -54,29 +54,25 @@ model CurrentLimitValue
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-120})));
-  parameter Real R_a=1e-3 "Internal source resistance, pu, system base"
+  parameter Real R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
-  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, system base"
+  parameter Real X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
-  parameter Real Imax = 2.0 "Inverter allowable maximum output current"
+  parameter Real Imax = 2.0 "Inverter allowable maximum output current, pu, machine base"
     annotation (Dialog(group="Current Limiter Setting"));
 
-  // Auxiliary variables for internal computations
-
   protected
-  Real ire(start=Imax);
-  Real iim(start=0);
-  Real R = R_a + R_e;
+  Real ire(start=Imax) "Real part of the current (E - V)/(R_a + R_e + jX_d)";
+  Real iim(start=0) "Imaginary part of the current (E - V)/(R_a + R_e + jX_d)";
+  Real R = R_a + R_e "Total resistance in series with the source";
 
 equation
-  // Solve for the real and imaginary parts of the currents
-  ire*R - iim*X_d = Emag*cos(Eang) - V*cos(anglev);
-  ire*X_d + iim*R = Emag*sin(Eang) - V*sin(anglev);
-  // Compute the limited current variables
-  ImaxMag = Imax;
-  ImaxAng = atan2(iim, ire);
-  ImaxRe = Imax*cos(ImaxAng);
-  ImaxIm = Imax*sin(ImaxAng);
+  ire*R - iim*X_d = Emag*cos(Eang) - V*cos(anglev) "Real part of (R + jX_d)*i = E - V";
+  ire*X_d + iim*R = Emag*sin(Eang) - V*sin(anglev) "Imaginary part of (R + jX_d)*i = E - V";
+  ImaxMag = Imax "The magnitude of the limited current";
+  ImaxAng = atan2(iim, ire) "The angle of the current through R_a + R_e + jX_d";
+  ImaxRe = Imax*cos(ImaxAng) "Real part of the current of magnitude Imax at that angle";
+  ImaxIm = Imax*sin(ImaxAng) "Imaginary part of the current of magnitude Imax at that angle";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Line(points={{-80,0},{-60,0}}, color={28,108,200},
@@ -114,5 +110,18 @@ equation
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
-          lineThickness=1)}));
+          lineThickness=1)}),
+    Documentation(info="<html>
+<p>
+The current phasor of magnitude <code>Imax</code> (pu, machine base) at the angle of the current that the internal voltage
+<code>E</code> (inputs <code>Emag</code>, <code>Eang</code>) drives through <code>R_a + R_e + jX_d</code> into the terminal voltage
+<code>V</code> (inputs <code>V</code>, <code>anglev</code>): <code>ImaxRe + j ImaxIm = Imax (E - V)/|E - V| e^(-j atan(X_d/(R_a + R_e)))</code>.
+</p>
+<p>
+With <code>R_e = 0</code> the angle is that of the unlimited current, which is the current the clamp of PSS/E's REGFMA1 keeps while it
+limits the magnitude (<code>CurrentLimiters.Clamp</code> uses this block so); with the virtual resistance of <code>CurrentLimiters.VRe</code>
+it is the angle of the current of the virtual-resistor limiter. The outputs are the limited current whether or not the limit is reached:
+the block does not decide when to limit.
+</p>
+</html>"));
 end CurrentLimitValue;
