@@ -40,7 +40,7 @@ equation
     cr = 1 "Not limited: the internal voltage is the droop command";
     ci = 0 "Not limited: the internal voltage is the droop command";
   elseif useVirtualResistor then
-    R_e = sqrt(dE2/Imax^2 - X_d^2) - R_a "Virtual resistance for which |Edroop - V|/|R_a + R_e + jX_d| = Imax";
+    R_e = sqrt(max(dE2/Imax^2 - X_d^2, R_a^2)) - R_a "Virtual resistance for which |Edroop - V|/|R_a + R_e + jX_d| = Imax (the argument is at least R_a^2 in this branch; the bound keeps it real if a tool evaluates the branch elsewhere)";
     cr = (R_a*(R_a + R_e) + X_d^2)/((R_a + R_e)^2 + X_d^2) "Real part of (R_a + jX_d)/(R_a + R_e + jX_d)";
     ci = X_d*R_e/((R_a + R_e)^2 + X_d^2) "Imaginary part of (R_a + jX_d)/(R_a + R_e + jX_d)";
   else
