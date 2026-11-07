@@ -7,21 +7,29 @@ model VSwithVReInGrid
       R=1e-12,
       X=1e-6,
       t2=2.05));
-  Electrical.GFCs.GFMs.VoltageSources.VSIOwVReInput VS
+  Electrical.GFCs.GFMs.VoltageSources.VSIOwVReInput VS(
+    P_0=40e6,
+    Q_0=5.416582e6,
+    v_0=1.0,
+    angle_0=0.070620799598684,
+    Imax=virtualRe.Imax) "The source at bus GEN1, on its power flow"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.VRe virtualRe(Imax=1.8)
+  Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.VRe virtualRe(
+    R_a=VS.R_a,
+    X_d=VS.X_d,
+    Imax=1.8)
     annotation (Placement(transformation(extent={{-110,-60},{-90,-40}})));
   Modelica.Blocks.Sources.Ramp DEm(
     height=-0.3,
     duration=1,
-    offset=1.01439,
-    startTime=4)
+    offset=VS.E0,
+    startTime=4) "The commanded internal voltage magnitude: E0 of the power flow, then 0.3 pu lower"
     annotation (Placement(transformation(extent={{-170,2},{-150,22}})));
   Modelica.Blocks.Sources.Ramp DEang(
     height=-Modelica.Constants.pi/8,
     duration=3,
-    offset=0.149386,
-    startTime=6)
+    offset=VS.delta0,
+    startTime=6) "The commanded internal voltage angle: delta0 of the power flow, then pi/8 lower"
     annotation (Placement(transformation(extent={{-170,-28},{-150,-8}})));
   Modelica.Blocks.Sources.RealExpression EmagVal(y=VS.Emag) annotation (
       Placement(transformation(extent={{-144,-54},{-124,-34}})));
@@ -62,5 +70,20 @@ equation
       StopTime=10,
       __Dymola_fixedstepsize=0.01,
       __Dymola_Algorithm="Dassl"), Diagram(coordinateSystem(extent={{-180,-100},
-            {100,100}}, grid={2,2})));
+            {100,100}}, grid={2,2})),
+    Documentation(info="<html>
+<p>
+Tests the voltage source with a virtual-resistance input, <code>VoltageSources.VSIOwVReInput</code>, with the virtual resistance computed by
+<code>REGFMA1.CurrentLimiters.VRe</code> (<code>Imax = 1.8</code> pu), on <code>OpenIPSL.Tests.BaseClasses.SMIB</code>.
+The commanded internal voltage starts at the source's power flow (<code>VS.E0</code>, <code>VS.delta0</code>), so the test starts in steady state.
+</p>
+<p>
+A bolted fault at bus FAULT from 2 to 2.05 s drives the current above <code>Imax</code>: <code>virtualRe.R_e</code> rises and holds the current,
+<code>pwCurrent</code>, at 1.8 pu, and falls back to zero when the fault is cleared. From 4 s the commanded magnitude falls by 0.3 pu, and from 6 s
+its angle by pi/8.
+</p>
+<p>
+Simulate and plot <code>virtualRe.R_e</code>, <code>VS.P</code>, <code>VS.Q</code>, <code>VS.V</code> and the current through <code>pwCurrent</code>.
+</p>
+</html>"));
 end VSwithVReInGrid;
