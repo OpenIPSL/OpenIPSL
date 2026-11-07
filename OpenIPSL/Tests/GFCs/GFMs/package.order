@@ -3,3 +3,4 @@ PQLimiters
 CurrentLimiter
 REGFMA1LightEncapsulate
 REGFMA1withPQLimEncapsulate
+REGFMA1withFCLEncapsulate
