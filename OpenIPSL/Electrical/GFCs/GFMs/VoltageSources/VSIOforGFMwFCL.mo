@@ -14,17 +14,18 @@ model VSIOforGFMwFCL
   parameter Boolean useVirtualResistor=false
     "false: the current is clamped to Imax at the angle of the unlimited current (PSS/E's REGFMA1, the WECC specification); true: a virtual resistor in series limits it to Imax"
     annotation (Dialog(group="Fault current limiter"));
-  Boolean limited "true while the unlimited current exceeds Imax";
-  OpenIPSL.Types.PerUnit I_unlim "Magnitude of the unlimited current (Edroop - V)/(R_a + jX_d), pu, machine base";
-  OpenIPSL.Types.PerUnit I_mag "Magnitude of the output current, pu, machine base";
-  OpenIPSL.Types.PerUnit R_e "Virtual resistance, pu, machine base (zero with the clamp and when not limited)";
+  Boolean limited(start=false) "true while the unlimited current exceeds Imax";
+  OpenIPSL.Types.PerUnit I_unlim(start=I0) "Magnitude of the unlimited current (Edroop - V)/(R_a + jX_d), pu, machine base";
+  OpenIPSL.Types.PerUnit I_mag(start=I0) "Magnitude of the output current, pu, machine base";
+  OpenIPSL.Types.PerUnit R_e(start=0) "Virtual resistance, pu, machine base (zero with the clamp and when not limited)";
 protected
   parameter OpenIPSL.Types.PerUnit Z_a=sqrt(R_a^2 + X_d^2) "Magnitude of the source impedance, pu, machine base";
-  OpenIPSL.Types.PerUnit dEr "Real part of Edroop - V";
-  OpenIPSL.Types.PerUnit dEi "Imaginary part of Edroop - V";
-  Real dE2 "Squared magnitude of Edroop - V";
-  Real cr "Real part of the factor c in E = V + c*(Edroop - V)";
-  Real ci "Imaginary part of the factor c in E = V + c*(Edroop - V)";
+  parameter OpenIPSL.Types.PerUnit I0=sqrt(ir0^2 + ii0^2)/CoB "Current of the power flow, pu, machine base";
+  OpenIPSL.Types.PerUnit dEr(start=Er0 - vr0) "Real part of Edroop - V";
+  OpenIPSL.Types.PerUnit dEi(start=Ei0 - vi0) "Imaginary part of Edroop - V";
+  Real dE2(start=(Er0 - vr0)^2 + (Ei0 - vi0)^2) "Squared magnitude of Edroop - V";
+  Real cr(start=1) "Real part of the factor c in E = V + c*(Edroop - V)";
+  Real ci(start=0) "Imaginary part of the factor c in E = V + c*(Edroop - V)";
 equation
   E = uEmag "The droop command of the magnitude, |Edroop| (VAR(L+1) of PSS/E's REGFMA1)";
   delta = uEang "The droop command of the angle";
@@ -33,7 +34,8 @@ equation
   dE2 = dEr^2 + dEi^2 "Squared voltage across the source impedance without limiting";
   limited = dE2 > (Imax*Z_a)^2 "The unlimited current exceeds Imax (an output; the equations below test the same condition without an event)";
   I_unlim = sqrt(dE2)/Z_a "Unlimited current magnitude on the machine base";
-  if noEvent(dE2 <= (Imax*Z_a)^2) then
+  assert(I0 < Imax, "The current of the power flow is not below Imax: the fault current limiter cannot start in steady state");
+  if initial() or noEvent(dE2 <= (Imax*Z_a)^2) then
     R_e = 0 "No virtual resistance";
     cr = 1 "Not limited: the internal voltage is the droop command";
     ci = 0 "Not limited: the internal voltage is the droop command";
@@ -128,6 +130,8 @@ at every iterate of the nonlinear solver. With an event, the solver keeps the li
 network at a switching; when a fault is cleared with the current limited, OpenModelica then converged to a second solution
 of the network, in which the voltage of a PSS/E load with a low-voltage characteristic is zero and the load passes any current,
 and stayed there. Evaluated at every iterate, the limiter takes the state of the solution the solver is converging to.
+At initialization the limiter is inactive: the model asserts that the current of the power flow is below <code>Imax</code>,
+the condition for a steady start.
 </p>
 <p>
 The outputs <code>Emag</code> and <code>Edelta</code> are the internal voltage actually applied (the limited one);
