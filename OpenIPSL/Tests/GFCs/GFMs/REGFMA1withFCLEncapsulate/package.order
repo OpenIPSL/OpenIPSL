@@ -5,3 +5,4 @@ ClampVariantFault
 VRVariantFault
 ReplaceableClampFault
 ReplaceableVRFault
+ReplaceableNoLimitFault
