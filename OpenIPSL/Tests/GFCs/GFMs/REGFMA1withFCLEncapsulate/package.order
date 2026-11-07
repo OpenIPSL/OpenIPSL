@@ -1,2 +1,7 @@
+CombiningComponents
 FaultClamp
 FaultVirtualResistor
+ClampVariantFault
+VRVariantFault
+ReplaceableClampFault
+ReplaceableVRFault
