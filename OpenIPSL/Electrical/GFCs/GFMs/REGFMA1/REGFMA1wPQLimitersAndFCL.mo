@@ -401,6 +401,8 @@ The limiter decides the current during the fault, and through it the voltage, th
 The current <code>(Edroop - V)/(R_a + jX_d)</code> the droop command would drive is compared with <code>Imax</code> (pu, machine base).
 Above it, with <code>useVirtualResistor = false</code> (the default) the magnitude is clamped to <code>Imax</code> at the angle of the unlimited current, as PSS/E's REGFMA1 and the specification do;
 with <code>useVirtualResistor = true</code> a virtual resistor in series limits it to <code>Imax</code> <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>.
+The clamp is the default because it is what PSS/E's REGFMA1 does; the virtual resistor can lose synchronism after long faults
+(about 0.5 s and more, see <code>VoltageSources.VSIOforGFMwFCL</code>), as [Du2024] also reports.
 Both release by themselves when the fault is cleared. With an <code>Imax</code> that is never reached the model gives the trajectories of <code>REGFMA1wPQLimiters</code>.
 The droop controls are not changed by the limiter: they keep integrating from the measured power and voltage, which are those of the limited current.
 The steady-state current limiting of manufacturers' controls is not represented, as in PSS/E's REGFMA1.

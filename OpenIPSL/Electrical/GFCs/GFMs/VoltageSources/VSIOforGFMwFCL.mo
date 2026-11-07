@@ -120,7 +120,10 @@ The magnitude of the current is set to <code>Imax</code>, its angle is that of t
 <li><code>useVirtualResistor = true</code>: the virtual resistor of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>.
 A resistance <code>R_e</code> in series with the source is chosen so that <code>|Edroop - V|/|R_a + R_e + jX_d| = Imax</code>,
 <code>R_e = sqrt(|Edroop - V|^2/Imax^2 - X_d^2) - R_a</code>. The current magnitude is again <code>Imax</code>;
-its angle turns towards that of <code>Edroop - V</code>, which adds damping.</li>
+its angle turns towards that of <code>Edroop - V</code>, which adds damping.
+For long faults this mode can lose synchronism after the fault is cleared: the droop angle advances during the fault, and the current
+at that angle makes the converter absorb power. [Du2024] reports this for a 0.45 s delayed clearing; on PNNL's validation case of REGFM_A1,
+faults of 0.5 s at the converter's terminal slip one or more poles, where the clamp, PSS/E and PNNL's PSCAD model recover.</li>
 </ul>
 <p>
 In both modes the test is made on the unlimited current, i.e. on the droop command and not on the limited internal voltage,
