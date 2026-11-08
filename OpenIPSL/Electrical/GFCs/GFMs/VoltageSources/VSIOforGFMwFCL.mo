@@ -78,7 +78,7 @@ equation
           extent={{-80,-54},{80,-114}},
           textColor={28,108,200},
           fontName="Geist",
-          textString="Current Clamp"),
+          textString="Current Limiter"),
         Line(
           points={{-44,-74},{-24,-74},{36,86},{76,86}},
           color={28,108,200},
