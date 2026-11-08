@@ -2,34 +2,35 @@ within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
 model VRe "Virtual Resistor Computation"
   Modelica.Blocks.Interfaces.RealInput Emag
     "Input to vary the voltage magnitude of the voltage source" annotation (
-      Placement(transformation(extent={{-140,42},{-100,82}}),
-        iconTransformation(extent={{-140,40},{-100,80}})));
+      Placement(transformation(extent={{-120,70},{-100,90}}),
+        iconTransformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput Eang
     "Input to vary the angle of the voltage source" annotation (Placement(
-        transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(
-          extent={{-140,-80},{-100,-40}})));
+        transformation(extent={{-120,30},{-100,50}}),   iconTransformation(
+          extent={{-120,30},{-100,50}})));
   Modelica.Blocks.Interfaces.RealInput V
     "Input to vary the voltage magnitude of the voltage source" annotation (
       Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,60}), iconTransformation(extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,60})));
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-40}),
+                          iconTransformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-40})));
   Modelica.Blocks.Interfaces.RealInput anglev
     "Input to vary the angle of the voltage source" annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,-60}), iconTransformation(extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,-60})));
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-80}),iconTransformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-80})));
   Modelica.Blocks.Interfaces.RealOutput R_e
     "Output Value of the Virtual Resistance" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,110})));
+        rotation=0,
+        origin={110,0})));
   parameter Real R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
   parameter Real X_d=0.2 "Internal source d-axis reactance, pu, machine base"
@@ -47,7 +48,7 @@ equation
   subsval = divres - Ra2pXd2 "Positive when |E - V|/|R_a + jX_d| > Imax";
   R_e = noEvent(if subsval > 0 then sqrt(max(divres - X_d^2, R_a^2)) - R_a else 0)
     "The exact root of |E - V| = Imax*|R_a + R_e + jX_d|, zero when the current is below Imax; continuous at the switch, which is evaluated without an event (see Documentation)";
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  annotation (preferredView="text",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},

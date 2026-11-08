@@ -118,7 +118,7 @@ equation
           62},{-120,62}}, color={0,0,127}));
   connect(p2R.u_arg, uEang) annotation (Line(points={{-64.2,-11.6},{-94,-11.6},{
           -94,-60},{-120,-60}}, color={0,0,127}));
-    annotation (Dialog(group="System data"),
+  annotation (preferredView = "diagram", Dialog(group="System data"),
     Icon(graphics={
         Ellipse(extent={{-100,100},{100,-100}},
                                            lineColor={0,0,255},
@@ -176,7 +176,6 @@ equation
           lineThickness=1,
           fillColor={170,213,255},
           fillPattern=FillPattern.Solid)}),
-                             preferredView="text",
     Diagram(graphics={Text(
           extent={{-80,-20},{80,-100}},
           textColor={217,67,180},

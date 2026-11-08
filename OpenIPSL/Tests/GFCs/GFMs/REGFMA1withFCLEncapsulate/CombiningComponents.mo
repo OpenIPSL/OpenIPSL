@@ -8,12 +8,12 @@ model CombiningComponents
       t1=55.0,
       t2=55.15));
   Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60)
-    annotation (Placement(transformation(extent={{-102,-18},{-62,22}})));
+    annotation (Placement(transformation(extent={{-100,-20},{-60,20}})));
   Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Clamp clamp(
     R_a=VS.R_a,
     X_d=VS.X_d,
     Imax=1.5) "The current limiter between the droop controls and the voltage source"
-    annotation (Placement(transformation(extent={{-150,-12},{-126,12}})));
+    annotation (Placement(transformation(extent={{-160,-20},{-120,20}})));
   Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.PfdrpControlSchemePLim
     basic_dROOP(
     f0=60,
@@ -103,18 +103,21 @@ model CombiningComponents
     offset=0,
     startTime=40)
     annotation (Placement(transformation(extent={{-380,-100},{-360,-80}})));
+  Modelica.Blocks.Sources.RealExpression sig_Vm(y=VS.V)
+    annotation (Placement(transformation(extent={{-188,-8},{-176,2}})));
+  Modelica.Blocks.Sources.RealExpression sig_Vang(y=VS.anglev)
+    annotation (Placement(transformation(extent={{-188,-16},{-176,-6}})));
 equation
-  connect(basic_dROOP.Edelta0, VS.delta0) annotation (Line(points={{-212,
-          -42},{-212,-60},{-90,-60},{-90,-20}},
-                                          color={0,0,127}));
-  connect(VS.p0, gain2P0pu.u) annotation (Line(points={{-82,-20},{-84,-20},
-          {-84,-80},{-116.4,-80}},
+  connect(basic_dROOP.Edelta0, VS.delta0) annotation (Line(points={{-212,-42},{
+          -212,-60},{-88,-60},{-88,-22}}, color={0,0,127}));
+  connect(VS.p0, gain2P0pu.u) annotation (Line(points={{-80,-22},{-84,-22},{-84,
+          -80},{-116.4,-80}},
                         color={0,0,127}));
   connect(gain2P0pu.y, basic_dROOP.Pout0) annotation (Line(points={{-134.8,
           -80},{-228,-80},{-228,-42}},
                                   color={0,0,127}));
-  connect(Vref.y, add.u1) annotation (Line(points={{-319,168},{-312,168},
-          {-312,156},{-302,156}},
+  connect(Vref.y, add.u1) annotation (Line(points={{-319,168},{-312,168},{-312,
+          158},{-302,158}},
                       color={0,0,127}));
   connect(Vref1.y, add.u2) annotation (Line(points={{-319,130},{-314,130},
           {-314,150},{-302,150}},
@@ -138,17 +141,15 @@ equation
   connect(sig_V0.y, q_v_droop_scheme.Vt0) annotation (Line(points={{-209,
           174},{-220,174},{-220,161.8}}, color={0,0,127}));
   connect(q_v_droop_scheme.Edroop, clamp.Emag) annotation (Line(points={{-199,
-          142},{-160,142},{-160,7.2},{-152.4,7.2}}, color={0,0,127}));
+          142},{-180,142},{-180,13.3333},{-161.667,13.3333}},
+                                                    color={0,0,127}));
   connect(basic_dROOP.delta_droop, clamp.Eang) annotation (Line(points={{-199,
-          -12},{-160,-12},{-160,-7.2},{-152.4,-7.2}}, color={0,0,127}));
-  connect(clamp.ElimMag, VS.uEmag) annotation (Line(points={{-142.8,13.2},{-142.8,
-          30},{-112,30},{-112,10},{-106,10}}, color={0,0,127}));
-  connect(clamp.ElimAng, VS.uEang) annotation (Line(points={{-133.2,13.2},{-133.2,
-          24},{-116,24},{-116,-6},{-106,-6}}, color={0,0,127}));
-  connect(VS.V, clamp.V) annotation (Line(points={{-60,10},{-56,10},{-56,-40},{-120,
-          -40},{-120,7.2},{-123.6,7.2}}, color={0,0,127}));
-  connect(VS.anglev, clamp.anglev) annotation (Line(points={{-60,6},{-54,6},{-54,
-          -44},{-122,-44},{-122,-7.2},{-123.6,-7.2}}, color={0,0,127}));
+          -12},{-194,-12},{-194,3.33333},{-161.667,3.33333}},
+                                                      color={0,0,127}));
+  connect(clamp.ElimMag, VS.uEmag) annotation (Line(points={{-118.333,10},{-114,
+          8},{-104,8}},                       color={0,0,127}));
+  connect(clamp.ElimAng, VS.uEang) annotation (Line(points={{-118.333,-10},{
+          -114,-8},{-104,-8}},                color={0,0,127}));
   connect(Pfilt.y, plimiter.Pfilt)
     annotation (Line(points={{-279,-120},{-262,-120}}, color={0,0,127}));
   connect(sig_Pmeas_4pfilt.y, Pfilt.u)
@@ -167,16 +168,21 @@ equation
           -13},{-260,-12},{-242,-12}}, color={0,0,127}));
   connect(basic_dROOP.Pref0, addPref0.u2) annotation (Line(points={{-220,-41},{-220,
           -50},{-296,-50},{-296,-17.2},{-291.4,-17.2}}, color={0,0,127}));
-  connect(q_v_droop_scheme.Vref0, add.u3) annotation (Line(points={{-204,122.5},{-204,
-          116},{-306,116},{-306,142},{-302,142}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, add.u3) annotation (Line(points={{-204,123.1},
+          {-204,116},{-306,116},{-306,142},{-302,142}},
+                                                  color={0,0,127}));
   connect(Pstep.y, add3_1_Pref.u1)
     annotation (Line(points={{-359,-2},{-322,-2}}, color={0,0,127}));
   connect(Pfilt_upper.y, add3_1_Pref.u2) annotation (Line(points={{-359,
           -50},{-348,-50},{-348,-10},{-322,-10}}, color={0,0,127}));
   connect(Pfilt_lower.y, add3_1_Pref.u3) annotation (Line(points={{-359,
           -90},{-340,-90},{-340,-18},{-322,-18}}, color={0,0,127}));
-  connect(VS.p, GEN1.p) annotation (Line(points={{-60,2},{-46,2},{-46,0},{-30,0}},
+  connect(VS.p, GEN1.p) annotation (Line(points={{-58,0},{-30,0}},
         color={0,0,255}));
+  connect(sig_Vm.y, clamp.V) annotation (Line(points={{-175.4,-3},{-175.4,
+          -3.33333},{-161.667,-3.33333}}, color={0,0,127}));
+  connect(sig_Vang.y, clamp.anglev) annotation (Line(points={{-175.4,-11},{
+          -175.4,-11.6667},{-161.667,-11.6667}}, color={0,0,127}));
   annotation (experiment(
       StopTime=60,
       __Dymola_NumberOfIntervals=5000,

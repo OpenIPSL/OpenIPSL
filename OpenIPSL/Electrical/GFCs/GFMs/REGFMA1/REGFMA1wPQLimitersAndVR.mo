@@ -237,13 +237,18 @@ equation
           -70},{-12,-62}}, color={0,0,127}));
   connect(sig_p0.y,gain2P0pu. u) annotation (Line(points={{39,-86},{21.6,-86}},
                         color={0,0,127}));
-  connect(q_v_droop_scheme.Edroop, virtualRe.Emag) annotation (Line(points={{1,58},{8,58},
-          {8,-44},{38,-44}}, color={0,0,127}));
-  connect(pfdroopcntrl.delta_droop, virtualRe.Eang) annotation (Line(points={{1,-32},{6,-32},
-          {6,-56},{38,-56}}, color={0,0,127}));
-  connect(sig_Vt.y, virtualRe.V) annotation (Line(points={{69,-44},{62,-44}}, color={0,0,127}));
-  connect(sig_anglev.y, virtualRe.anglev) annotation (Line(points={{69,-56},{62,-56}}, color={0,0,127}));
-  connect(virtualRe.R_e, VS.R_e) annotation (Line(points={{50,-39},{50,-30},{60,-30},{60,-24}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Edroop, virtualRe.Emag) annotation (Line(points={{1,58},{
+          8,58},{8,-42},{39,-42}},
+                             color={0,0,127}));
+  connect(pfdroopcntrl.delta_droop, virtualRe.Eang) annotation (Line(points={{1,-32},
+          {6,-32},{6,-46},{39,-46}},
+                             color={0,0,127}));
+  connect(sig_Vt.y, virtualRe.V) annotation (Line(points={{69,-44},{54,-44},{54,
+          -54},{39,-54}},                                                     color={0,0,127}));
+  connect(sig_anglev.y, virtualRe.anglev) annotation (Line(points={{69,-56},{54,
+          -56},{54,-58},{39,-58}},                                                     color={0,0,127}));
+  connect(virtualRe.R_e, VS.R_e) annotation (Line(points={{61,-50},{61,-30},{60,
+          -30},{60,-24}},                                                                       color={0,0,127}));
   connect(gain2P0pu.y, pfdroopcntrl.Pout0)
     annotation (Line(points={{3.2,-86},{-28,-86},{-28,-62}}, color={0,0,127}));
   connect(sig_Pmeas.y, pfdroopcntrl.Pmeas)
@@ -280,7 +285,8 @@ equation
     annotation (Line(points={{91,-60},{110,-60}}, color={0,0,127}));
   connect(sigaEdelta.y,Edelta)
     annotation (Line(points={{91,-80},{110,-80}}, color={0,0,127}));
-  connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{4,38},{4,30},{-60,30},{-60,-110}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{-4,39.1},{-4,
+          30},{-60,30},{-60,-110}},                                                                   color={0,0,127}));
   connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
   connect(pfdroopcntrl.omega_dev, omega_dev) annotation (Line(points={{1,-54},{64,-54},{64,20},{110,20}}, color={0,0,127}));
   connect(pfdroopcntrl.omega_droop, omega_droop) annotation (Line(points={{1,

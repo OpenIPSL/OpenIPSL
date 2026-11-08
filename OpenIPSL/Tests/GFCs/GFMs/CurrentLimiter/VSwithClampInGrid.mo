@@ -13,7 +13,7 @@ model VSwithClampInGrid
     R_a=VS.R_a,
     X_d=VS.X_d,
     Imax=1.8)
-    annotation (Placement(transformation(extent={{-150,-20},{-130,0}})));
+    annotation (Placement(transformation(extent={{-152,-20},{-130,20}})));
   Modelica.Blocks.Sources.Ramp DEm(
     height=-0.3,
     duration=1,
@@ -32,32 +32,41 @@ model VSwithClampInGrid
     annotation (Placement(transformation(extent={{-200,-40},{-180,-20}})));
   OpenIPSL.Electrical.Sensors.PwCurrent pwCurrent
     annotation (Placement(transformation(extent={{-56,-10},{-36,10}})));
+  Modelica.Blocks.Sources.RealExpression sigVm(y=VS.V) annotation (Placement(
+        transformation(extent={{-4.5,-4.5},{4.5,4.5}}, origin={-162.5,-2.5})));
+  Modelica.Blocks.Sources.RealExpression sigVang(y=VS.anglev) annotation (
+      Placement(transformation(extent={{-4.5,-4.5},{4.5,4.5}}, origin={-162.5,
+            -12.5})));
 equation
   connect(DEm.y, Ecmd.u1)
     annotation (Line(points={{-219,30},{-210,30},{-210,16},{-202,16}}, color={0,0,127}));
   connect(VS.E0, Ecmd.u2)
-    annotation (Line(points={{-98,-22},{-98,-80},{-210,-80},{-210,4},{-202,4}}, color={0,0,127}));
+    annotation (Line(points={{-106,-22},{-106,-80},{-210,-80},{-210,4},{-202,4}},
+                                                                                color={0,0,127}));
   connect(DEang.y, deltacmd.u2)
     annotation (Line(points={{-219,-50},{-210,-50},{-210,-36},{-202,-36}}, color={0,0,127}));
   connect(VS.delta0, deltacmd.u1)
-    annotation (Line(points={{-90,-22},{-90,-84},{-206,-84},{-206,-24},{-202,-24}}, color={0,0,127}));
+    annotation (Line(points={{-98,-22},{-98,-84},{-206,-84},{-206,-24},{-202,-24}}, color={0,0,127}));
   connect(Ecmd.y, clamp.Emag)
-    annotation (Line(points={{-179,10},{-160,10},{-160,-4},{-152,-4}}, color={0,0,127}));
+    annotation (Line(points={{-179,10},{-166,10},{-166,13.3333},{-152.917,
+          13.3333}},                                                   color={0,0,127}));
   connect(deltacmd.y, clamp.Eang)
-    annotation (Line(points={{-179,-30},{-160,-30},{-160,-16},{-152,-16}}, color={0,0,127}));
+    annotation (Line(points={{-179,-30},{-178,-30},{-178,3.33333},{-152.917,
+          3.33333}},                                                       color={0,0,127}));
   connect(clamp.ElimMag, VS.uEmag)
-    annotation (Line(points={{-142,1},{-142,8},{-114,8}}, color={0,0,127}));
+    annotation (Line(points={{-129.083,10},{-122,10},{-122,8},{-114,8}},
+                                                          color={0,0,127}));
   connect(clamp.ElimAng, VS.uEang)
-    annotation (Line(points={{-138,1},{-138,4},{-120,4},{-120,-8},{-114,-8}}, color={0,0,127}));
-  connect(VS.V, clamp.V)
-    annotation (Line(points={{-68,8},{-62,8},{-62,-40},{-120,-40},{-120,-4},{-128,-4}}, color={0,0,127}));
-  connect(VS.anglev, clamp.anglev)
-    annotation (Line(points={{-68,4},{-64,4},{-64,-44},{-124,-44},{-124,-16},{-128,-16}}, color={0,0,127}));
+    annotation (Line(points={{-129.083,-10},{-124,-10},{-124,-8},{-114,-8}},  color={0,0,127}));
   connect(GEN1.p, pwCurrent.n)
     annotation (Line(points={{-30,0},{-36,0}}, color={0,0,255}));
   connect(VS.p, pwCurrent.p)
     annotation (Line(points={{-68,0},{-56,0}}, color={0,0,255}));
-  annotation (experiment(
+  connect(sigVang.y, clamp.anglev) annotation (Line(points={{-157.55,-12.5},{
+          -157.55,-11.6667},{-152.917,-11.6667}}, color={0,0,127}));
+  connect(sigVm.y, clamp.V) annotation (Line(points={{-157.55,-2.5},{-157.55,
+          -3.33333},{-152.917,-3.33333}}, color={0,0,127}));
+  annotation (preferredView="diagram",experiment(
       StopTime=10,
       __Dymola_Algorithm="Dassl"), Diagram(coordinateSystem(extent={{-260,-100},
             {100,100}}, grid={2,2})),

@@ -4,56 +4,57 @@ model CurrentLimitValue
     Modelica.Blocks.Interfaces.RealInput V(start=1.0)
     "Input to vary the voltage magnitude of the voltage source" annotation (
       Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,60}), iconTransformation(extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,60})));
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-20}),
+                          iconTransformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-20})));
   Modelica.Blocks.Interfaces.RealInput anglev(start=0.0)
     "Input to vary the angle of the voltage source" annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,-60}), iconTransformation(extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={120,-60})));
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-80}),iconTransformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-80})));
   Modelica.Blocks.Interfaces.RealInput Emag(start=1.1)
     "Input to vary the voltage magnitude of the voltage source" annotation (
-      Placement(transformation(extent={{-140,40},{-100,80}}),
-        iconTransformation(extent={{-140,40},{-100,80}})));
+      Placement(transformation(extent={{-120,70},{-100,90}}),
+        iconTransformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput Eang(start=0.01)
     "Input to vary the angle of the voltage source" annotation (Placement(
-        transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(
-          extent={{-140,-80},{-100,-40}})));
+        transformation(extent={{-120,10},{-100,30}}),   iconTransformation(
+          extent={{-120,10},{-100,30}})));
   Modelica.Blocks.Interfaces.RealOutput ImaxRe(start=0) "Maximum current real part"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-80,110})));
+        rotation=0,
+        origin={110,-40})));
   Modelica.Blocks.Interfaces.RealOutput ImaxIm(start=0) "Maximum current imaginary part"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-40,110})));
+        rotation=0,
+        origin={110,-80})));
   Modelica.Blocks.Interfaces.RealOutput ImaxAng(start=0) "Maximum current angle"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={80,110})));
+        rotation=0,
+        origin={110,40})));
   Modelica.Blocks.Interfaces.RealOutput ImaxMag(start=0) "Maximum current magnitude"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={40,110})));
+        rotation=0,
+        origin={110,80})));
   Modelica.Blocks.Interfaces.RealInput R_e(start=0)
     "Input Value of the Virtual Resistance" annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
+        extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={0,-120}), iconTransformation(
-        extent={{-20,-20},{20,20}},
+        origin={0,-110}), iconTransformation(
+        extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={0,-120})));
+        origin={0,-110})));
   parameter Real R_a=1e-3 "Internal source resistance, pu, machine base"
     annotation (Dialog(group="Voltage Source parameters"));
   parameter Real X_d=0.2 "Internal source d-axis reactance, pu, machine base"
@@ -74,7 +75,7 @@ equation
   ImaxRe = Imax*cos(ImaxAng) "Real part of the current of magnitude Imax at that angle";
   ImaxIm = Imax*sin(ImaxAng) "Imaginary part of the current of magnitude Imax at that angle";
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  annotation (preferredView="text",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Line(points={{-80,0},{-60,0}}, color={28,108,200},
           thickness=1),
         Line(points={{60,0},{80,0}}, color={28,108,200},
@@ -123,5 +124,6 @@ limits the magnitude (<code>CurrentLimiters.Clamp</code> uses this block so); wi
 it is the angle of the current of the virtual-resistor limiter. The outputs are the limited current whether or not the limit is reached:
 the block does not decide when to limit.
 </p>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(grid={2,2})));
 end CurrentLimitValue;
