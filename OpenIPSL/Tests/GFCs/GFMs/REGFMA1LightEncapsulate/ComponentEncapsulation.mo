@@ -42,21 +42,21 @@ model ComponentEncapsulation "Test the packaged REGF_A1_Light model"
     annotation (Placement(transformation(extent={{-140,-30},{-80,30}})));
 equation
   connect(Vref_up.y, add.u1) annotation (Line(points={{-199,48},{-192,48},
-          {-192,36},{-182,36}}, color={0,0,127}));
+          {-192,38},{-182,38}}, color={0,0,127}));
   connect(Vref_down.y, add.u2) annotation (Line(points={{-199,10},{-194,
           10},{-194,30},{-182,30}}, color={0,0,127}));
   connect(Pstep.y, addPref0.u1)
     annotation (Line(points={{-159,-18},{-161,-18},{-161,-22}}, color={0,0,127}));
   connect(addPref0.y, GFC.Pref)
-    annotation (Line(points={{-149.5,-25},{-148,-25},{-148,-18},{-144.8,-18}}, color={0,0,127}));
-  connect(GFC.Pref0, addPref0.u2) annotation (Line(points={{-116,-33},{-116,-40},{-164,
+    annotation (Line(points={{-149.5,-25},{-148,-25},{-148,-18},{-143,-18}}, color={0,0,127}));
+  connect(GFC.Pref0, addPref0.u2) annotation (Line(points={{-98,-31.5},{-98,-40},{-164,
           -40},{-164,-28},{-161,-28}}, color={0,0,127}));
-  connect(GFC.Vref0, add.u3) annotation (Line(points={{-128,-33},{-128,-44},{-190,-44},
+  connect(GFC.Vref0, add.u3) annotation (Line(points={{-122,-31.5},{-122,-44},{-190,-44},
           {-190,22},{-182,22}}, color={0,0,127}));
   connect(add.y, GFC.Vref) annotation (Line(points={{-159,30},{-154,30},{
-          -154,18},{-144.8,18}}, color={0,0,127}));
+          -154,18},{-143,18}}, color={0,0,127}));
   connect(GFC.p1, GEN1.p)
-    annotation (Line(points={{-74,0},{-30,0}}, color={0,0,255}));
+    annotation (Line(points={{-77,0},{-30,0}}, color={0,0,255}));
   annotation (experiment(
       StopTime=60,
       __Dymola_NumberOfIntervals=5000,

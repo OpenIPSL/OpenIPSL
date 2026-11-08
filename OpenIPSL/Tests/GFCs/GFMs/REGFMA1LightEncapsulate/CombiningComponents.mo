@@ -77,8 +77,8 @@ equation
                         color={0,0,127}));
   connect(gain2P0pu.y, basic_dROOP.Pout0) annotation (Line(points={{-134.8,-120},
           {-248,-120},{-248,-82}},color={0,0,127}));
-  connect(Vref.y, add.u1) annotation (Line(points={{-339,68},{-332,68},{-332,56},
-          {-322,56}}, color={0,0,127}));
+  connect(Vref.y, add.u1) annotation (Line(points={{-339,68},{-332,68},{-332,58},
+          {-322,58}}, color={0,0,127}));
   connect(Vref1.y, add.u2) annotation (Line(points={{-339,30},{-334,30},{-334,
           50},{-322,50}}, color={0,0,127}));
   connect(q_v_droop_scheme.Vref0, add.u3) annotation (Line(points={{-224,21},{-224,

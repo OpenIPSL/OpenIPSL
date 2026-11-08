@@ -88,10 +88,9 @@ characteristic is at zero voltage, and stayed there. Evaluated at every iterate 
     Diagram(coordinateSystem(grid={2,2}, extent={{-120,-100},{120,100}}),
         graphics={
         Text(
-          extent={{-10,-43},{110,-60}},
+          extent={{-6,-56},{106,-66}},
           textColor={215,215,215},
           fontName="Geist",
-          fontSize=24,
           textString="Implemented in the Text Layer"),
         Rectangle(
           extent={{32,40},{72,-40}},
@@ -114,27 +113,24 @@ characteristic is at zero voltage, and stayed there. Evaluated at every iterate 
           lineColor={28,108,200},
           lineThickness=1),
         Text(
-          extent={{22,59},{82,39}},
+          extent={{22,62},{82,42}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="Current Limited
 Droop Voltage"),
         Text(
-          extent={{58,42},{118,22}},
+          extent={{74,32},{104,24}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="ElimMag"),
         Polygon(
           points={{22,-31},{22,-21},{31,-26},{22,-31}},
           lineColor={28,108,200},
           lineThickness=1),
         Text(
-          extent={{56,-20},{116,-40}},
+          extent={{74,-24},{104,-32}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="ElimAng"),
         Rectangle(
           extent={{-10,70},{110,-70}},
@@ -142,16 +138,14 @@ Droop Voltage"),
           lineThickness=1,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-20,20},{40,0}},
+          extent={{-2,30},{22,22}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="ImaxRe"),
         Text(
-          extent={{-18,-6},{42,-26}},
+          extent={{-2,-28},{22,-36}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="ImaxIm"),
         Line(
           points={{-16,-8},{-4,-8},{-4,20},{22,20}},

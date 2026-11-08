@@ -24,19 +24,19 @@ model FlagsQV1V1
     annotation (Placement(transformation(extent={{-150,10},{-130,30}})));
 equation
   connect(GFC.p, GEN1.p)
-    annotation (Line(points={{-34,0},{-30,0}}, color={0,0,255}));
+    annotation (Line(points={{-37,0},{-30,0}}, color={0,0,255}));
   connect(Pstep.y, Pref.u1) annotation (Line(points={{-179,-30},{-160,-30},{-160,
           -14},{-152,-14}}, color={0,0,127}));
-  connect(GFC.Pref0, Pref.u2) annotation (Line(points={{-76,-33},{-76,-50},{-156,
+  connect(GFC.Pref0, Pref.u2) annotation (Line(points={{-58,-31.5},{-58,-50},{-156,
           -50},{-156,-26},{-152,-26}}, color={0,0,127}));
   connect(Pref.y, GFC.Pref)
-    annotation (Line(points={{-129,-20},{-104.5,-18}}, color={0,0,127}));
+    annotation (Line(points={{-129,-20},{-116,-20},{-116,-18},{-103,-18}}, color={0,0,127}));
   connect(Vstep.y, Vref.u1) annotation (Line(points={{-179,30},{-160,30},{-160,26},
           {-152,26}}, color={0,0,127}));
-  connect(GFC.Vref0, Vref.u2) annotation (Line(points={{-88,-33},{-88,-60},{-166,
+  connect(GFC.Vref0, Vref.u2) annotation (Line(points={{-82,-31.5},{-82,-60},{-166,
           -60},{-166,14},{-152,14}}, color={0,0,127}));
   connect(Vref.y, GFC.Vref)
-    annotation (Line(points={{-129,20},{-104.5,18}}, color={0,0,127}));
+    annotation (Line(points={{-129,20},{-116,20},{-116,18},{-103,18}}, color={0,0,127}));
   annotation (experiment(
       StopTime=12,
       __Dymola_NumberOfIntervals=6000,

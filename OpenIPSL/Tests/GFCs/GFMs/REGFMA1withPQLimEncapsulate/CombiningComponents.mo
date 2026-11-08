@@ -109,7 +109,7 @@ equation
           -80},{-228,-80},{-228,-42}},
                                   color={0,0,127}));
   connect(Vref.y, add.u1) annotation (Line(points={{-319,168},{-312,168},
-          {-312,156},{-302,156}},
+          {-312,158},{-302,158}},
                       color={0,0,127}));
   connect(Vref1.y, add.u2) annotation (Line(points={{-319,130},{-314,130},
           {-314,150},{-302,150}},

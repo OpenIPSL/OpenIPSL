@@ -14,20 +14,34 @@ model REGFMA1wPQLimitersAndVR
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The voltage source with the virtual resistance as an input"
-    annotation (Placement(transformation(extent={{40,-20},{80,20}})));
+    annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   CurrentLimiters.VRe virtualRe(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The virtual resistance that limits the current to Imax, from the droop command and the terminal voltage"
-    annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
+    annotation (Placement(transformation(extent={{-18,-18},{18,18}},
+        rotation=90,
+        origin={50,-38})));
+  Modelica.Blocks.Sources.RealExpression sig_Edroop(y=q_v_droop_scheme.Edroop) "Droop command magnitude, for the virtual resistance"
+    annotation (Placement(transformation(extent={{-10,-3},{10,3}},
+        rotation=90,
+        origin={35.6,-69})));
+  Modelica.Blocks.Sources.RealExpression sig_delta_droop(y=pfdroopcntrl.delta_droop) "Droop command angle, for the virtual resistance"
+    annotation (Placement(transformation(extent={{-10,-3},{10,3}},
+        rotation=90,
+        origin={42.8,-69})));
   Modelica.Blocks.Sources.RealExpression sig_Vt(y=VS.V) "Terminal voltage magnitude, for the virtual resistance"
-    annotation (Placement(transformation(extent={{90,-54},{70,-34}})));
+    annotation (Placement(transformation(extent={{-10,-3},{10,3}},
+        rotation=90,
+        origin={57.2,-69})));
   Modelica.Blocks.Sources.RealExpression sig_anglev(y=VS.anglev) "Terminal voltage angle, for the virtual resistance"
-    annotation (Placement(transformation(extent={{90,-66},{70,-46}})));
+    annotation (Placement(transformation(extent={{-10,-3},{10,3}},
+        rotation=90,
+        origin={64.4,-69})));
   Modelica.Blocks.Sources.RealExpression sig_delta0(y=VS.delta0) "Initial internal voltage angle"
-    annotation (Placement(transformation(extent={{40,-80},{20,-60}})));
+    annotation (Placement(transformation(extent={{30,-76},{14,-64}})));
   Modelica.Blocks.Sources.RealExpression sig_p0(y=P_0) "Initial active power (W)"
-    annotation (Placement(transformation(extent={{60,-96},{40,-76}})));
+    annotation (Placement(transformation(extent={{36,-92},{24,-80}})));
   PQLimitersAndCntrlSchemes.PfdrpControlSchemePLim pfdroopcntrl(
     f0=f0,
     mp=mp,
@@ -84,13 +98,15 @@ model REGFMA1wPQLimitersAndVR
         rotation=180,
         origin={-4,92})));
   Interfaces.PwPin p annotation (Placement(transformation(extent={{
-            99,-9},{118,10}}), iconTransformation(extent={{100,-20},{140,20}})));
+            99,-9},{118,10}}), iconTransformation(extent={{200,-20},{240,20}})));
   Modelica.Blocks.Interfaces.RealInput Pref "Active power reference"
                                             annotation (Placement(
-        transformation(extent={{-131,-75},{-101,-45}})));
+        transformation(extent={{-131,-75},{-101,-45}}), iconTransformation(
+          extent={{-240,-140},{-200,-100}})));
   Modelica.Blocks.Interfaces.RealInput Vref "Reference voltage input"
                                             annotation (Placement(
-        transformation(extent={{-131,45},{-101,75}})));
+        transformation(extent={{-131,45},{-101,75}}), iconTransformation(
+          extent={{-240,100},{-200,140}})));
 
   parameter Types.ApparentPower M_b=SysData.S_b "Voltage source base power rating (VA); the control parameters are in pu on this base"
     annotation (Dialog(tab="Voltage Source parameters"));
@@ -146,47 +162,61 @@ model REGFMA1wPQLimitersAndVR
   Modelica.Blocks.Interfaces.RealOutput P_meas "VS P measurement" annotation
     (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={110,90})));
+        origin={110,90}), iconTransformation(extent={{200,170},{220,190}})));
   Modelica.Blocks.Interfaces.RealOutput Q_meas "VS Q meas"
                                          annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={110,70})));
+        origin={110,70}), iconTransformation(extent={{200,130},{220,150}})));
   Modelica.Blocks.Interfaces.RealOutput V "VS terminal voltage" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={110,-20})));
+        origin={110,-20}), iconTransformation(extent={{200,-70},{220,-50}})));
   Modelica.Blocks.Interfaces.RealOutput anglev "VS terminal angle"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={110,-40})));
+        origin={110,-40}), iconTransformation(extent={{200,-110},{220,-90}})));
   Modelica.Blocks.Interfaces.RealOutput Emag
     "Internal voltage source voltage magnitude E"
                                       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={110,-60})));
+        origin={110,-60}), iconTransformation(extent={{200,-150},{220,-130}})));
   Modelica.Blocks.Interfaces.RealOutput Edelta
     "Internal voltage source angle delta"
                                       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        origin={110,-80})));
+        origin={110,-80}), iconTransformation(extent={{200,-190},{220,-170}})));
   Modelica.Blocks.Interfaces.RealOutput Vref0
     "Voltage reference of the initial operating point, to be fed back to Vref"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-60,-110})));
+        origin={-60,-110}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-80,-210})));
   Modelica.Blocks.Interfaces.RealOutput Pref0
     "Active power reference of the initial operating point (pu, machine base), to be fed back to Pref"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-20,-110})));
+        origin={-20,-110}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={80,-210})));
   Modelica.Blocks.Interfaces.RealOutput omega_dev
     "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
-    annotation (Placement(transformation(extent={{100,10},{120,30}})));
+    annotation (Placement(transformation(extent={{100,40},{120,60}}),
+        iconTransformation(extent={{200,90},{220,110}})));
   Modelica.Blocks.Interfaces.RealOutput omega_droop
     "Speed output from the P-f droop controller"
-    annotation (Placement(transformation(extent={{100,-110},{120,-90}})));
+    annotation (Placement(transformation(extent={{100,20},{120,40}}),
+        iconTransformation(extent={{200,50},{220,70}})));
+  Modelica.Blocks.Sources.RealExpression sigOmega_dev(y=pfdroopcntrl.omega_dev)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={70,
+            50})));
+  Modelica.Blocks.Sources.RealExpression sigOmega_droop(y=pfdroopcntrl.omega_droop)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={70,
+            30})));
   parameter Real Pmax=0.9
     "Upper limit of the inverter active power output. Normal Range: [0.1 - 1] pu"
     annotation (Dialog(tab="Pmin/Pmax Limiters", group="Overlad controller parameters"));
@@ -233,22 +263,20 @@ model REGFMA1wPQLimitersAndVR
     "Maximum transient current magnitude (pu, machine base)"
     annotation (Dialog(tab="Fault Current Limiter"));
 equation
-  connect(sig_delta0.y, pfdroopcntrl.Edelta0) annotation (Line(points={{19,-70},{-12,
-          -70},{-12,-62}}, color={0,0,127}));
-  connect(sig_p0.y,gain2P0pu. u) annotation (Line(points={{39,-86},{21.6,-86}},
+  connect(sig_delta0.y, pfdroopcntrl.Edelta0) annotation (Line(points={{13.2,-70},
+          {-12,-70},{-12,-62}}, color={0,0,127}));
+  connect(sig_p0.y,gain2P0pu. u) annotation (Line(points={{23.4,-86},{21.6,-86}},
                         color={0,0,127}));
-  connect(q_v_droop_scheme.Edroop, virtualRe.Emag) annotation (Line(points={{1,58},{
-          8,58},{8,-42},{39,-42}},
-                             color={0,0,127}));
-  connect(pfdroopcntrl.delta_droop, virtualRe.Eang) annotation (Line(points={{1,-32},
-          {6,-32},{6,-46},{39,-46}},
-                             color={0,0,127}));
-  connect(sig_Vt.y, virtualRe.V) annotation (Line(points={{69,-44},{54,-44},{54,
-          -54},{39,-54}},                                                     color={0,0,127}));
-  connect(sig_anglev.y, virtualRe.anglev) annotation (Line(points={{69,-56},{54,
-          -56},{54,-58},{39,-58}},                                                     color={0,0,127}));
-  connect(virtualRe.R_e, VS.R_e) annotation (Line(points={{61,-50},{61,-30},{60,
-          -30},{60,-24}},                                                                       color={0,0,127}));
+  connect(sig_Edroop.y, virtualRe.Emag)
+    annotation (Line(points={{35.6,-58},{35.6,-57.8}}, color={0,0,127}));
+  connect(sig_delta_droop.y, virtualRe.Eang)
+    annotation (Line(points={{42.8,-58},{42.8,-57.8}}, color={0,0,127}));
+  connect(sig_Vt.y, virtualRe.V)
+    annotation (Line(points={{57.2,-58},{57.2,-57.8}}, color={0,0,127}));
+  connect(sig_anglev.y, virtualRe.anglev)
+    annotation (Line(points={{64.4,-58},{64.4,-57.8}}, color={0,0,127}));
+  connect(virtualRe.R_e, VS.R_e)
+    annotation (Line(points={{50,-18.2},{50,-12}}, color={0,0,127}));
   connect(gain2P0pu.y, pfdroopcntrl.Pout0)
     annotation (Line(points={{3.2,-86},{-28,-86},{-28,-62}}, color={0,0,127}));
   connect(sig_Pmeas.y, pfdroopcntrl.Pmeas)
@@ -266,9 +294,9 @@ equation
   connect(sig_V0.y,q_v_droop_scheme. Vt0) annotation (Line(points={{-15,92},{-20,
           92},{-20,77.8}}, color={0,0,127}));
   connect(q_v_droop_scheme.Edroop, VS.uEmag) annotation (Line(points={{1,58},{8,
-          58},{8,12},{36,12}}, color={0,0,127}));
+          58},{8,6},{38,6}}, color={0,0,127}));
   connect(pfdroopcntrl.delta_droop, VS.uEang) annotation (Line(points={{1,-32},{
-          8,-32},{8,-12},{36,-12}}, color={0,0,127}));
+          8,-32},{8,-6},{38,-6}}, color={0,0,127}));
   connect(Pref, pfdroopcntrl.Pref) annotation (Line(points={{-116,-60},{-96,-60},
           {-96,-32},{-42,-32}}, color={0,0,127}));
   connect(Vref, q_v_droop_scheme.Vref) annotation (Line(points={{-116,60},{-84,60},
@@ -288,124 +316,132 @@ equation
   connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{-4,39.1},{-4,
           30},{-60,30},{-60,-110}},                                                                   color={0,0,127}));
   connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
-  connect(pfdroopcntrl.omega_dev, omega_dev) annotation (Line(points={{1,-54},{64,-54},{64,20},{110,20}}, color={0,0,127}));
-  connect(pfdroopcntrl.omega_droop, omega_droop) annotation (Line(points={{1,
-          -48},{60,-48},{60,-100},{110,-100}}, color={0,0,127}));
+  connect(sigOmega_droop.y, omega_droop)
+    annotation (Line(points={{81,30},{110,30}}, color={0,0,127}));
+  connect(sigOmega_dev.y, omega_dev)
+    annotation (Line(points={{81,50},{110,50}}, color={0,0,127}));
   connect(VS.p, p)
-    annotation (Line(points={{82,0},{84,0.5},{108.5,0.5}}, color={0,0,255}));
-  annotation (Icon(graphics={
+    annotation (Line(points={{61,0},{64,0.5},{108.5,0.5}}, color={0,0,255}));
+  annotation (Icon(coordinateSystem(extent={{-200,-200},{200,200}}, grid={2,2}),
+                   graphics={
+        Line(
+          points={{-80,-100},{-40,-100},{40,100},{80,100}},
+          color={0,0,255},
+          thickness=1),
         Rectangle(
-          extent={{-100,100},{100,-100}},
+          extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
           lineThickness=1),
         Text(
-          extent={{-80,86},{80,46}},
-          textColor={0,170,255},
-          textString="REGFM_A1"),
-        Text(
-          extent={{-100,140},{100,102}},
+          extent={{-200,280},{200,200}},
           textColor={28,108,200},
           textString="%name"),
-        Rectangle(extent={{0,40},{80,-40}}, lineColor={28,108,200},
-          lineThickness=1),
-        Line(points={{80,-40},{0,40}}, color={28,108,200},
+        Rectangle(
+          extent={{-80,80},{80,-80}},
+          lineColor={0,0,255},
+          lineThickness=1,
+          fillColor={234,234,234},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-180,200},{180,120}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="REGFMA1"),
+      Polygon(
+        points={{-6,4},{10,14},{10,-6},{-6,4}},
+        lineColor={28,108,200},
+          origin={-158,4},
+          rotation=180,
+          lineThickness=1,
+          fillColor={28,108,200},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-184,0},{-168,0}},
+          color={28,108,200},
           thickness=1),
         Line(
-          points={{12,-12},{32,-12}},
+          points={{82,0},{200,0}},
+          color={0,0,255},
+          thickness=1),
+        Line(
+          points={{-132,-36},{-132,-54}},
           color={28,108,200},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Ellipse(
-          extent={{56,18},{76,-2}},
-          lineColor={28,108,200},
+          thickness=1),                   Text(
+          extent={{-160,-112},{160,-192}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="With P&Q Limiters &
+Virtual Resistor Current Limiter"),
+        Line(
+          points={{-112,0},{-92,0}},
+          color={28,108,200},
+          thickness=1),
+      Polygon(
+        points={{-6,4},{10,14},{10,-6},{-6,4}},
+        lineColor={28,108,200},
+          origin={-86,4},
+          rotation=180,
           lineThickness=1,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.None,
-          startAngle=0,
-          endAngle=180,
-          closure=EllipseClosure.None),
-        Ellipse(
-          extent={{36,-2},{56,18}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.None,
-          startAngle=0,
-          endAngle=180,
-          closure=EllipseClosure.None),
-        Ellipse(
-          extent={{54,34},{74,14}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.None,
-          startAngle=0,
-          endAngle=180,
-          closure=EllipseClosure.None),
-        Ellipse(
-          extent={{34,14},{54,34}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.None,
-          startAngle=0,
-          endAngle=180,
-          closure=EllipseClosure.None),
-        Rectangle(extent={{-70,20},{-28,-20}}, lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={0,203,203},
+          fillColor={28,108,200},
           fillPattern=FillPattern.Solid),
       Polygon(
-        points={{-10,0},{10,6},{10,-6},{-10,0}},
+        points={{-6,4},{10,14},{10,-6},{-6,4}},
         lineColor={28,108,200},
-        fillColor={28,108,200},
-        fillPattern=FillPattern.Solid,
-          origin={-70,0},
-          rotation=180),
-        Text(
-          extent={{-62,12},{-34,-12}},
-          textColor={28,108,200},
-          textString="D"),
-      Polygon(
-        points={{-2,0},{-22,6},{-22,-6},{-2,0}},
-        lineColor={28,108,200},
-        fillColor={28,108,200},
-        fillPattern=FillPattern.Solid),
-      Polygon(
-        points={{10,0},{-10,6},{-10,-6},{10,0}},
-        lineColor={28,108,200},
-        fillColor={28,108,200},
-        fillPattern=FillPattern.Solid,
-          origin={-50,-18},
-          rotation=90),
+          origin={-136,-26},
+          rotation=270,
+          lineThickness=1,
+          fillColor={28,108,200},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{0,-8},{80,-48}},
+          textColor={0,0,255},
+          fontName="Geist",
+          textString="AC"),
         Line(
-          points={{-96,0},{-78,0}},
-          color={28,108,200},
-          thickness=1),
-        Line(
-          points={{-28,0},{-10,0}},
-          color={28,108,200},
-          thickness=1),
-        Line(
-          points={{12,-18},{32,-18}},
-          color={28,108,200},
+          points={{8,-24},{24,8},{40,-26},{56,-64},{72,-28}},
+          color={0,0,255},
           thickness=1,
           smooth=Smooth.Bezier),
         Line(
-          points={{80,0},{100,0}},
-          color={28,108,200},
-          thickness=1),
+          points={{-68,24},{-8,24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None),
         Line(
-          points={{-50,-22},{-50,-40}},
-          color={28,108,200},
-          thickness=1), Rectangle(
-          extent={{-80,-50},{80,-90}},
-          lineColor={238,46,47},
-          fillColor={234,234,234},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-60,-50},{60,-90}},
+          points={{-68,4},{-8,4}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None,
+          pattern=LinePattern.Dash),      Text(
+          extent={{-80,64},{0,24}},
+          textColor={0,0,0},
+          fontName="Geist",
+          textString="DC"),
+        Line(
+          points={{-60,-56},{60,64}},
+          color={0,0,255},
+          thickness=1,
+          smooth=Smooth.Bezier),
+        Rectangle(extent={{-152,20},{-112,-20}},
+                                               lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-154,20},{-112,-20}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="D",
+          textStyle={TextStyle.Italic}),
+        Text(
+          extent={{60,140},{140,100}},
           textColor={238,46,47},
-          textString="Plim / Qlim")}), Documentation(info="<html>
+          fontName="Geist",
+          textString="Imax"),
+        Line(
+          points={{-40,100},{80,100}},
+          color={238,46,47},
+          pattern=LinePattern.Dash,
+          thickness=1)}),              Documentation(info="<html>
 <p>
 <code>REGFMA1wPQLimiters</code> with the virtual-resistor current limiter of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>,
 built from components: <code>CurrentLimiters.VRe</code> computes the virtual resistance <code>R_e</code> from the droop command

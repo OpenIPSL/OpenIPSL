@@ -92,7 +92,7 @@ equation
   connect(virtualRe.R_e, currentLimitValue.R_e)
     annotation (Line(points={{0,-12},{0,-3}}, color={0,0,127}));
   connect(EmagVal.y, currentLimitValue.Emag)
-    annotation (Line(points={{-59,54},{-36,54}}, color={0,0,127}));
+    annotation (Line(points={{-59,54},{-33,54}}, color={0,0,127}));
   connect(EangVal.y, currentLimitValue.Eang)
     annotation (Line(points={{-59,36},{-33,36}},
                                                color={0,0,127}));
@@ -100,7 +100,7 @@ equation
     annotation (Line(points={{-59,24},{-33,24}},
                                                color={0,0,127}));
   connect(angleVval.y, currentLimitValue.anglev)
-    annotation (Line(points={{-59,6},{-36,6}},
+    annotation (Line(points={{-59,6},{-33,6}},
                                              color={0,0,127}));
   connect(currentLimitValue.ImaxRe, ImaxRe)
     annotation (Line(points={{33,18},{72,18}},   color={0,0,127}));
