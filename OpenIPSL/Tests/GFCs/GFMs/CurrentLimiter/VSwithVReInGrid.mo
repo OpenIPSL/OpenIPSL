@@ -18,55 +18,60 @@ model VSwithVReInGrid
     R_a=VS.R_a,
     X_d=VS.X_d,
     Imax=1.8)
-    annotation (Placement(transformation(extent={{-110,-60},{-90,-40}})));
+    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Sources.Ramp DEm(
     height=-0.3,
     duration=1,
     offset=VS.E0,
     startTime=4) "The commanded internal voltage magnitude: E0 of the power flow, then 0.3 pu lower"
-    annotation (Placement(transformation(extent={{-170,2},{-150,22}})));
+    annotation (Placement(transformation(extent={{-170,40},{-150,60}})));
   Modelica.Blocks.Sources.Ramp DEang(
     height=-Modelica.Constants.pi/8,
     duration=3,
     offset=VS.delta0,
     startTime=6) "The commanded internal voltage angle: delta0 of the power flow, then pi/8 lower"
-    annotation (Placement(transformation(extent={{-170,-28},{-150,-8}})));
+    annotation (Placement(transformation(extent={{-170,0},{-150,20}})));
   Modelica.Blocks.Sources.RealExpression EmagVal(y=VS.Emag) annotation (
-      Placement(transformation(extent={{-144,-54},{-124,-34}})));
+      Placement(transformation(extent={{-180,-40},{-160,-20}})));
   Modelica.Blocks.Sources.RealExpression EangVal(y=VS.Edelta) annotation
-    (Placement(transformation(extent={{-144,-46},{-124,-66}})));
+    (Placement(transformation(extent={{-180,-40},{-160,-60}})));
   Modelica.Blocks.Sources.RealExpression Vval(y=VS.V) annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
-        rotation=180,
-        origin={-70,-44})));
+        rotation=0,
+        origin={-170,-70})));
   Modelica.Blocks.Sources.RealExpression angleVval(y=VS.anglev)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-70,-56})));
+        rotation=0,
+        origin={-170,-90})));
   OpenIPSL.Electrical.Sensors.PwCurrent pwCurrent
     annotation (Placement(transformation(extent={{-56,-10},{-36,10}})));
 equation
-  connect(DEm.y, VS.uEmag) annotation (Line(points={{-149,12},{-124,12}},
-                                   color={0,0,127}));
-  connect(DEang.y, VS.uEang) annotation (Line(points={{-149,-18},{-140,-18},{
-          -140,-12},{-124,-12}}, color={0,0,127}));
+  connect(DEm.y, VS.uEmag) annotation (Line(points={{-149,50},{-134,50},{-134,
+          12},{-124,12}},          color={0,0,127}));
+  connect(DEang.y, VS.uEang) annotation (Line(points={{-149,10},{-134,10},{-134,
+          -12},{-124,-12}},      color={0,0,127}));
   connect(virtualRe.R_e, VS.R_e)
-    annotation (Line(points={{-100,-39},{-100,-24}}, color={0,0,127}));
+    annotation (Line(points={{-98,-60},{-80,-60},{-80,-34},{-100,-34},{-100,-24}},
+                                                     color={0,0,127}));
   connect(EmagVal.y, virtualRe.Emag)
-    annotation (Line(points={{-123,-44},{-112,-44}}, color={0,0,127}));
-  connect(EangVal.y, virtualRe.Eang) annotation (Line(points={{-123,-56},{-112,
-          -56}}, color={0,0,127}));
+    annotation (Line(points={{-159,-30},{-150,-30},{-150,-44},{-142,-44}},
+                                                     color={0,0,127}));
+  connect(EangVal.y, virtualRe.Eang) annotation (Line(points={{-159,-50},{-150,
+          -50},{-150,-52},{-142,-52}},
+                 color={0,0,127}));
   connect(Vval.y, virtualRe.V)
-    annotation (Line(points={{-81,-44},{-88,-44}}, color={0,0,127}));
-  connect(angleVval.y, virtualRe.anglev) annotation (Line(points={{-81,-56},{
-          -88,-56}}, color={0,0,127}));
+    annotation (Line(points={{-159,-70},{-150,-70},{-150,-68},{-142,-68}},
+                                                   color={0,0,127}));
+  connect(angleVval.y, virtualRe.anglev) annotation (Line(points={{-159,-90},{
+          -150,-90},{-150,-76},{-142,-76}},
+                     color={0,0,127}));
   connect(GEN1.p, pwCurrent.n)
     annotation (Line(points={{-30,0},{-36,0}}, color={0,0,255}));
   connect(VS.p, pwCurrent.p)
     annotation (Line(points={{-78,0},{-56,0}}, color={0,0,255}));
-  annotation (experiment(
+  annotation (preferredView="diagram",experiment(
       StopTime=10,
       __Dymola_fixedstepsize=0.01,
       __Dymola_Algorithm="Dassl"), Diagram(coordinateSystem(extent={{-180,-100},

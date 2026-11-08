@@ -51,7 +51,7 @@ equation
     annotation (Line(points={{-30,0},{-36,0}}, color={0,0,255}));
   connect(VS.p, pwCurrent.p)
     annotation (Line(points={{-78,0},{-56,0}}, color={0,0,255}));
-  annotation (experiment(
+  annotation (preferredView="diagram",experiment(
       StopTime=10,
       __Dymola_Algorithm="Dassl"), Diagram(coordinateSystem(extent={{-260,-100},
             {100,100}}, grid={2,2})),

@@ -55,11 +55,44 @@ equation
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
-          lineThickness=1),
+          lineThickness=1,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Text(
           extent={{-100,142},{100,100}},
           textColor={28,108,200},
           textString="%name"),
+        Line(
+          points={{42,0},{102,0}},
+          color={0,0,255},
+          thickness=1),
+        Line(
+          points={{-98,40},{-58,40},{-58,-40},{-98,-40}},
+          color={28,108,200},
+          thickness=1),
+        Line(
+          points={{-58,0},{-38,0}},
+          color={28,108,200},
+          thickness=1),
+        Text(
+          extent={{-80,-54},{80,-114}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="Current Clamp"),
+        Line(
+          points={{-44,-74},{-24,-74},{36,86},{76,86}},
+          color={28,108,200},
+          thickness=1),
+        Line(
+          points={{-44,86},{76,86}},
+          color={238,46,47},
+          pattern=LinePattern.Dash,
+          thickness=1),
+        Text(
+          extent={{-90,88},{-10,48}},
+          textColor={238,46,47},
+          fontName="Geist",
+          textString="Imax"),
         Ellipse(extent={{-38,40},{42,-40}},lineColor={28,108,200},
           lineThickness=1,
           fillColor={255,255,255},
@@ -81,27 +114,7 @@ equation
           fillPattern=FillPattern.None,
           startAngle=0,
           endAngle=180,
-          closure=EllipseClosure.None),
-        Line(
-          points={{42,0},{102,0}},
-          color={0,0,255},
-          thickness=1),
-        Line(
-          points={{-98,40},{-58,40},{-58,-40},{-98,-40}},
-          color={28,108,200},
-          thickness=1),
-        Line(
-          points={{-58,0},{-38,0}},
-          color={28,108,200},
-          thickness=1),
-        Line(
-          points={{-80,-80},{-60,-80},{-20,-60},{80,-60}},
-          color={238,46,47},
-          thickness=1),
-        Text(
-          extent={{20,-62},{100,-98}},
-          textColor={238,46,47},
-          textString="Imax")}),
+          closure=EllipseClosure.None)}),
     Documentation(info="<html>
 <p>
 A voltage source behind the impedance <code>R_a + jX_d</code> (pu on the machine base <code>M_b</code>) whose internal voltage
