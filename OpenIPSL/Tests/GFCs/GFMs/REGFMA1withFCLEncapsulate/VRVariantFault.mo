@@ -11,11 +11,11 @@ model VRVariantFault
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
 equation
   connect(GFC.p, GEN1.p)
-    annotation (Line(points={{-34,0},{-30,0}}, color={0,0,255}));
-  connect(GFC.Pref0, GFC.Pref) annotation (Line(points={{-76,-33},{-76,-50},{-120,
-          -50},{-120,-18},{-104.5,-18}}, color={0,0,127}));
-  connect(GFC.Vref0, GFC.Vref) annotation (Line(points={{-88,-33},{-88,-60},{-130,
-          -60},{-130,18},{-104.5,18}}, color={0,0,127}));
+    annotation (Line(points={{-37,0},{-30,0}}, color={0,0,255}));
+  connect(GFC.Pref0, GFC.Pref) annotation (Line(points={{-58,-31.5},{-58,-50},{-120,
+          -50},{-120,-18},{-103,-18}}, color={0,0,127}));
+  connect(GFC.Vref0, GFC.Vref) annotation (Line(points={{-82,-31.5},{-82,-60},{-130,
+          -60},{-130,18},{-103,18}}, color={0,0,127}));
   annotation (experiment(
       StopTime=10,
       __Dymola_NumberOfIntervals=10000,

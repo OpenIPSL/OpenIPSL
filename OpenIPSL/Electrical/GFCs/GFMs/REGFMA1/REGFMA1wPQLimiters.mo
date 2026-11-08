@@ -70,15 +70,15 @@ model REGFMA1wPQLimiters
         rotation=180,
         origin={-4,92})));
   Interfaces.PwPin p annotation (Placement(transformation(extent={{
-            99,-9},{118,10}}), iconTransformation(extent={{200,-18},{240,22}})));
+            99,-9},{118,10}}), iconTransformation(extent={{200,-20},{240,20}})));
   Modelica.Blocks.Interfaces.RealInput Pref "Active power reference"
                                             annotation (Placement(
-        transformation(extent={{-239,-139},{-199,-99}}), iconTransformation(
+        transformation(extent={{-131,-75},{-101,-45}}), iconTransformation(
           extent={{-240,-140},{-200,-100}})));
   Modelica.Blocks.Interfaces.RealInput Vref "Reference voltage input"
                                             annotation (Placement(
-        transformation(extent={{-239,101},{-209,131}}), iconTransformation(
-          extent={{-239,101},{-200,140}})));
+        transformation(extent={{-131,45},{-101,75}}), iconTransformation(
+          extent={{-240,100},{-200,140}})));
 
   parameter Types.ApparentPower M_b=SysData.S_b "Voltage source base power rating (VA); the control parameters are in pu on this base"
     annotation (Dialog(tab="Voltage Source parameters"));
@@ -177,12 +177,18 @@ model REGFMA1wPQLimiters
         origin={80,-210})));
   Modelica.Blocks.Interfaces.RealOutput omega_dev
     "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
-    annotation (Placement(transformation(extent={{200,90},{220,110}}),
+    annotation (Placement(transformation(extent={{100,40},{120,60}}),
         iconTransformation(extent={{200,90},{220,110}})));
   Modelica.Blocks.Interfaces.RealOutput omega_droop
     "Speed output from the P-f droop controller"
-    annotation (Placement(transformation(extent={{200,50},{220,70}}),
+    annotation (Placement(transformation(extent={{100,20},{120,40}}),
         iconTransformation(extent={{200,50},{220,70}})));
+  Modelica.Blocks.Sources.RealExpression sigOmega_dev(y=pfdroopcntrl.omega_dev)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={70,
+            50})));
+  Modelica.Blocks.Sources.RealExpression sigOmega_droop(y=pfdroopcntrl.omega_droop)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={70,
+            30})));
   parameter Real Pmax=0.9
     "Upper limit of the inverter active power output. Normal Range: [0.1 - 1] pu"
     annotation (Dialog(tab="Pmin/Pmax Limiters", group="Overlad controller parameters"));
@@ -250,12 +256,10 @@ equation
           58},{8,8},{16,8}}, color={0,0,127}));
   connect(pfdroopcntrl.delta_droop, VS.uEang) annotation (Line(points={{1,-32},{
           8,-32},{8,-8},{16,-8}}, color={0,0,127}));
-  connect(Pref, pfdroopcntrl.Pref) annotation (Line(points={{-214,-114},{-96,
-          -114},{-96,-32},{-42,-32}},
-                                color={0,0,127}));
-  connect(Vref, q_v_droop_scheme.Vref) annotation (Line(points={{-216,120},{-84,
-          120},{-84,67},{-42,67}},
-                              color={0,0,127}));
+  connect(Pref, pfdroopcntrl.Pref) annotation (Line(points={{-116,-60},{-96,-60},
+          {-96,-32},{-42,-32}}, color={0,0,127}));
+  connect(Vref, q_v_droop_scheme.Vref) annotation (Line(points={{-116,60},{-84,60},
+          {-84,67},{-42,67}}, color={0,0,127}));
   connect(sigPmeas.y,P_meas)
     annotation (Line(points={{81,90},{110,90}}, color={0,0,127}));
   connect(sigQmeas.y,Q_meas)
@@ -271,10 +275,10 @@ equation
   connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{-4,39.1},{-4,
           30},{-60,30},{-60,-110}},                                                                   color={0,0,127}));
   connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
-  connect(pfdroopcntrl.omega_dev, omega_dev) annotation (Line(points={{1,-54},{
-          64,-54},{64,100},{210,100}},                                                                    color={0,0,127}));
-  connect(pfdroopcntrl.omega_droop, omega_droop) annotation (Line(points={{1,-48},
-          {60,-48},{60,60},{210,60}},          color={0,0,127}));
+  connect(sigOmega_droop.y, omega_droop)
+    annotation (Line(points={{81,30},{110,30}}, color={0,0,127}));
+  connect(sigOmega_dev.y, omega_dev)
+    annotation (Line(points={{81,50},{110,50}}, color={0,0,127}));
   connect(VS.p, p)
     annotation (Line(points={{62,0},{64,0.5},{108.5,0.5}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(extent={{-200,-200},{200,200}}, grid={2,2}),

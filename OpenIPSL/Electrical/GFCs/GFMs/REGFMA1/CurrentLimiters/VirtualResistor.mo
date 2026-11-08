@@ -38,6 +38,17 @@ equation
     annotation (Line(points={{-130,-70},{-90,-70},{-90,-16},{-82,-16}},
                                                                     color={0,0,127}));
   annotation (preferredView="diagram",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-120,120},{120,-120}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-80,-60},{80,-120}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="Virtual Resistor"),
         Line(
           points={{-60,-80},{-40,-80},{40,80},{60,80}},
           color={28,108,200},
@@ -93,10 +104,9 @@ The test is evaluated without an event and not at initialization, as in <code>Cl
 </html>"),
     Diagram(graphics={
         Text(
-          extent={{-10,-55},{110,-72}},
+          extent={{-6,-56},{106,-66}},
           textColor={215,215,215},
           fontName="Geist",
-          fontSize=24,
           textString="Implemented in the Text Layer"),
         Rectangle(
           extent={{28,40},{68,-40}},
@@ -122,20 +132,17 @@ The test is evaluated without an event and not at initialization, as in <code>Cl
           extent={{18,63},{78,43}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="Current Limited
 Droop Voltage"),
         Text(
-          extent={{56,42},{116,22}},
+          extent={{70,32},{100,24}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="ElimMag"),
         Text(
-          extent={{58,-20},{118,-40}},
+          extent={{70,-24},{100,-32}},
           textColor={28,108,200},
           fontName="Geist",
-          fontSize=24,
           textString="ElimAng"),
         Rectangle(
           extent={{-10,70},{110,-70}},
@@ -143,10 +150,9 @@ Droop Voltage"),
           lineThickness=1,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-14,0},{46,-20}},
+          extent={{-20,10},{4,2}},
           textColor={238,46,47},
           fontName="Geist",
-          fontSize=24,
           textString="R_e"),
         Line(
           points={{-38,0},{18,0}},

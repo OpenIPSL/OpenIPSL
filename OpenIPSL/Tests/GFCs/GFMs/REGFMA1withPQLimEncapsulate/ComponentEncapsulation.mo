@@ -48,11 +48,11 @@ model ComponentEncapsulation "Test the REGFM_A1 model within a power system"
     annotation (Placement(transformation(extent={{-240,-120},{-220,-100}})));
 equation
   connect(Vref_up.y, add.u1) annotation (Line(points={{-199,48},{-192,48},
-          {-192,36},{-182,36}}, color={0,0,127}));
+          {-192,38},{-182,38}}, color={0,0,127}));
   connect(Vref_down.y, add.u2) annotation (Line(points={{-199,10},{-194,
           10},{-194,30},{-182,30}}, color={0,0,127}));
   connect(add.y, GFC.Vref) annotation (Line(points={{-159,30},{-154,30},{-154,
-          20},{-144.8,20}}, color={0,0,127}));
+          20},{-143,20}}, color={0,0,127}));
   connect(Pramp.y, add3_1_Pref.u1)
     annotation (Line(points={{-219,-22},{-182,-22}}, color={0,0,127}));
   connect(P_lim_test_1.y, add3_1_Pref.u2) annotation (Line(points={{-219,
@@ -60,15 +60,15 @@ equation
   connect(add3_1_Pref.y, addPref0.u1) annotation (Line(points={{-159,-30},{-162,
           -30},{-162,-52},{-161,-52}}, color={0,0,127}));
   connect(addPref0.y, GFC.Pref) annotation (Line(points={{-149.5,-55},{-148,-55},{-148,
-          -16},{-144.8,-16}}, color={0,0,127}));
-  connect(GFC.Pref0, addPref0.u2) annotation (Line(points={{-116,-31},{-116,-64},{-164,
+          -16},{-143,-16}}, color={0,0,127}));
+  connect(GFC.Pref0, addPref0.u2) annotation (Line(points={{-98,-29.5},{-98,-64},{-164,
           -64},{-164,-58},{-161,-58}}, color={0,0,127}));
-  connect(GFC.Vref0, add.u3) annotation (Line(points={{-128,-31},{-128,-40},{-190,-40},
+  connect(GFC.Vref0, add.u3) annotation (Line(points={{-122,-29.5},{-122,-40},{-190,-40},
           {-190,22},{-182,22}}, color={0,0,127}));
   connect(P_lim_test_2.y, add3_1_Pref.u3) annotation (Line(points={{-219,
           -110},{-194,-110},{-194,-38},{-182,-38}}, color={0,0,127}));
   connect(GFC.p, GEN1.p)
-    annotation (Line(points={{-74,2},{-52,2},{-52,0},{-30,0}},
+    annotation (Line(points={{-77,2},{-52,2},{-52,0},{-30,0}},
                                                color={0,0,255}));
   annotation (experiment(
       StopTime=60,

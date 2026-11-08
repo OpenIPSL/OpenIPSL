@@ -43,8 +43,6 @@ equation
     annotation (Line(points={{21.6667,10},{70,10}},     color={0,0,127}));
   connect(clamp.ElimAng, ElimAng)
     annotation (Line(points={{21.6667,-10},{70,-10}}, color={0,0,127}));
-  connect(ElimMag, ElimMag)
-    annotation (Line(points={{70,10},{70,10}}, color={0,0,127}));
   annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
