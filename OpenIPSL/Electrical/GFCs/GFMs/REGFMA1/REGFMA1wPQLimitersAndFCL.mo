@@ -431,7 +431,7 @@ The current <code>(Edroop - V)/(R_a + jX_d)</code> the droop command would drive
 Above it, with <code>useVirtualResistor = false</code> (the default) the magnitude is clamped to <code>Imax</code> at the angle of the unlimited current, as PSS/E's REGFMA1 and the specification do;
 with <code>useVirtualResistor = true</code> a virtual resistor in series limits it to <code>Imax</code> <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>.
 The clamp is the default because it is what PSS/E's REGFMA1 does; the virtual resistor can lose synchronism after long faults
-(about 0.5 s and more, see <code>VoltageSources.VSIOforGFMwFCL</code>), as [Du2024] also reports.
+(about 0.5 s and more, see <code>CurrentLimiters.ClampOrVirtualResistor</code>), as [Du2024] also reports.
 Both release by themselves when the fault is cleared. With an <code>Imax</code> that is never reached the model gives the trajectories of <code>REGFMA1wPQLimiters</code>.
 The same limiters built from components are <code>REGFMA1wPQLimitersAndClamp</code>, <code>REGFMA1wPQLimitersAndVR</code> and
 <code>REGFMA1wPQLimitersAndReplaceableFCL</code>; they give the trajectories of this model with the same mode.
