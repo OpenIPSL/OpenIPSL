@@ -246,15 +246,17 @@ equation
   annotation (Icon(coordinateSystem(extent={{-200,-200},{200,200}}, grid={2,2}),
     graphics={
         Rectangle(
+          extent={{-200,200},{200,-200}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
           extent={{-80,76},{80,-84}},
           lineColor={0,0,255},
           lineThickness=1,
-          fillColor={234,234,234},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-200,200},{200,-200}},
-          lineColor={28,108,200},
-          lineThickness=1),
         Text(
           extent={{-180,180},{180,100}},
           textColor={28,108,200},
@@ -341,10 +343,10 @@ No Current Limiters"),
         Rectangle(extent={{-160,20},{-120,-20}},
                                                lineColor={28,108,200},
           lineThickness=1,
-          fillColor={215,215,215},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-162,20},{-120,-20}},
+          extent={{-158,18},{-122,-18}},
           textColor={28,108,200},
           fontName="Geist",
           textString="D",

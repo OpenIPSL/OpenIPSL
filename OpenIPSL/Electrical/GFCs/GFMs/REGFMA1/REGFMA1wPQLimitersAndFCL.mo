@@ -242,8 +242,9 @@ model REGFMA1wPQLimitersAndFCL
     "false: clamp of the current magnitude at Imax, at the angle of the unlimited current (PSS/E); true: virtual resistor [Du2024]"
     annotation (Dialog(tab="Fault Current Limiter"));
 equation
-  connect(pfdroopcntrl.Edelta0, VS.Eang0) annotation (Line(points={{-12,-62},{-12,
-          -70},{32,-70},{32,-22}}, color={0,0,127}));
+  connect(pfdroopcntrl.Edelta0, VS.Eang0) annotation (Line(points={{-12,-62},{
+          -12,-70},{40,-70},{40,-22}},
+                                   color={0,0,127}));
   connect(sig_p0.y, gain2P0pu.u) annotation (Line(points={{39,-86},{21.6,-86}},
                         color={0,0,127}));
   connect(gain2P0pu.y, pfdroopcntrl.Pout0)
@@ -282,7 +283,8 @@ equation
     annotation (Line(points={{91,-60},{110,-60}}, color={0,0,127}));
   connect(sigaEdelta.y,Edelta)
     annotation (Line(points={{91,-80},{110,-80}}, color={0,0,127}));
-  connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{4,38},{4,30},{-60,30},{-60,-110}}, color={0,0,127}));
+  connect(q_v_droop_scheme.Vref0, Vref0) annotation (Line(points={{-4,39.1},{-4,
+          30},{-60,30},{-60,-110}},                                                                   color={0,0,127}));
   connect(pfdroopcntrl.Pref0, Pref0) annotation (Line(points={{-20,-61},{-20,-110}}, color={0,0,127}));
   connect(sigOmega_droop.y, omega_droop)
     annotation (Line(points={{81,30},{110,30}}, color={0,0,127}));
@@ -299,7 +301,9 @@ equation
         Rectangle(
           extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
-          lineThickness=1),
+          lineThickness=1,
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
         Text(
           extent={{-200,280},{200,200}},
           textColor={28,108,200},
@@ -308,7 +312,7 @@ equation
           extent={{-80,80},{80,-80}},
           lineColor={0,0,255},
           lineThickness=1,
-          fillColor={234,234,234},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-180,200},{180,120}},
@@ -392,14 +396,8 @@ Current Limiter in Source"),
         Rectangle(extent={{-152,20},{-112,-20}},
                                                lineColor={28,108,200},
           lineThickness=1,
-          fillColor={215,215,215},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-154,20},{-112,-20}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="D",
-          textStyle={TextStyle.Italic}),
         Text(
           extent={{60,140},{140,100}},
           textColor={238,46,47},
@@ -409,7 +407,14 @@ Current Limiter in Source"),
           points={{-40,100},{80,100}},
           color={238,46,47},
           pattern=LinePattern.Dash,
-          thickness=1)}),              Documentation(info="<html>
+          thickness=1),
+        Text(
+          extent={{-150,18},{-114,-18}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="D",
+          textStyle={TextStyle.Italic})}),
+                                       Documentation(info="<html>
 <p>
 This is the third and complete variant of the REGFM_A1 model <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>, PSS/E's REGFMA1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.
 The three variants are stages of one model: <code>REGFMA1Light</code> has the P-f and Q-V droop controls only,

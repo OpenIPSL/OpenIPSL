@@ -286,7 +286,9 @@ equation
         Rectangle(
           extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
-          lineThickness=1),
+          lineThickness=1,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
         Text(
           extent={{-200,280},{200,200}},
           textColor={28,108,200},
@@ -295,7 +297,7 @@ equation
           extent={{-80,80},{80,-80}},
           lineColor={0,0,255},
           lineThickness=1,
-          fillColor={234,234,234},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-180,180},{180,100}},
@@ -379,10 +381,10 @@ No Current Limiters"),
         Rectangle(extent={{-152,20},{-112,-20}},
                                                lineColor={28,108,200},
           lineThickness=1,
-          fillColor={215,215,215},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-154,20},{-112,-20}},
+          extent={{-150,18},{-114,-18}},
           textColor={28,108,200},
           fontName="Geist",
           textString="D",
