@@ -15,6 +15,8 @@ The components of the fault current limiter of REGFM_A1, one function each, to b
 from the droop command and the terminal voltage to the internal voltage applied to the source (<code>VoltageSources.VSIOforGFM</code>).
 <code>Clamp</code> is PSS/E's REGFMA1 (<code>REGFMA1wPQLimitersAndClamp</code>); any of the four can be chosen in
 <code>REGFMA1wPQLimitersAndReplaceableFCL</code>.</li>
+<li><code>ClampDiagram</code>, <code>VirtualResistorDiagram</code>, <code>ClampOrVirtualResistorDiagram</code>: the same limiters built in the diagram layer, which can also be chosen there,
+from <code>CurrentLimitValue</code>, <code>VRe</code> and the blocks <code>ClampLimitedVoltage</code> and <code>VirtualResistorLimitedVoltage</code>.</li>
 </ul>
 <p>
 <code>ClampOrVirtualResistor</code> holds both limiters written as equations rather than as components, selected by a parameter.
