@@ -3,10 +3,7 @@ CurrentLimitValue
 ClampLimitedVoltage
 VirtualResistorLimitedVoltage
 Clamp
-ClampDiagram
 VirtualResistor
-VirtualResistorDiagram
 ClampOrVirtualResistor
-ClampOrVirtualResistorDiagram
 NoLimit
 Base

@@ -15,11 +15,11 @@ The components of the fault current limiter of REGFM_A1, one function each, to b
 from the droop command and the terminal voltage to the internal voltage applied to the source (<code>VoltageSources.VSIOforGFM</code>).
 <code>Clamp</code> is PSS/E's REGFMA1 (<code>REGFMA1wPQLimitersAndClamp</code>); any of the four can be chosen in
 <code>REGFMA1wPQLimitersAndReplaceableFCL</code>.</li>
-<li><code>ClampDiagram</code>, <code>VirtualResistorDiagram</code>, <code>ClampOrVirtualResistorDiagram</code>: the same limiters built in the diagram layer, which can also be chosen there,
-from <code>CurrentLimitValue</code>, <code>VRe</code> and the blocks <code>ClampLimitedVoltage</code> and <code>VirtualResistorLimitedVoltage</code>.</li>
+<li><code>ClampLimitedVoltage</code>, <code>VirtualResistorLimitedVoltage</code>: the internal voltage to apply, from the clamped current or the virtual resistance;
+the blocks of <code>Clamp</code> and <code>VirtualResistor</code> after <code>CurrentLimitValue</code> and <code>VRe</code>.</li>
 </ul>
 <p>
-<code>ClampOrVirtualResistor</code> holds both limiters written as equations rather than as components, selected by a parameter.
+<code>ClampOrVirtualResistor</code> runs <code>Clamp</code> and <code>VirtualResistor</code> and passes on the one selected by a parameter.
 <code>VoltageSources.VSIOforGFMwFCL</code> is a voltage source built on it, used by <code>REGFMA1wPQLimitersAndFCL</code>. The tests in
 <code>OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter</code> exercise each component alone and with a voltage source on a network.
 </p>

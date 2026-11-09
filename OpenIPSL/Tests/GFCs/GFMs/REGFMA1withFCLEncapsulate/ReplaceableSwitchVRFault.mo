@@ -1,6 +1,6 @@
 within OpenIPSL.Tests.GFCs.GFMs.REGFMA1withFCLEncapsulate;
 model ReplaceableSwitchVRFault
-  "REGFMA1wPQLimitersAndReplaceableFCL with the limiter written as equations, on the virtual resistor, on the SMIB: steady start and a fault limited at Imax"
+  "REGFMA1wPQLimitersAndReplaceableFCL with the limiter of both modes, on the virtual resistor, on the SMIB: steady start and a fault limited at Imax"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
       R=1e-4,
@@ -9,7 +9,7 @@ model ReplaceableSwitchVRFault
       t2=2.15));
   Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5,
       redeclare Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.ClampOrVirtualResistor currentLimiter(useVirtualResistor=true))
-    "The limiter replaced by the one written as equations, on the virtual resistor"
+    "The limiter replaced by the one with both modes, on the virtual resistor"
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
 equation
   connect(GFC.p, GEN1.p)

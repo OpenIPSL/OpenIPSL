@@ -1,5 +1,5 @@
 within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
-model ClampOrVirtualResistorCalc "Tests the current limiter written as equations with a falling terminal voltage"
+model ClampOrVirtualResistorCalc "Tests the current limiter with both modes with a falling terminal voltage"
   extends Modelica.Icons.Example;
   parameter Boolean useVirtualResistor=false "Mode of the limiter: false, the clamp; true, the virtual resistor";
   OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.ClampOrVirtualResistor limiter(

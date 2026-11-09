@@ -112,7 +112,7 @@ the extending blocks add what the limiter needs and give the limited internal vo
 <p>
 While the unlimited current <code>(Edroop - V)/(R_a + jX_d)</code> is within <code>Imax</code>, the output is the droop command. Above it, it is the limited internal voltage.
 The test is made on the unlimited current, so the limiter releases by itself when a fault is cleared; it is inactive at initialization and evaluated without an event
-(see <code>ClampOrVirtualResistor</code> for why).
+(see <code>Clamp</code> for why).
 </p>
 </html>"),
     Diagram(coordinateSystem(grid={2,2}), graphics={

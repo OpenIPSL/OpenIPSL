@@ -1,43 +1,72 @@
 within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
 model ClampOrVirtualResistor
-  "Fault current limiter of REGFM_A1 written as equations: the clamp of PSS/E's REGFMA1 or a virtual resistor, selected by a parameter"
+  "Fault current limiter of REGFM_A1: the clamp of PSS/E's REGFMA1 or a virtual resistor, selected by a parameter"
   extends Base.PartialCurrentLimiter;
   parameter Boolean useVirtualResistor=false
     "false: the current is clamped to Imax at the angle of the unlimited current (PSS/E's REGFMA1, the WECC specification); true: a virtual resistor in series limits it to Imax"
     annotation (Dialog(group="Current Limiter Setting"));
-  OpenIPSL.Types.PerUnit R_e(start=0) "Virtual resistance, pu, machine base (zero with the clamp and when not limited)";
-protected
-  Real dE2 "Squared magnitude of Edroop - V";
-  Real cr(start=1) "Real part of the factor c in E = V + c*(Edroop - V)";
-  Real ci(start=0) "Imaginary part of the factor c in E = V + c*(Edroop - V)";
-  Real Elr "Real part of the internal voltage behind R_a + jX_d";
-  Real Eli "Imaginary part of the internal voltage behind R_a + jX_d";
+  VirtualResistor virtualResistor(
+    R_a=R_a,
+    X_d=X_d,
+    Imax=Imax) "The limiter with the virtual resistor"
+    annotation (Placement(transformation(extent={{-60,26},{12,98}})));
+  Clamp clamp(
+    R_a=R_a,
+    X_d=X_d,
+    Imax=Imax) "The limiter with the clamp"
+    annotation (Placement(transformation(extent={{-60,-98},{12,-26}})));
+  Modelica.Blocks.Sources.RealExpression sigEmag(y=Emag) "Droop command, magnitude"
+    annotation (Placement(transformation(extent={{-78,-42},{-66,-34}})));
+  Modelica.Blocks.Sources.RealExpression sigEang(y=Eang) "Droop command, angle"
+    annotation (Placement(transformation(extent={{-78,-60},{-66,-52}})));
+  Modelica.Blocks.Sources.RealExpression sigV(y=V) "Terminal voltage, magnitude"
+    annotation (Placement(transformation(extent={{-78,-72},{-66,-64}})));
+  Modelica.Blocks.Sources.RealExpression sigAnglev(y=anglev) "Terminal voltage, angle"
+    annotation (Placement(transformation(extent={{-78,-87},{-66,-79}})));
+  Modelica.Blocks.Logical.Switch switchMag "The magnitude of the selected limiter"
+    annotation (Placement(transformation(extent={{64,48},{88,72}})));
+  Modelica.Blocks.Logical.Switch switchAng "The angle of the selected limiter"
+    annotation (Placement(transformation(extent={{64,-72},{88,-48}})));
+  Modelica.Blocks.Sources.BooleanConstant selectMag(k=useVirtualResistor) "true selects the virtual resistor"
+    annotation (Placement(transformation(extent={{36,54},{48,66}})));
+  Modelica.Blocks.Sources.BooleanConstant selectAng(k=useVirtualResistor) "true selects the virtual resistor"
+    annotation (Placement(transformation(extent={{36,-66},{48,-54}})));
+  OpenIPSL.Types.PerUnit R_e=if useVirtualResistor then virtualResistor.virtualRe.R_e else 0
+    "Virtual resistance, pu, machine base (zero with the clamp and when not limited)";
 equation
-  dE2 = dEr^2 + dEi^2 "Squared voltage across the source impedance without limiting";
-  if initial() or noEvent(dE2 <= (Imax*Z_a)^2) then
-    R_e = 0 "No virtual resistance";
-    cr = 1 "Not limited: the internal voltage is the droop command";
-    ci = 0 "Not limited: the internal voltage is the droop command";
-  elseif useVirtualResistor then
-    R_e = sqrt(max(dE2/Imax^2 - X_d^2, R_a^2)) - R_a "Virtual resistance for which |Edroop - V|/|R_a + R_e + jX_d| = Imax (the argument is at least R_a^2 in this branch; the bound keeps it real if a tool evaluates the branch elsewhere)";
-    cr = (R_a*(R_a + R_e) + X_d^2)/((R_a + R_e)^2 + X_d^2) "Real part of (R_a + jX_d)/(R_a + R_e + jX_d)";
-    ci = X_d*R_e/((R_a + R_e)^2 + X_d^2) "Imaginary part of (R_a + jX_d)/(R_a + R_e + jX_d)";
-  else
-    R_e = 0 "No virtual resistance with the clamp";
-    cr = Imax*Z_a/sqrt(dE2) "Clamp: the current is scaled to Imax, its angle is that of the unlimited current";
-    ci = 0 "Clamp: the scaling is real";
-  end if;
-  Elr = V*cos(anglev) + cr*dEr - ci*dEi "Internal voltage behind R_a + jX_d, real part: E = V + c*(Edroop - V)";
-  Eli = V*sin(anglev) + cr*dEi + ci*dEr "Internal voltage behind R_a + jX_d, imaginary part: E = V + c*(Edroop - V)";
-  if initial() or noEvent(dE2 <= (Imax*Z_a)^2) then
-    ElimMag = Emag "Not limited: the droop command";
-    ElimAng = Eang "Not limited: the droop command";
-  else
-    ElimMag = sqrt(Elr^2 + Eli^2) "Limited: the magnitude of the internal voltage";
-    ElimAng = Eang + atan2(Eli*cos(Eang) - Elr*sin(Eang), Elr*cos(Eang) + Eli*sin(Eang))
-      "Limited: its angle, written relative to delta_droop so that it follows the droop angle beyond +-pi";
-  end if;
-  annotation (preferredView="text",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  connect(Emag, virtualResistor.Emag)
+    annotation (Line(points={{-130,80},{-80,80},{-80,86},{-63,86}}, color={0,0,127}));
+  connect(Eang, virtualResistor.Eang)
+    annotation (Line(points={{-130,20},{-96,20},{-96,68},{-63,68}}, color={0,0,127}));
+  connect(V, virtualResistor.V)
+    annotation (Line(points={{-130,-20},{-90,-20},{-90,56},{-63,56}}, color={0,0,127}));
+  connect(anglev, virtualResistor.anglev)
+    annotation (Line(points={{-130,-70},{-84,-70},{-84,41},{-63,41}}, color={0,0,127}));
+  connect(sigEmag.y, clamp.Emag)
+    annotation (Line(points={{-65.4,-38},{-63,-38}}, color={0,0,127}));
+  connect(sigEang.y, clamp.Eang)
+    annotation (Line(points={{-65.4,-56},{-63,-56}}, color={0,0,127}));
+  connect(sigV.y, clamp.V)
+    annotation (Line(points={{-65.4,-68},{-63,-68}}, color={0,0,127}));
+  connect(sigAnglev.y, clamp.anglev)
+    annotation (Line(points={{-65.4,-83},{-63,-83}}, color={0,0,127}));
+  connect(virtualResistor.ElimMag, switchMag.u1)
+    annotation (Line(points={{15,80},{40,80},{40,69.6},{61.6,69.6}}, color={0,0,127}));
+  connect(clamp.ElimMag, switchMag.u3)
+    annotation (Line(points={{15,-44},{30,-44},{30,50.4},{61.6,50.4}}, color={0,0,127}));
+  connect(virtualResistor.ElimAng, switchAng.u1)
+    annotation (Line(points={{15,44},{22,44},{22,-50.4},{61.6,-50.4}}, color={0,0,127}));
+  connect(clamp.ElimAng, switchAng.u3)
+    annotation (Line(points={{15,-80},{40,-80},{40,-69.6},{61.6,-69.6}}, color={0,0,127}));
+  connect(selectMag.y, switchMag.u2)
+    annotation (Line(points={{48.6,60},{61.6,60}}, color={255,0,255}));
+  connect(selectAng.y, switchAng.u2)
+    annotation (Line(points={{48.6,-60},{61.6,-60}}, color={255,0,255}));
+  connect(switchMag.y, ElimMag)
+    annotation (Line(points={{89.2,60},{130,60}}, color={0,0,127}));
+  connect(switchAng.y, ElimAng)
+    annotation (Line(points={{89.2,-60},{130,-60}}, color={0,0,127}));
+  annotation (preferredView="diagram",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-120,120},{120,-120}},
           lineColor={28,108,200},
@@ -66,8 +95,8 @@ equation
 Virtual Resistor")}),
     Documentation(info="<html>
 <p>
-The fault current limiter of REGFM_A1, with both of its modes written as equations and selected by the parameter <code>useVirtualResistor</code>.
-It takes the droop command <code>Edroop</code> at the angle <code>delta_droop</code> and the terminal voltage <code>V</code>, and gives the internal voltage
+The fault current limiter of REGFM_A1 with both of its modes: <code>Clamp</code> and <code>VirtualResistor</code> both run, and the two switches pass on the one selected by
+<code>useVirtualResistor</code>. It takes the droop command <code>Edroop</code> at the angle <code>delta_droop</code> and the terminal voltage <code>V</code>, and gives the internal voltage
 to apply behind the impedance <code>R_a + jX_d</code> (pu on the machine base). It can be chosen in <code>REGFMA1wPQLimitersAndReplaceableFCL</code>,
 and <code>VoltageSources.VSIOforGFMwFCL</code> is a voltage source built on it.
 </p>
@@ -90,62 +119,9 @@ faults of 0.5 s at the converter's terminal slip one or more poles, where the cl
 <p>
 In both modes the test is made on the unlimited current, i.e. on the droop command and not on the limited internal voltage,
 so the limiter releases by itself once the fault is cleared and the current falls below <code>Imax</code>.
-Both modes are continuous at <code>|I| = Imax</code>, and the test is evaluated without an event (<code>noEvent</code>),
-at every iterate of the nonlinear solver. With an event, the solver keeps the limiter's previous state while it solves the
-network at a switching; when a fault is cleared with the current limited, OpenModelica then converged to a second solution
-of the network, in which the voltage of a PSS/E load with a low-voltage characteristic is zero and the load passes any current,
-and stayed there. Evaluated at every iterate, the limiter takes the state of the solution the solver is converging to.
-At initialization the limiter is inactive. <code>Clamp</code> and <code>VirtualResistor</code> are the same two limiters built from components.
+Both modes are continuous at <code>|I| = Imax</code>, and the test is evaluated without an event, as <code>Clamp</code> explains. At initialization the limiter is inactive.
 The steady-state current limiting of manufacturers' controls is not represented, as in PSS/E's REGFMA1 and the specification.
 </p>
 </html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, grid={2,2}), graphics={
-        Rectangle(
-          extent={{-60,60},{60,-60}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-54,44},{54,-4}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Clamp or
-Virtual Resistor"),
-        Text(
-          extent={{-54,-14},{54,-48}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Implemented in
-the Text Layer"),
-        Line(
-          points={{-120,80},{-84,80},{-84,30},{-60,30}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{-120,20},{-90,20},{-90,10},{-60,10}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{-120,-20},{-90,-20},{-90,-10},{-60,-10}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{-120,-70},{-84,-70},{-84,-30},{-60,-30}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{60,30},{90,30},{90,60},{120,60}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{60,-30},{90,-30},{90,-60},{120,-60}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash)}));
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, grid={2,2})));
 end ClampOrVirtualResistor;

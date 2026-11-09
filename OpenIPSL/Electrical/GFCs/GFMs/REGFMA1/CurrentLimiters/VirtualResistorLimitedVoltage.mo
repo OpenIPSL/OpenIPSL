@@ -26,7 +26,7 @@ equation
 Gives the internal voltage to apply with the virtual resistor <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>.
 Above <code>Imax</code> it is the voltage behind <code>R_a + jX_d</code> when <code>Edroop</code> drives the current through <code>R_a + R_e + jX_d</code>,
 <code>E = V + c (Edroop - V)</code> with <code>c = (R_a + jX_d)/(R_a + R_e + jX_d)</code>; below it, the droop command. The resistance <code>R_e</code> comes from <code>VRe</code>.
-Used in <code>VirtualResistorDiagram</code>.
+Used in <code>VirtualResistor</code>.
 </p>
 </html>"));
 end VirtualResistorLimitedVoltage;

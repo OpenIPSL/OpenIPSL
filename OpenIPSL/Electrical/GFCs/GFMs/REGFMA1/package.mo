@@ -14,7 +14,7 @@ Package containing the REGFM_A1 model based on <a href=\"modelica://OpenIPSL.Use
 <code>CurrentLimiters.VRe</code> and the source <code>VoltageSources.VSIOwVReInput</code>;</li>
 <li><code>REGFMA1wPQLimitersAndReplaceableFCL</code>: the limiter as a replaceable component (<code>CurrentLimiters.Clamp</code> by default,
 <code>CurrentLimiters.VirtualResistor</code>, <code>CurrentLimiters.ClampOrVirtualResistor</code>, <code>CurrentLimiters.NoLimit</code>);</li>
-<li><code>REGFMA1wPQLimitersAndFCL</code>: both limiters written as equations, <code>CurrentLimiters.ClampOrVirtualResistor</code>, inside one voltage source,
+<li><code>REGFMA1wPQLimitersAndFCL</code>: both limiters, <code>CurrentLimiters.ClampOrVirtualResistor</code>, inside one voltage source,
 <code>VoltageSources.VSIOforGFMwFCL</code>, selected by the parameter <code>useVirtualResistor</code>.</li>
 </ul>
 </li>

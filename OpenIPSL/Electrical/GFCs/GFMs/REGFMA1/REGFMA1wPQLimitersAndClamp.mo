@@ -438,8 +438,8 @@ magnitude <code>Imax</code> at the angle of the unlimited current.
 The droop controls are not changed by the limiter; they keep integrating from the measured power and voltage.
 </p>
 <p>
-The same model with the limiter as a replaceable component is <code>REGFMA1wPQLimitersAndReplaceableFCL</code>; the same limiter written as
-equations in the voltage source is <code>REGFMA1wPQLimitersAndFCL</code> (<code>useVirtualResistor = false</code>). With an <code>Imax</code>
+The same model with the limiter as a replaceable component is <code>REGFMA1wPQLimitersAndReplaceableFCL</code>; the same limiter inside
+the voltage source is <code>REGFMA1wPQLimitersAndFCL</code> (<code>useVirtualResistor = false</code>). With an <code>Imax</code>
 that is never reached the model gives the trajectories of <code>REGFMA1wPQLimiters</code>.
 </p>
 <p>
