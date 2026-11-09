@@ -440,13 +440,15 @@ the voltage source <code>VoltageSources.VSIOforGFM</code>. Any model that extend
 as in <code>REGFMA1wPQLimitersAndClamp</code>;</li>
 <li><code>CurrentLimiters.VirtualResistor</code>: the virtual resistor of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>,
 which gives the trajectories of <code>REGFMA1wPQLimitersAndVR</code>; it can lose synchronism after long faults (see its Documentation);</li>
+<li><code>CurrentLimiters.ClampOrVirtualResistor</code>: both limiters written as equations, selected by its parameter <code>useVirtualResistor</code>,
+which gives the trajectories of <code>REGFMA1wPQLimitersAndFCL</code> in the same mode;</li>
 <li><code>CurrentLimiters.NoLimit</code>: no limiter, the trajectories of <code>REGFMA1wPQLimiters</code>.</li>
 </ul>
 <p>
 The limiter takes the droop command (<code>Edroop</code>, <code>delta_droop</code>) and the terminal voltage of the source, and gives the source the
 internal voltage to apply. <code>Imax</code> (pu, machine base) and the source impedance are passed to the limiter by this model.
 The droop controls are not changed by the limiter; they keep integrating from the measured power and voltage.
-The same limiters written as equations in the voltage source, selected by a parameter, are <code>REGFMA1wPQLimitersAndFCL</code>.
+The same limiters inside the voltage source, selected by a parameter, are <code>REGFMA1wPQLimitersAndFCL</code>.
 </p>
 <p>
 All parameters of the controls are in per unit on the converter base <code>M_b</code> (in VA), as in PSS/E; the measured active and reactive power are converted from the system base.
