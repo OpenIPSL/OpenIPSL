@@ -2,5 +2,6 @@ VRe
 CurrentLimitValue
 Clamp
 VirtualResistor
+ClampOrVirtualResistor
 NoLimit
 Base

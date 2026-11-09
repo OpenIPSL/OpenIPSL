@@ -2,6 +2,7 @@ VReVdrop
 CurrentLimValueCalc
 ClampCalc
 VirtualResistorCalc
+ClampOrVirtualResistorCalc
 VSwithVReInGrid
 VSwithClampInGrid
 VSwithFCLInGrid
