@@ -249,7 +249,7 @@ equation
           extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
           lineThickness=1,
-          fillColor={240,240,240},
+          fillColor={235,235,235},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-80,76},{80,-84}},
