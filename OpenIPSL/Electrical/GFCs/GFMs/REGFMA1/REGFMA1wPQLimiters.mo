@@ -287,7 +287,7 @@ equation
           extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
           lineThickness=1,
-          fillColor={215,215,215},
+          fillColor={229,229,229},
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-200,280},{200,200}},
