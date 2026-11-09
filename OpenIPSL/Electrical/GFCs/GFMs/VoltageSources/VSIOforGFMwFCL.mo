@@ -14,43 +14,49 @@ model VSIOforGFMwFCL
   parameter Boolean useVirtualResistor=false
     "false: the current is clamped to Imax at the angle of the unlimited current (PSS/E's REGFMA1, the WECC specification); true: a virtual resistor in series limits it to Imax"
     annotation (Dialog(group="Fault current limiter"));
+  REGFMA1.CurrentLimiters.ClampOrVirtualResistor currentLimiter(
+    R_a=R_a,
+    X_d=X_d,
+    Imax=Imax,
+    useVirtualResistor=useVirtualResistor,
+    Emag(start=E0),
+    Eang(start=delta0),
+    V(start=v_0),
+    anglev(start=angle_0),
+    ElimMag(start=E0),
+    ElimAng(start=delta0),
+    I_unlim(start=I0),
+    I_mag(start=I0))
+    "The fault current limiter: from the droop command and the terminal voltage to the internal voltage applied"
+    annotation (Placement(transformation(extent={{-30,-30},{30,30}})));
+  Modelica.Blocks.Sources.RealExpression sigV(y=V) "Terminal voltage magnitude"
+    annotation (Placement(transformation(extent={{-80,-24},{-60,-4}})));
+  Modelica.Blocks.Sources.RealExpression sigAnglev(y=anglev) "Terminal voltage angle"
+    annotation (Placement(transformation(extent={{-80,-56},{-60,-36}})));
   Boolean limited(start=false) "true while the unlimited current exceeds Imax";
   OpenIPSL.Types.PerUnit I_unlim(start=I0) "Magnitude of the unlimited current (Edroop - V)/(R_a + jX_d), pu, machine base";
   OpenIPSL.Types.PerUnit I_mag(start=I0) "Magnitude of the output current, pu, machine base";
   OpenIPSL.Types.PerUnit R_e(start=0) "Virtual resistance, pu, machine base (zero with the clamp and when not limited)";
 protected
-  parameter OpenIPSL.Types.PerUnit Z_a=sqrt(R_a^2 + X_d^2) "Magnitude of the source impedance, pu, machine base";
   parameter OpenIPSL.Types.PerUnit I0=sqrt(ir0^2 + ii0^2)/CoB "Current of the power flow, pu, machine base";
-  OpenIPSL.Types.PerUnit dEr(start=Er0 - vr0) "Real part of Edroop - V";
-  OpenIPSL.Types.PerUnit dEi(start=Ei0 - vi0) "Imaginary part of Edroop - V";
-  Real dE2(start=(Er0 - vr0)^2 + (Ei0 - vi0)^2) "Squared magnitude of Edroop - V";
-  Real cr(start=1) "Real part of the factor c in E = V + c*(Edroop - V)";
-  Real ci(start=0) "Imaginary part of the factor c in E = V + c*(Edroop - V)";
 equation
   E = uEmag "The droop command of the magnitude, |Edroop| (VAR(L+1) of PSS/E's REGFMA1)";
   delta = uEang "The droop command of the angle";
-  dEr = E*cos(delta) - p.vr "Edroop - V, real part";
-  dEi = E*sin(delta) - p.vi "Edroop - V, imaginary part";
-  dE2 = dEr^2 + dEi^2 "Squared voltage across the source impedance without limiting";
-  limited = dE2 > (Imax*Z_a)^2 "The unlimited current exceeds Imax (an output; the equations below test the same condition without an event)";
-  I_unlim = sqrt(dE2)/Z_a "Unlimited current magnitude on the machine base";
+  limited = currentLimiter.limited "The state of the limiter";
+  I_unlim = currentLimiter.I_unlim "Unlimited current magnitude on the machine base";
+  I_mag = currentLimiter.I_mag "Output current magnitude on the machine base";
+  R_e = currentLimiter.R_e "Virtual resistance of the limiter";
   assert(I0 < Imax, "The current of the power flow is not below Imax: the fault current limiter cannot start in steady state");
-  if initial() or noEvent(dE2 <= (Imax*Z_a)^2) then
-    R_e = 0 "No virtual resistance";
-    cr = 1 "Not limited: the internal voltage is the droop command";
-    ci = 0 "Not limited: the internal voltage is the droop command";
-  elseif useVirtualResistor then
-    R_e = sqrt(max(dE2/Imax^2 - X_d^2, R_a^2)) - R_a "Virtual resistance for which |Edroop - V|/|R_a + R_e + jX_d| = Imax (the argument is at least R_a^2 in this branch; the bound keeps it real if a tool evaluates the branch elsewhere)";
-    cr = (R_a*(R_a + R_e) + X_d^2)/((R_a + R_e)^2 + X_d^2) "Real part of (R_a + jX_d)/(R_a + R_e + jX_d)";
-    ci = X_d*R_e/((R_a + R_e)^2 + X_d^2) "Imaginary part of (R_a + jX_d)/(R_a + R_e + jX_d)";
-  else
-    R_e = 0 "No virtual resistance with the clamp";
-    cr = Imax*Z_a/sqrt(dE2) "Clamp: the current is scaled to Imax, its angle is that of the unlimited current";
-    ci = 0 "Clamp: the scaling is real";
-  end if;
-  Er = p.vr + cr*dEr - ci*dEi "Internal voltage behind R_a + jX_d, real part: E = V + c*(Edroop - V)";
-  Ei = p.vi + cr*dEi + ci*dEr "Internal voltage behind R_a + jX_d, imaginary part: E = V + c*(Edroop - V)";
-  I_mag = sqrt((cr^2 + ci^2)*dE2)/Z_a "Output current magnitude on the machine base, |c|*|Edroop - V|/|R_a + jX_d|";
+  Er = currentLimiter.ElimMag*cos(currentLimiter.ElimAng) "Internal voltage behind R_a + jX_d from the limiter, real part";
+  Ei = currentLimiter.ElimMag*sin(currentLimiter.ElimAng) "Internal voltage behind R_a + jX_d from the limiter, imaginary part";
+  connect(uEmag, currentLimiter.Emag)
+    annotation (Line(points={{-120,40},{-44,40},{-44,20},{-32.5,20}}, color={0,0,127}));
+  connect(uEang, currentLimiter.Eang)
+    annotation (Line(points={{-120,-40},{-90,-40},{-90,5},{-32.5,5}}, color={0,0,127}));
+  connect(sigV.y, currentLimiter.V)
+    annotation (Line(points={{-59,-14},{-44,-14},{-44,-5},{-32.5,-5}}, color={0,0,127}));
+  connect(sigAnglev.y, currentLimiter.anglev)
+    annotation (Line(points={{-59,-46},{-40,-46},{-40,-17.5},{-32.5,-17.5}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -115,6 +121,23 @@ equation
           startAngle=0,
           endAngle=180,
           closure=EllipseClosure.None)}),
+    Diagram(coordinateSystem(preserveAspectRatio=false), graphics={
+        Line(
+          points={{32.5,15},{60,15},{60,0},{100,0}},
+          color={28,108,200},
+          thickness=1,
+          pattern=LinePattern.Dash),
+        Line(
+          points={{32.5,-15},{60,-15},{60,0}},
+          color={28,108,200},
+          thickness=1,
+          pattern=LinePattern.Dash),
+        Text(
+          extent={{36,-30},{100,-64}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="Er, Ei in
+the Text Layer")}),
     Documentation(info="<html>
 <p>
 A voltage source behind the impedance <code>R_a + jX_d</code> (pu on the machine base <code>M_b</code>) whose internal voltage
@@ -122,30 +145,9 @@ is the droop command <code>Edroop</code> at the angle <code>delta_droop</code> (
 while the current it would drive stays within <code>Imax</code>, with the transient fault current limiting of REGFM_A1.
 </p>
 <p>
-The unlimited current is <code>I = (Edroop - V)/(R_a + jX_d)</code>, computed from the droop command and the terminal voltage <code>V</code>.
-While <code>|I| &le; Imax</code> the internal voltage is the droop command. Once <code>|I| &gt; Imax</code>:
-</p>
-<ul>
-<li><code>useVirtualResistor = false</code> (the default): the clamp of PSS/E's REGFMA1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>
-and of the specification <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>.
-The magnitude of the current is set to <code>Imax</code>, its angle is that of the unlimited current, and the internal voltage is recomputed,
-<code>E = V + (R_a + jX_d) Imax I/|I|</code>.</li>
-<li><code>useVirtualResistor = true</code>: the virtual resistor of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>.
-A resistance <code>R_e</code> in series with the source is chosen so that <code>|Edroop - V|/|R_a + R_e + jX_d| = Imax</code>,
-<code>R_e = sqrt(|Edroop - V|^2/Imax^2 - X_d^2) - R_a</code>. The current magnitude is again <code>Imax</code>;
-its angle turns towards that of <code>Edroop - V</code>, which adds damping.
-For long faults this mode can lose synchronism after the fault is cleared: the droop angle advances during the fault, and the current
-at that angle makes the converter absorb power. [Du2024] reports this for a 0.45 s delayed clearing; on PNNL's validation case of REGFM_A1,
-faults of 0.5 s at the converter's terminal slip one or more poles, where the clamp, PSS/E and PNNL's PSCAD model recover.</li>
-</ul>
-<p>
-In both modes the test is made on the unlimited current, i.e. on the droop command and not on the limited internal voltage,
-so the limiter releases by itself once the fault is cleared and the current falls below <code>Imax</code>.
-Both modes are continuous at <code>|I| = Imax</code>, and the test is evaluated without an event (<code>noEvent</code>),
-at every iterate of the nonlinear solver. With an event, the solver keeps the limiter's previous state while it solves the
-network at a switching; when a fault is cleared with the current limited, OpenModelica then converged to a second solution
-of the network, in which the voltage of a PSS/E load with a low-voltage characteristic is zero and the load passes any current,
-and stayed there. Evaluated at every iterate, the limiter takes the state of the solution the solver is converging to.
+The limiter is the component <code>currentLimiter</code>, <code>REGFMA1.CurrentLimiters.ClampOrVirtualResistor</code>, which describes both modes:
+<code>useVirtualResistor = false</code> (the default) is the clamp of PSS/E's REGFMA1 and <code>useVirtualResistor = true</code> a virtual resistor.
+This class is that limiter fed with the terminal voltage of the source, its output applied as the internal voltage behind <code>R_a + jX_d</code>.
 At initialization the limiter is inactive: the model asserts that the current of the power flow is below <code>Imax</code>,
 the condition for a steady start.
 </p>
