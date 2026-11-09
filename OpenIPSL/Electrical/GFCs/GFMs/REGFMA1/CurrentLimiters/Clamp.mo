@@ -6,40 +6,60 @@ model Clamp
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The current of magnitude Imax at the angle of the unlimited current (no virtual resistance)"
-    annotation (Placement(transformation(extent={{-60,-20},{-20,20}})));
+    annotation (Placement(transformation(extent={{-70,-20},{-30,20}})));
   Modelica.Blocks.Sources.Constant noVirtualResistance(k=0)
     "The clamp has no virtual resistance: the angle is that of the unlimited current"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
-        origin={-40,-70})));
-protected
-  Real Ecr "Real part of the clamped internal voltage V + (R_a + jX_d)*Iclamp";
-  Real Eci "Imaginary part of the clamped internal voltage V + (R_a + jX_d)*Iclamp";
+        origin={-50,-46})));
+  ClampLimitedVoltage limitedVoltage(
+    R_a=R_a,
+    X_d=X_d,
+    Imax=Imax) "The internal voltage that drives the clamped current"
+    annotation (Placement(transformation(extent={{20,-30},{80,30}})));
+  Modelica.Blocks.Sources.RealExpression sigEmag(y=Emag) "Droop command, magnitude"
+    annotation (Placement(transformation(extent={{-10,-4},{10,4}},
+        rotation=90,
+        origin={32,-56})));
+  Modelica.Blocks.Sources.RealExpression sigEang(y=Eang) "Droop command, angle"
+    annotation (Placement(transformation(extent={{-10,-4},{10,4}},
+        rotation=90,
+        origin={44,-56})));
+  Modelica.Blocks.Sources.RealExpression sigV(y=V) "Terminal voltage, magnitude"
+    annotation (Placement(transformation(extent={{-10,-4},{10,4}},
+        rotation=90,
+        origin={56,-56})));
+  Modelica.Blocks.Sources.RealExpression sigAnglev(y=anglev) "Terminal voltage, angle"
+    annotation (Placement(transformation(extent={{-10,-4},{10,4}},
+        rotation=90,
+        origin={68,-56})));
 equation
-  Ecr = V*cos(anglev) + R_a*clampedCurrent.ImaxRe - X_d*clampedCurrent.ImaxIm
-    "The internal voltage that drives the clamped current, real part";
-  Eci = V*sin(anglev) + R_a*clampedCurrent.ImaxIm + X_d*clampedCurrent.ImaxRe
-    "The internal voltage that drives the clamped current, imaginary part";
-  if initial() or noEvent(I_unlim <= Imax) then
-    ElimMag = Emag "Not limited: the droop command";
-    ElimAng = Eang "Not limited: the droop command";
-  else
-    ElimMag = sqrt(Ecr^2 + Eci^2) "Limited: the internal voltage that drives the clamped current";
-    ElimAng = Eang + atan2(Eci*cos(Eang) - Ecr*sin(Eang), Ecr*cos(Eang) + Eci*sin(Eang))
-      "Limited: the angle of the clamped internal voltage, written relative to delta_droop so that it follows the droop angle beyond +-pi";
-  end if;
   connect(Emag, clampedCurrent.Emag)
-    annotation (Line(points={{-130,80},{-70,80},{-70,16},{-62,16}}, color={0,0,127}));
+    annotation (Line(points={{-130,80},{-90,80},{-90,16},{-72,16}}, color={0,0,127}));
   connect(Eang, clampedCurrent.Eang)
-    annotation (Line(points={{-130,20},{-80,20},{-80,4},{-62,4}},       color={0,0,127}));
+    annotation (Line(points={{-130,20},{-96,20},{-96,4},{-72,4}}, color={0,0,127}));
   connect(V, clampedCurrent.V)
-    annotation (Line(points={{-130,-20},{-80,-20},{-80,-4},{-62,-4}},
-                                                                color={0,0,127}));
+    annotation (Line(points={{-130,-20},{-96,-20},{-96,-4},{-72,-4}}, color={0,0,127}));
   connect(anglev, clampedCurrent.anglev)
-    annotation (Line(points={{-130,-70},{-70,-70},{-70,-16},{-62,-16}},
-                                                                    color={0,0,127}));
+    annotation (Line(points={{-130,-70},{-90,-70},{-90,-16},{-72,-16}}, color={0,0,127}));
   connect(noVirtualResistance.y, clampedCurrent.R_e)
-    annotation (Line(points={{-40,-59},{-40,-22}},       color={0,0,127}));
+    annotation (Line(points={{-50,-37.2},{-50,-22}}, color={0,0,127}));
+  connect(clampedCurrent.ImaxRe, limitedVoltage.ImaxRe)
+    annotation (Line(points={{-28,-8},{-6,-8},{-6,12},{17,12}}, color={0,0,127}));
+  connect(clampedCurrent.ImaxIm, limitedVoltage.ImaxIm)
+    annotation (Line(points={{-28,-16},{4,-16},{4,-12},{17,-12}}, color={0,0,127}));
+  connect(sigEmag.y, limitedVoltage.Emag)
+    annotation (Line(points={{32,-45},{32,-33}}, color={0,0,127}));
+  connect(sigEang.y, limitedVoltage.Eang)
+    annotation (Line(points={{44,-45},{44,-33}}, color={0,0,127}));
+  connect(sigV.y, limitedVoltage.V)
+    annotation (Line(points={{56,-45},{56,-33}}, color={0,0,127}));
+  connect(sigAnglev.y, limitedVoltage.anglev)
+    annotation (Line(points={{68,-45},{68,-33}}, color={0,0,127}));
+  connect(limitedVoltage.ElimMag, ElimMag)
+    annotation (Line(points={{83,12},{100,12},{100,60},{130,60}}, color={0,0,127}));
+  connect(limitedVoltage.ElimAng, ElimAng)
+    annotation (Line(points={{83,-12},{100,-12},{100,-60},{130,-60}}, color={0,0,127}));
   annotation (preferredView="diagram",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-120,120},{120,-120}},
@@ -74,7 +94,8 @@ specification of REGFM_A1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">
 and the internal voltage is recomputed, <code>E = V + (R_a + jX_d) Imax I/|I|</code>.
 </p>
 <p>
-The clamped current is computed by <code>CurrentLimitValue</code> with no virtual resistance, which gives the angle of the unlimited current.
+The clamped current is computed by <code>CurrentLimitValue</code> with no virtual resistance, which gives the angle of the unlimited current,
+and <code>ClampLimitedVoltage</code> gives the internal voltage that drives it.
 The test is made on the droop command, not on the applied voltage, so the limiter releases by itself once the fault is cleared.
 </p>
 <p>
@@ -85,86 +106,5 @@ current limited, OpenModelica then converged to a second solution of the network
 characteristic is at zero voltage, and stayed there. Evaluated at every iterate the limiter follows the solution the solver converges to.
 </p>
 </html>"),
-    Diagram(coordinateSystem(grid={2,2}, extent={{-120,-100},{120,100}}),
-        graphics={
-        Text(
-          extent={{-6,-56},{106,-66}},
-          textColor={215,215,215},
-          fontName="Geist",
-          textString="Implemented in the Text Layer"),
-        Rectangle(
-          extent={{32,40},{72,-40}},
-          lineColor={28,108,200},
-          lineThickness=1),
-        Line(
-          points={{40,-20},{48,-20},{58,20},{66,20}},
-          color={28,108,200},
-          thickness=1),
-        Polygon(
-          points={{22,15},{22,25},{31,20},{22,15}},
-          lineColor={28,108,200},
-          lineThickness=1),
-        Polygon(
-          points={{72,15},{72,25},{81,20},{72,15}},
-          lineColor={28,108,200},
-          lineThickness=1),
-        Polygon(
-          points={{72,-25},{72,-15},{81,-20},{72,-25}},
-          lineColor={28,108,200},
-          lineThickness=1),
-        Text(
-          extent={{22,62},{82,42}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Current Limited
-Droop Voltage"),
-        Text(
-          extent={{74,32},{104,24}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="ElimMag"),
-        Polygon(
-          points={{22,-31},{22,-21},{31,-26},{22,-31}},
-          lineColor={28,108,200},
-          lineThickness=1),
-        Text(
-          extent={{74,-24},{104,-32}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="ElimAng"),
-        Rectangle(
-          extent={{-10,70},{110,-70}},
-          lineColor={215,215,215},
-          lineThickness=1,
-          pattern=LinePattern.Dash),
-        Text(
-          extent={{-2,30},{22,22}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="ImaxRe"),
-        Text(
-          extent={{-2,-28},{22,-36}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="ImaxIm"),
-        Line(
-          points={{-16,-8},{-4,-8},{-4,20},{22,20}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{-16,-16},{-4,-16},{-4,-26},{22,-26}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{82,20},{106,20},{106,60},{120,60}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{82,-20},{106,-20},{106,-60},{120,-60}},
-          color={28,108,200},
-          thickness=1,
-          pattern=LinePattern.Dash)}));
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, grid={2,2})));
 end Clamp;

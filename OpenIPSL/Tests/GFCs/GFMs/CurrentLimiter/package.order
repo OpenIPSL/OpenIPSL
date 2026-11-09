@@ -5,9 +5,6 @@ VirtualResistorCalc
 ClampOrVirtualResistorCalc
 ClampLimitedVoltageCalc
 VirtualResistorLimitedVoltageCalc
-ClampDiagramCalc
-VirtualResistorDiagramCalc
-ClampOrVirtualResistorDiagramCalc
 VSwithVReInGrid
 VSwithClampInGrid
 VSwithFCLInGrid

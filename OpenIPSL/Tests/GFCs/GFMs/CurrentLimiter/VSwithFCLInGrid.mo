@@ -59,7 +59,7 @@ equation
 <p>
 Tests the voltage source with the fault current limiter built in, <code>VoltageSources.VSIOforGFMwFCL</code> (<code>Imax = 1.8</code> pu),
 on <code>OpenIPSL.Tests.BaseClasses.SMIB</code>, with the events of <code>VSwithVReInGrid</code> and <code>VSwithClampInGrid</code>:
-the same limiters as there, written as equations in the source instead of as components. The parameter <code>useVirtualResistor</code>
+the same limiters as there, inside the source. The parameter <code>useVirtualResistor</code>
 selects the mode: <code>false</code> (default) gives the trajectories of <code>VSwithClampInGrid</code>, <code>true</code> those of
 <code>VSwithVReInGrid</code>.
 </p>

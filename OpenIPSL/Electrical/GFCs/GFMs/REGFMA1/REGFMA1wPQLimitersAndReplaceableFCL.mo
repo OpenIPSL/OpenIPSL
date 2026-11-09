@@ -440,7 +440,7 @@ the voltage source <code>VoltageSources.VSIOforGFM</code>. Any model that extend
 as in <code>REGFMA1wPQLimitersAndClamp</code>;</li>
 <li><code>CurrentLimiters.VirtualResistor</code>: the virtual resistor of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>,
 which gives the trajectories of <code>REGFMA1wPQLimitersAndVR</code>; it can lose synchronism after long faults (see its Documentation);</li>
-<li><code>CurrentLimiters.ClampOrVirtualResistor</code>: both limiters written as equations, selected by its parameter <code>useVirtualResistor</code>,
+<li><code>CurrentLimiters.ClampOrVirtualResistor</code>: both limiters, selected by its parameter <code>useVirtualResistor</code>,
 which gives the trajectories of <code>REGFMA1wPQLimitersAndFCL</code> in the same mode;</li>
 <li><code>CurrentLimiters.NoLimit</code>: no limiter, the trajectories of <code>REGFMA1wPQLimiters</code>.</li>
 </ul>

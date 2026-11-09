@@ -38,7 +38,7 @@ equation
 <p>
 Gives the internal voltage to apply with the clamp of PSS/E's REGFMA1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.
 Above <code>Imax</code> it is the voltage that drives the clamped current <code>ImaxRe + jImaxIm</code> (from <code>CurrentLimitValue</code>) through the source impedance,
-<code>E = V + (R_a + jX_d) Iclamp</code>; below it, the droop command. Used in <code>ClampDiagram</code>.
+<code>E = V + (R_a + jX_d) Iclamp</code>; below it, the droop command. Used in <code>Clamp</code>.
 </p>
 </html>"));
 end ClampLimitedVoltage;
