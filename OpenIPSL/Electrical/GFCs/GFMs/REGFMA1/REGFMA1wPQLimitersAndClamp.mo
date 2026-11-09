@@ -314,7 +314,9 @@ equation
         Rectangle(
           extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
-          lineThickness=1),
+          lineThickness=1,
+          fillColor={175,175,175},
+          fillPattern=FillPattern.Solid),
         Text(
           extent={{-200,280},{200,200}},
           textColor={28,108,200},
@@ -323,7 +325,7 @@ equation
           extent={{-80,80},{80,-80}},
           lineColor={0,0,255},
           lineThickness=1,
-          fillColor={234,234,234},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-180,200},{180,120}},
@@ -407,14 +409,8 @@ Clamp Current Limiter"),
         Rectangle(extent={{-152,20},{-112,-20}},
                                                lineColor={28,108,200},
           lineThickness=1,
-          fillColor={215,215,215},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-154,20},{-112,-20}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="D",
-          textStyle={TextStyle.Italic}),
         Text(
           extent={{60,140},{140,100}},
           textColor={238,46,47},
@@ -424,7 +420,14 @@ Clamp Current Limiter"),
           points={{-40,100},{80,100}},
           color={238,46,47},
           pattern=LinePattern.Dash,
-          thickness=1)}),              Documentation(info="<html>
+          thickness=1),
+        Text(
+          extent={{-150,18},{-114,-18}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="D",
+          textStyle={TextStyle.Italic})}),
+                                       Documentation(info="<html>
 <p>
 <code>REGFMA1wPQLimiters</code> with the fault current limiter of PSS/E's REGFMA1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>
 and of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2021]</a>, section 3.3, built as a component:
