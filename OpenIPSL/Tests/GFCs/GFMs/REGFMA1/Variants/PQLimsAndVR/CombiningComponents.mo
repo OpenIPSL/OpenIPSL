@@ -95,7 +95,7 @@ model CombiningComponents
     startTime=2.5)
     annotation (Placement(transformation(extent={{-380,-12},{-360,8}})));
   Modelica.Blocks.Sources.Pulse Pfilt_upper(
-    amplitude=8,
+    amplitude=1,
     period=2,
     nperiod=1,
     offset=0,
@@ -210,8 +210,10 @@ Illustrates how to combine the components of REGFM_A1 with the virtual-resistor 
 </p>
 <p>
 The references start from the outputs <code>basic_dROOP.Pref0</code> and <code>q_v_droop_scheme.Vref0</code>, the references of the initial operating point,
-so the model starts in steady state. The changes of the references are those of <code>PQLims.CombiningComponents</code>;
-in addition a fault (0.000001 + j0.001 pu) at bus FAULT from 55 to 55.15 s drives the current above <code>Imax</code>, and the virtual resistance limits it to 1.5 pu.
+so the model starts in steady state. The changes of the references are those of <code>PQLims.CombiningComponents</code>,
+except that the pulse on the active power reference from 5 to 6 s is 1 pu instead of 8 pu: with 2 pu or more the current stays above <code>Imax</code>
+long enough for the converter to lose synchronism, as after a long fault (see <code>Variants.PQLimsAndVR</code>).
+A fault (0.000001 + j0.001 pu) at bus FAULT from 55 to 55.15 s drives the current above <code>Imax</code>, and the virtual resistance limits it to 1.5 pu.
 </p>
 <p>
 Simulate and plot <code>virtualRe.R_e</code>, <code>VS.P</code>, <code>VS.Q</code> and <code>VS.V</code>.
