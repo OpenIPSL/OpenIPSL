@@ -1,4 +1,4 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.PQLimsAndFCL;
 model FaultVirtualResistor
   "Variants.PQLimsAndFCL on the SMIB: steady start and a fault that the virtual resistor limits at Imax"
   extends FaultClamp(useVirtualResistor=true);

@@ -1,5 +1,5 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
-model ClampVariantFault
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.PQLimsAndClamp;
+model Fault
   "Variants.PQLimsAndClamp on the SMIB: steady start and a fault that the clamp component limits at Imax"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
@@ -23,14 +23,14 @@ equation
             {100,100}})),
     Documentation(info="<html>
 <p>
-Tests <code>Variants.PQLimsAndClamp</code>, the clamp of PSS/E's REGFMA1 as a component, with the network and the fault of <code>FaultClamp</code>:
+Tests <code>Variants.PQLimsAndClamp</code>, the clamp of PSS/E's REGFMA1 as a component, with the network and the fault of <code>PQLimsAndFCL.FaultClamp</code>:
 <code>Tests.BaseClasses.SMIB</code>, <code>Imax = 1.5</code> pu, a fault (0.0001 + j0.001 pu) at bus FAULT from 2 to 2.15 s.
 The model starts in steady state (the references are <code>GFC.Pref0</code> and <code>GFC.Vref0</code>); during the fault the clamp holds the current
-at 1.5 pu and releases it when the fault is cleared. Its trajectories are those of <code>FaultClamp</code> and <code>ReplaceableClampFault</code>.
+at 1.5 pu and releases it when the fault is cleared. Its trajectories are those of <code>PQLimsAndFCL.FaultClamp</code> and <code>REGFMA1.FaultClamp</code>.
 </p>
 <p>
 Simulate and plot <code>GFC.currentLimiter.I_unlim</code>, <code>GFC.currentLimiter.I_mag</code>, <code>GFC.currentLimiter.limited</code>,
 <code>GFC.P_meas</code>, <code>GFC.Q_meas</code>, <code>GFC.V</code> and <code>GFC.omega_dev</code>.
 </p>
 </html>"));
-end ClampVariantFault;
+end Fault;

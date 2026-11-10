@@ -1,4 +1,4 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.PQLimsAndClamp;
 model CombiningComponents
   "Test the components of the REGF_A1 model with the clamp current limiter in a power system"
   extends Modelica.Icons.Example;

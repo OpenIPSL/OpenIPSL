@@ -1,5 +1,5 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
-model VRVariantFault
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.PQLimsAndVR;
+model Fault
   "Variants.PQLimsAndVR on the SMIB: steady start and a fault that the virtual resistor limits at Imax"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
@@ -24,12 +24,12 @@ equation
     Documentation(info="<html>
 <p>
 Tests <code>Variants.PQLimsAndVR</code>, the virtual resistor built from <code>CurrentLimiters.Submodels.VRe</code> and the voltage source
-<code>VoltageSources.VSIOwVReInput</code>, with the network and the fault of <code>FaultClamp</code> (<code>Imax = 1.5</code> pu, a fault at bus FAULT
+<code>VoltageSources.VSIOwVReInput</code>, with the network and the fault of <code>PQLimsAndFCL.FaultClamp</code> (<code>Imax = 1.5</code> pu, a fault at bus FAULT
 from 2 to 2.15 s). During the fault the virtual resistance <code>GFC.virtualRe.R_e</code> holds the current at 1.5 pu and returns to zero when the fault is cleared.
-Its trajectories are those of <code>FaultVirtualResistor</code> and <code>ReplaceableVRFault</code>.
+Its trajectories are those of <code>PQLimsAndFCL.FaultVirtualResistor</code> and <code>REGFMA1.FaultVirtualResistor</code>.
 </p>
 <p>
 Simulate and plot <code>GFC.virtualRe.R_e</code>, <code>GFC.P_meas</code>, <code>GFC.Q_meas</code>, <code>GFC.V</code> and <code>GFC.omega_dev</code>.
 </p>
 </html>"));
-end VRVariantFault;
+end Fault;

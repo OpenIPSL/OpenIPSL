@@ -1,5 +1,5 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
-model ReplaceableNoLimitFault
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.REGFMA1;
+model FaultNoLimit
   "Variants.REGFMA1 with no current limiter, on the SMIB: the fault of the other tests, without limiting"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
@@ -26,13 +26,13 @@ equation
     Documentation(info="<html>
 <p>
 Tests <code>Variants.REGFMA1</code> with its current limiter replaced by <code>CurrentLimiters.NoLimit</code>, with the network
-and the fault of <code>FaultClamp</code>. The droop command is applied as it is: the current rises to 1.96 pu during the fault, above
+and the fault of <code>PQLimsAndFCL.FaultClamp</code>. The droop command is applied as it is: the current rises to 1.96 pu during the fault, above
 <code>Imax = 1.5</code> pu, which <code>GFC.currentLimiter.limited</code> reports but does not act on. The trajectories are those of
 <code>Variants.PQLims</code> on the same network and fault.
 </p>
 <p>
 Simulate and plot <code>GFC.currentLimiter.I_mag</code>, <code>GFC.currentLimiter.limited</code>, <code>GFC.P_meas</code>, <code>GFC.Q_meas</code>,
-<code>GFC.V</code> and <code>GFC.omega_dev</code>, and compare with <code>ReplaceableClampFault</code>.
+<code>GFC.V</code> and <code>GFC.omega_dev</code>, and compare with <code>FaultClamp</code>.
 </p>
 </html>"));
-end ReplaceableNoLimitFault;
+end FaultNoLimit;

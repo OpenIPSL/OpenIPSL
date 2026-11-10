@@ -1,5 +1,5 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
-model ReplaceableSwitchClampFault
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.REGFMA1;
+model FaultSwitchClamp
   "Variants.REGFMA1 with the limiter of both modes, on the clamp, on the SMIB: steady start and a fault limited at Imax"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
@@ -26,13 +26,13 @@ equation
     Documentation(info="<html>
 <p>
 Tests <code>Variants.REGFMA1</code> with its current limiter replaced by <code>CurrentLimiters.ClampOrVirtualResistor</code>
-(<code>redeclare</code>), with <code>useVirtualResistor = false</code>, the network and the fault of <code>FaultClamp</code>
-(<code>Imax = 1.5</code> pu, a fault at bus FAULT from 2 to 2.15 s). Its trajectories are those of <code>ReplaceableClampFault</code> and
-<code>FaultClamp</code>; <code>ReplaceableSwitchVRFault</code> is the other position of the switch.
+(<code>redeclare</code>), with <code>useVirtualResistor = false</code>, the network and the fault of <code>PQLimsAndFCL.FaultClamp</code>
+(<code>Imax = 1.5</code> pu, a fault at bus FAULT from 2 to 2.15 s). Its trajectories are those of <code>FaultClamp</code> and
+<code>PQLimsAndFCL.FaultClamp</code>; <code>FaultSwitchVirtualResistor</code> is the other position of the switch.
 </p>
 <p>
 Simulate and plot <code>GFC.currentLimiter.I_unlim</code>, <code>GFC.currentLimiter.I_mag</code>, <code>GFC.P_meas</code>, <code>GFC.Q_meas</code>,
 <code>GFC.V</code> and <code>GFC.omega_dev</code>.
 </p>
 </html>"));
-end ReplaceableSwitchClampFault;
+end FaultSwitchClamp;
