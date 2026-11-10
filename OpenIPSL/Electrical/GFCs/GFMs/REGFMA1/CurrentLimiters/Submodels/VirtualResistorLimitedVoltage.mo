@@ -1,4 +1,4 @@
-within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
+within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels;
 model VirtualResistorLimitedVoltage
   "The internal voltage for which Edroop drives the current through R_a + R_e + jX_d, the droop command when not limited"
   extends Base.PartialLimitedVoltage;

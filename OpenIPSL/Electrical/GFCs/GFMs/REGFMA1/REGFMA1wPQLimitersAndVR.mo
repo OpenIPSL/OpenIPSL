@@ -15,7 +15,7 @@ model REGFMA1wPQLimitersAndVR
     X_d=X_d,
     Imax=Imax) "The voltage source with the virtual resistance as an input"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
-  CurrentLimiters.VRe virtualRe(
+  CurrentLimiters.Submodels.VRe virtualRe(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The virtual resistance that limits the current to Imax, from the droop command and the terminal voltage"
@@ -442,7 +442,7 @@ Virtual Resistor Current Limiter"),
                                        Documentation(info="<html>
 <p>
 <code>REGFMA1wPQLimiters</code> with the virtual-resistor current limiter of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>,
-built from components: <code>CurrentLimiters.VRe</code> computes the virtual resistance <code>R_e</code> from the droop command
+built from components: <code>CurrentLimiters.Submodels.VRe</code> computes the virtual resistance <code>R_e</code> from the droop command
 (<code>Edroop</code>, <code>delta_droop</code>) and the terminal voltage, and the voltage source <code>VoltageSources.VSIOwVReInput</code> puts it in series
 with its impedance, so that the current never exceeds <code>Imax</code> (pu, machine base).
 The droop controls are not changed by the limiter; they keep integrating from the measured power and voltage.

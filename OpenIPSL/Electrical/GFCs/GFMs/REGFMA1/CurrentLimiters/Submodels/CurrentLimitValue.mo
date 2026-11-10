@@ -1,4 +1,4 @@
-within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
+within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels;
 model CurrentLimitValue
   "Determines the current limit value by taking into account the virtual resistance, maximum current magnitude, internal and terminal voltage"
     Modelica.Blocks.Interfaces.RealInput V(start=1.0)
@@ -164,7 +164,7 @@ The current phasor of magnitude <code>Imax</code> (pu, machine base) at the angl
 </p>
 <p>
 With <code>R_e = 0</code> the angle is that of the unlimited current, which is the current the clamp of PSS/E's REGFMA1 keeps while it
-limits the magnitude (<code>CurrentLimiters.Clamp</code> uses this block so); with the virtual resistance of <code>CurrentLimiters.VRe</code>
+limits the magnitude (<code>CurrentLimiters.Clamp</code> uses this block so); with the virtual resistance of <code>VRe</code>
 it is the angle of the current of the virtual-resistor limiter. The outputs are the limited current whether or not the limit is reached:
 the block does not decide when to limit.
 </p>

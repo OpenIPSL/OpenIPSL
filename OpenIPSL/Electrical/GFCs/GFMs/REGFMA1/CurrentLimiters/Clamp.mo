@@ -2,7 +2,7 @@ within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
 model Clamp
   "Current limiter of PSS/E's REGFMA1: the current is clamped to Imax at the angle of the unlimited current"
   extends Base.PartialCurrentLimiter;
-  CurrentLimitValue clampedCurrent(
+  Submodels.CurrentLimitValue clampedCurrent(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The current of magnitude Imax at the angle of the unlimited current (no virtual resistance)"
@@ -12,7 +12,7 @@ model Clamp
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-50,-48})));
-  ClampLimitedVoltage limitedVoltage(
+  Submodels.ClampLimitedVoltage limitedVoltage(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The internal voltage that drives the clamped current"
