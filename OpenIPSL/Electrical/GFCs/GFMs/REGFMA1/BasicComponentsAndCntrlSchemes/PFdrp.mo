@@ -38,6 +38,10 @@ model PFdrp "P-f droop controller"
     "Speed output from the P-f droop controller"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
         iconTransformation(extent={{100,-70},{120,-50}})));
+  Modelica.Blocks.Interfaces.RealOutput omega_dev
+    "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}}),
+        iconTransformation(extent={{100,-100},{120,-80}})));
   Modelica.Blocks.Interfaces.RealOutput delta_droop
     "Desired internal angle from the P-f droop controller"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
@@ -83,6 +87,7 @@ equation
   connect(integrator.u, w0Gain.y)
     annotation (Line(points={{50.8,0},{39,0}},
                                              color={0,0,127}));
+  connect(sum_Plim.y, omega_dev) annotation (Line(points={{1,-6},{8,-6},{8,-90},{110,-90}}, color={0,0,127}));
   connect(integrator.y, delta_droop)
     annotation (Line(points={{64.6,0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -103,6 +108,7 @@ equation
 
 <p>
 The gain block \"mpGain\" has a parameter <code>k=mp</code> that is used to set the droop value. The reminder of the model determines the angle and the frequency of the converter.
+The output <code>omega_droop</code> is the speed in rad/s; <code>omega_dev</code> is the speed deviation in pu, <code>(omega_droop - omega0)/omega0</code>, the quantity PSS/E reports in its SPD channel.
 </p>
 
 <p>
