@@ -14,7 +14,7 @@ model VSwithVReInGrid
     angle_0=0.070620799598684,
     Imax=virtualRe.Imax) "The source at bus GEN1, on its power flow"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.VRe virtualRe(
+  Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.VRe virtualRe(
     R_a=VS.R_a,
     X_d=VS.X_d,
     Imax=1.8)
@@ -79,7 +79,7 @@ equation
     Documentation(info="<html>
 <p>
 Tests the voltage source with a virtual-resistance input, <code>VoltageSources.VSIOwVReInput</code>, with the virtual resistance computed by
-<code>REGFMA1.CurrentLimiters.VRe</code> (<code>Imax = 1.8</code> pu), on <code>OpenIPSL.Tests.BaseClasses.SMIB</code>.
+<code>REGFMA1.CurrentLimiters.Submodels.VRe</code> (<code>Imax = 1.8</code> pu), on <code>OpenIPSL.Tests.BaseClasses.SMIB</code>.
 The commanded internal voltage starts at the source's power flow (<code>VS.E0</code>, <code>VS.delta0</code>), so the test starts in steady state.
 </p>
 <p>

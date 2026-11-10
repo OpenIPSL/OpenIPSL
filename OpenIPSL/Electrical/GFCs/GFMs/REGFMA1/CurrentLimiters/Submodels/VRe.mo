@@ -1,4 +1,4 @@
-within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
+within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels;
 model VRe "Virtual Resistor Computation"
   Modelica.Blocks.Interfaces.RealInput Emag
     "Input to vary the voltage magnitude of the voltage source" annotation (

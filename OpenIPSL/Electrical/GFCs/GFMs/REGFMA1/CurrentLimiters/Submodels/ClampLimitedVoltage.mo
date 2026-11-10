@@ -1,4 +1,4 @@
-within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
+within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels;
 model ClampLimitedVoltage
   "The internal voltage that drives the clamped current: V + (R_a + jX_d)*Iclamp above Imax, the droop command below it"
   extends Base.PartialLimitedVoltage;

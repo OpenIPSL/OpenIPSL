@@ -61,7 +61,7 @@ model VSIOwVReInput
     annotation (Dialog(tab="Voltage Source parameters"));
   parameter OpenIPSL.Types.PerUnit X_d=0.2 "Internal source d-axis reactance, pu, machine base"
     annotation (Dialog(tab="Voltage Source parameters"));
-  parameter OpenIPSL.Types.PerUnit Imax = 2.0 "Inverter allowable maximum output current, pu, machine base (not used by this model's equations: the limit is imposed by the R_e computed outside, CurrentLimiters.VRe)"
+  parameter OpenIPSL.Types.PerUnit Imax = 2.0 "Inverter allowable maximum output current, pu, machine base (not used by this model's equations: the limit is imposed by the R_e computed outside, CurrentLimiters.Submodels.VRe)"
     annotation (Dialog(tab="Current Limiter Setting"));
 
   OpenIPSL.Types.PerUnit V(start=v_0) "Bus voltage magnitude";
@@ -192,7 +192,7 @@ which are the real and imaginary input
 A voltage source behind the impedance <code>R_a + R_e + jX_d</code> (pu on the machine base <code>M_b</code>, in VA),
 where <code>R_e</code> is a virtual resistance given by the input of the same name: the source of the virtual-resistor current limiter
 of REGFM_A1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>.
-The input <code>R_e</code> is computed outside, by <code>REGFMA1.CurrentLimiters.VRe</code>, from the commanded internal voltage
+The input <code>R_e</code> is computed outside, by <code>REGFMA1.CurrentLimiters.Submodels.VRe</code>, from the commanded internal voltage
 (the inputs <code>uEmag</code>, <code>uEang</code>) and the terminal voltage; with <code>R_e = 0</code> this is a plain voltage source behind
 <code>R_a + jX_d</code>.
 </p>

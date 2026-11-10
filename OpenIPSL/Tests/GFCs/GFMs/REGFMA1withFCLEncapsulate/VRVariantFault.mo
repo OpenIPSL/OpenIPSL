@@ -23,7 +23,7 @@ equation
             {100,100}})),
     Documentation(info="<html>
 <p>
-Tests <code>REGFMA1wPQLimitersAndVR</code>, the virtual resistor built from <code>CurrentLimiters.VRe</code> and the voltage source
+Tests <code>REGFMA1wPQLimitersAndVR</code>, the virtual resistor built from <code>CurrentLimiters.Submodels.VRe</code> and the voltage source
 <code>VoltageSources.VSIOwVReInput</code>, with the network and the fault of <code>FaultClamp</code> (<code>Imax = 1.5</code> pu, a fault at bus FAULT
 from 2 to 2.15 s). During the fault the virtual resistance <code>GFC.virtualRe.R_e</code> holds the current at 1.5 pu and returns to zero when the fault is cleared.
 Its trajectories are those of <code>FaultVirtualResistor</code> and <code>ReplaceableVRFault</code>.
