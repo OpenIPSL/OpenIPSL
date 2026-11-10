@@ -20,6 +20,10 @@ partial model PFdrpCntrlSchemeBase
     "Speed output from the P-f droop controller"
     annotation (Placement(transformation(extent={{200,-90},{220,-70}}),
         iconTransformation(extent={{200,-90},{220,-70}})));
+  Modelica.Blocks.Interfaces.RealOutput omega_dev
+    "Speed deviation from the P-f droop controller, pu (the SPD channel of PSS/E)"
+    annotation (Placement(transformation(extent={{200,-150},{220,-130}}),
+        iconTransformation(extent={{200,-150},{220,-130}})));
   Modelica.Blocks.Interfaces.RealOutput delta_droop
     "Desired internal angle from the P-f droop controller"
     annotation (Placement(transformation(extent={{200,70},{220,90}}),
@@ -40,6 +44,12 @@ partial model PFdrpCntrlSchemeBase
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-80,-220})));
+  Modelica.Blocks.Interfaces.RealOutput Pref0
+    "Active power reference of the initial operating point, to be fed back to Pref"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,-210})));
 
   parameter Real f0=SysData.fn "Synchronous frequency, f0 = 50 or 60 Hz"
     annotation (Dialog(group="P-f droop controller parameters"));
@@ -54,6 +64,7 @@ initial equation
         delta0 = Edelta0 "Assign the value coming from the voltage source to the initial value of the internal angle delta0 used by the droop block";
     P0 = Pout0 "Assigne the value coming from the voltage source to the inital value of P0 used by the filter block";
 equation
+  Pref0 = P0 "At the initial operating point the frequency is nominal, so Pref = Pfilt = P0 (the P limiter output is zero with P0 inside its limits)";
   connect(pfdroop.omega_droop, omega_droop) annotation (Line(points={{22,-12},
           {60,-12},{60,-80},{210,-80}},
                                     color={0,0,127}));
@@ -67,6 +78,7 @@ equation
                                                 color={0,0,127}));
   connect(Edelta0, pfdroop.Edelta0) annotation (Line(points={{80,-220},{80,-180},
           {8,-180},{8,-24}},color={0,0,127}));
+  connect(pfdroop.omega_dev, omega_dev) annotation (Line(points={{22,-18},{40,-18},{40,-140},{210,-140}}, color={0,0,127}));
   connect(pfdroop.delta_droop, delta_droop)
     annotation (Line(points={{22,0},{120,0},{120,80},{210,80}},
                                               color={0,0,127}));
@@ -90,5 +102,9 @@ equation
 This is a partial model (or base model) that is extended to implement the P-f droop scheme variants.
 It contains the basic droop function and the active power measurement filter.
 A red triangle indicates the input for the signal of the active power limiters.
+<p>
+The output <code>Pref0</code> is the active power reference that holds the initial operating point, the initial active power <code>P0</code>.
+A test feeds it back to the input <code>Pref</code>.
+</p>
 </html>"));
 end PFdrpCntrlSchemeBase;
