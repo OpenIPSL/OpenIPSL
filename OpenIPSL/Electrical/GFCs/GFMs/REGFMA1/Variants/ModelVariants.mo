@@ -18,6 +18,8 @@ They differ only in the limiters they add:
 <p>
 <strong>Use <code>REGFMA1</code> by default.</strong> Its default limiter is the clamp of PSS/E's REGFMA1,
 and the limiter can be changed in its parameter dialog without changing the model or its connections.
+With the limiter <code>NoLimit</code> it gives the trajectories of <code>PQLims</code>. If the P and Q limits are also set very wide
+(for example <code>Pmax = Qmax = 1e12</code> and <code>Pmin = Qmin = -1e12</code>), as one would do in a power system tool, it gives those of <code>Light</code>.
 </p>
 <p>
 For the same limiter, the variants with a fault current limiter give the same results.
