@@ -54,7 +54,8 @@ equation
           textString="reference.y: P, Q, V, I and speed deviation in PSS/E")}), Documentation(info="<html>
 <p>
 <code>Variants.REGFMA1</code> with the data of PNNL's cases (machine base 0.1 MVA, <code>Imax</code> = 2 pu), and the table <code>reference</code> holding PSS/E's result.
-The test that extends this model gives the case and the file of the table; the package <code>PNNL</code> says what to plot.
+The test that extends this model gives the case and the file of the table;
+<a href=\"modelica://OpenIPSL.Tests.GFCs.GFMs.REGFMA1.PNNL.ValidationCases\">ValidationCases</a> and each test say what to plot against it.
 </p>
 </html>"));
 end BaseCase;
