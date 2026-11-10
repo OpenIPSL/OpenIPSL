@@ -1,9 +1,9 @@
 within OpenIPSL.Tests.GFCs.GFMs.BasicComponents;
 model Pfbasic "Tests the PFdrp"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.PFdrp
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.PFdrp
     pfbasic annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.LPFilter lowPassFilter
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.LPFilter lowPassFilter
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={-50,-30})));

@@ -9,12 +9,12 @@ model CombiningComponents
       t2=55.15));
   Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60)
     annotation (Placement(transformation(extent={{-100,-20},{-60,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Clamp clamp(
+  Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Clamp clamp(
     R_a=VS.R_a,
     X_d=VS.X_d,
     Imax=1.5) "The current limiter between the droop controls and the voltage source"
     annotation (Placement(transformation(extent={{-160,-20},{-120,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.PfdrpControlSchemePLim
+  Electrical.GFCs.GFMs.REGFMA1.Components.PQLimitersAndCntrlSchemes.PfdrpControlSchemePLim
     basic_dROOP(
     f0=60,
     mp=0.01,
@@ -38,7 +38,7 @@ model CombiningComponents
     annotation (Placement(transformation(extent={{-340,120},{-320,140}})));
   Modelica.Blocks.Math.Add3 add "Vref = Vref0 of the initial operating point plus the two ramps"
     annotation (Placement(transformation(extent={{-300,140},{-280,160}})));
-  Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.QVdrpCntrlSchemeQLim
+  Electrical.GFCs.GFMs.REGFMA1.Components.PQLimitersAndCntrlSchemes.QVdrpCntrlSchemeQLim
     q_v_droop_scheme(
     QVFlag_val_k=true,
     VFlag_val_k=true,
@@ -66,17 +66,17 @@ model CombiningComponents
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-198,174})));
-  Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.Plimiter plimiter
+  Electrical.GFCs.GFMs.REGFMA1.Components.PQLimitersAndCntrlSchemes.Plimiter plimiter
     annotation (Placement(transformation(extent={{-260,-100},{-220,-140}})));
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.LPFilter Pfilt
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.LPFilter Pfilt
     annotation (Placement(transformation(extent={{-300,-130},{-280,-110}})));
   Modelica.Blocks.Sources.RealExpression sig_Pmeas_4pfilt(y=VS.P_meas)
     annotation (Placement(transformation(extent={{-330,-130},{-310,-110}})));
-  Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.Qlimiter qlimiter
+  Electrical.GFCs.GFMs.REGFMA1.Components.PQLimitersAndCntrlSchemes.Qlimiter qlimiter
     annotation (Placement(transformation(extent={{-280,80},{-240,40}})));
   Modelica.Blocks.Sources.RealExpression sig_Qmeas_4qfilt(y=VS.Q_meas)
     annotation (Placement(transformation(extent={{-340,50},{-320,70}})));
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.LPFilter Qfilt(y0val=
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.LPFilter Qfilt(y0val=
         5.416582/100)
     annotation (Placement(transformation(extent={{-310,50},{-290,70}})));
   Modelica.Blocks.Math.Add3 add3_1_Pref
@@ -192,7 +192,7 @@ equation
     Documentation(info="<html>
 <p>
 Illustrates how to combine the components of REGFM_A1 with a current limiter, without encapsulating them:
-<code>REGFMA1withPQLimEncapsulate.CombiningComponents</code> with the clamp current limiter, <code>REGFMA1.CurrentLimiters.Clamp</code>
+<code>REGFMA1withPQLimEncapsulate.CombiningComponents</code> with the clamp current limiter, <code>REGFMA1.Components.CurrentLimiters.Clamp</code>
 (<code>Imax = 1.5</code> pu), between the droop controls (<code>q_v_droop_scheme.Edroop</code>, <code>basic_dROOP.delta_droop</code>) and the voltage source
 <code>VS</code>, which gives the limiter its terminal voltage. This is how <code>REGFMA1wPQLimitersAndClamp</code> is built.
 </p>

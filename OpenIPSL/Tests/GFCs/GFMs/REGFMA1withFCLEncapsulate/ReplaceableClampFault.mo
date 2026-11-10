@@ -7,7 +7,7 @@ model ReplaceableClampFault
       X=1e-3,
       t1=2.0,
       t2=2.15));
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5)
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5)
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
 equation
   connect(GFC.p, GEN1.p)

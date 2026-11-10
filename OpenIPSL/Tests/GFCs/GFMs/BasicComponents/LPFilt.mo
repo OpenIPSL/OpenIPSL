@@ -1,7 +1,7 @@
 within OpenIPSL.Tests.GFCs.GFMs.BasicComponents;
 model LPFilt "Test LPFilter"
   extends Modelica.Icons.Example;
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.LPFilter lowPassFilter
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.LPFilter lowPassFilter
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
   Modelica.Blocks.Sources.Step step(offset=40.0/100, startTime=1)
     annotation (Placement(transformation(extent={{-80,-20},{-40,20}})));

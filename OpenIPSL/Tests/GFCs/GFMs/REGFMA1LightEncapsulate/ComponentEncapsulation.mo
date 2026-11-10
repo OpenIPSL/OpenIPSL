@@ -28,7 +28,7 @@ model ComponentEncapsulation "Test the packaged REGF_A1_Light model"
     annotation (Placement(transformation(extent={{-180,20},{-160,40}})));
   Modelica.Blocks.Math.Add addPref0 "Pref = Pref0 of the initial operating point plus the ramp"
     annotation (Placement(transformation(extent={{-160,-30},{-150,-20}})));
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1Light GFC(
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1Light GFC(
     R_a=1e-12,
     X_d=0.001,
     mp=0.02,

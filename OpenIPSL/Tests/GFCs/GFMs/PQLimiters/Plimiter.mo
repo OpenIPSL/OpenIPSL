@@ -1,7 +1,7 @@
 within OpenIPSL.Tests.GFCs.GFMs.PQLimiters;
 model Plimiter "Tests the Plimiter"
   extends Modelica.Icons.Example;
-  Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.Plimiter Plim_upper
+  Electrical.GFCs.GFMs.REGFMA1.Components.PQLimitersAndCntrlSchemes.Plimiter Plim_upper
     annotation (Placement(transformation(extent={{-20,40},{20,80}})));
   Modelica.Blocks.Sources.Constant P0_ini(k=0.1)
     annotation (Placement(transformation(extent={{-42,-10},{-22,10}})));
@@ -15,7 +15,7 @@ model Plimiter "Tests the Plimiter"
   Modelica.Blocks.Interfaces.RealOutput Plim_out_upper
     "Active power limiter output signal"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
-  Electrical.GFCs.GFMs.REGFMA1.PQLimitersAndCntrlSchemes.Plimiter Plim_lower
+  Electrical.GFCs.GFMs.REGFMA1.Components.PQLimitersAndCntrlSchemes.Plimiter Plim_lower
     annotation (Placement(transformation(extent={{-20,-20},{20,-60}})));
   Modelica.Blocks.Sources.Pulse Pfilt_lower(
     amplitude=-0.5,

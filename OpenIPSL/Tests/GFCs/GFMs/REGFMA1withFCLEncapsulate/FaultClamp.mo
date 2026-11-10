@@ -8,7 +8,7 @@ model FaultClamp
       t1=2.0,
       t2=2.15));
   parameter Boolean useVirtualResistor=false "Mode of the fault current limiter of the converter";
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimitersAndFCL GFC(Imax=1.5,
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1wPQLimitersAndFCL GFC(Imax=1.5,
       useVirtualResistor=useVirtualResistor)
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
 equation

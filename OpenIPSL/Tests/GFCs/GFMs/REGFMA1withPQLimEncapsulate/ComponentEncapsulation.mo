@@ -20,7 +20,7 @@ model ComponentEncapsulation "Test the REGFM_A1 model within a power system"
     annotation (Placement(transformation(extent={{-220,0},{-200,20}})));
   Modelica.Blocks.Math.Add3 add "Vref = Vref0 of the initial operating point plus the two ramps"
     annotation (Placement(transformation(extent={{-180,20},{-160,40}})));
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimiters GFC(angle_0=0.0706207995986839)
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1wPQLimiters GFC(angle_0=0.0706207995986839)
     annotation (Placement(transformation(extent={{-140,-28},{-80,32}})));
   Modelica.Blocks.Math.Add3 add3_1_Pref annotation (Placement(
         transformation(extent={{-180,-40},{-160,-20}})));

@@ -1,7 +1,7 @@
 within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
 model ClampLimitedVoltageCalc "Tests the internal voltage of the clamp, fed by CurrentLimitValue, with a falling terminal voltage"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.CurrentLimitValue clampedCurrent(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.CurrentLimitValue clampedCurrent(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5) "The current of magnitude Imax at the angle of the unlimited current"
@@ -10,7 +10,7 @@ model ClampLimitedVoltageCalc "Tests the internal voltage of the clamp, fed by C
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-30,-30})));
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.ClampLimitedVoltage limitedVoltage(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.ClampLimitedVoltage limitedVoltage(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5)
@@ -81,7 +81,7 @@ equation
   annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
-Tests <code>REGFMA1.CurrentLimiters.Submodels.ClampLimitedVoltage</code> fed by <code>CurrentLimitValue</code>, with the inputs of <code>ClampCalc</code>.
+Tests <code>REGFMA1.Components.CurrentLimiters.Submodels.ClampLimitedVoltage</code> fed by <code>CurrentLimitValue</code>, with the inputs of <code>ClampCalc</code>.
 Its outputs are those of <code>ClampCalc</code>.
 </p>
 <p>

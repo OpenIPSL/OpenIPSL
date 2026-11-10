@@ -1,7 +1,7 @@
 within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
 model VirtualResistorCalc "Tests the virtual-resistor current limiter with a falling terminal voltage"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.VirtualResistor virtualResistor(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.VirtualResistor virtualResistor(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5)
@@ -48,7 +48,7 @@ equation
   annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
-Tests <code>REGFMA1.CurrentLimiters.VirtualResistor</code> alone, with the inputs of <code>ClampCalc</code>. While the unlimited current
+Tests <code>REGFMA1.Components.CurrentLimiters.VirtualResistor</code> alone, with the inputs of <code>ClampCalc</code>. While the unlimited current
 <code>virtualResistor.I_unlim</code> is below <code>Imax = 1.5</code> pu, the internal voltage applied is the droop command and the virtual resistance
 <code>virtualResistor.virtualRe.R_e</code> is zero; once it exceeds it, <code>R_e</code> rises so that the current <code>virtualResistor.I_mag</code>
 stays at 1.5 pu. The magnitude is that of <code>ClampCalc</code>; the angle of the current, and so the applied voltage, differ.

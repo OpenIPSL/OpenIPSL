@@ -2,7 +2,7 @@ within OpenIPSL.Tests.GFCs.GFMs.BasicComponents;
 model QVqvflag1vflag1
   "Tests the Q-v control scheme with QVFLAG = 1 and VFLAG = 1"
   extends Modelica.Icons.Example;
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.QVdrpCntrlScheme q_v_droop_scheme(
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.QVdrpCntrlScheme q_v_droop_scheme(
       QVFlag_val_k=true, VFlag_val_k=true)
     annotation (Placement(transformation(extent={{-40,-40},{40,40}})));
   Modelica.Blocks.Sources.Step Vref_step(

@@ -22,7 +22,7 @@ model PFdrpScheme "Test"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={30,-70})));
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.PFdrpScheme p_f_droop_scheme_nolims
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.PFdrpScheme p_f_droop_scheme_nolims
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
   connect(Pref.y, p_f_droop_scheme_nolims.Pref) annotation (Line(points={{-79,10},

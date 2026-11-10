@@ -2,7 +2,7 @@ within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
 model CurrentLimValueCalc
   "Tests the calculation of the current limit value imposing Imax magnitude"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.VRe virtualRe(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.VRe virtualRe(
       R_a=1e-6, Imax=1.5)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
@@ -30,7 +30,7 @@ model CurrentLimValueCalc
         origin={24,-84})));
   Modelica.Blocks.Sources.RealExpression EangVal(y=Eang.y)
     annotation (Placement(transformation(extent={{-80,28},{-60,44}})));
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.CurrentLimitValue
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.CurrentLimitValue
     currentLimitValue(
     R_a=virtualRe.R_a,
     X_d=virtualRe.X_d,
