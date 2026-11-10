@@ -1,5 +1,5 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
-model ReplaceableClampFault
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.REGFMA1;
+model FaultClamp
   "Variants.REGFMA1 with its default limiter, the clamp, on the SMIB: steady start and a fault limited at Imax"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
@@ -24,12 +24,12 @@ equation
     Documentation(info="<html>
 <p>
 Tests <code>Variants.REGFMA1</code> with its default current limiter, <code>CurrentLimiters.Clamp</code>, with the network and
-the fault of <code>FaultClamp</code> (<code>Imax = 1.5</code> pu, a fault at bus FAULT from 2 to 2.15 s). Its trajectories are those of
-<code>ClampVariantFault</code> and <code>FaultClamp</code>; <code>ReplaceableVRFault</code> replaces the limiter.
+the fault of <code>PQLimsAndFCL.FaultClamp</code> (<code>Imax = 1.5</code> pu, a fault at bus FAULT from 2 to 2.15 s). Its trajectories are those of
+<code>PQLimsAndClamp.Fault</code> and <code>PQLimsAndFCL.FaultClamp</code>; <code>FaultVirtualResistor</code> replaces the limiter.
 </p>
 <p>
 Simulate and plot <code>GFC.currentLimiter.I_unlim</code>, <code>GFC.currentLimiter.I_mag</code>, <code>GFC.P_meas</code>, <code>GFC.Q_meas</code>,
 <code>GFC.V</code> and <code>GFC.omega_dev</code>.
 </p>
 </html>"));
-end ReplaceableClampFault;
+end FaultClamp;

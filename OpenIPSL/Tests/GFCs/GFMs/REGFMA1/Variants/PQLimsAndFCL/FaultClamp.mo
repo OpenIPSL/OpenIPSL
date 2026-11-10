@@ -1,4 +1,4 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.PQLimsAndFCL;
 model FaultClamp
   "Variants.PQLimsAndFCL on the SMIB: steady start and a fault that the current limiter clamps at Imax"
   extends Modelica.Icons.Example;

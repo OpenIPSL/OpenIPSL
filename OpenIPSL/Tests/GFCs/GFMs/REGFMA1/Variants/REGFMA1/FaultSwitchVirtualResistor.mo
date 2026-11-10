@@ -1,5 +1,5 @@
-within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.FCL;
-model ReplaceableSwitchVRFault
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Variants.REGFMA1;
+model FaultSwitchVirtualResistor
   "Variants.REGFMA1 with the limiter of both modes, on the virtual resistor, on the SMIB: steady start and a fault limited at Imax"
   extends Modelica.Icons.Example;
   extends OpenIPSL.Tests.BaseClasses.SMIB(SysData(fn=60), pwFault(
@@ -26,13 +26,13 @@ equation
     Documentation(info="<html>
 <p>
 Tests <code>Variants.REGFMA1</code> with its current limiter replaced by <code>CurrentLimiters.ClampOrVirtualResistor</code>
-(<code>redeclare</code>), with <code>useVirtualResistor = true</code>, the network and the fault of <code>FaultClamp</code>
-(<code>Imax = 1.5</code> pu, a fault at bus FAULT from 2 to 2.15 s). Its trajectories are those of <code>ReplaceableVRFault</code> and
-<code>FaultVirtualResistor</code>; <code>ReplaceableSwitchClampFault</code> is the other position of the switch.
+(<code>redeclare</code>), with <code>useVirtualResistor = true</code>, the network and the fault of <code>PQLimsAndFCL.FaultClamp</code>
+(<code>Imax = 1.5</code> pu, a fault at bus FAULT from 2 to 2.15 s). Its trajectories are those of <code>FaultVirtualResistor</code> and
+<code>PQLimsAndFCL.FaultVirtualResistor</code>; <code>FaultSwitchClamp</code> is the other position of the switch.
 </p>
 <p>
 Simulate and plot <code>GFC.currentLimiter.R_e</code>, <code>GFC.currentLimiter.I_unlim</code>, <code>GFC.currentLimiter.I_mag</code>,
 <code>GFC.P_meas</code>, <code>GFC.Q_meas</code>, <code>GFC.V</code> and <code>GFC.omega_dev</code>.
 </p>
 </html>"));
-end ReplaceableSwitchVRFault;
+end FaultSwitchVirtualResistor;
