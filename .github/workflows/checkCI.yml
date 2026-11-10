@@ -5,26 +5,23 @@ on: [push,pull_request]
 jobs:
   html_documentation_checks:
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 5
       - name: Setup python environment
-        uses: actions/setup-python@v7.1.0
+        uses: actions/setup-python@v7
         with:
           python-version: 3.14
       - name: Install python packages
-        run: pip install --user pytidylib==0.3.2
-      - name: Build html tidy
         run: |
-          git clone --branch 5.8.0 --depth=1 https://github.com/htacg/tidy-html5.git
-          pushd tidy-html5
-          cmake .
-          make
-          sudo make install
-          popd
-          sudo ldconfig
+          pip install --user pytidylib
+          pip install --user futures
+      - name: Install html tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes tidy
       - name: Tidy html
         run: python ./.CI/check_html.py tidyHTML ./OpenIPSL/
       - name: Check tags
@@ -33,7 +30,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 5
       - name: Get moparser
@@ -48,11 +45,11 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 5
       - name: Setup python environment
-        uses: actions/setup-python@v7.1.0
+        uses: actions/setup-python@v7
         with:
           python-version: 3.14
       - name: Check deprecated Text.lineColor annotation
