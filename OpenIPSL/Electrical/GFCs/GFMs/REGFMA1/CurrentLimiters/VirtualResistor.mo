@@ -2,16 +2,16 @@ within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
 model VirtualResistor
   "Current limiter with a virtual resistor in series with the source: the current is limited to Imax"
   extends Base.PartialCurrentLimiter;
-  VirtualResistorLimitedVoltage limitedVoltage(
-    R_a=R_a,
-    X_d=X_d,
-    Imax=Imax) "The voltage behind R_a + jX_d when Edroop drives the current through R_a + R_e + jX_d"
-    annotation (Placement(transformation(extent={{20,-30},{80,30}})));
   VRe virtualRe(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The virtual resistance that limits the current to Imax"
     annotation (Placement(transformation(extent={{-80,-30},{-20,30}})));
+  VirtualResistorLimitedVoltage limitedVoltage(
+    R_a=R_a,
+    X_d=X_d,
+    Imax=Imax) "The voltage behind R_a + jX_d when Edroop drives the current through R_a + R_e + jX_d"
+    annotation (Placement(transformation(extent={{20,-30},{80,30}})));
   Modelica.Blocks.Sources.RealExpression sigEmag(y=Emag) "Droop command, magnitude"
     annotation (Placement(transformation(extent={{-10,-4},{10,4}},
         rotation=90,
