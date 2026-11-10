@@ -9,7 +9,7 @@ model VSwithClampInGrid
       t2=2.05));
   Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS "The source at bus GEN1, on its power flow (its defaults)"
     annotation (Placement(transformation(extent={{-110,-20},{-70,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Clamp clamp(
+  Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Clamp clamp(
     R_a=VS.R_a,
     X_d=VS.X_d,
     Imax=1.8)
@@ -72,7 +72,7 @@ equation
             {100,100}}, grid={2,2})),
     Documentation(info="<html>
 <p>
-Tests the clamp current limiter, <code>REGFMA1.CurrentLimiters.Clamp</code> (<code>Imax = 1.8</code> pu), between a commanded internal voltage
+Tests the clamp current limiter, <code>REGFMA1.Components.CurrentLimiters.Clamp</code> (<code>Imax = 1.8</code> pu), between a commanded internal voltage
 and the voltage source <code>VoltageSources.VSIOforGFM</code>, on <code>OpenIPSL.Tests.BaseClasses.SMIB</code>, with the events of
 <code>VSwithVReInGrid</code>. The limiter takes the terminal voltage from the source and gives it the internal voltage to apply.
 The commanded internal voltage is the source's start value (its outputs <code>E0</code>, <code>delta0</code>) plus the changes, so the test

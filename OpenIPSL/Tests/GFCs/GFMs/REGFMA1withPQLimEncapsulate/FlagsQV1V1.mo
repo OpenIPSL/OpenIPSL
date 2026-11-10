@@ -9,7 +9,7 @@ model FlagsQV1V1
       t2=8.05));
   parameter Boolean QVFlag=true "QVFlag of the converter";
   parameter Boolean VFlag=true "VFlag of the converter";
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimiters GFC(QVFlag_val_k=QVFlag,
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1wPQLimiters GFC(QVFlag_val_k=QVFlag,
       VFlag_val_k=VFlag)
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
   Modelica.Blocks.Sources.Step Pstep(height=0.05, startTime=2)

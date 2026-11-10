@@ -1,7 +1,7 @@
 within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
 model ClampCalc "Tests the clamp current limiter with a falling terminal voltage"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Clamp clamp(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Clamp clamp(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5)
@@ -46,7 +46,7 @@ equation
   annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
-Tests <code>REGFMA1.CurrentLimiters.Clamp</code> alone. The droop command is constant, 1.05 pu at 15 degrees, and the terminal voltage
+Tests <code>REGFMA1.Components.CurrentLimiters.Clamp</code> alone. The droop command is constant, 1.05 pu at 15 degrees, and the terminal voltage
 falls from 1 to 0.1 pu between 1 and 6 s. While the unlimited current <code>clamp.I_unlim</code> is below <code>Imax = 1.5</code> pu,
 the internal voltage applied (<code>ElimMag</code>, <code>ElimAng</code>) is the droop command; once it exceeds it, the applied voltage drives a current
 <code>clamp.I_mag</code> of 1.5 pu at the angle of the unlimited current.

@@ -7,8 +7,8 @@ model ReplaceableVRFault
       X=1e-3,
       t1=2.0,
       t2=2.15));
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5,
-      redeclare Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.VirtualResistor currentLimiter)
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5,
+      redeclare Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.VirtualResistor currentLimiter)
     "The limiter replaced by the virtual resistor"
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
 equation

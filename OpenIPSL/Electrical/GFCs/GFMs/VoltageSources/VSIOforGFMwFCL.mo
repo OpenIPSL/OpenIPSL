@@ -14,7 +14,7 @@ model VSIOforGFMwFCL
   parameter Boolean useVirtualResistor=false
     "false: the current is clamped to Imax at the angle of the unlimited current (PSS/E's REGFMA1, the WECC specification); true: a virtual resistor in series limits it to Imax"
     annotation (Dialog(group="Fault current limiter"));
-  REGFMA1.CurrentLimiters.ClampOrVirtualResistor currentLimiter(
+  REGFMA1.Components.CurrentLimiters.ClampOrVirtualResistor currentLimiter(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax,
@@ -135,7 +135,7 @@ is the droop command <code>Edroop</code> at the angle <code>delta_droop</code> (
 while the current it would drive stays within <code>Imax</code>, with the transient fault current limiting of REGFM_A1.
 </p>
 <p>
-The limiter is the component <code>currentLimiter</code>, <code>REGFMA1.CurrentLimiters.ClampOrVirtualResistor</code>, which describes both modes:
+The limiter is the component <code>currentLimiter</code>, <code>REGFMA1.Components.CurrentLimiters.ClampOrVirtualResistor</code>, which describes both modes:
 <code>useVirtualResistor = false</code> (the default) is the clamp of PSS/E's REGFMA1 and <code>useVirtualResistor = true</code> a virtual resistor.
 This class is that limiter fed with the terminal voltage of the source, its output applied as the internal voltage behind <code>R_a + jX_d</code>.
 At initialization the limiter is inactive: the model asserts that the current of the power flow is below <code>Imax</code>,

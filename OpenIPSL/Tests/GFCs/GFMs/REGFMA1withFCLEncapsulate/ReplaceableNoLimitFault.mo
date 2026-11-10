@@ -7,8 +7,8 @@ model ReplaceableNoLimitFault
       X=1e-3,
       t1=2.0,
       t2=2.15));
-  Electrical.GFCs.GFMs.REGFMA1.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5,
-      redeclare Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.NoLimit currentLimiter)
+  Electrical.GFCs.GFMs.REGFMA1.Variants.REGFMA1wPQLimitersAndReplaceableFCL GFC(Imax=1.5,
+      redeclare Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.NoLimit currentLimiter)
     "The limiter replaced by NoLimit"
     annotation (Placement(transformation(extent={{-100,-30},{-40,30}})));
 equation

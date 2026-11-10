@@ -1,12 +1,12 @@
 within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
 model VirtualResistorLimitedVoltageCalc "Tests the internal voltage with the virtual resistor, fed by VRe, with a falling terminal voltage"
   extends Modelica.Icons.Example;
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.VRe virtualRe(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.VRe virtualRe(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5) "The virtual resistance that limits the current to Imax"
     annotation (Placement(transformation(extent={{-50,-10},{-10,30}})));
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.Submodels.VirtualResistorLimitedVoltage limitedVoltage(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.VirtualResistorLimitedVoltage limitedVoltage(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5)
@@ -73,7 +73,7 @@ equation
   annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
-Tests <code>REGFMA1.CurrentLimiters.Submodels.VirtualResistorLimitedVoltage</code> fed by <code>VRe</code>, with the inputs of <code>VirtualResistorCalc</code>.
+Tests <code>REGFMA1.Components.CurrentLimiters.Submodels.VirtualResistorLimitedVoltage</code> fed by <code>VRe</code>, with the inputs of <code>VirtualResistorCalc</code>.
 Its outputs are those of <code>VirtualResistorCalc</code>.
 </p>
 <p>

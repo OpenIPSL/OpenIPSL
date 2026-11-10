@@ -2,7 +2,7 @@ within OpenIPSL.Tests.GFCs.GFMs.CurrentLimiter;
 model ClampOrVirtualResistorCalc "Tests the current limiter with both modes with a falling terminal voltage"
   extends Modelica.Icons.Example;
   parameter Boolean useVirtualResistor=false "Mode of the limiter: false, the clamp; true, the virtual resistor";
-  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters.ClampOrVirtualResistor limiter(
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.ClampOrVirtualResistor limiter(
     R_a=1e-3,
     X_d=0.2,
     Imax=1.5,
@@ -44,7 +44,7 @@ equation
   annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
-Tests <code>REGFMA1.CurrentLimiters.ClampOrVirtualResistor</code> alone, with the inputs of <code>ClampCalc</code> and <code>VirtualResistorCalc</code>.
+Tests <code>REGFMA1.Components.CurrentLimiters.ClampOrVirtualResistor</code> alone, with the inputs of <code>ClampCalc</code> and <code>VirtualResistorCalc</code>.
 The parameter <code>useVirtualResistor</code> selects the mode: <code>false</code> (default) gives the outputs of <code>ClampCalc</code>,
 <code>true</code> those of <code>VirtualResistorCalc</code>.
 </p>

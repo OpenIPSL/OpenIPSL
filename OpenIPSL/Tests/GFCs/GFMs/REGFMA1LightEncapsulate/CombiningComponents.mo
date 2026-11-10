@@ -15,7 +15,7 @@ model CombiningComponents
     annotation (Placement(transformation(extent={{-320,-50},{-300,-30}})));
   Electrical.GFCs.GFMs.VoltageSources.VSIOforGFM VS(fn=60)
     annotation (Placement(transformation(extent={{-102,-20},{-62,20}})));
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.PFdrpScheme basic_dROOP(
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.PFdrpScheme basic_dROOP(
     f0=60,
     mp=0.01,
     Tr=0.1)
@@ -41,7 +41,7 @@ model CombiningComponents
     annotation (Placement(transformation(extent={{-320,40},{-300,60}})));
   Modelica.Blocks.Math.Add addPref0 "Pref = Pref0 of the initial operating point plus the ramp"
     annotation (Placement(transformation(extent={{-290,-50},{-276,-36}})));
-  Electrical.GFCs.GFMs.REGFMA1.BasicComponentsAndCntrlSchemes.QVdrpCntrlScheme q_v_droop_scheme(
+  Electrical.GFCs.GFMs.REGFMA1.Components.BasicComponentsAndCntrlSchemes.QVdrpCntrlScheme q_v_droop_scheme(
     QVFlag_val_k=true,
     VFlag_val_k=true,
     mq=0.01)
