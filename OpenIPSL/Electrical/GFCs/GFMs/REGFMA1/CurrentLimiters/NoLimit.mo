@@ -5,21 +5,10 @@ equation
   ElimMag = Emag "The magnitude of the droop voltage command";
   ElimAng = Eang "The angle of the droop voltage command";
   annotation (preferredView="text",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Rectangle(
-          extent={{-120,120},{120,-120}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
         Line(
-          points={{-60,-50},{60,80}},
+          points={{-80,-80},{80,80}},
           color={28,108,200},
-          thickness=1),
-        Text(
-          extent={{-80,-74},{80,-110}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="No Limit")}),
+          thickness=1)}),
     Documentation(info="<html>
 <p>
 Variant to be used along the current limiter models to allow analysis without applying current limits.

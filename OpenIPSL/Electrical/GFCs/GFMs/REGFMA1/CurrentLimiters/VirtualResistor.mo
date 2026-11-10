@@ -2,16 +2,16 @@ within OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.CurrentLimiters;
 model VirtualResistor
   "Current limiter with a virtual resistor in series with the source: the current is limited to Imax"
   extends Base.PartialCurrentLimiter;
-  VRe virtualRe(
-    R_a=R_a,
-    X_d=X_d,
-    Imax=Imax) "The virtual resistance that limits the current to Imax"
-    annotation (Placement(transformation(extent={{-70,-20},{-30,20}})));
   VirtualResistorLimitedVoltage limitedVoltage(
     R_a=R_a,
     X_d=X_d,
     Imax=Imax) "The voltage behind R_a + jX_d when Edroop drives the current through R_a + R_e + jX_d"
     annotation (Placement(transformation(extent={{20,-30},{80,30}})));
+  VRe virtualRe(
+    R_a=R_a,
+    X_d=X_d,
+    Imax=Imax) "The virtual resistance that limits the current to Imax"
+    annotation (Placement(transformation(extent={{-80,-30},{-20,30}})));
   Modelica.Blocks.Sources.RealExpression sigEmag(y=Emag) "Droop command, magnitude"
     annotation (Placement(transformation(extent={{-10,-4},{10,4}},
         rotation=90,
@@ -30,15 +30,19 @@ model VirtualResistor
         origin={68,-56})));
 equation
   connect(Emag, virtualRe.Emag)
-    annotation (Line(points={{-130,80},{-90,80},{-90,16},{-72,16}}, color={0,0,127}));
+    annotation (Line(points={{-130,80},{-100,80},{-100,24},{-83,24}},
+                                                                    color={0,0,127}));
   connect(Eang, virtualRe.Eang)
-    annotation (Line(points={{-130,20},{-96,20},{-96,8},{-72,8}}, color={0,0,127}));
+    annotation (Line(points={{-130,20},{-116,20},{-116,12},{-83,12}},
+                                                                  color={0,0,127}));
   connect(V, virtualRe.V)
-    annotation (Line(points={{-130,-20},{-96,-20},{-96,-8},{-72,-8}}, color={0,0,127}));
+    annotation (Line(points={{-130,-20},{-116,-20},{-116,-12},{-83,-12}},
+                                                                      color={0,0,127}));
   connect(anglev, virtualRe.anglev)
-    annotation (Line(points={{-130,-70},{-90,-70},{-90,-16},{-72,-16}}, color={0,0,127}));
+    annotation (Line(points={{-130,-70},{-100,-70},{-100,-24},{-83,-24}},
+                                                                        color={0,0,127}));
   connect(virtualRe.R_e, limitedVoltage.R_e)
-    annotation (Line(points={{-28,0},{17,0}}, color={0,0,127}));
+    annotation (Line(points={{-17,0},{17,0}}, color={0,0,127}));
   connect(sigEmag.y, limitedVoltage.Emag)
     annotation (Line(points={{32,-45},{32,-33}}, color={0,0,127}));
   connect(sigEang.y, limitedVoltage.Eang)
@@ -52,17 +56,6 @@ equation
   connect(limitedVoltage.ElimAng, ElimAng)
     annotation (Line(points={{83,-12},{100,-12},{100,-60},{130,-60}}, color={0,0,127}));
   annotation (preferredView="diagram",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Rectangle(
-          extent={{-120,120},{120,-120}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-80,-60},{80,-120}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Virtual Resistor"),
         Line(
           points={{-60,-80},{-40,-80},{40,80},{60,80}},
           color={28,108,200},

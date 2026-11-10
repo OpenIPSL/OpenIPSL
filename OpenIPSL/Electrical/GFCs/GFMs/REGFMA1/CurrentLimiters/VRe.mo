@@ -88,7 +88,37 @@ equation
           extent={{-80,88},{80,-72}},
           textColor={28,108,200},
           textString="V",
-          textStyle={TextStyle.Bold})}),
+          textStyle={TextStyle.Bold}),
+        Text(
+          extent={{-142,70},{-102,50}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="|E|"),
+        Text(
+          extent={{-142,30},{-102,10}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="∡E"),
+        Text(
+          extent={{-142,-12},{-102,-32}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="V"),
+        Text(
+          extent={{-142,-52},{-102,-72}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="∡V"),
+        Text(
+          extent={{100,30},{140,10}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Left,
+          textString="R_e")}),
     Documentation(info="<html>
 <p>
 The virtual resistance of the current limiter of <a href=\"modelica://OpenIPSL.UsersGuide.References\">[Du2024]</a>, section IV-C:

@@ -15,25 +15,46 @@ equation
     "The internal voltage that drives the clamped current, imaginary part";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, grid={2,2}), graphics={
         Line(
-          points={{-24,78},{44,78}},
+          points={{0,80},{60,80}},
           color={238,46,47},
           pattern=LinePattern.Dash,
           thickness=1),
         Text(
-          extent={{-90,98},{-30,62}},
-          textColor={238,46,47},
-          fontName="Geist",
-          textString="Imax"),
-        Text(
-          extent={{-96,54},{-48,26}},
+          extent={{-140,70},{-100,50}},
           textColor={28,108,200},
           fontName="Geist",
-          textString="Re"),
+          textString="Re(Imax)"),
         Text(
-          extent={{-96,-26},{-48,-54}},
+          extent={{-140,-10},{-100,-30}},
           textColor={28,108,200},
           fontName="Geist",
-          textString="Im")}),
+          textString="Im(Imax)"),
+        Line(
+          points={{-60,-80},{-40,-80},{40,80},{60,80}},
+          color={28,108,200},
+          thickness=1),
+        Ellipse(extent={{-60,60},{60,-60}},lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-40,-20},{0,20}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={170,213,255},
+          fillPattern=FillPattern.None,
+          startAngle=0,
+          endAngle=180,
+          closure=EllipseClosure.None),
+        Ellipse(
+          extent={{0,20},{40,-20}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={229,244,255},
+          fillPattern=FillPattern.Solid,
+          startAngle=0,
+          endAngle=180,
+          closure=EllipseClosure.None)}),
     Documentation(info="<html>
 <p>
 Gives the internal voltage to apply with the clamp of PSS/E's REGFMA1 <a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.

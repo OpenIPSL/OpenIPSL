@@ -67,32 +67,66 @@ equation
   connect(switchAng.y, ElimAng)
     annotation (Line(points={{89.2,-60},{130,-60}}, color={0,0,127}));
   annotation (preferredView="diagram",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Rectangle(
-          extent={{-120,120},{120,-120}},
+        Line(
+          points={{-60,-80},{-40,-80},{20,80},{60,80}},
+          color={28,108,200},
+          thickness=1),
+        Ellipse(extent={{-60,60},{60,-60}},lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{20,80},{80,80}},
+          color={238,46,47},
+          pattern=LinePattern.Dash,
+          thickness=1),
+        Polygon(
+          points={{20,110},{20,90},{40,100},{20,110}},
           lineColor={28,108,200},
           lineThickness=1,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Line(
-          points={{-60,-30},{-40,-30},{20,70},{60,70}},
-          color={28,108,200},
+        Line(points={{-20,100},{20,100}},
+                                     color={28,108,200},
           thickness=1),
-        Line(
-          points={{-60,70},{60,70}},
-          color={238,46,47},
-          pattern=LinePattern.Dash,
+        Rectangle(
+          extent={{-52,-94},{-40,-106}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={0,128,255},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-40,-100},{-20,-100}},
+                                       color={28,108,200},
           thickness=1),
-        Text(
-          extent={{40,110},{120,70}},
-          textColor={238,46,47},
-          fontName="Geist",
-          textString="Imax"),
-        Text(
-          extent={{-100,-44},{100,-112}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Clamp or
-Virtual Resistor")}),
+        Line(points={{20,-100},{40,-100}},
+                                     color={28,108,200},
+          thickness=1),
+        Rectangle(
+          extent={{40,-96},{50,-106}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-20,-94},{20,-106}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          lineThickness=1),
+        Polygon(
+          points={{-14,20},{-12,20},{16,20},{26,0},{16,-20},{-12,-20},{-14,-20},
+              {-14,20}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          smooth=Smooth.Bezier),
+        Line(points={{-30,10},{-14,10}},
+                                     color={28,108,200},
+          thickness=1),
+        Line(points={{-30,-10},{-14,-10}},
+                                     color={28,108,200},
+          thickness=1)}),
     Documentation(info="<html>
 <p>
 The fault current limiter of REGFM_A1 with both of its modes: <code>Clamp</code> and <code>VirtualResistor</code> both run, and the two switches pass on the one selected by
