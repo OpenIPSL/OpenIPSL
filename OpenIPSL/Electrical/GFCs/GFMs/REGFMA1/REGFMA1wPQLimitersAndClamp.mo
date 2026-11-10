@@ -307,16 +307,21 @@ equation
     annotation (Line(points={{81,50},{110,50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(extent={{-200,-200},{200,200}}, grid={2,2}),
                    graphics={
-        Line(
-          points={{-80,-100},{-40,-100},{40,100},{80,100}},
-          color={0,0,255},
-          thickness=1),
         Rectangle(
           extent={{-200,200},{200,-200}},
           lineColor={28,108,200},
           lineThickness=1,
           fillColor={201,201,201},
           fillPattern=FillPattern.Solid),
+        Line(
+          points={{-80,-100},{-40,-100},{40,100},{80,100}},
+          color={0,0,255},
+          thickness=1),
+        Line(
+          points={{40,102},{80,102}},
+          color={238,46,47},
+          pattern=LinePattern.Dash,
+          thickness=1),
         Text(
           extent={{-200,280},{200,200}},
           textColor={28,108,200},
@@ -411,16 +416,6 @@ Clamp Current Limiter"),
           lineThickness=1,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{60,140},{140,100}},
-          textColor={238,46,47},
-          fontName="Geist",
-          textString="Imax"),
-        Line(
-          points={{-40,100},{80,100}},
-          color={238,46,47},
-          pattern=LinePattern.Dash,
-          thickness=1),
         Text(
           extent={{-150,18},{-114,-18}},
           textColor={28,108,200},

@@ -58,7 +58,7 @@ equation
   I_mag = sqrt((ElimMag*cos(ElimAng) - V*cos(anglev))^2 + (ElimMag*sin(ElimAng) - V*sin(anglev))^2)/Z_a
     "Current magnitude with the internal voltage applied";
   limited = I_unlim > Imax "An output; the implementations test the same condition without an event";
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false,
+  annotation (preferredView="text",Icon(coordinateSystem(preserveAspectRatio=false,
         extent={{-120,-120},{120,120}},
         grid={2,2}),                                            graphics={
         Rectangle(
@@ -70,19 +70,19 @@ equation
           textColor={28,108,200},
           textString="%name"),
         Text(
-          extent={{-162,120},{-122,100}},
+          extent={{-162,110},{-122,90}},
           textColor={28,108,200},
           fontName="Geist",
           horizontalAlignment=TextAlignment.Right,
           textString="Edrp"),
         Text(
-          extent={{-162,60},{-122,40}},
+          extent={{-162,48},{-122,28}},
           textColor={28,108,200},
           fontName="Geist",
           horizontalAlignment=TextAlignment.Right,
           textString="δ"),
         Text(
-          extent={{-162,-34},{-122,-54}},
+          extent={{-162,-28},{-122,-48}},
           textColor={28,108,200},
           fontName="Geist",
           horizontalAlignment=TextAlignment.Right,
@@ -92,7 +92,6 @@ equation
           textColor={28,108,200},
           fontName="Geist",
           horizontalAlignment=TextAlignment.Right,
-          fontSize=47,
           textString="∡V"),
         Text(
           extent={{120,108},{160,68}},

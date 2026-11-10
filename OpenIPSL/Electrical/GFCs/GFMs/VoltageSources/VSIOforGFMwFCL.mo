@@ -80,11 +80,6 @@ equation
           points={{-58,0},{-38,0}},
           color={28,108,200},
           thickness=1),
-        Text(
-          extent={{-80,-54},{80,-114}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Current Limiter"),
         Line(
           points={{-44,-74},{-24,-74},{36,86},{76,86}},
           color={28,108,200},
@@ -94,11 +89,6 @@ equation
           color={238,46,47},
           pattern=LinePattern.Dash,
           thickness=1),
-        Text(
-          extent={{-90,88},{-10,48}},
-          textColor={238,46,47},
-          fontName="Geist",
-          textString="Imax"),
         Ellipse(extent={{-38,40},{42,-40}},lineColor={28,108,200},
           lineThickness=1,
           fillColor={255,255,255},
@@ -133,7 +123,7 @@ equation
           thickness=1,
           pattern=LinePattern.Dash),
         Text(
-          extent={{36,-30},{100,-64}},
+          extent={{30,-20},{94,-54}},
           textColor={28,108,200},
           fontName="Geist",
           textString="Er, Ei in

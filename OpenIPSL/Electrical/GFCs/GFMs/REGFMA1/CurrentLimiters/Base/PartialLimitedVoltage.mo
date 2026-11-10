@@ -56,50 +56,38 @@ equation
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          lineThickness=1),
         Text(
           extent={{-100,128},{100,104}},
           textColor={28,108,200},
           textString="%name"),
-        Line(
-          points={{-24,10},{-6,10},{22,78},{44,78}},
-          color={28,108,200},
-          thickness=1),
         Text(
-          extent={{-46,-6},{44,-62}},
-          textColor={28,108,200},
-          fontName="Geist",
-          textString="Current Limited
-Droop Voltage"),
-        Text(
-          extent={{-86,-70},{-34,-98}},
+          extent={{-100,-100},{-68,-120}},
           textColor={28,108,200},
           fontName="Geist",
           textString="Edrp"),
         Text(
-          extent={{-44,-70},{4,-98}},
+          extent={{-60,-100},{-20,-120}},
           textColor={28,108,200},
           fontName="Geist",
           textString="δ"),
         Text(
-          extent={{-4,-70},{44,-98}},
+          extent={{-20,-100},{20,-120}},
           textColor={28,108,200},
           fontName="Geist",
           textString="V"),
         Text(
-          extent={{36,-70},{84,-98}},
+          extent={{20,-100},{60,-120}},
           textColor={28,108,200},
           fontName="Geist",
           textString="∡V"),
         Text(
-          extent={{60,60},{98,20}},
+          extent={{100,72},{120,52}},
           textColor={28,108,200},
           fontName="Geist",
           textString="|E|"),
         Text(
-          extent={{60,-20},{98,-60}},
+          extent={{100,-12},{120,-32}},
           textColor={28,108,200},
           fontName="Geist",
           textString="∡E")}),
@@ -115,15 +103,5 @@ The test is made on the unlimited current, so the limiter releases by itself whe
 (see <code>Clamp</code> for why).
 </p>
 </html>"),
-    Diagram(coordinateSystem(grid={2,2}), graphics={
-        Rectangle(
-          extent={{-70,70},{70,-70}},
-          lineColor={135,135,135},
-          lineThickness=1,
-          pattern=LinePattern.Dash),
-        Text(
-          extent={{-62,20},{62,-20}},
-          textColor={135,135,135},
-          fontName="Geist",
-          textString="Implemented in the Text Layer")}));
+    Diagram(coordinateSystem(grid={2,2})));
 end PartialLimitedVoltage;

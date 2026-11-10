@@ -111,7 +111,51 @@ equation
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
-          lineThickness=1)}),
+          lineThickness=1),
+        Text(
+          extent={{-142,70},{-102,50}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="|E|"),
+        Text(
+          extent={{-142,50},{-102,30}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="∡E"),
+        Text(
+          extent={{-142,-30},{-102,-50}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="V"),
+        Text(
+          extent={{-142,-50},{-102,-70}},
+          textColor={28,108,200},
+          fontName="Geist",
+          horizontalAlignment=TextAlignment.Right,
+          textString="∡V"),
+        Text(
+          extent={{100,70},{140,50}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="|Imax|"),
+        Text(
+          extent={{100,30},{140,10}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="∡Imax"),
+        Text(
+          extent={{100,-12},{140,-32}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="Re(Imax)"),
+        Text(
+          extent={{100,-52},{140,-72}},
+          textColor={28,108,200},
+          fontName="Geist",
+          textString="Im(Imax)")}),
     Documentation(info="<html>
 <p>
 The current phasor of magnitude <code>Imax</code> (pu, machine base) at the angle of the current that the internal voltage
