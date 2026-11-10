@@ -23,6 +23,15 @@ model References "References"
 </tr>
 
 <tr>
+<td>[EPRI2023]</td>
+<td>EPRI:
+        &quot;Code Based Generic Inverter Based Resource Model&quot;,
+        Technical Update 3002028322, Palo Alto, CA, November 2023 (CC BY 4.0),
+        <a href=\"https://www.epri.com/research/products/000000003002028322\">https://www.epri.com/research/products/000000003002028322</a>
+</td>
+</tr>
+
+<tr>
 <td>[Henningsson2019]</td>
 <td>E. Henningsson, H. Olsson and L. Vanfretti:
         &quot;DAE Solvers for Large-Scale Hybrid Models&quot;.
@@ -173,6 +182,14 @@ G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C
         &quot;PSS&reg;E Model Library&quot;,
         version 33, April 2017,
         (<a href=\"https://xcelerator.siemens.com/global/en/all-offerings/products/p/psse-version-33.html\">Home page</a>)
+</td>
+</tr>
+<tr>
+<td>[Ramasubramanian2022]</td>
+<td>D. Ramasubramanian:
+        &quot;Differentiating between plant level and inverter level voltage control to bring about operation of 100% inverter-based resource grids&quot;,
+        Electric Power Systems Research, vol. 205, 107739, April 2022,
+        <a href=\"https://doi.org/10.1016/j.epsr.2021.107739\">DOI: 10.1016/j.epsr.2021.107739</a>
 </td>
 </tr>
 <tr>
