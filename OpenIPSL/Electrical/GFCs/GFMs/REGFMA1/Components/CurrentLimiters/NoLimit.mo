@@ -13,7 +13,7 @@ equation
 <p>
 Variant to be used along the current limiter models to allow analysis without applying current limits.
 The droop voltage command is passed to the voltage source as it is. With it,
-<code>REGFMA1wPQLimitersAndReplaceableFCL</code> gives the trajectories of <code>REGFMA1wPQLimiters</code>.
+<code>Variants.REGFMA1</code> gives the trajectories of <code>Variants.PQLims</code>.
 The interface still reports the current <code>I_mag</code> and whether it exceeds <code>Imax</code> (<code>limited</code>).
 </p>
 </html>"),

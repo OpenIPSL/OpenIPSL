@@ -1,7 +1,7 @@
 ModelVariants
-REGFMA1Light
-REGFMA1wPQLimiters
-REGFMA1wPQLimitersAndClamp
-REGFMA1wPQLimitersAndVR
-REGFMA1wPQLimitersAndFCL
-REGFMA1wPQLimitersAndReplaceableFCL
+Light
+PQLims
+PQLimsAndClamp
+PQLimsAndVR
+PQLimsAndFCL
+REGFMA1

@@ -131,7 +131,7 @@ equation
 <p>
 The fault current limiter of REGFM_A1 with both of its modes: <code>Clamp</code> and <code>VirtualResistor</code> both run, and the two switches pass on the one selected by
 <code>useVirtualResistor</code>. It takes the droop command <code>Edroop</code> at the angle <code>delta_droop</code> and the terminal voltage <code>V</code>, and gives the internal voltage
-to apply behind the impedance <code>R_a + jX_d</code> (pu on the machine base). It can be chosen in <code>REGFMA1wPQLimitersAndReplaceableFCL</code>,
+to apply behind the impedance <code>R_a + jX_d</code> (pu on the machine base). It can be chosen in <code>Variants.REGFMA1</code>,
 and <code>VoltageSources.VSIOforGFMwFCL</code> is a voltage source built on it.
 </p>
 <p>
