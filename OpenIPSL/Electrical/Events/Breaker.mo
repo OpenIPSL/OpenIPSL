@@ -18,10 +18,6 @@ model Breaker "Circuit breaker with time or signal control"
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={0,120})));
-  Complex vs(re=s.vr, im=s.vi);
-  Complex vr(re=r.vr, im=r.vi);
-  Complex is(re=s.ir, im=s.ii);
-  Complex ir(re=r.ir, im=r.ii);
 
 protected
   Modelica.Blocks.Interfaces.BooleanOutput Open "Help variable to indicate open circuit breaker" annotation (Placement(transformation(extent={{-4,-10},{16,10}})));
@@ -36,6 +32,13 @@ equation
     end if;
   end if;
 
+  // Major WSM rework if only using Complex(0). WSM's order of operations in the
+  // compiler's front end - specifically when record scalarization / flattening
+  // happens relative to conditional equation processing - is different than
+  // Dymola/OpenModelica because they expand Complex() records into their
+  // constituent primitive scalar variables before causalization, matching, and
+  // conditional index reduction. WSM uses Mathematica's symbolic transformation
+  // engine in the back end in the graph-reduction phase.
   if Open then
   s.ir = 0; 
   s.ii = 0; 
