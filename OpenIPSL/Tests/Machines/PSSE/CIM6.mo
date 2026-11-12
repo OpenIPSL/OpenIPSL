@@ -37,7 +37,8 @@ model CIM6 "PSSE CIM6 induction motor at bus SHUNT of the SMIB test system, star
     P_0=7884675.16560625,
     Q_0=4090572.49098807,
     v_0=0.993173764485367,
-    angle_0=-0.0109655580125794) annotation (Placement(transformation(
+    angle_0=-0.0109655580125794,
+    s(start=0.00723396729)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={40,70})));
@@ -61,8 +62,11 @@ at <code>GEN1</code> (constant field voltage and mechanical power), as in the sh
 <a href=\"modelica://OpenIPSL.Tests.Banks.PSSE.CSVGN1\">Tests.Banks.PSSE.CSVGN1</a>. The motor has the model's
 default single-cage data (<code>R2 = X2 = 0</code>, <code>Mtype = 1</code>), a 10 MVA base, no speed control
 (<code>Ctrl = false</code>) and a quadratic load torque (<code>A = 1</code>, <code>B = C0 = D = 0</code>) of 0.8 pu at
-synchronous speed. It is started in steady state (<code>Sup = false</code>, slip 0.00723) and disturbed by the fault
-of <code>SMIB</code> at bus <code>FAULT</code> from 2 s to 2.15 s.</p>
+synchronous speed. It is started in steady state (<code>Sup = false</code>) and disturbed by the fault of
+<code>SMIB</code> at bus <code>FAULT</code> from 2 s to 2.15 s. The slip's start value is its steady-state value,
+0.00723: the torque balance of the quadratic load has a second root at negative speed (slip 1.48, the motor driven
+backwards), and without the start value a tool may initialise there (System Modeler 15 did; Dymola and OpenModelica
+found the running equilibrium from their default start of zero).</p>
 <h4>Why this test exists</h4>
 <p>Until OpenIPSL/OpenIPSL#456 no example or test instantiated <code>CIM6</code>, so the OpenModelica library
 report never compiled it and a Real equality in its <code>Lpp</code>, <code>Tp0</code> and <code>Tpp0</code>
