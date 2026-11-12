@@ -1,59 +1,86 @@
 within OpenIPSL.Tests.Machines.PSSE;
-model CIM6 "Infinite bus feeding a PSSE CIM6 induction motor through a line, motor start-up followed by a line opening"
-  extends Modelica.Icons.Example;
+model CIM6 "PSSE CIM6 induction motor at bus SHUNT of the SMIB test system, started in steady state, through the fault"
+  extends OpenIPSL.Tests.BaseClasses.SMIB(
+    gENCLS(P_0=17902671.9580135, Q_0=11559899.8696452),
+    constantLoad(v_0=0.990570718561679, angle_0=-0.0140416319339916),
+    SHUNT(v_0=0.993173764485367, angle_0=-0.0109655580125794),
+    FAULT(v_0=0.995260830200301, angle_0=-0.00698755799892328));
+  OpenIPSL.Electrical.Machines.PSSE.GENSAL gENSAL(
+    Tpd0=5,
+    Tppd0=0.07,
+    Tppq0=0.09,
+    H=4.28,
+    D=0,
+    Xd=1.84,
+    Xq=1.75,
+    Xpd=0.41,
+    Xppd=0.2,
+    Xl=0.12,
+    S10=0.11,
+    S12=0.39,
+    Xppq=0.2,
+    R_a=0,
+    M_b=100000000,
+    P_0=40000000,
+    Q_0=6130031.10280319,
+    v_0=1,
+    angle_0=0.0667458568774647) annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
   OpenIPSL.Electrical.Machines.PSSE.CIM6 motor(
-    M_b=15e6,
-    Sup=true,
+    M_b=10000000,
+    Sup=false,
     Ctrl=false,
     T_nom=0.8,
     A=1,
     B=0,
     C0=0,
     D=0,
-    H=0.4) annotation (Placement(transformation(
+    P_0=7884675.16560625,
+    Q_0=4090572.49098807,
+    v_0=0.993173764485367,
+    angle_0=-0.0109655580125794) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={70,0})));
-  OpenIPSL.Electrical.Branches.PwLine pwLine1(
-    G=0,
-    B=0,
-    R=0.01,
-    X=0.1) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={0,-20})));
-  OpenIPSL.Electrical.Branches.PwLine pwLine2(
-    G=0,
-    B=0,
-    R=0.01,
-    X=0.1,
-    t1=6,
-    t2=7,
-    opening=1) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={0,20})));
-  OpenIPSL.Electrical.Buses.InfiniteBus infiniteBus(angle_0=0, v_0=1.0) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        origin={-70,0})));
-  inner OpenIPSL.Electrical.SystemBase SysData(fn=60)
-    annotation (Placement(transformation(extent={{-100,80},{-40,100}})));
+        rotation=90,
+        origin={40,70})));
 equation
-  connect(pwLine1.n, infiniteBus.p) annotation (Line(points={{-9,-20},{-40,-20},{-40,0},{-60,0}}, color={0,0,255}));
-  connect(pwLine2.n, infiniteBus.p) annotation (Line(points={{-9,20},{-40,20},{-40,0},{-60,0}}, color={0,0,255}));
-  connect(pwLine2.p, motor.p) annotation (Line(points={{9,20},{40,20},{40,0},{60,0}}, color={0,0,255}));
-  connect(pwLine1.p, motor.p) annotation (Line(points={{9,-20},{40,-20},{40,0},{60,0}}, color={0,0,255}));
+  connect(gENSAL.PMECH, gENSAL.PMECH0) annotation (Line(points={{-92,10},{-100,10},{-100,26},{-42,26},{-42,10},{-46,10}},
+        color={0,0,127}));
+  connect(gENSAL.EFD, gENSAL.EFD0) annotation (Line(points={{-92,-10},{-100,-10},{-100,-30},{-42,-30},{-42,-10},{-46,-10}},
+        color={0,0,127}));
+  connect(gENSAL.p, GEN1.p) annotation (Line(points={{-48,0},{-30,0}}, color={0,0,255}));
+  connect(motor.p, SHUNT.p) annotation (Line(points={{40,60},{40,30}}, color={0,0,255}));
   annotation (
     experiment(
       StopTime=10,
       Interval=0.001,
       Tolerance=1e-06),
     Documentation(info="<html>
-<p>The motor starts from standstill (<code>Sup = true</code>) against an infinite bus, with the default
-single-cage data of the CIM6 model (<code>R2 = X2 = 0</code>), no speed control (<code>Ctrl = false</code>)
-and a quadratic load torque (<code>A = 1</code>, <code>B = C0 = D = 0</code>) of 0.8 pu at synchronous speed.
-One of the two parallel lines opens at 6 s and recloses at 7 s.</p>
-<p>The default single-cage data exercise the branch of the <code>Lpp</code>, <code>Tp0</code> and
-<code>Tpp0</code> equations that selects the single-cage circuit from <code>R2</code> and <code>X2</code>.</p>
+<p>The PSS/E induction motor model <code>Electrical.Machines.PSSE.CIM6</code> at bus <code>SHUNT</code> of
+<a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIB\">SMIB</a>, the network of the library's PSS/E tests, with
+the <code>GENSAL</code> of <a href=\"modelica://OpenIPSL.Tests.Machines.PSSE.GENSAL\">Tests.Machines.PSSE.GENSAL</a>
+at <code>GEN1</code> (constant field voltage and mechanical power), as in the shunt test
+<a href=\"modelica://OpenIPSL.Tests.Banks.PSSE.CSVGN1\">Tests.Banks.PSSE.CSVGN1</a>. The motor has the model's
+default single-cage data (<code>R2 = X2 = 0</code>, <code>Mtype = 1</code>), a 10 MVA base, no speed control
+(<code>Ctrl = false</code>) and a quadratic load torque (<code>A = 1</code>, <code>B = C0 = D = 0</code>) of 0.8 pu at
+synchronous speed. It is started in steady state (<code>Sup = false</code>, slip 0.00723) and disturbed by the fault
+of <code>SMIB</code> at bus <code>FAULT</code> from 2 s to 2.15 s.</p>
+<h4>Why this test exists</h4>
+<p>Until OpenIPSL/OpenIPSL#456 no example or test instantiated <code>CIM6</code>, so the OpenModelica library
+report never compiled it and a Real equality in its <code>Lpp</code>, <code>Tp0</code> and <code>Tpp0</code>
+equations (deprecated in Modelica 3.6, an error in OpenModelica 1.28) went unnoticed; the test covers the model
+at compile time and at run time. A PSS/E reference case for <code>CIM6</code> does not exist yet; this is the
+library test on the network such a case would use.</p>
+<p>The power flow data is the solution of this network with the motor at its equilibrium, in double precision
+(Newton on the five buses; the motor's P, Q and slip at the <code>SHUNT</code> voltage from the model's own
+steady-state initialisation in OpenModelica), so the test starts at rest: the slack's power
+(<code>gENCLS</code>), the load bus voltage (<code>constantLoad</code>) and the machine's reactive power and angle
+(<code>gENSAL</code>) differ from <code>SMIB</code>'s, which are for the network without the motor.</p>
+<h4>What to plot</h4>
+<ul>
+<li><code>motor.s</code>, <code>motor.P</code>, <code>motor.Q</code> and <code>gENSAL.SPEED</code>: constant until the
+fault at 2 s.</li>
+<li><code>motor.s</code>, <code>motor.Te_motor</code>, <code>motor.P</code>, <code>motor.Q</code> and
+<code>SHUNT.v</code> through the fault: the motor slows down while the voltage is depressed and reaccelerates
+after the fault is cleared.</li>
+</ul>
 </html>"));
 end CIM6;
