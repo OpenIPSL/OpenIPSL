@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical.Events;
 model Breaker "Circuit breaker with time or signal control"
-  constant Complex complexZero = Complex(0, 0);
+  constant Complex complexZero = Complex(0, 0) "Workaround for WSM, see https://github.com/OpenIPSL/OpenIPSL/pull/451";
   parameter Boolean enableTrigger=false "=true, if external trigger signal is used"
     annotation (Evaluate=true, choices(checkBox=true));
   parameter Types.Time t_o=Modelica.Constants.inf "Opening time"
@@ -37,13 +37,6 @@ equation
     end if;
   end if;
 
-  // Major WSM rework if only using Complex(0). WSM's order of operations in the
-  // compiler's front end - specifically when record scalarization / flattening
-  // happens relative to conditional equation processing - is different than
-  // Dymola/OpenModelica because they expand Complex() records into their
-  // constituent primitive scalar variables before causalization, matching, and
-  // conditional index reduction. WSM uses Mathematica's symbolic transformation
-  // engine in the back end in the graph-reduction phase.
   if Open then
     is = complexZero;
     ir = complexZero;
