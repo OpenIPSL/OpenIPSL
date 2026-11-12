@@ -1,5 +1,6 @@
 within OpenIPSL.Electrical.Events;
 model Breaker "Circuit breaker with time or signal control"
+  constant Complex complexZero = Complex(0, 0) "Workaround for WSM, see https://github.com/OpenIPSL/OpenIPSL/pull/451";
   parameter Boolean enableTrigger=false "=true, if external trigger signal is used"
     annotation (Evaluate=true, choices(checkBox=true));
   parameter Types.Time t_o=Modelica.Constants.inf "Opening time"
@@ -37,8 +38,8 @@ equation
   end if;
 
   if Open then
-    is = Complex(0);
-    ir = Complex(0);
+    is = complexZero;
+    ir = complexZero;
   else
     vs = vr;
     is = -ir;

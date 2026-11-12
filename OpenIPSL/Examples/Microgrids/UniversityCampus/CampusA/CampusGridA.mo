@@ -607,6 +607,7 @@ equation
           -40},{-80,-40},{-80,-32}}, color={0,0,255}));
   connect(UTILITY.p, BreakerMicrogrid.r)
     annotation (Line(points={{-20,190},{0,190},{0,186}}, color={0,0,255}));
+  connect(AENA.p, BreakerMicrogrid.s) annotation (Line(points={{0,168},{0,174}}, color={0,0,255}));
   annotation ( Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-200},{160,220}})),
     experiment(
