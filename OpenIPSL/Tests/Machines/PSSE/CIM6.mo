@@ -70,13 +70,13 @@ found the running equilibrium from their default start of zero).</p>
 <h4>Why this test exists</h4>
 <p>Until OpenIPSL/OpenIPSL#456 no example or test instantiated <code>CIM6</code>, so the OpenModelica library
 report never compiled it and a Real equality in its <code>Lpp</code>, <code>Tp0</code> and <code>Tpp0</code>
-equations (deprecated by the Modelica Language Specification 3.6, section 3.5; OpenModelica 1.27.1 warns about it)
-went unnoticed; the test covers the model
+equations (not allowed outside functions by the Modelica Language Specification 3.6, section 3.5; OpenModelica 1.27.1
+reports it as a deprecation warning) went unnoticed; the test covers the model
 at compile time and at run time. Its PSS/E counterpart is the case <code>ut_cim6</code> of ALSETLab/PSSE-2-Modelica
 (the SMIB template with the motor as the load at bus SHUNT, <code>CIM6BL</code> with the same data): against PSS/E
-36.2.1 (step 0.25 ms) through the fault, Dymola and OpenModelica differ from PSS/E by at most 7.6e-4 pu in the
-<code>SHUNT</code> voltage, 2.7e-4 in the slip and 6.2e-4 pu in the motor's Q, the size of PSS/E's own difference
-between its 1 ms and 0.25 ms steps. PSS/E's equilibrium of the same circuit differs slightly: slip 0.0072476
+36.2.1 (step 0.25 ms) through the fault, Dymola, OpenModelica and System Modeler differ from PSS/E, on a 1 ms grid
+with 5 ms around each switching instant left out, by at most 7.6e-4 pu in the <code>SHUNT</code> voltage, 2.7e-4 in
+the slip and 6.3e-4 pu in the motor's Q, the size of PSS/E's own difference between its 1 ms and 0.25 ms steps. PSS/E's equilibrium of the same circuit differs slightly: slip 0.0072476
 against 0.0072340 here, and 1.2e-4 pu more reactive power, which PSS/E balances with a hidden bus admittance.</p>
 <p>The power flow data is the solution of this network with the motor at its equilibrium, in double precision
 (Newton on the five buses; the motor's P, Q and slip at the <code>SHUNT</code> voltage from the model's own
