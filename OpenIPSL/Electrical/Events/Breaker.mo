@@ -1,5 +1,6 @@
 within OpenIPSL.Electrical.Events;
 model Breaker "Circuit breaker with time or signal control"
+  constant Complex complexZero = Complex(0, 0);
   parameter Boolean enableTrigger=false "=true, if external trigger signal is used"
     annotation (Evaluate=true, choices(checkBox=true));
   parameter Types.Time t_o=Modelica.Constants.inf "Opening time"
@@ -18,6 +19,10 @@ model Breaker "Circuit breaker with time or signal control"
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={0,120})));
+  Complex vs(re=s.vr, im=s.vi);
+  Complex vr(re=r.vr, im=r.vi);
+  Complex is(re=s.ir, im=s.ii);
+  Complex ir(re=r.ir, im=r.ii);
 
 protected
   Modelica.Blocks.Interfaces.BooleanOutput Open "Help variable to indicate open circuit breaker" annotation (Placement(transformation(extent={{-4,-10},{16,10}})));
@@ -40,15 +45,11 @@ equation
   // conditional index reduction. WSM uses Mathematica's symbolic transformation
   // engine in the back end in the graph-reduction phase.
   if Open then
-  s.ir = 0; 
-  s.ii = 0; 
-  r.ir = 0; 
-  r.ii = 0;
+    is = complexZero;
+    ir = complexZero;
   else
-  s.vr = r.vr; 
-  s.vi = r.vi; 
-  s.ir = -r.ir; 
-  s.ii = -r.ii;
+    vs = vr;
+    is = -ir;
   end if;
 
   connect(Trigger, Open) annotation (Line(points={{0,120},{0,60},{0,0},{6,0}}, color={255,0,255}));
