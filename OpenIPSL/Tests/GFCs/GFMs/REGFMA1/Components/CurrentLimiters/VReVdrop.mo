@@ -1,0 +1,41 @@
+within OpenIPSL.Tests.GFCs.GFMs.REGFMA1.Components.CurrentLimiters;
+model VReVdrop "Tests the Virtual Resistor Computation Module implementation"
+  extends Modelica.Icons.Example;
+  OpenIPSL.Electrical.GFCs.GFMs.REGFMA1.Components.CurrentLimiters.Submodels.VRe virtualRe(R_a=1e-6,
+      Imax=1.5)
+    annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
+  Modelica.Blocks.Sources.Ramp Vtdrop(
+    height=-0.9,
+    duration=5,
+    offset=1,
+    startTime=1) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-70,-20})));
+  Modelica.Blocks.Sources.Constant Emag(k=1.05)
+    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
+  Modelica.Blocks.Sources.Constant Eang(k=15*Modelica.Constants.pi/180)
+    annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
+  Modelica.Blocks.Sources.Constant anglev(k=0.0*Modelica.Constants.pi/180)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-70,-60})));
+  Modelica.Blocks.Interfaces.RealOutput R_e
+    "Output Value of the Virtual Resistance"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+equation
+  connect(Vtdrop.y, virtualRe.V)
+    annotation (Line(points={{-59,-20},{-40,-20},{-40,-8},{-22,-8}},
+                                               color={0,0,127}));
+  connect(Emag.y, virtualRe.Emag)
+    annotation (Line(points={{-59,60},{-30,60},{-30,16},{-22,16}},
+                                                 color={0,0,127}));
+  connect(Eang.y, virtualRe.Eang) annotation (Line(points={{-59,20},{-36,20},{
+          -36,8},{-22,8}},           color={0,0,127}));
+  connect(anglev.y, virtualRe.anglev) annotation (Line(points={{-59,-60},{-30,
+          -60},{-30,-16},{-22,-16}},  color={0,0,127}));
+  connect(virtualRe.R_e, R_e) annotation (Line(points={{22,0},{110,0}},
+                               color={0,0,127}));
+  annotation (preferredView="diagram",experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
+end VReVdrop;
