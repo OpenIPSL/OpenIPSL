@@ -103,7 +103,7 @@ def checkLinks(path):
     errors = 0
     with PoolExecutor(max_workers=8) as executor:
         for url, rc in executor.map(_checkURL, all_urls):
-            if rc != 200:
+            if not 200 <= rc < 300:
                 errors = errors + 1
                 # Only get first match for file name
                 file_name = next(file_name for file_name, url_list in urls.items() if url in url_list)
