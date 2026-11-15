@@ -24,6 +24,7 @@ model SCRX "SCRX - Bus Fed or Solid Fed Static Exciter (AC4A from [IEEE1992] / A
     K=K,
     T=T_E,
     y_start=VR0,
+    y(start=Efd0),
     outMax=E_MAX,
     outMin=E_MIN)
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
@@ -96,7 +97,22 @@ equation
 </tr>
 <tr>
 <td><p>Last update</p></td>
-<td><p>2020-09</p></td>
+<td><p>2026-10-25</p></td>
+</tr>
+<tr>
+<td><p>Revisions</p></td>
+<td><p>2026-10-25: the output <code>y</code> of <code>simpleLagLim</code> takes the initial field voltage
+<code>Efd0</code> as its start value (<code>y(start=Efd0)</code>); before, it took <code>y_start = VR0</code>
+from the block's default <code>y(start=y_start)</code>.
+<code>VR0</code> is computed at initialization from <code>ECOMP0</code>, the compensated voltage at t = 0, so it is
+solved in the same nonlinear block of initial equations as the network, the machine and <code>y</code> itself.
+Wolfram System Modeler 15.0 refuses a start value computed in the block of the variable it starts
+(&quot;Variables have start values that are determined in the same block of equations as the variables
+themselves&quot;) and could not build the tests that use this exciter. <code>Efd0</code> is known before that
+block. The start value of <code>y</code> is only the first guess of the solver: the initial equation of
+<code>simpleLagLim</code>, <code>state = y_start</code> with <code>y_start = VR0</code>, still fixes the
+initial value, so the initial values and the results do not change. With <code>C_SWITCH = true</code>,
+<code>VR0 = Efd0</code> and the guess is the value itself; bus fed, <code>VR0 = Efd0/ECOMP0</code>.</p></td>
 </tr>
 <tr>
 <td><p>Author</p></td>

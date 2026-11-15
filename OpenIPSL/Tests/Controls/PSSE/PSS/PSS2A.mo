@@ -16,7 +16,7 @@ model PSS2A "SMIB system to test functionality of PSS2A model"
     Xl=0.12,
     S10=0.11,
     S12=0.39,
-    angle_0=0.070492225331847,
+    angle_0=0.0706207995986839,
     Xppq=0.2,
     M_b=100000000,
     P_0=40000000,

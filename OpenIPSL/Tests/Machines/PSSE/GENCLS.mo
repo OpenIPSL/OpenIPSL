@@ -7,7 +7,7 @@ model GENCLS "SMIB system to test functionality of classical generator model, an
    P_0=40000000,
    Q_0=5416582,
    v_0=1,
-   angle_0=0.070492225331847,
+   angle_0=0.0706207995986839,
    omega(fixed=true)) annotation (Placement(transformation(extent={{-100,-20},{-60,20}})));
 equation
  connect(gENCLS1.p, GEN1.p)

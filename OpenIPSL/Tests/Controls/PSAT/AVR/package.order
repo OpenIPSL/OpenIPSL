@@ -2,3 +2,5 @@ AVRTypeI_Test
 AVRTypeII_Test
 AVRTypeII_SimpleLagLim
 AVRTypeII_LagLimWindupGuard
+AVRTypeIII_BusFed_on
+AVRTypeIII_BusFed_off

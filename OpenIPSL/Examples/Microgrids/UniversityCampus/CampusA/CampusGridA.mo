@@ -339,6 +339,8 @@ model CampusGridA "Microgrid model for university campus A"
         transformation(extent={{10,-188},{22,-176}})));
   GenerationGroups.CTG2.CTG2MachineComplete
                                         CTB(
+    exciter(TransducerDelay(state(start=1), y(start=1)),
+      rotatingExciterWithDemagnetizationVarLim(EFD(start=1), outMax(start=5))),
     P_0=pf.powerflow.machines.PG3,
     Q_0=pf.powerflow.machines.QG3,
     v_0=pf.powerflow.bus.V9,
@@ -361,6 +363,7 @@ model CampusGridA "Microgrid model for university campus A"
         origin={-50,-24})));
   GenerationGroups.STG1.STG1MachineComplete
                                         STGA(
+    exciter(TransducerDelay(state(start=1), y(start=1)), simpleLagLim(y(start=1))),
     P_0=pf.powerflow.machines.PG4,
     Q_0=pf.powerflow.machines.QG4,
     v_0=pf.powerflow.bus.V10,
@@ -372,6 +375,8 @@ model CampusGridA "Microgrid model for university campus A"
         origin={81,-83})));
   GenerationGroups.STG2.STG2MachineComplete
                                         STGB(
+    exciter(TransducerDelay(state(start=1), y(start=1)),
+      rotatingExciterWithDemagnetizationVarLim(EFD(start=1), outMax(start=5))),
     P_0=pf.powerflow.machines.PG5,
     Q_0=pf.powerflow.machines.QG5,
     v_0=pf.powerflow.bus.V12,
@@ -616,5 +621,6 @@ The microgrid also contains a 4.16kV portion in bus B15, stepped down from 12kV 
 The university campus microgrid is powered by two combustion turbo generators (CTs) and four steam turbo generators (STs). The two oldest steam turbine generation units rarely operate, typically online for a few days a year in extreme load conditions.
 For that reason, the model contains two CTs and two STs, producing power at 12kV each.
 The maximum amount of power that the combined generation units can produce is approximately 127MW. </p>
+<p>For OpenModelica settings, see <a href=\"modelica://OpenIPSL.Examples.Microgrids.UniversityCampus.CampusA.OpenModelicaInstructions\">OpenModelica Instructions</a>.</p>
 </html>"));
 end CampusGridA;

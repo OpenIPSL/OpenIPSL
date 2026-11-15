@@ -5,7 +5,7 @@ model IEESGO "SMIB system to test functionality of IEESGO model"
     Xppd=0.2,
     Xppq=0.2,
     Xl=0.12,
-    angle_0=0.07068583470577,
+    angle_0=0.0706207995986839,
     Tpd0=6.7000,
     Tppd0=0.028,
     Tppq0=0.0358,
@@ -17,8 +17,8 @@ model IEESGO "SMIB system to test functionality of IEESGO model"
     S10=0.18600,
     S12=0.802,
     M_b=100000000,
-    P_0=39999950,
-    Q_0=5416571,
+    P_0=40000000,
+    Q_0=5416582,
     v_0=1) annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
   OpenIPSL.Electrical.Controls.PSSE.ES.SCRX sCRX(
     T_B=10,

@@ -31,8 +31,7 @@ limits and back.</p>
 past the limit and is reset to it, again and again, until the input has fallen below the limit; each reset is an
 event. <code>LagLimWindupGuard</code>'s state stops at the limit, as in a non-windup limit (IEEE Std. 421.5-2005,
 Annex E).</li>
-<li><code>simpleLagLim.y</code> and <code>lagLimWindupGuard.y</code>: the outputs agree within 1.1e-5 and leave the limit
-together; the difference is <code>LagLimWindupGuard</code>'s, which tests its limits without events.</li>
+<li><code>simpleLagLim.y</code> and <code>lagLimWindupGuard.y</code>: the outputs are the same (to 2e-10 in OpenModelica) and leave the limit together.</li>
 </ul>
 <p>The PSAT models that can use either limiter have test pairs of their own, in
 <a href=\"modelica://OpenIPSL.Tests.Controls.PSAT.AVR\">Tests.Controls.PSAT.AVR</a> and

@@ -16,7 +16,7 @@ model ESURRY "SMIB system to test functionality of ESURRY model"
     Xl=0.261,
     S10=0.082,
     S12=0.385,
-    angle_0=0.070492225331847,
+    angle_0=0.0706207995986839,
     Xppq=0.314,
     M_b=1055000000,
     P_0=40000000,

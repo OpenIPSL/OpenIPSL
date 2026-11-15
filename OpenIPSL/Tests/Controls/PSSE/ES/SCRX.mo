@@ -17,7 +17,7 @@ model SCRX "SMIB system to test functionality of SCRX model"
     Xl=0.12,
     S10=0.11,
     S12=0.39,
-    angle_0=0.070492225331847,
+    angle_0=0.0706207995986839,
     Xppq=0.2,
     R_a=0,
     Xpp=0.2,

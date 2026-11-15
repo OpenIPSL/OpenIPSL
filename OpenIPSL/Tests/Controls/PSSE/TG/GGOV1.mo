@@ -18,10 +18,10 @@ model GGOV1 "SMIB system to test functionality of GGOV1 model"
     S12=0.5,
     Xpq=0.6,
     Tpq0=0.7,
-    angle_0=0.07068583470577,
+    angle_0=0.0706207995986839,
     M_b=100000000,
-    P_0=39999950,
-    Q_0=5416571,
+    P_0=40000000,
+    Q_0=5416582,
     v_0=1) annotation (Placement(transformation(extent={{-88,-20},{-48,20}})));
   OpenIPSL.Electrical.Controls.PSSE.TG.GGOV1 gGOV1(
     R=0.,

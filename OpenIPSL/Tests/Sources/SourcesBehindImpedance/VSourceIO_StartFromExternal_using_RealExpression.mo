@@ -10,7 +10,7 @@ model VSourceIO_StartFromExternal_using_RealExpression
     P_0=40000000,
     Q_0=5416582,
     v_0=1.0,
-    angle_0=0.070492225331847,
+    angle_0=0.070620799598684,
     M_b=SysData.S_b,
     useEphasorInternalAsInput=false)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));

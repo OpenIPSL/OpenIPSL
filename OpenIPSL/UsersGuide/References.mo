@@ -23,6 +23,16 @@ model References "References"
 </tr>
 
 <tr>
+<td>[Du2024]</td>
+<td>W. Du, Q.H. Nguyen, S. Wang, J. Kim, Y. Liu, S. Zhu, F.K. Tuffner et al.:
+        &quot;Positive-Sequence Modeling of Droop-Controlled Grid-Forming Inverters for Transient Stability Simulation of Transmission Systems&quot;.
+        IEEE Transactions on Power Delivery, vol. 39, no. 3, pp. 1736-1748, June 2024,
+        <a href=\"https://doi.org/10.1109/TPWRD.2024.3376245\">DOI: 10.1109/TPWRD.2024.3376245</a>
+
+</td>
+</tr>
+
+<tr>
 <td>[EPRI2023]</td>
 <td>EPRI:
         &quot;Code Based Generic Inverter Based Resource Model&quot;,

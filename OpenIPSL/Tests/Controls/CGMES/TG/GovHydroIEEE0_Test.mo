@@ -18,7 +18,7 @@ model GovHydroIEEE0_Test "SMIB system to test functionality of turbine governor 
     S10=0.11,
     S12=0.39,
     P_0=40000000,
-    angle_0=0.070492225331847,
+    angle_0=0.0706207995986839,
     Q_0=5416582,
     Xppq=0.2,
     R_a=0,
