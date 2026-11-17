@@ -31,7 +31,7 @@ the steady state of the overall model, i.e., a power flow solution. However, the
 </p>
 <p>
 Almost all of our models have been developed to provide the same response than a reference power system
-simulation tool, e.g., <a href=\"http://faraday1.ucd.ie/psat.html\">PSAT</a> and
+simulation tool, e.g., <a href=\"https://faraday1.ucd.ie/psat.html\">PSAT</a> and
 <a href=\"https://www.siemens.com/global/en/products/energy/grid-software/planning/pss-software/pss-e.html\">PSS&reg;E</a>.
 You can use these tools to create a power flow solution for your network.
 If you do not have access to these tools or do not want to use them, there are several power flow solvers

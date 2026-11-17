@@ -13,7 +13,7 @@ package UniversityCampus "University campus microgrid examples"
 <li>Fachini, Fernando, Aisling Pigott, Giuseppe Laera, Tetiana Bogodorova, Luigi Vanfretti, and Kyri Baker,
     &quot;Developing a Campus Microgrid Model utilizing Modelica and the OpenIPSL Library&quot;,
     2023 11th Workshop on Modelling and Simulation of Cyber-Physical Energy Systems (MSCPES), pp. 1-6. IEEE, 2023.
-    <a href=\"https://ieeexplore.ieee.org/document/10123421\">DOI:10.1109/MSCPES58582.2023.10123421</a></li>
+    <a href=\"https://doi.org/10.1109/MSCPES58582.2023.10123421\">DOI:10.1109/MSCPES58582.2023.10123421</a></li>
 </ul>
 </html>"));
 end UniversityCampus;
