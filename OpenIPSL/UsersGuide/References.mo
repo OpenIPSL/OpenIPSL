@@ -124,7 +124,7 @@ G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C
 <td>Federico Milano:
         &quot;Power System Analysis Toolbox&quot;,
         Documentation for PSAT version 2.1.8, 6th January 2013,
-        (<a href=\"http://faraday1.ucd.ie/psat.html\">Home page</a>)
+        (<a href=\"https://faraday1.ucd.ie/psat.html\">Home page</a>)
 </td>
 </tr>
 <tr>
@@ -133,7 +133,7 @@ G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C
         &quot;Modeling and Simulation of PI-Controllers Limiters for the Dynamic Analysis of VSC-Based Devices&quot;.
         In: IEEE Transactions in Power Systems, Vol: 34, Issue: 5,
         September 2019,
-        <a href=\"https://ieeexplore.ieee.org/document/8691611\">DOI: 10.1109/TPWRS.2019.2911034</a>
+        <a href=\"https://doi.org/10.1109/TPWRS.2019.2911034\">DOI: 10.1109/TPWRS.2019.2911034</a>
 </td>
 </tr>
 <tr>
@@ -151,7 +151,7 @@ G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C
         &quot;Microgrid Stability Definitions, Analysis, and Modeling&quot;.
          In: IEEE Power & Energy Society,
         April 2018,
-        <a href=\"https://ieeexplore.ieee.org/document/8750828\">DOI: 10.1109/TPWRS.2019.2925703</a>
+        <a href=\"https://doi.org/10.1109/TPWRS.2019.2925703\">DOI: 10.1109/TPWRS.2019.2925703</a>
 </td>
 </tr>
 <tr>
