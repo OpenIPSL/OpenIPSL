@@ -101,6 +101,13 @@ model REECA1 "Electrical control model for large scale wind"
     initType=Modelica.Blocks.Types.Init.InitialState, y_start=-Iq0
          - (-V0 + Vref0)*Kqv)
     annotation (Placement(transformation(extent={{140,-26},{160,-6}})));
+  Modelica.Blocks.Logical.Switch TiqFreeze
+    "Input of the Tiq lag: zero during a voltage dip, so that the lag holds its state"
+    annotation (Placement(transformation(extent={{98,-26},{118,-6}})));
+  Modelica.Blocks.Sources.Constant TiqHold(k=0) "Input of the Tiq lag during a voltage dip"
+    annotation (Placement(transformation(extent={{62,14},{78,30}})));
+  Modelica.Blocks.Sources.BooleanExpression TiqDip(y=Voltage_dip) "True during a voltage dip"
+    annotation (Placement(transformation(extent={{42,0},{58,16}})));
   Modelica.Blocks.Sources.RealExpression Vt_filt1(y=VFilter.y)
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
   Modelica.Blocks.Nonlinear.Limiter limiter4(uMax=Modelica.Constants.inf, uMin=0.01)
@@ -345,8 +352,14 @@ equation
           126},{-158,126}}, color={0,0,127}));
   connect(VBIAS.y, add3.u1)
     annotation (Line(points={{-39,32},{-28,32}}, color={0,0,127}));
-  connect(add7.y, integrator2.u) annotation (Line(points={{81,-16},{138,-16}},
+  connect(add7.y, TiqFreeze.u3) annotation (Line(points={{81,-16},{84,-16},{84,-24},{96,-24}},
                            color={0,0,127}));
+  connect(TiqFreeze.y, integrator2.u) annotation (Line(points={{119,-16},{138,-16}},
+                           color={0,0,127}));
+  connect(TiqHold.y, TiqFreeze.u1) annotation (Line(points={{78.8,22},{94,22},{94,-8},{96,-8}},
+                           color={0,0,127}));
+  connect(TiqDip.y, TiqFreeze.u2) annotation (Line(points={{58.8,8},{90,8},{90,-16},{96,-16}},
+                           color={255,0,255}));
   connect(limiter5.y, integrator3.u)
     annotation (Line(points={{-149,-166},{-142,-166}}, color={0,0,127}));
   connect(product5.y, add8.u1)
@@ -393,6 +406,12 @@ In terms of connectivity with other components to form the renewable source, the
 an input (wg) that allows modeling the torscional frequencies on the turbine shaft originated from disturbances.
 The three REECA1 inputs that take in values from the output of the inverter model
 are Vt, Pgen, and Qgen while the two inputs that could potentially be constant valued or come from the plant controller are Pref, and Qext.
+</p>
+<p>
+During a voltage dip (Vt below Vdip or above Vup) the reactive current injection Iqinj = Kqv (Vref0 - Vt_filt), outside the
+deadband dbd1, dbd2 and within Iql1 and Iqh1, is added to the reactive current command; outside a dip it is zero.
+The lag Tiq of the reactive current command with constant Q control (qflag = false) holds its state during the dip,
+as the PI controllers of the reactive power and voltage loops do.
 </p>
 <p>The modelling of such devices is based, mainly, on the following references:</p>
 <ul>
