@@ -73,7 +73,8 @@ themselves. Inside a when-clause a relation is taken literally and generates no 
 while the same relation in the clause's condition is the event-generating one, whose crossing a tool locates
 within its tolerance: at the event that releases the state, a relation written in the body may still be on the
 outward side of the limit and keep the state held. Wolfram System Modeler 15.0 did that at 20 of 666 releases
-of the PSAT-2-Modelica cases; the Booleans have one value at an event, the one that activated the clause.</p>
+of the cases of PSAT-2-Modelica, a private developer tool of the OpenIPSL development team; the Booleans have one
+value at an event, the one that activated the clause.</p>
 <p>It differs from <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a> in two
 ways:</p>
 <ul>

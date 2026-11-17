@@ -78,8 +78,9 @@ OpenModelica). The limiters' outputs leave the limit together, so the system doe
 System Modeler its anti-windup relation, zero at rest, makes an event of every round-off sign change, and this test
 stops there before any disturbance; with <code>LagLimWindupGuard</code> it runs.</li>
 </ul>
-<p>The network, the machine and the STATCOM are those of the PSAT-2-Modelica unit test <code>facts_statcom</code>, and
-the step that of its reference step test (C.5) taken at 10 s for 4 s on top of the fault and the line opening, so
+<p>The network, the machine and the STATCOM are those of the unit test <code>facts_statcom</code> of
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team), and
+the step that of its reference step test taken at 10 s for 4 s on top of the fault and the line opening, so
 that the test can be compared with PSAT directly. Added with the <code>useWindupGuard</code> option of the PSAT
 STATCOM and TCSC.</p>
 </html>"));

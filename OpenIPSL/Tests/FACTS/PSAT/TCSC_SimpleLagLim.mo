@@ -93,7 +93,8 @@ the default; the TCSC's documentation compares the limiters.</p>
 <li><code>tcsc.x1</code> and <code>tcsc.pkm</code>: the same in both tests to within 1.9e-5 pu in Dymola (both limiters' limits are events).</li>
 <li>The number of state events in the simulation log.</li>
 </ul>
-<p>The network, the machine, the load and the TCSC are those of the PSAT-2-Modelica unit test <code>facts_tcsc</code>,
+<p>The network, the machine, the load and the TCSC are those of the unit test <code>facts_tcsc</code> of
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team),
 so that the test can be compared with PSAT directly; the line runs from <code>SERIES2</code> to <code>SERIES1</code>
 because PSAT's constant power flow control is stable only on a positive flow. Added with the
 <code>useWindupGuard</code> option of the PSAT STATCOM and TCSC.</p>

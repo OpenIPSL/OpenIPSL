@@ -93,8 +93,9 @@ reaches and leaves a limit.</li>
 </ul>
 <p><a href=\"modelica://OpenIPSL.Tests.NonElectrical.Continuous.LagLimWindupGuard\">Tests.NonElectrical.Continuous.LagLimWindupGuard</a>
 shows the two limiters side by side in one model.</p>
-<p>The machine, the AVR, the stabilizer and the network are those of the PSAT-2-Modelica unit test of the PSAT type 1
-stabilizer, with the stabilizer's limits tightened from &plusmn;0.1 to &plusmn;0.02 pu so that the disturbances reach
+<p>The machine, the AVR, the stabilizer and the network are those of the unit test of the PSAT type 1 stabilizer in
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team),
+with the stabilizer's limits tightened from &plusmn;0.1 to &plusmn;0.02 pu so that the disturbances reach
 them.</p>
 </html>"));
 end PSSTypeI_SimpleLagLim;

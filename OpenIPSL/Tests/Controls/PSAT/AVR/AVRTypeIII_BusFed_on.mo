@@ -63,7 +63,8 @@ field circuit's lag (<code>Te</code> = 0.4 s) keeps the field voltage below the 
 2.35 pu at 2.6 s and the limit never acts. Not bus-fed, the field voltage rises to the ceiling in the fault, where the
 non-windup limit (<code>useWindupGuard = true</code>, the default) holds it.</p>
 <h4>Why this test exists</h4>
-<p>It is the library twin of the unit test <code>ut_avr_type3_busfed_on</code> of ALSETLab/PSAT-2-Modelica, which
+<p>It is the library twin of the unit test <code>ut_avr_type3_busfed_on</code> of
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team), which
 is verified against PSAT 2.1.11: the same network, operating point, machine, regulator and disturbances. The unit
 test sets column 9 of PSAT's <code>Exc.con</code>, so that PSAT scales the input of the field circuit by
 <code>v/v0</code>; <code>ut_avr_type3_busfed_off</code>, the twin of
