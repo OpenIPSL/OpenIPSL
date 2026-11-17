@@ -169,8 +169,8 @@ model REECA1 "Electrical control model for large scale wind"
     annotation (Placement(transformation(extent={{-12,212},{8,232}})));
   Modelica.Blocks.Sources.Constant State0(k=0)
     annotation (Placement(transformation(extent={{-52,260},{-32,280}})));
-  Modelica.Blocks.Sources.BooleanExpression StateTransitionLogic(y=if
-        Voltage_dip == true then true else false)
+  Modelica.Blocks.Sources.BooleanExpression StateTransitionLogic(y=not Voltage_dip)
+    "False during a voltage dip, when StateTransitionSwitch passes the injection Iqinj; true otherwise, when it passes 0"
     annotation (Placement(transformation(extent={{-68,220},{-48,240}})));
   OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag1(
     K=1,
