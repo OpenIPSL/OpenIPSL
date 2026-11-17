@@ -151,7 +151,7 @@ G. Laera, L. Vanfretti, M. de Castro Fernandes, S.A. Dorado-Rojas, F. Fachini, C
         &quot;Microgrid Stability Definitions, Analysis, and Modeling&quot;.
          In: IEEE Power & Energy Society,
         April 2018,
-        <a href=\"https://doi.org/10.1109/TPWRS.2019.2925703\">DOI: 10.1109/TPWRS.2019.2925703</a>
+        <a href=\"https://doi.org/10.17023/420y-ns22\">DOI: 10.17023/420y-ns22</a>
 </td>
 </tr>
 <tr>
