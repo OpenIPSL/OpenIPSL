@@ -16,9 +16,11 @@ model TGTypeVI
   parameter Real Ka "Pilot valve gain [pu/pu]";
   parameter Types.PerUnit dref;
   parameter Types.PerUnit po;
+  parameter Types.PerUnit gnorm=gmax - gmin
+    "Gate normalisation, G = g/gnorm: the gate range on the machine base (gmax - gmin when the gate limits are on the machine base)";
   Types.PerUnit G "Gate opening [pu]";
   Modelica.Blocks.Continuous.Integrator integrator(initType=Modelica.Blocks.Types.Init.InitialState,
-      y_start=po*(gmax - gmin))
+      y_start=po*gnorm)
     annotation (Placement(transformation(extent={{-8,14},{4,26}})));
   Modelica.Blocks.Sources.Constant one(k=1) annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
@@ -50,7 +52,7 @@ model TGTypeVI
         extent={{-6,-6},{6,6}},
         origin={-160,20})));
   Modelica.Blocks.Continuous.Integrator integrator5(initType=Modelica.Blocks.Types.Init.InitialState,
-      y_start=po*(gmax - gmin))
+      y_start=po*gnorm)
     annotation (Placement(transformation(extent={{-96,14},{-84,26}})));
   Modelica.Blocks.Math.Feedback dw "Speed deviation from nominal, w - 1"
     annotation (Placement(transformation(extent={{42,44},{54,56}})));
@@ -79,7 +81,7 @@ model TGTypeVI
     annotation (Placement(transformation(extent={{-44,14},{-32,26}})));
   Modelica.Blocks.Math.Feedback servo_fb
     annotation (Placement(transformation(extent={{-60,14},{-48,26}})));
-  Modelica.Blocks.Math.Gain Gain10(k=1/(gmax - gmin))
+  Modelica.Blocks.Math.Gain Gain10(k=1/gnorm)
     annotation (Placement(transformation(extent={{42,14},{54,26}})));
   Modelica.Blocks.Math.MultiSum multiSum4(nu=2, k={-1,1}) annotation (Placement(
         transformation(
@@ -237,7 +239,15 @@ equation
           textColor={0,0,0},
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-180,-60},{200,60}})),
-    Documentation(revisions="<html>
+    Documentation(info="<html>
+<p>The gate opening <code>G</code> fed to the turbine is the gate position <code>g</code> divided by
+<code>gnorm</code>. PSAT (<code>@TGclass/setx0.m</code>, its <code>K3</code>) takes <code>gnorm</code> as
+<code>gmax - gmin</code> on the machine base, while the gate limits, rates and gains are on the system base
+(<code>@TGclass/base.m</code>). On a machine rated at the system base the two are equal and the default
+<code>gnorm = gmax - gmin</code> holds. On a machine rated <code>Sn</code> on a system base <code>S_b</code>,
+with <code>gmax</code>, <code>gmin</code> given on the system base, set <code>gnorm</code> to
+<code>(gmax - gmin)*S_b/Sn</code>.</p>
+</html>", revisions="<html>
 <table cellspacing=\"1\" cellpadding=\"1\" border=\"1\">
 <tr>
 <td><p>Reference</p></td>
