@@ -81,6 +81,7 @@ reaches and leaves a limit.</li>
 </ul>
 <p><a href=\"modelica://OpenIPSL.Tests.NonElectrical.Continuous.LagLimWindupGuard\">Tests.NonElectrical.Continuous.LagLimWindupGuard</a>
 shows the two limiters side by side in one model.</p>
-<p>The machine, the AVR and the network are those of the PSAT-2-Modelica unit test of the PSAT type 2 AVR.</p>
+<p>The machine, the AVR and the network are those of the unit test of the PSAT type 2 AVR in
+PSAT-2-Modelica, a private developer tool of the OpenIPSL development team.</p>
 </html>"));
 end AVRTypeII_SimpleLagLim;

@@ -54,7 +54,8 @@ equation
 <code>SMIBPSAT</code> at bus <code>FAULT</code> from 2 s to 2.15 s, and the line from <code>LOAD</code> to
 <code>SHUNT</code> (<code>pwLine1</code>) opened at 6 s and closed again at 8 s.</p>
 <h4>Why this test exists</h4>
-<p>It is the library twin of the unit test <code>ut_avr_type3_order5_type2</code> of ALSETLab/PSAT-2-Modelica, which
+<p>It is the library twin of the unit test <code>ut_avr_type3_order5_type2</code> of
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team), which
 is verified against PSAT 2.1.11 (initial values and time response, in Dymola, OpenModelica and System Modeler): the
 same network, operating point, machine, regulator and disturbances, so its trajectories can be compared with PSAT's
 directly. <a href=\"modelica://OpenIPSL.Tests.Machines.PSAT.Order5Type2test2_AVR\">Order5Type2test2_AVR</a> tests the

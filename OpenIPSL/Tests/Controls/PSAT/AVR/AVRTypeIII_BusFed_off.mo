@@ -9,7 +9,8 @@ exciter not bus-fed (<code>busFed = false</code>): the regulator's command is no
 in the fault the field voltage rises to its ceiling, <code>vfmax</code> = 3.0 pu, and the non-windup limit
 (<code>useWindupGuard = true</code>, the default) holds it there until the command falls below it.</p>
 <h4>Why this test exists</h4>
-<p>It is the library twin of the unit test <code>ut_avr_type3_busfed_off</code> of ALSETLab/PSAT-2-Modelica, verified
+<p>It is the library twin of the unit test <code>ut_avr_type3_busfed_off</code> of
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team), verified
 against PSAT 2.1.11: the data of <code>ut_avr_type3_busfed_on</code> with column 9 of PSAT's <code>Exc.con</code> at
 0. Compared with <code>AVRTypeIII_BusFed_on</code> it shows the bus-fed term, and it drives the field voltage to its
 ceiling, which the bus-fed test does not.</p>

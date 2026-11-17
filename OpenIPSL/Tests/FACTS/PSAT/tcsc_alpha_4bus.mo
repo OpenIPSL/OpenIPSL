@@ -164,7 +164,8 @@ equation
 machine of 2220 MVA with an AVR type 3 feeds an infinite bus through a step-up transformer and two paths, one of them
 compensated by a TCSC of the firing angle model
 (<a href=\"modelica://OpenIPSL.Electrical.FACTS.PSAT.TCSC\">TCSC</a>, <code>ctrl = alpha</code>) that holds the line's
-power flow constant. Its name is that of its PSAT model in PSAT-2-Modelica, not of a test base: it is
+power flow constant. Its name is that of its PSAT model in
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team), not of a test base: it is
 <code>d_tcsc</code>'s own network, not <a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIBPSAT\">SMIBPSAT</a>.</p>
 <p>Two corrections make it a test, each measured in PSAT alone:</p>
 <ol>
@@ -177,9 +178,9 @@ all, at a 2 ms step; with the gains negated PSAT stays at rest for 10 s.</li>
 of step in PSAT.</li>
 </ol>
 <p>The machine's saturation (<code>Syn.con</code> columns 25-26 of <code>d_tcsc</code>) is left out, since no PSAT
-machine of the library models it. The data are those of the PSAT model <code>tcsc_alpha_4bus_nosat_mdl.m</code> of
-<a href=\"https://github.com/ALSETLab/PSAT-2-Modelica\">PSAT-2-Modelica</a> (<code>Examples/Contributed/psat/</code>,
-operating point 0, its power flow), against which it is verified: this model matches PSAT's run of the fault in
+machine of the library models it. The data are those of the PSAT model <code>tcsc_alpha_4bus_nosat</code> of
+PSAT-2-Modelica (operating point 0, its power flow),
+against which it is verified: this model matches PSAT's run of the fault in
 Dymola, OpenModelica and System Modeler, and so do the translated PSAT model's steps of the AVR's reference and of the
 mechanical power, small and large. (With the earlier form of
 <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>, whose limits were

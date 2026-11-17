@@ -310,7 +310,8 @@ A TCSC Regulator according to
 <p><strong>Limiter.</strong> <code>useWindupGuard = true</code> (the default) limits the lag with <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.LagLimWindupGuard\">LagLimWindupGuard</a>, PSAT's non-windup limit (<code>@TCclass/fcall.m</code>, <code>fm_windup</code>): the state stops at a limit while the
 input pushes outward. <code>false</code> uses <a href=\"modelica://OpenIPSL.NonElectrical.Continuous.SimpleLagLim\">SimpleLagLim</a>, the default until this version. Under constant power flow
 control the TCSC swings between its limits, and the moment the state leaves a limit decides the next swing, so how the
-limiter finds that moment matters. Three forms were compared on the PSAT-2-Modelica unit tests <code>facts_tcsc</code>,
+limiter finds that moment matters. Three forms were compared on the unit tests of
+PSAT-2-Modelica (a private developer tool of the OpenIPSL development team), <code>facts_tcsc</code>,
 <code>facts_tcsc_alpha</code> and <code>facts_tcsc_bases</code> (Dymola, OpenModelica and System Modeler, output every 1 ms
 and 10 ms: 18 runs per form):</p>
 <ul>

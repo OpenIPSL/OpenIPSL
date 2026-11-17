@@ -102,7 +102,9 @@ constant impedances after the power flow.</li>
 <li>A fault at bus <code>FAULT</code> from 2 s to 2.15 s.</li>
 </ul>
 <p>The buses start on the power flow solution of this operating point (PSAT 2.1.11). The same network is the
-template of the generating-unit unit tests of PSAT-2-Modelica, so a test built on it can be compared with PSAT
+template of the generating-unit unit tests of
+PSAT-2-Modelica, a private developer tool of the OpenIPSL development team,
+so a test built on it can be compared with PSAT
 directly.</p>
 </html>"));
 end SMIBPSAT;

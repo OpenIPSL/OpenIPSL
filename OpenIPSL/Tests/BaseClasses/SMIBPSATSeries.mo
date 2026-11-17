@@ -98,8 +98,9 @@ equation
 <p><a href=\"modelica://OpenIPSL.Tests.BaseClasses.SMIBPSAT\">SMIBPSAT</a> with the bus <code>SHUNT</code> of its
 upper path split into two, <code>SERIES1</code> and <code>SERIES2</code>, for the tests of the PSAT series devices:
 the model that extends this one connects the device between them, a machine and its controls at
-<code>GEN1</code>, and sets the buses' start values to its own power flow. It is the series template of the
-PSAT-2-Modelica unit tests (<code>LOAD - SERIES1 - [device] - SERIES2 - GEN2</code>), so a test built on it can be
+<code>GEN1</code>, and sets the buses' start values to its own power flow. It is the series template
+(<code>LOAD - SERIES1 - [device] - SERIES2 - GEN2</code>) of the unit tests of
+PSAT-2-Modelica, a private developer tool of the OpenIPSL development team, so a test built on it can be
 compared with PSAT directly.</p>
 <ul>
 <li><code>GEN2</code> is an infinite bus, PSAT's slack bus without a machine.</li>
