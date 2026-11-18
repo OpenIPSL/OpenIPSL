@@ -19,7 +19,8 @@ REECA1's fault response acting: the voltage dip logic never starts (<code>Vdip =
 injects nothing (<code>Kqv = 0</code>). With Q priority (<code>pqflag = false</code>) the active current is limited to
 <code>Ipmax = min(VDL2, sqrt(Imax^2 - Iqcmd^2))</code>, here about 1.09 pu, since the reactive current stays near
 0.1 pu. The fault (<code>Xf = 0.2</code> pu) lowers the terminal voltage to about 0.4 pu, so the active current
-command <code>Pord/Vt</code> rises to about 0.96 pu: below the circular limit, so the limit does not bind. Before the fix of
+command <code>Ipcmd = Pord/Vt_filt</code> rises to about 0.99 pu and the active current at the terminal, through the lag
+<code>Tg</code> of REGCA1, to about 0.96 pu: below the circular limit, so the limit does not bind. Before the fix of
 OpenIPSL issue #460 the limit was <code>sqrt(sqrt(Imax) - sqrt(|Iqcmd|))</code>, about 0.83 pu here, and it cut the
 active current. The PSS/E twin is the unit test <code>ut_reeca1_lim</code>.
 </p>

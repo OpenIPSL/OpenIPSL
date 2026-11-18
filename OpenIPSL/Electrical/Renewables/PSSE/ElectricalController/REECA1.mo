@@ -407,10 +407,17 @@ The three REECA1 inputs that take in values from the output of the inverter mode
 are Vt, Pgen, and Qgen while the two inputs that could potentially be constant valued or come from the plant controller are Pref, and Qext.
 </p>
 <p>
-During a voltage dip (Vt below Vdip or above Vup) the reactive current injection Iqinj = Kqv (Vref0 - Vt_filt), outside the
-deadband dbd1, dbd2 and within Iql1 and Iqh1, is added to the reactive current command; outside a dip it is zero.
-The lag Tiq of the reactive current command with constant Q control (qflag = false) holds its state during the dip,
-as the PI controllers of the reactive power and voltage loops do.
+During a voltage dip (Vt below Vdip or above Vup) the reactive current injection Iqinj is added to the reactive current
+command; outside a dip it is zero. Iqinj is the voltage error Vref0 - Vt_filt, with Vt_filt the terminal voltage through
+the lag Trv, passed through the dead zone dbd1, dbd2 (which subtracts its threshold outside the band), multiplied by Kqv
+and limited to Iql1, Iqh1. The initial values of the reactive current paths assume no injection, so that the controller
+starts in steady state also when Vref0 differs from the initial voltage.
+The lag Tiq of the reactive current command with constant Q control (qflag = false), whose input is
+Qext/max(Vt_filt, 0.01), holds its state during the dip, as the PI controllers of the reactive power and voltage loops do.
+</p>
+<p>
+The injection ends when the dip ends: the hold of Iqinj at Iqfrz for Thld seconds after a dip (Thld &gt; 0) is not
+modelled, and the parameters Thld and Iqfrz have no effect. The model follows PSS/E for Thld = 0.
 </p>
 <p>The modelling of such devices is based, mainly, on the following references:</p>
 <ul>

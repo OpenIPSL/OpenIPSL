@@ -15,7 +15,7 @@ The voltage dip logic and the current limit logic of
 <a href=\"modelica://OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECA1\">REECA1</a> acting together, with
 P priority (<code>pqflag = true</code>), where the reactive current is limited to
 <code>Iqmax = min(VDL1, sqrt(Imax^2 - Ipcmd^2))</code>. The fault (<code>Xf = 0.15</code> pu) holds the terminal voltage
-near 0.7 pu. During the dip REECA1 injects <code>Iqinj = Kqv (Vref0 - Vt)</code> with <code>Kqv = 5</code>, more reactive
+near 0.7 pu. During the dip REECA1 injects <code>Iqinj = Kqv (Vref0 - Vt_filt)</code> with <code>Kqv = 5</code>, more reactive
 current than the limit leaves, so <code>Iqcmd</code> rides <code>Iqmax</code> and the converter current reaches
 <code>Imax = 1.1</code>; the lag <code>Tiq</code> of the constant Q control holds its state.
 </p>
