@@ -10,6 +10,7 @@ partial model SMIBREECA1
   parameter Real Kqv=5 "Reactive current injection gain of REECA1 during the voltage dip";
   parameter OpenIPSL.Types.PerUnit Vdip=0.9 "Voltage below which REECA1 is in a voltage dip";
   parameter OpenIPSL.Types.PerUnit Vup=1.1 "Voltage above which REECA1 is in a voltage dip";
+  parameter OpenIPSL.Types.PerUnit vref0=0 "Reference voltage of the reactive current injection; 0 for the initial terminal voltage";
   parameter OpenIPSL.Types.Time Tiq=0.02 "Time constant of the lag of the reactive current command with constant Q control";
   parameter OpenIPSL.Types.PerUnit Xf=0.15 "Reactance of the fault at bus FAULT (system base), with R = Xf/10";
   Electrical.Renewables.PSSE.Wind wind(
@@ -48,7 +49,7 @@ partial model SMIBREECA1
       Kqv=Kqv,
       Iqh1=1.5,
       Iql1=-1.5,
-      vref0=0,
+      vref0=vref0,
       Iqfrz=0,
       Thld=0,
       Tp=0.05,
@@ -107,7 +108,10 @@ from 2 to 2.15 s.
 Nothing but REECA1's current limit and voltage dip logic limits the currents: the low voltage power logic of REGCA1 is
 off, its low voltage active current management starts below 0.3 pu and its high voltage reactive current management
 above 2 pu, the VDL tables are flat at 1.5 pu, above <code>Imax = 1.1</code>. The tests change <code>pqflag</code>,
-<code>Kqv</code>, <code>Vdip</code>, <code>Vup</code>, <code>Tiq</code> and <code>Xf</code>.
+<code>Kqv</code>, <code>vref0</code>, <code>Vdip</code>, <code>Vup</code>, <code>Tiq</code> and <code>Xf</code>. The low voltage active
+current management of REGCA1 acts only in
+<a href=\"modelica://OpenIPSL.Tests.Renewable.PSSE.UnitTests.REECA1.REECA1CurrentLimitQ\">REECA1CurrentLimitQ</a>, where the
+terminal voltage is below 0.3 pu from 2.001 to 2.016 s.
 </p>
 <p>
 The voltage control PI of REECA1 (<code>Kvp</code>, <code>Kvi</code>) is not in the path of the reactive current with

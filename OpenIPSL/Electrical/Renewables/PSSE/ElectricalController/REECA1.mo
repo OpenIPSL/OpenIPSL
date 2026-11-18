@@ -98,8 +98,7 @@ model REECA1 "Electrical control model for large scale wind"
   Modelica.Blocks.Math.Add add7(k2=-1)
     annotation (Placement(transformation(extent={{60,-26},{80,-6}})));
   Modelica.Blocks.Continuous.Integrator integrator2(k=1/Tiq,
-    initType=Modelica.Blocks.Types.Init.InitialState, y_start=-Iq0
-         - (-V0 + Vref0)*Kqv)
+    initType=Modelica.Blocks.Types.Init.InitialState, y_start=-Iq0)
     annotation (Placement(transformation(extent={{140,-26},{160,-6}})));
   Modelica.Blocks.Logical.Switch TiqFreeze
     "Input of the Tiq lag: zero during a voltage dip, so that the lag holds its state"
@@ -200,7 +199,7 @@ model REECA1 "Electrical control model for large scale wind"
   BaseClasses.PIwithVariableLimiter pI_No_Windup(
     K_P=Kvp,
     K_I=Kvi,
-    y_start=-Iq0 - (-V0 + Vref0)*Kqv)
+    y_start=-Iq0)
     annotation (Placement(transformation(extent={{86,106},{126,146}})));
   BaseClasses.PIwithNoVariableLimiter pI_No_Windup_notVariable(
     K_P=Kqp,
