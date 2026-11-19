@@ -13,8 +13,8 @@ model REECA1 "Electrical control model for large scale wind"
   parameter OpenIPSL.Types.PerUnit Iqh1 = 1.05 "Upper limit on reactive current injection Iqinj (1 - 1.1)";
   parameter OpenIPSL.Types.PerUnit Iql1 = -1.05 "Lower limit on reactive current injection Iqinj (-1.1 - 1)";
   parameter OpenIPSL.Types.PerUnit vref0 = 0 "User defined voltage reference (0.95 - 1.05)";
-  parameter OpenIPSL.Types.PerUnit Iqfrz = 0.15 "Value at which Iqinj is held for Thld seconds following a voltage dip if Thld > 0";
-  parameter OpenIPSL.Types.Time Thld = 0 "Time for which Iqinj is held at Iqfrz after voltage dip returns to zero";
+  parameter OpenIPSL.Types.PerUnit Iqfrz = 0.15 "Value at which PSS/E holds Iqinj for Thld seconds following a voltage dip if Thld > 0 (not modelled here, no effect)";
+  parameter OpenIPSL.Types.Time Thld = 0 "Time for which PSS/E holds Iqinj at Iqfrz after the voltage dip ends (not modelled here, no effect)";
   parameter OpenIPSL.Types.Time Tp = 0.05 "Filter time constant for electrical power (0.01 - 0.1)";
   parameter OpenIPSL.Types.PerUnit Qmax = 0.4 "Upper limits of the limit for reactive power regulator (0.4 - 1.0)";
   parameter OpenIPSL.Types.PerUnit Qmin = -0.4 "Lower limits of the limit for reactive power regulator (-1.0 - -0.4)";
@@ -98,9 +98,15 @@ model REECA1 "Electrical control model for large scale wind"
   Modelica.Blocks.Math.Add add7(k2=-1)
     annotation (Placement(transformation(extent={{60,-26},{80,-6}})));
   Modelica.Blocks.Continuous.Integrator integrator2(k=1/Tiq,
-    initType=Modelica.Blocks.Types.Init.InitialState, y_start=-Iq0
-         - (-V0 + Vref0)*Kqv)
+    initType=Modelica.Blocks.Types.Init.InitialState, y_start=-Iq0)
     annotation (Placement(transformation(extent={{140,-26},{160,-6}})));
+  Modelica.Blocks.Logical.Switch TiqFreeze
+    "Input of the Tiq lag: zero during a voltage dip, so that the lag holds its state"
+    annotation (Placement(transformation(extent={{98,-26},{118,-6}})));
+  Modelica.Blocks.Sources.Constant TiqHold(k=0) "Input of the Tiq lag during a voltage dip"
+    annotation (Placement(transformation(extent={{62,14},{78,30}})));
+  Modelica.Blocks.Sources.BooleanExpression TiqDip(y=Voltage_dip) "True during a voltage dip"
+    annotation (Placement(transformation(extent={{42,0},{58,16}})));
   Modelica.Blocks.Sources.RealExpression Vt_filt1(y=VFilter.y)
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
   Modelica.Blocks.Nonlinear.Limiter limiter4(uMax=Modelica.Constants.inf, uMin=0.01)
@@ -169,8 +175,8 @@ model REECA1 "Electrical control model for large scale wind"
     annotation (Placement(transformation(extent={{-12,212},{8,232}})));
   Modelica.Blocks.Sources.Constant State0(k=0)
     annotation (Placement(transformation(extent={{-52,260},{-32,280}})));
-  Modelica.Blocks.Sources.BooleanExpression StateTransitionLogic(y=if
-        Voltage_dip == true then true else false)
+  Modelica.Blocks.Sources.BooleanExpression StateTransitionLogic(y=not Voltage_dip)
+    "False during a voltage dip, when StateTransitionSwitch passes the injection Iqinj; true otherwise, when it passes 0"
     annotation (Placement(transformation(extent={{-68,220},{-48,240}})));
   OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag1(
     K=1,
@@ -193,7 +199,7 @@ model REECA1 "Electrical control model for large scale wind"
   BaseClasses.PIwithVariableLimiter pI_No_Windup(
     K_P=Kvp,
     K_I=Kvi,
-    y_start=-Iq0 - (-V0 + Vref0)*Kqv)
+    y_start=-Iq0)
     annotation (Placement(transformation(extent={{86,106},{126,146}})));
   BaseClasses.PIwithNoVariableLimiter pI_No_Windup_notVariable(
     K_P=Kqp,
@@ -345,8 +351,14 @@ equation
           126},{-158,126}}, color={0,0,127}));
   connect(VBIAS.y, add3.u1)
     annotation (Line(points={{-39,32},{-28,32}}, color={0,0,127}));
-  connect(add7.y, integrator2.u) annotation (Line(points={{81,-16},{138,-16}},
+  connect(add7.y, TiqFreeze.u3) annotation (Line(points={{81,-16},{84,-16},{84,-24},{96,-24}},
                            color={0,0,127}));
+  connect(TiqFreeze.y, integrator2.u) annotation (Line(points={{119,-16},{138,-16}},
+                           color={0,0,127}));
+  connect(TiqHold.y, TiqFreeze.u1) annotation (Line(points={{78.8,22},{94,22},{94,-8},{96,-8}},
+                           color={0,0,127}));
+  connect(TiqDip.y, TiqFreeze.u2) annotation (Line(points={{58.8,8},{90,8},{90,-16},{96,-16}},
+                           color={255,0,255}));
   connect(limiter5.y, integrator3.u)
     annotation (Line(points={{-149,-166},{-142,-166}}, color={0,0,127}));
   connect(product5.y, add8.u1)
@@ -393,6 +405,20 @@ In terms of connectivity with other components to form the renewable source, the
 an input (wg) that allows modeling the torscional frequencies on the turbine shaft originated from disturbances.
 The three REECA1 inputs that take in values from the output of the inverter model
 are Vt, Pgen, and Qgen while the two inputs that could potentially be constant valued or come from the plant controller are Pref, and Qext.
+</p>
+<p>
+During a voltage dip (Vt below Vdip or above Vup) the reactive current injection Iqinj is added to the reactive current
+command; outside a dip it is zero. Iqinj is the voltage error Vref0 - Vt_filt, with Vt_filt the terminal voltage through
+the lag Trv, passed through the dead zone dbd1, dbd2 (which subtracts its threshold outside the band), multiplied by Kqv
+and limited to Iql1, Iqh1. The initial values of the reactive current paths assume no injection, so that the controller
+starts in steady state also when Vref0 differs from the initial voltage. A unit whose initial voltage is already below
+Vdip or above Vup injects Iqinj from the start and does not start in steady state, as in PSS/E.
+The lag Tiq of the reactive current command with constant Q control (qflag = false), whose input is
+Qext/max(Vt_filt, 0.01), holds its state during the dip, as the PI controllers of the reactive power and voltage loops do.
+</p>
+<p>
+The injection ends when the dip ends: the hold of Iqinj at Iqfrz for Thld seconds after a dip (Thld &gt; 0) is not
+modelled, and the parameters Thld and Iqfrz have no effect. The model follows PSS/E for Thld = 0.
 </p>
 <p>The modelling of such devices is based, mainly, on the following references:</p>
 <ul>

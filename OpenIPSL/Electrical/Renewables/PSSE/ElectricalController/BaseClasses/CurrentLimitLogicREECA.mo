@@ -5,8 +5,8 @@ model CurrentLimitLogicREECA "Current limit logic for REECA"
   parameter OpenIPSL.Types.PerUnit start_ir "Starting current value from Ipcmd (comes from power flow simulation)";
   parameter OpenIPSL.Types.PerUnit Imax "Maximum limit on total converter current";
 
-  OpenIPSL.Types.PerUnit Ipost;
-  OpenIPSL.Types.PerUnit Ipre;
+  OpenIPSL.Types.PerUnit Ipre "Square of the current left by the priority axis: Imax^2 - Iqcmd^2 (Q priority) or Imax^2 - Ipcmd^2 (P priority)";
+  OpenIPSL.Types.PerUnit Ipost "Current left for the other axis, sqrt(Ipre), zero when Ipre is negative";
 
   Modelica.Blocks.Interfaces.RealInput VDL1_out annotation (Placement(
         transformation(
@@ -51,17 +51,12 @@ model CurrentLimitLogicREECA "Current limit logic for REECA"
         origin={60,-110})));
 equation
 
-    Ipre = if pqflag == false then sqrt(Imax) - sqrt(abs(Iqcmd)) else sqrt(Imax) - sqrt(abs(Ipcmd));
-    Ipost = if Ipre < 0 then 0 else sqrt(Ipre);
+    Ipre = if pqflag == false then Imax^2 - Iqcmd^2 else Imax^2 - Ipcmd^2;
+    Ipost = noEvent(if Ipre > 0 then sqrt(Ipre) else 0) "Ipre is zero when the priority command is at Imax: noEvent keeps a solver iterate below zero out of sqrt";
 
     Iqmax = if pqflag == false then min(VDL1_out, Imax) else min(Ipost, VDL1_out);
-    //Iqmax = if pqflag == false then VDL1_out else min(VDL1_out, sqrt((Imax^2) - (Ipcmd^2)));
-    //Iqmax = if pqflag == false then min(VDL1_out, Imax) else min(VDL1_out, sqrt(Imax^2 - Ipcmd^2));
-    //Iqmax = if pqflag == false then (if Ipost < VDL1_out then Ipost else VDL1_out) else (if Ipost < VDL1_out then Ipost else VDL1_out);
-
     Iqmin = -Iqmax;
     Ipmax = if pqflag == false then min(Ipost, VDL2_out) else min(VDL2_out, Imax);
-    //Ipmax = if pqflag == false then min(VDL2_out, sqrt(Imax^2 - Iqcmd^2)) else min(VDL2_out, Imax);
     Ipmin = 0;
 
   annotation (Icon(graphics={Rectangle(
@@ -90,24 +85,32 @@ equation
           extent={{-78,106},{-38,66}},
           textColor={28,108,200},
           textString="IQMAX")}), Documentation(info="<html>
-The pseudo-code for the current limit logic in the REECA electrical controller detailed below:
+<p>
+The current limit logic keeps the current command within the circle |I| = Imax. The priority axis (active current with
+<code>pqflag = true</code>, reactive current with <code>pqflag = false</code>) is limited to <code>Imax</code>; the other axis
+gets the circular limit <code>sqrt(Imax^2 - I^2)</code>, the current left on the circle, where <code>I</code> is the
+priority command. Both are further limited by the voltage dependent limits <code>VDL1</code> and <code>VDL2</code>.
+</p>
+The pseudo-code for the current limit logic in the REECA electrical controller detailed below. Ipre is exactly zero
+whenever the priority command is at Imax; <code>noEvent</code> keeps a solver iterate just below zero out of
+<code>sqrt</code>.
 <pre>
 <code>
-Ipre = sqrt(Imax) - sqrt(abs(Ipcmd));
-
-if Ipre is less than 0:
-   Ipost = 0;
+if pqflag = true:
+   Ipre = Imax^2 - Ipcmd^2;
 else:
-   Ipost = sqrt(Ipre);
+   Ipre = Imax^2 - Iqcmd^2;
 
-if Pqflag = true:
+Ipost = noEvent(if Ipre &gt; 0 then sqrt(Ipre) else 0);
+
+if pqflag = true:
    Ipmax = min(VDL2_out, Imax);
    Ipmin = 0;
    Iqmax = min(Ipost, VDL1_out);
    Iqmin = -Iqmax;
 end
 
-if Pqflag = false:
+if pqflag = false:
    Ipmax = min(Ipost, VDL2_out);
    Ipmin = 0;
    Iqmax = min(VDL1_out, Imax);
