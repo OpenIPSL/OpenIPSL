@@ -21,8 +21,9 @@ below <code>Vdip = 0.9</code>, and REECA1 adds <code>Iqinj = Kqv (Vref0 - Vt_fil
 reactive current command; the terminal voltage stays near 0.58 pu. Before the dip <code>Vref0</code> differs from the
 initial voltage, 1.0 pu, and nothing is injected: the test also checks that the controller starts in steady state. The currents stay far from the
 current limit under both of its formulas (before and after the fix of OpenIPSL issue #460), and
-<code>Tiq = 10</code> s makes the lag of the constant Q control move by less than 1e-3 pu in the 0.15 s of the
-fault, whether or not it holds its state. Before the fix the dip switch passed <code>Iqinj</code> outside the dip and
+<code>Tiq = 10</code> s slows the lag of the constant Q control: without its hold it moves by about 1e-3 pu in the
+0.15 s of the fault, and the hold changes the reactive power by up to 3.9e-4 pu and the terminal voltage by up to
+4.7e-4 pu during the fault. Before the fix the dip switch passed <code>Iqinj</code> outside the dip and
 zero during it. The PSS/E twin is the unit test <code>ut_reeca1_dip</code>.
 </p>
 <p>

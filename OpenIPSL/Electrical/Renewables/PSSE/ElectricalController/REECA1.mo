@@ -13,8 +13,8 @@ model REECA1 "Electrical control model for large scale wind"
   parameter OpenIPSL.Types.PerUnit Iqh1 = 1.05 "Upper limit on reactive current injection Iqinj (1 - 1.1)";
   parameter OpenIPSL.Types.PerUnit Iql1 = -1.05 "Lower limit on reactive current injection Iqinj (-1.1 - 1)";
   parameter OpenIPSL.Types.PerUnit vref0 = 0 "User defined voltage reference (0.95 - 1.05)";
-  parameter OpenIPSL.Types.PerUnit Iqfrz = 0.15 "Value at which Iqinj is held for Thld seconds following a voltage dip if Thld > 0";
-  parameter OpenIPSL.Types.Time Thld = 0 "Time for which Iqinj is held at Iqfrz after voltage dip returns to zero";
+  parameter OpenIPSL.Types.PerUnit Iqfrz = 0.15 "Value at which PSS/E holds Iqinj for Thld seconds following a voltage dip if Thld > 0 (not modelled here, no effect)";
+  parameter OpenIPSL.Types.Time Thld = 0 "Time for which PSS/E holds Iqinj at Iqfrz after the voltage dip ends (not modelled here, no effect)";
   parameter OpenIPSL.Types.Time Tp = 0.05 "Filter time constant for electrical power (0.01 - 0.1)";
   parameter OpenIPSL.Types.PerUnit Qmax = 0.4 "Upper limits of the limit for reactive power regulator (0.4 - 1.0)";
   parameter OpenIPSL.Types.PerUnit Qmin = -0.4 "Lower limits of the limit for reactive power regulator (-1.0 - -0.4)";
@@ -411,7 +411,8 @@ During a voltage dip (Vt below Vdip or above Vup) the reactive current injection
 command; outside a dip it is zero. Iqinj is the voltage error Vref0 - Vt_filt, with Vt_filt the terminal voltage through
 the lag Trv, passed through the dead zone dbd1, dbd2 (which subtracts its threshold outside the band), multiplied by Kqv
 and limited to Iql1, Iqh1. The initial values of the reactive current paths assume no injection, so that the controller
-starts in steady state also when Vref0 differs from the initial voltage.
+starts in steady state also when Vref0 differs from the initial voltage. A unit whose initial voltage is already below
+Vdip or above Vup injects Iqinj from the start and does not start in steady state, as in PSS/E.
 The lag Tiq of the reactive current command with constant Q control (qflag = false), whose input is
 Qext/max(Vt_filt, 0.01), holds its state during the dip, as the PI controllers of the reactive power and voltage loops do.
 </p>

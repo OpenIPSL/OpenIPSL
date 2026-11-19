@@ -105,9 +105,9 @@ machine base, without a plant controller (local constant Q control) and with the
 from 2 to 2.15 s.
 </p>
 <p>
-Nothing but REECA1's current limit and voltage dip logic limits the currents: the low voltage power logic of REGCA1 is
-off, its low voltage active current management starts below 0.3 pu and its high voltage reactive current management
-above 2 pu, the VDL tables are flat at 1.5 pu, above <code>Imax = 1.1</code>. The tests change <code>pqflag</code>,
+The currents are limited by REECA1's current limit and voltage dip logic, and by little else: the low voltage power
+logic of REGCA1 is off, its low voltage active current management starts below 0.3 pu and its high voltage reactive
+current management above 2 pu, the VDL tables are flat at 1.5 pu, above <code>Imax = 1.1</code>. The tests change <code>pqflag</code>,
 <code>Kqv</code>, <code>vref0</code>, <code>Vdip</code>, <code>Vup</code>, <code>Tiq</code> and <code>Xf</code>. The low voltage active
 current management of REGCA1 acts only in
 <a href=\"modelica://OpenIPSL.Tests.Renewable.PSSE.UnitTests.REECA1.REECA1CurrentLimitQ\">REECA1CurrentLimitQ</a>, where the
