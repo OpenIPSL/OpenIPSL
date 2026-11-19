@@ -156,10 +156,13 @@ Read in the convention of that diagram, the term increases the injected reactive
 PSS/E 36.2 acts the other way. Its correction (the VAR <em>Reactive current overvoltage correction</em>) always reduces
 the injected reactive current, and it is computed in the iterations of PSS/E's network solution, where <code>Khv</code>
 and the acceleration factor <code>Accel</code> (a CON of PSS/E's REGCA1 that has no counterpart here) are gains of the
-iteration: PSS/E holds the voltage near <code>Volim</code>, at a level that depends on <code>Khv</code>, <code>Accel</code>
-and the network (measured with PSS/E 36.2.1: 1.07 pu with <code>Volim = 1.1</code>, <code>Khv = 0.7</code>,
-<code>Accel = 0.7</code>, from 1.15 to 0.92 pu for other gains on the same case, and no converged solution for
-<code>Khv = 2</code>, <code>Accel = 1</code> on a stronger overvoltage). A simultaneous solution of the network and the
+iteration: each call of the model adds <code>Khv max(0, V - Volim)</code>, with the voltage relaxed by <code>Accel</code>,
+to a correction rebuilt every time step. PSS/E holds the voltage near <code>Volim</code>, at a level that depends on
+<code>Khv</code>, <code>Accel</code>, the network and the settings of PSS/E's network solution (measured with PSS/E 36.2.1
+on <code>REGCA1HighVoltage</code>: 1.069 pu with the default settings, 1.067 pu with the network solution converged,
+1.085 pu with its acceleration factor 1.6 and 1.20 pu with at most five network iterations; from 1.13 to 0.72 pu for
+other gains and overvoltages, and no converged solution for <code>Khv = 2</code>, <code>Accel = 1</code> on a stronger
+overvoltage). A simultaneous solution of the network and the
 model, as here, reaches the limit the iteration aims at directly, which is how PowerWorld Simulator documents its REGC_A
 [POWERWORLD-REGCA]: at <code>Volim</code> additional reactive current maintains the solved voltage at the threshold.
 <code>Khv</code> is therefore kept as a parameter for data compatibility and not used. Before this was changed
