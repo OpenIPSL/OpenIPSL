@@ -15,6 +15,10 @@ model REGCA1 "Renewable energy generator/converter model A"
     "Curve parameter of the high voltage reactive current management: VT - Volim while s < 0, the correction Ihv while s >= 0";
   OpenIPSL.Types.PerUnit Ihv
     "Reactive current overvoltage correction, absorbed reactive current that holds VT at Volim (machine base)";
+protected
+  parameter Boolean hvrcm=Khv > 0
+    "High voltage reactive current management on; Khv = 0 switches it off, as in PSS/E";
+public
   OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.BaseClasses.LVACM LVACM(lvpnt0=
         lvpnt0, lvpnt1=lvpnt1)
     annotation (Placement(transformation(extent={{62,-80},{82,-60}})));
@@ -69,10 +73,12 @@ public
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
 equation
   [IP.y; add1.y] = -[cos(delta), sin(delta); -sin(delta), cos(delta)]*[p.ir/CoB; p.ii/CoB];
-  VT - Volim = if s < 0 then s else 0
+  VT - Volim = if hvrcm then noEvent(min(s, 0)) else s
     "High voltage reactive current management: VT is free below Volim and held at Volim while the correction acts";
-  Ihv = if s < 0 then 0 else s
+  Ihv = if hvrcm then noEvent(max(s, 0)) else 0
     "The correction is zero below Volim and positive while VT is held at Volim";
+  assert(not hvrcm or v_0 <= Volim,
+    "REGCA1: the initial terminal voltage v_0 is above Volim; the high voltage reactive current management would move the initial point off the power flow");
   V_t = VT;
   Pgen = -(1/CoB)*(p.vr*p.ir + p.vi*p.ii);
   Qgen = -(1/CoB)*(p.vi*p.ir - p.vr*p.ii);
@@ -147,14 +153,23 @@ injections (p_0 and q_0). This method reduces repetitiveness of initialization c
 correction <code>Ihv &gt;= 0</code>, which absorbs reactive current. The correction holds the terminal voltage
 <code>VT</code> at <code>Volim</code> while the current command alone would raise it above <code>Volim</code>, and is zero
 otherwise: <code>Ihv &gt;= 0</code>, <code>VT &lt;= Volim</code> and <code>Ihv (Volim - VT) = 0</code>. The two are written
-with one curve parameter <code>s</code>, as in an ideal diode: <code>VT - Volim = s</code> and <code>Ihv = 0</code> for
-<code>s &lt; 0</code>, <code>VT = Volim</code> and <code>Ihv = s</code> for <code>s &gt;= 0</code>. The terminal voltage
-before the event must be below <code>Volim</code>.</p>
+with one curve parameter <code>s</code>, as in an ideal diode: <code>VT - Volim = min(s, 0)</code> and
+<code>Ihv = max(s, 0)</code>, both inside <code>noEvent</code>, so that the solver chooses the branch with the network
+equations instead of carrying the branch of the last event into an algebraic loop (with the event form, two converters
+on one bus with different <code>Volim</code> could be left above the lower one). <code>Khv = 0</code> switches the
+management off (<code>Ihv = 0</code>), as it does in PSS/E; any <code>Khv &gt; 0</code> switches it on, and its value is
+not used (below). The initial terminal voltage <code>v_0</code> must not be above <code>Volim</code> while the management
+is on; an assert stops the simulation otherwise.</p>
+<p>Two limits of the clamp. Two converters at one bus with the same <code>Volim</code> hold the same voltage, and the
+network fixes only the sum of their corrections: how it splits between them is not determined, and depends on the tool.
+And a converter connected directly to a voltage source above <code>Volim</code> has no solution: no current can move a
+prescribed voltage.</p>
 <p>The block diagram of the PSS/E Model Library (section REGCA1 of the chapter Generic Renewable Generator Models) draws the
 correction as <code>Khv max(0, VT - Volim)</code> subtracted from the reactive current before the limit <code>Iolim</code>.
 Read in the convention of that diagram, the term increases the injected reactive current and raises the voltage further;
-PSS/E 36.2 acts the other way. Its correction (the VAR <em>Reactive current overvoltage correction</em>) always reduces
-the injected reactive current, and it is computed in the iterations of PSS/E's network solution, where <code>Khv</code>
+PSS/E 36.2 acts the other way. Its correction (the VAR <em>Reactive current overvoltage correction</em>, a reactive power:
+the reactive power is the terminal voltage times the lagged current minus the VAR, so the VAR corresponds to
+<code>VT Ihv</code> here) always reduces the injected reactive current, and it is computed in the iterations of PSS/E's network solution, where <code>Khv</code>
 and the acceleration factor <code>Accel</code> (a CON of PSS/E's REGCA1 that has no counterpart here) are gains of the
 iteration: each call of the model adds <code>Khv max(0, V - Volim)</code>, with the voltage relaxed by <code>Accel</code>,
 to a correction rebuilt every time step. PSS/E holds the voltage near <code>Volim</code>, at a level that depends on
@@ -164,8 +179,9 @@ on <code>REGCA1HighVoltage</code>: 1.069 pu with the default settings, 1.067 pu 
 other gains and overvoltages, and no converged solution for <code>Khv = 2</code>, <code>Accel = 1</code> on a stronger
 overvoltage). A simultaneous solution of the network and the
 model, as here, reaches the limit the iteration aims at directly, which is how PowerWorld Simulator documents its REGC_A
-[POWERWORLD-REGCA]: at <code>Volim</code> additional reactive current maintains the solved voltage at the threshold.
-<code>Khv</code> is therefore kept as a parameter for data compatibility and not used. Before this was changed
+[POWERWORLD-REGCA]: at <code>Volim</code> additional reactive current maintains the solved voltage at the threshold. The
+clamp is that approximation of PSS/E's behaviour. The value of <code>Khv</code> is therefore not used; only whether it is
+zero. Before this was changed
 (OpenIPSL issue #466), the correction was <code>Khv max(0, VT - Volim)</code> with the diagram's sign and raised the voltage
 after a fault instead of limiting it.</p>
 <p>[POWERWORLD-REGCA] PowerWorld Corporation, \"Machine Model: REGC_A\", PowerWorld Simulator help,
