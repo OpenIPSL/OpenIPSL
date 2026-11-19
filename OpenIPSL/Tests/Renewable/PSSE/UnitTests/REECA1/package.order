@@ -4,3 +4,6 @@ REECA1CurrentLimitQ
 REECA1CurrentLimitCircle
 REECA1VoltageDipInjection
 REECA1VoltageDipTiqHold
+REECA1VoltageControl
+REECA1VoltageControlP
+REECA1VoltageQControl
