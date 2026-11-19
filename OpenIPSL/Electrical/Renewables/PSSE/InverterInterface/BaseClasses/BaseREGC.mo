@@ -28,7 +28,7 @@ partial model BaseREGC "Base renewable generator/converter for PSSE models"
   parameter OpenIPSL.Types.PerUnit lvpnt0 = 0.4 "Low voltage point for low voltage active current management" annotation (Dialog(group="Input Parameters"));
   parameter OpenIPSL.Types.PerUnit Iolim = -1.3 "Current limit for high voltage reactive current management (specified as a negative value)" annotation (Dialog(group="Input Parameters"));
   parameter Modelica.Units.SI.Time Tfltr = 0.02 "Voltage filter time constant for low voltage active current management" annotation (Dialog(group="Input Parameters"));
-  parameter Real Khv = 0.7 "Overvoltage compensation gain used in the high voltage reactive current management" annotation (Dialog(group="Input Parameters"));
+  parameter Real Khv = 0.7 "Overvoltage compensation gain of the high voltage reactive current management in PSS/E's iterative network solution; in REGCA1, any positive value switches the upper voltage limit on (the voltage is held at Volim while the correction acts), and zero or a negative value switches it off" annotation (Dialog(group="Input Parameters"));
   parameter Modelica.Units.SI.TimeAging Iqrmax = 9999 "Upper limit on rate of change for reactive current" annotation (Dialog(group="Input Parameters"));
   parameter Modelica.Units.SI.TimeAging Iqrmin = -9999 "Lower limit on rate of change for reactive current" annotation (Dialog(group="Input Parameters"));
 
