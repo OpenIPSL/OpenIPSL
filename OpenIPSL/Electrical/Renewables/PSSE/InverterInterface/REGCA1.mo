@@ -156,20 +156,25 @@ otherwise: <code>Ihv &gt;= 0</code>, <code>VT &lt;= Volim</code> and <code>Ihv (
 with one curve parameter <code>s</code>, as in an ideal diode: <code>VT - Volim = min(s, 0)</code> and
 <code>Ihv = max(s, 0)</code>, both inside <code>noEvent</code>, so that the solver chooses the branch with the network
 equations instead of carrying the branch of the last event into an algebraic loop (with the event form, two converters
-on one bus with different <code>Volim</code> could be left above the lower one). <code>Khv = 0</code> switches the
-management off (<code>Ihv = 0</code>), as it does in PSS/E; any <code>Khv &gt; 0</code> switches it on, and its value is
-not used (below). The initial terminal voltage <code>v_0</code> must not be above <code>Volim</code> while the management
+on one bus with different <code>Volim</code> could be left above the lower one). A positive <code>Khv</code> switches the
+management on, and its value is not used (below); <code>Khv = 0</code> switches it off (<code>Ihv = 0</code>), as it does
+in PSS/E, and so does a negative <code>Khv</code>. The initial terminal voltage <code>v_0</code> must not be above <code>Volim</code> while the management
 is on; an assert stops the simulation otherwise.</p>
 <p>Two limits of the clamp. Two converters at one bus with the same <code>Volim</code> hold the same voltage, and the
 network fixes only the sum of their corrections: how it splits between them is not determined, and depends on the tool.
-And a converter connected directly to a voltage source above <code>Volim</code> has no solution: no current can move a
-prescribed voltage.</p>
+And the clamp needs a network that admits an operating point with <code>VT &lt;= Volim</code> for the converter's current
+commands: a converter connected directly to a voltage source above <code>Volim</code> has no solution (no current can
+move a prescribed voltage), one connected directly to a source at exactly <code>Volim</code> has an undetermined
+correction, and one behind an impedance too large for any reactive current to bring the voltage down to
+<code>Volim</code> has no solution either. With an ideal source at the converter's terminal, switch the management off
+(<code>Khv = 0</code>).</p>
 <p>The block diagram of the PSS/E Model Library (section REGCA1 of the chapter Generic Renewable Generator Models) draws the
 correction as <code>Khv max(0, VT - Volim)</code> subtracted from the reactive current before the limit <code>Iolim</code>.
 Read in the convention of that diagram, the term increases the injected reactive current and raises the voltage further;
-PSS/E 36.2 acts the other way. Its correction (the VAR <em>Reactive current overvoltage correction</em>, a reactive power:
-the reactive power is the terminal voltage times the lagged current minus the VAR, so the VAR corresponds to
-<code>VT Ihv</code> here) always reduces the injected reactive current, and it is computed in the iterations of PSS/E's network solution, where <code>Khv</code>
+PSS/E 36.2 acts the other way. Its correction (the VAR <em>Reactive current overvoltage correction</em>) is a reactive
+power: on the sample measured (after a fault, <code>Iolim</code> not binding, machine and system bases both 100 MVA) the
+reactive power equals the terminal voltage times the lagged current minus the VAR, so the VAR corresponds to the
+reduction of reactive power <code>VT Ihv</code> on the machine base here. It always reduces the injected reactive current, and it is computed in the iterations of PSS/E's network solution, where <code>Khv</code>
 and the acceleration factor <code>Accel</code> (a CON of PSS/E's REGCA1 that has no counterpart here) are gains of the
 iteration: each call of the model adds <code>Khv max(0, V - Volim)</code>, with the voltage relaxed by <code>Accel</code>,
 to a correction rebuilt every time step. PSS/E holds the voltage near <code>Volim</code>, at a level that depends on
@@ -181,7 +186,7 @@ overvoltage). A simultaneous solution of the network and the
 model, as here, reaches the limit the iteration aims at directly, which is how PowerWorld Simulator documents its REGC_A
 [POWERWORLD-REGCA]: at <code>Volim</code> additional reactive current maintains the solved voltage at the threshold. The
 clamp is that approximation of PSS/E's behaviour. The value of <code>Khv</code> is therefore not used; only whether it is
-zero. Before this was changed
+positive. Before this was changed
 (OpenIPSL issue #466), the correction was <code>Khv max(0, VT - Volim)</code> with the diagram's sign and raised the voltage
 after a fault instead of limiting it.</p>
 <p>[POWERWORLD-REGCA] PowerWorld Corporation, \"Machine Model: REGC_A\", PowerWorld Simulator help,

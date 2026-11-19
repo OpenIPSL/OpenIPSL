@@ -16,9 +16,11 @@ when the shunt is removed.
 </p>
 <p>
 PSS/E 36.2.1 computes its correction (a reactive power, which corresponds to <code>VT Ihv</code> here) in the iterations
-of its network solution and holds the voltage at 1.069 pu
-here, a level set by the iteration's gains <code>Khv</code> and <code>Accel</code> (CON J+13 of PSS/E's REGCA1, 0.7 in the
-PSS/E twin) and by the settings of PSS/E's network solution (from 1.067 to 1.20 pu); the model holds it at <code>Volim</code>,
+of its network solution and holds the voltage here at 1.069 pu with its default settings, where the network solution
+does not converge in any step of the overvoltage, and at 1.067 pu when it converges (at most 50 network iterations or
+more), a level set by the iteration's gains <code>Khv</code> and <code>Accel</code> (CON J+13 of PSS/E's REGCA1, 0.7 in the
+PSS/E twin) and by the settings of PSS/E's network solution (up to 1.20 pu with at most five iterations); the model
+holds it at <code>Volim</code>,
 an approximation of PSS/E's behaviour (see the Documentation of REGCA1). The case where the management
 does not act is <a href=\"modelica://OpenIPSL.Tests.Renewable.PSSE.UnitTests.REGCA1.REGCA1HighVoltageInactive\">REGCA1HighVoltageInactive</a>.
 Added with the fix of OpenIPSL issue #466 (the correction had raised the voltage instead of limiting it); the PSS/E twin
