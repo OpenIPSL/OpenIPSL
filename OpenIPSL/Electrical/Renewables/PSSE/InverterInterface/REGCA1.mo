@@ -41,7 +41,8 @@ public
         origin={-80,-90})));
   Modelica.Blocks.Sources.BooleanConstant Lvplsw_logic(k=Lvplsw)
     annotation (Placement(transformation(extent={{-30,-100},{-50,-80}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter4(uMax=rrpwr, uMin=-Modelica.Constants.inf)
+  Modelica.Blocks.Nonlinear.Limiter limiter4(uMax=rrpwr*Tg, uMin=-Modelica.Constants.inf)
+    "Ramp limit of the active current: the rise of Ip is at most rrpwr, since the gain 1/Tg follows"
     annotation (Placement(transformation(extent={{-82,-40},{-62,-20}})));
   Modelica.Blocks.Math.Add add2(k2=-1)
     annotation (Placement(transformation(extent={{-110,-40},{-90,-20}})));
