@@ -4,8 +4,7 @@ model REGCA1 "Renewable energy generator/converter model A"
   Modelica.Blocks.Math.Add add1
     "Reactive current injected into the network, absorbed positive: the limited current plus the overvoltage correction"
     annotation (Placement(transformation(extent={{112,78},{132,98}})));
-  Modelica.Blocks.Nonlinear.Limiter IOLIM(uMax=Modelica.Constants.inf,
-                                                    uMin=Iolim)
+  Modelica.Blocks.Nonlinear.Limiter IOLIM(uMax=C.inf, uMin=Iolim)
     "Limit Iolim on the reactive current, absorbed positive: the injected reactive current is at most -Iolim"
     annotation (Placement(transformation(extent={{78,78},{98,98}})));
   Modelica.Blocks.Sources.RealExpression HVRCM(y=Ihv)
@@ -41,7 +40,8 @@ public
         origin={-80,-90})));
   Modelica.Blocks.Sources.BooleanConstant Lvplsw_logic(k=Lvplsw)
     annotation (Placement(transformation(extent={{-30,-100},{-50,-80}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter4(uMax=rrpwr, uMin=-Modelica.Constants.inf)
+  Modelica.Blocks.Nonlinear.Limiter limiter4(uMax=rrpwr*Tg, uMin=-C.inf)
+    "Ramp limit of the active current: the rise of Ip is at most rrpwr, since the gain 1/Tg follows"
     annotation (Placement(transformation(extent={{-82,-40},{-62,-20}})));
   Modelica.Blocks.Math.Add add2(k2=-1)
     annotation (Placement(transformation(extent={{-110,-40},{-90,-20}})));
@@ -49,7 +49,7 @@ public
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         origin={34,-100})));
-  Modelica.Blocks.Sources.RealExpression LowerLimit(y=-Modelica.Constants.inf)
+  Modelica.Blocks.Sources.RealExpression LowerLimit(y=-C.inf)
     annotation (Placement(transformation(extent={{-80,-70},{-60,-50}})));
   Modelica.Blocks.Math.Add add3(k2=-1)
     annotation (Placement(transformation(extent={{-86,64},{-66,84}})));
@@ -62,7 +62,7 @@ public
     annotation (Placement(transformation(extent={{-18,64},{2,84}})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     annotation (Placement(transformation(extent={{-120,70},{-100,90}})));
-  Modelica.Blocks.Sources.RealExpression Constant(y=Modelica.Constants.inf)
+  Modelica.Blocks.Sources.RealExpression Constant(y=C.inf)
     annotation (Placement(transformation(extent={{-30,-124},{-50,-104}})));
   Modelica.Blocks.Continuous.Integrator integrator1(
     k=1/Tg,
