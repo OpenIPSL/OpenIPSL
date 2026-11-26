@@ -1,6 +1,6 @@
 within OpenIPSL.Electrical.Renewables.PSSE.ElectricalController;
 model REECCU1
-  "Electrical control model for utility scale battery energy storage"
+  "Electrical control model for utility scale battery energy storage (PSS/E model REECC1)"
   extends
     OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.BaseClasses.BaseREECC(
      Iqcmd, Ipcmd);
