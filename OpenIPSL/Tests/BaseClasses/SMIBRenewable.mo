@@ -12,13 +12,13 @@ partial model SMIBRenewable "SMIB - Single Machine Infinite Base system with one
     G=0,
     B=0.05000/2) annotation (Placement(transformation(extent={{34,-30},{54,-10}})));
   OpenIPSL.Electrical.Machines.PSSE.GENCLS gENCLS2_1(
-    angle_0=-1.570655e-05,
+    angle_0=0,
     R_a=0,
     X_d=2.00000E-1,
     M_b=100000000,
     V_b=100000,
-    P_0=-1498800,
-    Q_0=-4334000,
+    P_0=-1498805.03287179,
+    Q_0=-4334166.52621688,
     v_0=1.00000) annotation (Placement(transformation(extent={{98,-12},{86,12}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine2(
     G=0,

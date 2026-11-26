@@ -5,9 +5,9 @@ model BESSPlant
   Electrical.Renewables.PSSE.BESS bESS(
     fn=SysData.fn,
     P_0=1500000,
-    Q_0=-5665800,
+    Q_0=-5665680.14137508,
     v_0=1,
-    angle_0=0.02574992,
+    angle_0=0.000449674983856771,
     QFunctionality=4,
     PFunctionality=0,
     redeclare OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1

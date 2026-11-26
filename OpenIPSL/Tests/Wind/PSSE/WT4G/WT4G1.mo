@@ -12,13 +12,13 @@ model WT4G1 "SMIB system to test the functionality of type-4 wind generator mode
     G=0,
     B=0.05000/2) annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
   OpenIPSL.Electrical.Machines.PSSE.GENCLS gENCLS2_1(
-    angle_0=-1.570655e-005,
+    angle_0=0,
     R_a=0,
     X_d=2.00000E-1,
     M_b=100000000,
     V_b=100000,
-    P_0=-1498800,
-    Q_0=-4334000,
+    P_0=-1498805.03287179,
+    Q_0=-4334166.52621688,
     v_0=1.00000) annotation (Placement(transformation(extent={{102,-12},{90,12}})));
   OpenIPSL.Electrical.Branches.PwLine pwLine2(
     G=0,
@@ -27,7 +27,7 @@ model WT4G1 "SMIB system to test the functionality of type-4 wind generator mode
     X=2.50000E-3)
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   OpenIPSL.Electrical.Wind.PSSE.WT4G.WT4G1 wT4G1(
-    angle_0=0.02574992,
+    angle_0=0.000449674983856771,
     M_b=100000000,
     T_IQCmd=0.02,
     T_IPCmd=0.02,
@@ -40,8 +40,8 @@ model WT4G1 "SMIB system to test the functionality of type-4 wind generator mode
     T_LVPL=0.02,
     V_b=100000,
     P_0=1500000,
-    Q_0=-5665800,
-    v_0=0.9999999) annotation (Placement(transformation(
+    Q_0=-5665680.14137508,
+    v_0=1) annotation (Placement(transformation(
         extent={{12,12},{-12,-12}},
         rotation=180,
         origin={-52,0})));
