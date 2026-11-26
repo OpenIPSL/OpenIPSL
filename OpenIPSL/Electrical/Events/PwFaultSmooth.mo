@@ -47,8 +47,8 @@ equation
 <p>This model provides a dynamic alternative to the shunt fault model <a href=\"modelica://OpenIPSL.Electrical.Events.PwFault\">PwFault</a>. The fault can be applied at <code>t1</code> and cleared from <code>t2</code> on by an exponential decay of its admittance with time constant <code>Tc</code> instead of a &quot;jump&quot;, i.e. instead of an algebraic transition as in <a href=\"modelica://OpenIPSL.Electrical.Events.PwFault\">PwFault</a>. The fraction <code>k</code> of the admittance that is connected is a state, so the integrator follows the clearing in small steps and the solve after the clearing tracks the network&apos;s solution continuously from the faulted point.</p>
 <p>Use it where the network has almost no states (e.g., when using the <a href=\"modelica://OpenIPSL.Electrical.Buses.PVBus\">PVBus</a> models in a network with an infinite bus): there the algebraic equations after an abrupt clearing, as applied by <a href=\"modelica://OpenIPSL.Electrical.Events.PwFault\">PwFault</a>,
 can have many exact solutions, and the one a tool reaches from the faulted point depends on the variables it iterates on. PSAT restarts that solve from the pre-fault voltages; this clearing reaches the same solution in Dymola, OpenModelica and System Modeler. A bolted fault (R = X = 0) is not possible here; use PwFault.</p>
-<p><b>Note:</b> Observe that with <code>Tc=1e-4</code>, after 20 <code>Tc</code>, that is 2 ms, the dynamics will have largely settled, with less than 1e-8 of the admittance left.</p>
-<p><b>Note on the start value of <code>k</code>:</b> keep it at 0, the default. <code>k</code> is the fraction of
+<p><strong>Note:</strong> Observe that with <code>Tc=1e-4</code>, after 20 <code>Tc</code>, that is 2 ms, the dynamics will have largely settled, with less than 1e-8 of the admittance left.</p>
+<p><strong>Note on the start value of <code>k</code>:</strong> keep it at 0, the default. <code>k</code> is the fraction of
 the fault admittance that is connected, and it is a state that starts at its start value (<code>fixed=true</code>)
 and stays there until <code>t1</code>, where it is set to 1. Its start value therefore applies from time 0, not
 only during the fault. With 0 no fault admittance is connected before <code>t1</code>, so the network starts at
@@ -59,6 +59,6 @@ operating point. Even a small value matters, because the fault admittance is lar
 (<code>X = 0.001</code> pu) a start value of 0.01 holds bus <code>FAULT</code> at 0.60 pu instead of 0.996 pu
 before the fault. A start value of 1 is the value <code>k</code> is set to at <code>t1</code>: the whole fault is
 then on from time 0 (bus <code>FAULT</code> at 0.015 pu), as if <code>t1</code> were 0.</p>
-<p><b>Note:</b> Because <code>k</code> is a state, a linearisation of a model with this fault shows one more eigenvalue, at 0 (its derivative is 0 before the clearing).</p>
+<p><strong>Note:</strong> Because <code>k</code> is a state, a linearisation of a model with this fault shows one more eigenvalue, at 0 (its derivative is 0 before the clearing).</p>
 </html>"));
 end PwFaultSmooth;
