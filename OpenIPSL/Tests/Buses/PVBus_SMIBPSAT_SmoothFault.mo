@@ -39,12 +39,14 @@ instead of <code>PwFault</code>: from 2.15 s its admittance decays with the time
 <code>LOAD</code> to <code>SHUNT</code> is opened at 6 s and closed at 8 s, as in
 <code>PVBus_SMIBPSAT</code>.</p>
 <h4>Why this test exists</h4>
-<p>It shows that the smooth clearing gives the response of the abrupt one where the network after the
-clearing has a single solution, as here: the trajectories are those of PSAT's run of the unit test
-<code>ut_bus_pv</code>, cleared abruptly, except within a few <code>Tc</code> after 2.15 s. Where the network
-has several solutions after the clearing (PV buses and a STATCOM around an infinite bus, as in PSAT's
-<code>d_014_statcom</code>), the abrupt clearing lets each tool reach a different one; this clearing reaches
-PSAT's in Dymola, OpenModelica and System Modeler. Added by
+<p>It shows that the smooth clearing gives the response of the abrupt one where both return to the same
+operating point after the clearing, as here: the trajectories are those of PSAT's run of the unit test
+<code>ut_bus_pv</code>, cleared abruptly, except within a few <code>Tc</code> after 2.15 s. This network has
+another solution after the clearing as well (with <code>GEN1</code> at an angle of about 3.0 rad), which the
+runs with the start values given here do not reach. Where the network after the clearing has many solutions
+(PV buses and a STATCOM around an infinite bus, as in PSAT's <code>d_014_statcom</code>), the abrupt clearing
+leaves Dymola and System Modeler at a solution with bus 14 at 0 pu, and OpenModelica stops at the clearing;
+in those cases this clearing reached PSAT's solution in the three tools. Added by
 OpenIPSL/OpenIPSL#472.</p>
 <h4>What to plot</h4>
 <ul>

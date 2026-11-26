@@ -11,8 +11,11 @@ model PwFaultSmooth
   Real k(start=0, fixed=true) "Fraction of the fault admittance connected; keep its start value at 0 (see Documentation)";
 initial equation
   assert(R*R + X*X > 0, "PwFaultSmooth needs a fault impedance R + jX other than zero; use PwFault for a bolted fault");
+  assert(Tc > 0, "PwFaultSmooth needs a clearing time constant Tc > 0");
+  assert(t2 > t1, "PwFaultSmooth needs t2 > t1: the clearing starts after the fault is applied");
 equation
   der(k) = if time < t2 then 0 else -k/Tc "Held while the fault is on, then decays";
+  assert(not initial() or t1 > time, "PwFaultSmooth applies its fault by an event at t1, so t1 must be after the start time of the simulation");
   when time >= t1 then
     reinit(k, 1);
   end when;
@@ -46,7 +49,8 @@ equation
     Documentation(info="<html>
 <p>This model provides a dynamic alternative to the shunt fault model <a href=\"modelica://OpenIPSL.Electrical.Events.PwFault\">PwFault</a>. The fault can be applied at <code>t1</code> and cleared from <code>t2</code> on by an exponential decay of its admittance with time constant <code>Tc</code> instead of a &quot;jump&quot;, i.e. instead of an algebraic transition as in <a href=\"modelica://OpenIPSL.Electrical.Events.PwFault\">PwFault</a>. The fraction <code>k</code> of the admittance that is connected is a state, so the integrator follows the clearing in small steps and the solve after the clearing tracks the network&apos;s solution continuously from the faulted point.</p>
 <p>Use it where the network has almost no states (e.g., when using the <a href=\"modelica://OpenIPSL.Electrical.Buses.PVBus\">PVBus</a> models in a network with an infinite bus): there the algebraic equations after an abrupt clearing, as applied by <a href=\"modelica://OpenIPSL.Electrical.Events.PwFault\">PwFault</a>,
-can have many exact solutions, and the one a tool reaches from the faulted point depends on the variables it iterates on. PSAT restarts that solve from the pre-fault voltages; this clearing reaches the same solution in Dymola, OpenModelica and System Modeler. A bolted fault (R = X = 0) is not possible here; use PwFault.</p>
+can have many exact solutions, and the one a tool reaches from the faulted point depends on the variables it iterates on. PSAT restarts that solve from the pre-fault voltages; in the cases where this clearing was tested (PSAT&apos;s <code>d_014_statcom</code> and <code>d_014_twt</code>, with PV buses around an infinite bus), it reaches PSAT&apos;s solution in Dymola, OpenModelica and System Modeler. A bolted fault (R = X = 0) is not possible here; use PwFault.</p>
+<p>The parameters are checked at initialization: <code>t1</code> must be after the start time of the simulation (the fault is applied by an event at <code>t1</code>, which does not occur when the run starts at or after <code>t1</code>), <code>t2</code> after <code>t1</code>, and <code>Tc</code> positive (zero divides by zero at <code>t2</code>, a negative value makes the fault grow).</p>
 <p><strong>Note:</strong> Observe that with <code>Tc=1e-4</code>, after 20 <code>Tc</code>, that is 2 ms, the dynamics will have largely settled, with less than 1e-8 of the admittance left.</p>
 <p><strong>Note on the start value of <code>k</code>:</strong> keep it at 0, the default. <code>k</code> is the fraction of
 the fault admittance that is connected, and it is a state that starts at its start value (<code>fixed=true</code>)
