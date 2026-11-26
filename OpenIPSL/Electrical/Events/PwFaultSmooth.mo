@@ -15,7 +15,7 @@ initial equation
   assert(t2 > t1, "PwFaultSmooth needs t2 > t1: the clearing starts after the fault is applied");
 equation
   der(k) = if time < t2 then 0 else -k/Tc "Held while the fault is on, then decays";
-  assert(not initial() or t1 > time, "PwFaultSmooth applies its fault by an event at t1, so t1 must be after the start time of the simulation");
+  assert(not initial() or noEvent(time < t1), "PwFaultSmooth applies its fault by an event at t1, so t1 must be after the start time of the simulation");
   when time >= t1 then
     reinit(k, 1);
   end when;
@@ -54,15 +54,16 @@ can have many exact solutions, and the one a tool reaches from the faulted point
 <p><strong>Note:</strong> Observe that with <code>Tc=1e-4</code>, after 20 <code>Tc</code>, that is 2 ms, the dynamics will have largely settled, with less than 1e-8 of the admittance left.</p>
 <p><strong>Note on the start value of <code>k</code>:</strong> keep it at 0, the default. <code>k</code> is the fraction of
 the fault admittance that is connected, and it is a state that starts at its start value (<code>fixed=true</code>)
-and stays there until <code>t1</code>, where it is set to 1. Its start value therefore applies from time 0, not
-only during the fault. With 0 no fault admittance is connected before <code>t1</code>, so the network starts at
+and stays there until <code>t1</code>, where it is set to 1. Its start value therefore applies from the start of the
+simulation, not only during the fault. With 0 no fault admittance is connected before <code>t1</code>, so the network starts at
 the power flow solution its components were initialised for. Any other value connects that fraction of the fault
-from time 0: the voltages before the fault are not the power flow voltages, and the run starts on another
+from the start of the simulation: the voltages before the fault are not the power flow voltages, and the run starts on another
 operating point. Even a small value matters, because the fault admittance is large: in
 <a href=\"modelica://OpenIPSL.Tests.Buses.PVBus_SMIBPSAT_SmoothFault\">Tests.Buses.PVBus_SMIBPSAT_SmoothFault</a>
 (<code>X = 0.001</code> pu) a start value of 0.01 holds bus <code>FAULT</code> at 0.60 pu instead of 0.996 pu
 before the fault. A start value of 1 is the value <code>k</code> is set to at <code>t1</code>: the whole fault is
-then on from time 0 (bus <code>FAULT</code> at 0.015 pu), as if <code>t1</code> were 0.</p>
+then on from the start of the simulation (bus <code>FAULT</code> at 0.015 pu), although <code>t1</code> must
+still be after the start time.</p>
 <p><strong>Note:</strong> Because <code>k</code> is a state, a linearisation of a model with this fault shows one more eigenvalue, at 0 (its derivative is 0 before the clearing).</p>
 </html>"));
 end PwFaultSmooth;

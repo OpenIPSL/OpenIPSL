@@ -50,7 +50,10 @@ in those cases this clearing reached PSAT's solution in the three tools. Added b
 OpenIPSL/OpenIPSL#472.</p>
 <h4>What to plot</h4>
 <ul>
-<li><code>pwFaultSmooth.k</code>: 0 before 2 s, 1 in the fault, back to 0 within about 2 ms after 2.15 s.</li>
+<li><code>pwFaultSmooth.k</code>: 0 before 2 s, 1 in the fault, back to 0 within about 2 ms after 2.15 s. To see
+the decay, store the results at an output interval of 0.1 ms or finer, or at every solver step: at the default
+output interval a value interpolated between two stored points (0.60 at 2.152 s in System Modeler, where
+<code>k</code> is 2e-9) or no point at all falls inside those 2 ms.</li>
 <li><code>FAULT.v</code> and <code>GEN1.v</code>: the same as in <code>PVBus_SMIBPSAT</code>, except in the
 first milliseconds after 2.15 s, where <code>FAULT.v</code> rises continuously instead of jumping.</li>
 <li><code>pvBus.Q</code>: 0.054 pu before the fault and 2.53 pu in it, as in <code>PVBus_SMIBPSAT</code>.</li>
