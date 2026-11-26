@@ -15,7 +15,7 @@ model PVPlant
     redeclare OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1
       RenewableController(vref0=1),
     redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController)
+      PlantController(Kp=2))
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
   connect(pV.pwPin, GEN1.p)

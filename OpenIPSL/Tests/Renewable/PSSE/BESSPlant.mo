@@ -45,7 +45,7 @@ model BESSPlant
       Vq3=0.5,
       Vq4=1),
     redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController)
+      PlantController(Kp=2))
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
   connect(bESS.pwPin, GEN1.p)

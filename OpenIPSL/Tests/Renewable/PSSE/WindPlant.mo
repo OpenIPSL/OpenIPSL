@@ -26,7 +26,7 @@ model WindPlant
       Iqrmax=99,
       Iqrmin=-99),
     redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController,
+      PlantController(Kp=2),
     redeclare OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECA1
       RenewableController(
       pqflag=false,
