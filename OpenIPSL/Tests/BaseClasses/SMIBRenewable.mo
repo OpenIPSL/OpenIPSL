@@ -1,5 +1,5 @@
 within OpenIPSL.Tests.BaseClasses;
-partial model SMIBRenewable "SMIB - Single Machine Infinite Base system with one load for renewable source validation."
+partial model SMIBRenewable "Single machine infinite bus (SMIB) system for renewable source validation: the plant at bus GEN1, the infinite bus at GEN2, no load"
   extends Modelica.Icons.Example;
   OpenIPSL.Electrical.Branches.PwLine pwLine(
     R=2.50000E-2,
