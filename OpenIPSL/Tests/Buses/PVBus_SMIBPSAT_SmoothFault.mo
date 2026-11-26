@@ -44,9 +44,11 @@ operating point after the clearing, as here: the trajectories are those of PSAT'
 <code>ut_bus_pv</code>, cleared abruptly, except within a few <code>Tc</code> after 2.15 s. This network has
 another solution after the clearing as well (with <code>GEN1</code> at an angle of about 3.0 rad), which the
 runs with the start values given here do not reach. Where the network after the clearing has many solutions
-(PV buses and a STATCOM around an infinite bus, as in PSAT's <code>d_014_statcom</code>), the abrupt clearing
-leaves Dymola and System Modeler at a solution with bus 14 at 0 pu, and OpenModelica stops at the clearing;
-in those cases this clearing reached PSAT's solution in the three tools. Added by
+(PV buses and a STATCOM around an infinite bus, as in PSAT's <code>d_014_statcom</code> with a fault added at
+bus 14), the abrupt clearing leaves Dymola and System Modeler at a solution with bus 14 at 0 pu, and OpenModelica
+stops at the clearing; in those cases this clearing reached PSAT's solution in the three tools. OpenModelica ran
+those cases with <code>--tearingMethod=minimalTearing</code>; with its default tearing they stop at initialization.
+This test needs no such option. Added by
 OpenIPSL/OpenIPSL#472.</p>
 <h4>What to plot</h4>
 <ul>
