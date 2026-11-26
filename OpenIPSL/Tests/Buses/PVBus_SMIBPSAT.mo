@@ -35,7 +35,8 @@ opened at 6 s and closed again at 8 s.</p>
 <p>It is the library twin of the unit test <code>ut_bus_pv</code> of PSAT-2-Modelica, a private developer
 tool of the OpenIPSL development team, which is verified against PSAT 2.1.11: the same network, operating point and
 disturbances, so its trajectories can be compared with PSAT's directly. The model has no states: with an infinite bus
-at <code>GEN2</code> and the PV bus at <code>GEN1</code> every variable is algebraic, as in PSAT.</p>
+at <code>GEN2</code> and the PV bus at <code>GEN1</code> every variable is algebraic, as in PSAT. Added by
+OpenIPSL/OpenIPSL#472.</p>
 <h4>What to plot</h4>
 <ul>
 <li><code>GEN1.v</code>: 1 pu throughout, the fault included.</li>

@@ -44,7 +44,8 @@ clearing has a single solution, as here: the trajectories are those of PSAT's ru
 <code>ut_bus_pv</code>, cleared abruptly, except within a few <code>Tc</code> after 2.15 s. Where the network
 has several solutions after the clearing (PV buses and a STATCOM around an infinite bus, as in PSAT's
 <code>d_014_statcom</code>), the abrupt clearing lets each tool reach a different one; this clearing reaches
-PSAT's in Dymola, OpenModelica and System Modeler.</p>
+PSAT's in Dymola, OpenModelica and System Modeler. Added by
+OpenIPSL/OpenIPSL#472.</p>
 <h4>What to plot</h4>
 <ul>
 <li><code>pwFaultSmooth.k</code>: 0 before 2 s, 1 in the fault, back to 0 within about 2 ms after 2.15 s.</li>
