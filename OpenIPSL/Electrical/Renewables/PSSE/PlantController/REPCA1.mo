@@ -276,11 +276,13 @@ frequency and active power output to emulate active power control. TThe REPCA1 m
 provides active reactive power command references to the electrical controller components (REECA1, REECB1, and REECCU1).
 </p>
 <p>
-The default gains <code>Kp</code> = 18 and <code>Ki</code> = 5 are gains for plant-level voltage control
-(<code>refflag = true</code>), where the gain of the loop is <code>Kp</code> times the reactance of the network
-seen from the regulated bus. In plant-level reactive power control (<code>refflag = false</code>) the gain of the
-loop is about <code>Kp</code> itself, and with <code>Kp</code> = 18 the reactive power loop can be unstable: the tests
-<code>Tests.Renewable.PSSE.BESSPlant</code>, <code>PVPlant</code> and <code>WindPlant</code> use <code>Kp</code> = 2.
+The default gains <code>Kp</code> = 18 and <code>Ki</code> = 5 are shared by plant-level voltage control
+(<code>refflag = true</code>) and plant-level reactive power control (<code>refflag = false</code>), but the gain of
+the loop around them differs between the two. In the tests <code>Tests.Renewable.PSSE.BESSPlant</code>,
+<code>PVPlant</code> and <code>WindPlant</code>, at their operating point, it is about <code>Kp</code> times 0.21 pu in
+voltage control without compensation and about <code>Kp</code> itself in reactive power control; in general it also
+depends on the network, the operating point and the compensation selected. In reactive power control
+<code>Kp</code> = 18 makes the loop of these tests unstable, and they use <code>Kp</code> = 2.
 </p>
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
