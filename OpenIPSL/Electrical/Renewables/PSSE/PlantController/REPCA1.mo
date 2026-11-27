@@ -275,6 +275,17 @@ reactive power to then generate volt/var control at the plant level. It also gen
 frequency and active power output to emulate active power control. TThe REPCA1 module
 provides active reactive power command references to the electrical controller components (REECA1, REECB1, and REECCU1).
 </p>
+<p>
+The default gains <code>Kp</code> = 18 and <code>Ki</code> = 5 are shared by plant-level voltage control
+(<code>refflag = true</code>) and plant-level reactive power control (<code>refflag = false</code>), but the
+sensitivity of the regulated quantity to the plant's reactive current, which multiplies <code>Kp</code> around the
+loop, differs between the two. In the tests <code>Tests.Renewable.PSSE.BESSPlant</code>, <code>PVPlant</code> and
+<code>WindPlant</code>, at their operating point, it is about 0.21 pu in voltage control without compensation and
+about 1 in reactive power control; in general it also depends on the network, the operating point and the
+compensation selected, and <code>Ki</code>, the filters and the converter's lags add gain and phase that depend on
+frequency. In reactive power control
+<code>Kp</code> = 18 makes the loop of these tests unstable, and they use <code>Kp</code> = 2.
+</p>
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"

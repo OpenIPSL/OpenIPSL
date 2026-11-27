@@ -4,9 +4,9 @@ model PVPlant
   extends BaseClasses.SMIBRenewable(SysData(fn=60), freq(k=SysData.fn));
   Electrical.Renewables.PSSE.PV pV(
     P_0=1500000,
-    Q_0=-5665800,
+    Q_0=-5665680.14137508,
     v_0=1,
-    angle_0(displayUnit="deg") = 0.02574992,
+    angle_0=0.000449674983856771,
     QFunctionality=4,
     PFunctionality=0,
     Irr2Pow=false,
@@ -15,7 +15,7 @@ model PVPlant
     redeclare OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1
       RenewableController(vref0=1),
     redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController)
+      PlantController(Kp=2))
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
   connect(pV.pwPin, GEN1.p)
