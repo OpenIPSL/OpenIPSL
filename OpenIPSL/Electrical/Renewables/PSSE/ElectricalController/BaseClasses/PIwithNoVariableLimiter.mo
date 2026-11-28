@@ -6,7 +6,7 @@ model PIwithNoVariableLimiter "PI with no variable limiter controller for WECC e
   parameter SI.PerUnit V_RMAX "Maximum regulator output";
   parameter SI.PerUnit V_RMIN "Minimum regulator output";
   parameter Real y_start "Starting output value for the integrator";
-  parameter SI.Time T_aw=1e-4 "Time constant with which the rate of the integral state goes to zero beyond a limit (anti-windup)"
+  parameter SI.Time T_aw=1e-4 "Time constant of the anti-windup: beyond a limit the outward rate of the integral state falls to zero over T_aw*|K_I*u| (must be positive)"
     annotation (Dialog(tab="Advanced"));
   Modelica.Blocks.Continuous.Integrator integral(
     k=1,
@@ -30,12 +30,13 @@ model PIwithNoVariableLimiter "PI with no variable limiter controller for WECC e
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   Modelica.Blocks.Sources.RealExpression integralRate(y=min(max(K_I*u, min(0, K_I*u + (V_RMIN - PI_add.y)/T_aw)),
         max(0, K_I*u + (V_RMAX - PI_add.y)/T_aw)))
-    "Rate of the integral state: K_I*u while the sum is within the limits, falling to zero within T_aw*|K_I*u| beyond a limit"
+    "Rate of the integral state: K_I*u within the limits and towards them; beyond a limit an outward rate falls to zero over T_aw*|K_I*u|"
     annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
   Modelica.Blocks.Interfaces.BooleanInput voltage_dip
     "Connector of first Boolean input signal"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 equation
+  assert(T_aw > 0, "T_aw, the time constant of the anti-windup, must be positive");
   connect(proportional.y, PI_add.u2) annotation (Line(points={{21,-60},{30,-60},{30,-6},{36,-6}},
                             color={0,0,127}));
   connect(reset_switch.u1,realExpression. y)
@@ -71,15 +72,18 @@ The limit is a non-windup limit, as in the PI blocks of PSS&reg;E's WECC renewab
 <code>y</code> is the sum <code>x + K_P*u</code> of the integral state <code>x</code> and the proportional part, limited to
 <code>V_RMIN &le; y &le; V_RMAX</code>, and the integral state stops while the sum is beyond a limit and the input drives it further out. The state
 moves again as soon as the input reverses, or as soon as the sum is back within the limits. When the proportional
-part moves the sum back inside while the input still drives it out, the state follows the limit: the sum stays on it
-and the output does not leave the limit. During a voltage dip (<code>voltage_dip = true</code>) the state is held.
+part moves the sum back inside while the input still drives it out, the state follows the limit as fast as its
+rate <code>K_I*u</code> allows: the sum stays on the limit while that rate keeps up. During a voltage dip (<code>voltage_dip = true</code>) the state is held.
 </p>
 <p>
-The rate of the integral state is <code>K_I*u</code> while the sum is within the limits. Beyond a limit it falls
-linearly to zero over a band of width <code>T_aw*|K_I*u|</code>, so that the state stops at most that far beyond the
-limit (5e-3 pu with <code>K_I*u</code> = 50 pu/s and the default <code>T_aw = 1e-4</code> s), and while the sum slides
-along the limit the state tracks it with the time constant <code>T_aw</code>. The rate is a continuous function of the
-state and the input, so nothing switches. A freeze switched by a condition - the earlier implementation, which
+The rate of the integral state is <code>K_I*u</code> while the sum is within the limits, and whenever it drives the
+sum back towards them. Beyond a limit an outward rate falls linearly to zero over a band of width
+<code>T_aw*|K_I*u|</code> (5e-3 pu with <code>K_I*u</code> = 50 pu/s and the default <code>T_aw = 1e-4</code> s), within
+which the slope of the rate with respect to the state is <code>-1/T_aw</code>. The state is not pulled back: when the
+limit or the proportional part moves, the sum can lie further beyond the limit than the band, and the state is then
+held. The rate is a continuous function of the state, the input and the limits, so the anti-windup has no switch of
+its own; the output limiter and the freeze during a voltage dip still switch, a finite number of times.
+<code>T_aw</code> must be positive. A freeze switched by a condition - the earlier implementation, which
 froze the state when the output was at a limit and <code>der(integral.y)</code> pointed outwards - changes the
 condition it is decided on: at a limit the switch went on and off without end (OpenIPSL issue #467).
 </p>

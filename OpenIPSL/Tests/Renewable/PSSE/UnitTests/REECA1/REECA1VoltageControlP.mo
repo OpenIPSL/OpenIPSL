@@ -17,8 +17,9 @@ model REECA1VoltageControlP
 <a href=\"modelica://OpenIPSL.Tests.Renewable.PSSE.UnitTests.REECA1.REECA1VoltageControl\">REECA1VoltageControl</a> with
 P priority (<code>pqflag = true</code>): the limit of the voltage PI (<a href=\"modelica://OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.BaseClasses.PIwithVariableLimiter\">PIwithVariableLimiter</a>) is
 <code>Iqmax = sqrt(Imax^2 - Ipcmd^2)</code>, which moves with the active current command, a variable limit. During the
-fault the PI's sum stays beyond the limit and its integral state is held near 0.66 pu; after the clearing the active
-current rises and the limit with it.
+fault the PI's sum stays beyond the limit, by up to 0.23 pu, and its integral state is held near 0.66 pu; after the
+clearing the active current command falls (0.85 pu to 0.39 pu by 2.17 s) and the limit rises (0.70 pu to 1.03 pu),
+and the PI's output follows the rising limit until about 2.16 s.
 The PSS/E twin is the unit test <code>ut_reeca1_vctlp</code>.
 </p>
 <p>

@@ -25,7 +25,7 @@ is <code>Iqmax = Imax = 1.1</code>.
 The fault (<code>Xf = 0.1</code> pu) takes the terminal voltage to 0.33 pu, and the PI's output reaches 1.1 pu within
 30 ms. The voltage recovers to 0.69 pu during the fault and the error shrinks, so the integral state rises from 0.90 to
 0.95 pu while the sum of the state and the proportional part stays on the limit; after the clearing the output leaves
-the limit at once. Before the fix of OpenIPSL issue #467 the state wound up to 5.3 pu in Dymola and held the output at
+the limit about 5 ms later, when the filtered terminal voltage has recovered. Before the fix of OpenIPSL issue #467 the state wound up to 5.3 pu in Dymola and held the output at
 the limit for about 0.1 s after the clearing (the reactive power 1.67 pu at 2.2 s instead of 0.38 pu), and the
 anti-windup switched without end in OpenModelica and System Modeler.
 The PSS/E twin is the unit test <code>ut_reeca1_vctl</code>.
