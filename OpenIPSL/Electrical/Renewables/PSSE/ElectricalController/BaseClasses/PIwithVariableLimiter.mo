@@ -86,10 +86,13 @@ Specific PI with variable limiter component for the WECC-based renewable energy 
 <p>
 The limit is a non-windup limit, as in the PI blocks of PSS&reg;E's WECC renewable models: the output
 <code>y</code> is the sum <code>x + K_P*u</code> of the integral state <code>x</code> and the proportional part, limited to
-<code>limit2 &le; y &le; limit1</code>, and the integral state stops while the sum is beyond a limit and the input drives it further out. The state
-moves again as soon as the input reverses, or as soon as the sum is back within the limits. When the proportional
-part moves the sum back inside while the input still drives it out, the state follows the limit as fast as its
-rate <code>K_I*u</code> allows: the sum stays on the limit while that rate keeps up. During a voltage dip (<code>voltage_dip = true</code>) the state is held.
+<code>limit2 &le; y &le; limit1</code>. PSS&reg;E stops the integral state while the sum is beyond a limit and the
+input drives it further out; here the outward integration tapers off just beyond the limit instead (next
+paragraph), so that the sum may lie slightly beyond the limit while the output stays on it. The state moves again
+at its full rate as soon as the input reverses, or as soon as the sum is back within the limits. When the
+proportional part moves the sum back inside while the input still drives it out, the state follows the limit as
+fast as its rate <code>K_I*u</code> allows: the output stays on the limit while that rate keeps up. During a
+voltage dip (<code>voltage_dip = true</code>) the state is held.
 </p>
 <p>
 The rate of the integral state is <code>K_I*u</code> while the sum is within the limits, and whenever it drives the
